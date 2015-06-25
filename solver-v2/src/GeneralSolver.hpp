@@ -131,7 +131,7 @@ public:
 //            std::cout << __LINE__ << std::endl;
 //            std::cout << this->IntVars << std::endl;
             GeneralSolver* s = e.next();
-            std::cout << s->failed() << std::endl;
+//            std::cout << s->failed() << std::endl;
 //            s->print(std::cout);
 //            std::cout << "after print" << std::endl;
             s->compare(*this, std::cout);

@@ -67,7 +67,7 @@ public:
             c->at(i) = static_cast<int> (in->getVars(i).objcoeff);      
 //            std::cout << c->at(i) << " + ";
         }
-        std::cout << std::endl;
+//        std::cout << std::endl;
         GeneralSolver::linear(*this,c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1 );
         //        std::cout << "BPS after linear" << std::endl;
         //        std::cout << varInt->back().ArrayPointer << std::endl;

@@ -13,7 +13,7 @@
 class BPSolver : public GeneralSolver {
 protected:
     BP_Input *p_in;
-    int model;
+//    int model;
     //    FloatVarArray varFloat;
     //    IntVarArray varInt;
     //    FloatVar cost;
@@ -30,7 +30,6 @@ public:
         vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
 
         for (unsigned i = 0; i < in->getNcons(); i++) {
-            //            std::cout << varInt->size() << std::endl;
             const vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
             vector<int>* c = new vector<int>(leftside.size());
@@ -38,20 +37,11 @@ public:
 
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
-                
-                //                c[j] = e.coeff;
-                //                x[j] = varFloat[e.index];
-                //            c[j] = static_cast<int>(e.coeff*scale);
                 c->at(j) = static_cast<int> (e.coeff);
-//                boost::shared_ptr<IntegerVariable> tmp = boost::make_shared<IntegerVariable>();
-               
                 x->push_back(varInt->at(e.index));
-//                x.push_back(&varInt->at(e.index));
-
             }
 
             int upperbound = static_cast<int> (b.ub);
-            //        int lb = static_cast<int>(b.lb*scale);
             if (b.type == 5) {
                 GeneralSolver::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_DOM, 2);
             } else {
@@ -62,18 +52,13 @@ public:
         
         // Add objective function
         vector<int>* c = new vector<int>(varInt->size());
-//        std::cout << "objective function " << std::endl;
         for(unsigned i = 0; i < varInt->size(); i++ ){
             c->at(i) = static_cast<int> (in->getVars(i).objcoeff);      
-//            std::cout << c->at(i) << " + ";
         }
-//        std::cout << std::endl;
         GeneralSolver::linear(*this,c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1 );
-        //        std::cout << "BPS after linear" << std::endl;
-        //        std::cout << varInt->back().ArrayPointer << std::endl;
-            
+
+        // Branch
         GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-        //        std::cout << "efter branch BPS" << std::endl;
 
     }
 

@@ -1,7 +1,5 @@
 #include "Test.hpp"
-#include <boost/timer.hpp>
-#include <ctime>
-#include <math.h>
+
 #include <c++/4.9/bits/stl_bvector.h>
 
 Test::Test() {
@@ -13,18 +11,40 @@ Test::Test() {
     start = std::clock();
 
 
-    GS = new GeneralSolver();
-//    GS.
-    varInt = GS->createIntVars(10, 0, 1);
-    GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    createLinearEQConst();
-        std::cout << __LINE__ << std::endl;
 
-    GS->InitialSolution();
+    //    GS.
+    varInt = GeneralSolver::createIntVars(10, 0, 1);
+    //    createLinearEQConst();
+    unsigned invarSize = Invariants.size();
+    unsigned constSize = Constraints.size();
+    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+
+    std::vector<int>* coef = new vector<int>();
+    for (int i = 0; i < 10; i++) {
+        coef->push_back(i);
+        x->push_back(varInt->at(i));
+    }
+    GeneralSolver::linear(*this, coef, x, Gecode::IRT_LQ, 50, Gecode::ICL_DOM, 2);
+    //        std::cout << __LINE__ << std::endl;
+
+
+    // add obj
+    vector<int>* c = new vector<int>(varInt->size());
+    //        std::cout << "objective function " << std::endl;
+    for (unsigned i = 0; i < varInt->size(); i++) {
+        c->at(i) = 1;
+        //            std::cout << c->at(i) << " + ";
+    }
+    GeneralSolver::linear(*this, c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
+
+
+    GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+
+    //    InitialSolution();
 
     std::cout << __LINE__ << std::endl;
 
-    Invariants();
+    testInvariants();
 
 
 
@@ -47,41 +67,43 @@ Test::Test(const Test& orig) {
 Test::~Test() {
 }
 
-void Test::Constraints() {
+void Test::testConstraints() {
 
 }
 
-void Test::Invariants() {
-    Sum();
+void Test::testInvariants() {
+    testSum();
 
 }
 
-void Test::ObjectiveFunction() {
+void Test::testObjectiveFunction() {
 
 }
 
-void Test::Linear() {
+void Test::testLinear() {
 
 }
 
-void Test::Sum() {
-    GS->Invariants.at(0);
+void Test::testSum() {
+    //    Invariant inv = Invariants.at(0);
 }
 
 void Test::createLinearEQConst() {
     startTest();
-    std::cout << "Test " << __FUNCTION__ << std::endl;
-    unsigned invarSize = GS->Invariants.size();
-    unsigned constSize = GS->Constraints.size();
-
-    std::vector<int>* coef = new vector<int>();
-    for (int i = 0; i < 10; i++) {
-        coef->push_back(i);
-    }
-    GS->linear(*GS, coef, varInt, Gecode::IRT_EQ, 50, Gecode::ICL_DOM, 2);
-    if (invarSize + 1 != GS->Invariants.size() || constSize + 1 != GS->Constraints.size()) {
-        testFailed(string(__FUNCTION__));
-    }
+    //    std::cout << "Test " << __FUNCTION__ << std::endl;
+    //    unsigned invarSize = Invariants.size();
+    //    unsigned constSize = Constraints.size();
+    //    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+    //           
+    //    std::vector<int>* coef = new vector<int>();
+    //    for (int i = 0; i < 10; i++) {
+    //        coef->push_back(i);
+    //        x->push_back(varInt->at(i));
+    //    }
+    //    GeneralSolver::linear(*this, coef, x, Gecode::IRT_EQ, 50, Gecode::ICL_DOM, 2);
+    //    if (invarSize + 1 != Invariants.size() || constSize + 1 != Constraints.size()) {
+    //        testFailed(string(__FUNCTION__));
+    //    }
     testDone();
 
 

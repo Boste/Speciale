@@ -131,10 +131,19 @@ public:
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             GeneralSolver* s;
+            int counter = 0;
             while (!e.stopped()) {
                 std::cout << __LINE__ << std::endl;
+                sleep(1);
                  s = e.next();
+                 counter++;
+                 if(counter>2){
+                    std::cout << s->IntVars.size() << std::endl;
+                 }
+                 
             }
+//                             s = e.next();
+
             //            std::cout << this->IntVars << std::endl;
 //            GeneralSolver* s = e.next();
             //            std::cout << s->failed() << std::endl;

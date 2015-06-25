@@ -63,8 +63,8 @@ void gecode(int argc, char* argv[]) {
     //    // Let's start the Timer
     //    Support::Timer t;
     //    t.start()
-    Test* t = new Test();
-    t->InitialSolution();
+//    Test* t = new Test();
+//    t->InitialSolution();
     std::cout << "past test" << std::endl;
     BPSolver* m = new BPSolver(p);
     m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 

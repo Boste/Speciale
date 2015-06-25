@@ -130,29 +130,23 @@ public:
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
-            GeneralSolver* s;
+            GeneralSolver* s = e.next();
             int counter = 0;
-            while (!e.stopped()) {
-                std::cout << __LINE__ << std::endl;
-                sleep(1);
-                 s = e.next();
-                 counter++;
-                 if(counter>2){
-                    std::cout << s->IntVars.size() << std::endl;
-                 }
-                 
-            }
-//                             s = e.next();
+            while (!s->failed() && !e.stopped()) {
+//                std::cout << "counter " << counter << std::endl;
+                s = e.next(); // crash hvis der er ikke er en next?
+                counter++;
+//                std::cout << "efter counter" << std::endl;
 
+            }
+            //                             s = e.next();
+            std::cout << "efter while og s failed? " << std::endl;
+            sleep(1);
+            std::cout << s->failed() << std::endl;
             //            std::cout << this->IntVars << std::endl;
-//            GeneralSolver* s = e.next();
-            //            std::cout << s->failed() << std::endl;
-            //            s->print(std::cout);
-            //            std::cout << "after print" << std::endl;
-            s->compare(*this, std::cout);
-            //            std::cout << __LINE__ << std::endl;
-            //            std::cout << IntVars.size() << std::endl;
-            //            std::cout << s->IntVars.size() << std::endl;
+            //            GeneralSolver* s = e.next();
+
+            assert(!s->failed());
             assert(!e.stopped());
             this->SetValues(s->IntVars);
 

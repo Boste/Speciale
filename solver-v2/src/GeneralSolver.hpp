@@ -20,15 +20,16 @@ public:
     GeneralSolver() {
 
     }
-    GeneralSolver& operator=(const GeneralSolver &a){
+
+    GeneralSolver& operator=(const GeneralSolver &a) {
         this->IntVars = a.IntVars;
-//        std::cout << "hest " << std::endl;
+        //        std::cout << "hest " << std::endl;
     }
 
     void branch(Gecode::Home home, vector<IntegerVariable*>* vars, Gecode::IntVarBranch var, Gecode::IntValBranch val) {
 
         Gecode::branch(home, IntVars, var, val);
-//        std::cout << IntVars.size() << std::endl;
+        //        std::cout << IntVars.size() << std::endl;
 
     }
 
@@ -68,6 +69,7 @@ public:
         // Given to gecode space
         Gecode::IntVarArray Vars(*this, numberOfVariables, lb, ub);
         IntVars = Vars;
+
         // Given to LS space
 
 
@@ -88,7 +90,7 @@ public:
 
     GeneralSolver(bool share, GeneralSolver & s) :
     Gecode::Script(share, s) {
-//        std::cout << "this is not a line " << IntVars.size() << std::endl;
+        //        std::cout << "this is not a line " << IntVars.size() << std::endl;
         IntVars.update(*this, share, s.IntVars);
         // remember to update your main variables!
         //		model = s.model;
@@ -98,7 +100,7 @@ public:
     // Copy during cloning
 
     virtual Space * copy(bool share) {
-//        std::cout << "copy" << std::endl;
+        //        std::cout << "copy" << std::endl;
         return new GeneralSolver(share, *this);
     }
 
@@ -126,18 +128,22 @@ public:
         printSpaceStatus();
 
         try {
-//            std::cout << "try" << std::endl;
+            //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
-//            std::cout << __LINE__ << std::endl;
-//            std::cout << this->IntVars << std::endl;
-            GeneralSolver* s = e.next();
-//            std::cout << s->failed() << std::endl;
-//            s->print(std::cout);
-//            std::cout << "after print" << std::endl;
+            GeneralSolver* s;
+            while (!e.stopped()) {
+                std::cout << __LINE__ << std::endl;
+                 s = e.next();
+            }
+            //            std::cout << this->IntVars << std::endl;
+//            GeneralSolver* s = e.next();
+            //            std::cout << s->failed() << std::endl;
+            //            s->print(std::cout);
+            //            std::cout << "after print" << std::endl;
             s->compare(*this, std::cout);
-//            std::cout << __LINE__ << std::endl;
-//            std::cout << IntVars.size() << std::endl;
-//            std::cout << s->IntVars.size() << std::endl;
+            //            std::cout << __LINE__ << std::endl;
+            //            std::cout << IntVars.size() << std::endl;
+            //            std::cout << s->IntVars.size() << std::endl;
             assert(!e.stopped());
             this->SetValues(s->IntVars);
 
@@ -146,16 +152,16 @@ public:
             //                    std::cout << IntVarVector.at(i).getCurrentValue() << " vs " << s->IntVars[i] << std::endl;
             //                }
             //            }
-//            std::cout << __LINE__ << std::endl;
+            //            std::cout << __LINE__ << std::endl;
 
             initializeInvariants();
-//            std::cout << __LINE__ << std::endl;
+            //            std::cout << __LINE__ << std::endl;
 
             initializeConstraints();
-//            std::cout << __LINE__ << std::endl;
+            //            std::cout << __LINE__ << std::endl;
 
             initializeObjective();
-//            std::cout << __LINE__ << std::endl;
+            //            std::cout << __LINE__ << std::endl;
 
             printCurrent();
 

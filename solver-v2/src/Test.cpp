@@ -71,8 +71,8 @@ void Test::Sum() {
 void Test::createLinearEQConst() {
     startTest();
     std::cout << "Test " << __FUNCTION__ << std::endl;
-    int invarSize = GS->Invariants.size();
-    int constSize = GS->Constraints.size();
+    unsigned invarSize = GS->Invariants.size();
+    unsigned constSize = GS->Constraints.size();
 
     std::vector<int>* coef = new vector<int>();
     for (int i = 0; i < 10; i++) {

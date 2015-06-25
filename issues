@@ -1,0 +1,160 @@
+Til næste møde:
+Arkitektur af program. 
+	Kig på Oscar, LocalSolver, Easylocal
+
+Implementer en graph med invariant, constraints og variable.
+	Constraints bliver oprettet med pointer til variable, jeg vil gerne skabe et sammenhæng mellem variable og constraints + andre variable. Det kræver jeg laver
+	et container/objekt/struct som har pointers til constraints og andre variable. Hvordan finder jeg nemt den container? Kan jeg hashe adressen af variablen og lave et hashmap til containeren? 
+	skal der ændres mere i Gecode source code igen? Bedste bud, lad brugeren oprette mine variable som i generalSolver bliver associeret med gecode variable som bliver oprettet
+Hvordan skelner Oscar mellem implicit og ikke implicit. 	
+Hvordan vil invariant være i forhold til implicit i grafen. 
+	oneway <-> invariant (LHS), variable og imlicit
+Skrive om grafen og notation + implicit, invariant. 
+
+
+C++ scaling values
+bitwise standard library til opbygning af matrice.
+
+
+Boost intrusive læs
+	Smart pointers
+Comet chp (8,9)
+SchulteCarlson article
+
+Notation, degree, thight 
+
+Skriv om Comet, Gecode og Localsolver
+Kig på bøger om "skriv godt" (se Marco's hjemmeside)
+Cluster
+
+
+Ting at snakke om:
+Giver det mening at have en constraint classe eller skal det hele nedarves fra invariant?
+Hvordan går det overordnet?
+Lav en kalender med ting der skal lave og del den?
+
+
+
+
+Er gjort
+
+
+
+Ikke gjort men kigget på
+
+
+
+
+
+########################################################################
+Gammelt
+########################################################################
+# Start maj
+Kig på forskellen mellem space og script (Er det nødvendigt at nedarve fra script eller kan det gøres fra space?)
+Lav en nedarvning fra space/script + LSspace (som også skal laves, den skal ikke nedarve fra noget.) som er GeneralSolver. 
+	Ved dobbelt nedarvning (fra script -> GeneralSolver -> model) kan der ikke clones direkte ved brug af script, muligt det kan gøres gennem GeneralSolver som kalder script.
+
+
+
+# slut april
+Kig på om man kan gå tilbage fra en løsning i gecode til start pruning fra gecode.
+	Kan man ikke se hvad preprocessing har medført inden og så derefter løse det? Det kræver man kopiere domænet inden løsning hvilket ikke er helt optimalt. 
+	Master/Slave metoder kunne måske virker. En slave finder løsningen og master indholder de data efter preprocessing. Er det en besparelse over at kopiere det hele? 
+		Bruger Gecode i forvejen ikke clone som kopiere et helt space? Er det så ikke det samme som første forslag?
+ændre intVar så de kan tage en fixed værdi. 
+
+
+
+# mange møder senere
+Kig på views i gecode manual
+var i gecode
+oscaR strukur
++ meget andet.
+
+# 7. møde
+Er gjort
+
+
+
+Ikke gjort men kigget på
+Kig på gecode, progators i forhold til space og script.
+
+
+# 6. møde
+Er gjort
+Se hvor mange variable er sat efter preprocessing.
+	Den laver heller ikke noget med preprocessing så vidt jeg kan se selvom det er int. Så jeg er ikke sikker på jeg har lavet det rigtigt.
+Marco
+Sender artikel som skal læses.
+
+
+Ikke gjort men kigget på
+Prøv at løse med gecode.
+	Prøvede at scalere til int og løse det, men den finder ikke noget på en let efter 30 min, så tror jeg måske har gjort noget forkert? 
+Gelato?
+
+
+# 5. møde
+
+Er gjort
+Ret abstract
+Comet chp 7
+	Har prøvet at skrive ned samtidig med, men ved ikke hvor meget der skal inkluderes (har skrevet 1½ side om diff obj. i comet)
+Gecode implementer ikke make install
+	Modeller problemet i Gecode. Kig på Marcos opsætning for Assignment 3 DM841 
+
+Ikke gjort, men kigget på
+lav constraints som objecter 
+	Ikke brug for meget tid på det.
+	Vil ikke bruge alt for lang tid på at lave det hele om i det framework jeg ikke skal arbejde videre med lige nu. (Give variable som argument)
+
+
+
+
+# 4. møde
+Er gjort
+Ret abstract
+
+
+Ikke gjort, men kigget på
+lav constraints som objecter (Vigtigst) 
+	Ret store problemer med hvordan det skal linkes. Det har taget alt for lang tid (synes jeg selv) at få noget der compiler. 
+
+
+# 3. Møde 
+
+Ikke gjort
+Dont look bit heuristic 
+	Hvis det skal laves som preprocessing (hvilke variable der afhænger af hinanden) tager det alt for lang tid på store instancer. Det kan nok optimeres, men når 2 mil variable har 50 k som de er afhængige af virker det
+	som rigtig meget beregning, ud over at finde de 50 k. 
+Kig mere på script 001.001 format 
+	Føler ikke det giver mening. Jeg har kun 1 alg lige nu, Battery forstår jeg stadig ikke. Instancer og run nr. giver mening.
+
+
+Er gjort:
+Omskriv/ret abstract
+Kig på bøger om "skriv godt" (se Marco's hjemmeside)
+cmake easylocal som før
+Sæt konstanter i seperat fil
+greedy state - Flere feasible, men nogle forværringer, specielt dem med = constr. og dem som i forvejen var dårlige. 
+	Prøvede med det som vi havde snakket om, og ignorer = eller ikke flippe hvis der var =. Ignorer = virkede meget dårligt, det andet forbedre meget lidt. 
+	Nu bruger jeg sum af leftside til at beregne om = giver en violation, hvis det gør flipper den ikke ellers tæller den en counter op. For de andre 
+	tæller jeg op hvis de er positive og ned hvis de ikke er. Måske ikke det første man tænker der er rigtigt men det giver et bedre resultat ikke at flippe for mange.
+læs 4.6.1 af Rossi til forbedring af init state.
+
+
+
+# 2. møde
+Kig på abstract
+Forbedre solver, ideer fra artikler
+Kig på benchmark og lav script
+
+# 1. møde
+CoinUtils kan ikke læse zib02 og jeg kan ikke se hvordan jeg skal trække row information i zib01 uden at hente en matrix (som ikke kan lade sig gøre)
+Så vidt jeg ved kan man ikke se om et problem er minimerings eller maksimerings problem. 
+Det er kun muligt at se om der er kontinuerer eller heltals variable. 
+Hvis obj og vio = 0, terminere programmet inden der laves "firstMove" men efter state er sat. runner::lowerBoundReached() bliver kaldt og beregner statemanager::costFunction(state st) -> HARD_WEIGHT * hard_cost  + soft_cost; Hvis det er 0 terminere den. 
+	Det betyder hvis det er et maksimerings problem som bliver lavet til minimerings problem (sandsynligt obj skal være negativ) så kan den starte i et state hvor den terminere.  
+Jeg kan ikke få den til at starte i greedystate
+
+kort om svn igen (kan ikke huske om jeg skal flytte fra trunk først), er det fint som det er nu?

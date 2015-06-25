@@ -1,0 +1,58 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+ 
+%opening
+\title{A General Purpose Local Search Solver }
+\author{Bo Stentebjerg-Hansen}
+
+\begin{document}
+
+\maketitle
+
+\section*{Description}
+% Intro -> hvad er der lige nu
+% Hvad skal jeg arbejde med
+The field of optimization can be split into several subfields depending on the nature of the decision variables 
+(continuous, discrete) and the structure of the problem (linear, non linear, combinatorial, convex, non 
+convex). The main focus of this thesis is discrete optimization both linear and non linear. 
+Several solvers are available for discrete optimization. The mixed integer linear programming (MILP) approach has 
+solvers such as GLPK, Gurobi and CPLEX. There are also constraint programming (CP) solvers, such as Gecode. All these 
+solvers solve the problem exactly, but for some problems thit is not always possible due to the computational 
+cost. Another approach is to use local search and find a good solution fast by making a trade off between speed 
+and solution quality. \medskip \\ 
+There exists a vast literature about how to make good local search solvers for specific problems.
+However, only a few attempts have been made to use local search for general purpose solvers like 
+mathematical programming and constraint programming. Comet was a successful CP based solver and that allowed to 
+use local search to find a good solution fast but the project is now abandoned. Currently LocalSolver is a commercial 
+product that combines local search with a modeling language. It can be used to solve mathematical, constraint, 
+continuous, and non linear programming. \medskip \\
+In this project, a general heuristic solver based on local search will be developed. Initially, it will be a solver 
+for problems formulated as binary programming problems. For the part of 
+software engineering we will combine ideas from Comet, LocalSolver, Gecode and Easylocal which is a local search 
+framework.  \medskip \\
+Beside the basic components of local search there are several elements that will be studied to improve the 
+solver. One of these elements is preprocessing that can reduce the size of the search space before the local search is 
+started and improve the speed of the solver considerably. Other elements that will be studied are invariants and 
+directed acyclic graphs (DAGs) to represent efficiently the dependencies between the variables. The choice of 
+neighborhoods and how to efficiently explore these neighborhoods also be considered. Finally, on top of the local search 
+there several metaheuristics that can be studied. \medskip \\   
+The goal will then be to extend the range of problems that can be solved by looking at more general, non linear 
+constraints such as those considered in CP. \medskip \\ 
+The performance of the solver will be tested with the instances from the MIPLIB, on timetabling problems and eventually 
+on some competitions like the International Nurse Rostering Competition (NERC) and the MiniZinc challenge. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

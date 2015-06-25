@@ -1,0 +1,61 @@
+
+
+\subsection{Comet}
+% Figur om opbygning af comet som i bogen
+Comet is an object orientated programming language that uses the modeling language of constraint programming and uses a 
+general purpose local search solver. Comet is now an abandoned project but the architecture used is still of interest. 
+The core of the language is the incremental store that contains various incremental objects fx. incremental variables. 
+Invariants, also called one-way constraints, are expressions that are defined by incremental variables and a relation of 
+those. An incremental variable $v$ can for instance be expressed as a sum of other variables. The variable $v$ will 
+automatically be updated if one of the other variables changes value. The order in which the invariants gets updated can 
+be implemented to achieve higher performance. \\ \medskip
+One layer above the invariants is the differentiable objects that can use the invariants and the incremental objects. 
+Both constraints and objective are implemented as differentiable objects. They are called differentiable 
+because it is possible to compute how the change of a variable value will affect the differentiable object's values. 
+All 
+constraints are implemented using the same interface, that means that all constraint have some methods in common. These 
+method is defined as invariants hence they are always updated when a change is made to one of their variables. This is 
+especially useful when combining multiple constraints in a constraint system, that also implements the constraint 
+interface. The constraints can be combined in a constraint system that then uses the method from the individual 
+constraints to calculated its own methods. Just like the \interface{constraint} interface there exist a 
+\interface{objective} interface. Both 
+will be described further in section \ref{difObj}. \\ \medskip
+The next layer is where the user models their problem and use the objects mentioned above. Several search method are 
+implemented that can be used. The benefit of this architecture is the user can focus on modeling the problem 
+efficiently on a high level and thereby avoid small implementation mistakes. Using constraint programming inspired 
+structure gives the benefit of brief but very descriptive code.
+
+\subsubsection{Invariants}
+
+
+
+\subsubsection{Differentiable Objects} \label{difObj}
+Comets core modeling object is the differentiable objects that are used to model constraints and objective functions. \\
+All constraints in Comet implement the %\il{Constraint} interface (Hvad er et interface?) that makes it 
+possible to combine the constraints and reuse them easily. A constraint has at least an array $a$ of 
+variables as argument, that is the variables associated with the constraint. The interface specifies some basic 
+methods that all constraints must implement such as \method{violations()} that returns the number 
+of violations for that constraint and \method{isTrue()} that returns whether the constraint is satisfied. How the number 
+of violations is calculated depends on the implementation of the constraint. An example could be the 
+\method{alldifferent(a)} constraint, that states that all variables in the array $a$ should have distinct values. The 
+method \method{violations()} then returns the number of variables that do not have a unique value. \medskip \\ 
+% variables, value or decomposition based violations. Skal uddybes
+One of the benefits that all constraints implements the same interface is the ease of combining these constraints. 
+%%% Det her skal enten omskrives ingen logical combinators eller udlades.
+This can be done by using other differentiable objects such as logical combinators. These objects has a specific 
+definition of the basic methods from the \interface{Constraint} interface that means they do not rely on the semantics 
+of the constraints to combine them. 
+Another way to combine the constraints is to use a constraint system. Constraint systems are containers objects that 
+contains any number of constraints. These constraints are linked by logical combinators, namely conjunction. Comet can 
+use several constraints system simultaneously and is very useful for local search where one system can be used for hard 
+constraints another for soft constraints. Other constraint operators in comet are cardinality constraints, weighted 
+constraints and satisfactions constraints. \medskip \\
+Objectives are another type of differentiable objects and the structure is very close to the structure of constraints. 
+Objectives implements an interface \interface{Objective} that have some of the same methods as \interface{Constraint} 
+but instead of having \method{isTrue()} and \method{violations()} they have \method{value()} and \method{evaluation()}. 
+The method \method{value} returns the value of the objective but it can be more convenient to look at the method 
+\method{evaluation()} to guide the search. The method \method{evaluation()} should indicate how close the current 
+assignment of variables is to 
+improve the value of the objective or be used to compare two assignments of variables. How the evaluation should do 
+that depends on the nature of the problem and could for instance use a function that would decrease as the assignment 
+of variables gets close to improve the \method{value()}.

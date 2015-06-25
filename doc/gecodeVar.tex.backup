@@ -1,0 +1,41 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+
+
+\begin{document}
+
+
+\section{Variables implementation in Gecode}
+I only look at IntVar since FloatVar is not relevant for the thesis and BoolVar is implemented using the same methods 
+as IntVar. 
+
+\subsection{IntVarImp}
+Heritage from IntVarImpBase, which is a generic class (it does not contain much as far as I can find). The constructor 
+takes min and max as argument or an IntSet. The most intuitive operations are: min, max, width, median (rounded down). 
+closer\_min, a boolean that tells if an int is closer to min than max. val returns min if min==max, range returns true 
+or false based on fst()?. Assigned returns min==max, size returns width - holes, where holes is number of values 
+between min and max not posible. The last two are min and max regret (distance to next value from min/max). One can 
+check it a value is in the domain of the int with the method in. \\ 
+It uses a rangelist as iterator and supports delta information (an event i think). \\ 
+Several methods that tells how the domain is compared (lq,gq,eq,nq) to an int, is ME\_INT\_FAILED/VAL/BND (ME = 
+modEvent). \\ 
+Iterator based domain operation. Can narrow range (remove some of the ranges, all or none), a rather complex method 
+(lot of loops and cases). That method is used en sevaral others methods intersect, minus both on values and ranges. 
+\\ 
+A copy method. \\
+Methods for subscribing and cancel to propagator and advisor.
+
+\subsection{IntView}
+Have the same functions as IntVar and also derived from a class VarImpView. It is a view of a variable and have the 
+same access operators but can also access ME, schedule propagators and construct modification event delta. 
+\subsection{IntSet}
+Have lot of the same operations as intVar. 
+\subsection{IntVar}
+Creates a IntVarImp when constructed that is used for all of the same methods as IntVarImp.
+\subsection{IntVarArray}
+Dervied from VarArray that contain a var type, in this case IntVar. 
+
+
+\end{document}

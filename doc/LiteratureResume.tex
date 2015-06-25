@@ -1,0 +1,46 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+
+\section{Literature}
+Different articles/books that I have read are listed here with summary/comments. 
+\subsection{Rossi chp 4.6.1}
+Finding the order that variables should be assigned values is very difficult. Heuristics are used for this. Most basic 
+heuristic is to take the variable that has the smallest domain available. Another approach is the first fail, take the 
+path where you are most likely to fail. More complex heuristics are domain divided with degree or weighted degree. \\
+Like the approach with the smallest domain one can choose the most constraint variable. One could translate the 
+problem into a graph structure and use a structure-guide heuristic, fx the CSP (constraint satisfactory problem?) can 
+be modeled as to variables are neighbors if the are in the same constraint. If there is no cycles it is more efficient 
+than domain degree heuristics. The last approach is to divide the graphs into subgraph s with a minimal number of cuts. 
+\subsection{Estellon2009}
+Suggested approach to engineering local search is in three parts. Search strategy, moves and algorithmics \& 
+implementation. One can increase or decrease the search space by mooving constraints to obj func or relaxing 
+constraints. The search graph is connected to the search space and an algorithm. The graph can be expanded by 
+introducing different moves. This should not be controlled sololy by meta heuristics but through redefinition of search 
+space and different moves. Obvious thins as optimizing code by cache allocation speed up the search. \\ 
+Verify and test your code. Implement debug mode, use assert and calculate function with naive method and compare. \\
+After these steps use statistic on moves to improve code (80-20) rule. 
+\subsection{Benoist2009}
+Basically using the thing proposed in Estellon2009 and put some number for their specific problem that worked out well. 
+
+\subsection{oscaR}
+A backend constraint based local solver CBLS for miniZinc based in oscaR. Good for inspiration when describing local 
+search. Creating a CBLS is done in 4 steps. Simplifying the model (reducing domain of variables), Classify constraints 
+(soft, implicit or one-way), The actual model and search procedure. fzn-oscar-cbls uses basic propagation but want to 
+extend it so it uses oscaR's propagation until fix point. One-way constraints are made greedily in 5 steps and ordered 
+in a digraph where one-way constraints are nodes and there is an arc from a to b if b is dependent on a. It may not 
+contain cycles so the cycles are broken by making a constraint non-one-way. The one with the lowest domain is chosen 
+ties a broken by taking the constraint with largest number of input varialbes defined by other invariants. Finding the 
+smallest number of arc is the minimum feedback arc set problem and is NP-hard. \\ 
+Neighbourhood depends on the type of the constraint because the moves are different. \\ 
+The search procedure is three steps. Greedy initial, tabu search to find a solution and another tabu for improving 
+solution. \\
+The results ar epromising though not as good as other backend there was some hard instances it performed well. Good 
+analysis of which instance types was hard to solve. 
+\end{document}

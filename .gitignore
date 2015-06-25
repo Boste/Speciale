@@ -2,3 +2,4 @@ target
 solver-v2/src/nbproject
 solver-v2/src/*.o
 solver-v2/src/xyz
+data/

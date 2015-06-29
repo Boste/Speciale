@@ -52,7 +52,7 @@ public:
             // What should be given to LSSpace
             if (irt == Gecode::IRT_EQ) {
                 LSSpace::linear(coefficients, variables, 0, ub, type);
-            } else if (irt == Gecode::IRT_GQ) {
+            } else if (irt == Gecode::IRT_LQ) {
                 LSSpace::linear(coefficients, variables, 1, ub, type);
             }
         }
@@ -122,6 +122,7 @@ public:
     void InitialSolution() {
         //	// This is to stop the search at the time limit imposed
         Gecode::Search::Options so;
+            print(std::cout);
 
         startTimer(so);
 
@@ -131,23 +132,26 @@ public:
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             GeneralSolver* s = e.next();
-            int counter = 0;
-            while (!s->failed() && !e.stopped()) {
-//                std::cout << "counter " << counter << std::endl;
-                s = e.next(); // crash hvis der er ikke er en next?
-                counter++;
-//                std::cout << "efter counter" << std::endl;
-
-            }
-            //                             s = e.next();
-            std::cout << "efter while og s failed? " << std::endl;
-            sleep(1);
-            std::cout << s->failed() << std::endl;
+//            s = e.next();
+            //            int counter = 0;
+            //            while (!s->failed() && !e.stopped()) {
+            ////                std::cout << "counter " << counter << std::endl;
+            //                s = e.next(); // crash hvis der er ikke er en next?
+            //                counter++;
+            ////                std::cout << "efter counter" << std::endl;
+            //
+            //            }
+            //            //                             s = e.next();
+            //            std::cout << "efter while og s failed? " << std::endl;
+            //            sleep(1);
+            //            std::cout << s->failed() << std::endl;
             //            std::cout << this->IntVars << std::endl;
             //            GeneralSolver* s = e.next();
 
             assert(!s->failed());
             assert(!e.stopped());
+            printCurrent();
+            s->print(std::cout);
             this->SetValues(s->IntVars);
 
             //            for(int i = 0; i < IntVars.size(); i++ ){
@@ -166,7 +170,6 @@ public:
             initializeObjective();
             //            std::cout << __LINE__ << std::endl;
 
-            printCurrent();
 
 
 
@@ -194,6 +197,11 @@ public:
 
     void optimizeSolution() {
         bestMove();
+    }
+    // Only for testing
+
+    Gecode::IntVarArray* getIntVars() {
+        return &IntVars;
     }
 
 
@@ -245,6 +253,7 @@ private:
         cout << "\trestarts: " << stat.restart << endl;
         cout << "\tnogoods: " << stat.nogood << endl;
     }
+
 
 
 };

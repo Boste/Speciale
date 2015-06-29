@@ -11,7 +11,7 @@
 #ifndef TEST_HPP
 #define	TEST_HPP
 
-class Test : public GeneralSolver{
+class Test {
 public:
     Test();
     Test(const Test& orig);
@@ -23,11 +23,12 @@ private:
     void testLinear();
     void testSum();
     void createLinearEQConst();
+    void createLinearLQConst();
     void startTest();
     void testDone();
-    void testFailed(string func);
+    void testFailed(string func, string error);
 protected:
-//    GeneralSolver* GS;
+    GeneralSolver* GS;
     vector<IntegerVariable*>* varInt;
     std::clock_t start;
     std::clock_t testStart;

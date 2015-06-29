@@ -83,6 +83,7 @@ void Test::testLinear() {
     varInt = GS->createIntVars(10, 0, 1);
     createLinearEQConst();
     createLinearLQConst();
+    GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     GS->InitialSolution();
     string error = "Constraints not satisfied";
     for (int i = 0; i < GS->Constraints.size(); i++) {
@@ -100,8 +101,8 @@ void Test::testLinear() {
             sum += varInt->at(j)->getCurrentValue()*(j + 1);
         }
         if (GS->Invariants.at(i)->getCurrentValue() != sum) {
-            error += " invariant " + std::to_string(i) + " value " + 
-                    std::to_string(GS->Invariants.at(i)->getCurrentValue()) + 
+            error += " invariant " + std::to_string(i) + " value " +
+                    std::to_string(GS->Invariants.at(i)->getCurrentValue()) +
                     " should be " + std::to_string(sum);
             testFailed(string(__FUNCTION__), error);
 

@@ -15,6 +15,7 @@ class GeneralSolver : public Gecode::Script, public LSSpace {
 private:
     //    Gecode::IntVarArray* solutions;
     Gecode::IntVarArray IntVars;
+    std::vector<Gecode::IntVarArgs*> test; 
 public:
 
     GeneralSolver() {
@@ -122,7 +123,7 @@ public:
     void InitialSolution() {
         //	// This is to stop the search at the time limit imposed
         Gecode::Search::Options so;
-            print(std::cout);
+        print(std::cout);
 
         startTimer(so);
 
@@ -132,7 +133,9 @@ public:
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             GeneralSolver* s = e.next();
-//            s = e.next();
+            s = e.next();
+
+            assert(s != NULL);
             //            int counter = 0;
             //            while (!s->failed() && !e.stopped()) {
             ////                std::cout << "counter " << counter << std::endl;

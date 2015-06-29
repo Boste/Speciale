@@ -12,6 +12,7 @@ Test::Test() {
     start = std::clock();
 
     testLinear();
+    testObjectiveFunction();
 
 
 
@@ -61,11 +62,13 @@ Test::~Test() {
 }
 
 void Test::testConstraints() {
+    startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
     varInt = GS->createIntVars(10, 0, 1);
 
 
 
+    testDone(string(__FUNCTION__));
 
 }
 
@@ -75,10 +78,42 @@ void Test::testInvariants() {
 }
 
 void Test::testObjectiveFunction() {
+    startTest(string(__FUNCTION__));
+    GS = new GeneralSolver();
+    varInt = GS->createIntVars(10, 0, 1);
+    createLinearEQConst();
+    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+
+    std::vector<int>* coef = new vector<int>();
+    for (int i = 0; i < varInt->size(); i++) {
+        coef->push_back(1);
+        x->push_back(varInt->at(i));
+    }
+    GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
+    string error = "objective not added to LSS";
+    if (GS->ObjectiveFunction.size() != 1) {
+        testFailed(__FUNCTION__, error);
+    }
+    GS->InitialSolution();
+    int objfnc = 0;
+    for(int i = 0; i < varInt->size(); i++ ) {
+        objfnc += varInt->at(i)->getCurrentValue();
+    }
+    
+    if(GS->ObjectiveFunction.at(0)->getDeltaViolationDegree() != objfnc){
+        error = "Wrong objective value. Current Value " + std::to_string(GS->ObjectiveFunction.at(0)->getDeltaViolationDegree()) + " Value should be " + std::to_string(objfnc);
+        testFailed(__FUNCTION__,error);
+    }
+        
+    
+
+
+    testDone(string(__FUNCTION__));
 
 }
 
 void Test::testLinear() {
+    startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
     varInt = GS->createIntVars(10, 0, 1);
     createLinearEQConst();
@@ -86,7 +121,7 @@ void Test::testLinear() {
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     GS->InitialSolution();
     string error = "Constraints not satisfied";
-    for (int i = 0; i < GS->Constraints.size(); i++) {
+    for (unsigned i = 0; i < GS->Constraints.size(); i++) {
         if (GS->Constraints.at(i)->getViolation() != 0) {
             testFailed(string(__FUNCTION__), error);
 
@@ -95,9 +130,9 @@ void Test::testLinear() {
     // Testing invariant (sum)
 
     error = "Lefthand side gives wrong value";
-    for (int i = 0; i < GS->Invariants.size(); i++) {
+    for (unsigned i = 0; i < GS->Invariants.size(); i++) {
         int sum = 0;
-        for (int j = 0; j < varInt->size(); j++) {
+        for (unsigned j = 0; j < varInt->size(); j++) {
             sum += varInt->at(j)->getCurrentValue()*(j + 1);
         }
         if (GS->Invariants.at(i)->getCurrentValue() != sum) {
@@ -109,11 +144,13 @@ void Test::testLinear() {
         }
     }
 
+    testDone(string(__FUNCTION__));
 
 
 }
 
 void Test::testSum() {
+    startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
     varInt = GS->createIntVars(10, 0, 1);
     createLinearEQConst();
@@ -122,8 +159,7 @@ void Test::testSum() {
 }
 
 void Test::createLinearEQConst() {
-    startTest();
-    std::cout << "Test " << __FUNCTION__ << std::endl;
+    startTest(string(__FUNCTION__));
     unsigned invarSize = GS->Invariants.size();
     unsigned constSize = GS->Constraints.size();
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
@@ -141,14 +177,13 @@ void Test::createLinearEQConst() {
 
 
 
-    testDone();
+    testDone(string(__FUNCTION__));
 
 
 }
 
 void Test::createLinearLQConst() {
-    startTest();
-    std::cout << "Test " << __FUNCTION__ << std::endl;
+    startTest(string(__FUNCTION__));
     unsigned invarSize = GS->Invariants.size();
     unsigned constSize = GS->Constraints.size();
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
@@ -163,19 +198,20 @@ void Test::createLinearLQConst() {
         string error = "number of invariants and constraints " + std::to_string(invarSize) + " " + std::to_string(constSize) + ". After linear " + std::to_string(GS->Invariants.size()) + " " + std::to_string(GS->Constraints.size());
         testFailed(string(__FUNCTION__), error);
     }
-    testDone();
+    testDone(string(__FUNCTION__));
 
 
 }
 
-void Test::startTest() {
+void Test::startTest(string func) {
     testStart = std::clock();
+    std::cout << "Test " << func << std::endl;
 }
 
-void Test::testDone() {
+void Test::testDone(string func) {
     double seconds = (std::clock() - testStart) / (double) CLOCKS_PER_SEC;
     int minuts = floor(seconds / 60);
-    std::cout << "Test finish after " << minuts << " minuts and " << seconds << " seconds" << std::endl;
+    std::cout << "Test " << func << " finish after " << minuts << " minuts and " << seconds << " seconds" << std::endl;
 }
 
 void Test::testFailed(string func, string error) {

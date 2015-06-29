@@ -24,8 +24,8 @@ private:
     void testSum();
     void createLinearEQConst();
     void createLinearLQConst();
-    void startTest();
-    void testDone();
+    void startTest(string func);
+    void testDone(string func);
     void testFailed(string func, string error);
 protected:
     GeneralSolver* GS;

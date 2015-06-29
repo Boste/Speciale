@@ -153,8 +153,6 @@ public:
 
             assert(!s->failed());
             assert(!e.stopped());
-            printCurrent();
-            s->print(std::cout);
             this->SetValues(s->IntVars);
 
             //            for(int i = 0; i < IntVars.size(); i++ ){

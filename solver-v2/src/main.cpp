@@ -64,12 +64,11 @@ void gecode(int argc, char* argv[]) {
     //    Support::Timer t;
     //    t.start()
     Test* t = new Test();
-//    t->InitialSolution();
-    BPSolver* m = new BPSolver(p);
-    m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 
-    m->optimizeSolution();
-//        m->InitialSolution();
-    m->printCurrent();
+//    BPSolver* m = new BPSolver(p);
+//    m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 
+//    m->printCurrent();
+//    m->optimizeSolution();
+//    m->printCurrent();
     
 //    std::cout << &opt << std::endl;
 //    m->print(std::cout);

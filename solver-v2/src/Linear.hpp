@@ -3,6 +3,7 @@
 #include "Sum.hpp"
 #include "Invariant.hpp"
 #include "Constraint.hpp"
+#include "Constants.hpp"
 
 class Linear : public Constraint {
 protected:
@@ -37,7 +38,7 @@ public:
     int setDeltaViolation() {
 
         // if constraint is LQ
-        if (relation == 1) {
+        if (relation == LQ) {
             // if not violated before change
             if (Violation == 0) {
                 // if not violated after change
@@ -77,31 +78,14 @@ public:
         return 0;
     }
 
-    int setDeltaViolationDegree() {
-        int change = 0;
-        if (relation == 1) {
-            if (lhs->getCurrentValue() <= rhs) {
-                change = -ViolationDegree;
-                ViolationDegree = 0;
-            } else {
-                change = lhs->getCurrentValue() - rhs - ViolationDegree;
-                ViolationDegree += change;
-            }
-        } else {
-            if (lhs->getCurrentValue() == rhs) {
-                change = -ViolationDegree;
-                ViolationDegree = 0;
-            } else {
-                change = lhs->getCurrentValue() - ViolationDegree;
-                ViolationDegree += change;
-            }
-        }
-        return change;
+     int setDeltaViolationDegree() {
+        DeltaViolationDegree = lhs->getDeltaValue();
+        return DeltaViolationDegree;
     }
 
     int updateViolation() {
         int change = 0;
-        if (relation == 1) {
+        if (relation == LQ) {
             if (lhs->getCurrentValue() <= rhs) {
                 change = -Violation;
                 Violation = 0;
@@ -123,7 +107,7 @@ public:
 
     int updateViolationDegree() {
         int change = 0;
-        if (relation == 1) {
+        if (relation == LQ) {
             if (lhs->getCurrentValue() <= rhs) {
                 change = -ViolationDegree;
                 ViolationDegree = 0;

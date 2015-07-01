@@ -27,6 +27,7 @@ private:
     void startTest(string func);
     void testDone(string func);
     void testFailed(string func, string error);
+    void testBestMove();
 protected:
     GeneralSolver* GS;
     vector<IntegerVariable*>* varInt;

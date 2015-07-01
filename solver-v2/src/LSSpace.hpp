@@ -20,12 +20,46 @@ public:
     std::vector<Constraint*> Constraints;
     std::vector<Constraint*> ObjectiveFunction;
 
+//    LSSpace(LSSpace &c) {
+//        this->IntVarVector = c.IntVarVector;
+//        this->BoolVarVector = c.BoolVarVector;
+//        this->Invariants = c.Invariants;
+//        this->Constraints = c.Constraints;
+//        this->ObjectiveFunction = c.ObjectiveFunction;
+//        this->Violations = c.Violations;
+//        this->ObjectiveValue = c.ObjectiveValue;
+//    }
+//
+//    LSSpace& operator=(const LSSpace &c) {
+//        this->IntVarVector = c.IntVarVector;
+//        this->BoolVarVector = c.BoolVarVector;
+//        this->Invariants = c.Invariants;
+//        this->Constraints = c.Constraints;
+//        this->ObjectiveFunction = c.ObjectiveFunction;
+//        this->Violations = c.Violations;
+//        this->ObjectiveValue = c.ObjectiveValue;
+//        return *this;
+//    }
+//
+//    ~LSSpace() {
+//        delete &IntVarVector;
+//        delete &BoolVarVector;
+//        delete &Invariants;
+//        delete &Constraints;
+//        delete &ObjectiveFunction;
+//        delete &Violations;
+//        delete &ObjectiveValue;
+//    }
+
 
 private:
+    int Violations = 0;
+    int ObjectiveValue = 0;
 
     void addInvariantToIntVariable(int variableNumber, int invariantNumber) {
         IntVarVector.at(variableNumber)->addToUpdate(invariantNumber);
     }
+
 protected:
 
     std::vector<IntegerVariable*>* addIntVariablesToLS(Gecode::IntVarArray& vars);
@@ -42,10 +76,10 @@ protected:
     void initializeConstraints();
 
     void initializeObjective();
-    
+
     void commitDeltaOfVariable(int changedVariable);
 
-    std::pair<int,int> calculateDeltaValueOfVariableChange(int variableNumber, int newValue);
+    std::pair<int, int> calculateDeltaValueOfVariableChange(int variableNumber, int newValue);
 
     double testInvariant(int invariantNumber) {
         return Invariants.at(invariantNumber)->test();

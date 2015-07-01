@@ -71,7 +71,7 @@ void LSSpace::initializeObjective() {
         std::cout << "Initial solution value: " << violations << std::endl;
     }
 }
-
+    
 int LSSpace::bestMove() {
     int violationChange = 0;
     int objectiveChange = 0;
@@ -97,6 +97,7 @@ int LSSpace::bestMove() {
     }
     std::cout << "changed variable " << bestVariable << std::endl;
     std::cout << "violation change " << violationChange << " objective change " << objectiveChange << std::endl;
+    
     return bestVariable;
 }
 
@@ -125,18 +126,21 @@ std::pair<int, int> LSSpace::calculateDeltaValueOfVariableChange(int variableNum
     vector<int>* updateVector = variable->getUpdateVector();
     int violationChange = 0;
     int objectiveChange = 0;
+//    std::cout << "Variable " << variableNumber << std::endl;
     for (unsigned i = 0; i < updateVector->size(); i++) {
         Invariant* invar = Invariants.at(updateVector->at(i));
         invar->addChange(variableNumber, newValue - oldValue);
         invar->calculateDeltaValue();
         if (invar->getUsedInConstraint() != -1) {
+//            std::cout << "Used in Constraint " << std::endl;
             violationChange += Constraints.at(invar->getUsedInConstraint())->setDeltaViolation();
         }
         if (invar->getUsedInObjective() != -1) {
+//            std::cout << "Used in objective " << std::endl;
             objectiveChange += ObjectiveFunction.at(invar->getUsedInObjective())->setDeltaViolationDegree();
         }
     }
-
+//    std::cout << std::endl;
     std::pair<int, int> change(violationChange, objectiveChange);
     return change;
     //    return std::pair<int,int> change = new pair<int,int>(violationChange,objectiveChange);

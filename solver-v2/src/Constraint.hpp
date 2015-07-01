@@ -15,14 +15,14 @@ public:
     }
 
     Constraint(const Constraint &c) {
-        this->DeltaViolation = c.DeltaViolation ;
+        this->DeltaViolation = c.DeltaViolation;
         this->DeltaViolationDegree = c.DeltaViolationDegree;
         this->Violation = c.Violation;
         this->ViolationDegree = c.ViolationDegree;
     }
 
     Constraint& operator=(const Constraint &c) {
-        this->DeltaViolation = c.DeltaViolation ;
+        this->DeltaViolation = c.DeltaViolation;
         this->DeltaViolationDegree = c.DeltaViolationDegree;
         this->Violation = c.Violation;
         this->ViolationDegree = c.ViolationDegree;
@@ -36,40 +36,47 @@ public:
     int getDeltaViolation() {
         return DeltaViolation;
     }
+
     int getDeltaViolationDegree() {
         return DeltaViolationDegree;
     }
+
     int getViolation() {
         return Violation;
     }
+
     int getViolationDegree() {
         return ViolationDegree;
     }
 
     virtual int setDeltaViolation() {
         std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
+        sleep(1);
         return 0;
     }
 
-   virtual int setDeltaViolationDegree() {
+    virtual int setDeltaViolationDegree() {
         std::cout << "setDeltaViolationDegree() called in Constraint.hpp" << std::endl;
+        sleep(1);
         return 0;
     }
-//   void updateViolation(int violation){
-//       Violation = violation;
-//   }
-//   void updateViolationDegree(int degree){
-//       ViolationDegree = degree;
-//   }
+    //   void updateViolation(int violation){
+    //       Violation = violation;
+    //   }
+    //   void updateViolationDegree(int degree){
+    //       ViolationDegree = degree;
+    //   }
     // Return change 
 
     virtual int updateViolation() {
         std::cout << "Update Violation called in Constraint.hpp" << std::endl;
+        sleep(1);
         return 0;
     }
 
     virtual int updateViolationDegree() {
         std::cout << "Update Violation Degree called in Constraint.hpp" << std::endl;
+        sleep(1);
         return 0;
     }
 

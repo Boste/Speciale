@@ -69,8 +69,9 @@ public:
     std::vector<IntegerVariable*>* createIntVars(unsigned numberOfVariables, int lb, int ub) {
         // Given to gecode space
         Gecode::IntVarArray Vars(*this, numberOfVariables, lb, ub);
+        
+        // Looks bad but does not copy the variables. Points to two different places in memory but the variables in the two arrays have the same memory address. 
         IntVars = Vars;
-
         // Given to LS space
 
 
@@ -133,7 +134,7 @@ public:
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             GeneralSolver* s = e.next();
-            s = e.next();
+//            s = e.next();
 
             assert(s != NULL);
             //            int counter = 0;
@@ -150,6 +151,7 @@ public:
             //            std::cout << s->failed() << std::endl;
             //            std::cout << this->IntVars << std::endl;
             //            GeneralSolver* s = e.next();
+            s->print(std::cout);
 
             assert(!s->failed());
             assert(!e.stopped());

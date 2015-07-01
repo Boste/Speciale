@@ -11,7 +11,7 @@ Test::Test() {
     std::cout << std::endl;
     start = std::clock();
 
-    testLinear();
+    //    testLinear();
     testObjectiveFunction();
 
 
@@ -80,13 +80,15 @@ void Test::testInvariants() {
 void Test::testObjectiveFunction() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(10, 0, 1);
-    createLinearEQConst();
+    varInt = GS->createIntVars(100, 0, 1);
+//    createLinearEQConst();
+    createLinearLQConst();
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
 
     std::vector<int>* coef = new vector<int>();
-    for (int i = 0; i < varInt->size(); i++) {
-        coef->push_back(1);
+    for (unsigned i = 0; i < varInt->size(); i++) {
+        int c = -((i+1) % 5);
+        coef->push_back(c);
         x->push_back(varInt->at(i));
     }
     GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
@@ -94,28 +96,29 @@ void Test::testObjectiveFunction() {
     if (GS->ObjectiveFunction.size() != 1) {
         testFailed(__FUNCTION__, error);
     }
+    GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+
     GS->InitialSolution();
     int objfnc = 0;
-    for(int i = 0; i < varInt->size(); i++ ) {
-        objfnc += varInt->at(i)->getCurrentValue();
+    for (unsigned i = 0; i < varInt->size(); i++) {
+        objfnc += varInt->at(i)->getCurrentValue() * coef->at(i);
     }
-    
-    if(GS->ObjectiveFunction.at(0)->getDeltaViolationDegree() != objfnc){
-        error = "Wrong objective value. Current Value " + std::to_string(GS->ObjectiveFunction.at(0)->getDeltaViolationDegree()) + " Value should be " + std::to_string(objfnc);
-        testFailed(__FUNCTION__,error);
+
+    if (GS->ObjectiveFunction.at(0)->getViolationDegree() != objfnc) {
+        error = "Wrong objective value. Current Value " + std::to_string(GS->ObjectiveFunction.at(0)->getViolationDegree()) + " Value should be " + std::to_string(objfnc);
+        testFailed(__FUNCTION__, error);
     }
-        
-    
-
-
+    GS->optimizeSolution();
+    GS->printCurrent();
     testDone(string(__FUNCTION__));
 
 }
 
+
 void Test::testLinear() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(10, 0, 1);
+    varInt = GS->createIntVars(100, 0, 1);
     createLinearEQConst();
     createLinearLQConst();
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -152,7 +155,7 @@ void Test::testLinear() {
 void Test::testSum() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(10, 0, 1);
+    varInt = GS->createIntVars(100, 0, 1);
     createLinearEQConst();
 
     //    Invariant inv = Invariants.at(0);
@@ -165,7 +168,7 @@ void Test::createLinearEQConst() {
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
 
     std::vector<int>* coef = new vector<int>();
-    for (int i = 0; i < varInt->size(); i++) {
+    for (unsigned i = 0; i < varInt->size(); i++) {
         coef->push_back(i + 1);
         x->push_back(varInt->at(i));
     }
@@ -189,7 +192,7 @@ void Test::createLinearLQConst() {
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
 
     std::vector<int>* coef = new vector<int>();
-    for (int i = 0; i < varInt->size(); i++) {
+    for (unsigned i = 0; i < varInt->size(); i++) {
         coef->push_back(i + 1);
         x->push_back(varInt->at(i));
     }

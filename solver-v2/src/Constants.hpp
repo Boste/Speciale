@@ -8,6 +8,11 @@
 #define maxIter 200000000
 #define iniTrails 20
 #define maxMoves 600
+#define LQ 1
+#define EQ 0
+#define SOFT 1
+#define INVARIANT 2
+
 //class GlobalConstraints {
 //    
 //    

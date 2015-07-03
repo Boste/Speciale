@@ -1,10 +1,4 @@
-/* 
- * File:   NeighborhoodExplorer.hpp
- * Author: bo
- *
- * Created on July 2, 2015, 11:01 AM
- */
-
+#include "Move.hpp"
 #ifndef NEIGHBORHOODEXPLORER_HPP
 #define	NEIGHBORHOODEXPLORER_HPP
 

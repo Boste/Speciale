@@ -71,7 +71,7 @@ public:
                 if (lhs->getDeltaValue() + lhs->getCurrentValue() == rhs) {
                     return -1;
                 } else {
-                    return 0;
+                    return 0; 
                 }
             }
         }

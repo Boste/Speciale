@@ -1,0 +1,41 @@
+digraph g{
+  a -> b
+	a -> c
+	a -> d	
+	a -> g
+	a -> k
+	b -> c
+	d -> b
+	e -> b
+	e -> g
+	f -> b
+	g -> b
+	h -> j
+	i -> b
+	i -> d
+	i -> g
+	i -> h
+	i -> j
+	j -> b
+	k -> b
+	k -> d
+	k -> g
+	k -> h
+	k -> i
+	k -> j
+	l -> c
+	
+  a [label="IntegerVariable",shape=ellipse,fillcolor="",style="filled"];
+  b [label="LSSpace",shape=ellipse,fillcolor="",style="filled"];
+  c [label="GeneralSolver",shape=ellipse,fillcolor="",style="filled"];
+  d [label="Linear",shape=ellipse,fillcolor="",style="filled"];
+  e [label="Invariant",shape=ellipse,fillcolor="",style="filled"];
+  f [label="Constraint",shape=ellipse,fillcolor="",style="filled"];
+  g [label="Sum",shape=ellipse,fillcolor="",style="filled"];
+  h [label="NeighborhoodExplorer",shape=ellipse,fillcolor="",style="filled"];
+  i [label="Move",shape=ellipse,fillcolor="",style="filled"];
+  j [label="Solvers",shape=ellipse,fillcolor="",style="filled"];
+  k [label="State",shape=ellipse,fillcolor="",style="filled"];
+	l [label="gecode",shape=ellipse,fillcolor="",style="filled"];
+
+}

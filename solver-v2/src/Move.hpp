@@ -13,7 +13,7 @@ protected:
     std::vector<int> oldValue;
     std::vector<int> newValue;
     std::vector<int> deltaValue;
-
+    
 public:
 
     Move() {
@@ -21,35 +21,35 @@ public:
     }
 
     ~Move() {
-        delete variables;
-        delete deltaValue;
-        delete newValue;
-        delete oldValue;
+        delete &variables;
+        delete &deltaValue;
+        delete &newValue;
+        delete &oldValue;
     }
 
-    Move::Move(const Move& orig) {
+    Move(const Move& orig) {
         this->variables = orig.variables;
         this->oldValue = orig.oldValue;
         this->newValue = orig.newValue;
         this->deltaValue = orig.deltaValue;
     }
 
-    std::vector<IntegerVariable*> getVariables() {
-        return variables;
+    std::vector<IntegerVariable*>* getVariables() {
+        return &variables;
     }
 
-    std::vector<int> getOldValue() {
-        return oldValue;
+    std::vector<int>* getOldValue() {
+        return &oldValue;
     }
 
-    std::vector<int> getNewValue() {
-        return newValue;
+    std::vector<int>* getNewValue() {
+        return &newValue;
     }
 
-    std::vector<int> getDeltaValue() {
-        return deltaValue;
+    std::vector<int>* getDeltaValue() {
+        return &deltaValue;
     }
-
+    
 
 };
 

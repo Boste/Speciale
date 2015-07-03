@@ -16,6 +16,12 @@ public:
     Test();
     Test(const Test& orig);
     virtual ~Test();
+protected:
+    GeneralSolver* GS;
+    vector<IntegerVariable*>* varInt;
+    std::clock_t start;
+    std::clock_t testStart;
+    int failedTests = 0;
 private:
     void testConstraints();
     void testInvariants();
@@ -28,11 +34,7 @@ private:
     void testDone(string func);
     void testFailed(string func, string error);
     void testBestMove();
-protected:
-    GeneralSolver* GS;
-    vector<IntegerVariable*>* varInt;
-    std::clock_t start;
-    std::clock_t testStart;
+
 };
 
 #endif	/* TEST_HPP */

@@ -29,10 +29,19 @@ Cluster
 
 
 Ting at snakke om:
-Giver det mening at have en constraint classe eller skal det hele nedarves fra invariant?
-Hvordan går det overordnet?
-Lav en kalender med ting der skal lave og del den?
+Skal der være en state klasse.
+Hvilket space skal der arbejdes videre fra (mht variable). 
+Første space:
+	fordele:
+		Skal ikke kopier alt der ikke er relevant for Gecode (Variable, invarianter, constraints)
+	Ulempe: 
+		Skal kopier mulige domæne fra initial solution space. 
 
+Initial solution Space:
+	Fordele:
+		Domænet er gemt i variablene
+	Ulempe: 
+		Skal kopiere alt der skal bruges i LSSpace, enten hver gang eller en gang til sidst (hvis det er muligt). 	 
 
 
 

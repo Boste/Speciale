@@ -20,6 +20,7 @@ public:
 
     GeneralSolver() {
 
+       
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {
@@ -59,12 +60,12 @@ public:
         }
     }
 
-    void SetValues(Gecode::IntVarArray vars) {
-        for (int i = 0; i < vars.size(); i++) {
-            assert(vars[i].assigned());
-            this->IntVarVector.at(i)->setCurrentValue(vars[i].val());
-        }
-    }
+//    void SetValues(Gecode::IntVarArray vars) {
+//        for (int i = 0; i < vars.size(); i++) {
+//            assert(vars[i].assigned());
+//            this->IntVarVector.at(i)->setCurrentValue(vars[i].val());
+//        }
+//    }
 
     std::vector<IntegerVariable*>* createIntVars(unsigned numberOfVariables, int lb, int ub) {
         // Given to gecode space
@@ -75,7 +76,7 @@ public:
         // Given to LS space
 
 
-        return LSSpace::addIntVariablesToLS(IntVars);
+        return LSSpace::addIntVariablesToState(&IntVars);
         //        return LSSpace::addIntVariablesToLS(IntVars);
         //        return vars;
     }
@@ -155,8 +156,7 @@ public:
 
             assert(!s->failed());
             assert(!e.stopped());
-            this->SetValues(s->IntVars);
-
+            SetValues(s->IntVars);
             //            for(int i = 0; i < IntVars.size(); i++ ){
             //                if(IntVarVector.at(i).getCurrentValue() != s->IntVars[i].val()){
             //                    std::cout << IntVarVector.at(i).getCurrentValue() << " vs " << s->IntVars[i] << std::endl;
@@ -165,13 +165,12 @@ public:
             //            std::cout << __LINE__ << std::endl;
 
             initializeInvariants();
-            //            std::cout << __LINE__ << std::endl;
+//                        std::cout << __LINE__ << std::endl;
 
             initializeConstraints();
-            //            std::cout << __LINE__ << std::endl;
+//                        std::cout << __LINE__ << std::endl;
 
             initializeObjective();
-            //            std::cout << __LINE__ << std::endl;
 
 
 

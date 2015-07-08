@@ -13,6 +13,7 @@
 
 class Test {
 public:
+
     Test();
     Test(const Test& orig);
     virtual ~Test();
@@ -34,6 +35,8 @@ private:
     void testDone(string func);
     void testFailed(string func, string error);
     void testBestMove();
+public:
+    ;
 
 };
 

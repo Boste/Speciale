@@ -6,6 +6,8 @@
 #include "Sum.hpp"
 #include "Linear.hpp"
 #include "State.hpp"
+#include "NeighborhoodExplorer.hpp"
+#include "Constants.hpp"
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 
@@ -57,6 +59,7 @@ private:
     int Violations = 0;
     int ObjectiveValue = 0;
     State st = State();
+    int iterations = 0;
 
     void addInvariantToIntVariable(int variableNumber, int invariantNumber);
 //        IntVarVector.at(variableNumber)->addToUpdate(invariantNumber);
@@ -69,9 +72,9 @@ protected:
 
     // Not able to add obj fnc. 
     void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
-
+    void optimizeSolution();
     void simpleMove(int variabelNr);
-    int bestMove();
+    bool bestImprovement();
 
     // Assumes initial value is 0, hence can only be used to initialize once. 
     void initializeInvariants();

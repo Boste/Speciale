@@ -17,15 +17,16 @@ using namespace std;
 class Sum : public Invariant {
 protected:
     std::unordered_map<int, int> coefficients;
+    
     std::vector<IntegerVariable*> VariablePointers;
     //    double oldValue = 0;
     std::vector<std::pair<int, int>> VariableChange;
 
-
+    
 public:
-
+    
     Sum(vector<IntegerVariable*>* vars, vector<int>* c);
-
+    
     Sum(const Sum &a);
 
     ~Sum();
@@ -53,7 +54,7 @@ public:
 //    void addChangeSwap(int variableNumber1, int variableNumber2);
 
 
-    double test();
+    bool test();
 
 
 };

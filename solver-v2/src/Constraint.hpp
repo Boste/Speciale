@@ -79,6 +79,17 @@ public:
         sleep(1);
         return 0;
     }
+    
+    virtual bool testCons(){
+        std::cout << "TestCons called in Constraint.hpp" << std::endl;
+        sleep(1);
+        return false;
+    }
+    virtual bool testObj(){
+        std::cout << "TestObj called in Constraint.hpp" << std::endl;
+        sleep(1);
+        return false;
+    }
 
 
 

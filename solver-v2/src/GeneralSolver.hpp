@@ -9,23 +9,27 @@
 //#include <gecode/minimodel.hh>
 #include <limits>
 #include "IntegerVariable.hpp"
+#include "Clock.hpp"
+//#include "Random.hpp"
 //using namespace Gecode;
 
 class GeneralSolver : public Gecode::Script, public LSSpace {
 private:
     //    Gecode::IntVarArray* solutions;
     Gecode::IntVarArray IntVars;
-    std::vector<Gecode::IntVarArgs*> test; 
+//    std::vector<Gecode::IntVarArgs*> test;
 public:
 
     GeneralSolver() {
+//        Random::Seed(SEED);
 
-       
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {
         this->IntVars = a.IntVars;
         //        std::cout << "hest " << std::endl;
+        return *this;
+
     }
 
     void branch(Gecode::Home home, vector<IntegerVariable*>* vars, Gecode::IntVarBranch var, Gecode::IntValBranch val) {
@@ -60,17 +64,17 @@ public:
         }
     }
 
-//    void SetValues(Gecode::IntVarArray vars) {
-//        for (int i = 0; i < vars.size(); i++) {
-//            assert(vars[i].assigned());
-//            this->IntVarVector.at(i)->setCurrentValue(vars[i].val());
-//        }
-//    }
+    //    void SetValues(Gecode::IntVarArray vars) {
+    //        for (int i = 0; i < vars.size(); i++) {
+    //            assert(vars[i].assigned());
+    //            this->IntVarVector.at(i)->setCurrentValue(vars[i].val());
+    //        }
+    //    }
 
     std::vector<IntegerVariable*>* createIntVars(unsigned numberOfVariables, int lb, int ub) {
         // Given to gecode space
         Gecode::IntVarArray Vars(*this, numberOfVariables, lb, ub);
-        
+
         // Looks bad but does not copy the variables. Points to two different places in memory but the variables in the two arrays have the same memory address. 
         IntVars = Vars;
         // Given to LS space
@@ -125,7 +129,7 @@ public:
     void InitialSolution() {
         //	// This is to stop the search at the time limit imposed
         Gecode::Search::Options so;
-        print(std::cout);
+//        print(std::cout);
 
         startTimer(so);
 
@@ -135,8 +139,9 @@ public:
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             GeneralSolver* s = e.next();
-//            s = e.next();
-
+            //            s = e.next();
+            std::cout << "Gecode found solution after "<< (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+            
             assert(s != NULL);
             //            int counter = 0;
             //            while (!s->failed() && !e.stopped()) {
@@ -152,7 +157,7 @@ public:
             //            std::cout << s->failed() << std::endl;
             //            std::cout << this->IntVars << std::endl;
             //            GeneralSolver* s = e.next();
-            s->print(std::cout);
+//            s->print(std::cout);
 
             assert(!s->failed());
             assert(!e.stopped());
@@ -162,16 +167,17 @@ public:
             //                    std::cout << IntVarVector.at(i).getCurrentValue() << " vs " << s->IntVars[i] << std::endl;
             //                }
             //            }
-            //            std::cout << __LINE__ << std::endl;
+            //                        std::cout << __LINE__ << std::endl;
 
             initializeInvariants();
-//                        std::cout << __LINE__ << std::endl;
+            //                                    std::cout << __LINE__ << std::endl;
 
             initializeConstraints();
-//                        std::cout << __LINE__ << std::endl;
+            //                                    std::cout << __LINE__ << std::endl;
 
             initializeObjective();
-
+            //            std::cout << __LINE__ << std::endl;
+            
 
 
 
@@ -198,7 +204,7 @@ public:
     }
 
     void optimizeSolution() {
-        bestMove();
+        LSSpace::optimizeSolution();
     }
     // Only for testing
 

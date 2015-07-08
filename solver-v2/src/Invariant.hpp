@@ -31,9 +31,9 @@ public:
         return DeltaValue;
     }
 
-    virtual double test() {
+    virtual bool test() {
         std::cout << "test in invariant" << std::endl;
-        return 0;
+        return false;
     }
 
     virtual ~Invariant() {

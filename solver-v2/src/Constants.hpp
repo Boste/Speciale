@@ -12,6 +12,11 @@
 #define EQ 0
 #define SOFT 1
 #define INVARIANT 2
+#define FLIP 1
+#define SWAP 2
+#define VALUECHANGE 3
+#define RANDOMSEED 1337
+#define PRINT TRUE
 
 //class GlobalConstraints {
 //    

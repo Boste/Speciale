@@ -1,21 +1,30 @@
 #include "IntegerVariable.hpp"
 #include "Invariant.hpp"
 #include "Constraint.hpp"
+#include "Constants.hpp"
+#include <limits>
 #ifndef STATE_HPP
 #define	STATE_HPP
 
 class State {
-//    friend class LSSpace;
-    private:
+    //    friend class LSSpace;
+private:
     std::vector<IntegerVariable*> IntVarVector;
     std::vector<Gecode::BoolVar> BoolVarVector;
     std::vector<Invariant*> Invariants;
     std::vector<Constraint*> Constraints;
     std::vector<Constraint*> ObjectiveFunction;
+    int numberOfVariables;
+    std::vector<int> solution;
+    int solutionValue = std::numeric_limits<int>::max();
 public:
+
+    int numberOfViolations;
+
     State();
     State(const State& orig);
     ~State();
+
 
     //        std::vector<IntegerVariable*> IntVarVector;
     //    std::vector<Gecode::BoolVar> BoolVarVector;
@@ -31,12 +40,24 @@ public:
 
     void initializeObjective();
 
-//    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
+    //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     std::vector<IntegerVariable*>* getIntegerVariables();
     std::vector<Invariant*>* getInvariants();
     std::vector<Constraint*>* getConstraints();
     std::vector<Constraint*>* getObjectives();
-    
+    IntegerVariable* getIntegerVariable(int i);
+    int getObjectiveValue();
+
+    int getNumberOfVariables() {
+        return numberOfVariables;
+    }
+    void saveSolution();
+    std::vector<int>* getSolution();
+    int getSolutionValue();
+    void setSolution();
+    bool recalculateAll();
+
+
 
 
 };

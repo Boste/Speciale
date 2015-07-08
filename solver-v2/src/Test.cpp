@@ -1,7 +1,7 @@
 #include "Test.hpp"
 
-#include <c++/4.9/bits/stl_bvector.h>
-#include <c++/4.9/bits/basic_string.h>
+//#include <c++/4.9/bits/stl_bvector.h>
+//#include <c++/4.9/bits/basic_string.h>
 
 Test::Test() {
     std::cout << std::endl;
@@ -47,10 +47,11 @@ Test::Test() {
 
 
     double seconds = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    int minuts = floor(seconds / 60);
+//    int minuts = floor(seconds / 60);
+//    double seconds = seconds % 60;
     std::cout << std::endl;
     std::cout << "#############################################################################" << std::endl;
-    std::cout << "All test finish after " << minuts << " minuts and " << seconds << " seconds" << std::endl;
+    std::cout << "All test finish after " << seconds << " seconds" << std::endl;
     std::cout << "With " << failedTests << " failed tests" << std::endl;
     std::cout << "#############################################################################" << std::endl;
     std::cout << std::endl;
@@ -88,7 +89,8 @@ void Test::testObjectiveFunction() {
 
     std::vector<int>* coef = new vector<int>();
     for (unsigned i = 0; i < varInt->size(); i++) {
-        int c = -((i + 1) % 5);
+//        int c = -((i + 1) % 5);
+        int c = -1;
         coef->push_back(c);
         x->push_back(varInt->at(i));
     }
@@ -98,7 +100,6 @@ void Test::testObjectiveFunction() {
         testFailed(__FUNCTION__, error);
     }
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-
     GS->InitialSolution();
     int objfnc = 0;
     for (unsigned i = 0; i < varInt->size(); i++) {
@@ -110,7 +111,7 @@ void Test::testObjectiveFunction() {
         testFailed(__FUNCTION__, error);
     }
     GS->optimizeSolution();
-    GS->printCurrent();
+//    GS->printCurrent();
     testDone(string(__FUNCTION__));
 
 }
@@ -193,7 +194,7 @@ void Test::createLinearLQConst() {
 
     std::vector<int>* coef = new vector<int>();
     for (unsigned i = 0; i < varInt->size(); i++) {
-        coef->push_back(i + 1);
+        coef->push_back(2);
         x->push_back(varInt->at(i));
     }
     GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 60, Gecode::ICL_DOM, 2);
@@ -223,5 +224,5 @@ void Test::testFailed(string func, string error) {
     std::cout << error << std::endl;
     std::cout << "#############################################################################" << std::endl;
     failedTests++;
-    sleep(5);
+    sleep(5000);
 }

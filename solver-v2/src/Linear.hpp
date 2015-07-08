@@ -35,6 +35,7 @@ public:
 
     // either LQ or EQ constraint
     // Four cases either violated before or not, and either violated after or not. 
+
     int setDeltaViolation() {
 
         // if constraint is LQ
@@ -71,14 +72,14 @@ public:
                 if (lhs->getDeltaValue() + lhs->getCurrentValue() == rhs) {
                     return -1;
                 } else {
-                    return 0; 
+                    return 0;
                 }
             }
         }
         return 0;
     }
 
-     int setDeltaViolationDegree() {
+    int setDeltaViolationDegree() {
         DeltaViolationDegree = lhs->getDeltaValue();
         return DeltaViolationDegree;
     }
@@ -102,29 +103,62 @@ public:
                 Violation = 1;
             }
         }
+        
         return change;
     }
 
     int updateViolationDegree() {
-        int change = 0;
-        if (relation == LQ) {
-            if (lhs->getCurrentValue() <= rhs) {
-                change = -ViolationDegree;
-                ViolationDegree = 0;
-            } else {
-                change = lhs->getCurrentValue() - rhs - ViolationDegree;
-                ViolationDegree += change;
+        ViolationDegree += DeltaViolationDegree;
+
+        return DeltaViolationDegree;
+    }
+    //    int updateViolationDegree() {
+    //        int change = 0;
+    //        if (relation == LQ) {
+    //            if (lhs->getCurrentValue() <= rhs) {
+    //                change = -ViolationDegree;
+    //                ViolationDegree = 0;
+    //            } else {
+    //                change = lhs->getCurrentValue() - rhs - ViolationDegree;
+    //                ViolationDegree += change;
+    //            }
+    //        } else {
+    //            if (lhs->getCurrentValue() == rhs) {
+    //                change = -ViolationDegree;
+    //                ViolationDegree = 0;
+    //            } else {
+    //                change = lhs->getCurrentValue() - ViolationDegree;
+    //                ViolationDegree += change;
+    //            }
+    //        }
+    //        return change;
+    //    }
+
+    bool testCons() {
+        if (lhs->getCurrentValue() <= rhs) {
+            if (Violation != 0) {
+                std::cout << "failed test Linear" << std::endl;
+                std::cout << "Violation " << Violation << " lhs " << lhs << " rhs " << rhs << std::endl;
+                return false;
             }
         } else {
-            if (lhs->getCurrentValue() == rhs) {
-                change = -ViolationDegree;
-                ViolationDegree = 0;
-            } else {
-                change = lhs->getCurrentValue() - ViolationDegree;
-                ViolationDegree += change;
+            if (Violation != 1) {
+                std::cout << "failed test Linear" << std::endl;
+                std::cout << "Violation " << Violation << " lhs " << lhs << " rhs " << rhs << std::endl;
+                return false;
             }
         }
-        return change;
+        return true;
+    }
+
+    bool testObj() {
+        if (ViolationDegree != lhs->getCurrentValue() - rhs) {
+            std::cout << "failed test Linear" << std::endl;
+            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << lhs << " rhs " << rhs << std::endl;
+            return false;
+
+        }
+        return true;
     }
 
 };

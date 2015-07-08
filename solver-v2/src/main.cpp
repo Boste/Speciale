@@ -9,7 +9,7 @@
 //#include <iomanip>
 #include <limits>
 #include "BPSolver.hpp"
-#include "Test.hpp"
+#include "Clock.hpp"
 //#include "BP_Helpers.hpp"
 
 using namespace Gecode;
@@ -27,32 +27,20 @@ using namespace Gecode;
 
 
 
-void gecode(int argc, char* argv[]);
-void easylocal(int argc, const char* argv[]);
+//void gecode(int argc, char* argv[]);
+//void easylocal(int argc, const char* argv[]);
 
 int main(int argc, char* argv[]) {
-
-    gecode(argc, argv);
-
-
-    //    const char* argv2[argc];
-    //    for(int i = 0; i< argc; i++){
-    //        argv2[i] = argv[i];
-    //    }
-    //    easylocal(argc, argv2);
-
-    return 0;
-}
-
-void gecode(int argc, char* argv[]) {
-    InstanceOptions opt("BPSolver");
+    Random::Seed(RANDOMSEED);
+//    gecode(argc, argv);
+   Clock::globalClock =std::clock(); 
+   InstanceOptions opt("BPSolver");
     opt.instance("data/toy.txt");
     opt.time(180 * 1000); // in milliseconds
 
     opt.parse(argc, argv);
-
     BP_Input *p = new BP_Input(opt.instance());
-
+    std::cout << "Instance read after "<< (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
     
     //    //	// This is to stop the search at the time limit imposed
     //    Search::Options so;
@@ -63,81 +51,119 @@ void gecode(int argc, char* argv[]) {
     //    // Let's start the Timer
     //    Support::Timer t;
     //    t.start()
-    Test* t = new Test();
+//    Test* t = new Test();
     
     BPSolver* m = new BPSolver(p);
     m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 
-    m->printCurrent();
+    std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
+//    m->printCurrent();
     m->optimizeSolution();
-    m->printCurrent();
-    
-//    std::cout << &opt << std::endl;
-//    m->print(std::cout);
+    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
+//    m->printCurrent();
 
-    //    SpaceStatus status = m->status();
-    //    m->print(cout);
-    //    if (status == SS_FAILED){
-    //        cout << "Status: " << m->status() << " the space is failed at root."
-    //                << endl;
+    //    const char* argv2[argc];
+    //    for(int i = 0; i< argc; i++){
+    //        argv2[i] = argv[i];
     //    }
-    //    else if (status == SS_SOLVED){
-    //        cout << "Status: " << m->status()
-    //                << " the space is not failed but the space has no brancher left."
-    //                << endl;
-    //    }
-    //    else if (status == SS_BRANCH){
-    //        cout << "Status: " << m->status()
-    //                << " the space is not failed and we need to start branching."
-    //                << endl;
-    //    }
-    ////    m->print(cout);
-    //    //    exit(1);
-    //    //	BP_Output out(*p);
-    //    //
-    //    
-    //    
-    //    try {
-    //        DFS<BPSolver> e(m, so);
-    //        //        BAB<BPSolver> e(m, so);
-    //        //        RBS<BAB, VRPSolver> e(m, so);
-    ////        delete m;
-    //        BPSolver* s=e.next();
-    ////        while (s = e.next()) {
-    ////            
-    //////            			s->print(cout);
-    ////            //			s->setSolution(out); // pass here the solution found to Output for drawing
-    ////            //			out.draw();
-    //////            delete s;
-    ////            //            			stat = e.statistics();
-    ////            //			//cout << "Propagators: " << stat.propagate << endl; // see page 145 MPG
-    ////            //            			print_stats(stat);
-    ////            //			cout << "\ttime: " << t.stop() / 1000 << "s" << endl;
-    ////            //break;
-    ////        }
-    //        s->print(std::cout);
-    //        s->setValues();
-    //        if (e.stopped()) {
-    //            cout << "WARNING: solver stopped, solution is not optimal!\n";
-    //            if (ts->stop(e.statistics(), so)) {
-    //                cout << "\t Solver stopped because of TIME LIMIT!\n";
-    //            }
-    //        }
-    //        
-    //        m->print_stats(stat);
-    //        m->print(std::cout);
-    //        cout << "\ttime: " << t.stop() / 1000 << "s" << endl;
-    //        s->printCurrent();
-    //        //		cout << out << endl;
-    //    } catch (Exception e) {
-    //        std::cerr << "Gecode exception: " << e.what() << std::endl;
-    ////        return 1;
-    //    }
-    //    //
-    ////    m->print(cout);
-    //    
-    //    delete p;
+    //    easylocal(argc, argv2);
 
+    return 0;
 }
+//
+//void gecode(int argc, char* argv[]) {
+//    InstanceOptions opt("BPSolver");
+//    opt.instance("data/toy.txt");
+//    opt.time(180 * 1000); // in milliseconds
+//
+//    opt.parse(argc, argv);
+//
+//    BP_Input *p = new BP_Input(opt.instance());
+//
+//    
+//    //    //	// This is to stop the search at the time limit imposed
+//    //    Search::Options so;
+//    //    Search::TimeStop* ts = new Search::TimeStop(opt.time());
+//    //    so.stop = ts;
+//    //    Search::Statistics stat;
+//    //    //
+//    //    // Let's start the Timer
+//    //    Support::Timer t;
+//    //    t.start()
+////    Test* t = new Test();
+//    
+//    BPSolver* m = new BPSolver(p);
+//    m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 
+////    m->printCurrent();
+//    m->optimizeSolution();
+////    m->printCurrent();
+//    
+////    std::cout << &opt << std::endl;
+////    m->print(std::cout);
+//
+//    //    SpaceStatus status = m->status();
+//    //    m->print(cout);
+//    //    if (status == SS_FAILED){
+//    //        cout << "Status: " << m->status() << " the space is failed at root."
+//    //                << endl;
+//    //    }
+//    //    else if (status == SS_SOLVED){
+//    //        cout << "Status: " << m->status()
+//    //                << " the space is not failed but the space has no brancher left."
+//    //                << endl;
+//    //    }
+//    //    else if (status == SS_BRANCH){
+//    //        cout << "Status: " << m->status()
+//    //                << " the space is not failed and we need to start branching."
+//    //                << endl;
+//    //    }
+//    ////    m->print(cout);
+//    //    //    exit(1);
+//    //    //	BP_Output out(*p);
+//    //    //
+//    //    
+//    //    
+//    //    try {
+//    //        DFS<BPSolver> e(m, so);
+//    //        //        BAB<BPSolver> e(m, so);
+//    //        //        RBS<BAB, VRPSolver> e(m, so);
+//    ////        delete m;
+//    //        BPSolver* s=e.next();
+//    ////        while (s = e.next()) {
+//    ////            
+//    //////            			s->print(cout);
+//    ////            //			s->setSolution(out); // pass here the solution found to Output for drawing
+//    ////            //			out.draw();
+//    //////            delete s;
+//    ////            //            			stat = e.statistics();
+//    ////            //			//cout << "Propagators: " << stat.propagate << endl; // see page 145 MPG
+//    ////            //            			print_stats(stat);
+//    ////            //			cout << "\ttime: " << t.stop() / 1000 << "s" << endl;
+//    ////            //break;
+//    ////        }
+//    //        s->print(std::cout);
+//    //        s->setValues();
+//    //        if (e.stopped()) {
+//    //            cout << "WARNING: solver stopped, solution is not optimal!\n";
+//    //            if (ts->stop(e.statistics(), so)) {
+//    //                cout << "\t Solver stopped because of TIME LIMIT!\n";
+//    //            }
+//    //        }
+//    //        
+//    //        m->print_stats(stat);
+//    //        m->print(std::cout);
+//    //        cout << "\ttime: " << t.stop() / 1000 << "s" << endl;
+//    //        s->printCurrent();
+//    //        //		cout << out << endl;
+//    //    } catch (Exception e) {
+//    //        std::cerr << "Gecode exception: " << e.what() << std::endl;
+//    ////        return 1;
+//    //    }
+//    //    //
+//    ////    m->print(cout);
+//    //    
+//    //    delete p;
+//
+//}
 //void easylocal(int argc, const char* argv[]){
 //    ParameterBox main_parameters("main", "Main Program options");
 //

@@ -26,6 +26,8 @@ BP_Input::BP_Input(string file_name) {
     matcoeff.resize(ncons);
     bterms.resize(ncons);
     matcoeff2.resize(nvars);
+    assert(ncons > 0);
+    assert(nvars > 0);
 //    cons.resize(ncons);
 
     

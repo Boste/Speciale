@@ -10,6 +10,7 @@
 #include <limits>
 #include "IntegerVariable.hpp"
 #include "Clock.hpp"
+//#include "getRSS.hpp"
 //#include "Random.hpp"
 //using namespace Gecode;
 
@@ -17,12 +18,16 @@ class GeneralSolver : public Gecode::Script, public LSSpace {
 private:
     //    Gecode::IntVarArray* solutions;
     Gecode::IntVarArray IntVars;
-//    std::vector<Gecode::IntVarArgs*> test;
+    //    std::vector<Gecode::IntVarArgs*> test;
 public:
 
     GeneralSolver() {
-//        Random::Seed(SEED);
+        //        Random::Seed(SEED);
 
+    }
+
+    ~GeneralSolver() {
+//        std::cout << "Destructing GS" << std::endl;
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {
@@ -126,22 +131,24 @@ public:
 
     //    void InitialSolution(Gecode::InstanceOptions opt) {
 
-    void InitialSolution() {
+    GeneralSolver* InitialSolution(Gecode::Search::Options so) {
         //	// This is to stop the search at the time limit imposed
-        Gecode::Search::Options so;
-//        print(std::cout);
+        //        Gecode::Search::Options so;
+        //        print(std::cout);
 
-        startTimer(so);
+        //        startTimer(so);
+
+
 
         printSpaceStatus();
-
+        GeneralSolver* s;
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
-            GeneralSolver* s = e.next();
+            s = e.next();
             //            s = e.next();
-            std::cout << "Gecode found solution after "<< (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
-            
+            std::cout << "Gecode found solution after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+            //            delete so.stop;
             assert(s != NULL);
             //            int counter = 0;
             //            while (!s->failed() && !e.stopped()) {
@@ -157,11 +164,11 @@ public:
             //            std::cout << s->failed() << std::endl;
             //            std::cout << this->IntVars << std::endl;
             //            GeneralSolver* s = e.next();
-//            s->print(std::cout);
+            //            s->print(std::cout);
 
             assert(!s->failed());
             assert(!e.stopped());
-            SetValues(s->IntVars);
+            //            SetValues(s->IntVars);
             //            for(int i = 0; i < IntVars.size(); i++ ){
             //                if(IntVarVector.at(i).getCurrentValue() != s->IntVars[i].val()){
             //                    std::cout << IntVarVector.at(i).getCurrentValue() << " vs " << s->IntVars[i] << std::endl;
@@ -169,15 +176,13 @@ public:
             //            }
             //                        std::cout << __LINE__ << std::endl;
 
-            initializeInvariants();
-            //                                    std::cout << __LINE__ << std::endl;
-
-            initializeConstraints();
-            //                                    std::cout << __LINE__ << std::endl;
-
-            initializeObjective();
+            //            initializeInvariants();
+            //
+            //            initializeConstraints();
+            //
+            //            initializeObjective();
             //            std::cout << __LINE__ << std::endl;
-            
+
 
 
 
@@ -192,15 +197,27 @@ public:
                     cout << "\t Solver stopped because of TIME LIMIT!\n";
                 }
             }
-            delete s;
+
 
         } catch (Gecode::Exception e) {
             std::cerr << "Gecode exception: " << e.what() << std::endl;
             //        return 1;
         }
+        return s;
         //
         //        this->print(cout);
 
+    }
+
+    void initializeLS(GeneralSolver* GS) {
+        SetValues(GS->IntVars);
+
+        initializeInvariants();
+
+        initializeConstraints();
+
+        initializeObjective();
+        delete GS;
     }
 
     void optimizeSolution() {
@@ -231,6 +248,8 @@ private:
         if (status == Gecode::SS_FAILED) {
             cout << "Status: " << this->status() << " the space is failed at root."
                     << endl;
+            std::cout << "No feasible solution" << std::endl;
+            exit(1);
         } else if (status == Gecode::SS_SOLVED) {
             cout << "Status: " << this->status()
                     << " the space is not failed but the space has no brancher left."
@@ -242,16 +261,18 @@ private:
         }
     }
 
-    void startTimer(Gecode::Search::Options so) {
-        //        Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(opt.time());
-        Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(7200000);
-        so.stop = ts;
-        Gecode::Search::Statistics stat;
-        //
-        // Let's start the Timer
-        Gecode::Support::Timer t;
-        t.start();
-    }
+    //    void startTimer(Gecode::Search::Options so) {
+    //        //        Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(opt.time());
+    //        Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(1);
+    //        so.stop = ts;
+    //        Gecode::Search::Statistics stat;
+    //        //
+    //        // Let's start the Timer
+    //        Gecode::Support::Timer t;
+    //        t.start();
+    //        
+    //        //        delete ts;
+    //    }
 
     void print_stats(Gecode::Search::Statistics & stat) {
         cout << "\tfail: " << stat.fail << endl;

@@ -35,6 +35,7 @@ private:
     void testDone(string func);
     void testFailed(string func, string error);
     void testBestMove();
+    void testBig(int vars, int cons);
 public:
     ;
 

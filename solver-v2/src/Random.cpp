@@ -11,6 +11,11 @@ int Random::Integer(int lb, int ub) {
 
     return d(mt);
 }
+int Random::Integer(int ub) {
+    std::uniform_int_distribution<> d(0, ub);
+
+    return d(mt);
+}
 
 double Random::Double(double lb, double ub) {
     std::uniform_real_distribution<> d(lb, ub);

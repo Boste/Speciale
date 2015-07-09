@@ -6,24 +6,24 @@
 //using namespace Gecode;
 
 LSSpace::LSSpace() {
-    //    std::cout << "constructed" << std::endl;
-    //    initialState = State();
+//        std::cout << "constructed" << std::endl;
+        st = new State();
 
 }
 
 std::vector<IntegerVariable*>* LSSpace::addIntVariablesToState(Gecode::IntVarArray* vars) {
-    return st.addIntegerVariable(vars);
+    return st->addIntegerVariable(vars);
 }
 
 void LSSpace::SetValues(Gecode::IntVarArray vars) {
     for (int i = 0; i < vars.size(); i++) {
         assert(vars[i].assigned());
-        st.getIntegerVariables()->at(i)->setCurrentValue(vars[i].val());
+        st->getIntegerVariables()->at(i)->setCurrentValue(vars[i].val());
     }
 }
 
 void LSSpace::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
-    st.getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+    st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
 
 }
 
@@ -33,78 +33,82 @@ void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* v
 
     //        std::cout << sumInvariant << std::endl;
     for (unsigned i = 0; i < coefficients->size(); i++) {
-        addInvariantToIntVariable(variables->at(i)->getID(), st.getInvariants()->size());
+        addInvariantToIntVariable(variables->at(i)->getID(), st->getInvariants()->size());
     }
-    st.getInvariants()->push_back(sumInvariant);
+    st->getInvariants()->push_back(sumInvariant);
     Linear* LinearConstraint = new Linear(sumInvariant, upperbound, relation);
     if (type == INVARIANT) {
-        sumInvariant->usedByConstraint(st.getConstraints()->size());
-        st.getConstraints()->push_back(LinearConstraint);
+        sumInvariant->usedByConstraint(st->getConstraints()->size());
+        st->getConstraints()->push_back(LinearConstraint);
 
     } else {
-        sumInvariant->usedByObjective(st.getObjectives()->size());
-        st.getObjectives()->push_back(LinearConstraint);
+        sumInvariant->usedByObjective(st->getObjectives()->size());
+        st->getObjectives()->push_back(LinearConstraint);
     }
+    
 }
 
 void LSSpace::optimizeSolution() {
     //    std::cout << __LINE__ << std::endl;
-
+    std::cout << "optimize" << std::endl;
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
-    IntegerVariable* var = st.getIntegerVariable(0);
+    std::cout << "NE created" << std::endl;
+    std::cout << "Segmentation fault right after this " << std::endl;
+    IntegerVariable* var = st->getIntegerVariable(0);
+    std::cout << "segmentation fault before this" << std::endl;
     Move* mv = new Move(var, 1 - var->getCurrentValue() - var->getCurrentValue(), FLIP);
     //        std::cout << __LINE__ << std::endl;
     //    NE.bestImprovement<int>()
-    //    NE->randomWalk(mv,&st);
-    double timelimit = 300;
+    //    NE->randomWalk(mv,st);
+    double timelimit = 10;
     double usedTime = 0;
     std::clock_t start = std::clock();
-    int randomMoves = st.getNumberOfVariables() / 10;
+    int randomMoves = st->getNumberOfVariables() / 5;
     std::cout << "Number of random moves " << randomMoves << std::endl;
     std::cout << "Timelimit " << timelimit << std::endl;
-    mv->first = st.getIntegerVariable(0);
+    mv->first = st->getIntegerVariable(0);
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-    while (NE->bestImprovement(mv, &st)) {
+    while (NE->bestImprovement(mv, st)) {
         iterations++;
-        //        if (!st.recalculateAll()) {
+        //        if (!st->recalculateAll()) {
         //            std::cout << "Line " << __LINE__ << std::endl;
         //            sleep(5);
         //        }
     }
-    if (st.getObjectiveValue() < st.getSolutionValue() && st.numberOfViolations == 0) {
-        st.saveSolution();
-        std::cout << "improved solution value to: " << st.getSolutionValue() << " after " << iterations << " iterations" << std::endl;
+    if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
+        st->saveSolution();
+        std::cout << "improved solution value to: " << st->getSolutionValue() << " after " << iterations << " iterations" << std::endl;
     }
-    //    if (!st.recalculateAll()) {
+    //    if (!st->recalculateAll()) {
     //        std::cout << "Line " << __LINE__ << std::endl;
     //        sleep(5);
     //    }
     while (usedTime < timelimit) {
         for (int i = 0; i < randomMoves; i++) {
-            NE->randomWalk(mv, &st);
+            NE->randomWalk(mv, st);
             iterations++;
-            //            if (!st.recalculateAll()) {
+            //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
             //                sleep(5);
             //            }
         }
-        //        std::cout << "objective value after random moves " << st.getObjectiveValue() << std::endl;
-        mv->first = st.getIntegerVariable(0);
+        //        std::cout << "objective value after random moves " << st->getObjectiveValue() << std::endl;
+        mv->first = st->getIntegerVariable(0);
         mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-        while (NE->bestImprovement(mv, &st)) {
+        while (NE->bestImprovement(mv, st)) {
             iterations++;
-            //            if (!st.recalculateAll()) {
+            //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
             //                sleep(5);
             //            }
         }
         //        std::cout << iterations << std::endl;
-        if (st.getObjectiveValue() < st.getSolutionValue() && st.numberOfViolations == 0) {
-            st.saveSolution();
-            std::cout << "improved solution value to: " << st.getSolutionValue() << " after " << iterations << " iterations" << std::endl;
-            //            st.recalculateAll();
+        if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
+            st->saveSolution();
+            std::cout << "improved solution value to: " << st->getSolutionValue() << " after " << iterations << " iterations" << std::endl;
+            //            st->recalculateAll();
         }
-        //        if (!st.recalculateAll()) {
+        //        if (!st->recalculateAll()) {
         //            std::cout << "Line " << __LINE__ << std::endl;
         //            sleep(5);
         //        }
@@ -112,31 +116,32 @@ void LSSpace::optimizeSolution() {
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
     std::cout << "Time used " << usedTime << std::endl;
+    
 
-
-    st.recalculateAll();
-    std::vector<int>* sol = st.getSolution();
+    st->recalculateAll();
+    std::vector<int>* sol = st->getSolution();
     for (unsigned i = 0; i < sol->size(); i++) {
-        IntegerVariable* var = st.getIntegerVariable(i);
+        IntegerVariable* var = st->getIntegerVariable(i);
         mv->first = var;
         mv->deltaValueFirst = sol->at(i) - var->getCurrentValue();
-        NE->makeMove(mv, &st);
+        NE->makeMove(mv, st);
 
     }
 
 
-    std::cout << "Solution value: " << st.getObjectiveValue() << std::endl;
+    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
     std::cout << "Number of moves " << iterations << std::endl;
+    delete mv;
+    delete NE;
 
-
-    //    st.setSolution();
+    //    st->setSolution();
     //
-    //    std::cout << "Solution value: " << st.getObjectiveValue() << std::endl;
+    //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
     //    std::cout << "Number of moves " << iterations << std::endl;
 }
 
 
-//    FlipMove mv = FlipMove(st.getIntegerVariables()->at(0));
+//    FlipMove mv = FlipMove(st->getIntegerVariables()->at(0));
 //    Move bestMove = mv;
 //    std::pair<int, int> delta = calculateDeltaValueOfMove(mv);
 //    int violationChange = delta.first;
@@ -145,8 +150,8 @@ void LSSpace::optimizeSolution() {
 //    int violationChange = 0;
 //    int objectiveChange = 0;
 //    int bestVariable = -1;
-//    for (unsigned i = 0; i < st.getIntegerVariables()->size(); i++) {
-//        IntegerVariable* variable = st.getIntegerVariables()->at(i);
+//    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
+//        IntegerVariable* variable = st->getIntegerVariables()->at(i);
 //        std::pair<int, int> delta = calculateDeltaValueOfVariableChange(i, 1 - variable->getCurrentValue());
 //        if (delta.first <= violationChange) {
 //            if (delta.second <= objectiveChange) {
@@ -172,17 +177,17 @@ void LSSpace::optimizeSolution() {
 //}
 
 //void LSSpace::commitDeltaOfVariable(int changedVariable) {
-//    IntegerVariable* var = st.getIntegerVariables()->at(changedVariable);
+//    IntegerVariable* var = st->getIntegerVariables()->at(changedVariable);
 //    vector<int>* update = var->getUpdateVector();
 //    for (unsigned i = 0; i < update->size(); i++) {
-//        Invariant* invar = st.getInvariants()->at(update->at(i));
+//        Invariant* invar = st->getInvariants()->at(update->at(i));
 //        invar->updateValue();
 //        if (invar->getUsedInConstraint() != -1) {
-//            st.getConstraints()->at(invar->getUsedInConstraint())->updateViolation();
+//            st->getConstraints()->at(invar->getUsedInConstraint())->updateViolation();
 //        }
 //
 //        if (invar->getUsedInObjective() != -1) {
-//            st.getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
+//            st->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
 //        }
 //    }
 //    var->setCurrentValue(1 - var->getCurrentValue());
@@ -191,23 +196,23 @@ void LSSpace::optimizeSolution() {
 
 //std::pair<int, int> LSSpace::calculateDeltaValueOfVariableChange(int variableNumber, int newValue) {
 //
-//    IntegerVariable* variable = st.getIntegerVariables()->at(variableNumber);
+//    IntegerVariable* variable = st->getIntegerVariables()->at(variableNumber);
 //    int oldValue = variable->getCurrentValue();
 //    vector<int>* updateVector = variable->getUpdateVector();
 //    int violationChange = 0;
 //    int objectiveChange = 0;
 //    //    std::cout << "Variable " << variableNumber << std::endl;
 //    for (unsigned i = 0; i < updateVector->size(); i++) {
-//        Invariant* invar = st.getInvariants()->at(updateVector->at(i));
+//        Invariant* invar = st->getInvariants()->at(updateVector->at(i));
 //        invar->addChange(variableNumber, newValue - oldValue);
 //        invar->calculateDeltaValue();
 //        if (invar->getUsedInConstraint() != -1) {
 //            //            std::cout << "Used in Constraint " << std::endl;
-//            violationChange += st.getConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
+//            violationChange += st->getConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
 //        }
 //        if (invar->getUsedInObjective() != -1) {
 //            //            std::cout << "Used in objective " << std::endl;
-//            objectiveChange += st.getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
+//            objectiveChange += st->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
 //        }
 //    }
 //    //    std::cout << std::endl;
@@ -218,25 +223,25 @@ void LSSpace::optimizeSolution() {
 //}
 
 void LSSpace::initializeInvariants() {
-    st.initializeInvariants();
+    st->initializeInvariants();
 }
 
 void LSSpace::initializeConstraints() {
-    st.initializeConstraints();
+    st->initializeConstraints();
 }
 
 void LSSpace::initializeObjective() {
-    st.initializeObjective();
+    st->initializeObjective();
 }
 
 void LSSpace::printCurrent() {
 
-    if (st.getIntegerVariables()->size() > 0) {
+    if (st->getIntegerVariables()->size() > 0) {
         std::cout << "Integer Variables:" << std::endl;
     }
 
-    for (unsigned i = 0; i < st.getIntegerVariables()->size(); i++) {
-        std::cout << st.getIntegerVariables()->at(i)->getCurrentValue() << " ";
+    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
+        std::cout << st->getIntegerVariables()->at(i)->getCurrentValue() << " ";
         //        std::cout << IntVarVector[i].VariablePointer << " ";
 
     }

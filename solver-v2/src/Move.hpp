@@ -58,6 +58,9 @@ public:
     }
 
     ~Move() {
+        first = NULL;
+        second=NULL;
+        third = NULL;
         //        delete &variables;
         //        delete &deltaValue;
         //        delete &newValue;

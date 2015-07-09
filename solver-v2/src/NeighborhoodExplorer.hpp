@@ -10,8 +10,6 @@
 
 class NeighborhoodExplorer {
 public:
-    boost::random::mt19937 rnd;
-    boost::random::uniform_int_distribution<> range;
     NeighborhoodExplorer();
     NeighborhoodExplorer(const NeighborhoodExplorer& orig);
     virtual ~NeighborhoodExplorer();
@@ -21,7 +19,7 @@ public:
     //    template<typename returnType>
     bool bestImprovement(Move* mv, State* st);
     //    template<typename returnType>
-    bool firstImprovement(Move* mv, State* st);
+//    bool firstImprovement(Move* mv, State* st);
     
     void makeMove(Move* mv ,State* st);
 

@@ -1,7 +1,7 @@
 
 #include "NeighborhoodExplorer.hpp"
 
-NeighborhoodExplorer::NeighborhoodExplorer() : range(0, 99) {
+NeighborhoodExplorer::NeighborhoodExplorer() {
     
 }
 
@@ -9,18 +9,20 @@ NeighborhoodExplorer::NeighborhoodExplorer(const NeighborhoodExplorer& orig) {
 }
 
 NeighborhoodExplorer::~NeighborhoodExplorer() {
+    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
 }
 
 //template<typename returnType>
 
 bool NeighborhoodExplorer::bestImprovement(Move* mv, State* st) {
+    st->shuffleMask();
     Move* bestMove = new Move();
     std::pair<int, int> delta = calculateDeltaChange(mv, st);
     int violationChange = delta.first;
     int objectiveChange = delta.second;
     bestMove->copy(mv);
-    for (unsigned i = 1; i < st->getIntegerVariables()->size(); i++) {
-        IntegerVariable* variable = st->getIntegerVariables()->at(i);
+    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
+        IntegerVariable* variable = st->getIntegerVariables()->at(st->maskAt(i));
         mv->first = variable;
         mv->deltaValueFirst = 1 - variable->getCurrentValue() - variable->getCurrentValue();
         std::pair<int, int> delta = calculateDeltaChange(mv, st);
@@ -35,12 +37,14 @@ bool NeighborhoodExplorer::bestImprovement(Move* mv, State* st) {
     if (violationChange <= 0 && objectiveChange < 0) {
         commitMove(bestMove, st);
     } else {
+        delete bestMove;
 //        std::cout << "no improving move" << std::endl;
         return false;
         //        sleep(1);
         //        std::exit(1);
 
     }
+    delete bestMove;
 //    std::cout << "changed variable " << bestMove->first->getID() << std::endl;
 //    std::cout << "violation change " << violationChange << " objective change " << objectiveChange << std::endl;
 
@@ -63,9 +67,9 @@ void NeighborhoodExplorer::randomWalk(Move* mv, State* st) {
     }
 }
 
-bool NeighborhoodExplorer::firstImprovement(Move* mv, State * st) {
-
-}
+//bool NeighborhoodExplorer::firstImprovement(Move* mv, State * st) {
+//
+//}
 
 //template<typename returnType>
 

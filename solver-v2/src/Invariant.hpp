@@ -37,7 +37,7 @@ public:
     }
 
     virtual ~Invariant() {
-        std::cout << "destruct invariant" << std::endl;
+//        std::cout << "destruct invariant" << std::endl;
     }
 
     int getCurrentValue() {

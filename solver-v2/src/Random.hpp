@@ -8,6 +8,7 @@ public:
     static std::mt19937 mt;
     static int seed;
     static int Integer(int lb, int ub);
+    static int Integer(int ub);
     static double Double(double lb = 0, double ub = 1);
     static int Seed(int seed);
 };

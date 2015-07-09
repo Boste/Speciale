@@ -10,6 +10,9 @@
 #include <limits>
 #include "BPSolver.hpp"
 #include "Clock.hpp"
+#include "getRSS.hpp"
+#include "GeneralSolver.hpp"
+#include "Test.hpp"
 //#include "BP_Helpers.hpp"
 
 using namespace Gecode;
@@ -32,41 +35,100 @@ using namespace Gecode;
 
 int main(int argc, char* argv[]) {
     Random::Seed(RANDOMSEED);
-//    gecode(argc, argv);
-   Clock::globalClock =std::clock(); 
-   InstanceOptions opt("BPSolver");
+    //    gecode(argc, argv);
+    Clock::globalClock = std::clock();
+    InstanceOptions opt("BPSolver");
     opt.instance("data/toy.txt");
     opt.time(180 * 1000); // in milliseconds
 
     opt.parse(argc, argv);
     BP_Input *p = new BP_Input(opt.instance());
-    std::cout << "Instance read after "<< (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
-    
-    //    //	// This is to stop the search at the time limit imposed
-    //    Search::Options so;
-    //    Search::TimeStop* ts = new Search::TimeStop(opt.time());
-    //    so.stop = ts;
-    //    Search::Statistics stat;
-    //    //
-    //    // Let's start the Timer
-    //    Support::Timer t;
-    //    t.start()
-//    Test* t = new Test();
-    
+    std::cout << "Instance read after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+
+    //     This is to stop the search at the time limit imposed
+    Search::Options so;
+    Search::TimeStop* ts = new Search::TimeStop(opt.time());
+    so.stop = ts;
+    // Let's start the Timer
+    Support::Timer t;
+    t.start();
+
+
+    //    Test* test = new Test();
+    //    delete test;
+
+
+
+
+
     BPSolver* m = new BPSolver(p);
-    m->InitialSolution(); // problem at sende opt med da den bliver slettet efter kald. 
-    std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
-//    m->printCurrent();
+    GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
+
+    size_t peakSize2 = getPeakRSS();
+    std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
+    std::cout << "Initializing LSS" << std::endl;
+    m->initializeLS(GS);
+    std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+    //    m->printCurrent();
     m->optimizeSolution();
-    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" <<std::endl;
-//    m->printCurrent();
+    size_t peakSize = getPeakRSS();
+    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
+    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+    delete m;
+
+    //    m->printCurrent();
+
+
+
+//    // Test big 
+//    int vars = 1 * 100;
+//    int cons = 200000;
+//    GeneralSolver* GS = new GeneralSolver();
+//    std::vector<IntegerVariable*>* varInt = GS->createIntVars(vars, 0, 1);
+//    for (int i = 0; i < cons; i++) {
+//        vector<int>* c = new vector<int>(vars);
+//        vector<IntegerVariable*>* x = new vector<IntegerVariable*>();
+//        for (int j = 0; j < vars; j++) {
+//            c->at(j) = 1;
+//            x->push_back(varInt->at(j));
+//        }
+//        int upperbound = vars/2;
+//        GS->linear(*GS, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, 2);
+////        GS->linear(*GS, c, x, Gecode::IRT_GQ, 50, Gecode::ICL_DOM, 2);
+//        // deleter den også pointer inden i vector?
+//        delete x;
+//        delete c;
+//    }
+//    // Add objective function
+//    vector<int>* c = new vector<int>(varInt->size());
+//    for (unsigned i = 0; i < varInt->size(); i++) {
+//        c->at(i) = -1;
+//    }
+//    GS->linear(*GS, c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
+//    delete c;
+//    // Branch
+//    GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+//    
+//    GeneralSolver* General = GS->InitialSolution(so);
+//    size_t peakSize2 = getPeakRSS();
+//    std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
+//    std::cout << "Initializing LSS" << std::endl;
+//    GS->initializeLS(General);
+//    std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+//    GS->optimizeSolution();
+//    size_t peakSize = getPeakRSS();
+//    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
+//    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+//    delete GS;
+
 
     //    const char* argv2[argc];
     //    for(int i = 0; i< argc; i++){
     //        argv2[i] = argv[i];
     //    }
     //    easylocal(argc, argv2);
-
+    delete ts;
+    //    delete p;
     return 0;
 }
 //

@@ -24,8 +24,9 @@ protected:
 
 public:
 
-    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
-    p_in(in)/*, varInt(*this, (int) in->getNvars(), 0, 1) /*, varInt2(*this,(int) in->getNvars(), 0, 1) */ {
+//    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
+    BPSolver(BP_Input *in) :
+    p_in(in) {
 
         vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
 
@@ -47,6 +48,9 @@ public:
             } else {
                 GeneralSolver::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, 2);
             }
+            // deleter den også pointer inden i vector?
+            delete x;
+            delete c;
 
         }
         
@@ -56,10 +60,14 @@ public:
             c->at(i) = static_cast<int> (in->getVars(i).objcoeff);      
         }
         GeneralSolver::linear(*this,c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1 );
+        delete c;
 
         // Branch
         GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
+    }
+    ~BPSolver(){
+        delete p_in;
     }
 
     /// Constructor for cloning s

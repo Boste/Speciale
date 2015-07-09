@@ -9,14 +9,15 @@
 class State {
     //    friend class LSSpace;
 private:
-    std::vector<IntegerVariable*> IntVarVector;
-    std::vector<Gecode::BoolVar> BoolVarVector;
-    std::vector<Invariant*> Invariants;
-    std::vector<Constraint*> Constraints;
-    std::vector<Constraint*> ObjectiveFunction;
+    std::vector<IntegerVariable*>* IntVarVector;
+    std::vector<Gecode::BoolVar>* BoolVarVector;
+    std::vector<Invariant*>* Invariants;
+    std::vector<Constraint*>* Constraints;
+    std::vector<Constraint*>* ObjectiveFunction;
     int numberOfVariables;
-    std::vector<int> solution;
-    int solutionValue = std::numeric_limits<int>::max();
+    std::vector<int>* solution;
+    int solutionValue;
+    std::vector<int>* mask;
 public:
 
     int numberOfViolations;
@@ -56,7 +57,8 @@ public:
     int getSolutionValue();
     void setSolution();
     bool recalculateAll();
-
+    int maskAt(int i);
+    void shuffleMask();
 
 
 

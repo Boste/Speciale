@@ -50,6 +50,10 @@ public:
     Gecode::IntVarArray* getArrayPointer() {
         return ArrayPointer;
     }
+    ~IntegerVariable(){
+//        delete VariablePointer;
+        
+    }
 
     //    IntegerVariable(const IntegerVariable& orig);
     //    virtual ~IntegerVariable();

@@ -55,7 +55,7 @@ public:
     //    
 
     ~LSSpace() {
-//        std::cout << "Destructing LSSpace" << std::endl;
+        std::cout << "Destructing LSSpace" << std::endl;
         //            delete &IntVarVector;
 //        delete &BoolVarVector;
         //            delete &Invariants;

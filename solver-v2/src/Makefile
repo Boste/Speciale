@@ -30,7 +30,7 @@ LDFLAGS = -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/
 LD=g++
 CXX=g++
 
-CXXFLAGS = -std=c++11 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
+CXXFLAGS = -std=c++0x -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
 CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 #CPPFLAGS = -I$(EASYLOCAL)/include -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 LDFLAGS +=  -pthread -Wl,--rpath,$(GECODE_HOME) -Wl,--rpath,$(COIN)/lib -L${GECODE_HOME} -L$(COIN)/lib#-Wl, --rpath,$(LIBDIR)

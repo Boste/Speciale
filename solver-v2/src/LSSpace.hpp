@@ -1,4 +1,5 @@
-#include <../../../gecode/release-4.3.3/gecode/int.hh>
+//#include <../../../gecode/release-4.3.3/gecode/int.hh>
+#include <gecode/int.hh>
 //#include "../include/Constraints.hpp"
 #include "IntegerVariable.hpp"
 #include "Invariant.hpp"

@@ -63,7 +63,7 @@ clean:
 	rm -fr ${PROG} *.o
 
 verifier:
-	g++ -std=c++11 -Wfatal-errors verifier.cc -o verify
+	g++ -std=c++0x -Wfatal-errors verifier.cc -o verify
 
 scip:
 	g++ -c -Wfatal-errors reader_mps.c 

@@ -12,7 +12,8 @@ include ../../../make/make.local
 PROG=xyz
 MAKE=make
 LIBDIR=../lib
-GECODE_LINKS=-lgecodegist -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat
+#GECODE_LINKS=-lgecodegist -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat     Try without gist
+GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat
 
 #COIN = ${HOME}/Coin/coin-CoinUtils
 #BOOST = ${HOME}/boost/boost_1_57_0

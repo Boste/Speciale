@@ -250,7 +250,7 @@ void LSSpace::printCurrent() {
         std::cout << "Boolean Variables:" << std::endl;
     }
     for (unsigned i = 0; i < BoolVarVector.size(); i++) {
-        std::cout << BoolVarVector[i].getCurrentVal() << " ";
+//        std::cout << BoolVarVector[i].getCurrentVal() << " ";
     }
     std::cout << std::endl;
 

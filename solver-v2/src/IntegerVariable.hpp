@@ -25,6 +25,7 @@ public:
     }
     void setCurrentValue(int val) {
         value = val;
+        
     }
 
     int getCurrentValue() {

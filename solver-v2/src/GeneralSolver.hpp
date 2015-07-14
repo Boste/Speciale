@@ -14,7 +14,7 @@
 //#include "Random.hpp"
 //using namespace Gecode;
 
-class GeneralSolver : public Gecode::Script, public LSSpace {
+class GeneralSolver : public Gecode::Space, public LSSpace {
 private:
     //    Gecode::IntVarArray* solutions;
     Gecode::IntVarArray IntVars;
@@ -101,7 +101,7 @@ public:
     /// Constructor for cloning s
 
     GeneralSolver(bool share, GeneralSolver & s) :
-    Gecode::Script(share, s) {
+    Gecode::Space(share, s) {
         //        std::cout << "this is not a line " << IntVars.size() << std::endl;
         IntVars.update(*this, share, s.IntVars);
         // remember to update your main variables!

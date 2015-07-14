@@ -1,23 +1,22 @@
-#include ../../../make/make.local
+include ../../../make/make.local
 ## You may need to edit this path to gecode
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-	GECODE_HOME=${HOME}/gecode/release-4.3.3
-else
-	ifeq ($(UNAME_S),Darwin)
-		GECODE_HOME=/opt/gecode/release
-  	endif
-endif
+#UNAME_S := $(shell uname -s)
+#ifeq ($(UNAME_S),Linux)
+#	GECODE_HOME=${HOME}/gecode/release-4.3.3
+#else
+#	ifeq ($(UNAME_S),Darwin)
+#		GECODE_HOME=/opt/gecode/release
+#  	endif
+#endif
 #COIN = ${HOME}/Coin/coin-CoinUtils
 PROG=xyz
 MAKE=make
 LIBDIR=../lib
 GECODE_LINKS=-lgecodegist -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat
 
-COIN = ${HOME}/Coin/coin-CoinUtils
-#EASYLOCAL = ${HOME}/Speciale/GLS/trunk/solver-v1.0/easylocal
-BOOST = ${HOME}/boost/boost_1_57_0
-BOOST_LIB = ${HOME}/boost/boost_1_57_0/stage/lib
+#COIN = ${HOME}/Coin/coin-CoinUtils
+#BOOST = ${HOME}/boost/boost_1_57_0
+#BOOST_LIB = ${HOME}/boost/boost_1_57_0/stage/lib
 #CXXFLAGS = -std=c++11 -Wall #-O3 # -g
 #EASYLOCALLIB = -lEasyLocal -lboost_program_options
 

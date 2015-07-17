@@ -1,7 +1,7 @@
 #! /bin/bash
 #
 # Name of the job
-SBATCH -J hardTest.sh -N 2 -n 40 --mem=25600 --gres=gpu:1 -t 0:10:00 --mail-user=boste09@student.sdu.dk -type=ALL
+sbatch -J hardTest.sh -N 2 -n 40 --mem=25600 --gres=gpu:1 -t 0:10:00 --mail-user=boste09@student.sdu.dk -type=ALL
 #
 # Use two nodes with 40 cores in total
 #

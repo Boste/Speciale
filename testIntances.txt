@@ -12,7 +12,7 @@ ivu52.mps.gz
 mining.mps.gz
 ns1853823.mps.gz
 pb-simp-nonunif.mps.gz
-ramos03.mps.gz
+ramos3.mps.gz
 rmine10.mps.gz
 rmine14.mps.gz
 rmine21.mps.gz

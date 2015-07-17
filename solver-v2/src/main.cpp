@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
-    std::cout << "Initializing LSS" << std::endl;
+//    std::cout << "Initializing LSS" << std::endl;
     m->initializeLS(GS);
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();

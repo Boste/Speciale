@@ -12,14 +12,14 @@ BP_Input::BP_Input(string file_name) {
     // Insert the code that reads the input from the file
     // and stored it into the data structures of the object
     //read_mps(file_name.c_str());
-    
-    
+
+
 
     CoinMpsIO t;
-    
-//    std::cout << "Can coin read?" << std::endl;
+
+    //    std::cout << "Can coin read?" << std::endl;
     t.readMps(file_name.c_str());
-//    std::cout << "Coin have read" << std::endl;
+        std::cout << "Coin have read" << std::endl;
     ncons = t.getNumRows();
     nvars = t.getNumCols();
     vars.resize(nvars);
@@ -28,30 +28,30 @@ BP_Input::BP_Input(string file_name) {
     matcoeff2.resize(nvars);
     assert(ncons > 0);
     assert(nvars > 0);
-//    cons.resize(ncons);
+    //    cons.resize(ncons);
 
-    
-//    int index[nvars];
-//    double coeff[nvars];
-    
+
+    //    int index[nvars];
+    //    double coeff[nvars];
+
     //    nbinvars = t.getNumElements();
     //   
     //    nintvars = solver.getNumIntegers();
     //    std::cout << nbinvars << " " << nintvars << " " << nvars <<  std::endl;
     //    assert(nbinvars == nvars);
-    
-    
-    
+
+
+
     //    direction = t.getObjSense();
-    
+
     //    if (direction == 1 || direction ==0)
     //        cout << "WARNING: objective is maximization!" << endl;
-//    std::cout << "start read" << std::endl;
-    
+    //    std::cout << "start read" << std::endl;
+
     for (int j = 0; j < nvars; j++) {
         var tmp;
-        tmp.objcoeff  = t.getObjCoefficients()[j];
-        
+        tmp.objcoeff = t.getObjCoefficients()[j];
+
         // Hvad var det var type blev brugt til? Kun til udskrift?
         //        char* t = solver;
         //        if(t=='G'){
@@ -61,68 +61,68 @@ BP_Input::BP_Input(string file_name) {
         //        } else {
         //            tmp.type =3;
         //        }
-        
+
         tmp.lb = t.getColLower()[j];
         tmp.ub = t.getColUpper()[j];
         vars[j] = tmp;
     }
-    
-    
-//    std::cout << "before matrix" << std::endl;
+
+
+    //    std::cout << "before matrix" << std::endl;
     const CoinPackedMatrix* matrix = t.getMatrixByRow();
-//    std::cout << "after matrix" << std::endl;
+    //    std::cout << "after matrix" << std::endl;
     int G = 0;
     int E = 0;
     int L = 0;
     for (int i = 0; i < ncons; i++) {
         const CoinShallowPackedVector vec = matrix->getVector(i);
-//        Constraint co(ele,ind);
-//        cons[i] = co;
-        
+        //        Constraint co(ele,ind);
+        //        cons[i] = co;
+
         const double* val = vec.getElements();
         int non_zeros = vec.getNumElements();
-        const int* indices =  vec.getIndices();
+        const int* indices = vec.getIndices();
         //        int non_zeros = glp_get_mat_row(lp, i, index, coeff);
         //        int non_zeros = solver.get
-        
-        
+
+
         matcoeff[i].resize(non_zeros);
         bounds tmp;
-        
+
         char c = t.getRowSense()[i];
-        
+
         int type;
-        if(c=='G'){
+        if (c == 'G') {
             type = 2;
             G++;
-        } else if (c == 'E'){
-            type =5;
+        } else if (c == 'E') {
+            type = 5;
             E++;
         } else {
-            type =3;
+            type = 3;
             L++;
         }
-        
+
         //        int type = glp_get_row_type(lp, i);
-        if(type == 2){
+        if (type == 2) {
             tmp.type = 3;
             tmp.lb = -t.getRowUpper()[i];
             //            tmp.lb = -glp_get_row_ub(lp, i);
             tmp.ub = -t.getRowLower()[i];
             //            tmp.ub = -glp_get_row_lb(lp, i);
-            
+
             bterms[i] = tmp;
-//            double rhs = tmp.lb;
-//            LinearGreat con(i, type, rhs, ind, ele);
-//            cons.push_back(&con);
+            //            double rhs = tmp.lb;
+            //            LinearGreat con(i, type, rhs, ind, ele);
+            //            cons.push_back(&con);
             for (int j = 0; j < non_zeros; j++) {
                 elem tmp;
                 tmp.index = indices[j];
                 tmp.coeff = -val[j];
                 matcoeff[i][j] = tmp;
-                
+
             }
-            
+
         } else {
             tmp.type = type;
             tmp.lb = t.getRowLower()[i];
@@ -130,82 +130,81 @@ BP_Input::BP_Input(string file_name) {
             tmp.ub = t.getRowUpper()[i];
             //            tmp.ub = glp_get_row_ub(lp, i);
             bterms[i] = tmp;
-//            double rhs = tmp.lb;
-            if(type == 5){
-                
-//                Equal con = Equal(matcoeff[i],tmp,1);
-//                cons.push_back(&con);
-                
+            //            double rhs = tmp.lb;
+            if (type == 5) {
+
+                //                Equal con = Equal(matcoeff[i],tmp,1);
+                //                cons.push_back(&con);
+
             } else {
-//                LinearGreat con(i, type, rhs,ind,ele);
-//                cons.push_back(&con);
-              
+                //                LinearGreat con(i, type, rhs,ind,ele);
+                //                cons.push_back(&con);
+
             }
             for (int j = 0; j < non_zeros; j++) {
                 elem tmp;
                 tmp.index = indices[j];
                 tmp.coeff = val[j];
                 matcoeff[i][j] = tmp;
-                
+
             }
 
         }
-        
+
         // Lav constraints her
-        
-        
-        
-        
+
+
+
+
     }
     const CoinPackedMatrix* matrix2 = t.getMatrixByCol();
-    
+
     for (int i = 0; i < nvars; i++) {
-        
+
         const CoinShallowPackedVector vec = matrix2->getVector(i);
         int non_zeros = vec.getNumElements();
         const double* val = vec.getElements();
-        
+
 
         const int* indices = vec.getIndices();
         matcoeff2[i].resize(non_zeros);
- 
+
         for (int j = 0; j < non_zeros; j++) {
-            
+
             char c = t.getRowSense()[indices[j]];
 
             int type;
-            if(c=='E'){
+            if (c == 'E') {
                 type = 5;
-            }
-            else if (c=='L'){
+            } else if (c == 'L') {
                 type = 3;
-                        
+
             } else {
-                type =2;
+                type = 2;
             }
-            
+
             elem tmp;
             tmp.index = indices[j];
-            
-            if(type==3){
-                
+
+            if (type == 3) {
+
                 tmp.coeff = -val[j];
             } else {
                 tmp.coeff = val[j];
             }
-            
+
             matcoeff2[i][j] = tmp;
-            
-            
+
+
         }
     }
     std::cout << "G: " << G << "   E: " << E << "    L: " << L << std::endl;
-//    for(int i =0; i< cons.size();i++){
-//        Constraint* c = cons[i];
-//        
-//    }
+    //    for(int i =0; i< cons.size();i++){
+    //        Constraint* c = cons[i];
+    //        
+    //    }
 }
-    
+
 
 //BP_Constraints::BP_Constraints(const double& my_value, const double& my_indicies) :
 //               value(my_value),indicies(my_indicies) {
@@ -290,16 +289,17 @@ BP_Input::BP_Input(string file_name) {
 //}
 
 BP_Output::BP_Output(const BP_Input& my_in) :
-		in(my_in), varAssignment(in.getNvars()) {
+in(my_in), varAssignment(in.getNvars()) {
     // Insert the code that initialize the data structures of the
     // output object based in the input object
-    
-    
-    
+
+
+
 }
-void BP_Output::assign(int var, bool b){
-    varAssignment[var]=b;
-//    std::cout << "var " << var << "   " << b << std::endl;
+
+void BP_Output::assign(int var, bool b) {
+    varAssignment[var] = b;
+    //    std::cout << "var " << var << "   " << b << std::endl;
 }
 
 BP_Output& BP_Output::operator=(const BP_Output& out) {
@@ -307,38 +307,36 @@ BP_Output& BP_Output::operator=(const BP_Output& out) {
     // output object from the ones of the parameter out
     // (excluding the reference to the input object, that is constant)
     varAssignment = out.varAssignment;
-    
+
     return *this;
 }
 
-
 ostream& operator<<(ostream& os, const BP_Output& out) {
     // Insert the code that writes the output object
-    
-//    os << "v ";
-    for (unsigned j = 0; j < out.in.getNvars(); j++){
-        os << j+1 << " " << out.varAssignment[j] << std::endl;
-//        if(out.varAssignment[j]){
-            
-//            os << j+1 << " ";
-//        }
+
+    //    os << "v ";
+    for (unsigned j = 0; j < out.in.getNvars(); j++) {
+        os << j + 1 << " " << out.varAssignment[j] << std::endl;
+        //        if(out.varAssignment[j]){
+
+        //            os << j+1 << " ";
+        //        }
     }
-    
-//    os << "0";
+
+    //    os << "0";
     return os;
 }
 
 istream& operator>>(istream& is, BP_Output& out) {
     // Insert the code that reads the output object
-    
+
     int r;
     char ch;
     is >> ch;
-    for (unsigned j = 0; j < out.in.getNvars(); j++)
-    {
+    for (unsigned j = 0; j < out.in.getNvars(); j++) {
         is >> r >> ch;
         cerr << j << " " << r << " " << ch << endl;
-        out.assign(j,r);
+        out.assign(j, r);
     }
     return is;
 }

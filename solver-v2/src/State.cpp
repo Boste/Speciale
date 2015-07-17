@@ -27,7 +27,7 @@ State::State(const State& orig) {
 }
 
 State::~State() {
-    std::cout << "Destructing State" << std::endl;
+//    std::cout << "Destructing State" << std::endl;
         for (unsigned i = 0; i < IntVarVector->size(); i++) {
             delete IntVarVector->at(i);
         }

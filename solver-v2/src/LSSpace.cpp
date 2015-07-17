@@ -50,12 +50,12 @@ void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* v
 
 void LSSpace::optimizeSolution() {
     //    std::cout << __LINE__ << std::endl;
-    std::cout << "optimize" << std::endl;
+//    std::cout << "optimize" << std::endl;
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
-    std::cout << "NE created" << std::endl;
-    std::cout << "Segmentation fault right after this " << std::endl;
+//    std::cout << "NE created" << std::endl;
+//    std::cout << "Segmentation fault right after this " << std::endl;
     IntegerVariable* var = st->getIntegerVariable(0);
-    std::cout << "segmentation fault before this" << std::endl;
+//    std::cout << "segmentation fault before this" << std::endl;
     Move* mv = new Move(var, 1 - var->getCurrentValue() - var->getCurrentValue(), FLIP);
     //        std::cout << __LINE__ << std::endl;
     //    NE.bestImprovement<int>()
@@ -64,8 +64,8 @@ void LSSpace::optimizeSolution() {
     double usedTime = 0;
     std::clock_t start = std::clock();
     int randomMoves = st->getNumberOfVariables() / 5;
-    std::cout << "Number of random moves " << randomMoves << std::endl;
-    std::cout << "Timelimit " << timelimit << std::endl;
+//    std::cout << "Number of random moves " << randomMoves << std::endl;
+//    std::cout << "Timelimit " << timelimit << std::endl;
     mv->first = st->getIntegerVariable(0);
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
     while (NE->bestImprovement(mv, st)) {

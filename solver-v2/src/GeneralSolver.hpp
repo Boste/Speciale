@@ -27,7 +27,7 @@ public:
     }
 
     ~GeneralSolver() {
-        std::cout << "Destructing GS" << std::endl;
+//        std::cout << "Destructing GS" << std::endl;
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {

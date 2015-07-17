@@ -1,3 +1,4 @@
+! /bin/bash
 cat testInstances.txt | while read line
 do
 	PARA=" ../../data/"$line	

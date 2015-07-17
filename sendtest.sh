@@ -1,7 +1,7 @@
-! /bin/bash
+#! /bin/bash
 #
 # Name of the job
-SBATCH -J test-2nodes
+SBATCH -J hardTest.sh
 #
 # Use two nodes with 40 cores in total
 SBATCH -N 2 -n 40

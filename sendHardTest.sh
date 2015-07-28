@@ -60,8 +60,9 @@ module load gcc/4.9.0
 #done
 
 export INSTANCE=$SLURM_SUBMIT_DIR/data/p6b.mps.gz
-export EXECUTABLE=$SLURM_SUBMIT_DIR/src/xyz
-
+export EXECUTABLE=$SLURM_SUBMIT_DIR/solver-v2/src/xyz
+export LOGDIR=$SLURM_SUBMIT_DIR/log
+export LOGFILE=$LOGDIR/c1.1.1.1
 
 for f in $INSTANCE $EXECUTABLE; do
     sbcast $f $SCRATCH/`basename $f`;
@@ -80,9 +81,11 @@ fi
 
 export INPF=$SCRATCH/input
 export OUPF=$SCRATCH/input
-mpirun \
-    ./xyz p6b.mps.gz -o $SLURM_SUBMIT_DIR/em.out 
+#mpirun \
+./xyz p6b.mps.gz > $LOGFILE 2>&1 # $SLURM_SUBMIT_DIR/em.out 
 echo Done.
+
+# bash -c "ulimit -v 22000000; /people/disk2/marco/sumcol/src/main/sumcol_cut /people/disk2/marco/sumcol/data/zeroin.i.3.col lp cliquer > /people/disk2/marco/sumcol/cluster/log/c0001.0048.0001.0001 2>&1"
 
 
 ls 

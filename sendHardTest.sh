@@ -1,7 +1,9 @@
 #! /bin/bash
 #
 # Name of the job
-sbatch -J hardTest.sh -N 2 -n 40 --mem=25600 --gres=gpu:1 -t 0:10:00 --mail-user=boste09@student.sdu.dk -type=ALL
+#SBATCH -J test-2nodes -N 1 -n 1 --mem=25600 --gres=gpu:0 
+#SBATCH -t 0:10:00 
+
 #
 # Use two nodes with 40 cores in total
 #
@@ -29,11 +31,14 @@ sbatch -J hardTest.sh -N 2 -n 40 --mem=25600 --gres=gpu:1 -t 0:10:00 --mail-user
 #SBATCH --mail-type=ALL
 # By default send email to the email address specified when the user was
 # created this can be overrided here
+#SBATCH --mail-user=boste09@student.sdu.dk 
 #
 # Write stdout/stderr output, %j is replaced with the job number
 # use same path name to write everything to one file
 #SBATCH --output slurm-%j.txt
 #SBATCH --error  slurm-%j.txt
+
+test -n "$SCRATCH" || export SCRATCH=/scratch
 
 echo Running on $(hostname)
 echo Available nodes: $SLURM_NODELIST
@@ -46,12 +51,19 @@ echo Start time: $(date)
 #module add amber/14.2014.04
 module load gcc/4.9.0
 
+
+
 # Copy all input files to local scratch on all nodes
 #for f in *.inp *.prmtop *.inpcrd ; do
 #    sbcast $f $SCRATCH/$f
 #done
-for f in data ; do
-	sbcast $f $SCRATCH/$f
+
+export INSTANCE=$SLURM_SUBMIT_DIR/data/p6b.mps.gz
+export EXECUTABLE=$SLURM_SUBMIT_DIR/src/xyz
+
+
+for f in $INSTANCE $EXECUTABLE; do
+    sbcast $f $SCRATCH/`basename $f`;
 done
 
 
@@ -68,6 +80,8 @@ fi
 export INPF=$SCRATCH/input
 export OUPF=$SCRATCH/input
 mpirun \
-    $cmd -O -i em.inp -o $SLURM_SUBMIT_DIR/em.out -r em.rst \
-    -p test.prmtop -c test.inpcrd -ref test.inpcrd
+    ./xyz p6b.mps.gz -o $SLURM_SUBMIT_DIR/em.out 
 echo Done.
+
+
+ls 

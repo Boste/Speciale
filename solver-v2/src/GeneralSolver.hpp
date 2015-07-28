@@ -142,10 +142,23 @@ public:
 
         printSpaceStatus();
         GeneralSolver* s;
+        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
+//        c->constant(1);
+//        Gecode::Search::NodeStop* st = Gecode::Search::NodeStop(10);
+//        std::cout <<  so.stop << std::endl;
+//        so.stop = st;
+//        std::cout << so.stop << std::endl;
+        std::cout << so.stop  << std::endl;
+        std::cout << so.cutoff << std::endl;
+        so.cutoff  = c;
+        std::cout <<  so.cutoff << std::endl;
+        sleep(5);
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
+            
             s = e.next();
+//            std::cout <<  s.
             //            s = e.next();
             std::cout << "Gecode found solution after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             //            delete so.stop;

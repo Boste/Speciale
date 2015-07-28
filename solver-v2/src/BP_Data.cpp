@@ -16,10 +16,10 @@ BP_Input::BP_Input(string file_name) {
 
 
     CoinMpsIO t;
-
+   
     //    std::cout << "Can coin read?" << std::endl;
     t.readMps(file_name.c_str());
-        std::cout << "Coin have read" << std::endl;
+//        std::cout << "Coin have read" << std::endl;
     ncons = t.getNumRows();
     nvars = t.getNumCols();
     vars.resize(nvars);

@@ -5,3 +5,7 @@ solver-v2/src/xyz
 data/
 slurm*
 *~
+*.sh
+jobs/
+log/
+

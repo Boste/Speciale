@@ -2,7 +2,7 @@
 #
 # Name of the job
 #SBATCH -J test-2nodes -N 1 -n 1 --mem=25600 --gres=gpu:0 
-#SBATCH -t 0:10:00 
+#SBATCH -t 0:01:00 
 
 #
 # Use two nodes with 40 cores in total

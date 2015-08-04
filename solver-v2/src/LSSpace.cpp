@@ -133,7 +133,7 @@ void LSSpace::optimizeSolution() {
     std::cout << "Number of moves " << iterations << std::endl;
     delete mv;
     delete NE;
-
+    std::cout << st->getObjectiveValue() << " ";
     //    st->setSolution();
     //
     //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;

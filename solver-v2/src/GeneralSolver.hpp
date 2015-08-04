@@ -148,7 +148,7 @@ public:
 //        std::cout <<  so.stop << std::endl;
 //        so.stop = st;
 //        std::cout << so.stop << std::endl;
-        std::cout << so.stop  << std::endl;
+        std::cout << so.stop     << std::endl;
         std::cout << so.cutoff << std::endl;
         so.cutoff  = c;
         std::cout <<  so.cutoff << std::endl;
@@ -235,6 +235,7 @@ public:
 
     void optimizeSolution() {
         LSSpace::optimizeSolution();
+        
     }
     // Only for testing
 

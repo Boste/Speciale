@@ -75,9 +75,10 @@ int main(int argc, char* argv[]) {
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
     m->optimizeSolution();
-    size_t peakSize = getPeakRSS();
-    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
-    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+    std::cout << getPeakRSS()/1024 << std::endl;
+//    size_t peakSize = getPeakRSS();
+//    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
+//    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     delete m;
 
     //    m->printCurrent();

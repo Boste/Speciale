@@ -113,7 +113,7 @@ void Test::testBig(int vars, int cons) {
 
     GeneralSolver* General = GS->InitialSolution(so);
     GS->initializeLS(General);
-    GS->optimizeSolution();
+    GS->optimizeSolution(10);
     testDone(string(__FUNCTION__));
 
 
@@ -156,7 +156,7 @@ void Test::testObjectiveFunction() {
         error = "Wrong objective value. Current Value " + std::to_string(GS->st->getObjectives()->at(0)->getViolationDegree()) + " Value should be " + std::to_string(objfnc);
         testFailed(__FUNCTION__, error);
     }
-    GS->optimizeSolution();
+    GS->optimizeSolution(10);
     //    GS->printCurrent();
     testDone(string(__FUNCTION__));
 

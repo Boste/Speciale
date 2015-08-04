@@ -102,14 +102,14 @@ void State::initializeConstraints() {
     }
 }
 
-void State::initializeObjective() {
+int State::initializeObjective() {
     int violations = 0;
     for (unsigned i = 0; i < ObjectiveFunction->size(); i++) {
         violations += ObjectiveFunction->at(i)->setDeltaViolationDegree();
         ObjectiveFunction->at(i)->updateViolationDegree();
     }
     std::cout << "Initial solution value: " << violations << std::endl;
-
+    return violations;
 }
 
 void State::shuffleMask() {

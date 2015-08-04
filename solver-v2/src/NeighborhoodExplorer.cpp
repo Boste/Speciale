@@ -9,7 +9,7 @@ NeighborhoodExplorer::NeighborhoodExplorer(const NeighborhoodExplorer& orig) {
 }
 
 NeighborhoodExplorer::~NeighborhoodExplorer() {
-    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
+//    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
 }
 
 //template<typename returnType>

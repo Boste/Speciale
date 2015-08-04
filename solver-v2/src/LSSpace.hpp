@@ -26,7 +26,7 @@ private:
 public:
     LSSpace();
     void printCurrent();
-
+    int initialValue = 0;
     //    std::vector<IntegerVariable*> IntVarVector;
     std::vector<Gecode::BoolVar> BoolVarVector;
     //    std::vector<Invariant*> Invariants;
@@ -78,7 +78,7 @@ protected:
 
     // Not able to add obj fnc. 
     void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
-    void optimizeSolution();
+    void optimizeSolution(int time);
     void simpleMove(int variabelNr);
     bool bestImprovement();
 
@@ -88,6 +88,7 @@ protected:
     void initializeConstraints();
 
     void initializeObjective();
+//    int getObjectiveValue();
 
     void commitDeltaOfVariable(int changedVariable);
 

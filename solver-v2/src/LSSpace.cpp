@@ -19,6 +19,7 @@ void LSSpace::SetValues(Gecode::IntVarArray vars) {
     for (int i = 0; i < vars.size(); i++) {
         assert(vars[i].assigned());
         st->getIntegerVariables()->at(i)->setCurrentValue(vars[i].val());
+        
     }
 }
 
@@ -48,7 +49,7 @@ void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* v
     
 }
 
-void LSSpace::optimizeSolution() {
+void LSSpace::optimizeSolution(int time) {
     //    std::cout << __LINE__ << std::endl;
 //    std::cout << "optimize" << std::endl;
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
@@ -60,7 +61,9 @@ void LSSpace::optimizeSolution() {
     //        std::cout << __LINE__ << std::endl;
     //    NE.bestImprovement<int>()
     //    NE->randomWalk(mv,st);
-    double timelimit = 10;
+    
+//    double timelimit = 10;
+    double timelimit = (double) time;
     double usedTime = 0;
     std::clock_t start = std::clock();
     int randomMoves = st->getNumberOfVariables() / 5;
@@ -231,8 +234,11 @@ void LSSpace::initializeConstraints() {
 }
 
 void LSSpace::initializeObjective() {
-    st->initializeObjective();
+    initialValue = st->initializeObjective();
 }
+//int LSSpace::getObjectiveValue(){
+//    return st->getObjectiveValue();
+//}
 
 void LSSpace::printCurrent() {
 

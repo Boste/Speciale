@@ -44,7 +44,7 @@ public:
 
     }
 
-    void linear(GeneralSolver& s, vector<int>* coefficients, vector<IntegerVariable*>* variables, Gecode::IntRelType irt, int ub, Gecode::IntConLevel icl, int type) { // 0 = implicit, 1 = soft, 2 = invariant 
+    void linear(GeneralSolver& s, std::vector<int>* coefficients, vector<IntegerVariable*>* variables, Gecode::IntRelType irt, int ub, Gecode::IntConLevel icl, int type) { // 0 = implicit, 1 = soft, 2 = invariant 
         if (type == 1) {
             // add to obj fnc
             LSSpace::linear(coefficients, variables, 0, ub, type);
@@ -233,8 +233,8 @@ public:
         delete GS;
     }
 
-    void optimizeSolution() {
-        LSSpace::optimizeSolution();
+    void optimizeSolution(int time) {
+        LSSpace::optimizeSolution(time);
         
     }
     // Only for testing

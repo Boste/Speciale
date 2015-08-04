@@ -39,7 +39,7 @@ public:
 
     void initializeConstraints();
 
-    void initializeObjective();
+    int initializeObjective();
 
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     std::vector<IntegerVariable*>* getIntegerVariables();

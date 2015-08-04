@@ -36,6 +36,13 @@ using namespace Gecode;
 //void easylocal(int argc, const char* argv[]);
 
 int main(int argc, char* argv[]) {
+    int time;
+    if (argc == 3) {
+        time = std::atoi(argv[2]);
+    } else {
+        std::cout << "time not set. Set optimization time to 10 seconds" << std::endl;
+        time = 10;
+    }
     Random::Seed(RANDOMSEED);
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();
@@ -56,9 +63,9 @@ int main(int argc, char* argv[]) {
     Support::Timer t;
     t.start();
 
-//    Script::run<MagicSquare, DFS, InstanceOptions>(opt);
-//    size_t peakSize3 = getPeakRSS();
-//    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
+    //    Script::run<MagicSquare, DFS, InstanceOptions>(opt);
+    //    size_t peakSize3 = getPeakRSS();
+    //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
 
 
 
@@ -68,17 +75,20 @@ int main(int argc, char* argv[]) {
     BPSolver* m = new BPSolver(p);
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
 
+    double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
-//    std::cout << "Initializing LSS" << std::endl;
+    //    std::cout << "Initializing LSS" << std::endl;
     m->initializeLS(GS);
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
-    m->optimizeSolution();
-    std::cout << getPeakRSS()/1024 << std::endl;
-//    size_t peakSize = getPeakRSS();
-//    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
-//    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
+    m->optimizeSolution(time);
+    std::cout << m->initialValue << " ";
+    std::cout << iniTime << " ";
+    std::cout << getPeakRSS() / 1024 << std::endl;
+    //    size_t peakSize = getPeakRSS();
+    //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
+    //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     delete m;
 
     //    m->printCurrent();

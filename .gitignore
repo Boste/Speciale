@@ -8,4 +8,4 @@ slurm*
 *.sh
 jobs/
 log/
-
+submitted/

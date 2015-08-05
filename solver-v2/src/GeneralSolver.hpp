@@ -27,7 +27,7 @@ public:
     }
 
     ~GeneralSolver() {
-//        std::cout << "Destructing GS" << std::endl;
+        //        std::cout << "Destructing GS" << std::endl;
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {
@@ -142,27 +142,44 @@ public:
 
         printSpaceStatus();
         GeneralSolver* s;
-        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
-//        c->constant(1);
-//        Gecode::Search::NodeStop* st = Gecode::Search::NodeStop(10);
-//        std::cout <<  so.stop << std::endl;
-//        so.stop = st;
-//        std::cout << so.stop << std::endl;
-        std::cout << so.stop     << std::endl;
-        std::cout << so.cutoff << std::endl;
-        so.cutoff  = c;
-        std::cout <<  so.cutoff << std::endl;
-        sleep(5);
+//        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
+        //        c->constant(1);
+        //        std::cout <<  so.stop << std::endl;
+        so.stop = new Gecode::Search::NodeStop(80000);
+        std::cout << "clone distance " << so.a_d << std::endl;
+        std::cout << "Clone commit distance " << so.c_d << std::endl;
+        
+//        so.stop->time(1);
+        //        std::cout << so.stop << std::endl;
+        //        std::cout << so.stop     << std::endl;
+        //        std::cout << so.cutoff << std::endl;
+        //        so.cutoff  = c;
+        //        std::cout <<  so.cutoff << std::endl;
+        //        std::cout << so.stop << std::endl;
+
+//        sleep(5);
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
-            
+            std::cout << "hej" << std::endl;
             s = e.next();
-//            std::cout <<  s.
+            //            Gecode::Search::TimeStop
+            std::cout << " print" << std::endl;
+            if (!e.stopped()) {
+                std::cout << "e did not stop" << std::endl;
+                if (s != NULL) {
+                    std::cout << "s not null" << std::endl;
+                    if (!s->failed()) {
+                        Gecode::Search::Statistics stat = e.statistics();
+
+                        print_stats(stat);
+                    }
+                }
+            }
+            //            std::cout <<  s.
             //            s = e.next();
             std::cout << "Gecode found solution after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             //            delete so.stop;
-            assert(s != NULL);
             //            int counter = 0;
             //            while (!s->failed() && !e.stopped()) {
             ////                std::cout << "counter " << counter << std::endl;
@@ -178,9 +195,9 @@ public:
             //            std::cout << this->IntVars << std::endl;
             //            GeneralSolver* s = e.next();
             //            s->print(std::cout);
-
-            assert(!s->failed());
-            assert(!e.stopped());
+            //            assert(s != NULL);
+            //            assert(!s->failed());
+            //            assert(!e.stopped());
             //            SetValues(s->IntVars);
             //            for(int i = 0; i < IntVars.size(); i++ ){
             //                if(IntVarVector.at(i).getCurrentValue() != s->IntVars[i].val()){
@@ -203,7 +220,7 @@ public:
             //                std::cout << Invariants.at(i).getValue() << " " << LSSpace::testInvariant(i) << "  ";
             //                
             //            }
-
+            std::cout << "should print " << std::endl;
             if (e.stopped()) {
                 cout << "WARNING: solver stopped, solution is not optimal!\n";
                 if (so.stop->stop(e.statistics(), so)) {
@@ -235,7 +252,7 @@ public:
 
     void optimizeSolution(int time) {
         LSSpace::optimizeSolution(time);
-        
+
     }
     // Only for testing
 

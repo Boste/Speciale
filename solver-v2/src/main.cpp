@@ -48,7 +48,8 @@ int main(int argc, char* argv[]) {
     Clock::globalClock = std::clock();
     InstanceOptions opt("BPSolver");
     opt.instance("data/toy.txt");
-    opt.time(180 * 1000); // in milliseconds
+//    opt.time(180 * 1000); // in milliseconds
+//    std::cout << opt.time() << std::endl;
 
     opt.parse(argc, argv);
     BP_Input* p = new BP_Input(opt.instance());
@@ -59,6 +60,7 @@ int main(int argc, char* argv[]) {
     Search::Options so;
     Search::TimeStop* ts = new Search::TimeStop(opt.time());
     so.stop = ts;
+
     // Let's start the Timer
     Support::Timer t;
     t.start();
@@ -74,7 +76,9 @@ int main(int argc, char* argv[]) {
 
     BPSolver* m = new BPSolver(p);
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
-
+    assert(GS != NULL);
+    assert(!GS->failed());
+//    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;

@@ -36,6 +36,17 @@ using namespace Gecode;
 //void easylocal(int argc, const char* argv[]);
 
 int main(int argc, char* argv[]) {
+    string str = argv[1];
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == '/')
+            str[i] = ' ';
+    }
+    std::vector<string> array;
+    stringstream ss(str);
+    string temp;
+    while (ss >> temp)
+        array.push_back(temp);
+    std::cout << array.back() << std::endl;
     int time;
     if (argc == 3) {
         time = std::atoi(argv[2]);
@@ -92,17 +103,16 @@ int main(int argc, char* argv[]) {
     std::cout << iniTime << " ";
 
 
-    string str = argv[1];
-    for (int i = 0; i < str.length(); i++) {
-        if (str[i] == '/')
-            str[i] = ' ';
-    }
-    std::vector<string> array;
-    stringstream ss(str);
-    string temp;
-    while (ss >> temp)
-        array.push_back(temp);
-    std::cout << getPeakRSS() / 1024 << " " << array.back() <<  std::endl;
+//    string str = argv[1];
+//    for (int i = 0; i < str.length(); i++) {
+//        if (str[i] == '/')
+//            str[i] = ' ';
+//    }
+//    std::vector<string> array;
+//    stringstream ss(str);
+//    while (ss >> temp)
+//        array.push_back(temp);
+    std::cout << getPeakRSS() / 1024 / 1024 << " " << array.back() <<  std::endl;
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;

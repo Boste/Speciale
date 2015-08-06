@@ -145,7 +145,7 @@ public:
 //        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
         //        c->constant(1);
         //        std::cout <<  so.stop << std::endl;
-        so.stop = new Gecode::Search::NodeStop(80000);
+        so.stop = new Gecode::Search::NodeStop(800000);
         std::cout << "clone distance " << so.a_d << std::endl;
         std::cout << "Clone commit distance " << so.c_d << std::endl;
         
@@ -291,6 +291,8 @@ private:
                     << " the space is not failed and we need to start branching."
                     << endl;
         }
+        
+        
     }
 
     //    void startTimer(Gecode::Search::Options so) {

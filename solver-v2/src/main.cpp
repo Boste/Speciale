@@ -113,6 +113,11 @@ int main(int argc, char* argv[]) {
 //    while (ss >> temp)
 //        array.push_back(temp);
     std::cout << getPeakRSS() / 1024 / 1024 << " " << array.back() <<  std::endl;
+    
+    // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
+    
+    
+    
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;

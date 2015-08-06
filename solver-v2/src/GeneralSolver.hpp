@@ -161,14 +161,14 @@ public:
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
-            std::cout << "hej" << std::endl;
+            std::cout << "Still searching for solution" << std::endl;
             s = e.next();
             //            Gecode::Search::TimeStop
-            std::cout << " print" << std::endl;
+//            std::cout << " print" << std::endl;
             if (!e.stopped()) {
-                std::cout << "e did not stop" << std::endl;
+//                std::cout << "e did not stop" << std::endl;
                 if (s != NULL) {
-                    std::cout << "s not null" << std::endl;
+//                    std::cout << "s not null" << std::endl;
                     if (!s->failed()) {
                         Gecode::Search::Statistics stat = e.statistics();
 
@@ -220,11 +220,12 @@ public:
             //                std::cout << Invariants.at(i).getValue() << " " << LSSpace::testInvariant(i) << "  ";
             //                
             //            }
-            std::cout << "should print " << std::endl;
+//            std::cout << "should print " << std::endl;
             if (e.stopped()) {
                 cout << "WARNING: solver stopped, solution is not optimal!\n";
                 if (so.stop->stop(e.statistics(), so)) {
-                    cout << "\t Solver stopped because of TIME LIMIT!\n";
+//                    cout << "\t Solver stopped because of TIME LIMIT!\n";
+                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
                 }
             }
 

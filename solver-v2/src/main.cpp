@@ -48,11 +48,12 @@ int main(int argc, char* argv[]) {
     Clock::globalClock = std::clock();
     InstanceOptions opt("BPSolver");
     opt.instance("data/toy.txt");
-//    opt.time(180 * 1000); // in milliseconds
-//    std::cout << opt.time() << std::endl;
+    //    opt.time(180 * 1000); // in milliseconds
+    //    std::cout << opt.time() << std::endl;
 
     opt.parse(argc, argv);
     BP_Input* p = new BP_Input(opt.instance());
+
     std::cout << "Instance read after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     size_t peakSize4 = getPeakRSS();
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
@@ -78,7 +79,7 @@ int main(int argc, char* argv[]) {
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
     assert(GS != NULL);
     assert(!GS->failed());
-//    assert(!GS.stopped());
+    //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
@@ -89,7 +90,19 @@ int main(int argc, char* argv[]) {
     m->optimizeSolution(time);
     std::cout << m->initialValue << " ";
     std::cout << iniTime << " ";
-    std::cout << getPeakRSS() / 1024 << std::endl;
+
+
+    string str = argv[1];
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == '/')
+            str[i] = ' ';
+    }
+    std::vector<string> array;
+    stringstream ss(str);
+    string temp;
+    while (ss >> temp)
+        array.push_back(temp);
+    std::cout << getPeakRSS() / 1024 << " " << array.back() <<  std::endl;
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;

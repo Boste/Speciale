@@ -87,6 +87,7 @@ int main(int argc, char* argv[]) {
     //    delete test;
 
     BPSolver* m = new BPSolver(p);
+    std::cout << "Initialize solution" << std::endl;
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
     assert(GS != NULL);
     assert(!GS->failed());
@@ -103,21 +104,23 @@ int main(int argc, char* argv[]) {
     std::cout << iniTime << " ";
 
 
-//    string str = argv[1];
-//    for (int i = 0; i < str.length(); i++) {
-//        if (str[i] == '/')
-//            str[i] = ' ';
-//    }
-//    std::vector<string> array;
-//    stringstream ss(str);
-//    while (ss >> temp)
-//        array.push_back(temp);
-    std::cout << getPeakRSS() / 1024 / 1024 << " " << array.back() <<  std::endl;
-    
+    //    string str = argv[1];
+    //    for (int i = 0; i < str.length(); i++) {
+    //        if (str[i] == '/')
+    //            str[i] = ' ';
+    //    }
+    //    std::vector<string> array;
+    //    stringstream ss(str);
+    //    while (ss >> temp)
+    //        array.push_back(temp);
+    std::cout << getPeakRSS() / 1024 / 1024;
+//    std::cout << " " << array.back();
+    std::cout << std::endl;
+
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
-    
-    
-    
+
+
+
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;

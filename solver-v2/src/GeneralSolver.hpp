@@ -139,17 +139,19 @@ public:
         //        startTimer(so);
 
 
-
         printSpaceStatus();
+        std::cout <<  "after status" << std::endl;
         GeneralSolver* s;
-//        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
+        //        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
         //        c->constant(1);
         //        std::cout <<  so.stop << std::endl;
+
         so.stop = new Gecode::Search::NodeStop(800000);
+
         std::cout << "clone distance " << so.a_d << std::endl;
         std::cout << "Clone commit distance " << so.c_d << std::endl;
-        
-//        so.stop->time(1);
+
+        //        so.stop->time(1);
         //        std::cout << so.stop << std::endl;
         //        std::cout << so.stop     << std::endl;
         //        std::cout << so.cutoff << std::endl;
@@ -157,18 +159,18 @@ public:
         //        std::cout <<  so.cutoff << std::endl;
         //        std::cout << so.stop << std::endl;
 
-//        sleep(5);
+        //        sleep(5);
         try {
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, so);
             std::cout << "Still searching for solution" << std::endl;
             s = e.next();
             //            Gecode::Search::TimeStop
-//            std::cout << " print" << std::endl;
+            //            std::cout << " print" << std::endl;
             if (!e.stopped()) {
-//                std::cout << "e did not stop" << std::endl;
+                //                std::cout << "e did not stop" << std::endl;
                 if (s != NULL) {
-//                    std::cout << "s not null" << std::endl;
+                    //                    std::cout << "s not null" << std::endl;
                     if (!s->failed()) {
                         Gecode::Search::Statistics stat = e.statistics();
 
@@ -220,11 +222,11 @@ public:
             //                std::cout << Invariants.at(i).getValue() << " " << LSSpace::testInvariant(i) << "  ";
             //                
             //            }
-//            std::cout << "should print " << std::endl;
+            //            std::cout << "should print " << std::endl;
             if (e.stopped()) {
                 cout << "WARNING: solver stopped, solution is not optimal!\n";
                 if (so.stop->stop(e.statistics(), so)) {
-//                    cout << "\t Solver stopped because of TIME LIMIT!\n";
+                    //                    cout << "\t Solver stopped because of TIME LIMIT!\n";
                     cout << "\t Solver stopped because of  NODE LIMIT!\n";
                 }
             }
@@ -274,9 +276,11 @@ private:
     //    }
 
     void printSpaceStatus() {
-
+        std::cout << "in status" << std::endl;
+        
+        std::cout << this->status() << std::endl;
+        std::cout << "can it find status? " << std::endl;
         Gecode::SpaceStatus status = this->status();
-
         if (status == Gecode::SS_FAILED) {
             cout << "Status: " << this->status() << " the space is failed at root."
                     << endl;
@@ -291,8 +295,7 @@ private:
                     << " the space is not failed and we need to start branching."
                     << endl;
         }
-        
-        
+
     }
 
     //    void startTimer(Gecode::Search::Options so) {

@@ -1,0 +1,14 @@
+The purpose of this solver is to combine the simplicity of constraint programming formulation with the 
+efficiency local search. Constraint programming sometimes offers a natural way to write problem formulations that can 
+lead to very short and precise formulation. Local search is effective at searching for an improvement of a current 
+solution. \\ 
+This solver is roughly split into three parts, one for formulating the problem, one for finding an initial solution and 
+a part for improving the current solution. The user needs to define variables and constraints for the problem and 
+give and need to specify an objective for optimization. The formulation given by the user is then parsed to a 
+constraint programming solver Gecode and Local search framework. Gecode is used to find an initial solution that the 
+local search framework will try to improve with regard to the objective given by the user.   
+
+\subsection{Parsing the Problem Formulation}
+
+\subsection{The User Surface}
+\subsection{The Local Search}

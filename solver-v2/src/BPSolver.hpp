@@ -28,10 +28,10 @@ public:
     BPSolver(BP_Input *in) :
     p_in(in) {
 
-        vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
+        std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
 
         for (unsigned i = 0; i < in->getNcons(); i++) {
-            const vector<elem> leftside = in->getMatcoeff(i);
+            const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
             vector<int>* c = new vector<int>(leftside.size());
             vector<IntegerVariable*>* x = new vector<IntegerVariable*>();

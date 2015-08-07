@@ -49,11 +49,17 @@ int main(int argc, char* argv[]) {
         array.push_back(temp);
     std::cout << array.back() << std::endl;
     int time;
-    if (argc == 3) {
+    if (argc >= 3) {
         time = std::atoi(argv[2]);
     } else {
         std::cout << "time not set. Set optimization time to 10 seconds" << std::endl;
         time = 10;
+    }
+    int TimeForGecode;
+    if(argc>=4){
+        TimeForGecode = std::atoi(argv[3]);
+    } else {
+        TimeForGecode = 300;
     }
     Random::Seed(RANDOMSEED);
     //    gecode(argc, argv);
@@ -89,7 +95,7 @@ int main(int argc, char* argv[]) {
 
     BPSolver* m = new BPSolver(p);
     std::cout << "Initialize solution" << std::endl;
-    so->stop = new Multistop(0, 1, 300000);
+    so->stop = new Multistop(0, 1, TimeForGecode*1000);
 
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
     assert(GS != NULL);

@@ -154,7 +154,7 @@ public:
         //        so.stop->fail(10000);
         //        so.stop->time(300000);
         
-        so->c_d = IntVars.size()/2;
+        so->c_d = IntVars.size();
         so->a_d = so->c_d-1;
              
         std::cout << "clone distance " << so->a_d << std::endl;

@@ -71,10 +71,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
     //     This is to stop the search at the time limit imposed
     Search::Options* so = new Gecode::Search::Options();
-    
-//    Search::TimeStop* ts = new Search::TimeStop(opt.time());
-    Search::FailStop* fs = new Search::FailStop(0);
-    so->stop = new Multistop(0,1,300000);
+
+    //    Search::TimeStop* ts = new Search::TimeStop(opt.time());
 
     // Let's start the Timer
     Support::Timer t;
@@ -91,7 +89,8 @@ int main(int argc, char* argv[]) {
 
     BPSolver* m = new BPSolver(p);
     std::cout << "Initialize solution" << std::endl;
-    
+    so->stop = new Multistop(0, 1, 300000);
+
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
     assert(GS != NULL);
     assert(!GS->failed());
@@ -118,7 +117,7 @@ int main(int argc, char* argv[]) {
     //    while (ss >> temp)
     //        array.push_back(temp);
     std::cout << getPeakRSS() / 1024 / 1024;
-//    std::cout << " " << array.back();
+    //    std::cout << " " << array.back();
     std::cout << std::endl;
 
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
@@ -181,7 +180,6 @@ int main(int argc, char* argv[]) {
     //        argv2[i] = argv[i];
     //    }
     //    easylocal(argc, argv2);
-    delete fs;
     delete so;
     //    delete p;
     return 0;

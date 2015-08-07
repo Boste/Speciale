@@ -172,7 +172,7 @@ public:
         //        sleep(5);
         try {
             std::clock_t GecodeClock = std::clock();
-
+            
             //            std::cout << "try" << std::endl;
             Gecode::DFS<GeneralSolver> e(this, *so);
             std::cout << "Still searching for solution" << std::endl;
@@ -243,6 +243,7 @@ public:
                     //                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
                     std::cout << "\t Number of nodes expanded: " << e.statistics().node << std::endl;
                     std::cout << "\t Number of failed nodes: " << e.statistics().fail << std::endl;
+                    std::cout << "\t Number of restarts: " << e.statistics().restart << std::endl;
                     double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
                     std::cout << "\t Time spend searching for solution: " << time << " seconds" <<std::endl;
                 }

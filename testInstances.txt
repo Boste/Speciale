@@ -4,7 +4,7 @@ opm2-z12-s14.mps.gz
 opm2-z12-s7.mps.gz
 p6b.mps.gz
 queens-30.mps.gz
-dc11.mps.gz
+dc1l.mps.gz
 ds-big.mps.gz
 ex1010-pi.mps.gz
 ivu06-big.mps.gz
@@ -17,6 +17,5 @@ rmine10.mps.gz
 rmine14.mps.gz
 rmine21.mps.gz
 rmine25.mps.gz
-siena1.mps.gz
 sts405.mps.gz
 sts729.mps.gz

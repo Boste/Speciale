@@ -105,9 +105,9 @@ void Test::testBig(int vars, int cons) {
     delete c;
     // Branch
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::Search::Options so;
+    Gecode::Search::Options* so = new Gecode::Search::Options();
     Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(10 * 1000); // 10 seconds
-    so.stop = ts;
+    so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
 
@@ -140,9 +140,9 @@ void Test::testObjectiveFunction() {
         testFailed(__FUNCTION__, error);
     }
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::Search::Options so;
+    Gecode::Search::Options* so = new Gecode::Search::Options();
     Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(10 * 1000); // 10 seconds
-    so.stop = ts;
+    so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
     GeneralSolver* General = GS->InitialSolution(so);
@@ -169,9 +169,9 @@ void Test::testLinear() {
     createLinearEQConst();
     createLinearLQConst();
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::Search::Options so;
+    Gecode::Search::Options* so = new Gecode::Search::Options();
     Gecode::Search::TimeStop* ts = new Gecode::Search::TimeStop(10 * 1000); // 10 seconds
-    so.stop = ts;
+    so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
     GeneralSolver* General = GS->InitialSolution(so);

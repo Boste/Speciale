@@ -13,6 +13,7 @@
 #include "getRSS.hpp"
 #include "GeneralSolver.hpp"
 #include "Test.hpp"
+#include "Multistop.hpp"
 //#include "GecodeLinear.hpp"
 
 //#include "BP_Helpers.hpp"
@@ -37,7 +38,7 @@ using namespace Gecode;
 
 int main(int argc, char* argv[]) {
     string str = argv[1];
-    for (int i = 0; i < str.length(); i++) {
+    for (unsigned i = 0; i < str.length(); i++) {
         if (str[i] == '/')
             str[i] = ' ';
     }
@@ -69,9 +70,11 @@ int main(int argc, char* argv[]) {
     size_t peakSize4 = getPeakRSS();
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
     //     This is to stop the search at the time limit imposed
-    Search::Options so;
-    Search::TimeStop* ts = new Search::TimeStop(opt.time());
-    so.stop = ts;
+    Search::Options* so = new Gecode::Search::Options();
+    
+//    Search::TimeStop* ts = new Search::TimeStop(opt.time());
+    Search::FailStop* fs = new Search::FailStop(0);
+    so->stop = new Multistop(0,1,300000);
 
     // Let's start the Timer
     Support::Timer t;
@@ -88,6 +91,7 @@ int main(int argc, char* argv[]) {
 
     BPSolver* m = new BPSolver(p);
     std::cout << "Initialize solution" << std::endl;
+    
     GeneralSolver* GS = m->InitialSolution(so); // problem at sende opt med da den bliver slettet efter kald. 
     assert(GS != NULL);
     assert(!GS->failed());
@@ -177,7 +181,8 @@ int main(int argc, char* argv[]) {
     //        argv2[i] = argv[i];
     //    }
     //    easylocal(argc, argv2);
-    delete ts;
+    delete fs;
+    delete so;
     //    delete p;
     return 0;
 }

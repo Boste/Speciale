@@ -131,7 +131,9 @@ public:
 
     //    void InitialSolution(Gecode::InstanceOptions opt) {
 
-    GeneralSolver* InitialSolution(Gecode::Search::Options so) {
+    /// Uses Gecode to find initial solution
+
+    GeneralSolver* InitialSolution(Gecode::Search::Options* so) {
         //	// This is to stop the search at the time limit imposed
         //        Gecode::Search::Options so;
         //        print(std::cout);
@@ -140,16 +142,20 @@ public:
 
 
         printSpaceStatus();
-        std::cout <<  "after status" << std::endl;
+        std::cout << "after status" << std::endl;
         GeneralSolver* s;
         //        Gecode::Search::Cutoff* c = Gecode::Search::CutoffConstant::constant(1);
         //        c->constant(1);
         //        std::cout <<  so.stop << std::endl;
 
-        so.stop = new Gecode::Search::NodeStop(800000);
+        //        so.stop = new Gecode::Search::NodeStop(8000000);
+        //        so.threads =1;
+        //        so->stop->node(800000);
+        //        so.stop->fail(10000);
+        //        so.stop->time(300000);
 
-        std::cout << "clone distance " << so.a_d << std::endl;
-        std::cout << "Clone commit distance " << so.c_d << std::endl;
+        std::cout << "clone distance " << so->a_d << std::endl;
+        std::cout << "Clone commit distance " << so->c_d << std::endl;
 
         //        so.stop->time(1);
         //        std::cout << so.stop << std::endl;
@@ -159,10 +165,13 @@ public:
         //        std::cout <<  so.cutoff << std::endl;
         //        std::cout << so.stop << std::endl;
 
+
         //        sleep(5);
         try {
+            std::clock_t GecodeClock = std::clock();
+
             //            std::cout << "try" << std::endl;
-            Gecode::DFS<GeneralSolver> e(this, so);
+            Gecode::DFS<GeneralSolver> e(this, *so);
             std::cout << "Still searching for solution" << std::endl;
             s = e.next();
             //            Gecode::Search::TimeStop
@@ -225,9 +234,14 @@ public:
             //            std::cout << "should print " << std::endl;
             if (e.stopped()) {
                 cout << "WARNING: solver stopped, solution is not optimal!\n";
-                if (so.stop->stop(e.statistics(), so)) {
+
+                if (so->stop->stop(e.statistics(), *so)) {
                     //                    cout << "\t Solver stopped because of TIME LIMIT!\n";
-                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
+                    //                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
+                    std::cout << "\t Number of nodes expanded: " << e.statistics().node << std::endl;
+                    std::cout << "\t Number of failed nodes: " << e.statistics().fail << std::endl;
+                    double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
+                    std::cout << "\t Time spend searching for solution: " << time << " seconds" <<std::endl;
                 }
             }
 
@@ -277,8 +291,9 @@ private:
 
     void printSpaceStatus() {
         std::cout << "in status" << std::endl;
-        
+
         std::cout << this->status() << std::endl;
+
         std::cout << "can it find status? " << std::endl;
         Gecode::SpaceStatus status = this->status();
         if (status == Gecode::SS_FAILED) {

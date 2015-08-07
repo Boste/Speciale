@@ -153,7 +153,10 @@ public:
         //        so->stop->node(800000);
         //        so.stop->fail(10000);
         //        so.stop->time(300000);
-
+        
+        so->c_d = IntVars.size()/2;
+        so->a_d = so->c_d-1;
+             
         std::cout << "clone distance " << so->a_d << std::endl;
         std::cout << "Clone commit distance " << so->c_d << std::endl;
 

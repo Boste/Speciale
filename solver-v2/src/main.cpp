@@ -108,6 +108,7 @@ int main(int argc, char* argv[]) {
     m->optimizeSolution(time);
     std::cout << m->getInitialValue() << " ";
     std::cout << iniTime << " ";
+    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " ";
 
 
     //    string str = argv[1];

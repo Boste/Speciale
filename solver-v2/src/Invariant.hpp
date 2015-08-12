@@ -64,7 +64,7 @@ protected:
     double DeltaValue = 0;
     int usedInConstraintNr = -1;
     int usedInObjectiveNr = -1;
-    std::vector<IntegerVariable*> VariablePointers;
+    std::vector<IntegerVariable*>* VariablePointers;
 
 private:
 

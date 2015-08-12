@@ -271,7 +271,7 @@ public:
             
             //        std::cout << "før gecode" << std::endl;
 
-            Gecode::linear(relaxed, c, x, irt, ub, icl);
+//            Gecode::linear(relaxed, c, x, irt, ub, icl);
                     //            st->getInvariants()->at(0).
 
         }

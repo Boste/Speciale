@@ -177,8 +177,8 @@ void Test::testLinear() {
     GeneralSolver* General = GS->InitialSolution(so);
     GS->initializeLS(General);
     string error = "Constraints not satisfied";
-    for (unsigned i = 0; i < GS->st->getConstraints()->size(); i++) {
-        if (GS->st->getConstraints()->at(i)->getViolation() != 0) {
+    for (unsigned i = 0; i < GS->st->getHardConstraints()->size(); i++) {
+        if (GS->st->getHardConstraints()->at(i)->getViolation() != 0) {
             testFailed(string(__FUNCTION__), error);
 
         }
@@ -217,7 +217,7 @@ void Test::testSum() {
 void Test::createLinearEQConst() {
     startTest(string(__FUNCTION__));
     unsigned invarSize = GS->st->getInvariants()->size();
-    unsigned constSize = GS->st->getConstraints()->size();
+    unsigned constSize = GS->st->getHardConstraints()->size();
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
 
     std::vector<int>* coef = new vector<int>();
@@ -226,7 +226,7 @@ void Test::createLinearEQConst() {
         x->push_back(varInt->at(i));
     }
     GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_EQ, 50, Gecode::ICL_DOM, 2);
-    if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getConstraints()->size()) {
+    if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
         string error = "";
         testFailed(string(__FUNCTION__), error);
     }
@@ -241,7 +241,7 @@ void Test::createLinearEQConst() {
 void Test::createLinearLQConst() {
     startTest(string(__FUNCTION__));
     unsigned invarSize = GS->st->getInvariants()->size();
-    unsigned constSize = GS->st->getConstraints()->size();
+    unsigned constSize = GS->st->getHardConstraints()->size();
     std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
 
     std::vector<int>* coef = new vector<int>();
@@ -250,8 +250,8 @@ void Test::createLinearLQConst() {
         x->push_back(varInt->at(i));
     }
     GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 60, Gecode::ICL_DOM, 2);
-    if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getConstraints()->size()) {
-        string error = "number of invariants and constraints " + std::to_string(invarSize) + " " + std::to_string(constSize) + ". After linear " + std::to_string(GS->st->getInvariants()->size()) + " " + std::to_string(GS->st->getConstraints()->size());
+    if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
+        string error = "number of invariants and constraints " + std::to_string(invarSize) + " " + std::to_string(constSize) + ". After linear " + std::to_string(GS->st->getInvariants()->size()) + " " + std::to_string(GS->st->getHardConstraints()->size());
         testFailed(string(__FUNCTION__), error);
     }
     testDone(string(__FUNCTION__));

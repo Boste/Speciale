@@ -86,7 +86,7 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, State *
             invar->calculateDeltaValue();
             if (invar->getUsedInConstraint() != -1) {
                 //            std::cout << "Used in Constraint " << std::endl;
-                violationChange += st->getConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
+                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
             }
             if (invar->getUsedInObjective() != -1) {
                 //            std::cout << "Used in objective " << std::endl;
@@ -121,7 +121,7 @@ void NeighborhoodExplorer::commitMove(Move* mv, State * st) {
             Invariant* invar = st->getInvariants()->at(update->at(i));
             invar->updateValue();
             if (invar->getUsedInConstraint() != -1) {
-                st->numberOfViolations += st->getConstraints()->at(invar->getUsedInConstraint())->updateViolation();
+                st->numberOfViolations += st->getHardConstraints()->at(invar->getUsedInConstraint())->updateViolation();
             }
 
             if (invar->getUsedInObjective() != -1) {

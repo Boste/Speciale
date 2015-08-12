@@ -6,7 +6,8 @@ State::State() {
     IntVarVector = new std::vector<IntegerVariable*>();
     BoolVarVector = new std::vector<Gecode::BoolVar>();
     Invariants = new std::vector<Invariant*>();
-    Constraints = new std::vector<Constraint*>();
+    HardConstraints = new std::vector<Constraint*>();
+    SoftConstraints = new std::vector<Constraint*>();
     ObjectiveFunction = new std::vector<Constraint*>();
     numberOfVariables = 0;
     solution = new std::vector<int>();
@@ -18,7 +19,8 @@ State::State(const State& orig) {
     this->IntVarVector =  orig.IntVarVector;
     this->BoolVarVector = orig.BoolVarVector;
     this->Invariants = orig.Invariants;
-    this->Constraints = orig.Constraints;
+    this->HardConstraints = orig.HardConstraints;
+    this->SoftConstraints = orig.SoftConstraints;
     this->ObjectiveFunction = orig.ObjectiveFunction;
     this->numberOfVariables = orig.numberOfVariables;
     this->solution = orig.solution;
@@ -36,10 +38,14 @@ State::~State() {
             delete Invariants->at(i);
         }
         delete Invariants;
-        for (unsigned i = 0; i < Constraints->size(); i++) {
-            delete Constraints->at(i);
+        for (unsigned i = 0; i < HardConstraints->size(); i++) {
+            delete HardConstraints->at(i);
         }
-        delete Constraints;
+        delete HardConstraints;
+        for (unsigned i = 0; i < SoftConstraints->size(); i++) {
+            delete SoftConstraints->at(i);
+        }
+        delete SoftConstraints;
         for (unsigned i = 0; i < ObjectiveFunction->size(); i++) {
             delete ObjectiveFunction->at(i);
         }
@@ -89,8 +95,8 @@ void State::initializeInvariants() {
 void State::initializeConstraints() {
 
     int violations = 0;
-    for (unsigned i = 0; i < Constraints->size(); i++) {
-        violations += Constraints->at(i)->updateViolation();
+    for (unsigned i = 0; i < HardConstraints->size(); i++) {
+        violations += HardConstraints->at(i)->updateViolation();
     }
     if (violations != 0) {
         std::cout << "Initial solution not feasible? violations: " << violations << std::endl;
@@ -137,8 +143,11 @@ std::vector<Invariant*>* State::getInvariants() {
     return Invariants;
 }
 
-std::vector<Constraint*>* State::getConstraints() {
-    return Constraints;
+std::vector<Constraint*>* State::getHardConstraints() {
+    return HardConstraints;
+}
+std::vector<Constraint*>* State::getSoftConstraints() {
+    return SoftConstraints;
 }
 
 std::vector<Constraint*>* State::getObjectives() {
@@ -182,8 +191,8 @@ void State::setSolution() {
     }
     // Setting constraints
     int violations = 0;
-    for (unsigned i = 0; i < Constraints->size(); i++) {
-        violations += Constraints->at(i)->updateViolation();
+    for (unsigned i = 0; i < HardConstraints->size(); i++) {
+        violations += HardConstraints->at(i)->updateViolation();
     }
     if (violations != 0) {
         std::cout << "Final solution not feasible? violations: " << violations << std::endl;
@@ -213,8 +222,8 @@ bool State::recalculateAll() {
             success = false;
         }
     }
-    for (unsigned i = 0; i < Constraints->size(); i++) {
-        Constraint* cons = Constraints->at(i);
+    for (unsigned i = 0; i < HardConstraints->size(); i++) {
+        Constraint* cons = HardConstraints->at(i);
         if (!cons->testCons()) {
             success = false;
         }

@@ -1,7 +1,10 @@
 #ifndef INVARIANT_HPP
 #define	INVARIANT_HPP
+#include "IntegerVariable.hpp"
 
 class Invariant {
+        friend class GeneralSolver;
+
 public:
 
     Invariant() {
@@ -10,7 +13,7 @@ public:
 
     Invariant(const Invariant &a) {
         std::cout << &a << std::endl;
-        
+
     }
     //    virtual void commit() = 0;
     //    {
@@ -37,7 +40,7 @@ public:
     }
 
     virtual ~Invariant() {
-//        std::cout << "destruct invariant" << std::endl;
+        //        std::cout << "destruct invariant" << std::endl;
     }
 
     int getCurrentValue() {
@@ -61,6 +64,8 @@ protected:
     double DeltaValue = 0;
     int usedInConstraintNr = -1;
     int usedInObjectiveNr = -1;
+    std::vector<IntegerVariable*> VariablePointers;
+
 private:
 
 };

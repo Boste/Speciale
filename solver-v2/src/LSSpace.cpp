@@ -38,11 +38,13 @@ void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* v
     }
     st->getInvariants()->push_back(sumInvariant);
     Linear* LinearConstraint = new Linear(sumInvariant, upperbound, relation);
-    if (type == INVARIANT) {
-        sumInvariant->usedByConstraint(st->getConstraints()->size());
-        st->getConstraints()->push_back(LinearConstraint);
+    if (type == HARD) {
+        sumInvariant->usedByConstraint(st->getHardConstraints()->size());
+        st->getHardConstraints()->push_back(LinearConstraint);
 
-    } else {
+    } else if (type ==SOFT) {
+        std::cout << "Soft not supported yet" << std::endl;
+    }else {
         sumInvariant->usedByObjective(st->getObjectives()->size());
         st->getObjectives()->push_back(LinearConstraint);
     }

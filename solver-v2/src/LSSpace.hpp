@@ -19,10 +19,10 @@ class LSSpace {
 private:
     int Violations = 0;
     int ObjectiveValue = 0;
-    State* st;
     int iterations = 0;
 
     void addInvariantToIntVariable(int variableNumber, int invariantNumber);
+    
 public:
     LSSpace();
     void printCurrent();
@@ -72,7 +72,7 @@ public:
     //    }
 
 protected:
-
+    State* st;
     std::vector<IntegerVariable*>* addIntVariablesToState(Gecode::IntVarArray* vars);
     void SetValues(Gecode::IntVarArray vars);
 

@@ -13,7 +13,7 @@
 class BPSolver : public GeneralSolver {
 protected:
     BP_Input *p_in;
-//    int model;
+    //    int model;
     //    FloatVarArray varFloat;
     //    IntVarArray varInt;
     //    FloatVar cost;
@@ -24,11 +24,13 @@ protected:
 
 public:
 
-//    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
+    //    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
+
     BPSolver(BP_Input *in) :
     p_in(in) {
 
         std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
+        this->print(std::cout);
 
         for (unsigned i = 0; i < in->getNcons(); i++) {
             const std::vector<elem> leftside = in->getMatcoeff(i);
@@ -44,29 +46,32 @@ public:
 
             int upperbound = static_cast<int> (b.ub);
             if (b.type == 5) {
-                GeneralSolver::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_DOM, 2);
+                GeneralSolver::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_DOM, HARD);
             } else {
-                GeneralSolver::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, 2);
+                GeneralSolver::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, HARD);
             }
             // deleter den også pointer inden i vector?
             delete x;
             delete c;
-
+//            this->print(std::cout);
+//            std::cout << std::endl;
+//            sleep(1);
         }
         
         // Add objective function
         vector<int>* c = new vector<int>(varInt->size());
-        for(unsigned i = 0; i < varInt->size(); i++ ){
-            c->at(i) = static_cast<int> (in->getVars(i).objcoeff);      
+        for (unsigned i = 0; i < varInt->size(); i++) {
+            c->at(i) = static_cast<int> (in->getVars(i).objcoeff);
         }
-        GeneralSolver::linear(*this,c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1 );
+        GeneralSolver::linear(*this, c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, OBJ);
         delete c;
 
         // Branch
         GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     }
-    ~BPSolver(){
+
+    ~BPSolver() {
         delete p_in;
     }
 
@@ -103,7 +108,7 @@ public:
     //    }
 
     void printCurrent() {
-        LSSpace::printCurrent();
+        GeneralSolver::printCurrent();
     }
 
     //void print_stats(Search::Statistics &stat) {

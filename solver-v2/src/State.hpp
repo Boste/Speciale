@@ -12,7 +12,8 @@ private:
     std::vector<IntegerVariable*>* IntVarVector;
     std::vector<Gecode::BoolVar>* BoolVarVector;
     std::vector<Invariant*>* Invariants;
-    std::vector<Constraint*>* Constraints;
+    std::vector<Constraint*>* HardConstraints;
+    std::vector<Constraint*>* SoftConstraints;
     std::vector<Constraint*>* ObjectiveFunction;
     int numberOfVariables;
     std::vector<int>* solution;
@@ -44,7 +45,8 @@ public:
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     std::vector<IntegerVariable*>* getIntegerVariables();
     std::vector<Invariant*>* getInvariants();
-    std::vector<Constraint*>* getConstraints();
+    std::vector<Constraint*>* getHardConstraints();
+    std::vector<Constraint*>* getSoftConstraints();
     std::vector<Constraint*>* getObjectives();
     IntegerVariable* getIntegerVariable(int i);
     int getObjectiveValue();

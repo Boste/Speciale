@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
         time = 20;
     }
     int TimeForGecode;
-    if(argc>=4){
+    if (argc >= 4) {
         TimeForGecode = std::atoi(argv[3]);
     } else {
         TimeForGecode = 300;
@@ -64,14 +64,14 @@ int main(int argc, char* argv[]) {
     Random::Seed(RANDOMSEED);
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();
-//    InstanceOptions opt("BPSolver");
-//    opt.instance("data/toy.txt");
+    //    InstanceOptions opt("BPSolver");
+    //    opt.instance("data/toy.txt");
     //    opt.time(180 * 1000); // in milliseconds
     //    std::cout << opt.time() << std::endl;
 
-//    opt.parse(argc, argv);
-    
-    
+    //    opt.parse(argc, argv);
+
+
     BP_Input* p = new BP_Input(argv[1]);
     std::cout << "Instance read after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     size_t peakSize4 = getPeakRSS();
@@ -91,18 +91,20 @@ int main(int argc, char* argv[]) {
 
     BPSolver* m = new BPSolver(p);
     std::cout << "Initialize solution" << std::endl;
-    so->stop = new Multistop(0, 1, TimeForGecode*1000);
-//    so->stop = new Multistop(1, 1, TimeForGecode*1000);
-    GeneralSolver* GS = m->InitialSolution(so); 
+
+    Multistop* ms = new Multistop(0, 1, TimeForGecode * 1000);
+    so->stop = ms;
+    //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
+    GeneralSolver* GS = m->InitialSolution(so);
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
     m->initializeLS(GS);
-    
-//    m->printCurrent();
-    
+
+    //    m->printCurrent();
+
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
     m->optimizeSolution(time);
@@ -184,6 +186,7 @@ int main(int argc, char* argv[]) {
     //        argv2[i] = argv[i];
     //    }
     //    easylocal(argc, argv2);
+    delete ms;
     delete so;
     //    delete p;
     return 0;

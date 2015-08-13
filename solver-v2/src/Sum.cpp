@@ -1,7 +1,8 @@
 #include "Sum.hpp"
 
-Sum::Sum(vector<IntegerVariable*>* vars, vector<int>* c) : Invariant() {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::vector<IntegerVariable*>* vars, vector<int>* c) : Invariant() {//:IntVariables(vars),coefficients(c) {
     //    VariablePointers = *vars;
+    assert(c->size()>=vars->size());
     for (unsigned i = 0; i < vars->size(); i++) {
         //        coefficients.insert(std::make_pair(vars->at(i)->getID(), c->at(i)));
         coefficients[vars->at(i)->getID()] = c->at(i);
@@ -27,8 +28,8 @@ Sum& Sum::operator=(const Sum &a) {
     if (this != &a) {
         this->coefficients = a.coefficients;
 
-        std::cout << "operator =" << std::endl;
-        sleep(5);
+//        std::cout << "operator =" << std::endl;
+//        sleep(5);
         //        this->VariablePointers = a.VariablePointers;
 
         this->VariableChange = a.VariableChange;

@@ -1,6 +1,7 @@
 #ifndef INVARIANT_HPP
 #define	INVARIANT_HPP
 #include "IntegerVariable.hpp"
+#include <unordered_map>
 
 class Invariant {
         friend class GeneralSolver;
@@ -65,6 +66,7 @@ protected:
     int usedInConstraintNr = -1;
     int usedInObjectiveNr = -1;
     std::vector<IntegerVariable*>* VariablePointers;
+    std::unordered_map<int, int> coefficients;
 
 private:
 

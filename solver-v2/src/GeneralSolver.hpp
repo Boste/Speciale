@@ -255,8 +255,9 @@ public:
         std::vector<Constraint*>* hardConstraints = st->getHardConstraints();
         std::vector<Invariant*>* invariants = st->getInvariants();
         for (int i = 0; i < invariants->size(); i++) {
-//            Constraint* cons = hardConstraints->at(i);
+            Constraint* cons = hardConstraints->at(i);
             Invariant* invar = invariants->at(i);
+            
             std::vector<IntegerVariable*>* integerVariables = invar->VariablePointers;
             Gecode::IntArgs c(integerVariables->size());
             Gecode::IntVarArgs x(integerVariables->size());
@@ -264,7 +265,7 @@ public:
 //                c[j] = HVORDAN FÅR JEG DEN?;
                 x[j] = *(integerVariables->at(j)->getVariablePointer());
             }
-            Constraint* cons = hardConstraints->at(invar->usedInObjectiveNr);
+//            Constraint* cons = hardConstraints->at(invar->usedInObjectiveNr);
             // irt (eq, lq), ub, og IntegerConsisdencyLevel. Hvor skal jeg få dem fra?
             
             

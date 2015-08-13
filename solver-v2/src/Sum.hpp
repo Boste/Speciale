@@ -16,7 +16,6 @@ using namespace std;
 
 class Sum : public Invariant {
 protected:
-    std::unordered_map<int, int> coefficients;
     
 //    std::vector<IntegerVariable*> VariablePointers;
     //    double oldValue = 0;

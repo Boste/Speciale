@@ -1,12 +1,14 @@
 #ifndef CONSTRAINT_HPP
 #define	CONSTRAINT_HPP
 
+
 class Constraint {
 protected:
     int Violation = 0;
     int ViolationDegree = 0;
     int DeltaViolation = 0;
     int DeltaViolationDegree = 0;
+
 
 
 public:
@@ -79,13 +81,14 @@ public:
         sleep(1);
         return 0;
     }
-    
-    virtual bool testCons(){
+
+    virtual bool testCons() {
         std::cout << "TestCons called in Constraint.hpp" << std::endl;
         sleep(1);
         return false;
     }
-    virtual bool testObj(){
+
+    virtual bool testObj() {
         std::cout << "TestObj called in Constraint.hpp" << std::endl;
         sleep(1);
         return false;

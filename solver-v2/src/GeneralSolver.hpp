@@ -148,7 +148,7 @@ public:
 
 
         printSpaceStatus();
-        this->print(std::cout);
+//        this->print(std::cout);
         std::cout << "after status" << std::endl;
         GeneralSolver* s;
 

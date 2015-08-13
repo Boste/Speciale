@@ -30,7 +30,7 @@ public:
     p_in(in) {
 
         std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
-        this->print(std::cout);
+//        this->print(std::cout);
 
         for (unsigned i = 0; i < in->getNcons(); i++) {
             const std::vector<elem> leftside = in->getMatcoeff(i);

@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
     //    std::cout << "Initializing LSS" << std::endl;
     m->initializeLS(GS);
     
-    m->printCurrent();
+//    m->printCurrent();
     
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();

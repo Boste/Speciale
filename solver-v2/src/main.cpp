@@ -14,6 +14,7 @@
 #include "GeneralSolver.hpp"
 #include "Test.hpp"
 #include "Multistop.hpp"
+#include <boost/algorithm/string.hpp>
 //#include "GecodeLinear.hpp"
 
 //#include "BP_Helpers.hpp"
@@ -37,29 +38,25 @@ using namespace Gecode;
 //void easylocal(int argc, const char* argv[]);
 
 int main(int argc, char* argv[]) {
-    string str = argv[1];
-    for (unsigned i = 0; i < str.length(); i++) {
-        if (str[i] == '/')
-            str[i] = ' ';
-    }
-    std::vector<string> array;
-    stringstream ss(str);
-    string temp;
-    while (ss >> temp)
-        array.push_back(temp);
-    std::cout << array.back() << std::endl;
+    std::vector<std::string> strs;
+
+    //    string str = argv[1];
+    boost::split(strs, argv[1], boost::is_any_of("/"));
+    string name = strs.back();
+    std::cout << name << std::endl;
     int time;
     if (argc >= 3) {
         time = std::atoi(argv[2]);
     } else {
-        std::cout << "time not set. Set optimization time to 10 seconds" << std::endl;
+        std::cout << "time not set. Set optimization time to 20 seconds" << std::endl;
         time = 20;
     }
     int TimeForGecode;
     if (argc >= 4) {
         TimeForGecode = std::atoi(argv[3]);
     } else {
-        TimeForGecode = 300;
+        TimeForGecode = 10;
+        std::cout << "Time for Gecode not given (arg 3) time set to 10 sec" << std::endl;
     }
     Random::Seed(RANDOMSEED);
     //    gecode(argc, argv);
@@ -76,7 +73,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Instance read after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     size_t peakSize4 = getPeakRSS();
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
-    Search::Options* so = new Gecode::Search::Options();
+    //    Search::Options* so = new Gecode::Search::Options();
 
 
     // Let's start the Timer
@@ -90,16 +87,20 @@ int main(int argc, char* argv[]) {
     //    delete test;
 
     BPSolver* m = new BPSolver(p);
-    std::cout << "Initialize solution" << std::endl;
 
-    Multistop* ms = new Multistop(0, 1, TimeForGecode * 1000);
+    std::cout << "Initialize solution" << std::endl;
+    Multistop* ms = new Multistop(0, 10, TimeForGecode * 1000);
+    Gecode::Search::Options* so = new Gecode::Search::Options();
     so->stop = ms;
+    //    so->stop = ms;
+
+
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     GeneralSolver* GS = m->InitialSolution(so);
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
-    std::cout << "Peak memory usage for gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
+    std::cout << "Peak memory usage for Gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
     m->initializeLS(GS);
 
@@ -108,9 +109,9 @@ int main(int argc, char* argv[]) {
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
     m->optimizeSolution(time);
-    std::cout << m->getInitialValue() << " ";
-    std::cout << iniTime << " ";
-    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " ";
+    std::cout << m->getInitialValue() << " "; // value of solution gecode found
+    std::cout << iniTime << " "; // time for initializing problem 
+    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 
 
     //    string str = argv[1];
@@ -122,8 +123,8 @@ int main(int argc, char* argv[]) {
     //    stringstream ss(str);
     //    while (ss >> temp)
     //        array.push_back(temp);
-    std::cout << getPeakRSS() / 1024 / 1024;
-    //    std::cout << " " << array.back();
+    std::cout << getPeakRSS() / 1024 / 1024; // peak memory in mb
+    std::cout << " " << name; // Instance name
     std::cout << std::endl;
 
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
@@ -187,7 +188,7 @@ int main(int argc, char* argv[]) {
     //    }
     //    easylocal(argc, argv2);
     delete ms;
-    delete so;
+    //    delete so;
     //    delete p;
     return 0;
 }

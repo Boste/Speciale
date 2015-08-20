@@ -46,13 +46,15 @@ public:
 
             int upperbound = static_cast<int> (b.ub);
             if (b.type == 5) {
-                GeneralSolver::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_DOM, HARD);
+//                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
+                GeneralSolver::linear(*this, c, x, EQ, upperbound, HARD);
             } else {
-                GeneralSolver::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, HARD);
+//                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
+                GeneralSolver::linear(*this, c, x, LQ, upperbound, HARD);
             }
             // deleter den også pointer inden i vector?
-            delete x;
-            delete c;
+//            delete x;
+//            delete c;
 //            this->print(std::cout);
 //            std::cout << std::endl;
 //            sleep(1);
@@ -63,12 +65,13 @@ public:
         for (unsigned i = 0; i < varInt->size(); i++) {
             c->at(i) = static_cast<int> (in->getVars(i).objcoeff);
         }
-        GeneralSolver::linear(*this, c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, OBJ);
+        GeneralSolver::linear(*this, c, varInt, LQ, 0, OBJ);
+//        GeneralSolver::linear(*this, c, varInt, LQ, 0, Gecode::ICL_DOM, OBJ);
         delete c;
 
         // Branch
         GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-
+        
     }
 
     ~BPSolver() {

@@ -7,51 +7,38 @@
 
 LSSpace::LSSpace() {
 //        std::cout << "constructed" << std::endl;
-        st = new State();
 
 }
 
-std::vector<IntegerVariable*>* LSSpace::addIntVariablesToState(Gecode::IntVarArray* vars) {
-    return st->addIntegerVariable(vars);
-}
+//std::vector<IntegerVariable*>* LSSpace::addIntVariablesToState(Gecode::IntVarArray* vars) {
+//    return 
+//}
 
-void LSSpace::SetValues(Gecode::IntVarArray vars) {
-    for (int i = 0; i < vars.size(); i++) {
-        assert(vars[i].assigned());
-        st->getIntegerVariables()->at(i)->setCurrentValue(vars[i].val());
-        
-    }
-}
 
-void LSSpace::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
-    st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+//void LSSpace::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
+//    st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+//
+//}
 
-}
+//void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type) {
+//    //        std::cout << variables << std::endl;
+//    Sum* sumInvariant = new Sum(variables, coefficients);
+//
+//    //        std::cout << sumInvariant << std::endl;
+//    for (unsigned i = 0; i < coefficients->size(); i++) {
+//        addInvariantToIntVariable(variables->at(i)->getID(), st->getInvariants()->size());
+//    }
+//    st->getInvariants()->push_back(sumInvariant);
+//    Linear* LinearConstraint = new Linear(sumInvariant, upperbound, relation);
+//    if (type == HARD) {
+//        sumInvariant->usedByConstraint(st->getHardConstraints()->size());
+//        st->getHardConstraints()->push_back(LinearConstraint);
+//
+//    } 
+//    
+//}
 
-void LSSpace::linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type) {
-    //        std::cout << variables << std::endl;
-    Sum* sumInvariant = new Sum(variables, coefficients);
-
-    //        std::cout << sumInvariant << std::endl;
-    for (unsigned i = 0; i < coefficients->size(); i++) {
-        addInvariantToIntVariable(variables->at(i)->getID(), st->getInvariants()->size());
-    }
-    st->getInvariants()->push_back(sumInvariant);
-    Linear* LinearConstraint = new Linear(sumInvariant, upperbound, relation);
-    if (type == HARD) {
-        sumInvariant->usedByConstraint(st->getHardConstraints()->size());
-        st->getHardConstraints()->push_back(LinearConstraint);
-
-    } else if (type ==SOFT) {
-        std::cout << "Soft not supported yet" << std::endl;
-    }else {
-        sumInvariant->usedByObjective(st->getObjectives()->size());
-        st->getObjectives()->push_back(LinearConstraint);
-    }
-    
-}
-
-void LSSpace::optimizeSolution(int time) {
+void LSSpace::optimizeSolution(int time, shared_ptr<State> st) {
     //    std::cout << __LINE__ << std::endl;
 //    std::cout << "optimize" << std::endl;
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
@@ -227,43 +214,43 @@ void LSSpace::optimizeSolution(int time) {
 //    //        variable->setCurrentValue(newValue);
 //}
 
-void LSSpace::initializeInvariants() {
+void LSSpace::initializeInvariants(shared_ptr<State> st) {
     st->initializeInvariants();
 }
 
-void LSSpace::initializeConstraints() {
+void LSSpace::initializeConstraints(shared_ptr<State> st) {
     st->initializeConstraints();
 }
 
-void LSSpace::initializeObjective() {
+void LSSpace::initializeObjective(shared_ptr<State> st) {
     initialValue = st->initializeObjective();
 }
 //int LSSpace::getObjectiveValue(){
 //    return st->getObjectiveValue();
 //}
 
-void LSSpace::printCurrent() {
-
-    if (st->getIntegerVariables()->size() > 0) {
-        std::cout << "Integer Variables:" << std::endl;
-    }
-
-    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
-        std::cout << st->getIntegerVariables()->at(i)->getCurrentValue() << " ";
-        //        std::cout << IntVarVector[i].VariablePointer << " ";
-
-    }
-    std::cout << std::endl;
-    if (BoolVarVector.size() > 0) {
-        std::cout << "Boolean Variables:" << std::endl;
-    }
-    for (unsigned i = 0; i < BoolVarVector.size(); i++) {
-//        std::cout << BoolVarVector[i].getCurrentVal() << " ";
-    }
-    std::cout << std::endl;
-
-
-}
+//void LSSpace::printCurrent() {
+//
+//    if (st->getIntegerVariables()->size() > 0) {
+//        std::cout << "Integer Variables:" << std::endl;
+//    }
+//
+//    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
+//        std::cout << st->getIntegerVariables()->at(i)->getCurrentValue() << " ";
+//        //        std::cout << IntVarVector[i].VariablePointer << " ";
+//
+//    }
+//    std::cout << std::endl;
+//    if (BoolVarVector.size() > 0) {
+//        std::cout << "Boolean Variables:" << std::endl;
+//    }
+//    for (unsigned i = 0; i < BoolVarVector.size(); i++) {
+////        std::cout << BoolVarVector[i].getCurrentVal() << " ";
+//    }
+//    std::cout << std::endl;
+//
+//
+//}
 
 //LSSpace::~LSSpace() {
 //}

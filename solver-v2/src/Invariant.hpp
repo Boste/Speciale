@@ -59,13 +59,18 @@ public:
     int getUsedInObjective() {
         return usedInObjectiveNr;
     }
+    int getType(){
+        assert(type!=NULL);
+        return type;
+    }
+    std::vector<IntegerVariable*>* VariablePointers;
 
 protected:
     double CurrentValue = 0;
     double DeltaValue = 0;
     int usedInConstraintNr = -1;
     int usedInObjectiveNr = -1;
-    std::vector<IntegerVariable*>* VariablePointers;
+    int type;
     std::unordered_map<int, int> coefficients;
 
 private:

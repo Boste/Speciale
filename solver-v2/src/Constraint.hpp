@@ -1,13 +1,15 @@
 #ifndef CONSTRAINT_HPP
 #define	CONSTRAINT_HPP
 
-
 class Constraint {
 protected:
     int Violation = 0;
     int ViolationDegree = 0;
     int DeltaViolation = 0;
     int DeltaViolationDegree = 0;
+    int type;
+    std::vector<int> arguments;
+    Invariant* invariant;
 
 
 
@@ -21,6 +23,7 @@ public:
         this->DeltaViolationDegree = c.DeltaViolationDegree;
         this->Violation = c.Violation;
         this->ViolationDegree = c.ViolationDegree;
+        this->arguments = c.arguments;
     }
 
     Constraint& operator=(const Constraint &c) {
@@ -28,6 +31,7 @@ public:
         this->DeltaViolationDegree = c.DeltaViolationDegree;
         this->Violation = c.Violation;
         this->ViolationDegree = c.ViolationDegree;
+        this->arguments = c.arguments;
         return *this;
     }
 
@@ -35,9 +39,15 @@ public:
 
     }
 
+    int getType() {
+        assert(type != NULL);
+        return type;
+    }
+
     int getDeltaViolation() {
         return DeltaViolation;
     }
+    
 
     int getDeltaViolationDegree() {
         return DeltaViolationDegree;
@@ -49,6 +59,12 @@ public:
 
     int getViolationDegree() {
         return ViolationDegree;
+    }
+    int getArgument(int i) {
+        return arguments[i];
+    }
+    Invariant* getInvariant(){
+        return invariant;
     }
 
     virtual int setDeltaViolation() {

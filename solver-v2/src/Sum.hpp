@@ -1,5 +1,6 @@
 #ifndef SUM_HH
 #define SUM_HH
+#include "Constants.hpp"
 #include <vector>
 
 #include <unordered_map>
@@ -25,6 +26,8 @@ protected:
 public:
     
     Sum(vector<IntegerVariable*>* vars, vector<int>* c);
+    Sum(vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map);
+    
     
     Sum(const Sum &a);
 

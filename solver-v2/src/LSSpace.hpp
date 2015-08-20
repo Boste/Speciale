@@ -21,14 +21,14 @@ private:
     int ObjectiveValue = 0;
     int iterations = 0;
 
-    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
+//    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     
 public:
     LSSpace();
     void printCurrent();
     int initialValue = 0;
     //    std::vector<IntegerVariable*> IntVarVector;
-    std::vector<Gecode::BoolVar> BoolVarVector;
+//    std::vector<Gecode::BoolVar> BoolVarVector;
     //    std::vector<Invariant*> Invariants;
     //    std::vector<Constraint*> Constraints;
     //    std::vector<Constraint*> ObjectiveFunction;
@@ -64,35 +64,34 @@ public:
         //            delete &ObjectiveFunction;
         //            delete &Violations;
         //            delete &ObjectiveValue;
-        delete  st;
+//        delete  st;
     }
 
 
     //        IntVarVector.at(variableNumber)->addToUpdate(invariantNumber);
     //    }
 
-protected:
-    State* st;
-    std::vector<IntegerVariable*>* addIntVariablesToState(Gecode::IntVarArray* vars);
-    void SetValues(Gecode::IntVarArray vars);
+//    State* st;
+//    std::vector<IntegerVariable*>* addIntVariablesToState(Gecode::IntVarArray* vars);
+//    void SetValues(Gecode::IntVarArray vars);
 
     // Not able to add obj fnc. 
-    void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
-    void optimizeSolution(int time);
+//    void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
+    void optimizeSolution(int time, State* st);
     void simpleMove(int variabelNr);
     bool bestImprovement();
 
     // Assumes initial value is 0, hence can only be used to initialize once. 
-    void initializeInvariants();
+    void initializeInvariants(State* st);
 
-    void initializeConstraints();
+    void initializeConstraints(State* st);
 
-    void initializeObjective();
+    void initializeObjective(State* st);
 //    int getObjectiveValue();
 
-    void commitDeltaOfVariable(int changedVariable);
+//    void commitDeltaOfVariable(int changedVariable);
 
-    std::pair<int, int> calculateDeltaValueOfVariableChange(int variableNumber, int newValue);
+//    std::pair<int, int> calculateDeltaValueOfVariableChange(int variableNumber, int newValue);
 
     //    double testInvariant(int invariantNumber) {
     //        return Invariants.at(invariantNumber)->test();

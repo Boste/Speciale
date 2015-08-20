@@ -1,12 +1,26 @@
 #include "Sum.hpp"
 
 Sum::Sum(std::vector<IntegerVariable*>* vars, vector<int>* c) : Invariant() {//:IntVariables(vars),coefficients(c) {
-    //    VariablePointers = *vars;
-    assert(c->size()>=vars->size());
+    type=SUM;
+//    if(c->size()!=vars->size()){
+//        std::cout << c->size() << " " <<vars->size() << std::endl;
+//    }
+    assert(c->size()==vars->size());
     for (unsigned i = 0; i < vars->size(); i++) {
         //        coefficients.insert(std::make_pair(vars->at(i)->getID(), c->at(i)));
         coefficients[vars->at(i)->getID()] = c->at(i);
     }
+    VariablePointers = vars;
+    //        std::cout << std::endl;
+}
+
+/// Construct that copies a Coefficient map (Only used when relaxing)
+Sum::Sum(std::vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map) : Invariant() {//:IntVariables(vars),coefficients(c) {
+    type=SUM;
+    
+    assert(map.size()==vars->size());
+    coefficients = map;
+    VariablePointers = vars;
     //        std::cout << std::endl;
 }
 

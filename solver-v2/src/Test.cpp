@@ -91,7 +91,7 @@ void Test::testBig(int vars, int cons) {
             x->push_back(varInt->at(i));
         }
         int upperbound = vars;
-        GS->linear(*GS, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM, 2);
+        GS->linear(*GS, c, x, LQ, upperbound, 2);
         // deleter den også pointer inden i vector?
         delete x;
         delete c;
@@ -101,7 +101,7 @@ void Test::testBig(int vars, int cons) {
     for (unsigned i = 0; i < varInt->size(); i++) {
         c->at(i) = 1;
     }
-    GS->linear(*GS, c, varInt, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
+    GS->linear(*GS, c, varInt, LQ, 0, 1);
     delete c;
     // Branch
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -134,7 +134,7 @@ void Test::testObjectiveFunction() {
         coef->push_back(c);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 0, Gecode::ICL_DOM, 1);
+    GS->GeneralSolver::linear(*GS, coef, x, LQ, 0, 1);
     string error = "objective not added to LSS";
     if (GS->st->getObjectives()->size() != 1) {
         testFailed(__FUNCTION__, error);
@@ -225,7 +225,7 @@ void Test::createLinearEQConst() {
         coef->push_back(i + 1);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_EQ, 50, Gecode::ICL_DOM, 2);
+    GS->GeneralSolver::linear(*GS, coef, x, EQ, 50, 2);
     if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
         string error = "";
         testFailed(string(__FUNCTION__), error);
@@ -249,7 +249,7 @@ void Test::createLinearLQConst() {
         coef->push_back(2);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, Gecode::IRT_LQ, 60, Gecode::ICL_DOM, 2);
+    GS->GeneralSolver::linear(*GS, coef, x, LQ, 60, 2);
     if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
         string error = "number of invariants and constraints " + std::to_string(invarSize) + " " + std::to_string(constSize) + ". After linear " + std::to_string(GS->st->getInvariants()->size()) + " " + std::to_string(GS->st->getHardConstraints()->size());
         testFailed(string(__FUNCTION__), error);

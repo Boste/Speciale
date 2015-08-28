@@ -2,19 +2,19 @@
 #include "NeighborhoodExplorer.hpp"
 
 NeighborhoodExplorer::NeighborhoodExplorer() {
-    
+
 }
 
 NeighborhoodExplorer::NeighborhoodExplorer(const NeighborhoodExplorer& orig) {
 }
 
 NeighborhoodExplorer::~NeighborhoodExplorer() {
-//    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
+    //    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
 }
 
 //template<typename returnType>
 
-bool NeighborhoodExplorer::bestImprovement(Move* mv, State* st) {
+bool NeighborhoodExplorer::bestImprovement(Move* mv, std::shared_ptr<State> st) {
     st->shuffleMask();
     Move* bestMove = new Move();
     std::pair<int, int> delta = calculateDeltaChange(mv, st);
@@ -38,30 +38,30 @@ bool NeighborhoodExplorer::bestImprovement(Move* mv, State* st) {
         commitMove(bestMove, st);
     } else {
         delete bestMove;
-//        std::cout << "no improving move" << std::endl;
+        //        std::cout << "no improving move" << std::endl;
         return false;
         //        sleep(1);
         //        std::exit(1);
 
     }
     delete bestMove;
-//    std::cout << "changed variable " << bestMove->first->getID() << std::endl;
-//    std::cout << "violation change " << violationChange << " objective change " << objectiveChange << std::endl;
+    //    std::cout << "changed variable " << bestMove->first->getID() << std::endl;
+    //    std::cout << "violation change " << violationChange << " objective change " << objectiveChange << std::endl;
 
     return true;
 }
 
-void NeighborhoodExplorer::randomWalk(Move* mv, State* st) {
+void NeighborhoodExplorer::randomWalk(Move* mv, std::shared_ptr<State> st) {
     if (mv->moveType == FLIP) {
-        int var = Random::Integer(0,st->getNumberOfVariables()-1);
-        if(var < 0 || st->getNumberOfVariables() <= var){
+        int var = Random::Integer(0, st->getNumberOfVariables() - 1);
+        if (var < 0 || st->getNumberOfVariables() <= var) {
             std::cout << "var " << var << std::endl;
             std::cout << st->getNumberOfVariables() << std::endl;
         }
         assert(var < st->getNumberOfVariables() && 0 <= var);
         mv->first = st->getIntegerVariable(var);
         mv->flip();
-        commitMove(mv,st);
+        commitMove(mv, st);
     } else {
 
     }
@@ -73,7 +73,7 @@ void NeighborhoodExplorer::randomWalk(Move* mv, State* st) {
 
 //template<typename returnType>
 
-std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, State * st) {
+std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, std::shared_ptr<State> st) {
     if (mv->moveType == FLIP) {
         IntegerVariable* variable = mv->first;
         std::vector<int>* updateVector = variable->getUpdateVector();
@@ -81,16 +81,20 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, State *
         int objectiveChange = 0;
         //    std::cout << "Variable " << variableNumber << std::endl;
         for (unsigned i = 0; i < updateVector->size(); i++) {
+//            std::cout << i << std::endl;
             Invariant* invar = st->getInvariants()->at(updateVector->at(i));
             invar->addChange(variable->getID(), mv->deltaValueFirst);
             invar->calculateDeltaValue();
-            if (invar->getUsedInConstraint() != -1) {
-                //            std::cout << "Used in Constraint " << std::endl;
-                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
-            }
-            if (invar->getUsedInObjective() != -1) {
-                //            std::cout << "Used in objective " << std::endl;
+            if (invar->getPriority() == 0) {
                 objectiveChange += st->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
+
+
+            } else {
+                int priority = invar->getPriority();
+                
+                Constraint* cons = st->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
+                violationChange += cons->setDeltaViolation();
+                //                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
             }
         }
         //    std::cout << std::endl;
@@ -110,7 +114,7 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, State *
     //        variable->setCurrentValue(newValue);
 }
 
-void NeighborhoodExplorer::commitMove(Move* mv, State * st) {
+void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
     if (mv->moveType == FLIP) {
         IntegerVariable* var = mv->first;
 
@@ -120,11 +124,13 @@ void NeighborhoodExplorer::commitMove(Move* mv, State * st) {
         for (unsigned i = 0; i < update->size(); i++) {
             Invariant* invar = st->getInvariants()->at(update->at(i));
             invar->updateValue();
-            if (invar->getUsedInConstraint() != -1) {
-                st->numberOfViolations += st->getHardConstraints()->at(invar->getUsedInConstraint())->updateViolation();
-            }
 
-            if (invar->getUsedInObjective() != -1) {
+            if (invar->getPriority() > 0) {
+                Constraint* cons = st->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+                st->numberOfViolations += cons->updateViolation();
+            }
+            if (invar->getPriority() == 0) {
+
                 st->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
             }
         }
@@ -136,6 +142,7 @@ void NeighborhoodExplorer::commitMove(Move* mv, State * st) {
         std::cout << "Supposed to do value change of 1 to 3 variables" << std::endl;
     }
 }
-void NeighborhoodExplorer::makeMove(Move* mv, State* st){
-    commitMove(mv,st);
+
+void NeighborhoodExplorer::makeMove(Move* mv, std::shared_ptr<State> st) {
+    commitMove(mv, st);
 }

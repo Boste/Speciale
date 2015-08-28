@@ -77,16 +77,16 @@ public:
 
     // Not able to add obj fnc. 
 //    void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
-    void optimizeSolution(int time, State* st);
+    void optimizeSolution(int time, std::shared_ptr<State> st);
     void simpleMove(int variabelNr);
     bool bestImprovement();
 
     // Assumes initial value is 0, hence can only be used to initialize once. 
-    void initializeInvariants(State* st);
+    void initializeInvariants(std::shared_ptr<State> st);
 
-    void initializeConstraints(State* st);
+    void initializeConstraints(std::shared_ptr<State> st);
 
-    void initializeObjective(State* st);
+    void initializeObjective(std::shared_ptr<State> st);
 //    int getObjectiveValue();
 
 //    void commitDeltaOfVariable(int changedVariable);

@@ -6,8 +6,8 @@
 #include <algorithm>
 #include "GeneralSolver.hpp"
 #include "IntegerVariable.hpp"
-#include "boost/make_shared.hpp"
-#include "boost/shared_ptr.hpp"
+//#include "boost/make_shared.hpp"
+//#include "boost/shared_ptr.hpp"
 //using namespace Gecode;
 
 class BPSolver : public GeneralSolver {
@@ -26,52 +26,46 @@ public:
 
     //    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
 
-    BPSolver(BP_Input *in) :
-    p_in(in) {
-
+    BPSolver(BP_Input *in) : p_in(in) {
         std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
-//        this->print(std::cout);
-
         for (unsigned i = 0; i < in->getNcons(); i++) {
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
-            vector<int>* c = new vector<int>(leftside.size());
+            vector<int> c(leftside.size());
             vector<IntegerVariable*>* x = new vector<IntegerVariable*>();
 
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
-                c->at(j) = static_cast<int> (e.coeff);
+                c.at(j) = static_cast<int> (e.coeff);
                 x->push_back(varInt->at(e.index));
             }
-
             int upperbound = static_cast<int> (b.ub);
             if (b.type == 5) {
-//                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
-                GeneralSolver::linear(*this, c, x, EQ, upperbound, HARD);
+                //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
+                GeneralSolver::linear(c, x, EQ, upperbound, HARD);
             } else {
-//                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
-                GeneralSolver::linear(*this, c, x, LQ, upperbound, HARD);
+                //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
+                GeneralSolver::linear(c, x, LQ, upperbound, HARD);
             }
             // deleter den også pointer inden i vector?
-//            delete x;
-//            delete c;
-//            this->print(std::cout);
-//            std::cout << std::endl;
-//            sleep(1);
+            //            delete x;
+            //            delete c;
+            //            this->print(std::cout);
+            //            std::cout << std::endl;
+            //            sleep(1);
         }
-        
+//        std::cout << "COnstraints posted" << std::endl;
         // Add objective function
-        vector<int>* c = new vector<int>(varInt->size());
+        vector<int> c(varInt->size());
         for (unsigned i = 0; i < varInt->size(); i++) {
-            c->at(i) = static_cast<int> (in->getVars(i).objcoeff);
+            c.at(i) = static_cast<int> (in->getVars(i).objcoeff);
         }
-        GeneralSolver::linear(*this, c, varInt, LQ, 0, OBJ);
-//        GeneralSolver::linear(*this, c, varInt, LQ, 0, Gecode::ICL_DOM, OBJ);
-        delete c;
-
+        GeneralSolver::linear(c, varInt, LQ, 0, OBJ);
+        //        GeneralSolver::linear(*this, c, varInt, LQ, 0, Gecode::ICL_DOM, OBJ);
+//        std::cout << "obj posted" << std::endl;
         // Branch
-        GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-        
+        //        GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+
     }
 
     ~BPSolver() {

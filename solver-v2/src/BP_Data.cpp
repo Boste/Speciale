@@ -64,6 +64,14 @@ BP_Input::BP_Input(string file_name) {
 
         tmp.lb = t.getColLower()[j];
         tmp.ub = t.getColUpper()[j];
+//        if( tmp.lb != 0 ){
+//            std::cout << tmp.lb << std::endl;
+//        }
+//        
+//        if(tmp.ub != 1){
+//            std::cout << tmp.ub << std::endl;
+//        }
+//        assert(tmp.lb >=0 && tmp.ub <=1);
         vars[j] = tmp;
     }
 

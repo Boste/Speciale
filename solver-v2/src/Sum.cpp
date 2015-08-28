@@ -1,14 +1,14 @@
 #include "Sum.hpp"
 
-Sum::Sum(std::vector<IntegerVariable*>* vars, vector<int>* c) : Invariant() {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::vector<IntegerVariable*>* vars, std::vector<int>& c) : Invariant() {//:IntVariables(vars),coefficients(c) {
     type=SUM;
 //    if(c->size()!=vars->size()){
 //        std::cout << c->size() << " " <<vars->size() << std::endl;
 //    }
-    assert(c->size()==vars->size());
+    assert(c.size()==vars->size());
     for (unsigned i = 0; i < vars->size(); i++) {
         //        coefficients.insert(std::make_pair(vars->at(i)->getID(), c->at(i)));
-        coefficients[vars->at(i)->getID()] = c->at(i);
+        coefficients[vars->at(i)->getID()] = c.at(i);
     }
     VariablePointers = vars;
     //        std::cout << std::endl;
@@ -70,15 +70,7 @@ void Sum::addChange(int variableNumber, int changeInValue) {
     //        sleep(5000);
 }
 
-void Sum::usedByConstraint(int constraint) {
-    usedInConstraintNr = constraint;
-}
 
-void Sum::usedByObjective(int objective) {
-    usedInObjectiveNr = objective;
-
-
-}
 
 //void Sum::addChange(std::vector<int> variableNumbers, std::vector<int> changes) {
 //    std::cout << "Ikke implementeret" << std::endl;

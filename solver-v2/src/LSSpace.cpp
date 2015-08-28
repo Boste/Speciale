@@ -6,7 +6,7 @@
 //using namespace Gecode;
 
 LSSpace::LSSpace() {
-//        std::cout << "constructed" << std::endl;
+    //        std::cout << "constructed" << std::endl;
 
 }
 
@@ -39,34 +39,40 @@ LSSpace::LSSpace() {
 //}
 
 void LSSpace::optimizeSolution(int time, shared_ptr<State> st) {
-    //    std::cout << __LINE__ << std::endl;
-//    std::cout << "optimize" << std::endl;
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
-//    std::cout << "NE created" << std::endl;
-//    std::cout << "Segmentation fault right after this " << std::endl;
+    //    std::cout << "NE created" << std::endl;
+    //    std::cout << "Segmentation fault right after this " << std::endl;
     IntegerVariable* var = st->getIntegerVariable(0);
-//    std::cout << "segmentation fault before this" << std::endl;
+    //    std::cout << "segmentation fault before this" << std::endl;
     Move* mv = new Move(var, 1 - var->getCurrentValue() - var->getCurrentValue(), FLIP);
     //        std::cout << __LINE__ << std::endl;
     //    NE.bestImprovement<int>()
     //    NE->randomWalk(mv,st);
-    
-//    double timelimit = 10;
+
+    //    double timelimit = 10;
     double timelimit = (double) time;
     double usedTime = 0;
     std::clock_t start = std::clock();
     int randomMoves = st->getNumberOfVariables() / 5;
-//    std::cout << "Number of random moves " << randomMoves << std::endl;
-//    std::cout << "Timelimit " << timelimit << std::endl;
+    //    std::cout << "Number of random moves " << randomMoves << std::endl;
+    //    std::cout << "Timelimit " << timelimit << std::endl;
+//        std::cout << "optimize" << std::endl;
+
     mv->first = st->getIntegerVariable(0);
+//        std::cout << "optimize" << std::endl;
+
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
     while (NE->bestImprovement(mv, st)) {
+//        std::cout << __LINE__ << std::endl;
+
+
         iterations++;
         //        if (!st->recalculateAll()) {
         //            std::cout << "Line " << __LINE__ << std::endl;
         //            sleep(5);
         //        }
     }
+//    std::cout << "in optimize" << std::endl;
     if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
         st->saveSolution();
         std::cout << "improved solution value to: " << st->getSolutionValue() << " after " << iterations << " iterations" << std::endl;
@@ -108,7 +114,7 @@ void LSSpace::optimizeSolution(int time, shared_ptr<State> st) {
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
     std::cout << "Time used " << usedTime << std::endl;
-    
+
 
     st->recalculateAll();
     std::vector<int>* sol = st->getSolution();
@@ -214,17 +220,17 @@ void LSSpace::optimizeSolution(int time, shared_ptr<State> st) {
 //    //        variable->setCurrentValue(newValue);
 //}
 
-void LSSpace::initializeInvariants(shared_ptr<State> st) {
-    st->initializeInvariants();
-}
-
-void LSSpace::initializeConstraints(shared_ptr<State> st) {
-    st->initializeConstraints();
-}
-
-void LSSpace::initializeObjective(shared_ptr<State> st) {
-    initialValue = st->initializeObjective();
-}
+//void LSSpace::initializeInvariants(shared_ptr<State> st) {
+//    st->initializeInvariants();
+//}
+//
+//void LSSpace::initializeConstraints(shared_ptr<State> st) {
+//    st->initializeConstraints();
+//}
+//
+//void LSSpace::initializeObjective(shared_ptr<State> st) {
+//    initialValue = st->initializeObjective();
+//}
 //int LSSpace::getObjectiveValue(){
 //    return st->getObjectiveValue();
 //}

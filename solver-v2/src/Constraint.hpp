@@ -7,6 +7,7 @@ protected:
     int ViolationDegree = 0;
     int DeltaViolation = 0;
     int DeltaViolationDegree = 0;
+    int priority;
     int type;
     std::vector<int> arguments;
     Invariant* invariant;
@@ -40,7 +41,6 @@ public:
     }
 
     int getType() {
-        assert(type != NULL);
         return type;
     }
 

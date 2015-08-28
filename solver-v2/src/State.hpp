@@ -12,10 +12,9 @@ private:
     std::vector<IntegerVariable*>* IntVarVector;
     std::vector<Gecode::BoolVar>* BoolVarVector;
     std::vector<Invariant*>* Invariants;
-    std::vector<Constraint*>* HardConstraints;
-    std::vector<Constraint*>* SoftConstraints;
-    std::vector<Constraint*>* ObjectiveFunction;
-    int numberOfVariables;
+    std::vector<std::vector<Constraint*>*>* Constraints;
+//    std::vector<Constraint*>* SoftConstraints;
+//    std::vector<Constraint*>* ObjectiveFunction;
     std::vector<int>* solution;
     int solutionValue;
     std::vector<int>* mask;
@@ -35,24 +34,26 @@ public:
     //    std::vector<Constraint*> ObjectiveFunction;
 
 
-    std::vector<IntegerVariable*>* addIntegerVariable(Gecode::IntVarArray* vars);
+    std::vector<IntegerVariable*>* addIntegerVariable(int numberOfVariables, int lb, int ub);
     void initializeInvariants();
 
     void initializeConstraints();
 
-    int initializeObjective();
+    void initializeObjective();
 
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     std::vector<IntegerVariable*>* getIntegerVariables();
     std::vector<Invariant*>* getInvariants();
-    std::vector<Constraint*>* getHardConstraints();
-    std::vector<Constraint*>* getSoftConstraints();
+    std::vector<Constraint*>* getConstraintsWithPriority(int prio);
+    std::vector<std::vector<Constraint*>*>* getConstraints();
+//    std::vector<Constraint*>* getSoftConstraints();
     std::vector<Constraint*>* getObjectives();
     IntegerVariable* getIntegerVariable(int i);
     int getObjectiveValue();
+    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars);
 
     int getNumberOfVariables() {
-        return numberOfVariables;
+        return IntVarVector->size();
     }
     void saveSolution();
     std::vector<int>* getSolution();

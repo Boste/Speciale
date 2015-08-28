@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 class Invariant {
-        friend class GeneralSolver;
+    friend class GeneralSolver;
 
 public:
 
@@ -52,15 +52,31 @@ public:
         CurrentValue += DeltaValue;
     }
 
-    int getUsedInConstraint() {
+    void setUsedByConstraint(int constraint, int priority) {
+        usedInConstraintNr = constraint;
+        constraintPriority = priority;
+    }
+
+    void setUsedByObjective(int objective) {
+        usedInObjectiveNr = objective;
+        constraintPriority = 0;
+
+
+    }
+
+    int getConstraintNumber() {
         return usedInConstraintNr;
     }
 
     int getUsedInObjective() {
         return usedInObjectiveNr;
     }
-    int getType(){
-        assert(type!=NULL);
+
+    unsigned getPriority() {
+        return constraintPriority;
+    }
+
+    int getType() {
         return type;
     }
     std::vector<IntegerVariable*>* VariablePointers;
@@ -68,10 +84,11 @@ public:
 protected:
     double CurrentValue = 0;
     double DeltaValue = 0;
-    int usedInConstraintNr = -1;
-    int usedInObjectiveNr = -1;
-    int type;
+    unsigned constraintPriority;
+    int usedInConstraintNr;
+    int usedInObjectiveNr;
     std::unordered_map<int, int> coefficients;
+    int type;
 
 private:
 

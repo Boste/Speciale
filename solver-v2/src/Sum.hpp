@@ -25,7 +25,7 @@ protected:
     
 public:
     
-    Sum(vector<IntegerVariable*>* vars, vector<int>* c);
+    Sum(vector<IntegerVariable*>* vars, vector<int>& c);
     Sum(vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map);
     
     
@@ -45,8 +45,8 @@ public:
 
     int calculateDeltaValue();
     
-    void usedByConstraint(int constraint);
-    void usedByObjective(int constraint);
+//    void usedByConstraint(int constraint, int priority);
+//    void usedByObjective(int constraint, int priority);
 
     void addChange(int variableNumber, int changeInValue);
 

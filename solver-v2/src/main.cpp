@@ -1,7 +1,7 @@
 
 #include <gecode/driver.hh>
 #include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+//#include <gecode/minimodel.hh>
 //#include <gecode/float.hh>
 #include "BP_Data.hpp"
 #include <cmath>
@@ -12,6 +12,7 @@
 #include "Clock.hpp"
 #include "getRSS.hpp"
 #include "GeneralSolver.hpp"
+#include "GecodeSolver.hpp"
 #include "Test.hpp"
 #include "Multistop.hpp"
 #include <boost/algorithm/string.hpp>
@@ -38,6 +39,10 @@ using namespace Gecode;
 //void easylocal(int argc, const char* argv[]);
 
 int main(int argc, char* argv[]) {
+
+
+
+
     std::vector<std::string> strs;
 
     //    string str = argv[1];
@@ -85,29 +90,38 @@ int main(int argc, char* argv[]) {
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
     //    delete test;
-
     BPSolver* m = new BPSolver(p);
-
     std::cout << "Initialize solution" << std::endl;
-    Multistop* ms = new Multistop(0, 10, TimeForGecode * 1000);
-    Gecode::Search::Options* so = new Gecode::Search::Options();
-    so->stop = ms;
+
+    //Need my own option class
+
     //    so->stop = ms;
 
 
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
-    GeneralSolver* GS = m->InitialSolution(so);
+    //    GeneralSolver* GS = m->InitialSolution(so);
+    m->InitialSolution(TimeForGecode);
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for Gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
-    m->initializeLS(GS);
+    //    m->initializeLS(GS);
 
     //    m->printCurrent();
 
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
+
+    std::cout << "\n ######################################################################################################### " << std::endl;
+    std::cout << "BEGINING LOCALSEARCH \n "
+            "s######################################################################################################### \n" << std::endl;
+
+    //    exit(1);
+
+    //    m->printCurrent();
+    
+    m->initializeLS();
     m->optimizeSolution(time);
     std::cout << m->getInitialValue() << " "; // value of solution gecode found
     std::cout << iniTime << " "; // time for initializing problem 
@@ -187,7 +201,7 @@ int main(int argc, char* argv[]) {
     //        argv2[i] = argv[i];
     //    }
     //    easylocal(argc, argv2);
-    delete ms;
+    //    delete ms;
     //    delete so;
     //    delete p;
     return 0;

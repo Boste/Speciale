@@ -24,8 +24,9 @@
 
 // Constraint priority
 #define OBJ 0
-#define SOFT 1
-#define HARD 2
+#define HARD 1
+#define SOFT 2
+
 
 // Move types
 #define FLIP 1

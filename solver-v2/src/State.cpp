@@ -5,8 +5,9 @@
 State::State() {
     IntVarVector = new std::vector<IntegerVariable*>();
     BoolVarVector = new std::vector<Gecode::BoolVar>();
-    Invariants = new std::vector<Invariant*>();
-    Constraints = new std::vector<std::vector < Constraint*>*>();
+    Invariants = new std::vector<std::shared_ptr<Invariant>>();
+//    Invariants = new std::vector<Invariant*>();
+    Constraints = new std::vector<std::vector < std::shared_ptr<Constraint>>*>();
     //    SoftConstraints = new std::vector<Constraint*>();
     //    ObjectiveFunction = new std::vector<Constraint*>();
     solution = new std::vector<int>();
@@ -34,14 +35,14 @@ State::~State() {
 //        std::cout << "Destructing IVV" << std::endl;
     delete IntVarVector;
     for (unsigned i = Invariants->size() ; i > 0; i--) {
-        delete Invariants->at(i-1);
+//        delete Invariants->at(i-1);
     }
     delete Invariants;
 //    std::cout << "Destructing Invar" << std::endl;
     for (unsigned i = Constraints->size(); i > 0; i--) {
-        std::vector<Constraint*>* cons = Constraints->at(i-1);
+        std::vector<std::shared_ptr<Constraint>>* cons = Constraints->at(i-1);
         for (unsigned j = cons->size(); j > 0; j--) {
-            delete cons->at(j-1);
+//            delete cons->at(j-1);
         }
         delete Constraints->at(i-1);
 //        std::cout << "Destructing cons "<< i-1 << std::endl;
@@ -104,7 +105,7 @@ void State::initializeConstraints() {
 
     int violations = 0;
         for (unsigned i = 1; i < Constraints->size(); i++) {
-            std::vector<Constraint*>* prio = Constraints->at(i);
+            std::vector<std::shared_ptr<Constraint>>* prio = Constraints->at(i);
             for (unsigned j = 0; j < prio->size(); j++) {
                 violations += prio->at(j)->updateViolation();
             }
@@ -158,15 +159,16 @@ std::vector<IntegerVariable*>* State::getIntegerVariables() {
     return IntVarVector;
 }
 
-std::vector<Invariant*>* State::getInvariants() {
+std::vector<std::shared_ptr<Invariant>>* State::getInvariants() {
+//std::vector<Invariant*>* State::getInvariants() {
     return Invariants;
 }
 
-std::vector<std::vector<Constraint*>*>* State::getConstraints() {
+std::vector<std::vector<std::shared_ptr<Constraint>>*>* State::getConstraints() {
     return Constraints;
 }
 
-std::vector<Constraint*>* State::getConstraintsWithPriority(int prio) {
+std::vector<std::shared_ptr<Constraint>>* State::getConstraintsWithPriority(int prio) {
 
     return Constraints->at(prio);
 }
@@ -175,7 +177,7 @@ std::vector<Constraint*>* State::getConstraintsWithPriority(int prio) {
 //    return SoftConstraints;
 //}
 
-std::vector<Constraint*>* State::getObjectives() {
+std::vector<std::shared_ptr<Constraint>>* State::getObjectives() {
     return Constraints->at(0);
 }
 
@@ -217,7 +219,7 @@ void State::setSolution() {
     // Setting constraints
     int violations = 0;
     for (unsigned i = 1; i < Constraints->size(); i++) {
-        std::vector<Constraint*>* prio = getConstraintsWithPriority(i);
+        std::vector<std::shared_ptr<Constraint>>* prio = getConstraintsWithPriority(i);
         for (unsigned j = 0; j < prio->size(); j++) {
 
             violations += prio->at(i)->updateViolation();
@@ -246,15 +248,16 @@ bool State::recalculateAll() {
     //    std::cout << std::endl;
     bool success = true;
     for (unsigned i = 0; i < Invariants->size(); i++) {
-        Invariant* invar = Invariants->at(i);
+        std::shared_ptr<Invariant> invar = Invariants->at(i);
+//        Invariant* invar = Invariants->at(i);
         if (!invar->test()) {
             success = false;
         }
     }
     for (unsigned i = 1; i < Constraints->size(); i++) {
-        std::vector<Constraint*>* prio = getConstraintsWithPriority(i);
+        std::vector<std::shared_ptr<Constraint>>* prio = getConstraintsWithPriority(i);
         for (unsigned j = 0; j < prio->size(); j++) {
-            Constraint* cons = prio->at(i);
+            std::shared_ptr<Constraint> cons = prio->at(i);
 
             if (!cons->testCons()) {
                 success = false;
@@ -262,7 +265,7 @@ bool State::recalculateAll() {
         }
     }
     for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
-        Constraint* obj = getConstraintsWithPriority(0)->at(i);
+        std::shared_ptr<Constraint> obj = getConstraintsWithPriority(0)->at(i);
         if (!obj->testObj()) {
             success = false;
         }

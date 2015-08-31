@@ -1,6 +1,7 @@
 #ifndef CONSTRAINT_HPP
 #define	CONSTRAINT_HPP
-
+#include "Invariant.hpp"
+#include <memory>
 class Constraint {
 protected:
     int Violation = 0;
@@ -10,34 +11,36 @@ protected:
     int priority;
     int type;
     std::vector<int> arguments;
-    Invariant* invariant;
-
+    std::shared_ptr<Invariant> invariant;
+//    Invariant* invariant;
+//    Invariant* invariant;
 
 
 public:
 
     Constraint() {
+        
     }
 
-    Constraint(const Constraint &c) {
-        this->DeltaViolation = c.DeltaViolation;
-        this->DeltaViolationDegree = c.DeltaViolationDegree;
-        this->Violation = c.Violation;
-        this->ViolationDegree = c.ViolationDegree;
-        this->arguments = c.arguments;
-    }
-
-    Constraint& operator=(const Constraint &c) {
-        this->DeltaViolation = c.DeltaViolation;
-        this->DeltaViolationDegree = c.DeltaViolationDegree;
-        this->Violation = c.Violation;
-        this->ViolationDegree = c.ViolationDegree;
-        this->arguments = c.arguments;
-        return *this;
-    }
+//    Constraint(const Constraint &c) {
+//        this->DeltaViolation = c.DeltaViolation;
+//        this->DeltaViolationDegree = c.DeltaViolationDegree;
+//        this->Violation = c.Violation;
+//        this->ViolationDegree = c.ViolationDegree;
+//        this->arguments = c.arguments;
+//    }
+//
+//    Constraint& operator=(const Constraint &c) {
+//        this->DeltaViolation = c.DeltaViolation;
+//        this->DeltaViolationDegree = c.DeltaViolationDegree;
+//        this->Violation = c.Violation;
+//        this->ViolationDegree = c.ViolationDegree;
+//        this->arguments = c.arguments;
+//        return *this;
+//    }
 
     ~Constraint() {
-
+        
     }
 
     int getType() {
@@ -63,7 +66,8 @@ public:
     int getArgument(int i) {
         return arguments[i];
     }
-    Invariant* getInvariant(){
+    std::shared_ptr<Invariant> getInvariant(){
+//    Invariant* getInvariant(){
         return invariant;
     }
 

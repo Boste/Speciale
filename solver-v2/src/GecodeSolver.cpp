@@ -7,7 +7,7 @@ GecodeSolver::GecodeSolver(std::shared_ptr<State> st) {
 }
 
 GecodeSolver::~GecodeSolver() {
-    
+
 }
 
 void GecodeSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>* variables, int relation, int upperbound) {
@@ -21,19 +21,19 @@ void GecodeSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVar
 
     switch (relation) {
         case EQ:
-            Gecode::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_DOM);
+            Gecode::linear(*this, c, x, Gecode::IRT_EQ, upperbound, Gecode::ICL_BND);
             break;
         case LQ:
-            Gecode::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_DOM);
+            Gecode::linear(*this, c, x, Gecode::IRT_LQ, upperbound, Gecode::ICL_BND);
             break;
         case LE:
-            Gecode::linear(*this, c, x, Gecode::IRT_LE, upperbound, Gecode::ICL_DOM);
+            Gecode::linear(*this, c, x, Gecode::IRT_LE, upperbound, Gecode::ICL_BND);
             break;
         case GQ:
-            Gecode::linear(*this, c, x, Gecode::IRT_GQ, upperbound, Gecode::ICL_DOM);
+            Gecode::linear(*this, c, x, Gecode::IRT_GQ, upperbound, Gecode::ICL_BND);
             break;
         case GR:
-            Gecode::linear(*this, c, x, Gecode::IRT_GR, upperbound, Gecode::ICL_DOM);
+            Gecode::linear(*this, c, x, Gecode::IRT_GR, upperbound, Gecode::ICL_BND);
             break;
     }
 }
@@ -58,31 +58,38 @@ void GecodeSolver::print(std::ostream & os) const {
     os << IntVars << std::endl;
 }
 
-
-void GecodeSolver::branch(bool fix){
+void GecodeSolver::branch(bool fix) {
     Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     if (fix) {
         std::cout << "Should fix those variables that is fixed be preprocessing" << std::endl;
     }
 }
-bool GecodeSolver::initialize() {
-    
-    
-    
-    
+
+bool GecodeSolver::initialize(int TimeForGecode) {
+
+
+
+
     //        std::cout << IntVars.size() << std::endl;
-    return FindSolution();
+    return FindSolution(TimeForGecode);
 
 }
 
-bool GecodeSolver::FindSolution() {
+bool GecodeSolver::FindSolution(int TimeForGecode) {
 
-    std::shared_ptr<Gecode::Search::Options> so = std::make_shared<Search::Options>();
+    //    std::shared_ptr<Gecode::Search::Options> so = std::make_shared<Search::Options>();
+    //    Gecode::Search::Options* so = new Gecode::Search::Options();
+    Multistop* ms = new Multistop(0, 10, TimeForGecode * 1000);
+    Gecode::Search::Options* so = new Gecode::Search::Options();
+    so->stop = ms;
+    so->a_d = IntVars.size() - 1;
+    so->c_d = IntVars.size() - 1;
     printSpaceStatus();
-
+    bool solutionFound = false;
     GecodeSolver* s;
     try {
         std::clock_t GecodeClock = std::clock();
+        std::cout << "Before search engine" << std::endl;
         Gecode::DFS<GecodeSolver> e(this, *so);
         std::cout << "Still searching for solution" << std::endl;
         s = e.next();
@@ -102,18 +109,23 @@ bool GecodeSolver::FindSolution() {
             //            s->print(std::cout);
             //            this->print(std::cout);
             SetValues(s->IntVars);
+            solutionFound = true;
             std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
             std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             Gecode::Search::Statistics stat = e.statistics();
             print_stats(stat);
+            delete s;
 
         }
+        //        delete s; Skal det være her jeg deleter s?
 
     } catch (Gecode::Exception e) {
         std::cerr << "Gecode exception: " << e.what() << std::endl;
         //        return 1;
     }
-    return s;
+    delete ms;
+    delete so;
+    return solutionFound;
 }
 
 void GecodeSolver::SetValues(Gecode::IntVarArray& vars) {

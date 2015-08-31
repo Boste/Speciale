@@ -3,6 +3,7 @@
 #include "Constraint.hpp"
 #include "Constants.hpp"
 #include <limits>
+#include <memory>
 #ifndef STATE_HPP
 #define	STATE_HPP
 
@@ -11,8 +12,9 @@ class State {
 private:
     std::vector<IntegerVariable*>* IntVarVector;
     std::vector<Gecode::BoolVar>* BoolVarVector;
-    std::vector<Invariant*>* Invariants;
-    std::vector<std::vector<Constraint*>*>* Constraints;
+    std::vector<std::shared_ptr<Invariant>>* Invariants;
+//    std::vector<Invariant*>* Invariants;
+    std::vector<std::vector<std::shared_ptr<Constraint>>*>* Constraints;
 //    std::vector<Constraint*>* SoftConstraints;
 //    std::vector<Constraint*>* ObjectiveFunction;
     std::vector<int>* solution;
@@ -29,7 +31,7 @@ public:
 
     //        std::vector<IntegerVariable*> IntVarVector;
     //    std::vector<Gecode::BoolVar> BoolVarVector;
-    //    std::vector<Invariant*> Invariants;
+    //    std::vector<std::shared_ptr<Invariant>> Invariants;
     //    std::vector<Constraint*> Constraints;
     //    std::vector<Constraint*> ObjectiveFunction;
 
@@ -43,11 +45,12 @@ public:
 
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     std::vector<IntegerVariable*>* getIntegerVariables();
-    std::vector<Invariant*>* getInvariants();
-    std::vector<Constraint*>* getConstraintsWithPriority(int prio);
-    std::vector<std::vector<Constraint*>*>* getConstraints();
+    std::vector<std::shared_ptr<Invariant>>* getInvariants();
+//    std::vector<Invariant*>* getInvariants();
+    std::vector<std::shared_ptr<Constraint>>* getConstraintsWithPriority(int prio);
+    std::vector<std::vector<std::shared_ptr<Constraint>>*>* getConstraints();
 //    std::vector<Constraint*>* getSoftConstraints();
-    std::vector<Constraint*>* getObjectives();
+    std::vector<std::shared_ptr<Constraint>>* getObjectives();
     IntegerVariable* getIntegerVariable(int i);
     int getObjectiveValue();
     void updateIntegerVariables(Gecode::IntVarArray& gecodeVars);

@@ -12,7 +12,7 @@
 
 class BPSolver : public GeneralSolver {
 protected:
-    BP_Input *p_in;
+//    BP_Input *p_in;
     //    int model;
     //    FloatVarArray varFloat;
     //    IntVarArray varInt;
@@ -26,7 +26,7 @@ public:
 
     //    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
 
-    BPSolver(BP_Input *in) : p_in(in) {
+    BPSolver(BP_Input *in) {
         std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
         for (unsigned i = 0; i < in->getNcons(); i++) {
             const std::vector<elem> leftside = in->getMatcoeff(i);
@@ -47,6 +47,7 @@ public:
                 //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
                 GeneralSolver::linear(c, x, LQ, upperbound, HARD);
             }
+            delete x;
             // deleter den også pointer inden i vector?
             //            delete x;
             //            delete c;
@@ -69,7 +70,7 @@ public:
     }
 
     ~BPSolver() {
-        delete p_in;
+//        delete p_in;
     }
 
     /// Constructor for cloning s

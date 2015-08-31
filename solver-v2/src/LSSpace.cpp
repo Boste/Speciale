@@ -38,7 +38,7 @@ LSSpace::LSSpace() {
 //    
 //}
 
-void LSSpace::optimizeSolution(int time, shared_ptr<State> st) {
+void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     NeighborhoodExplorer* NE = new NeighborhoodExplorer();
     //    std::cout << "NE created" << std::endl;
     //    std::cout << "Segmentation fault right after this " << std::endl;

@@ -9,6 +9,7 @@
 #include "State.hpp"
 #include "NeighborhoodExplorer.hpp"
 #include "Constants.hpp"
+#include <memory>
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 

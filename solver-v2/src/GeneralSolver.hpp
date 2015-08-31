@@ -14,7 +14,7 @@
 #include "IntegerVariable.hpp"
 #include "Multistop.hpp"
 #include "Sum.hpp"
-
+#include <memory>
 //#include "Invariant.hpp"
 //#include "Constraint.hpp"
 #include "Clock.hpp"
@@ -34,13 +34,15 @@ private:
     //    LSSpace* LS = new LSSpace();
     //    std::shared_ptr<LSSpace> LS;
     //    shared_ptr<LSSpace> LS(new LSSpace());
+
+    // Should be unique
     std::shared_ptr<LSSpace> LS = std::make_shared<LSSpace>();
-    //      std::shared_ptr<LSSpace> LS (new LSSpace);
 
-    shared_ptr<State> st = std::make_shared<State> ();
+    std::shared_ptr<State> st = std::make_shared<State> ();
 
-//    std::shared_ptr<GecodeSolver> GS = std::make_shared<GecodeSolver>(st);
-    GecodeSolver* GS = new GecodeSolver(st);
+    // Should be unique
+    std::shared_ptr<GecodeSolver> GS = std::make_shared<GecodeSolver>(st);
+    //    GecodeSolver* GS = new GecodeSolver(st);
 
 
     //    std::vector<Gecode::IntVarArgs*> test;
@@ -57,7 +59,7 @@ public:
 
     ~GeneralSolver() {
         //        std::cout << "Destructing GS" << std::endl;
-        delete GS;
+        //        delete GS;
         //        delete st;
     }
 
@@ -72,16 +74,28 @@ public:
     // Skal Gecode::IntConLevel icl være et argument?
     // ingen shared i det her kald
 
-    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>* variables, int relation, int ub, unsigned priority) { // 0 = obj, 1 = soft, 2 = hard 
-        Sum* sumInvariant = new Sum(variables, coefficients);
+    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>* variables, int relation, int ub, unsigned priority) {
 
+        //        std::vector<IntegerVariable*>* vars = variables;
+        //        std::vector<int> c = coefficients;
+        std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(variables, coefficients);
+        //        Sum* sumInvariant = new Sum(vars,coefficients);
+
+
+        //        std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(variables, coefficients);
+        //        std::shared_ptr<Sum> sumInvariant = std::shared_ptr<Sum> (new Sum(variables, coefficients));
+        //        Sum* sumInvariant = new Sum(variables,coefficients);
+        //        std::unique_ptr<Sum> sumInvariant = std::unique_ptr<Sum> (new Sum (variables,coefficients));
         //        std::cout << sumInvariant << std::endl;
         int variableNumber;
         int invariantNumber;
-        for (unsigned i = 0; i < coefficients.size(); i++) {
+        for (IntegerVariable* iv : *variables) {
+            //        for (unsigned i = 0; i < coefficients.size(); i++) {
 
-            variableNumber = variables->at(i)->getID();
+            variableNumber = iv->getID();
             invariantNumber = st->getInvariants()->size();
+
+
             st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
         }
         st->getInvariants()->push_back(sumInvariant);
@@ -90,11 +104,11 @@ public:
         //        sleep(1);
         //        std::cout << "Invariant size " << st->getInvariants()->size() << std::endl;
         //        std::cout << "invariant just added size " << st->getInvariants()->at(st->getInvariants()->size()-1)->VariablePointers->size() << " vs " << coefficients->size() << std::endl;
-        Linear* LinearConstraint = new Linear(sumInvariant, ub, relation);
+        std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(sumInvariant, ub, relation);
         // add to obj fnc
         if (priority == OBJ) {
             if (st->getConstraints()->size() == 0) {
-                std::vector<Constraint*>* prioVector = new std::vector<Constraint*>();
+                std::vector<std::shared_ptr < Constraint>>*prioVector = new std::vector<std::shared_ptr < Constraint >> ();
                 st->getConstraints()->push_back(prioVector);
             }
             sumInvariant->setUsedByObjective(st->getConstraintsWithPriority(0)->size());
@@ -105,11 +119,11 @@ public:
             // What should be given to LSSpace
             if (st->getConstraints()->size() <= priority) {
                 for (unsigned i = st->getConstraints()->size(); i <= priority; i++) {
-                    std::vector<Constraint*>*prioVector = new std::vector<Constraint*>();
+                    std::vector<std::shared_ptr < Constraint>>*prioVector = new std::vector<std::shared_ptr < Constraint >> ();
                     st->getConstraints()->push_back(prioVector);
                 }
             }
-            std::vector<Constraint*>* prio = st->getConstraintsWithPriority(priority);
+            std::vector<std::shared_ptr < Constraint>>*prio = st->getConstraintsWithPriority(priority);
             sumInvariant->setUsedByConstraint(st->getConstraintsWithPriority(priority)->size(), priority);
             st->getConstraintsWithPriority(priority)->push_back(LinearConstraint);
 
@@ -185,22 +199,20 @@ public:
 
     void InitialSolution(int TimeForGecode) {
 
-        Multistop* ms = new Multistop(0, 10, TimeForGecode * 1000);
-        Gecode::Search::Options* so = new Gecode::Search::Options();
-        so->stop = ms;
+
         //        GeneralSolver* s = GecodeSearch(so);
         GS->branch(true);
-        if (GS->initialize()) {
+        if (GS->initialize(TimeForGecode)) {
             //            
         } else {
             std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
             int timesRelaxed = 0;
             bool failed = true;
             while (failed && timesRelaxed != 5) {
-                relax(so, timesRelaxed);
+                relax(timesRelaxed);
                 timesRelaxed++;
                 GS->branch(false);
-                failed = GS->initialize();
+                failed = GS->initialize(TimeForGecode);
             }
             //        assert(s != NULL);
             //        assert(!s->failed());
@@ -208,12 +220,14 @@ public:
             //
             //                this->print(cout);
         }
+        //        delete ms;
+        //        delete so;
     }
 
     /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
     /// Only works for binary
 
-    GeneralSolver* relax(Gecode::Search::Options* so, int timesRelaxed) {
+    GeneralSolver* relax(int timesRelaxed) {
 
         /*
         relaxed->createIntVars(IntVars.size(), 0, 1);
@@ -340,17 +354,24 @@ public:
     void simpleRelax(int timesRelaxed) {
         //        std::cout << "do nothing" << std::endl;
         for (unsigned i = 1; i < st->getConstraints()->size()/*-((timesRelaxed+1)*100)*/; i++) {
-            std::vector<Constraint*>* prio = st->getConstraintsWithPriority(i);
-            for (unsigned j = 0; j < prio->size(); j++) {
-                Constraint* cons = prio->at(i);
-                Invariant* invar = cons->getInvariant();
+//        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
+            std::vector<std::shared_ptr < Constraint>>*prio = st->getConstraintsWithPriority(i);
+            //            for (unsigned j = 0; j < prio->size(); j++) {
+            for (std::shared_ptr<Constraint> cons : *prio) {
+//                std::shared_ptr<Constraint> cons = prio->at(i);
+                std::shared_ptr<Invariant> invar = cons->getInvariant();
+                //                Invariant* invar = cons->getInvariant();
                 std::vector<IntegerVariable*>* integerVariables = invar->VariablePointers;
                 if (invar->getType() == SUM) { // otherwise it is in objective function atm.
                     Gecode::IntArgs c(integerVariables->size());
                     Gecode::IntVarArgs x(integerVariables->size());
                     for (unsigned j = 0; j < integerVariables->size(); j++) {
                         int variableID = integerVariables->at(j)->getID();
+//                        for(IntegerVariable* iv : *integerVariables){
+                            
+//                            int variableID = iv->getID();
                         c[j] = invar->coefficients.at(variableID);
+//                        x[j] = *(iv->getVariablePointer());
                         x[j] = *(integerVariables->at(j)->getVariablePointer());
                         //                    std::cout << __LINE__ << std::endl;
 
@@ -399,21 +420,21 @@ public:
     void initializeLS() {
         //        SetValues(GS->IntVars);
 
-            st->initializeInvariants();
-        
+        st->initializeInvariants();
 
-            st->initializeConstraints();
-        
 
-            st->initializeObjective();
-//        LS->initializeInvariants(st);
-//        std::cout << __LINE__ << std::endl;
-//
-//        LS->initializeConstraints(st);
-//        std::cout << __LINE__ << std::endl;
-//
-//        LS->initializeObjective(st);
-//        std::cout << __LINE__ << std::endl;
+        st->initializeConstraints();
+
+
+        st->initializeObjective();
+        //        LS->initializeInvariants(st);
+        //        std::cout << __LINE__ << std::endl;
+        //
+        //        LS->initializeConstraints(st);
+        //        std::cout << __LINE__ << std::endl;
+        //
+        //        LS->initializeObjective(st);
+        //        std::cout << __LINE__ << std::endl;
 
         //        delete GS;
     }
@@ -489,12 +510,12 @@ private:
     //    }
 
     void print_stats(Gecode::Search::Statistics & stat) {
-        cout << "\tfail: " << stat.fail << endl;
-        cout << "\tnodes: " << stat.node << endl;
-        cout << "\tpropagators: " << stat.propagate << endl; // see page 145 MPG
-        cout << "\tdepth: " << stat.depth << endl;
-        cout << "\trestarts: " << stat.restart << endl;
-        cout << "\tnogoods: " << stat.nogood << endl;
+        std::cout << "\tfail: " << stat.fail << std::endl;
+        std::cout << "\tnodes: " << stat.node << std::endl;
+        std::cout << "\tpropagators: " << stat.propagate << std::endl; // see page 145 MPG
+        std::cout << "\tdepth: " << stat.depth << std::endl;
+        std::cout << "\trestarts: " << stat.restart << std::endl;
+        std::cout << "\tnogoods: " << stat.nogood << std::endl;
     }
 
 

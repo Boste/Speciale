@@ -1,6 +1,5 @@
-#include "Sum.hpp"
-
-Sum::Sum(std::vector<IntegerVariable*>* vars, std::vector<int>& c) : Invariant() {//:IntVariables(vars),coefficients(c) {
+    #include "Sum.hpp"
+Sum::Sum(std::vector<IntegerVariable*>* vars, std::vector<int>& c) : Invariant() {
     type=SUM;
 //    if(c->size()!=vars->size()){
 //        std::cout << c->size() << " " <<vars->size() << std::endl;
@@ -70,7 +69,15 @@ void Sum::addChange(int variableNumber, int changeInValue) {
     //        sleep(5000);
 }
 
-
+//void Sum::setUsedByConstraint(int constraint) {
+//    usedInConstraintNr = constraint;
+//}
+//
+//void Sum::usedByObjective(int objective) {
+//    usedInObjectiveNr = objective;
+//
+//
+//}
 
 //void Sum::addChange(std::vector<int> variableNumbers, std::vector<int> changes) {
 //    std::cout << "Ikke implementeret" << std::endl;

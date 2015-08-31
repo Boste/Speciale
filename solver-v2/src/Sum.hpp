@@ -1,20 +1,16 @@
 #ifndef SUM_HH
 #define SUM_HH
 #include "Constants.hpp"
-#include <vector>
-
 #include <unordered_map>
 #include "IntegerVariable.hpp"
-#include "boost/shared_ptr.hpp"
 #include "Invariant.hpp" 
+#include <memory>
 //#include <utility>
 //struct elem {
 //	int index;
 //	double coeff;
 //	~elem() {};
 //};
-using namespace std;
-
 class Sum : public Invariant {
 protected:
     
@@ -25,8 +21,8 @@ protected:
     
 public:
     
-    Sum(vector<IntegerVariable*>* vars, vector<int>& c);
-    Sum(vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map);
+    Sum(std::vector<IntegerVariable*>* vars, std::vector<int>& c);
+    Sum(std::vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map);
     
     
     Sum(const Sum &a);

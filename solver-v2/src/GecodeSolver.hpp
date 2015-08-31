@@ -5,6 +5,7 @@
 #include "Clock.hpp"
 #include "Constants.hpp"
 #include "State.hpp"
+#include "Multistop.hpp"
 #ifndef GECODESOLVER_HPP
 #define	GECODESOLVER_HPP
 
@@ -15,15 +16,16 @@ using namespace Gecode;
 class GecodeSolver : public Space {
 protected:
     std::shared_ptr<State> st;
+        IntVarArray IntVars;
+
 public:
-    IntVarArray IntVars;
     
     GecodeSolver( std::shared_ptr<State> st);
     
     virtual ~GecodeSolver();
     void branch(bool fix);
-    bool initialize();
-    bool FindSolution();
+    bool initialize(int TimeForGecode);
+    bool FindSolution(int TimeForGecode);
     void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>* variables, int relation, int upperbound);
     void createGecodeVariables(std::shared_ptr<State> st);
     void SetValues(Gecode::IntVarArray& vars);

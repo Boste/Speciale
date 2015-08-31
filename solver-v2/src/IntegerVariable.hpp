@@ -9,18 +9,21 @@ protected:
     //    Gecode::IntVar* VariablePointer;
     //    Gecode::IntVarArray* ArrayPointer;
     //    int ArrayID;
-    int lb;
-    int ub;
+//    int lb;
+//    int ub;
+    int vectorID;
     int value=0;
     std::vector<int> update;
     Gecode::IntVarArray* ArrayPointer;
     Gecode::IntVar* VariablePointer;
 
-    int vectorID;
+    
 public:
-    IntegerVariable(int lowerbound, int upperbound,int id) : lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
+    IntegerVariable(int lowerbound, int upperbound,int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
 //        VariablePointer = vp;
 //        ArrayPointer = ap;
+//        lb = lowerbound;
+//        ub = upperbound;
         vectorID = id;
         value = 0;
     }

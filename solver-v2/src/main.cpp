@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
     //    opt.parse(argc, argv);
 
 
-    BP_Input* p = new BP_Input(argv[1]);
+    BP_Input* input = new BP_Input(argv[1]);
     std::cout << "Instance read after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     size_t peakSize4 = getPeakRSS();
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
     //    delete test;
-    BPSolver* m = new BPSolver(p);
+    BPSolver* model = new BPSolver(input);
     std::cout << "Initialize solution" << std::endl;
 
     //Need my own option class
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     //    GeneralSolver* GS = m->InitialSolution(so);
-    m->InitialSolution(TimeForGecode);
+    model->InitialSolution(TimeForGecode);
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
@@ -115,15 +115,15 @@ int main(int argc, char* argv[]) {
 
     std::cout << "\n ######################################################################################################### " << std::endl;
     std::cout << "BEGINING LOCALSEARCH \n "
-            "s######################################################################################################### \n" << std::endl;
+            "######################################################################################################### \n" << std::endl;
 
     //    exit(1);
 
     //    m->printCurrent();
     
-    m->initializeLS();
-    m->optimizeSolution(time);
-    std::cout << m->getInitialValue() << " "; // value of solution gecode found
+    model->initializeLS();
+    model->optimizeSolution(time);
+    std::cout << model->getInitialValue() << " "; // value of solution gecode found
     std::cout << iniTime << " "; // time for initializing problem 
     std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 
@@ -148,7 +148,8 @@ int main(int argc, char* argv[]) {
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
-    delete m;
+    delete model;
+    delete input;
 
     //    m->printCurrent();
 

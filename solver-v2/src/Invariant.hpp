@@ -42,6 +42,11 @@ public:
 
     virtual ~Invariant() {
         //        std::cout << "destruct invariant" << std::endl;
+        
+//        for(IntegerVariable* IV : *VariablePointers){
+//            delete IV;
+//        }
+//        delete VariablePointers;
     }
 
     int getCurrentValue() {

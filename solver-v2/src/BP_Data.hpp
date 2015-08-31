@@ -88,7 +88,11 @@ public:
     void setDigits(double number);
     
     ~BP_Input(){
-        
+//        for( vector<elem> vec : matcoeff){
+//            for(elem e : vec){
+//                delete e;
+//            }
+//        }
     }
     //        Constraint getConstraint(const int i){
     //            return cons[i];

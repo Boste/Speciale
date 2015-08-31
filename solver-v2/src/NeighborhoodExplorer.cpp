@@ -82,7 +82,8 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, std::sh
         //    std::cout << "Variable " << variableNumber << std::endl;
         for (unsigned i = 0; i < updateVector->size(); i++) {
 //            std::cout << i << std::endl;
-            Invariant* invar = st->getInvariants()->at(updateVector->at(i));
+            std::shared_ptr<Invariant> invar = st->getInvariants()->at(updateVector->at(i));
+//            Invariant* invar = st->getInvariants()->at(updateVector->at(i));
             invar->addChange(variable->getID(), mv->deltaValueFirst);
             invar->calculateDeltaValue();
             if (invar->getPriority() == 0) {
@@ -92,7 +93,7 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, std::sh
             } else {
                 int priority = invar->getPriority();
                 
-                Constraint* cons = st->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
+                std::shared_ptr<Constraint> cons = st->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
                 violationChange += cons->setDeltaViolation();
                 //                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
             }
@@ -122,11 +123,12 @@ void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
         calculateDeltaChange(mv, st);
         std::vector<int>* update = var->getUpdateVector();
         for (unsigned i = 0; i < update->size(); i++) {
-            Invariant* invar = st->getInvariants()->at(update->at(i));
+            std::shared_ptr<Invariant> invar = st->getInvariants()->at(update->at(i));
+//            Invariant* invar = st->getInvariants()->at(update->at(i));
             invar->updateValue();
 
             if (invar->getPriority() > 0) {
-                Constraint* cons = st->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+                std::shared_ptr<Constraint> cons = st->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
                 st->numberOfViolations += cons->updateViolation();
             }
             if (invar->getPriority() == 0) {

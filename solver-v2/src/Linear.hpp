@@ -13,9 +13,11 @@ protected:
 
 public:
 
-    Linear(Sum* lhs, int ub, int relation) : Constraint() {
+    Linear(std::shared_ptr<Sum> lhs, int ub, int relation) : Constraint() {
+//    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
 //        this->lhs = lhs;
+//        invariant = std::move(lhs);
         invariant = lhs;
         rhs = ub;
         type = LINEAR;
@@ -23,22 +25,22 @@ public:
         arguments.push_back(ub);
     }
 
-    Linear(Linear &c) : Constraint() {
-//        this->lhs = c.lhs;
-        invariant = c.invariant;
-        this->relation = c.relation;
-        this->rhs = c.rhs;
-        this->type = c.type;
-    }
+//    Linear(Linear &c) : Constraint() {
+////        this->lhs = c.lhs;
+//        invariant = c.invariant;
+//        this->relation = c.relation;
+//        this->rhs = c.rhs;
+//        this->type = c.type;
+//    }
 
-    Linear& operator=(const Linear &c) {
-//        this->lhs = c.lhs;
-        invariant = c.invariant;
-        this->relation = c.relation;
-        this->rhs = c.rhs;
-        this->type = c.type;
-        return *this;
-    }
+//    Linear& operator=(const Linear &c) {
+////        this->lhs = c.lhs;
+//        invariant = c.invariant;
+//        this->relation = c.relation;
+//        this->rhs = c.rhs;
+//        this->type = c.type;
+//        return *this;
+//    }
 
     ~Linear() {
 //        delete lhs;
@@ -150,13 +152,13 @@ public:
         if (invariant->getCurrentValue() <= rhs) {
             if (Violation != 0) {
                 std::cout << "failed test Linear" << std::endl;
-                std::cout << "Violation " << Violation << " lhs " << invariant << " rhs " << rhs << std::endl;
+                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
                 return false;
             }
         } else {
             if (Violation != 1) {
                 std::cout << "failed test Linear" << std::endl;
-                std::cout << "Violation " << Violation << " lhs " << invariant << " rhs " << rhs << std::endl;
+                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
                 return false;
             }
         }
@@ -166,7 +168,7 @@ public:
     bool testObj() {
         if (ViolationDegree != invariant->getCurrentValue() - rhs) {
             std::cout << "failed test Linear" << std::endl;
-            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << invariant << " rhs " << rhs << std::endl;
+            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << &invariant << " rhs " << rhs << std::endl;
             return false;
 
         }

@@ -21,8 +21,8 @@ protected:
     
 public:
     
-    Sum(std::vector<IntegerVariable*>* vars, std::vector<int>& c);
-    Sum(std::vector<IntegerVariable*>* vars, std::unordered_map<int,int>& map);
+    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c);
+    Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int,int>& map);
     
     
     Sum(const Sum &a);

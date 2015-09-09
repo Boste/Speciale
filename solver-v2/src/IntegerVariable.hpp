@@ -9,27 +9,29 @@ protected:
     //    Gecode::IntVar* VariablePointer;
     //    Gecode::IntVarArray* ArrayPointer;
     //    int ArrayID;
-//    int lb;
-//    int ub;
+    int lowerBound;
+    int upperBound;
     int vectorID;
-    int value=0;
+    int value = 0;
     std::vector<int> update;
     Gecode::IntVarArray* ArrayPointer;
     Gecode::IntVar* VariablePointer;
 
-    
+
 public:
-    IntegerVariable(int lowerbound, int upperbound,int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
-//        VariablePointer = vp;
-//        ArrayPointer = ap;
-//        lb = lowerbound;
-//        ub = upperbound;
+
+    IntegerVariable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
+        //        VariablePointer = vp;
+        //        ArrayPointer = ap;
+        lowerBound = lowerbound;
+        upperBound = upperbound;
         vectorID = id;
         value = 0;
     }
+
     void setCurrentValue(int val) {
         value = val;
-        
+
     }
 
     int getCurrentValue() {
@@ -51,16 +53,25 @@ public:
     Gecode::IntVar* getVariablePointer() {
         return VariablePointer;
     }
-    void setVariablePointer(Gecode::IntVar* gecodeVar) {
-        VariablePointer = gecodeVar;
+
+    void setVariablePointer(Gecode::IntVar& gecodeVar) {
+        VariablePointer = &gecodeVar;
     }
 
     Gecode::IntVarArray* getArrayPointer() {
         return ArrayPointer;
     }
-    ~IntegerVariable(){
-//        delete VariablePointer;
-        
+
+    int getLowerBound() {
+        return lowerBound;
+    }
+    int getUpperBound(){
+        return upperBound;
+    }
+
+    ~IntegerVariable() {
+        //        delete VariablePointer;
+
     }
 
     //    IntegerVariable(const IntegerVariable& orig);

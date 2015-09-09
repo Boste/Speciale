@@ -12,7 +12,7 @@
 
 class BPSolver : public GeneralSolver {
 protected:
-//    BP_Input *p_in;
+    //    BP_Input *p_in;
     //    int model;
     //    FloatVarArray varFloat;
     //    IntVarArray varInt;
@@ -27,25 +27,57 @@ public:
     //    BPSolver(/*const Gecode::InstanceOptions& opt, */BP_Input *in) :
 
     BPSolver(BP_Input *in) {
-        std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
+        //        std::vector<IntegerVariable*>* varInt;
+        //  
+        int counter = 0;
+
+        for (var intVar : in->getVars()) {
+            //            counter++;
+            //            std::cout << "adding variable number " << counter << std::endl;
+            createIntVar(intVar.lb, intVar.ub);
+            if (intVar.ub == 1) {
+                counter++;
+            }
+
+        }
+        std::cout << "Number of binary variables " << counter << std::endl;
+        
+        //        std::cout << "Variables created" << std::endl;
+        vector<IntegerVariable*>& varInt = getBinaryVariables();
+        //        for (unsigned i = 0; i < varInt->size(); i++) {
+        //            assert(varInt->at(i)->getID() == i);
+        //        }
+        //        std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
+        counter = 0;
         for (unsigned i = 0; i < in->getNcons(); i++) {
+            //            std::cout << "creating linear " << i << std::endl;
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
             vector<int> c(leftside.size());
-            vector<IntegerVariable*>* x = new vector<IntegerVariable*>();
+            if(leftside.size() == 1 ){
+                counter++;
+            }
+            //                        vector<IntegerVariable*> x(leftside.size());
+            vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
 
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
                 c.at(j) = static_cast<int> (e.coeff);
-                x->push_back(varInt->at(e.index));
+                //                x->push_back(varInt.at(e.index));
+                x->at(j) = varInt.at(e.index);
+                //                x.at(j) = varInt->at(e.index);
             }
             int upperbound = static_cast<int> (b.ub);
-            if (b.type == 5) {
-                //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
-                GeneralSolver::linear(c, x, EQ, upperbound, HARD);
-            } else {
-                //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
-                GeneralSolver::linear(c, x, LQ, upperbound, HARD);
+            //            std::cout << "posting" << std::endl;
+            //            std::cout << "constraint nr " << i << std::endl;
+            if (x->size() != 0) {
+                if (b.type == 5) {
+                    //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
+                    GeneralSolver::linear(c, *x, EQ, upperbound, HARD);
+                } else {
+                    //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
+                    GeneralSolver::linear(c, *x, LQ, upperbound, HARD);
+                }
             }
             delete x;
             // deleter den også pointer inden i vector?
@@ -55,22 +87,30 @@ public:
             //            std::cout << std::endl;
             //            sleep(1);
         }
-//        std::cout << "COnstraints posted" << std::endl;
+        std::cout <<  "Number of Singleton constraints " << counter << std::endl;
+        //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
-        vector<int> c(varInt->size());
-        for (unsigned i = 0; i < varInt->size(); i++) {
-            c.at(i) = static_cast<int> (in->getVars(i).objcoeff);
+        std::vector<int> c(varInt.size());
+        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
+
+        for (unsigned i = 0; i < varInt.size(); i++) {
+            c.at(i) = static_cast<int> (in->getVar(i).objcoeff);
+            x->at(i) = varInt.at(i);
         }
-        GeneralSolver::linear(c, varInt, LQ, 0, OBJ);
+
+        GeneralSolver::linear(c, *x, LQ, 0, OBJ);
+        delete x;
+        //        std::cout << "Model posted" << std::endl;
+        //        std::cout << "done " << std::endl;
         //        GeneralSolver::linear(*this, c, varInt, LQ, 0, Gecode::ICL_DOM, OBJ);
-//        std::cout << "obj posted" << std::endl;
+        //        std::cout << "obj posted" << std::endl;
         // Branch
         //        GeneralSolver::branch(*this, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     }
 
     ~BPSolver() {
-//        delete p_in;
+        //        delete p_in;
     }
 
     /// Constructor for cloning s

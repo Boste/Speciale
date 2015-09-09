@@ -13,15 +13,16 @@ ts((time > 0) ? new Gecode::Search::TimeStop(time) : NULL) {
 
 bool Multistop::stop(const Gecode::Search::Statistics& s, const Gecode::Search::Options& o) {
     if ((ns != NULL) && ns->stop(s, o)) {
-        std::cout <<  "Stopped becasue of Node limit" << std::endl;
-    }
+        std::cout <<  "Stopped because of Node limit" << std::endl;
+    } else 
     if ((fs != NULL) && fs->stop(s, o)) {
-        std::cout <<  "Stopped becasue of Fail limit" << std::endl;
-    }
+        std::cout <<  "Stopped because of Fail limit" << std::endl;
+    } else
     if ((ts != NULL) && ts->stop(s, o)) {
-        std::cout <<  "Stopped becasue of time limit" << std::endl;
+        std::cout <<  "Stopped because of time limit" << std::endl;
     }
     
+    called++;
     
     
     return

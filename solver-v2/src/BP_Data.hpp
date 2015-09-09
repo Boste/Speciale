@@ -73,11 +73,14 @@ public:
         return nvars;
     }
 
-    var getVars(const int j) const {
+    var getVar(const int j) const {
         assert(j >= 0 && j < nvars);
         return vars[j];
     }
 
+    vector<var> getVars() const {
+        return vars;
+    }
     int getDirection() const {
         return direction;
     }
@@ -133,6 +136,7 @@ public:
     int assignment(int var) const {
         return varAssignment[var];
     }
+
     void assign(int var, bool b);
 protected:
     const BP_Input& in;

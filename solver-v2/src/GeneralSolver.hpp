@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "LSSpace.hpp"
 #include <assert.h>
-#include "State.hpp"
+#include "Model.hpp"
 #include <gecode/driver.hh>
 #include <gecode/int.hh>
 #include "Constants.hpp"
@@ -15,6 +15,7 @@
 #include "Multistop.hpp"
 #include "Sum.hpp"
 #include <memory>
+#include "State.hpp"
 //#include "Invariant.hpp"
 //#include "Constraint.hpp"
 #include "Clock.hpp"
@@ -36,12 +37,15 @@ private:
     //    shared_ptr<LSSpace> LS(new LSSpace());
 
     // Should be unique
-    std::shared_ptr<LSSpace> LS = std::make_shared<LSSpace>();
+    //    std::unique_ptr<LSSpace> LS = std::make_shared<LSSpace>();
 
-    std::shared_ptr<State> st = std::make_shared<State> ();
+    std::shared_ptr<Model> model = std::make_shared<Model> ();
+    std::shared_ptr<State> st = std::make_shared<State>(model);
+    std::unique_ptr<LSSpace> LS = std::unique_ptr<LSSpace> (new LSSpace(model));
 
     // Should be unique
-    std::shared_ptr<GecodeSolver> GS = std::make_shared<GecodeSolver>(st);
+    //    std::shared_ptr<GecodeSolver> GS = std::make_shared<GecodeSolver>(st);
+    std::unique_ptr<GecodeSolver> GS = std::unique_ptr<GecodeSolver> (new GecodeSolver(model));
     //    GecodeSolver* GS = new GecodeSolver(st);
 
 
@@ -52,7 +56,7 @@ public:
         //        Random::Seed(SEED);
         //        LS = std::make_shared<LSSpace>(new LSSpace());
         //        GS = std::make_shared<GecodeSolver>(new GecodeSolver());
-        //        st = std::make_shared<State> (new State());
+        //        st = std::make_shared<Model> (new Model());
 
 
     }
@@ -64,8 +68,7 @@ public:
     }
 
     GeneralSolver& operator=(const GeneralSolver &a) {
-        this->st = a.st;
-        //        std::cout << "hest " << std::endl;
+        this->model = a.model;
         return *this;
 
     }
@@ -74,10 +77,18 @@ public:
     // Skal Gecode::IntConLevel icl være et argument?
     // ingen shared i det her kald
 
-    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>* variables, int relation, int ub, unsigned priority) {
-
+    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority) {
+//    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority) {
+//    void linear(std::vector<int>& coefficients, std::array<IntegerVariable*>& variables, int relation, int ub, unsigned priority) {
+        //        std::cout << "make linear" << std::endl;
         //        std::vector<IntegerVariable*>* vars = variables;
         //        std::vector<int> c = coefficients;
+//        std::cout << variables.size() <<  " " << coefficients.size() << std::endl;
+        
+        if(variables.size()==0){
+            std::cout << "Constraint nr " << model->getInvariants().size() << std::endl;
+        }
+//        std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(variables, coefficients);
         std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(variables, coefficients);
         //        Sum* sumInvariant = new Sum(vars,coefficients);
 
@@ -89,16 +100,18 @@ public:
         //        std::cout << sumInvariant << std::endl;
         int variableNumber;
         int invariantNumber;
-        for (IntegerVariable* iv : *variables) {
+//        std::cout << "for variable" << std::endl;
+        for (IntegerVariable* iv : variables) {
+//        for (IntegerVariable* iv : variables) {
             //        for (unsigned i = 0; i < coefficients.size(); i++) {
 
             variableNumber = iv->getID();
-            invariantNumber = st->getInvariants()->size();
+            invariantNumber = model->getInvariants().size();
 
 
-            st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+            model->getAllIntegerVariables().at(variableNumber)->addToUpdate(invariantNumber);
         }
-        st->getInvariants()->push_back(sumInvariant);
+        model->getInvariants().push_back(sumInvariant);
         //        std::cout << sumInvariant->VariablePointers << std::endl;
         //        std::cout << "first invariant size " << st->getInvariants()->at(0)->VariablePointers->size() << std::endl;
         //        sleep(1);
@@ -106,26 +119,35 @@ public:
         //        std::cout << "invariant just added size " << st->getInvariants()->at(st->getInvariants()->size()-1)->VariablePointers->size() << " vs " << coefficients->size() << std::endl;
         std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(sumInvariant, ub, relation);
         // add to obj fnc
+        
         if (priority == OBJ) {
-            if (st->getConstraints()->size() == 0) {
-                std::vector<std::shared_ptr < Constraint>>*prioVector = new std::vector<std::shared_ptr < Constraint >> ();
-                st->getConstraints()->push_back(prioVector);
+            if (model->getConstraints().size() == 0) {
+                std::shared_ptr<std::vector<std::shared_ptr < Constraint>>> prioVector = std::make_shared<std::vector<std::shared_ptr < Constraint >>>();
+                model->getConstraints().push_back(prioVector);
             }
-            sumInvariant->setUsedByObjective(st->getConstraintsWithPriority(0)->size());
-            st->getObjectives()->push_back(LinearConstraint);
+            sumInvariant->setUsedByObjective(model->getConstraintsWithPriority(0)->size());
+            model->getObjectives()->push_back(LinearConstraint);
         } else {
-
+//            GS->linear(coefficients, &variables, relation, ub);
+//            std::cout << "Skal Gecode have constraints? " << std::endl;
             GS->linear(coefficients, variables, relation, ub);
-            // What should be given to LSSpace
-            if (st->getConstraints()->size() <= priority) {
-                for (unsigned i = st->getConstraints()->size(); i <= priority; i++) {
-                    std::vector<std::shared_ptr < Constraint>>*prioVector = new std::vector<std::shared_ptr < Constraint >> ();
-                    st->getConstraints()->push_back(prioVector);
+            //                        GS->print(std::cout );
+            //                        sleep(1);
+            //             What should be given to LSSpace
+            if (model->getConstraints().size() <= priority) {
+                for (unsigned i = model->getConstraints().size(); i <= priority; i++) {
+                    std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prioVector = std::make_shared<std::vector<std::shared_ptr < Constraint >>> ();
+                    model->getConstraints().push_back(prioVector);
                 }
             }
-            std::vector<std::shared_ptr < Constraint>>*prio = st->getConstraintsWithPriority(priority);
-            sumInvariant->setUsedByConstraint(st->getConstraintsWithPriority(priority)->size(), priority);
-            st->getConstraintsWithPriority(priority)->push_back(LinearConstraint);
+//            std::cout << "så hvad nu? " << std::endl;
+            std::shared_ptr<std::vector<std::shared_ptr < Constraint>>> prio = model->getConstraintsWithPriority(priority);
+//            std::cout << "prio? " << std::endl;
+//            std::cout << prio->size() << std::endl;
+            sumInvariant->setUsedByConstraint(prio->size(), priority);
+//            std::cout << "set used by? " << std::endl;
+            prio->push_back(LinearConstraint);
+//            std::cout <<  "tjaa det var så ikke linear" << std::endl;
 
         }
     }
@@ -137,22 +159,38 @@ public:
     //        }
     //    }
 
-    std::vector<IntegerVariable*>* createIntVars(unsigned numberOfVariables, int lb, int ub) {
+    //    std::vector<IntegerVariable*>* createIntVars(unsigned numberOfVariables, int lb, int ub) {
+
+    void createIntVars(unsigned numberOfVariables, int lb, int ub) {
         // Given to gecode space
         //        Gecode::IntVarArray vars(*this, numberOfVariables, lb, ub);
-        st->addIntegerVariable(numberOfVariables, lb, ub);
 
-        GS->createGecodeVariables(st);
+
+        for (unsigned i = 0; i < numberOfVariables; i++) {
+            createIntVar(lb, ub);
+
+        }
 
         // Looks bad but does not copy the variables. Points to two different places in memory but the variables in the two arrays have the same memory address. 
         //        IntVars = vars;
         // Given to LS space
         //        return st->addIntegerVariable(&vars);
-        return st->getIntegerVariables();
-
-
+        //        return model->getAllIntegerVariables();
         //        return LSSpace::addIntVariablesToLS(IntVars);
         //        return vars;
+    }
+    ///Create a single variable with given lower and upper bound
+
+    void createIntVar(int lb, int ub) {
+        model->addIntegerVariable(lb, ub);
+        GS->createGecodeVariable(lb, ub);
+        //        std::cout <<  "integer var pointer " << newVar << std::endl;
+        //        std::cout << lb << " " << ub << std::endl;
+
+    }
+
+    std::vector<IntegerVariable*>& getBinaryVariables() {
+        return model->getAllIntegerVariables();
     }
 
     //    Gecode::BoolVarArray createBoolVars(int amount, int lb, int ub) {
@@ -181,6 +219,9 @@ public:
     //        return new GeneralSolver(share, *this);
     //    }
 
+
+    /// Only for testing, should be removed 
+
     void print(std::vector<IntegerVariable>& IntegerVariables) {
         std::cout << "{";
         for (unsigned i = 0; i < IntegerVariables.size(); i++) {
@@ -201,18 +242,25 @@ public:
 
 
         //        GeneralSolver* s = GecodeSearch(so);
-        GS->branch(true);
-        if (GS->initialize(TimeForGecode)) {
-            //            
+        //        GS->print(std::cout);
+        //        fixVariables();
+        GS->createArray();
+//        GS->branch(true);
+        if (GS->initialize(TimeForGecode,true)) {
+
         } else {
             std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
             int timesRelaxed = 0;
-            bool failed = true;
-            while (failed && timesRelaxed != 5) {
+            bool solutionFound = false;
+            while (!solutionFound && timesRelaxed != 5) {
                 relax(timesRelaxed);
                 timesRelaxed++;
-                GS->branch(false);
-                failed = GS->initialize(TimeForGecode);
+//                GS->branch(false);
+                solutionFound = GS->initialize(TimeForGecode,false);
+            }
+            if (!solutionFound) {
+                std::cout << "Relaxation failed" << std::endl;
+                exit(1);
             }
             //        assert(s != NULL);
             //        assert(!s->failed());
@@ -220,6 +268,9 @@ public:
             //
             //                this->print(cout);
         }
+        //        fixVariables();
+        initializeLS();
+
         //        delete ms;
         //        delete so;
     }
@@ -227,111 +278,125 @@ public:
     /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
     /// Only works for binary
 
-    GeneralSolver* relax(int timesRelaxed) {
 
-        /*
-        relaxed->createIntVars(IntVars.size(), 0, 1);
-        IntVars = relaxed->IntVars;
+    /// Different relaxation can be chosen (not atm) needs to create a new GecodeSolver (Space) and recreate some 
+    /// of the calls the user made (those that should not be relaxed).
+
+    void relax(int timesRelaxed) {
+//        std::cout << "relax" << std::endl;
+
+        GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+
+        for (IntegerVariable* iv : model->getAllIntegerVariables()) {
+            int lb = iv->getLowerBound();
+            int ub = iv->getUpperBound();
+
+
+            GS->createGecodeVariable(lb, ub);
+        }
+        GS->createArray();
+        simpleRelax(timesRelaxed);
+        //        IntVars = relaxed->IntVars;
 
         // Remake hard constraints with new gecode variables. 
         //        for (Constraint* cons : st->getHardConstraints()) {
-        for (unsigned i = 0; i < st->getHardConstraints()->size(); i++) {
-            Constraint* cons = st->getHardConstraints()->at(i);
-            std::vector<IntegerVariable*>* variables = new std::vector<IntegerVariable*>();
-            //            std::vector<int>* coefficients = new std::vector<int>();
-            if (cons->getType() == LINEAR) {
-                vector<IntegerVariable*>* oldVars = cons->getInvariant()->VariablePointers;
-                //                std::cout <<  oldVars->size() << std::endl;
-                std::unordered_map<int, int> coefficients = cons->getInvariant()->coefficients;
-                for (unsigned j = 0; j < oldVars->size(); j++) {
-                    IntegerVariable* var = oldVars->at(j);
-                    //                for (IntegerVariable* var : oldVars) {
-                    variables->push_back(relaxed->st->getIntegerVariables()->at(var->getID()));
-                    //                    coefficients->push_back()
-                }
-                //                std::cout << "Sum1" << std::endl;
-                Sum* sumInvariant = new Sum(variables, coefficients);
-                int variableNumber;
-                int invariantNumber;
+        //        for (unsigned i = 0; i < st->getHardConstraints()->size(); i++) {
+        //            Constraint* cons = st->getHardConstraints()->at(i);
+        //            std::vector<IntegerVariable*>* variables = new std::vector<IntegerVariable*>();
+        //            //            std::vector<int>* coefficients = new std::vector<int>();
+        //            if (cons->getType() == LINEAR) {
+        //                vector<IntegerVariable*>* oldVars = cons->getInvariant()->VariablePointers;
+        //                //                std::cout <<  oldVars->size() << std::endl;
+        //                std::unordered_map<int, int> coefficients = cons->getInvariant()->coefficients;
+        //                for (unsigned j = 0; j < oldVars->size(); j++) {
+        //                    IntegerVariable* var = oldVars->at(j);
+        //                    //                for (IntegerVariable* var : oldVars) {
+        //                    variables->push_back(relaxed->st->getIntegerVariables()->at(var->getID()));
+        //                    //                    coefficients->push_back()
+        //                }
+        //                //                std::cout << "Sum1" << std::endl;
+        //                Sum* sumInvariant = new Sum(variables, coefficients);
+        //                int variableNumber;
+        //                int invariantNumber;
+        //
+        //                for (unsigned j = 0; j < oldVars->size(); j++) {
+        //                    variableNumber = variables->at(j)->getID();
+        //                    invariantNumber = relaxed->st->getInvariants()->size();
+        //                    relaxed->st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+        //                }
+        //                relaxed->st->getInvariants()->push_back(sumInvariant);
+        //                int relation = cons->getArgument(0);
+        //                int ub = cons->getArgument(1);
+        //                Linear* LinearConstraint = new Linear(sumInvariant, ub, relation);
+        //                //                Gecode::IntArgs c(coefficients->size());
+        //                //                Gecode::IntVarArgs x(coefficients->size());
+        //                //                for (unsigned j = 0; j < coefficients->size(); j++) {
+        //                //                    c[j] = coefficients->at(j);
+        //                //                    x[j] = *(variables->at(j)->getVariablePointer());
+        //                //                }
+        //                //                switch (relation) {
+        //                //                    case EQ:
+        //                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_EQ, ub, Gecode::ICL_VAL);
+        //                //                        break;
+        //                //                    case LQ:
+        //                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_LQ, ub, Gecode::ICL_VAL);
+        //                //                        break;
+        //                //                    case LE:
+        //                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_LE, ub, Gecode::ICL_VAL);
+        //                //                        break;
+        //                //                    case GQ:
+        //                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_GQ, ub, Gecode::ICL_VAL);
+        //                //                        break;
+        //                //                    case GR:
+        //                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_GR, ub, Gecode::ICL_VAL);
+        //                //                        break;
+        //                //                }
+        //
+        //                // What should be given to LSSpace
+        //                sumInvariant->usedByConstraint(relaxed->st->getHardConstraints()->size());
+        //                relaxed->st->getHardConstraints()->push_back(LinearConstraint);
+        //            } else {
+        //                std::cout << "It is not linear :S" << std::endl;
+        //            }
+        //        }
+        //        // Remake objective func with new gecode variables. 
+        //        //        for (Constraint* cons : st->getObjectives()) {
+        //        for (int i = 0; i < st->getObjectives()->size(); i++) {
+        //            Constraint* cons = st->getObjectives()->at(i);
+        //            std::vector<IntegerVariable*>* variables = new std::vector<IntegerVariable*>();
+        //            //            std::vector<int>* coefficients = new std::vector<int>();
+        //            if (cons->getType() == LINEAR) {
+        //                vector<IntegerVariable*>* oldVars = cons->getInvariant()->VariablePointers;
+        //                std::unordered_map<int, int> coefficients = cons->getInvariant()->coefficients;
+        //                //                for (IntegerVariable* var : oldVars) {
+        //                for (unsigned j = 0; j < oldVars->size(); j++) {
+        //                    IntegerVariable* var = oldVars->at(j);
+        //                    variables->push_back(relaxed->st->getIntegerVariables()->at(var->getID()));
+        //                    //                    coefficients->push_back()
+        //                }
+        //                //                std::cout << "sum2" << std::endl;
+        //                Sum* sumInvariant = new Sum(variables, coefficients);
+        //                int variableNumber;
+        //                int invariantNumber;
+        //
+        //                for (unsigned j = 0; j < oldVars->size(); j++) {
+        //                    variableNumber = variables->at(j)->getID();
+        //                    invariantNumber = relaxed->st->getInvariants()->size();
+        //                    relaxed->st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
+        //                }
+        //                relaxed->st->getInvariants()->push_back(sumInvariant);
+        //                int relation = cons->getArgument(0);
+        //                int ub = cons->getArgument(1);
+        //                Linear* LinearConstraint = new Linear(sumInvariant, ub, relation);
+        //
+        //                // What should be given to LSSpace
+        //                sumInvariant->usedByObjective(relaxed->st->getObjectives()->size());
+        //                relaxed->st->getObjectives()->push_back(LinearConstraint);
+        //            } else {
+        //                std::cout << "it is not linear :S" << std::endl;
+        //            }
+        //        }
 
-                for (unsigned j = 0; j < oldVars->size(); j++) {
-                    variableNumber = variables->at(j)->getID();
-                    invariantNumber = relaxed->st->getInvariants()->size();
-                    relaxed->st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
-                }
-                relaxed->st->getInvariants()->push_back(sumInvariant);
-                int relation = cons->getArgument(0);
-                int ub = cons->getArgument(1);
-                Linear* LinearConstraint = new Linear(sumInvariant, ub, relation);
-                //                Gecode::IntArgs c(coefficients->size());
-                //                Gecode::IntVarArgs x(coefficients->size());
-                //                for (unsigned j = 0; j < coefficients->size(); j++) {
-                //                    c[j] = coefficients->at(j);
-                //                    x[j] = *(variables->at(j)->getVariablePointer());
-                //                }
-                //                switch (relation) {
-                //                    case EQ:
-                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_EQ, ub, Gecode::ICL_DOM);
-                //                        break;
-                //                    case LQ:
-                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_LQ, ub, Gecode::ICL_DOM);
-                //                        break;
-                //                    case LE:
-                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_LE, ub, Gecode::ICL_DOM);
-                //                        break;
-                //                    case GQ:
-                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_GQ, ub, Gecode::ICL_DOM);
-                //                        break;
-                //                    case GR:
-                //                        Gecode::linear(relaxed, c, x, Gecode::IRT_GR, ub, Gecode::ICL_DOM);
-                //                        break;
-                //                }
-
-                // What should be given to LSSpace
-                sumInvariant->usedByConstraint(relaxed->st->getHardConstraints()->size());
-                relaxed->st->getHardConstraints()->push_back(LinearConstraint);
-            } else {
-                std::cout << "It is not linear :S" << std::endl;
-            }
-        }
-        // Remake objective func with new gecode variables. 
-        //        for (Constraint* cons : st->getObjectives()) {
-        for (int i = 0; i < st->getObjectives()->size(); i++) {
-            Constraint* cons = st->getObjectives()->at(i);
-            std::vector<IntegerVariable*>* variables = new std::vector<IntegerVariable*>();
-            //            std::vector<int>* coefficients = new std::vector<int>();
-            if (cons->getType() == LINEAR) {
-                vector<IntegerVariable*>* oldVars = cons->getInvariant()->VariablePointers;
-                std::unordered_map<int, int> coefficients = cons->getInvariant()->coefficients;
-                //                for (IntegerVariable* var : oldVars) {
-                for (unsigned j = 0; j < oldVars->size(); j++) {
-                    IntegerVariable* var = oldVars->at(j);
-                    variables->push_back(relaxed->st->getIntegerVariables()->at(var->getID()));
-                    //                    coefficients->push_back()
-                }
-                //                std::cout << "sum2" << std::endl;
-                Sum* sumInvariant = new Sum(variables, coefficients);
-                int variableNumber;
-                int invariantNumber;
-
-                for (unsigned j = 0; j < oldVars->size(); j++) {
-                    variableNumber = variables->at(j)->getID();
-                    invariantNumber = relaxed->st->getInvariants()->size();
-                    relaxed->st->getIntegerVariables()->at(variableNumber)->addToUpdate(invariantNumber);
-                }
-                relaxed->st->getInvariants()->push_back(sumInvariant);
-                int relation = cons->getArgument(0);
-                int ub = cons->getArgument(1);
-                Linear* LinearConstraint = new Linear(sumInvariant, ub, relation);
-
-                // What should be given to LSSpace
-                sumInvariant->usedByObjective(relaxed->st->getObjectives()->size());
-                relaxed->st->getObjectives()->push_back(LinearConstraint);
-            } else {
-                std::cout << "it is not linear :S" << std::endl;
-            }
-        }
-         */
 
         //        GeneralSolver* s;
         //        if (timesRelaxed > 0 || st->getSoftConstraints()->size() == 0) {
@@ -352,65 +417,45 @@ public:
     }
 
     void simpleRelax(int timesRelaxed) {
+        std::cout << "SimpleRelasadasdasdx" << std::endl;
         //        std::cout << "do nothing" << std::endl;
-        for (unsigned i = 1; i < st->getConstraints()->size()/*-((timesRelaxed+1)*100)*/; i++) {
-//        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
-            std::vector<std::shared_ptr < Constraint>>*prio = st->getConstraintsWithPriority(i);
+//        std::cout << model->getObjectives()->at(0)->getInvariant()->VariablePointers->size() << std::endl;
+        for (unsigned i = 1; i < model->getConstraints().size()/*-((timesRelaxed+1)*100)*/; i++) {
+            //        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
+            std::shared_ptr<std::vector<std::shared_ptr < Constraint>>> prio = model->getConstraintsWithPriority(i);
             //            for (unsigned j = 0; j < prio->size(); j++) {
             for (std::shared_ptr<Constraint> cons : *prio) {
-//                std::shared_ptr<Constraint> cons = prio->at(i);
+//                std::cout << __LINE__ << std::endl;
                 std::shared_ptr<Invariant> invar = cons->getInvariant();
                 //                Invariant* invar = cons->getInvariant();
-                std::vector<IntegerVariable*>* integerVariables = invar->VariablePointers;
+                std::vector<IntegerVariable*>& integerVariables = invar->VariablePointers;
                 if (invar->getType() == SUM) { // otherwise it is in objective function atm.
-                    Gecode::IntArgs c(integerVariables->size());
-                    Gecode::IntVarArgs x(integerVariables->size());
-                    for (unsigned j = 0; j < integerVariables->size(); j++) {
-                        int variableID = integerVariables->at(j)->getID();
-//                        for(IntegerVariable* iv : *integerVariables){
-                            
-//                            int variableID = iv->getID();
-                        c[j] = invar->coefficients.at(variableID);
-//                        x[j] = *(iv->getVariablePointer());
-                        x[j] = *(integerVariables->at(j)->getVariablePointer());
-                        //                    std::cout << __LINE__ << std::endl;
+                    //                    Gecode::IntArgs c(integerVariables->size());
+//                    std::cout << __LINE__ << std::endl;
+//                    std::cout << integerVariables->size() << std::endl;
+                    std::vector<int> c(integerVariables.size());
+//                    std::cout << __LINE__ << std::endl;
+
+                    //                    Gecode::IntVarArgs x(integerVariables->size());
+                    for (unsigned j = 0; j < integerVariables.size(); j++) {
+//                        std::cout << __LINE__ << std::endl;
+
+                        int variableID = integerVariables.at(j)->getID();
+//                        std::cout << __LINE__ << std::endl;
+
+                        //                        for(IntegerVariable* iv : *integerVariables){
+
+                        //                            int variableID = iv->getID();
+                        c[j] = invar->coefficients.at(variableID); //                    std::cout << __LINE__ << std::endl;
 
                     }
-                    //                std::cout << __LINE__ << std::endl;
 
-                    //                Constraint* cons = hardConstraints->at(invar->getUsedInConstraint());
-                    //                std::cout << __LINE__ << std::endl;
-                    //                std::cout << "give to gecode" << std::endl;
                     int relation = cons->getArgument(0);
                     int ub = cons->getArgument(1);
-                    //                switch (relation) {
-                    //                    case EQ:
-                    //                        Gecode::linear(*this, c, x, Gecode::IRT_EQ, ub, Gecode::ICL_DOM);
-                    //                        break;
-                    //                    case LQ:
-                    //                        Gecode::linear(*this, c, x, Gecode::IRT_LQ, ub, Gecode::ICL_DOM);
-                    //                        break;
-                    //                    case LE:
-                    //                        Gecode::linear(*this, c, x, Gecode::IRT_LE, ub, Gecode::ICL_DOM);
-                    //                        break;
-                    //                    case GQ:
-                    //                        Gecode::linear(*this, c, x, Gecode::IRT_GQ, ub, Gecode::ICL_DOM);
-                    //                        break;
-                    //                    case GR:
-                    //                        Gecode::linear(*this, c, x, Gecode::IRT_GR, ub, Gecode::ICL_DOM);
-                    //                        break;
-                    //                }
-                    //            Constraint* cons = hardConstraints->at(invar->usedInObjectiveNr);
-                    // irt (eq, lq), ub, og IntegerConsisdencyLevel. Hvor skal jeg få dem fra?
-
-
-
-                    //        std::cout << "før gecode" << std::endl;
-
-                    //            Gecode::linear(relaxed, c, x, irt, ub, icl);
-                    //            st->getInvariants()->at(0).
+//                    std::cout << "posting linear" << std::endl;
+                    GS->linear(c, integerVariables, relation, ub);
                 } else {
-                    std::cout << "type should be SUM and assert should prevent this. Then type must be set to other than 1" << std::endl;
+                    std::cout << "type should be SUM and assert should prevent this. Then type is set to " << invar->getType() << std::endl;
                 }
             }
         }
@@ -427,6 +472,7 @@ public:
 
 
         st->initializeObjective();
+        model->initialValue = st->getSolutionValue();
         //        LS->initializeInvariants(st);
         //        std::cout << __LINE__ << std::endl;
         //
@@ -449,7 +495,7 @@ public:
     //    }
 
     int getInitialValue() {
-        return LS->initialValue;
+        return st->getObjectiveValue();
     }
 
     void optimizeSolution(int time) {
@@ -464,12 +510,12 @@ public:
     //    }
 
     void printCurrent() {
-        if (st->getIntegerVariables()->size() > 0) {
+        if (model->getIntegerVariables().size() > 0) {
             std::cout << "Integer Variables:" << std::endl;
         }
 
-        for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
-            std::cout << st->getIntegerVariables()->at(i)->getCurrentValue() << " ";
+        for (unsigned i = 0; i < model->getIntegerVariables().size(); i++) {
+            std::cout << model->getIntegerVariables().at(i)->getCurrentValue() << " ";
             //        std::cout << IntVarVector[i].VariablePointer << " ";
 
         }

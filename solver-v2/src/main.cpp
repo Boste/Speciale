@@ -89,10 +89,11 @@ int main(int argc, char* argv[]) {
     //    size_t peakSize3 = getPeakRSS();
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
-    //    delete test;
-    BPSolver* model = new BPSolver(input);
-    std::cout << "Initialize solution" << std::endl;
+    //    delete test;  
+    BPSolver* userModel = new BPSolver(input);
 
+
+    std::cout << "Initialize solution" << std::endl;
     //Need my own option class
 
     //    so->stop = ms;
@@ -100,7 +101,8 @@ int main(int argc, char* argv[]) {
 
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     //    GeneralSolver* GS = m->InitialSolution(so);
-    model->InitialSolution(TimeForGecode);
+    userModel->InitialSolution(TimeForGecode);
+
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
@@ -117,13 +119,12 @@ int main(int argc, char* argv[]) {
     std::cout << "BEGINING LOCALSEARCH \n "
             "######################################################################################################### \n" << std::endl;
 
-    //    exit(1);
 
     //    m->printCurrent();
-    
-    model->initializeLS();
-    model->optimizeSolution(time);
-    std::cout << model->getInitialValue() << " "; // value of solution gecode found
+
+    //    userModel->initializeLS();
+    userModel->optimizeSolution(time);
+    std::cout << userModel->getInitialValue() << " "; // value of solution gecode found
     std::cout << iniTime << " "; // time for initializing problem 
     std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 
@@ -148,7 +149,7 @@ int main(int argc, char* argv[]) {
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
-    delete model;
+    delete userModel;
     delete input;
 
     //    m->printCurrent();
@@ -208,4 +209,54 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+/*
+GeneralSolver* userModel = new GeneralSolver();
+    for (var intVar : input->getVars()) {
+        //            counter++;
+        //            std::cout << "adding variable number " << counter << std::endl;
+        userModel->createIntVar(intVar.lb, intVar.ub);
+    }
+    vector<IntegerVariable*>* varInt = userModel->getBinaryVariables();
+    //        for (unsigned i = 0; i < varInt->size(); i++) {
+    //            assert(varInt->at(i)->getID() == i);
+    //        }
+    //        std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
+    for (unsigned i = 0; i < input->getNcons(); i++) {
+        const std::vector<elem> leftside = input->getMatcoeff(i);
+        bounds b = input->getBterms(i);
+        vector<int> c(leftside.size());
 
+        vector<IntegerVariable*> x(leftside.size());
+        //        vector<IntegerVariable*>* x = new vector<IntegerVariable*>();
+
+        for (unsigned j = 0; j < leftside.size(); j++) {
+            elem e = leftside[j];
+            c.at(j) = static_cast<int> (e.coeff);
+            //            x->push_back(varInt->at(e.index));
+            x.at(j) = varInt->at(e.index);
+        }
+        int upperbound = static_cast<int> (b.ub);
+        if (b.type == 5) {
+            //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
+            userModel->linear(c, x, EQ, upperbound, HARD);
+        } else {
+            //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
+            userModel->linear(c, x, LQ, upperbound, HARD);
+        }
+        //            delete x;
+        // deleter den også pointer inden i vector?
+        //            delete x;
+        //            delete c;
+        //            this->print(std::cout);
+        //            std::cout << std::endl;
+        //            sleep(1);
+    }
+
+    // Add objective function
+    vector<int> c(varInt->size());
+    for (unsigned i = 0; i < varInt->size(); i++) {
+        c.at(i) = static_cast<int> (input->getVar(i).objcoeff);
+    }
+
+    userModel->linear(c, *varInt, LQ, 0, OBJ);
+ */

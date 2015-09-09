@@ -13,7 +13,7 @@ PROG=xyz
 MAKE=make
 LIBDIR=../lib
 #GECODE_LINKS=-lgecodegist -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat     Try without gist
-GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat
+GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport #-lgecodedriver  -lgecodeminimodel -lgecodeset -lgecodefloat
 
 #COIN = ${HOME}/Coin/coin-CoinUtils
 #BOOST = ${HOME}/boost/boost_1_57_0
@@ -31,7 +31,7 @@ LDFLAGS = -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/
 LD=g++
 CXX=g++
 
-CXXFLAGS = -std=c++11 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
+CXXFLAGS = -std=c++14 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
 CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 #CPPFLAGS = -I$(EASYLOCAL)/include -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 LDFLAGS +=  -pthread -Wl,--rpath,$(GECODE_HOME) -Wl,--rpath,$(COIN)/lib -L${GECODE_HOME} -L$(COIN)/lib#-Wl, --rpath,$(LIBDIR)
@@ -40,7 +40,7 @@ LIBS += ${GECODE_LINKS} -lCoinUtils -lz -llapack -lblas -lm -lbz2
 #SOURCE_FILES = main.cpp BP_Data.cpp LSSpace.cpp GeneralSolver.cpp ../include/constraints/linear.cpp Sum.cpp #../include/constraints/invariant.cpp #IntegerVariable.cpp
 # BP_Basics.cpp BP_Helpers.cpp 
 # ../include/constraints/Equal.cpp ../include/constraints/LinearComb.cpp ../include/constraints/Constraint.cpp ../include/constraints/ConstraintSystem.cpp
-OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  IntegerVariable.o Sum.o State.o NeighborhoodExplorer.o Random.o Clock.o Multistop.o GecodeSolver.o # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o
+OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  IntegerVariable.o Sum.o Model.o State.o NeighborhoodExplorer.o Random.o Clock.o Multistop.o GecodeSolver.o # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o
 # BP_Basics.o BP_Helpers.o 
 #../include/constraints/Equal.o ../include/constraints/LinearComb.o ../include/constraints/Constraint.o ../include/constraints/ConstraintSystem.o
 #HEADER_FILES = BP_Data.hpp Constants.hpp LSSpace.hpp GeneralSolver.hpp ../include/constraints/Sum.hpp ../include/constraints/linear.hpp IntegerVariable.hpp invariant.hpp

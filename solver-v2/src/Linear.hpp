@@ -123,7 +123,7 @@ public:
 
     int updateViolationDegree() {
         ViolationDegree += DeltaViolationDegree;
-
+//        std::cout << "uodating violation degree " << ViolationDegree << std::endl; 
         return DeltaViolationDegree;
     }
     //    int updateViolationDegree() {

@@ -5,12 +5,14 @@
 
 //using namespace Gecode;
 
-LSSpace::LSSpace() {
+LSSpace::LSSpace(std::shared_ptr<Model> model) {
+    this->model = model;
+
     //        std::cout << "constructed" << std::endl;
 
 }
 
-//std::vector<IntegerVariable*>* LSSpace::addIntVariablesToState(Gecode::IntVarArray* vars) {
+//std::vector<IntegerVariable*>* LSSpace::addIntVariablesToModel(Gecode::IntVarArray* vars) {
 //    return 
 //}
 
@@ -39,10 +41,10 @@ LSSpace::LSSpace() {
 //}
 
 void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
-    NeighborhoodExplorer* NE = new NeighborhoodExplorer();
+    NeighborhoodExplorer* NE = new NeighborhoodExplorer(model);
     //    std::cout << "NE created" << std::endl;
     //    std::cout << "Segmentation fault right after this " << std::endl;
-    IntegerVariable* var = st->getIntegerVariable(0);
+    IntegerVariable* var = model->getIntegerVariable(0);
     //    std::cout << "segmentation fault before this" << std::endl;
     Move* mv = new Move(var, 1 - var->getCurrentValue() - var->getCurrentValue(), FLIP);
     //        std::cout << __LINE__ << std::endl;
@@ -53,17 +55,19 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     double timelimit = (double) time;
     double usedTime = 0;
     std::clock_t start = std::clock();
-    int randomMoves = st->getNumberOfVariables() / 5;
+    st->saveSolution();
+    int randomMoves = model->getIntegerVariables().size() / 5;
+    
     //    std::cout << "Number of random moves " << randomMoves << std::endl;
     //    std::cout << "Timelimit " << timelimit << std::endl;
-//        std::cout << "optimize" << std::endl;
+    //        std::cout << "optimize" << std::endl;
 
-    mv->first = st->getIntegerVariable(0);
-//        std::cout << "optimize" << std::endl;
+    mv->first = model->getIntegerVariable(st->maskAt(0));
+    //        std::cout << "optimize" << std::endl;
 
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-    while (NE->bestImprovement(mv, st)) {
-//        std::cout << __LINE__ << std::endl;
+    while (NE->bestImprovement(mv,st)) {
+        //        std::cout << __LINE__ << std::endl;
 
 
         iterations++;
@@ -72,7 +76,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
         //            sleep(5);
         //        }
     }
-//    std::cout << "in optimize" << std::endl;
+    //    std::cout << "in optimize" << std::endl;
     if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
         st->saveSolution();
         std::cout << "improved solution value to: " << st->getSolutionValue() << " after " << iterations << " iterations" << std::endl;
@@ -83,7 +87,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     //    }
     while (usedTime < timelimit) {
         for (int i = 0; i < randomMoves; i++) {
-            NE->randomWalk(mv, st);
+            NE->randomWalk(mv,st);
             iterations++;
             //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
@@ -91,9 +95,9 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
             //            }
         }
         //        std::cout << "objective value after random moves " << st->getObjectiveValue() << std::endl;
-        mv->first = st->getIntegerVariable(0);
+        mv->first = model->getIntegerVariable(0);
         mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-        while (NE->bestImprovement(mv, st)) {
+        while (NE->bestImprovement(mv,st)) {
             iterations++;
             //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
@@ -114,17 +118,28 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
     std::cout << "Time used " << usedTime << std::endl;
+    std::cout << "obj val " << st->getObjectiveValue() << std::endl;
 
 
     st->recalculateAll();
-    std::vector<int>* sol = st->getSolution();
-    for (unsigned i = 0; i < sol->size(); i++) {
-        IntegerVariable* var = st->getIntegerVariable(i);
-        mv->first = var;
-        mv->deltaValueFirst = sol->at(i) - var->getCurrentValue();
-        NE->makeMove(mv, st);
+//    std::cout << "obj val " << st->getObjectiveValue() << std::endl;
 
+    std::vector<int>* sol = st->getSolution();
+    for (IntegerVariable* iv : model->getAllIntegerVariables()) {
+        mv->first = iv;
+        mv->deltaValueFirst = sol->at(iv->getID()) - iv->getCurrentValue();
+        NE->makeMove(mv, st);
     }
+//    st->recalculateAll();
+
+    //    for (unsigned i = 0; i < sol->size(); i++) {
+    //    
+    //        IntegerVariable* var = model->getIntegerVariable(i);
+    //        mv->first = var;
+    //        mv->deltaValueFirst = sol->at(i) - var->getCurrentValue();
+    //        NE->makeMove(mv, st);
+    //
+    //    }
 
 
     std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
@@ -132,7 +147,6 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     delete mv;
     delete NE;
     std::cout << "O " << st->getObjectiveValue() << " ";
-    //    st->setSolution();
     //
     //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
     //    std::cout << "Number of moves " << iterations << std::endl;
@@ -220,15 +234,15 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
 //    //        variable->setCurrentValue(newValue);
 //}
 
-//void LSSpace::initializeInvariants(shared_ptr<State> st) {
+//void LSSpace::initializeInvariants(shared_ptr<Model> st) {
 //    st->initializeInvariants();
 //}
 //
-//void LSSpace::initializeConstraints(shared_ptr<State> st) {
+//void LSSpace::initializeConstraints(shared_ptr<Model> st) {
 //    st->initializeConstraints();
 //}
 //
-//void LSSpace::initializeObjective(shared_ptr<State> st) {
+//void LSSpace::initializeObjective(shared_ptr<Model> st) {
 //    initialValue = st->initializeObjective();
 //}
 //int LSSpace::getObjectiveValue(){

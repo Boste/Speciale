@@ -1,12 +1,13 @@
 
 #include "NeighborhoodExplorer.hpp"
+#include "State.hpp"
 
-NeighborhoodExplorer::NeighborhoodExplorer() {
-
+NeighborhoodExplorer::NeighborhoodExplorer(std::shared_ptr<Model> model) {
+    this->model = model;
 }
 
-NeighborhoodExplorer::NeighborhoodExplorer(const NeighborhoodExplorer& orig) {
-}
+//NeighborhoodExplorer::NeighborhoodExplorer(const NeighborhoodExplorer& orig) {
+//}
 
 NeighborhoodExplorer::~NeighborhoodExplorer() {
     //    std::cout << "Destructing NeighborhoodExplorer" << std::endl;
@@ -17,15 +18,17 @@ NeighborhoodExplorer::~NeighborhoodExplorer() {
 bool NeighborhoodExplorer::bestImprovement(Move* mv, std::shared_ptr<State> st) {
     st->shuffleMask();
     Move* bestMove = new Move();
-    std::pair<int, int> delta = calculateDeltaChange(mv, st);
+    std::pair<int, int> delta = calculateDeltaChange(mv);
     int violationChange = delta.first;
     int objectiveChange = delta.second;
     bestMove->copy(mv);
-    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
-        IntegerVariable* variable = st->getIntegerVariables()->at(st->maskAt(i));
-        mv->first = variable;
-        mv->deltaValueFirst = 1 - variable->getCurrentValue() - variable->getCurrentValue();
-        std::pair<int, int> delta = calculateDeltaChange(mv, st);
+    for (unsigned i = 0; i < model->getIntegerVariables().size(); i++) {
+//        for(IntegerVariable* iv : *model->getIntegerVariables()){
+        IntegerVariable* iv = model->getIntegerVariables().at(st->maskAt(i));
+            
+        mv->first = iv;
+        mv->deltaValueFirst = 1 - iv->getCurrentValue() - iv->getCurrentValue();
+        std::pair<int, int> delta = calculateDeltaChange(mv);
         if (delta.first <= violationChange) {
             if (delta.second <= objectiveChange) {
                 violationChange = delta.first;
@@ -51,29 +54,31 @@ bool NeighborhoodExplorer::bestImprovement(Move* mv, std::shared_ptr<State> st) 
     return true;
 }
 
-void NeighborhoodExplorer::randomWalk(Move* mv, std::shared_ptr<State> st) {
+void NeighborhoodExplorer::randomWalk(Move* mv,std::shared_ptr<State> st) {
     if (mv->moveType == FLIP) {
-        int var = Random::Integer(0, st->getNumberOfVariables() - 1);
-        if (var < 0 || st->getNumberOfVariables() <= var) {
-            std::cout << "var " << var << std::endl;
-            std::cout << st->getNumberOfVariables() << std::endl;
-        }
-        assert(var < st->getNumberOfVariables() && 0 <= var);
-        mv->first = st->getIntegerVariable(var);
+        unsigned var = Random::Integer(0, model->getIntegerVariables().size() - 1);
+//        if (var < 0 || model->getIntegerVariables()->size() <= var) {
+//            std::cout << "var " << var << std::endl;
+//            std::cout << model->getIntegerVariables()->size() << std::endl;
+//        }
+        assert(var < model->getIntegerVariables().size());
+        mv->first = model->getIntegerVariable(var);
         mv->flip();
-        commitMove(mv, st);
+        commitMove(mv,st);
     } else {
 
     }
 }
 
-//bool NeighborhoodExplorer::firstImprovement(Move* mv, State * st) {
+//bool NeighborhoodExplorer::firstImprovement(Move* mv, Model * st) {
 //
 //}
 
 //template<typename returnType>
 
-std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, std::shared_ptr<State> st) {
+
+/// Not using priority of constraints yet
+std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv) {
     if (mv->moveType == FLIP) {
         IntegerVariable* variable = mv->first;
         std::vector<int>* updateVector = variable->getUpdateVector();
@@ -82,18 +87,18 @@ std::pair<int, int> NeighborhoodExplorer::calculateDeltaChange(Move* mv, std::sh
         //    std::cout << "Variable " << variableNumber << std::endl;
         for (unsigned i = 0; i < updateVector->size(); i++) {
 //            std::cout << i << std::endl;
-            std::shared_ptr<Invariant> invar = st->getInvariants()->at(updateVector->at(i));
+            std::shared_ptr<Invariant> invar = model->getInvariants().at(updateVector->at(i));
 //            Invariant* invar = st->getInvariants()->at(updateVector->at(i));
             invar->addChange(variable->getID(), mv->deltaValueFirst);
             invar->calculateDeltaValue();
             if (invar->getPriority() == 0) {
-                objectiveChange += st->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
+                objectiveChange += model->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
 
 
             } else {
                 int priority = invar->getPriority();
                 
-                std::shared_ptr<Constraint> cons = st->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
+                std::shared_ptr<Constraint> cons = model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
                 violationChange += cons->setDeltaViolation();
                 //                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
             }
@@ -120,20 +125,20 @@ void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
         IntegerVariable* var = mv->first;
 
         // Skal genberegne!!!!!
-        calculateDeltaChange(mv, st);
+        calculateDeltaChange(mv);
         std::vector<int>* update = var->getUpdateVector();
         for (unsigned i = 0; i < update->size(); i++) {
-            std::shared_ptr<Invariant> invar = st->getInvariants()->at(update->at(i));
+            std::shared_ptr<Invariant> invar = model->getInvariants().at(update->at(i));
 //            Invariant* invar = st->getInvariants()->at(update->at(i));
             invar->updateValue();
 
             if (invar->getPriority() > 0) {
-                std::shared_ptr<Constraint> cons = st->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+                std::shared_ptr<Constraint> cons = model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
                 st->numberOfViolations += cons->updateViolation();
             }
             if (invar->getPriority() == 0) {
 
-                st->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
+                model->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
             }
         }
         var->setCurrentValue(1 - var->getCurrentValue());
@@ -146,5 +151,5 @@ void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
 }
 
 void NeighborhoodExplorer::makeMove(Move* mv, std::shared_ptr<State> st) {
-    commitMove(mv, st);
+    commitMove(mv,st);
 }

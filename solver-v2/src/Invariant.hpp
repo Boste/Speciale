@@ -58,7 +58,9 @@ public:
     }
 
     void setUsedByConstraint(int constraint, int priority) {
+//        std::cout << "ehhh?" << std::endl;
         usedInConstraintNr = constraint;
+//        std::cout << "constraint" << std::endl;
         constraintPriority = priority;
     }
 
@@ -84,7 +86,7 @@ public:
     int getType() {
         return type;
     }
-    std::vector<IntegerVariable*>* VariablePointers;
+    std::vector<IntegerVariable*> VariablePointers;
 
 protected:
     double CurrentValue = 0;

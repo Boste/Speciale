@@ -6,10 +6,11 @@
 #include "Constraint.hpp"
 #include "Sum.hpp"
 #include "Linear.hpp"
-#include "State.hpp"
+#include "Model.hpp"
 #include "NeighborhoodExplorer.hpp"
 #include "Constants.hpp"
 #include <memory>
+#include "State.hpp"
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 
@@ -19,15 +20,16 @@ class LSSpace {
 
 private:
     int Violations = 0;
-    int ObjectiveValue = 0;
+//    int ObjectiveValue = 0;
     int iterations = 0;
-
+    std::shared_ptr<Model> model;
+    
 //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     
 public:
-    LSSpace();
+    LSSpace(std::shared_ptr<Model> model);
     void printCurrent();
-    int initialValue = 0;
+//    int initialValue;
     //    std::vector<IntegerVariable*> IntVarVector;
 //    std::vector<Gecode::BoolVar> BoolVarVector;
     //    std::vector<Invariant*> Invariants;
@@ -72,8 +74,8 @@ public:
     //        IntVarVector.at(variableNumber)->addToUpdate(invariantNumber);
     //    }
 
-//    State* st;
-//    std::vector<IntegerVariable*>* addIntVariablesToState(Gecode::IntVarArray* vars);
+//    Model* st;
+//    std::vector<IntegerVariable*>* addIntVariablesToModel(Gecode::IntVarArray* vars);
 //    void SetValues(Gecode::IntVarArray vars);
 
     // Not able to add obj fnc. 
@@ -83,11 +85,11 @@ public:
     bool bestImprovement();
 
     // Assumes initial value is 0, hence can only be used to initialize once. 
-    void initializeInvariants(std::shared_ptr<State> st);
+//    void initializeInvariants(std::shared_ptr<State> st);
 
-    void initializeConstraints(std::shared_ptr<State> st);
+//    void initializeConstraints(std::shared_ptr<State> st);
 
-    void initializeObjective(std::shared_ptr<State> st);
+//    void initializeObjective(std::shared_ptr<State> st);
 //    int getObjectiveValue();
 
 //    void commitDeltaOfVariable(int changedVariable);

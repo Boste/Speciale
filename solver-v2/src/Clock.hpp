@@ -6,6 +6,7 @@ class Clock {
 public:
     static double globalClock;
     
+    
 
 };
 

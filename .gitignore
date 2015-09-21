@@ -9,3 +9,4 @@ slurm*
 jobs/
 log/
 submitted/
+*.backup

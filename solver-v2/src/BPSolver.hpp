@@ -43,7 +43,7 @@ public:
         std::cout << "Number of binary variables " << counter << std::endl;
         
         //        std::cout << "Variables created" << std::endl;
-        vector<IntegerVariable*>& varInt = getBinaryVariables();
+        vector<IntegerVariable*>& varInt = getAllVariables();
         //        for (unsigned i = 0; i < varInt->size(); i++) {
         //            assert(varInt->at(i)->getID() == i);
         //        }
@@ -59,7 +59,6 @@ public:
             }
             //                        vector<IntegerVariable*> x(leftside.size());
             vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
-
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
                 c.at(j) = static_cast<int> (e.coeff);

@@ -6,49 +6,55 @@ State::State(std::shared_ptr<Model> model) {
     this->model = model;
     solution = new std::vector<int>();
     solutionValue = std::numeric_limits<int>::max();
-    mask = new std::vector<int>();
+    //    mask = new std::vector<int>();
 
 }
 
 State::State(const State& orig) {
     this->solution = orig.solution;
     this->solutionValue = orig.solutionValue;
-    this->mask = orig.mask;
+    //    this->mask = orig.mask;
     this->model = orig.model;
 }
 
 State::~State() {
-    delete mask;
+    //    delete mask;
     delete solution;
 }
 
 void State::initializeInvariants() {
 
-    mask->resize(model->getIntegerVariables().size());
-    for (unsigned i = 0; i < model->getIntegerVariables().size(); i++) {
-        mask->at(i) = i;
-    }
-    shuffleMask();
+
+    // Should create mask in model instead
 
     //    std::random_shuffle(mask->begin(), mask->end());
-    solution->resize(model->getAllIntegerVariables().size());
+    solution->resize(model->getAllVariables().size());
     //    for (unsigned i = 0; i < IntVarVector->size(); i++) {
-    for (IntegerVariable* current : model->getAllIntegerVariables()) {
+    //    for (IntegerVariable* current : model->getAllVariables()) {
+
+    for (IntegerVariable* current : model->getNonFixedBinaryVariables()) {
 
         //        IntegerVariable* current = IntVarVector->at(i);
         //        for (unsigned j = 0; j < current->getUpdateVector()->size(); j++) {
-        for (int invariantNumber : *current->getUpdateVector()) {
+        for (updateType invariant : current->getUpdateVector()) { // FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!
+
             //            int invariantNumber = current->getUpdateVector()->at(j);
-            model->getInvariants().at(invariantNumber)->addChange(current->getID(), current->getCurrentValue());
+            invariant->addChange(current->getID(), current->getCurrentValue());
         }
     }
     //    for (unsigned i = 0; i < Invariants->size(); i++) {
-    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
-        invar->calculateDeltaValue();
-        invar->updateValue();
-        //        Invariants->at(i)->calculateDeltaValue();
-        //        Invariants->at(i)->updateValue();
-        //        Invariants->at(i)->test();
+    for (unsigned i = 0; i < model->numberOfLayers; i++) {
+//        std::cout << i << " " << model->numberOfLayers << std::endl;
+        // Maybe invariants should be in a vector of vectors according to layer number since this is not as efficient. 
+        for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+            if (invar->getLayer() == i) {
+                invar->calculateDeltaValue();
+                invar->updateValue();
+            }
+            //        Invariants->at(i)->calculateDeltaValue();
+            //        Invariants->at(i)->updateValue();
+            //        Invariants->at(i)->test();
+        }
     }
 }
 
@@ -56,7 +62,7 @@ void State::initializeConstraints() {
 
     int violations = 0;
     for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraints().at(i);
+        constraintContainer prio = model->getConstraints().at(i);
         //        for (unsigned j = 0; j < prio->size(); j++) {
         for (std::shared_ptr<Constraint> cons : *prio) {
             violations += cons->updateViolation();
@@ -90,7 +96,7 @@ void State::saveSolution() {
     solutionValue = getObjectiveValue();
 
     //     for (int i = 0; i < model->getIntegerVariables()->size(); i++) {
-    for (IntegerVariable* iv : model->getIntegerVariables()) {
+    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
 
 
         solution->at(iv->getID()) = iv->getCurrentValue();
@@ -113,12 +119,12 @@ void State::setSolution() {
     // setting invariants
 
     //    for (unsigned i = 0; i < solution->size(); i++) {
-    for (IntegerVariable* iv : model->getAllIntegerVariables()) {
+    for (IntegerVariable* iv : model->getAllVariables()) {
 
         //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
-        for (unsigned j = 0; j < iv->getUpdateVector()->size(); j++) {
-            int invariantNumber = iv->getUpdateVector()->at(j);
-            model->getInvariants().at(invariantNumber)->addChange(iv->getID(), solution->at(iv->getID()) - iv->getCurrentValue());
+        for (unsigned j = 0; j < iv->getUpdateVector().size(); j++) { // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            updateType invariant = iv->getUpdateVector().at(j);
+            invariant->addChange(iv->getID(), solution->at(iv->getID()) - iv->getCurrentValue());
         }
     }
     //    for (unsigned i = 0; i < model->getInvariants()->size(); i++) {
@@ -190,10 +196,13 @@ bool State::recalculateAll() {
     return success;
 }
 
+/// Move this to model
+
 void State::shuffleMask() {
     std::random_shuffle(mask->begin(), mask->end());
 
 }
+/// Move this to model
 
 int State::maskAt(int i) {
     return mask->at(i);

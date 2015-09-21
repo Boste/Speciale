@@ -18,6 +18,8 @@ public:
     State(const State& orig);
     virtual ~State();
 
+    
+    /// Maybe all the initialize should be moved to model (again).
     void initializeInvariants();
 
     void initializeConstraints();

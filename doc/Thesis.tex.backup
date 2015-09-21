@@ -1,7 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
-
+\include{style}
 %opening
 \title{A General Purpose Local Search Solver}
 
@@ -14,8 +14,14 @@
 
 \end{abstract}
 
+\section{Graph}
+\input{graph}
+
 \section{Existing Solvers}
 \input{comet}
 \input{gecode}
 \input{localsolver}
+\section{Structure (or Architecture?) of My Solver}
+\input{structure}
+
 \end{document}

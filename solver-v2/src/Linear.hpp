@@ -7,43 +7,62 @@
 
 class Linear : public Constraint {
 protected:
-//    Sum* lhs;
+    //    Sum* lhs;
     int rhs;
     int relation; // 0 is equal, 1 is LQ
 
 public:
 
+
+    /// Used to create the original (given by user) constraints
+
     Linear(std::shared_ptr<Sum> lhs, int ub, int relation) : Constraint() {
-//    Linear(Sum* lhs, int ub, int relation) : Constraint() {
+        //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
-//        this->lhs = lhs;
-//        invariant = std::move(lhs);
+        domainSize = lhs->getVariables().size();
+        //        this->lhs = lhs;
+        //        invariant = std::move(lhs);
         invariant = lhs;
         rhs = ub;
         type = LINEAR;
         arguments.push_back(relation);
         arguments.push_back(ub);
     }
+    /// Used to create the Linear constraint used by local search
+    //    Linear(std::vector<std::shared_ptr<Sum>>&lhs, int ub, int relation) : Constraint() {
+    //        this->relation = relation;
+    //        //        this->lhs = lhs;
+    //        //        invariant = std::move(lhs);
+    //        for (std::shared_ptr<Sum> sum : lhs) {
+    //            invariants.push_back(sum);
+    //        }
+    //        std::cout << &invariants << " vs " << &lhs << std::endl;
+    //        std::cout << "In Linear constructor" << std::endl;
+    //        sleep(1);
+    //        rhs = ub;
+    //        type = LINEAR;
+    //        arguments.push_back(relation);
+    //        arguments.push_back(ub);
+    //    }
+    //    Linear(Linear &c) : Constraint() {
+    ////        this->lhs = c.lhs;
+    //        invariant = c.invariant;
+    //        this->relation = c.relation;
+    //        this->rhs = c.rhs;
+    //        this->type = c.type;
+    //    }
 
-//    Linear(Linear &c) : Constraint() {
-////        this->lhs = c.lhs;
-//        invariant = c.invariant;
-//        this->relation = c.relation;
-//        this->rhs = c.rhs;
-//        this->type = c.type;
-//    }
-
-//    Linear& operator=(const Linear &c) {
-////        this->lhs = c.lhs;
-//        invariant = c.invariant;
-//        this->relation = c.relation;
-//        this->rhs = c.rhs;
-//        this->type = c.type;
-//        return *this;
-//    }
+    //    Linear& operator=(const Linear &c) {
+    ////        this->lhs = c.lhs;
+    //        invariant = c.invariant;
+    //        this->relation = c.relation;
+    //        this->rhs = c.rhs;
+    //        this->type = c.type;
+    //        return *this;
+    //    }
 
     ~Linear() {
-//        delete lhs;
+        //        delete lhs;
     }
 
 
@@ -51,13 +70,21 @@ public:
     // Four cases either violated before or not, and either violated after or not. 
 
     int setDeltaViolation() {
-
+        int deltaValue = 0;
+        int currentValue = 0;
+        std::shared_ptr<Invariant> invar = getInvariant();
+        //        std::shared_ptr<Invariant> invar = invariant;
+        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+        deltaValue += invar->getDeltaValue();
+        currentValue += invar->getCurrentValue();
+        //        }
         // if constraint is LQ
         if (relation == LQ) {
             // if not violated before change
             if (Violation == 0) {
                 // if not violated after change
-                if (invariant->getDeltaValue() + invariant->getCurrentValue() <= rhs) {
+
+                if (deltaValue + currentValue <= rhs) {
                     return 0;
                 } else {
                     return 1;
@@ -65,7 +92,7 @@ public:
                 // violated before change
             } else {
                 // if not violated after change
-                if (invariant->getDeltaValue() + invariant->getCurrentValue() <= rhs) {
+                if (deltaValue + currentValue <= rhs) {
                     return -1;
                 } else {
                     return 0;
@@ -76,14 +103,14 @@ public:
             // if not violated before change
             if (Violation == 0) {
                 // if not violated after change
-                if (invariant->getDeltaValue() + invariant->getCurrentValue() == rhs) {
+                if (deltaValue + currentValue == rhs) {
                     return 0;
                 } else {
                     return 1;
                 }
             } else {
                 // if not violated after change
-                if (invariant->getDeltaValue() + invariant->getCurrentValue() == rhs) {
+                if (deltaValue + currentValue == rhs) {
                     return -1;
                 } else {
                     return 0;
@@ -94,14 +121,25 @@ public:
     }
 
     int setDeltaViolationDegree() {
-        DeltaViolationDegree = invariant->getDeltaValue();
+        int deltaValue = 0;
+        std::shared_ptr<Invariant> invar = getInvariant();
+        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+        deltaValue += invar->getDeltaValue();
+        //        }
+        DeltaViolationDegree = deltaValue;
         return DeltaViolationDegree;
     }
 
     int updateViolation() {
+        int currentValue = 0;
+        std::shared_ptr<Invariant> invar = getInvariant();
+        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+        currentValue += invar->getCurrentValue();
+        //        }
+
         int change = 0;
         if (relation == LQ) {
-            if (invariant->getCurrentValue() <= rhs) {
+            if (currentValue <= rhs) {
                 change = -Violation;
                 Violation = 0;
             } else {
@@ -109,7 +147,7 @@ public:
                 Violation = 1;
             }
         } else {
-            if (invariant->getCurrentValue() == rhs) {
+            if (currentValue == rhs) {
                 change = -Violation;
                 Violation = 0;
             } else {
@@ -123,7 +161,7 @@ public:
 
     int updateViolationDegree() {
         ViolationDegree += DeltaViolationDegree;
-//        std::cout << "uodating violation degree " << ViolationDegree << std::endl; 
+        //        std::cout << "uodating violation degree " << ViolationDegree << std::endl; 
         return DeltaViolationDegree;
     }
     //    int updateViolationDegree() {
@@ -149,16 +187,22 @@ public:
     //    }
 
     bool testCons() {
-        if (invariant->getCurrentValue() <= rhs) {
+        int currentValue = 0;
+        std::shared_ptr<Invariant> invar = getInvariant();
+
+        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+        currentValue += invar->getCurrentValue();
+        //        }
+        if (currentValue <= rhs) {
             if (Violation != 0) {
                 std::cout << "failed test Linear" << std::endl;
-                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
+                //                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
                 return false;
             }
         } else {
             if (Violation != 1) {
                 std::cout << "failed test Linear" << std::endl;
-                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
+                //                std::cout << "Violation " << Violation << " lhs " << &invariant << " rhs " << rhs << std::endl;
                 return false;
             }
         }
@@ -166,9 +210,16 @@ public:
     }
 
     bool testObj() {
-        if (ViolationDegree != invariant->getCurrentValue() - rhs) {
+
+        int currentValue = 0;
+        std::shared_ptr<Invariant> invar = getInvariant();
+
+        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+        currentValue += invar->getCurrentValue();
+        //        }
+        if (ViolationDegree != currentValue - rhs) {
             std::cout << "failed test Linear" << std::endl;
-            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << &invariant << " rhs " << rhs << std::endl;
+            //            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << &invariant << " rhs " << rhs << std::endl;
             return false;
 
         }

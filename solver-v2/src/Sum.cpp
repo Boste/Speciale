@@ -14,12 +14,12 @@ Sum::Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c) : Invariant()
     //        std::cout << std::endl;
 }
 
-/// Construct that copies a Coefficient map (Only used when relaxing)
+/// Construct that copies a Coefficient map. Size can be different when this sum contains invariants
 
-Sum::Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int, int>& map) : Invariant() {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int, coefType>& map) : Invariant() {//:IntVariables(vars),coefficients(c) {
     type = SUM;
 
-    assert(map.size() == vars.size());
+    //    assert(map.size() == vars.size());
     coefficients = map;
     VariablePointers = vars;
     //        std::cout << std::endl;
@@ -37,10 +37,10 @@ Sum::~Sum() {
     //    delete &coefficients;
     //    delete &VariableChange;
     //    std::cout << "Delete Sum" << std::endl;
-//    VariablePointers->shrink_to_fit();
-//    VariablePointers->clear();
-//    std::vector<IntegerVariable*>().swap(VariablePointers);
-//    delete VariablePointers;
+    //    VariablePointers->shrink_to_fit();
+    //    VariablePointers->clear();
+    //    std::vector<IntegerVariable*>().swap(VariablePointers);
+    //    delete VariablePointers;
 }
 
 //Sum& Sum::operator=(const Sum &a) {
@@ -59,8 +59,9 @@ Sum::~Sum() {
 int Sum::calculateDeltaValue() {
     int valueChange = 0;
     while (!VariableChange.empty()) {
-        std::pair<int, int> currentPair = VariableChange.back();
-        valueChange += coefficients.at(currentPair.first) * currentPair.second;
+        valueChange += VariableChange.back();
+        //        std::pair<int, int> currentPair = VariableChange.back();
+        //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
 
         VariableChange.pop_back();
     }
@@ -70,10 +71,26 @@ int Sum::calculateDeltaValue() {
 }
 
 void Sum::addChange(int variableNumber, int changeInValue) {
-    VariableChange.push_back(std::pair<int, int> (variableNumber, changeInValue));
+    int deltaChange = coefficients.at(variableNumber) * changeInValue;
+    VariableChange.push_back(deltaChange);
+
+
+    //    VariableChange.push_back(std::pair<int, int> (variableNumber, changeInValue));
+
     //        std::cout << "addChange in sum" << std::endl;
     //        sleep(5000);
 }
+/// update currentValue by adding currentValue*coeff of all variables and invariants 
+
+//void Sum::initialize() {
+//    for (IntegerVariable* iv : VariablePointers) {
+//        CurrentValue += iv->getCurrentValue()*coefficients.at(iv->getID());
+//    }
+//    for(invariant invar : invariants){
+//        int id = invar->getVariableID();
+//        CurrentValue += invar->getCurrentValue()*coefficients.at(id);
+//    }
+//}
 
 //void Sum::setUsedByConstraint(int constraint) {
 //    usedInConstraintNr = constraint;

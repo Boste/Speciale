@@ -5,11 +5,11 @@
 Model::Model() {
     //    std::cout << "Create model " << std::endl;
     //    IntVarVector = new std::vector<IntegerVariable*>();
-//    original = new std::vector<IntegerVariable*>();
-//    BoolVarVector = new std::vector<Gecode::BoolVar>();
-//    Invariants = new std::vector<std::shared_ptr < Invariant >> ();
+    //    original = new std::vector<IntegerVariable*>();
+    //    BoolVarVector = new std::vector<Gecode::BoolVar>();
+    //    Invariants = new std::vector<std::shared_ptr < Invariant >> ();
     //    Invariants = new std::vector<Invariant*>();
-//    Constraints = new std::vector<std::vector < std::shared_ptr < Constraint>>*>();
+    //    Constraints = new std::vector<std::vector < std::shared_ptr < Constraint>>*>();
     //    SoftConstraints = new std::vector<Constraint*>();
     //    ObjectiveFunction = new std::vector<Constraint*>();
     //    solution = new std::vector<int>();
@@ -40,41 +40,49 @@ Model::~Model() {
     for (IntegerVariable* iv : original) {
         delete iv;
     }
-//    delete original;
-//    delete IntVarVector;
+    //    delete original;
+    //    delete IntVarVector;
 
 
-//    for (std::shared_ptr<std::vector<std::shared_ptr < Constraint>>cons : Constraints) {
-//        delete cons;
-//    }
-//    delete Constraints;
-//    delete Invariants;
+    //    for (std::shared_ptr<std::vector<std::shared_ptr < Constraint>>cons : Constraints) {
+    //        delete cons;
+    //    }
+    //    delete Constraints;
+    //    delete Invariants;
 
     //    delete mask;
     //    delete solution;
-//    delete BoolVarVector;
+    //    delete BoolVarVector;
 
 }
 
+std::list<IntegerVariable*>& Model::getIntegerVariables(){
+    return IntegerVariables;
+}
 //IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
 
-void Model::addIntegerVariable(int lb, int ub) {
+void Model::addBinaryVariable(int lb, int ub) {
     //    for (int i = 0; i < numberOfVariables; i++) {
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
-    //        return v;
-    //    }
-    //    this->numberOfVariables += numberOfVariables;
-    //    return original;
+
+}
+
+void Model::addIntegerVariable(int lb, int ub) {
+    int id = original.size();
+    IntegerVariable* v = new IntegerVariable(lb, ub, id);
+    original.push_back(v);
+    IntegerVariables.push_back(v);
+    
 }
 //int Model::getNumberOfVariables(){
 //    return numberOfVariables;
 //}
 
 void Model::nonFixedVariables(std::vector<IntegerVariable*>* nonFixed) {
-    IntVarVector = *nonFixed;
-//    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
+    nonFixedBinaryVariables = *nonFixed;
+    //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
 //void Model::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
 //    IntVarVector->at(variableNumber)->addToUpdate(invariantNumber);
@@ -169,45 +177,64 @@ void Model::nonFixedVariables(std::vector<IntegerVariable*>* nonFixed) {
 //        iv->setVariablePointer(gecodeVars[iv->getID()]);
 //    }
 //}
-
+IntegerVariable* Model::getMaskat(int i){
+    return mask.at(i);
+}
+std::vector<IntegerVariable*>& Model::getMask(){
+    return mask;
+}
 void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
-    getIntegerVariable(index)->setVariablePointer(variable);
+    getNonFixedBinaryVariable(index)->setVariablePointer(variable);
 }
 
-std::vector<IntegerVariable*>& Model::getIntegerVariables() {
-    return IntVarVector;
+variableContainer& Model::getNonFixedBinaryVariables() {
+    return nonFixedBinaryVariables;
 }
-
-std::vector<IntegerVariable*>& Model::getAllIntegerVariables() {
+IntegerVariable* Model::getNonFixedBinaryVariable(int i) {
+    return nonFixedBinaryVariables.at(i);
+}
+variableContainer& Model::getAllVariables() {
     return original;
 }
 
-std::vector<std::shared_ptr<Invariant>>& Model::getInvariants() {
+InvariantContainer& Model::getInvariants() {
     //std::vector<Invariant*>* Model::getInvariants() {
     return Invariants;
 }
-
-std::vector<std::shared_ptr<std::vector<std::shared_ptr<Constraint>>>>& Model::getConstraints() {
-    return Constraints;
+InvariantContainer& Model::getOrgInvariants() {
+    //std::vector<Invariant*>* Model::getInvariants() {
+    return orgInvariants;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Constraint>>> Model::getConstraintsWithPriority(int prio) {
+allConstraints& Model::getConstraints() {
+    return Constraints;
+}
+allConstraints& Model::getOrgConstraints() {
+    return orgConstraints;
+}
 
+constraintContainer& Model::getConstraintsWithPriority(int prio) {
     return Constraints.at(prio);
+}
+constraintContainer& Model::getOrgConstraintsWithPriority(int prio) {
+    return orgConstraints.at(prio);
 }
 
 //std::vector<Constraint*>* Model::getSoftConstraints() {
 //    return SoftConstraints;
 //}
 
-std::shared_ptr<std::vector<std::shared_ptr<Constraint>>> Model::getObjectives() {
+constraintContainer& Model::getOrgObjectives() {
+    return orgConstraints.at(0);
+}
+constraintContainer& Model::getObjectives() {
     return Constraints.at(0);
 }
 
-IntegerVariable* Model::getIntegerVariable(int i) {
-    return IntVarVector.at(i);
-}
 
+//std::vector<std::shared_ptr<std::pair<int,int>>>& Model::getConstraintsWithIntegerVariables(){
+//    return ConstraintsWithIntegerVariables;
+//}
 //void Model::saveSolution() {
 //    solutionValue = getObjectiveValue();
 //    for (int i = 0; i < getNumberOfVariables(); i++) {

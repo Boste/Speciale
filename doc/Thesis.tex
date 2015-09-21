@@ -1,6 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
+\usepackage{mathtools}
 \include{style}
 %opening
 \title{A General Purpose Local Search Solver}
@@ -14,14 +15,26 @@
 
 \end{abstract}
 
-\section{Graph}
-\input{graph}
+\section{Local Search and Neighbourhoods}
+\section{Heuristics and Metaheuristics}
 
+\section{Defenitions of structures in a solver}
+\input{structures}
+\subsection{Invariant}
+\input{invariant}
+\subsection{Oneway Constraints}
+\input{oneway}
 \section{Existing Solvers}
 \input{comet}
 \input{gecode}
 \input{localsolver}
+\section{Graph}
+\input{graph}
+\subsection{Creating the Update Graph} \label{updategraph}
+\input{updateCons}
+
 \section{Structure (or Architecture?) of My Solver}
 \input{structure}
+
 
 \end{document}

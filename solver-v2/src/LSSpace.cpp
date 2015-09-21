@@ -44,7 +44,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     NeighborhoodExplorer* NE = new NeighborhoodExplorer(model);
     //    std::cout << "NE created" << std::endl;
     //    std::cout << "Segmentation fault right after this " << std::endl;
-    IntegerVariable* var = model->getIntegerVariable(0);
+    IntegerVariable* var = model->getNonFixedBinaryVariable(0);
     //    std::cout << "segmentation fault before this" << std::endl;
     Move* mv = new Move(var, 1 - var->getCurrentValue() - var->getCurrentValue(), FLIP);
     //        std::cout << __LINE__ << std::endl;
@@ -56,13 +56,13 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     double usedTime = 0;
     std::clock_t start = std::clock();
     st->saveSolution();
-    int randomMoves = model->getIntegerVariables().size() / 5;
+    int randomMoves = model->getNonFixedBinaryVariables().size() / 5;
     
     //    std::cout << "Number of random moves " << randomMoves << std::endl;
     //    std::cout << "Timelimit " << timelimit << std::endl;
     //        std::cout << "optimize" << std::endl;
 
-    mv->first = model->getIntegerVariable(st->maskAt(0));
+    mv->first = model->getNonFixedBinaryVariable(st->maskAt(0));
     //        std::cout << "optimize" << std::endl;
 
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
@@ -95,7 +95,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
             //            }
         }
         //        std::cout << "objective value after random moves " << st->getObjectiveValue() << std::endl;
-        mv->first = model->getIntegerVariable(0);
+        mv->first = model->getNonFixedBinaryVariable(0);
         mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
         while (NE->bestImprovement(mv,st)) {
             iterations++;
@@ -125,7 +125,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
 //    std::cout << "obj val " << st->getObjectiveValue() << std::endl;
 
     std::vector<int>* sol = st->getSolution();
-    for (IntegerVariable* iv : model->getAllIntegerVariables()) {
+    for (IntegerVariable* iv : model->getAllVariables()) {
         mv->first = iv;
         mv->deltaValueFirst = sol->at(iv->getID()) - iv->getCurrentValue();
         NE->makeMove(mv, st);

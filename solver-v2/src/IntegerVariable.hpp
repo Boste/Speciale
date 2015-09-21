@@ -2,9 +2,15 @@
 #define	INTEGERVARIABLE_HPP
 //#include <gecode/driver.hh>
 #include <gecode/int.hh>
+
+#include "Constants.hpp"
 //#include "../include/constraints/invariant.hpp"
 
+class Constraint;
+class Invariant;
+
 class IntegerVariable {
+    friend class GeneralSolver;
 protected:
     //    Gecode::IntVar* VariablePointer;
     //    Gecode::IntVarArray* ArrayPointer;
@@ -13,18 +19,53 @@ protected:
     int upperBound;
     int vectorID;
     int value = 0;
-    std::vector<int> update;
+    bool isInteger = false;
+    bool isDefined = false;
+    VariableInConstraints constraints;
+    invariant oneway;
+    constraint definedByCons;
+//    invariant definedByInvar;
+    
+    updateVector update;
     Gecode::IntVarArray* ArrayPointer;
     Gecode::IntVar* VariablePointer;
 
+    void clearUpdateVector() {
+//        for(InvariantContainer invars : update){
+//            invars.clear();
+//            invars.resize(0);
+//        }
+        update.clear();
+        update.resize(0);
+    }
+
 
 public:
+    /// Only used for testing instances
+    int usedIn = 0;
+    VariableInConstraints& usedInConstraints(){
+        return constraints;
+    }
+    void addToUsedInConstraints(std::shared_ptr<Constraint> constraint){
+        constraints.push_back(constraint);
+    }
+    invariant getOneway(){
+        return oneway;
+    }
+    void setDefinedBy(invariant invar, constraint cons){
+        definedByCons = cons;
+        oneway = invar;
+        isDefined = true;
+    }
 
     IntegerVariable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
         //        VariablePointer = vp;
         //        ArrayPointer = ap;
         lowerBound = lowerbound;
         upperBound = upperbound;
+        if (upperbound > 1 || lowerbound < 0) {
+            isInteger = true;
+        }
         vectorID = id;
         value = 0;
     }
@@ -34,16 +75,20 @@ public:
 
     }
 
+    bool isIntegerVariable() {
+        return isInteger;
+    }
+
     int getCurrentValue() {
         return value;
     }
 
-    void addToUpdate(int invariantNumber) {
-        update.push_back(invariantNumber);
+    void addToUpdate(updateType invariant) {
+        update.push_back(invariant);
     }
-
-    std::vector<int>* getUpdateVector() {
-        return &update;
+    
+    InvariantContainer& getUpdateVector() {
+        return update;
     }
 
     int getID() {
@@ -58,14 +103,15 @@ public:
         VariablePointer = &gecodeVar;
     }
 
-    Gecode::IntVarArray* getArrayPointer() {
-        return ArrayPointer;
-    }
+//    Gecode::IntVarArray* getArrayPointer() {
+//        return ArrayPointer;
+//    }
 
     int getLowerBound() {
         return lowerBound;
     }
-    int getUpperBound(){
+
+    int getUpperBound() {
         return upperBound;
     }
 

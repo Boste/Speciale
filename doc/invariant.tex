@@ -1,0 +1,21 @@
+Invariants are used to maintain variables or auxiliary variables and they are defined by other variables or invariants. 
+The invariants all have methods that needs to be defined for the different types of invariants. These method are 
+for instance \textbf{getCurrentValue()} that return the value of the invariant. If a variable $v$ or invariant $i$ 
+changes value then the invariants that are defined by $v$ or $i$ needs to update their current value. This is done 
+through the \textbf{addChange(arguments)} method, \textbf{calculateDeltaValue()}, and  \textbf{updateValue()}. They 
+informs the invariant something is changed, calculates the change in value and updates the current value respectively. 
+Since invariants can be defined by other invariants this can leads to a series of updates. In order to avoid looking at 
+an invariant multiple times when a change is made the variables, invariants and constraints can built as a 
+directed graph without cycles. The construction of that graph is described in section \ref{updategraph}. \\ 
+An example of an invariant is the \textbf{Sum} invariant that defines a variable or an auxiliary variable. The 
+\textbf{Sum} invariant consist of a coefficient vector $C$ and an invariant vector $Y$ and variable vector $X$. For 
+a \textbf{Sum} invariant $S$ the value is defined as: \\
+\begin{equation}
+ S = \sum_{\substack{x_i \in X_S\\ c_i \in C_S }}  c_i x_i + \sum_{\substack{y_i \in Y_S\\ c_i \in C_S }}  c_i y_i 
+\qquad \forall i \in I_S
+\end{equation}
+
+
+
+%which value is defined by the sum of the variables and invariant  times their coefficient. 
+%Invariants are used to create auxiliary variables based on other variables and/or invariants. 

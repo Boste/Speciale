@@ -1,10 +1,11 @@
 #ifndef SUM_HH
 #define SUM_HH
+#include <memory>
 #include "Constants.hpp"
 #include <unordered_map>
 #include "IntegerVariable.hpp"
 #include "Invariant.hpp" 
-#include <memory>
+
 //#include <utility>
 //struct elem {
 //	int index;
@@ -16,13 +17,14 @@ protected:
     
 //    std::vector<IntegerVariable*> VariablePointers;
     //    double oldValue = 0;
-    std::vector<std::pair<int, int>> VariableChange;
+//    std::vector<std::pair<int, int>> VariableChange;
+    std::vector<int> VariableChange;
 
     
 public:
     
     Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c);
-    Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int,int>& map);
+    Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int,coefType>& map);
     
     
     Sum(const Sum &a);
@@ -40,6 +42,7 @@ public:
 //    }
 
     int calculateDeltaValue();
+//    void initialize();
     
 //    void usedByConstraint(int constraint, int priority);
 //    void usedByObjective(int constraint, int priority);

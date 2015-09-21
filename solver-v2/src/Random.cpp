@@ -8,7 +8,7 @@ std::mt19937 Random::mt(Random::seed);
 
 int Random::Integer(int lb, int ub) {
     std::uniform_int_distribution<> d(lb, ub);
-
+    
     return d(mt);
 }
 int Random::Integer(int ub) {

@@ -12,13 +12,11 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Gecode}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Localsolver}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Graph}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Creating the Update Graph}{3}}
-\newlabel{updategraph}{{5.1}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Structure (or Architecture?) of My Solver}{3}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces Finding One-way constraints}}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Creating the Update Graph}{4}}
+\newlabel{updategraph}{{5.1}{4}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces O$(|V|^2C_{max}$O$($\lstinline [basicstyle=\sffamily  ]{canBeMadeOneway()}$)$}}{4}}
 \newlabel{updateGraph1}{{}{4}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces \lstinline [basicstyle=\sffamily  ]{canBeMadeOneway}(\textbf  {IntegerVariable} var, \textbf  {Constraint} cons, \textbf  {int} layer)}}{4}}
-\newlabel{updateGraph1}{{}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Parsing the Problem Formulation}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}The User Surface}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}The Local Search}{4}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces \textbf  {bool }\lstinline [basicstyle=\sffamily  ]{canBeMadeOneway}(\textbf  {IntegerVariable} \text  {var}, \textbf  {Constraint} cons) \hskip 2em\relax O$(V_{max} + $O$($\lstinline [basicstyle=\sffamily  ]{makeOneway}$))$}}{5}}
+\newlabel{updateGraph1}{{}{5}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces \lstinline [basicstyle=\sffamily  ]{makeOneway}(\textbf  {IntegerVariable} \text  {var}, \textbf  {Constraint} cons) \hskip 2em\relax O$(V_{max})$}}{5}}
+\newlabel{updateGraph1}{{}{5}}

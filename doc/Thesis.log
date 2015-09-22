@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  22 SEP 2015 11:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  22 SEP 2015 14:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -412,6 +412,9 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 
 LaTeX Warning: Label `updateGraph1' multiply defined.
 
+
+LaTeX Warning: Label `updateGraph1' multiply defined.
+
 )
 \openout1 = `Thesis.aux'.
 
@@ -477,20 +480,25 @@ Overfull \hbox (4.46315pt too wide) in paragraph at lines 33--1
 nts an in-ter-face [][][]
  []
 
-[2]) (./localsolver.tex) (./graph.tex) (./updateCons.tex) (./structure.tex
-[3]) [4] (./Thesis.aux)
+[2]) (./localsolver.tex) (./graph.tex) [3] (./updateCons.tex
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]\OT1/cmr/bx/n/10 bool [][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 IntegerVariable
+ []\OT1/cmr/m/n/10 , \OT1/cmr/bx/n/10 Con-straint \OT1/cmr/m/n/10 cons)
+ []
+
+) [4] [5] (./Thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4436 strings out of 495032
- 57979 string characters out of 6181718
- 124993 words of memory out of 5000000
- 7583 multiletter control sequences out of 15000+600000
+ 4437 strings out of 495032
+ 57960 string characters out of 6181718
+ 125039 words of memory out of 5000000
+ 7587 multiletter control sequences out of 15000+600000
  9328 words of font info for 34 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 33i,7n,32p,257b,1521s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,7n,32p,337b,1521s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -500,12 +508,12 @@ t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb>
-Output written on Thesis.pdf (4 pages, 145909 bytes).
+s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on Thesis.pdf (5 pages, 158897 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
+ 70 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

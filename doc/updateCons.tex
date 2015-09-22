@@ -1,19 +1,24 @@
- \floatname{algorithm}{Update Graph}
+ \floatname{algorithm}{Finding One-way constraints}
 \begin{algorithm}[ht]
- \caption{Finding One-way constraints}
+ \caption{O$(|V|^2C_{max}$O$($\method{canBeMadeOneway()}$)$}
  \begin{algorithmic}\label{updateGraph1}
-  \STATE{$Q = $ model.getIntegerVariables()}
-  \STATE{\Int layer = 1}
-  \WHILE{$ Q !=  \emptyset $}
-    \FOR{IntegerVariable var in $Q$}
-      \FOR{Constraint cons in var.usedInConstriant()}
-	\IF{\method{canBeMadeOneway(var, cons, layer)}}
-	  \STATE{Q.remove(var)}
+  \STATE{$Q = \emptyset$}
+  \STATE{$V = $ model.getVariables()}
+  \STATE{V.sort()}
+  \STATE{\bool change = \true }
+  \WHILE{change}
+    \FOR{\var var in $V$}
+      \FOR{\cons cons in var.usedInConstriant()}
+	\IF{\method{canBeMadeOneway(var, cons)}}
+	  \STATE{V.remove(var)}
+	  \STATE{$Q.psuhback($var$)$}
 	  \STATE{\Break }
+	\ELSE
+	\STATE{change = \false}
 	\ENDIF
       \ENDFOR
     \ENDFOR
-    \STATE{layer$++$}
+   % \STATE{layer$++$}
 %{$j\leftarrow 1$ \TO $i-1$}
   \ENDWHILE
  \end{algorithmic}
@@ -21,24 +26,65 @@
 \end{algorithm}
 
 
- \floatname{algorithm}{Update Graph}
+ \floatname{algorithm}{}
 \begin{algorithm}[ht]
- \caption{\method{canBeMadeOneway}(\var var, \cons cons, \Int layer)}
+ \caption{\bool \method{canBeMadeOneway}(\var \text{var}, \cons cons) \qquad O$(V_{max} + $O$($\method{makeOneway}$))$}
  \begin{algorithmic}\label{updateGraph1}
-  \STATE{$Q = $ model.getIntegerVariables()}
-  \STATE{\Int layer = 1}
-  \WHILE{$ Q !=  \emptyset $}
-    \FOR{IntegerVariable var in $Q$}
-      \FOR{Constraint cons in var.usedInConstriant()}
-	\IF{\method{canBeMadeOneway(var,cons,layer)}}
-	  \STATE{Q.remove(var)}
-	  \STATE{\Break }
-	\ENDIF
-      \ENDFOR
-    \ENDFOR
-    \STATE{layer$++$}
-%{$j\leftarrow 1$ \TO $i-1$}
-  \ENDWHILE
+ \IF{cons.isOneway()}
+  \RETURN \false
+  \ENDIF
+ \STATE{\Int notDefined = 0} 
+ \FOR { \var v in cons.getVariables}
+ \IF{v.isInteger()}
+  \IF{!v.isDefinedByOneway}
+  \STATE{notDefined++}
+  \ENDIF
+  \ENDIF
+  \IF{notDefined $> 1$}
+    \RETURN \false  
+ \ENDIF
+ \ENDFOR
+ \STATE{\Int coef = var.getCoefficient(cons)}
+ \STATE{\Int objCoef = var.getObjectiveCoefficient()}
+ 
+ \IF{cons.Relation = EQ \OR coef$\cdot$objCoef $< 0$}
+    \STATE{\method{makeOneway}(\var var, \cons cons)}
+    \RETURN \true
+ \ENDIF
+ \RETURN \false
  \end{algorithmic}
-
 \end{algorithm}
+
+
+ \floatname{algorithm}{}
+\begin{algorithm}[ht]
+ \caption{\method{makeOneway}(\var \text{var}, \cons cons) \qquad O$(V_{max})$}
+ \begin{algorithmic}\label{updateGraph1}
+ \STATE{variables = cons.getVariables()-var}
+ \STATE{coefficients = cons.getCoefficient-var.coefficients}
+ \STATE{\Int coef = var.getCoefficient(cons)}
+ \IF{coef $\neq$ -1}
+ \STATE{coefficients = $\frac{-1}{coef}\cdot$ coefficients}
+ \ENDIF
+ \STATE{\invar invar$(variables, coefficients)$}
+ \FOR{\var v in variables}
+  \IF{v.isDefinedByOneway}
+    \STATE{\invar inv = v.oneway}
+    \STATE{inv.updateList.pushback(invar)}
+  \ELSE
+  \STATE{v.updateList.pushback(invar)}
+  \ENDIF
+   \ENDFOR
+   \STATE{cons.isOneway = \true }
+   \STATE{cons.defines = invar }
+   \STATE{var.setDefinedBy(invar,cons)}
+   \STATE{model.add(invar)}
+   \STATE{invar.currentvalue = -cons.getArgument(1)} 
+ \end{algorithmic}
+\end{algorithm}
+  
+
+
+
+
+

@@ -1,27 +1,49 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
-\include{style}
+\usepackage{mathtools}
+\usepackage{color}
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
 %opening
+
+\include{style}
 \title{A General Purpose Local Search Solver}
 
 
 \begin{document}
 
 \maketitle
+%\newpage
+%\begin{abstract}
 
-\begin{abstract}
-
-\end{abstract}
-
-\section{Graph}
-\input{graph}
-
+%\end{abstract}
+%\newpage
+\section{Local Search and Neighbourhoods}
+%\newpage
+\section{Heuristics and Metaheuristics}
+%\newpage
+\section{Defenitions of structures in a solver}
+\input{structures}
+\subsection{Invariant}
+\input{invariant}
+\subsection{Oneway Constraints}
+\input{oneway}
+%\newpage
 \section{Existing Solvers}
 \input{comet}
 \input{gecode}
 \input{localsolver}
+%\newpage
+\section{Graph}
+\input{graph}
+\newpage
+\subsection{Creating the Update Graph} \label{updategraph}
+\input{updateCons}
+%\newpage
 \section{Structure (or Architecture?) of My Solver}
 \input{structure}
+
 
 \end{document}

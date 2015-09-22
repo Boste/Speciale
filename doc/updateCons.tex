@@ -1,1 +1,44 @@
-Write the algorithm here
+ \floatname{algorithm}{Update Graph}
+\begin{algorithm}[ht]
+ \caption{Finding One-way constraints}
+ \begin{algorithmic}\label{updateGraph1}
+  \STATE{$Q = $ model.getIntegerVariables()}
+  \STATE{\Int layer = 1}
+  \WHILE{$ Q !=  \emptyset $}
+    \FOR{IntegerVariable var in $Q$}
+      \FOR{Constraint cons in var.usedInConstriant()}
+	\IF{\method{canBeMadeOneway(var, cons, layer)}}
+	  \STATE{Q.remove(var)}
+	  \STATE{\Break }
+	\ENDIF
+      \ENDFOR
+    \ENDFOR
+    \STATE{layer$++$}
+%{$j\leftarrow 1$ \TO $i-1$}
+  \ENDWHILE
+ \end{algorithmic}
+
+\end{algorithm}
+
+
+ \floatname{algorithm}{Update Graph}
+\begin{algorithm}[ht]
+ \caption{\method{canBeMadeOneway}(\var var, \cons cons, \Int layer)}
+ \begin{algorithmic}\label{updateGraph1}
+  \STATE{$Q = $ model.getIntegerVariables()}
+  \STATE{\Int layer = 1}
+  \WHILE{$ Q !=  \emptyset $}
+    \FOR{IntegerVariable var in $Q$}
+      \FOR{Constraint cons in var.usedInConstriant()}
+	\IF{\method{canBeMadeOneway(var,cons,layer)}}
+	  \STATE{Q.remove(var)}
+	  \STATE{\Break }
+	\ENDIF
+      \ENDFOR
+    \ENDFOR
+    \STATE{layer$++$}
+%{$j\leftarrow 1$ \TO $i-1$}
+  \ENDWHILE
+ \end{algorithmic}
+
+\end{algorithm}

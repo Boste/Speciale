@@ -374,10 +374,10 @@ public:
     void initializeLS() {
 
         /// Sort constraints a variable is part of in decreasing order according to domain
-        for (IntegerVariable* vars : model->getAllVariables()) {
-            std::vector<constraint> constraints = vars->usedInConstraints();
-            std::sort(constraints.begin(), constraints.end(), Constraint::SortGreater());
-        }
+//        for (IntegerVariable* vars : model->getAllVariables()) {
+//            std::vector<constraint> constraints = vars->usedInConstraints();
+//            std::sort(constraints.begin(), constraints.end(), Constraint::SortGreater());
+//        }
         //        std::cout << "Make alg to handle integer variables " << std::endl;
         //        std::cout << "opret Constraints, Invariants. Måske erstat pair med vector?" << std::endl;
         //        model->getConstraintsWithIntegerVariables();

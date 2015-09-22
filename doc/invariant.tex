@@ -1,18 +1,19 @@
-Invariants are used to maintain variables or auxiliary variables and they are defined by other variables or invariants. 
-The invariants all have methods that needs to be defined for the different types of invariants. These method are 
-for instance \textbf{getCurrentValue()} that return the value of the invariant. If a variable $v$ or invariant $i$ 
-changes value then the invariants that are defined by $v$ or $i$ needs to update their current value. This is done 
-through the \textbf{addChange(arguments)} method, \textbf{calculateDeltaValue()}, and  \textbf{updateValue()}. They 
+Invariants are variables, which value is purely determined by other variables. The variable defined is not necessarily 
+one of the variable currently in the system but it can be a new auxiliary variable which value is of interest.  
+The invariants all have generic methods that needs to be defined for the different types of invariants. One of these 
+methods is for instance \method{getCurrentValue()} that return the value of the invariant. If a variable $v$ 
+changes value then the invariants that are defined by $v$ needs to update their current value. This is done 
+through the \method{addChange(arguments)} method, \method{calculateDeltaValue()}, and  \method{updateValue()}. They 
 informs the invariant something is changed, calculates the change in value and updates the current value respectively. 
-Since invariants can be defined by other invariants this can leads to a series of updates. In order to avoid looking at 
-an invariant multiple times when a change is made the variables, invariants and constraints can built as a 
-directed graph without cycles. The construction of that graph is described in section \ref{updategraph}. \\ 
-An example of an invariant is the \textbf{Sum} invariant that defines a variable or an auxiliary variable. The 
-\textbf{Sum} invariant consist of a coefficient vector $C$ and an invariant vector $Y$ and variable vector $X$. For 
-a \textbf{Sum} invariant $S$ the value is defined as: \\
+Since invariants can be defined by variables that are invariants themselves this can leads to a series of 
+updates. Invariants and constraints can built as a directed graph without cycles in 
+order to avoid looking at an invariant multiple times when a change is made to a variable. The construction of that 
+graph is described in section \ref{updategraph}. \\ 
+An example of an invariant is the \method{Sum} invariant that defines an auxiliary variable. The 
+\method{Sum} invariant consist of a coefficient set $C$, variable set $V$ and it can have a constant $b$ added. For 
+a \method{Sum} invariant $S$ the value is defined as: \\
 \begin{equation}
- S = \sum_{\substack{x_i \in X_S\\ c_i \in C_S }}  c_i x_i + \sum_{\substack{y_i \in Y_S\\ c_i \in C_S }}  c_i y_i 
-\qquad \forall i \in I_S
+ S = b+ \sum_{\substack{i \in I_S}}  c_i x_i  
 \end{equation}
 
 

@@ -1,0 +1,26 @@
+Models contains variables $X$ that is a n-tuple of variables $X = \langle x_1, x_2, \dots , x_n \rangle $. Each 
+variable $x_i \in X$ has a domain $D_i \in D$ where $D$ is an n-tuple of domains $D = \langle D_1, D_2, \dots , D_n 
+\rangle $ such that $x_i \in D_i$. The variables $x_i \in X$ of the models that will be discussed in this paper all 
+have the domain restricted to $D_i \subseteq \mathbb{Z}\ : \: \forall \ D_i \in D$ \boste{Does not look quite nice 
+and is not true for MIP}. \\ 
+The variables will be restricted by $C$ that is a m-tuple of constrains $C= \langle 
+C_1,C_2, \dots , C_m \rangle $. The set of variables to which the constraint $C_j$ applies is called its scope and 
+is denoted $S_j$. Each $C_j \in C$ is a pair $\langle R_{S_j}, S_j \rangle $ where $ R_{S_j}$ is a subset of the 
+cartesian product of the domains of the variables in $S_j$ also called the relation on $C_j$. \\ 
+The constraint satisfaction problem (CSP) can then be defined as a triple $\mathbb{P} = \langle X,D,C \rangle$. A 
+solution to the CSP $P$ is an n-tuple $A = \langle a_1,a_2,\dots,a_n\rangle $ where $a_i \in 
+D_i$. The solution is feasible if the projection of $A$ onto $S_j$ is included in $R_{S_j}$ for all 
+$C_j \in C$.\\ 
+The solution of interest could be all feasible solutions $sol(P)$, any feasible solution $A$ or if there 
+exists a solution or not.  
+
+
+
+
+%In order to define mixed integer programming and integer programming we need to define a function $f(X) = 
+%\sum_{x_i \in X} 
+%c_i x_i$ where $c_i \in E 
+
+
+%We can reduce the CSP to 3-SAT by restricting the domain of the variables to zero and one and restrict the scope of 
+%all constraints to exactly three. By that we can conclude that some CSP are NP-complete and not easy to solve.  

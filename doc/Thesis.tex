@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{color}
+\usepackage{amssymb}
 
 \usepackage{algorithmic}
 \usepackage{algorithm}
@@ -20,42 +21,86 @@
 
 %\end{abstract}
 %\newpage
-\section{Local Search and Neighbourhoods}
-\subsection{Local Search}
-\subsection{Neighbourhoods}
-%\newpage
-\section{Heuristics and Metaheuristics}
-\subsection{Heuristics}
+\tableofcontents
+\newpage
+\section{Introduction}
+\subsection{Mixed Integer Programming}
+\subsection{Constraint Programming}
+\subsection{Heuristics and Local Search}
+\subsubsection{Construction Heuristics}
+\subsubsection{Local Search and Neighborhoods}
+\subsubsection{Metaheuristics}
+
+\section{Modeling}
+%\subsection{Variables}
+
+\subsection{Variables and Constraints}
+\input{varcons}
+\subsection{Types of Modeling}
+\input{modeling}
+\section{Different Solvers \boste{properly not the best name}}
+\subsection{Comet}
+Invariant bliver introduceret her, så endten skal det være efter min struktur eller også skal jeg definere invariant og 
+oneway før det her. 
+\subsection{Gecode}
+\subsection{LocalSolver}
+\subsection{OscaR}
+\subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
+\section{Preprocessing and Simplification}
+\subsection{Gecode Engine}
+\subsubsection{Relaxation}
+\subsection{Initial Solution}
+\section{Structuring Local Search Model}
+\subsection{Simplification}
+\subsection{Invariants and One-way Constraints}
+\subsection{Maintaining Invariants}
+\subsection{Maintenance Graph}
+\section{Local Search Engine}
+\subsection{Neighborhoods}
+\subsubsection{Moves}
 \subsection{Metaheuristics}
-%\newpage
-\section{Defenitions of structures in a solver}
-\input{structures}
-\subsection{Moves}
-\subsection{State}
-\subsection{Constriants}
-\subsection{Invariant}
-\input{invariant}
-\subsection{Oneway Constraints}
-\input{oneway}
-\subsection{Metaheuristics implemeted}
-%\newpage
-\section{Existing Solvers}
-\input{comet}
-\input{gecode}
-\input{localsolver}
-%\input{OsCar
-%\newpage
-\section{Graph}
-\input{graph}
-\newpage
-\subsection{Creating the Update Graph} \label{updategraph}
-\input{updateCons}
-\newpage
 \section{Tests}
 \section{Results}
 \section{Conclusion}
+%\newpage
+%\newpage
+%\section{Defenitions of structures in a solver}
+%\input{structures}
+%\subsection{variables}
+%\subsection{Moves}
+%\subsection{Constriants}
+%\subsection{Invariant}
+%\input{invariant}
+%\subsection{Oneway Constraints}
+%\input{oneway}
+%\subsection{State}
+%\subsection{Metaheuristics implemeted}
+%\newpage
+%\section{Existing Solvers}
+%\input{comet}
+%\input{gecode}
+%\input{localsolver}
+%\input{OsCar}
+%\newpage
+%\section{Graph}
+%\input{graph}
+%\newpage
+%\subsection{Creating the Update Graph} \label{updategraph}
+%\input{updateCons}
+%\newpage
 %\section{Structure (or Architecture?) of My Solver}
+%\section{Tests}
+%\section{Results}
+%\section{Conclusion}
+
 %\input{structure}
 
+
+% Generelle fejl
+
+% Can, be precise -> is 
+% Define 
+% which og that 
+% properly vs probably
 
 \end{document}

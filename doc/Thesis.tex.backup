@@ -20,30 +20,44 @@
 
 %\end{abstract}
 %\newpage
-\section{Local Search and Neighbourhoods}
+\section{Introduction}
+\subsection{Mixed Integer Programming}
+\subsection{Constraint Programming}
+\subsection{Heuristics and Local Search}
+\subsubsection{Construction Heuristics}
+\subsubsection{Local Search and Neighbourhoods}
+\subsubsection{Metaheuristics}
+
+\section{Modelling}
+\subsection{Integer Programming with limitations}
+\subsection{Variables}
+\subsection{Constraints}
+\section{Preprocessing and simplification}
+\subsection{Gecode Engine}
+\subsubsection{Simplification}
 \subsection{Local Search}
 \subsection{Neighbourhoods}
 %\newpage
 \section{Heuristics and Metaheuristics}
 \subsection{Heuristics}
-\subsection{Metaheuristics}
 %\newpage
 \section{Defenitions of structures in a solver}
 \input{structures}
+\subsection{variables}
 \subsection{Moves}
-\subsection{State}
 \subsection{Constriants}
 \subsection{Invariant}
 \input{invariant}
 \subsection{Oneway Constraints}
 \input{oneway}
-\subsection{Metaheuristics implemeted}
+\subsection{State}
+%\subsection{Metaheuristics implemeted}
 %\newpage
 \section{Existing Solvers}
 \input{comet}
 \input{gecode}
 \input{localsolver}
-%\input{OsCar
+%\input{OsCar}
 %\newpage
 \section{Graph}
 \input{graph}
@@ -51,11 +65,17 @@
 \subsection{Creating the Update Graph} \label{updategraph}
 \input{updateCons}
 \newpage
-\subsection{Tests}
-\subsection{Results}
-\subsection{Conclusion}
-%\section{Structure (or Architecture?) of My Solver}
+\section{Structure (or Architecture?) of My Solver}
+\section{Tests}
+\section{Results}
+\section{Conclusion}
+
 %\input{structure}
 
+
+% Generelle fejl
+
+% Can, be precise
+% Define 
 
 \end{document}

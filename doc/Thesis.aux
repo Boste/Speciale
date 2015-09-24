@@ -1,22 +1,33 @@
 \relax 
-\@writefile{toc}{\contentsline {section}{\numberline {1}Local Search and Neighbourhoods}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Heuristics and Metaheuristics}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Defenitions of structures in a solver}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Invariant}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Oneway Constraints}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Existing Solvers}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Comet}{2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Invariants}{2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Differentiable Objects}{2}}
-\newlabel{difObj}{{4.1.2}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Gecode}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Localsolver}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Graph}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Creating the Update Graph}{4}}
-\newlabel{updategraph}{{5.1}{4}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces O$(|V|^2C_{max}$O$($\lstinline [basicstyle=\sffamily  ]{canBeMadeOneway()}$)$}}{4}}
-\newlabel{updateGraph1}{{}{4}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces \textbf  {bool }\lstinline [basicstyle=\sffamily  ]{canBeMadeOneway}(\textbf  {IntegerVariable} \text  {var}, \textbf  {Constraint} cons) \hskip 2em\relax O$(V_{max} + $O$($\lstinline [basicstyle=\sffamily  ]{makeOneway}$))$}}{5}}
-\newlabel{updateGraph1}{{}{5}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {}{\ignorespaces \lstinline [basicstyle=\sffamily  ]{makeOneway}(\textbf  {IntegerVariable} \text  {var}, \textbf  {Constraint} cons) \hskip 2em\relax O$(V_{max})$}}{5}}
-\newlabel{updateGraph1}{{}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Mixed Integer Programming}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Constraint Programming}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Heuristics and Local Search}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.1}Construction Heuristics}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.2}Local Search and Neighborhoods}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.3}Metaheuristics}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Modeling}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Variables and Constraints}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Types of Modeling}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Different Solvers {\textbf  {\color  {blue}(properly not the best name)}}}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Comet}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Gecode}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}LocalSolver}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}OscaR}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}{\textbf  {\color  {blue}((This solver))}} Constraint Based Local Search with Limitations}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Preprocessing and Simplification}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Gecode Engine}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Relaxation}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Initial Solution}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Structuring Local Search Model}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Simplification}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Invariants and One-way Constraints}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Maintaining Invariants}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Maintenance Graph}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Local Search Engine}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Neighborhoods}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Moves}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Metaheuristics}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Tests}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Results}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{4}}

@@ -43,18 +43,18 @@ void State::initializeInvariants() {
         }
     }
     //    for (unsigned i = 0; i < Invariants->size(); i++) {
-    for (unsigned i = 0; i < model->numberOfLayers; i++) {
+//    for (unsigned i = 0; i < model->numberOfLayers; i++) {
 //        std::cout << i << " " << model->numberOfLayers << std::endl;
         // Maybe invariants should be in a vector of vectors according to layer number since this is not as efficient. 
         for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
-            if (invar->getLayer() == i) {
+//            if (invar->getLayer() == i) {
                 invar->calculateDeltaValue();
                 invar->updateValue();
-            }
+//            }
             //        Invariants->at(i)->calculateDeltaValue();
             //        Invariants->at(i)->updateValue();
             //        Invariants->at(i)->test();
-        }
+//        }
     }
 }
 

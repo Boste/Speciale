@@ -39,7 +39,7 @@ private:
 public:
     /// Should be moved to state
     int initialValue;
-    unsigned numberOfLayers = 0;
+//    unsigned numberOfLayers = 0;
     //    int numberOfViolations;
 
     Model();

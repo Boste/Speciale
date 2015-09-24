@@ -101,7 +101,7 @@ public:
             //                }
             //            }
             //            variableID = iv->getID();
-            iv->addToUpdate(sumInvariant);
+            //            iv->addToUpdate(sumInvariant);
             if (priority != 0) {
                 iv->addToUsedInConstraints(LinearConstraint);
             }
@@ -374,10 +374,12 @@ public:
     void initializeLS() {
 
         /// Sort constraints a variable is part of in decreasing order according to domain
-//        for (IntegerVariable* vars : model->getAllVariables()) {
-//            std::vector<constraint> constraints = vars->usedInConstraints();
-//            std::sort(constraints.begin(), constraints.end(), Constraint::SortGreater());
-//        }
+        
+        /// Sort integer variables decreasing order according to number of constraints they are involved
+        //        for (IntegerVariable* vars : model->getAllVariables()) {
+        //            std::vector<constraint> constraints = vars->usedInConstraints();
+        //            std::sort(constraints.begin(), constraints.end(), Constraint::SortGreater());
+        //        }
         //        std::cout << "Make alg to handle integer variables " << std::endl;
         //        std::cout << "opret Constraints, Invariants. Måske erstat pair med vector?" << std::endl;
         //        model->getConstraintsWithIntegerVariables();
@@ -386,26 +388,30 @@ public:
         //        for (int i =queue.size()-1; i >= 0; i--){
         // Try to make Integer variables oneway
         unsigned numberOfIntegerVariables = queue.size();
+        std::cout << numberOfIntegerVariables << std::endl;
         std::cout << "#####################################################################################################" << std::endl;
         std::cout << queue.size() << std::endl;
-        unsigned layer = 1;
-        while (queue.size() != 0 && layer <= numberOfIntegerVariables) { // kinda high limit but could in theory reach it.
-            std::cout << "layer " << layer << " queue size " << queue.size() << std::endl;
+        //        unsigned layer = 1;
+        bool change = true;
+        while (queue.size() != 0 && change) { // kinda high limit but could in theory reach it.
+            std::cout << " queue size " << queue.size() << std::endl;
+            change = false;
             for (auto it = queue.begin(); it != queue.end(); ++it) {
                 IntegerVariable* iv = *it;
                 VariableInConstraints constraints = iv->usedInConstraints();
                 for (constraint cons : constraints) {
                     //                iv->usedInConstraints()
-                    if (canBeMadeOneway(iv, cons, layer)) {
+                    if (canBeMadeOneway(iv, cons)) {
                         queue.erase(it);
                         it--;
+                        change = true;
                         //                        model->getIntegerVariables().erase(it);
                         //                    madeOneway = true;
                         break;
                     }
                 }
             }
-            layer++;
+            //            layer++;
         }
 
         if (queue.size() != 0) {
@@ -413,15 +419,22 @@ public:
             exit(1);
         }
         std::cout << "All Integer variables can be made oneway" << std::endl;
-        unsigned highestLayer;
+        //        unsigned highestLayer;
         // Create the new model that is used in Local search
+
+
+
+        /// Omskriv det hele. Alt skal bygges op model->invariant fungerer som en prioritet invariant skal opdateres i. Hver variable har deres egen kø.
         for (unsigned i = 0; i < model->getOrgConstraints().size(); i++) {
             for (constraint cons : *model->getOrgConstraintsWithPriority(i)) {
-                layer = 0; // if invariant got integer variable then layer will be at least one higher than the invariant corresponding to that int var.
+                //                layer = 0; // if invariant got integer variable then layer will be at least one higher than the invariant corresponding to that int var.
                 // oneway constraints are implicit
                 if (!cons->isOneway()) {
                     // If there are integer variables then the invariant must be updated if no integer variables the constraint is hasn't changed 
-                    if (cons->getNumberOfIntegerVariables() > 0) {
+                    
+                    
+                    
+//                    if (cons->getNumberOfIntegerVariables() > 0) {
                         std::vector<IntegerVariable*> variables;
                         InvariantContainer invars;
                         invariant invar = cons->getInvariant();
@@ -431,42 +444,47 @@ public:
                             } else {
 
                                 invars.push_back(iv->oneway);
-                                if (layer < iv->oneway->layer) {
-                                    layer = iv->oneway->layer;
-                                }
+                                //                                if (layer < iv->oneway->layer) {
+                                //                                    layer = iv->oneway->layer;
+                                //                                }
                             }
                         }
-                        layer++;
+                        //                        layer++;
                         std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(variables, invar->coefficients);
-                        sumInvariant->layer = layer;
+                        //                        sumInvariant->layer = layer;
                         sumInvariant->invariants = invars;
                         model->getInvariants().push_back(sumInvariant);
-                        std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(sumInvariant, cons->getArgument(1), cons->getArgument(0));
-                        model->getConstraintsWithPriority(i)->push_back(LinearConstraint);
+                        cons->getInvariant() = sumInvariant;
+//                        std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(sumInvariant, cons->getArgument(1), cons->getArgument(0));
+//                        model->getConstraintsWithPriority(i)->push_back(LinearConstraint);
 
                         // Constraint does not have integer variables
-                    } else {
-                        if (model->getConstraints().size() <= i) {
-                            constraintContainer tmp = std::make_shared<std::vector < constraint >> ();
-                            model->getConstraints().push_back(tmp);
-                        }
-                        model->getConstraintsWithPriority(i)->push_back(cons);
-                        model->getInvariants().push_back(cons->getInvariant());
+//                    } else {
+//                        if (model->getConstraints().size() <= i) {
+//                            constraintContainer tmp = std::make_shared<std::vector < constraint >> ();
+//                            model->getConstraints().push_back(tmp);
+//                        }
+//                        model->getConstraintsWithPriority(i)->push_back(cons);
+//                        model->getInvariants().push_back(cons->getInvariant());
+//
+//                    }
+                    //                    if (highestLayer < layer) {
+                    //                        highestLayer = layer;
+                    //                    }
 
-                    }
-                    if (highestLayer < layer) {
-                        highestLayer = layer;
-                    }
+//                } else {
 
-                } else {
-                    model->getConstraintsWithPriority(i)->push_back(cons);
-                    model->getInvariants().push_back(cons->getInvariant());
+                    // Gå væk fra orgCons og cons?
+//                    model->getConstraintsWithPriority(i)->push_back(cons);
+
+                    // Den burde ikke eksistere mere (skal måske ændre det, men ved ikke præcist til hvad). 
+//                    model->getInvariants().push_back(cons->getInvariant());
                 }
 
             }
         }
-        model->numberOfLayers = highestLayer; // could there be an invariant with a layer one higher? 
-        std::cout << "highest layer" << std::endl;
+        //        model->numberOfLayers = highestLayer; // could there be an invariant with a layer one higher? 
+        //        std::cout << "highest layer" << std::endl;
 
         constraint obj = model->getOrgConstraintsWithPriority(0)->at(0);
         std::cout << obj->getInvariant()->VariablePointers.size() << std::endl;
@@ -497,7 +515,7 @@ public:
 
     // Not taking into account if the coefficient in objective function is negative
 
-    bool canBeMadeOneway(IntegerVariable* iv, constraint cons, unsigned layer) {
+    bool canBeMadeOneway(IntegerVariable* iv, constraint cons) {
         if (cons->isOneway()) {
             return false;
         }
@@ -505,32 +523,36 @@ public:
 
         //        std::cout << "Make oneway. constraint type " << cons->getArgument(0) << " number of intvars " << cons->getNumberOfIntegerVariables() << std::endl;
         if (cons->getNumberOfIntegerVariables() > 1) {
-            unsigned highestLayer = 0;
+            //            unsigned highestLayer = 0;
             unsigned notDefined = 0;
             for (IntegerVariable* iv : cons->getInvariant()->getVariables()) {
                 if (iv->isIntegerVariable()) {
                     if (!iv->isDefined) {
                         notDefined++;
-                    } else {
-                        if (iv->oneway->layer > highestLayer) {
-                            highestLayer = iv->oneway->layer;
-                        }
+                        //                    } else {
+                        //                        if (iv->oneway->layer > highestLayer) {
+                        //                            highestLayer = iv->oneway->layer;
+                        //                        }
                     }
                 }
             }
 
-            if (notDefined > 1 || layer == highestLayer) {
+            if (notDefined > 1) {
                 return false;
             }
         }
+
+
+        /// Flere check på coeff. Skal have forskelligt fortegn i forhold til alle coeff i objective functions 
         if (cons->getArgument(0) == EQ || coeff < 0) {
-            makeOneway(iv, cons, coeff, layer);
+            makeOneway(iv, cons, coeff);
             return true;
         }
         return false;
     }
 
-    void makeOneway(IntegerVariable* iv, constraint cons, int coeff, unsigned layer) {
+    void makeOneway(IntegerVariable* iv, constraint cons, int coeff) {
+        // prob not from invariant 
         auto oldVars = cons->getInvariant()->getVariables();
         std::vector<IntegerVariable*> variables;
         InvariantContainer invariants;
@@ -552,6 +574,8 @@ public:
                 }
             }
         }
+
+        // Prob not from invariant i get coefficients
         auto coefficients = cons->getInvariant()->getCoefficients();
         coefficients.erase(iv->getID());
         if (coeff != -1) {
@@ -564,23 +588,23 @@ public:
         //Need to update the updateVector, removing old invariant and adding the new one. 
         // Horrorible inefficient could save it in a map that would increase the construction time but reduce the update time
         for (IntegerVariable* iv : variables) {
-            for (invariant inv : iv->getUpdateVector()) {
-                if (inv == cons->getInvariant()) {
-                    inv = sumInvariant;
-                    break;
-                }
-
-            }
+            //            for (invariant inv : iv->getUpdateVector()) {
+            //                if (inv == cons->getInvariant()) {
+            //                    inv = sumInvariant;
+            //                    break;
+            //                }
+            //
+            //            }
             iv->getUpdateVector().push_back(sumInvariant);
         }
-
-        sumInvariant->layer = layer;
-        sumInvariant->CurrentValue = -cons->getArgument(1);
-        sumInvariant->variableID = iv->getID();
         for (invariant invar : invariants) {
             sumInvariant->invariants.push_back(invar);
             invar->getUpdateVector().push_back(sumInvariant);
         }
+        //        sumInvariant->layer = layer;
+        sumInvariant->CurrentValue = -cons->getArgument(1);
+        sumInvariant->startValue = -cons->getArgument(1);
+        sumInvariant->variableID = iv->getID();
         iv->setDefinedBy(sumInvariant, cons);
         cons->isOneway(true);
         model->getInvariants().push_back(sumInvariant);

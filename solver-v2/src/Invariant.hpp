@@ -125,13 +125,13 @@ public:
     }
     
     /// Correspond to the priority the invariant should be updated. 
-    unsigned getLayer() {
-        return layer;
-    }
+//    unsigned getLayer() {
+//        return layer;
+//    }
 
 protected:
     std::vector<IntegerVariable*> VariablePointers;
-
+    
     double CurrentValue = 0;
     double DeltaValue = 0;
     unsigned constraintPriority;
@@ -140,7 +140,7 @@ protected:
     std::unordered_map<int, coefType> coefficients;
     int type;
     /// Should be defined when creating oneway constraints that define (integer)variables 
-    unsigned layer = 0;
+    int startValue = 0;
     int variableID;
     InvariantContainer invariants;
     InvariantContainer update;

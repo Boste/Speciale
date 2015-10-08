@@ -6,7 +6,8 @@
 \usepackage{amssymb}
 
 \usepackage{algorithmic}
-\usepackage{algorithm}
+%\usepackage{algorithm}
+\usepackage{algorithm2e}
 %opening
 
 \include{style}
@@ -24,41 +25,42 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-\subsection{Mixed Integer Programming}
-\subsection{Constraint Programming}
-\subsection{Heuristics and Local Search}
-\subsubsection{Construction Heuristics}
-\subsubsection{Local Search and Neighborhoods}
-\subsubsection{Metaheuristics}
+  \subsection{Mixed Integer Programming}
+  \subsection{Constraint Programming}
+  \subsection{Heuristics and Local Search}
+  \subsubsection{Construction Heuristics}
+  \subsubsection{Local Search and Neighborhoods}
+  \subsubsection{Metaheuristics}
 
 \section{Modeling}
 %\subsection{Variables}
 
-\subsection{Variables and Constraints}
-\input{varcons}
-\subsection{Types of Modeling}
-\input{modeling}
+  \subsection{Variables and Constraints}
+  \input{varcons}
+  \subsection{Types of Modeling}
+  \input{modeling}
 \section{Different Solvers \boste{properly not the best name}}
-\subsection{Comet}
-Invariant bliver introduceret her, så endten skal det være efter min struktur eller også skal jeg definere invariant og 
-oneway før det her. 
-\subsection{Gecode}
-\subsection{LocalSolver}
-\subsection{OscaR}
-\subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
+  \subsection{Comet}
+  Invariant bliver introduceret her, så endten skal det være efter min struktur eller også skal jeg definere invariant 
+  og oneway før det her. 
+  \subsection{Gecode}
+  \subsection{LocalSolver}
+  \subsection{OscaR}
+  \subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
 \section{Preprocessing and Simplification}
-\subsection{Gecode Engine}
-\subsubsection{Relaxation}
-\subsection{Initial Solution}
+  \subsection{Gecode Engine}
+    \subsubsection{Relaxation}
+  \subsection{Initial Solution}
 \section{Structuring Local Search Model}
-\subsection{Simplification}
-\subsection{Invariants and One-way Constraints}
-\subsection{Maintaining Invariants}
-\subsection{Maintenance Graph}
+  \subsection{Simplification}
+  \subsection{Invariants and One-way Constraints}
+    \input{updateCons}
+  \subsection{Maintaining Invariants}
+  \subsection{Maintenance Graph}
 \section{Local Search Engine}
-\subsection{Neighborhoods}
-\subsubsection{Moves}
-\subsection{Metaheuristics}
+  \subsection{Neighborhoods}
+    \subsubsection{Moves}
+  \subsection{Metaheuristics}
 \section{Tests}
 \section{Results}
 \section{Conclusion}

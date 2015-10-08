@@ -16,15 +16,18 @@ NeighborhoodExplorer::~NeighborhoodExplorer() {
 //template<typename returnType>
 
 bool NeighborhoodExplorer::bestImprovement(Move* mv, std::shared_ptr<State> st) {
-    st->shuffleMask();
+    //    model->shuffleMask();
     Move* bestMove = new Move();
     std::vector<int> bestDelta = calculateDeltaChange(mv);
     //    int violationChange = delta.first;
     //    int objectiveChange = delta[0];
     bestMove->copy(mv);
-    for (unsigned i = 0; i < model->getNonFixedBinaryVariables().size(); i++) {
+    std::cout <<model->getMask().size() << std::endl;
+    for (IntegerVariable* iv : model->getMask()) {
+//        debug;
+        //    for (unsigned i = 0; i < model->getNonFixedBinaryVariables().size(); i++) {
         //        for(IntegerVariable* iv : *model->getIntegerVariables()){
-        IntegerVariable* iv = model->getNonFixedBinaryVariables().at(st->maskAt(i));
+        //        IntegerVariable* iv = model->getMaskAt(i);
 
         mv->first = iv;
         mv->deltaValueFirst = 1 - iv->getCurrentValue() - iv->getCurrentValue();
@@ -44,6 +47,7 @@ bool NeighborhoodExplorer::bestImprovement(Move* mv, std::shared_ptr<State> st) 
             bestMove->copy(mv);
         }
     }
+//    debug;
     unsigned changeAt = 0;
     for (unsigned i = 1; i < bestDelta.size(); i++) {
         if (bestDelta[i] != 0) {
@@ -109,25 +113,31 @@ std::vector<int> NeighborhoodExplorer::calculateDeltaChange(Move* mv) {
 
     if (mv->moveType == FLIP) {
         IntegerVariable* variable = mv->first;
-        InvariantContainer update = variable->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        updateVector update = variable->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //        int violationChange = 0;
         //        int objectiveChange = 0;
         //    std::cout << "Variable " << variableNumber << std::endl;
-        for (unsigned i = 0; i < update.size(); i++) {
+        for(updateType invar : update){
+//        for (unsigned i = 0; i < update.size(); i++) {
             //            std::cout << i << std::endl;
-            std::shared_ptr<Invariant> invar = update.at(i);
+//            std::shared_ptr<Invariant> invar = update.at(i);
             //            Invariant* invar = st->getInvariants()->at(updateVector->at(i));
             invar->addChange(variable->getID(), mv->deltaValueFirst);
             invar->calculateDeltaValue();
-            if (invar->getPriority() == 0) {
-                change[0] += model->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
+            if (invar->isUsedByConstraint()) {
+                //            if (invar->getPriority() == 0) {
+                //                change[0] += model->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
 
+                std::shared_ptr<Constraint> cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
 
-            } else {
+                //            } else {
                 int priority = invar->getPriority();
+                if (priority == 0) {
+                    change[priority] += cons->setDeltaViolationDegree();
 
-                std::shared_ptr<Constraint> cons = model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
-                change[priority] += cons->setDeltaViolation();
+                } else if (priority > 0) {
+                    change[priority] += cons->setDeltaViolation();
+                }
                 //                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
             }
         }
@@ -157,21 +167,23 @@ void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
 
         // Skal genberegne!!!!!
         calculateDeltaChange(mv);
-        InvariantContainer update = var->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        updateVector update = var->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (updateType invar : update) {
             //        for (unsigned i = 0; i < update->size(); i++) {
 
             //            std::shared_ptr<Invariant> invar = update->at(i);
             //            Invariant* invar = st->getInvariants()->at(update->at(i));
             invar->updateValue();
-
-            if (invar->getPriority() > 0) {
-                std::shared_ptr<Constraint> cons = model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
-                st->numberOfViolations += cons->updateViolation();
-            }
-            if (invar->getPriority() == 0) {
-
-                model->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
+            if (invar->isUsedByConstraint()) {
+                //            if (invar->getPriority() > 0) {
+                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+                if (cons->getPriority() > 0) {
+                    st->numberOfViolations += cons->updateViolation(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                }
+                if (invar->getPriority() == 0) {
+                    cons->updateViolationDegree();
+                    //                            model->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
+                }
             }
         }
         var->setCurrentValue(1 - var->getCurrentValue());

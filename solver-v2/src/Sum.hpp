@@ -23,15 +23,17 @@ protected:
     
 public:
     
-    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c);
-    Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int,coefType>& map);
+//    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id);
+//    Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int,coefType> map, unsigned id);
+//    Sum(std::unordered_map<int,coefType> map, unsigned id);
+    Sum(std::unordered_map<int,coefType> map);
     
     
     Sum(const Sum &a);
 
     ~Sum();
 
-    Sum& operator=(const Sum &a);
+//    Sum& operator=(const Sum &a);
 
 //    void rollback() {
 //        // Skal den overhovedet bruges?

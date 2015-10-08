@@ -1,0 +1,250 @@
+\hypertarget{class_model}{\section{Model Class Reference}
+\label{class_model}\index{Model@{Model}}
+}
+
+
+{\ttfamily \#include $<$Model.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_model_ae3b375de5f6df4faf74a95d64748e048}{Model} ()
+\item 
+\hyperlink{class_model_afdedf278781f785abeecf5f450e43653}{Model} (const \hyperlink{class_model}{Model} \&orig)
+\item 
+\hyperlink{class_model_ad6ebd2062a0b823db841a0b88baac4c0}{$\sim$\-Model} ()
+\item 
+void \hyperlink{class_model_ab4a45c7798de6427e24d4d0116db2e70}{add\-Binary\-Variable} (int lb, int ub)
+\item 
+void \hyperlink{class_model_a7b8e21078dbcbb489f985bf13b03f76e}{add\-Integer\-Variable} (int lb, int ub)
+\item 
+\hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ \hyperlink{class_model_a7ab387183363c4784c44b5bcf8132198}{get\-Mask\-At} (int i)
+\item 
+std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \& \hyperlink{class_model_a62dcb95de0df2587cb82f1dcc469b443}{get\-Mask} ()
+\item 
+std\-::list$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \& \hyperlink{class_model_aa4dbcf1abedc835ac9017c320fbd91be}{get\-Integer\-Variables} ()
+\begin{DoxyCompactList}\small\item\em Returns all integer variables as a list. only used to make oneway constraints. \end{DoxyCompactList}\item 
+\hyperlink{_constants_8hpp_a30d6ea0a65b32e8b74cc6126cea9852e}{variable\-Container} \& \hyperlink{class_model_a8416f0b4c7db6b2a5ff5edf4aa0bf3db}{get\-Non\-Fixed\-Binary\-Variables} ()
+\item 
+\hyperlink{_constants_8hpp_a30d6ea0a65b32e8b74cc6126cea9852e}{variable\-Container} \& \hyperlink{class_model_acdcb4f81370ca74c301faceae32cb466}{get\-All\-Variables} ()
+\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \& \hyperlink{class_model_aabfc3eb2ef3c57060792e45684a951b3}{get\-Invariants} ()
+\item 
+\hyperlink{_constants_8hpp_a44699d451ee649f131b1b72451070aa0}{constraint\-Container} \hyperlink{class_model_a169afc5a4132e106a9909ebb158f1e97}{get\-Constraints\-With\-Priority} (int prio)
+\item 
+\hyperlink{_constants_8hpp_a9cd92c30962a3af393035610635972fa}{all\-Constraints} \& \hyperlink{class_model_a84692604aec562f826ecd797f7c9a53e}{get\-Constraints} ()
+\item 
+\hyperlink{_constants_8hpp_a44699d451ee649f131b1b72451070aa0}{constraint\-Container} \hyperlink{class_model_a3a02bd2477b425dffb18af15541ab08f}{get\-Objectives} ()
+\item 
+\hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ \hyperlink{class_model_a319b03ca9238413b4120b8edb67099b4}{get\-Non\-Fixed\-Binary\-Variable} (int i)
+\item 
+void \hyperlink{class_model_aea595e2853bd86b738ef0908137c4a9f}{update\-Integer\-Variable} (int index, Gecode\-::\-Int\-Var \&variable)
+\item 
+void \hyperlink{class_model_a2f6cc1ee8ac991843a43c9fac4a7da7b}{non\-Fixed\-Variables} (std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ $\ast$non\-Fixed)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_model_a69256596942801e8a166dabaf9a31114}{initial\-Value}
+\begin{DoxyCompactList}\small\item\em Should be moved to state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_constants_8hpp_a30d6ea0a65b32e8b74cc6126cea9852e}{variable\-Container} \hyperlink{class_model_ad313212f7d87f5b57c0a50fe1bc8ab64}{original}
+\begin{DoxyCompactList}\small\item\em All variables given by user. \end{DoxyCompactList}\item 
+\hyperlink{_constants_8hpp_a30d6ea0a65b32e8b74cc6126cea9852e}{variable\-Container} \hyperlink{class_model_ab5c91a03f63f4d70ca6310e38b7d0f60}{non\-Fixed\-Binary\-Variables}
+\begin{DoxyCompactList}\small\item\em Binary Variables that are not fixed by preprocessing. \end{DoxyCompactList}\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \hyperlink{class_model_a7523e3ea7a5c057d7570dbf7b1cfc9b5}{Invariants}
+\begin{DoxyCompactList}\small\item\em Invariants for original model, before oneway constraints are made. \end{DoxyCompactList}\item 
+std\-::list$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \hyperlink{class_model_a64bcd8c173f44f76e0217fdcbf92d8eb}{Integer\-Variables}
+\begin{DoxyCompactList}\small\item\em All integer variables in the model. \end{DoxyCompactList}\item 
+\hyperlink{_constants_8hpp_a9cd92c30962a3af393035610635972fa}{all\-Constraints} \hyperlink{class_model_aca46427b888eb4564749efc4a305ec50}{Constraints}
+\item 
+std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \hyperlink{class_model_a4f7c982b83cb72cd28962e5259d18467}{mask}
+\begin{DoxyCompactList}\small\item\em All Constraints after some has been made oneway (oneway is not included, oneway is invariants) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_model_ae3b375de5f6df4faf74a95d64748e048}{\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\subsubsection[{Model}]{\setlength{\rightskip}{0pt plus 5cm}Model\-::\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_ae3b375de5f6df4faf74a95d64748e048}
+\hypertarget{class_model_afdedf278781f785abeecf5f450e43653}{\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\subsubsection[{Model}]{\setlength{\rightskip}{0pt plus 5cm}Model\-::\-Model (
+\begin{DoxyParamCaption}
+\item[{const {\bf Model} \&}]{orig}
+\end{DoxyParamCaption}
+)}}\label{class_model_afdedf278781f785abeecf5f450e43653}
+\hypertarget{class_model_ad6ebd2062a0b823db841a0b88baac4c0}{\index{Model@{Model}!$\sim$\-Model@{$\sim$\-Model}}
+\index{$\sim$\-Model@{$\sim$\-Model}!Model@{Model}}
+\subsubsection[{$\sim$\-Model}]{\setlength{\rightskip}{0pt plus 5cm}Model\-::$\sim$\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_ad6ebd2062a0b823db841a0b88baac4c0}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_model_ab4a45c7798de6427e24d4d0116db2e70}{\index{Model@{Model}!add\-Binary\-Variable@{add\-Binary\-Variable}}
+\index{add\-Binary\-Variable@{add\-Binary\-Variable}!Model@{Model}}
+\subsubsection[{add\-Binary\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}void Model\-::add\-Binary\-Variable (
+\begin{DoxyParamCaption}
+\item[{int}]{lb, }
+\item[{int}]{ub}
+\end{DoxyParamCaption}
+)}}\label{class_model_ab4a45c7798de6427e24d4d0116db2e70}
+\hypertarget{class_model_a7b8e21078dbcbb489f985bf13b03f76e}{\index{Model@{Model}!add\-Integer\-Variable@{add\-Integer\-Variable}}
+\index{add\-Integer\-Variable@{add\-Integer\-Variable}!Model@{Model}}
+\subsubsection[{add\-Integer\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}void Model\-::add\-Integer\-Variable (
+\begin{DoxyParamCaption}
+\item[{int}]{lb, }
+\item[{int}]{ub}
+\end{DoxyParamCaption}
+)}}\label{class_model_a7b8e21078dbcbb489f985bf13b03f76e}
+\hypertarget{class_model_acdcb4f81370ca74c301faceae32cb466}{\index{Model@{Model}!get\-All\-Variables@{get\-All\-Variables}}
+\index{get\-All\-Variables@{get\-All\-Variables}!Model@{Model}}
+\subsubsection[{get\-All\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}{\bf variable\-Container} \& Model\-::get\-All\-Variables (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_acdcb4f81370ca74c301faceae32cb466}
+\hypertarget{class_model_a84692604aec562f826ecd797f7c9a53e}{\index{Model@{Model}!get\-Constraints@{get\-Constraints}}
+\index{get\-Constraints@{get\-Constraints}!Model@{Model}}
+\subsubsection[{get\-Constraints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf all\-Constraints} \& Model\-::get\-Constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_a84692604aec562f826ecd797f7c9a53e}
+\hypertarget{class_model_a169afc5a4132e106a9909ebb158f1e97}{\index{Model@{Model}!get\-Constraints\-With\-Priority@{get\-Constraints\-With\-Priority}}
+\index{get\-Constraints\-With\-Priority@{get\-Constraints\-With\-Priority}!Model@{Model}}
+\subsubsection[{get\-Constraints\-With\-Priority}]{\setlength{\rightskip}{0pt plus 5cm}{\bf constraint\-Container} Model\-::get\-Constraints\-With\-Priority (
+\begin{DoxyParamCaption}
+\item[{int}]{prio}
+\end{DoxyParamCaption}
+)}}\label{class_model_a169afc5a4132e106a9909ebb158f1e97}
+\hypertarget{class_model_aa4dbcf1abedc835ac9017c320fbd91be}{\index{Model@{Model}!get\-Integer\-Variables@{get\-Integer\-Variables}}
+\index{get\-Integer\-Variables@{get\-Integer\-Variables}!Model@{Model}}
+\subsubsection[{get\-Integer\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$ {\bf Integer\-Variable} $\ast$ $>$ \& Model\-::get\-Integer\-Variables (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_aa4dbcf1abedc835ac9017c320fbd91be}
+
+
+Returns all integer variables as a list. only used to make oneway constraints. 
+
+\hypertarget{class_model_aabfc3eb2ef3c57060792e45684a951b3}{\index{Model@{Model}!get\-Invariants@{get\-Invariants}}
+\index{get\-Invariants@{get\-Invariants}!Model@{Model}}
+\subsubsection[{get\-Invariants}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container} \& Model\-::get\-Invariants (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_aabfc3eb2ef3c57060792e45684a951b3}
+\hypertarget{class_model_a62dcb95de0df2587cb82f1dcc469b443}{\index{Model@{Model}!get\-Mask@{get\-Mask}}
+\index{get\-Mask@{get\-Mask}!Model@{Model}}
+\subsubsection[{get\-Mask}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Integer\-Variable} $\ast$ $>$ \& Model\-::get\-Mask (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_a62dcb95de0df2587cb82f1dcc469b443}
+\hypertarget{class_model_a7ab387183363c4784c44b5bcf8132198}{\index{Model@{Model}!get\-Mask\-At@{get\-Mask\-At}}
+\index{get\-Mask\-At@{get\-Mask\-At}!Model@{Model}}
+\subsubsection[{get\-Mask\-At}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Integer\-Variable} $\ast$ Model\-::get\-Mask\-At (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}\label{class_model_a7ab387183363c4784c44b5bcf8132198}
+\hypertarget{class_model_a319b03ca9238413b4120b8edb67099b4}{\index{Model@{Model}!get\-Non\-Fixed\-Binary\-Variable@{get\-Non\-Fixed\-Binary\-Variable}}
+\index{get\-Non\-Fixed\-Binary\-Variable@{get\-Non\-Fixed\-Binary\-Variable}!Model@{Model}}
+\subsubsection[{get\-Non\-Fixed\-Binary\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Integer\-Variable} $\ast$ Model\-::get\-Non\-Fixed\-Binary\-Variable (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}\label{class_model_a319b03ca9238413b4120b8edb67099b4}
+\hypertarget{class_model_a8416f0b4c7db6b2a5ff5edf4aa0bf3db}{\index{Model@{Model}!get\-Non\-Fixed\-Binary\-Variables@{get\-Non\-Fixed\-Binary\-Variables}}
+\index{get\-Non\-Fixed\-Binary\-Variables@{get\-Non\-Fixed\-Binary\-Variables}!Model@{Model}}
+\subsubsection[{get\-Non\-Fixed\-Binary\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}{\bf variable\-Container} \& Model\-::get\-Non\-Fixed\-Binary\-Variables (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_a8416f0b4c7db6b2a5ff5edf4aa0bf3db}
+\hypertarget{class_model_a3a02bd2477b425dffb18af15541ab08f}{\index{Model@{Model}!get\-Objectives@{get\-Objectives}}
+\index{get\-Objectives@{get\-Objectives}!Model@{Model}}
+\subsubsection[{get\-Objectives}]{\setlength{\rightskip}{0pt plus 5cm}{\bf constraint\-Container} Model\-::get\-Objectives (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_model_a3a02bd2477b425dffb18af15541ab08f}
+\hypertarget{class_model_a2f6cc1ee8ac991843a43c9fac4a7da7b}{\index{Model@{Model}!non\-Fixed\-Variables@{non\-Fixed\-Variables}}
+\index{non\-Fixed\-Variables@{non\-Fixed\-Variables}!Model@{Model}}
+\subsubsection[{non\-Fixed\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}void Model\-::non\-Fixed\-Variables (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Integer\-Variable} $\ast$ $>$ $\ast$}]{non\-Fixed}
+\end{DoxyParamCaption}
+)}}\label{class_model_a2f6cc1ee8ac991843a43c9fac4a7da7b}
+\hypertarget{class_model_aea595e2853bd86b738ef0908137c4a9f}{\index{Model@{Model}!update\-Integer\-Variable@{update\-Integer\-Variable}}
+\index{update\-Integer\-Variable@{update\-Integer\-Variable}!Model@{Model}}
+\subsubsection[{update\-Integer\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}void Model\-::update\-Integer\-Variable (
+\begin{DoxyParamCaption}
+\item[{int}]{index, }
+\item[{Gecode\-::\-Int\-Var \&}]{variable}
+\end{DoxyParamCaption}
+)}}\label{class_model_aea595e2853bd86b738ef0908137c4a9f}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_model_aca46427b888eb4564749efc4a305ec50}{\index{Model@{Model}!Constraints@{Constraints}}
+\index{Constraints@{Constraints}!Model@{Model}}
+\subsubsection[{Constraints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf all\-Constraints} Model\-::\-Constraints\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_aca46427b888eb4564749efc4a305ec50}
+\hypertarget{class_model_a69256596942801e8a166dabaf9a31114}{\index{Model@{Model}!initial\-Value@{initial\-Value}}
+\index{initial\-Value@{initial\-Value}!Model@{Model}}
+\subsubsection[{initial\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Model\-::initial\-Value}}\label{class_model_a69256596942801e8a166dabaf9a31114}
+
+
+Should be moved to state. 
+
+\hypertarget{class_model_a64bcd8c173f44f76e0217fdcbf92d8eb}{\index{Model@{Model}!Integer\-Variables@{Integer\-Variables}}
+\index{Integer\-Variables@{Integer\-Variables}!Model@{Model}}
+\subsubsection[{Integer\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Integer\-Variable}$\ast$$>$ Model\-::\-Integer\-Variables\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_a64bcd8c173f44f76e0217fdcbf92d8eb}
+
+
+All integer variables in the model. 
+
+\hypertarget{class_model_a7523e3ea7a5c057d7570dbf7b1cfc9b5}{\index{Model@{Model}!Invariants@{Invariants}}
+\index{Invariants@{Invariants}!Model@{Model}}
+\subsubsection[{Invariants}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container} Model\-::\-Invariants\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_a7523e3ea7a5c057d7570dbf7b1cfc9b5}
+
+
+Invariants for original model, before oneway constraints are made. 
+
+Invariants including oneway constraints but not the invariant from the constraints oneway is made \hypertarget{class_model_a4f7c982b83cb72cd28962e5259d18467}{\index{Model@{Model}!mask@{mask}}
+\index{mask@{mask}!Model@{Model}}
+\subsubsection[{mask}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Integer\-Variable}$\ast$$>$ Model\-::mask\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_a4f7c982b83cb72cd28962e5259d18467}
+
+
+All Constraints after some has been made oneway (oneway is not included, oneway is invariants) 
+
+\hypertarget{class_model_ab5c91a03f63f4d70ca6310e38b7d0f60}{\index{Model@{Model}!non\-Fixed\-Binary\-Variables@{non\-Fixed\-Binary\-Variables}}
+\index{non\-Fixed\-Binary\-Variables@{non\-Fixed\-Binary\-Variables}!Model@{Model}}
+\subsubsection[{non\-Fixed\-Binary\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}{\bf variable\-Container} Model\-::non\-Fixed\-Binary\-Variables\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_ab5c91a03f63f4d70ca6310e38b7d0f60}
+
+
+Binary Variables that are not fixed by preprocessing. 
+
+\hypertarget{class_model_ad313212f7d87f5b57c0a50fe1bc8ab64}{\index{Model@{Model}!original@{original}}
+\index{original@{original}!Model@{Model}}
+\subsubsection[{original}]{\setlength{\rightskip}{0pt plus 5cm}{\bf variable\-Container} Model\-::original\hspace{0.3cm}{\ttfamily [private]}}}\label{class_model_ad313212f7d87f5b57c0a50fe1bc8ab64}
+
+
+All variables given by user. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_model_8hpp}{Model.\-hpp}\item 
+\hyperlink{_model_8cpp}{Model.\-cpp}\end{DoxyCompactItemize}

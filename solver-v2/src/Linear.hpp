@@ -16,17 +16,24 @@ public:
 
     /// Used to create the original (given by user) constraints
 
-    Linear(std::shared_ptr<Sum> lhs, int ub, int relation) : Constraint() {
+    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority) : Constraint() {
         //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
-        domainSize = lhs->getVariables().size();
+        //        domainSize = lhs->getVariables().size();
         //        this->lhs = lhs;
         //        invariant = std::move(lhs);
-        invariant = lhs;
+        //        invariant = lhs;
+        this->variables = variables;
+        for (unsigned i = 0; i < variables.size(); i++) {
+            int id = variables.at(i)->getID();
+            std::pair<int,coefType> coef(id,coefficients.at(i));
+            this->coefficients.insert(coef);
+        }
         rhs = ub;
         type = LINEAR;
         arguments.push_back(relation);
         arguments.push_back(ub);
+        this->priority = priority;
     }
     /// Used to create the Linear constraint used by local search
     //    Linear(std::vector<std::shared_ptr<Sum>>&lhs, int ub, int relation) : Constraint() {

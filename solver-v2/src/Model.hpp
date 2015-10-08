@@ -17,18 +17,18 @@ private:
     variableContainer nonFixedBinaryVariables;
     //    std::vector<Gecode::BoolVar> BoolVarVector;
     /// Invariants for original model, before oneway constraints are made. 
-    InvariantContainer orgInvariants;
+    //    InvariantContainer orgInvariants;
     /// Invariants including oneway constraints but not the invariant from the constraints oneway is made
     InvariantContainer Invariants;
-//    variableContainer IntegerVariables;
+    //    variableContainer IntegerVariables;
     /// All integer variables in the model
     std::list<IntegerVariable*> IntegerVariables;
     //    std::vector<std::shared_ptr<std::pair<int, int>>> ConstraintsWithIntegerVariables;
     //    std::vector<Invariant*>* Invariants;
     // All constraints posted
-    allConstraints orgConstraints;
-    /// All Constraints after some has been made oneway (oneway is not included, oneway is invariants)
     allConstraints Constraints;
+    /// All Constraints after some has been made oneway (oneway is not included, oneway is invariants)
+    //    allConstraints Constraints;
     std::vector<IntegerVariable*> mask;
     //    int numberOfVariables =0;;
     //    std::vector<Constraint*>* SoftConstraints;
@@ -39,13 +39,30 @@ private:
 public:
     /// Should be moved to state
     int initialValue;
-//    unsigned numberOfLayers = 0;
+    std::vector<int> test;
+    //    unsigned numberOfLayers = 0;
     //    int numberOfViolations;
 
     Model();
     Model(const Model& orig);
     ~Model();
-    
+
+    //    std::vector<int> getTestVal(){
+    //        return test;
+    //    }
+    //    std::vector<int>& getTestRef(){
+    //        return test;
+    //    }
+    //    void fillTest(int elements){
+    //        for(int i = 0; i < elements; i++){
+    //            test.push_back(i);
+    //        }
+    //        std::cout << "test " << &test << std::endl;
+    //    }
+    //    void incTest(int nr){
+    //        test.at(nr) = nr+1;
+    //        std::cout << test.at(nr) << std::endl;
+    //    }
 
     //        std::vector<IntegerVariable*> IntVarVector;
     //    std::vector<Gecode::BoolVar> BoolVarVector;
@@ -58,10 +75,11 @@ public:
     void addBinaryVariable(int lb, int ub);
     void addIntegerVariable(int lb, int ub);
     //    void initializeInvariants();
-    IntegerVariable* getMaskat(int i);
+    IntegerVariable* getMaskAt(int i);
     std::vector<IntegerVariable*>& getMask();
-      
-    
+    void shuffleMask();
+
+
     //    void initializeConstraints();
 
     //    void initializeObjective();
@@ -71,23 +89,24 @@ public:
     variableContainer& getNonFixedBinaryVariables();
     variableContainer& getAllVariables();
     InvariantContainer& getInvariants();
-    InvariantContainer& getOrgInvariants();
+    void addInvariant(std::shared_ptr<Invariant> invar);
+    //    InvariantContainer& getOrgInvariants();
     //    std::vector<Invariant*>* getInvariants();
 
     //    std::vector<std::shared_ptr<std::pair<int, int>>>& getConstraintsWithIntegerVariables();
-    constraintContainer& getConstraintsWithPriority(int prio);
-    constraintContainer& getOrgConstraintsWithPriority(int prio);
-    allConstraints& getOrgConstraints();
+    //    constraintContainer& getConstraintsWithPriority(int prio);
+    constraintContainer getConstraintsWithPriority(int prio);
     allConstraints& getConstraints();
+    //    allConstraints& getConstraints();
     //    std::vector<Constraint*>* getSoftConstraints();
-    constraintContainer& getObjectives();
-    constraintContainer& getOrgObjectives();
+    //    constraintContainer& getObjectives();
+    constraintContainer getObjectives();
     IntegerVariable* getNonFixedBinaryVariable(int i);
     //    int getObjectiveValue();
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
     void updateIntegerVariable(int index, Gecode::IntVar& variable);
     //    int getNumberOfVariables();
-    void nonFixedVariables(std::vector<IntegerVariable*>* nonFixed);
+    void nonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
     //        return IntVarVector->size();
     ////    }
     //    void saveSolution();
@@ -95,8 +114,7 @@ public:
     //    int getSolutionValue();
     //    void setSolution();
     //    bool recalculateAll();
-    //    int maskAt(int i);
-    //    void shuffleMask();
+    //        int maskAt(int i);
 
 
 

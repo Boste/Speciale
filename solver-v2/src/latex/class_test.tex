@@ -1,0 +1,202 @@
+\hypertarget{class_test}{\section{Test Class Reference}
+\label{class_test}\index{Test@{Test}}
+}
+
+
+{\ttfamily \#include $<$Test.\-hpp$>$}
+
+
+
+Collaboration diagram for Test\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_test__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_test_a99f2bbfac6c95612322b0f10e607ebe5}{Test} ()
+\item 
+\hyperlink{class_test_aebeeeb367fbe9428cfbcee429876fd62}{Test} (const \hyperlink{class_test}{Test} \&orig)
+\item 
+virtual \hyperlink{class_test_a2b0a62f1e667bbe8d8cb18d785bfa991}{$\sim$\-Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_general_solver}{General\-Solver} $\ast$ \hyperlink{class_test_a8dde0db9f022bb331283df8cc0b85d8c}{G\-S}
+\item 
+vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ $\ast$ \hyperlink{class_test_aaaa874634bb96962296189b4910641f5}{var\-Int}
+\item 
+std\-::clock\-\_\-t \hyperlink{class_test_abbea9e118d54f37e96661bcd314a9f6a}{start}
+\item 
+std\-::clock\-\_\-t \hyperlink{class_test_a0a7a04e46cd3875b6d81fc68fb92204f}{test\-Start}
+\item 
+int \hyperlink{class_test_a72dca50d6f671c662b15fd52c4846bca}{failed\-Tests} = 0
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_test_afeffe2721f02998f1c7ae24b14da54df}{test\-Constraints} ()
+\item 
+void \hyperlink{class_test_a09b25c29500a2929e6d1c3147f205225}{test\-Invariants} ()
+\item 
+void \hyperlink{class_test_a5bbcd5e2a51b0e462f83901bfdefc6c1}{test\-Objective\-Function} ()
+\item 
+void \hyperlink{class_test_a59b6677561981a61b7db46d74f453782}{test\-Linear} ()
+\item 
+void \hyperlink{class_test_a12ea05841e28eceba60370c886398951}{test\-Sum} ()
+\item 
+void \hyperlink{class_test_ac3751ac5e703489dcbcf7fd478f52f65}{create\-Linear\-E\-Q\-Const} ()
+\item 
+void \hyperlink{class_test_ad24ce508194ece439f794f38ec99ea45}{create\-Linear\-L\-Q\-Const} ()
+\item 
+void \hyperlink{class_test_aa1c51c4cab3fa12c6c8a7dd48d0f0b37}{start\-Test} (string func)
+\item 
+void \hyperlink{class_test_a667edae13d984f15e3393e92b95977fb}{test\-Done} (string func)
+\item 
+void \hyperlink{class_test_a94e6179822022c2af782cd16a56c4345}{test\-Failed} (string func, string error)
+\item 
+void \hyperlink{class_test_ae42701594f0b771bc2f8c27e2e606498}{test\-Best\-Move} ()
+\item 
+void \hyperlink{class_test_acd44aea9739a41fef10cc33812334e85}{test\-Big} (int vars, int cons)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_test_a99f2bbfac6c95612322b0f10e607ebe5}{\index{Test@{Test}!Test@{Test}}
+\index{Test@{Test}!Test@{Test}}
+\subsubsection[{Test}]{\setlength{\rightskip}{0pt plus 5cm}Test\-::\-Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_test_a99f2bbfac6c95612322b0f10e607ebe5}
+\hypertarget{class_test_aebeeeb367fbe9428cfbcee429876fd62}{\index{Test@{Test}!Test@{Test}}
+\index{Test@{Test}!Test@{Test}}
+\subsubsection[{Test}]{\setlength{\rightskip}{0pt plus 5cm}Test\-::\-Test (
+\begin{DoxyParamCaption}
+\item[{const {\bf Test} \&}]{orig}
+\end{DoxyParamCaption}
+)}}\label{class_test_aebeeeb367fbe9428cfbcee429876fd62}
+\hypertarget{class_test_a2b0a62f1e667bbe8d8cb18d785bfa991}{\index{Test@{Test}!$\sim$\-Test@{$\sim$\-Test}}
+\index{$\sim$\-Test@{$\sim$\-Test}!Test@{Test}}
+\subsubsection[{$\sim$\-Test}]{\setlength{\rightskip}{0pt plus 5cm}Test\-::$\sim$\-Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_test_a2b0a62f1e667bbe8d8cb18d785bfa991}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_test_ac3751ac5e703489dcbcf7fd478f52f65}{\index{Test@{Test}!create\-Linear\-E\-Q\-Const@{create\-Linear\-E\-Q\-Const}}
+\index{create\-Linear\-E\-Q\-Const@{create\-Linear\-E\-Q\-Const}!Test@{Test}}
+\subsubsection[{create\-Linear\-E\-Q\-Const}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::create\-Linear\-E\-Q\-Const (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_ac3751ac5e703489dcbcf7fd478f52f65}
+\hypertarget{class_test_ad24ce508194ece439f794f38ec99ea45}{\index{Test@{Test}!create\-Linear\-L\-Q\-Const@{create\-Linear\-L\-Q\-Const}}
+\index{create\-Linear\-L\-Q\-Const@{create\-Linear\-L\-Q\-Const}!Test@{Test}}
+\subsubsection[{create\-Linear\-L\-Q\-Const}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::create\-Linear\-L\-Q\-Const (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_ad24ce508194ece439f794f38ec99ea45}
+\hypertarget{class_test_aa1c51c4cab3fa12c6c8a7dd48d0f0b37}{\index{Test@{Test}!start\-Test@{start\-Test}}
+\index{start\-Test@{start\-Test}!Test@{Test}}
+\subsubsection[{start\-Test}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::start\-Test (
+\begin{DoxyParamCaption}
+\item[{string}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_aa1c51c4cab3fa12c6c8a7dd48d0f0b37}
+\hypertarget{class_test_ae42701594f0b771bc2f8c27e2e606498}{\index{Test@{Test}!test\-Best\-Move@{test\-Best\-Move}}
+\index{test\-Best\-Move@{test\-Best\-Move}!Test@{Test}}
+\subsubsection[{test\-Best\-Move}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Best\-Move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_ae42701594f0b771bc2f8c27e2e606498}
+\hypertarget{class_test_acd44aea9739a41fef10cc33812334e85}{\index{Test@{Test}!test\-Big@{test\-Big}}
+\index{test\-Big@{test\-Big}!Test@{Test}}
+\subsubsection[{test\-Big}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Big (
+\begin{DoxyParamCaption}
+\item[{int}]{vars, }
+\item[{int}]{cons}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_acd44aea9739a41fef10cc33812334e85}
+\hypertarget{class_test_afeffe2721f02998f1c7ae24b14da54df}{\index{Test@{Test}!test\-Constraints@{test\-Constraints}}
+\index{test\-Constraints@{test\-Constraints}!Test@{Test}}
+\subsubsection[{test\-Constraints}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_afeffe2721f02998f1c7ae24b14da54df}
+\hypertarget{class_test_a667edae13d984f15e3393e92b95977fb}{\index{Test@{Test}!test\-Done@{test\-Done}}
+\index{test\-Done@{test\-Done}!Test@{Test}}
+\subsubsection[{test\-Done}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Done (
+\begin{DoxyParamCaption}
+\item[{string}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a667edae13d984f15e3393e92b95977fb}
+\hypertarget{class_test_a94e6179822022c2af782cd16a56c4345}{\index{Test@{Test}!test\-Failed@{test\-Failed}}
+\index{test\-Failed@{test\-Failed}!Test@{Test}}
+\subsubsection[{test\-Failed}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Failed (
+\begin{DoxyParamCaption}
+\item[{string}]{func, }
+\item[{string}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a94e6179822022c2af782cd16a56c4345}
+\hypertarget{class_test_a09b25c29500a2929e6d1c3147f205225}{\index{Test@{Test}!test\-Invariants@{test\-Invariants}}
+\index{test\-Invariants@{test\-Invariants}!Test@{Test}}
+\subsubsection[{test\-Invariants}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Invariants (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a09b25c29500a2929e6d1c3147f205225}
+\hypertarget{class_test_a59b6677561981a61b7db46d74f453782}{\index{Test@{Test}!test\-Linear@{test\-Linear}}
+\index{test\-Linear@{test\-Linear}!Test@{Test}}
+\subsubsection[{test\-Linear}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Linear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a59b6677561981a61b7db46d74f453782}
+\hypertarget{class_test_a5bbcd5e2a51b0e462f83901bfdefc6c1}{\index{Test@{Test}!test\-Objective\-Function@{test\-Objective\-Function}}
+\index{test\-Objective\-Function@{test\-Objective\-Function}!Test@{Test}}
+\subsubsection[{test\-Objective\-Function}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Objective\-Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a5bbcd5e2a51b0e462f83901bfdefc6c1}
+\hypertarget{class_test_a12ea05841e28eceba60370c886398951}{\index{Test@{Test}!test\-Sum@{test\-Sum}}
+\index{test\-Sum@{test\-Sum}!Test@{Test}}
+\subsubsection[{test\-Sum}]{\setlength{\rightskip}{0pt plus 5cm}void Test\-::test\-Sum (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_test_a12ea05841e28eceba60370c886398951}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_test_a72dca50d6f671c662b15fd52c4846bca}{\index{Test@{Test}!failed\-Tests@{failed\-Tests}}
+\index{failed\-Tests@{failed\-Tests}!Test@{Test}}
+\subsubsection[{failed\-Tests}]{\setlength{\rightskip}{0pt plus 5cm}int Test\-::failed\-Tests = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_test_a72dca50d6f671c662b15fd52c4846bca}
+\hypertarget{class_test_a8dde0db9f022bb331283df8cc0b85d8c}{\index{Test@{Test}!G\-S@{G\-S}}
+\index{G\-S@{G\-S}!Test@{Test}}
+\subsubsection[{G\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf General\-Solver}$\ast$ Test\-::\-G\-S\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_test_a8dde0db9f022bb331283df8cc0b85d8c}
+\hypertarget{class_test_abbea9e118d54f37e96661bcd314a9f6a}{\index{Test@{Test}!start@{start}}
+\index{start@{start}!Test@{Test}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}std\-::clock\-\_\-t Test\-::start\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_test_abbea9e118d54f37e96661bcd314a9f6a}
+\hypertarget{class_test_a0a7a04e46cd3875b6d81fc68fb92204f}{\index{Test@{Test}!test\-Start@{test\-Start}}
+\index{test\-Start@{test\-Start}!Test@{Test}}
+\subsubsection[{test\-Start}]{\setlength{\rightskip}{0pt plus 5cm}std\-::clock\-\_\-t Test\-::test\-Start\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_test_a0a7a04e46cd3875b6d81fc68fb92204f}
+\hypertarget{class_test_aaaa874634bb96962296189b4910641f5}{\index{Test@{Test}!var\-Int@{var\-Int}}
+\index{var\-Int@{var\-Int}!Test@{Test}}
+\subsubsection[{var\-Int}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Integer\-Variable}$\ast$$>$$\ast$ Test\-::var\-Int\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_test_aaaa874634bb96962296189b4910641f5}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_test_8hpp}{Test.\-hpp}\item 
+\hyperlink{_test_8cpp}{Test.\-cpp}\end{DoxyCompactItemize}

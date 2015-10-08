@@ -1,28 +1,39 @@
 #include "Sum.hpp"
 
-Sum::Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c) : Invariant() {
-    type = SUM;
-    //    if(c->size()!=vars->size()){
-    //        std::cout << c->size() << " " <<vars->size() << std::endl;
-    //    }
-    assert(c.size() == vars.size());
-    for (unsigned i = 0; i < vars.size(); i++) {
-        //        coefficients.insert(std::make_pair(vars->at(i)->getID(), c->at(i)));
-        coefficients[vars.at(i)->getID()] = c.at(i);
-    }
-    VariablePointers = vars;
-    //        std::cout << std::endl;
-}
+//Sum::Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id)  {
+//    type = SUM;
+//    invariantID = id;
+//    //    if(c->size()!=vars->size()){
+//    //        std::cout << c->size() << " " <<vars->size() << std::endl;
+//    //    }
+//    assert(c.size() == vars.size());
+//    for (unsigned i = 0; i < vars.size(); i++) {
+//        //        coefficients.insert(std::make_pair(vars->at(i)->getID(), c->at(i)));
+//        coefficients[vars.at(i)->getID()] = c.at(i);
+//    }
+//    VariablePointers = vars;
+//    //        std::cout << std::endl;
+//}
 
 /// Construct that copies a Coefficient map. Size can be different when this sum contains invariants
 
-Sum::Sum(std::vector<IntegerVariable*>& vars, std::unordered_map<int, coefType>& map) : Invariant() {//:IntVariables(vars),coefficients(c) {
-    type = SUM;
+//Sum::Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int, coefType> map, unsigned id)  {//:IntVariables(vars),coefficients(c) {
+//    type = SUM;
+//    invariantID = id;
+//    //    assert(map.size() == vars.size());
+//    coefficients = map;
+//    VariablePointers = vars;
+//
+//    //        std::cout << std::endl;
+//}
 
-    //    assert(map.size() == vars.size());
-    coefficients = map;
-    VariablePointers = vars;
-    //        std::cout << std::endl;
+//Sum::Sum(std::unordered_map<int, coefType> map, unsigned id)  {//:IntVariables(vars),coefficients(c) {
+
+Sum::Sum(std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
+    type = SUM;
+    //    invariantID = id;
+    coefficients.insert(map.begin(), map.end());
+
 }
 
 //Sum::Sum(const Sum &a) : Invariant(a) {
@@ -58,21 +69,54 @@ Sum::~Sum() {
 
 int Sum::calculateDeltaValue() {
     int valueChange = 0;
+    //    std::cout << "Change added " << changeAdd << std::endl;
+    //    std::cout << "calc delta val. Size " << VariableChange.size() << std::endl;
+
+    //    std::cout << startValue << " ";
+    //    int id = variableID;
+    //    if (id == 53552 || id == 110133 || id == 119734) {
+    //        std::cout << "changed variables " << VariableChange.size() << std::endl;
+    //    }
+    //
+    //    if (id == 53552) {
+    //        while (!VariableChange.empty()) {
+    //            //        std::cout << " + " << VariableChange.back();
+    //            std::cout << VariableChange.back() << " ";
+    //            valueChange += VariableChange.back();
+    //            //        std::pair<int, int> currentPair = VariableChange.back();
+    //            //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
+    //
+    //            VariableChange.pop_back();
+    //        }
+    //        std::cout << std::endl;
+    //        std::cout << "valueChange " << valueChange << std::endl;
+    //    } else {
     while (!VariableChange.empty()) {
+        //        std::cout << " + " << VariableChange.back();
         valueChange += VariableChange.back();
         //        std::pair<int, int> currentPair = VariableChange.back();
         //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
 
         VariableChange.pop_back();
     }
+    for(updateType invar : update){
+        invar->addChange(this->getVariableID(),DeltaValue);
+    }
+    //    }
     //        std::cout << valueChange << " ";
     DeltaValue = valueChange;
+
+    //    if (CurrentValue + valueChange < lowerbound) {
+    //        
+    //        return lowerbound - CurrentValue;
+    //    }
     return valueChange;
 }
 
 void Sum::addChange(int variableNumber, int changeInValue) {
     int deltaChange = coefficients.at(variableNumber) * changeInValue;
     VariableChange.push_back(deltaChange);
+    //    changeAdd = true;
 
 
     //    VariableChange.push_back(std::pair<int, int> (variableNumber, changeInValue));

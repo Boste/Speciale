@@ -1,9 +1,11 @@
 #ifndef BPSOLVER_HPP
 #define	BPSOLVER_HPP
 
-#include "BP_Data.hpp"
 #include <cmath>
 #include <algorithm>
+
+
+#include "BP_Data.hpp"
 #include "GeneralSolver.hpp"
 #include "IntegerVariable.hpp"
 //#include "boost/make_shared.hpp"

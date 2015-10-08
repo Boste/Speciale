@@ -56,25 +56,31 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     double usedTime = 0;
     std::clock_t start = std::clock();
     st->saveSolution();
+    //    debug;
     int randomMoves = model->getNonFixedBinaryVariables().size() / 5;
-    
+
     //    std::cout << "Number of random moves " << randomMoves << std::endl;
     //    std::cout << "Timelimit " << timelimit << std::endl;
     //        std::cout << "optimize" << std::endl;
-
-    mv->first = model->getNonFixedBinaryVariable(st->maskAt(0));
+    //    debug;
+    mv->first = model->getMaskAt(0);
+    //    mv->first = model->getNonFixedBinaryVariable(model->getMaskAt(0));
     //        std::cout << "optimize" << std::endl;
-
+    //    debug;
     mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-    while (NE->bestImprovement(mv,st)) {
+    debug;
+    while (NE->bestImprovement(mv, st) && usedTime < timelimit) {
         //        std::cout << __LINE__ << std::endl;
-
+        //        debug;
 
         iterations++;
         //        if (!st->recalculateAll()) {
         //            std::cout << "Line " << __LINE__ << std::endl;
         //            sleep(5);
         //        }
+        break;
+        usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
     }
     //    std::cout << "in optimize" << std::endl;
     if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
@@ -87,7 +93,7 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
     //    }
     while (usedTime < timelimit) {
         for (int i = 0; i < randomMoves; i++) {
-            NE->randomWalk(mv,st);
+            NE->randomWalk(mv, st);
             iterations++;
             //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
@@ -97,12 +103,14 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
         //        std::cout << "objective value after random moves " << st->getObjectiveValue() << std::endl;
         mv->first = model->getNonFixedBinaryVariable(0);
         mv->deltaValueFirst = 1 - mv->first->getCurrentValue() - mv->first->getCurrentValue();
-        while (NE->bestImprovement(mv,st)) {
+        while (NE->bestImprovement(mv, st) && usedTime < timelimit) {
             iterations++;
             //            if (!st->recalculateAll()) {
             //                std::cout << "Line " << __LINE__ << std::endl;
             //                sleep(5);
             //            }
+                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
         }
         //        std::cout << iterations << std::endl;
         if (st->getObjectiveValue() < st->getSolutionValue() && st->numberOfViolations == 0) {
@@ -114,23 +122,23 @@ void LSSpace::optimizeSolution(int time, std::shared_ptr<State> st) {
         //            std::cout << "Line " << __LINE__ << std::endl;
         //            sleep(5);
         //        }
-
-        usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+        debug;
+//        usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
     std::cout << "Time used " << usedTime << std::endl;
     std::cout << "obj val " << st->getObjectiveValue() << std::endl;
 
 
-    st->recalculateAll();
-//    std::cout << "obj val " << st->getObjectiveValue() << std::endl;
+//    st->recalculateAll();
+    //    std::cout << "obj val " << st->getObjectiveValue() << std::endl;
 
-    std::vector<int>* sol = st->getSolution();
+    std::vector<int>& sol = st->getSolution();
     for (IntegerVariable* iv : model->getAllVariables()) {
         mv->first = iv;
-        mv->deltaValueFirst = sol->at(iv->getID()) - iv->getCurrentValue();
+        mv->deltaValueFirst = sol.at(iv->getID()) - iv->getCurrentValue();
         NE->makeMove(mv, st);
     }
-//    st->recalculateAll();
+    //    st->recalculateAll();
 
     //    for (unsigned i = 0; i < sol->size(); i++) {
     //    

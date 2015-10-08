@@ -7,9 +7,10 @@ private:
 
 
     int solutionValue;
-    std::vector<int>* mask;
+//    std::vector<int>* mask;
     std::shared_ptr<Model> model;
-    std::vector<int>* solution;
+    std::vector<int> solution;
+    propagation_queue deltaQueue;
 
 public:
     int numberOfViolations;
@@ -29,12 +30,12 @@ public:
 
     int getObjectiveValue();
     void saveSolution();
-    std::vector<int>* getSolution();
+    std::vector<int>& getSolution();
     int getSolutionValue();
     void setSolution();
     bool recalculateAll();
-    int maskAt(int i);
-    void shuffleMask();
+//    int maskAt(int i);
+//    void shuffleMask();
 private:
 
 };

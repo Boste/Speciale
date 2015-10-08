@@ -1,0 +1,202 @@
+\hypertarget{class_b_p___input}{\section{B\-P\-\_\-\-Input Class Reference}
+\label{class_b_p___input}\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}}
+}
+
+
+{\ttfamily \#include $<$B\-P\-\_\-\-Data.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_p___input_af11c6d9710bee39d23a4abba20cb630f}{B\-P\-\_\-\-Input} (string file\-\_\-name)
+\item 
+\hyperlink{structbounds}{bounds} \hyperlink{class_b_p___input_af4d2583195fd4629455d74923ca499fe}{get\-Bterms} (const int i) const 
+\item 
+const vector$<$ \hyperlink{structelem}{elem} $>$ \& \hyperlink{class_b_p___input_adef364bb6eca83f1deab8c450bd64352}{get\-Matcoeff} (const int i) const 
+\item 
+const vector$<$ \hyperlink{structelem}{elem} $>$ \& \hyperlink{class_b_p___input_ac9ac75a8da307b1a4f4c5d19fa8fd456}{get\-Matcoeff2} (const int j) const 
+\item 
+unsigned \hyperlink{class_b_p___input_a945d4a08729b49412a9a94e7df780ab0}{get\-Ncons} () const 
+\item 
+unsigned \hyperlink{class_b_p___input_a6d6f9c288b6349bbbbbda2bacf367985}{get\-Nvars} () const 
+\item 
+\hyperlink{structvar}{var} \hyperlink{class_b_p___input_a0e7dbca96bff6f3e143485584deec724}{get\-Var} (const int j) const 
+\item 
+vector$<$ \hyperlink{structvar}{var} $>$ \hyperlink{class_b_p___input_a05c2c750e02a0a2fd9de1ae0aa7a14c0}{get\-Vars} () const 
+\item 
+int \hyperlink{class_b_p___input_a82efaa6879d5c37d50fe82d71628c03f}{get\-Direction} () const 
+\item 
+unsigned \hyperlink{class_b_p___input_ac760da883346d05855da604a0f418e68}{get\-Scale} () const 
+\item 
+void \hyperlink{class_b_p___input_a6858da37c5b259b8b7d5c59fbd65acb3}{set\-Digits} (double number)
+\item 
+\hyperlink{class_b_p___input_a3341717cf5481b2369b600901ab5450d}{$\sim$\-B\-P\-\_\-\-Input} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_b_p___input_a5852fa6f08df71a7e6f7da18d29d00fb}{nvars}
+\item 
+int \hyperlink{class_b_p___input_aa4e9401b70ce5a85684c826dc91f0e22}{ncons}
+\item 
+int \hyperlink{class_b_p___input_a9248e80975fe67559644a53be0fdaced}{nbinvars}
+\item 
+int \hyperlink{class_b_p___input_a26d89d84381b238db05b8c89d7b948ce}{nintvars}
+\item 
+int \hyperlink{class_b_p___input_a815e964e6687ba9572ff5eded8428ab7}{direction}
+\item 
+unsigned \hyperlink{class_b_p___input_acee50c002d8261ef1b0fdd05af99c659}{scale}
+\item 
+vector$<$ vector$<$ \hyperlink{structelem}{elem} $>$ $>$ \hyperlink{class_b_p___input_ab55ff15bb47a828b7a3c83c32e1c18c3}{matcoeff}
+\item 
+vector$<$ vector$<$ \hyperlink{structelem}{elem} $>$ $>$ \hyperlink{class_b_p___input_a213441fb4dcffbe23c104142b4169d42}{matcoeff2}
+\item 
+vector$<$ \hyperlink{structbounds}{bounds} $>$ \hyperlink{class_b_p___input_a964eaa6ceec4d2edf5ab2e70338077a5}{bterms}
+\item 
+vector$<$ \hyperlink{structvar}{var} $>$ \hyperlink{class_b_p___input_a57b4dee2857fb8155af4521fca27fb89}{vars}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{class_b_p___input_a5df5090f211b1f324a0318de57eed9f4}{operator$<$$<$} (ostream \&os, const \hyperlink{class_b_p___input}{B\-P\-\_\-\-Input} \&bs)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_p___input_af11c6d9710bee39d23a4abba20cb630f}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}}
+\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{B\-P\-\_\-\-Input}]{\setlength{\rightskip}{0pt plus 5cm}B\-P\-\_\-\-Input\-::\-B\-P\-\_\-\-Input (
+\begin{DoxyParamCaption}
+\item[{string}]{file\-\_\-name}
+\end{DoxyParamCaption}
+)}}\label{class_b_p___input_af11c6d9710bee39d23a4abba20cb630f}
+\hypertarget{class_b_p___input_a3341717cf5481b2369b600901ab5450d}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!$\sim$\-B\-P\-\_\-\-Input@{$\sim$\-B\-P\-\_\-\-Input}}
+\index{$\sim$\-B\-P\-\_\-\-Input@{$\sim$\-B\-P\-\_\-\-Input}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{$\sim$\-B\-P\-\_\-\-Input}]{\setlength{\rightskip}{0pt plus 5cm}B\-P\-\_\-\-Input\-::$\sim$\-B\-P\-\_\-\-Input (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a3341717cf5481b2369b600901ab5450d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_p___input_af4d2583195fd4629455d74923ca499fe}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Bterms@{get\-Bterms}}
+\index{get\-Bterms@{get\-Bterms}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Bterms}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bounds} B\-P\-\_\-\-Input\-::get\-Bterms (
+\begin{DoxyParamCaption}
+\item[{const int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_af4d2583195fd4629455d74923ca499fe}
+\hypertarget{class_b_p___input_a82efaa6879d5c37d50fe82d71628c03f}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Direction@{get\-Direction}}
+\index{get\-Direction@{get\-Direction}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Direction}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::get\-Direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a82efaa6879d5c37d50fe82d71628c03f}
+\hypertarget{class_b_p___input_adef364bb6eca83f1deab8c450bd64352}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Matcoeff@{get\-Matcoeff}}
+\index{get\-Matcoeff@{get\-Matcoeff}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Matcoeff}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<${\bf elem}$>$\& B\-P\-\_\-\-Input\-::get\-Matcoeff (
+\begin{DoxyParamCaption}
+\item[{const int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_adef364bb6eca83f1deab8c450bd64352}
+\hypertarget{class_b_p___input_ac9ac75a8da307b1a4f4c5d19fa8fd456}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Matcoeff2@{get\-Matcoeff2}}
+\index{get\-Matcoeff2@{get\-Matcoeff2}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Matcoeff2}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<${\bf elem}$>$\& B\-P\-\_\-\-Input\-::get\-Matcoeff2 (
+\begin{DoxyParamCaption}
+\item[{const int}]{j}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_ac9ac75a8da307b1a4f4c5d19fa8fd456}
+\hypertarget{class_b_p___input_a945d4a08729b49412a9a94e7df780ab0}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Ncons@{get\-Ncons}}
+\index{get\-Ncons@{get\-Ncons}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Ncons}]{\setlength{\rightskip}{0pt plus 5cm}unsigned B\-P\-\_\-\-Input\-::get\-Ncons (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a945d4a08729b49412a9a94e7df780ab0}
+\hypertarget{class_b_p___input_a6d6f9c288b6349bbbbbda2bacf367985}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Nvars@{get\-Nvars}}
+\index{get\-Nvars@{get\-Nvars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Nvars}]{\setlength{\rightskip}{0pt plus 5cm}unsigned B\-P\-\_\-\-Input\-::get\-Nvars (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a6d6f9c288b6349bbbbbda2bacf367985}
+\hypertarget{class_b_p___input_ac760da883346d05855da604a0f418e68}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Scale@{get\-Scale}}
+\index{get\-Scale@{get\-Scale}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}unsigned B\-P\-\_\-\-Input\-::get\-Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_ac760da883346d05855da604a0f418e68}
+\hypertarget{class_b_p___input_a0e7dbca96bff6f3e143485584deec724}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Var@{get\-Var}}
+\index{get\-Var@{get\-Var}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Var}]{\setlength{\rightskip}{0pt plus 5cm}{\bf var} B\-P\-\_\-\-Input\-::get\-Var (
+\begin{DoxyParamCaption}
+\item[{const int}]{j}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a0e7dbca96bff6f3e143485584deec724}
+\hypertarget{class_b_p___input_a05c2c750e02a0a2fd9de1ae0aa7a14c0}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!get\-Vars@{get\-Vars}}
+\index{get\-Vars@{get\-Vars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{get\-Vars}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf var}$>$ B\-P\-\_\-\-Input\-::get\-Vars (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_b_p___input_a05c2c750e02a0a2fd9de1ae0aa7a14c0}
+\hypertarget{class_b_p___input_a6858da37c5b259b8b7d5c59fbd65acb3}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!set\-Digits@{set\-Digits}}
+\index{set\-Digits@{set\-Digits}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{set\-Digits}]{\setlength{\rightskip}{0pt plus 5cm}void B\-P\-\_\-\-Input\-::set\-Digits (
+\begin{DoxyParamCaption}
+\item[{double}]{number}
+\end{DoxyParamCaption}
+)}}\label{class_b_p___input_a6858da37c5b259b8b7d5c59fbd65acb3}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_b_p___input_a5df5090f211b1f324a0318de57eed9f4}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf B\-P\-\_\-\-Input} \&}]{bs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_b_p___input_a5df5090f211b1f324a0318de57eed9f4}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_p___input_a964eaa6ceec4d2edf5ab2e70338077a5}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!bterms@{bterms}}
+\index{bterms@{bterms}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{bterms}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf bounds}$>$ B\-P\-\_\-\-Input\-::bterms\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a964eaa6ceec4d2edf5ab2e70338077a5}
+\hypertarget{class_b_p___input_a815e964e6687ba9572ff5eded8428ab7}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!direction@{direction}}
+\index{direction@{direction}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{direction}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::direction\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a815e964e6687ba9572ff5eded8428ab7}
+\hypertarget{class_b_p___input_ab55ff15bb47a828b7a3c83c32e1c18c3}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!matcoeff@{matcoeff}}
+\index{matcoeff@{matcoeff}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{matcoeff}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<${\bf elem}$>$ $>$ B\-P\-\_\-\-Input\-::matcoeff\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_ab55ff15bb47a828b7a3c83c32e1c18c3}
+\hypertarget{class_b_p___input_a213441fb4dcffbe23c104142b4169d42}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!matcoeff2@{matcoeff2}}
+\index{matcoeff2@{matcoeff2}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{matcoeff2}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<${\bf elem}$>$ $>$ B\-P\-\_\-\-Input\-::matcoeff2\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a213441fb4dcffbe23c104142b4169d42}
+\hypertarget{class_b_p___input_a9248e80975fe67559644a53be0fdaced}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!nbinvars@{nbinvars}}
+\index{nbinvars@{nbinvars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{nbinvars}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::nbinvars\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a9248e80975fe67559644a53be0fdaced}
+\hypertarget{class_b_p___input_aa4e9401b70ce5a85684c826dc91f0e22}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!ncons@{ncons}}
+\index{ncons@{ncons}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{ncons}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::ncons\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_aa4e9401b70ce5a85684c826dc91f0e22}
+\hypertarget{class_b_p___input_a26d89d84381b238db05b8c89d7b948ce}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!nintvars@{nintvars}}
+\index{nintvars@{nintvars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{nintvars}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::nintvars\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a26d89d84381b238db05b8c89d7b948ce}
+\hypertarget{class_b_p___input_a5852fa6f08df71a7e6f7da18d29d00fb}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!nvars@{nvars}}
+\index{nvars@{nvars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{nvars}]{\setlength{\rightskip}{0pt plus 5cm}int B\-P\-\_\-\-Input\-::nvars\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a5852fa6f08df71a7e6f7da18d29d00fb}
+\hypertarget{class_b_p___input_acee50c002d8261ef1b0fdd05af99c659}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!scale@{scale}}
+\index{scale@{scale}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}unsigned B\-P\-\_\-\-Input\-::scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_acee50c002d8261ef1b0fdd05af99c659}
+\hypertarget{class_b_p___input_a57b4dee2857fb8155af4521fca27fb89}{\index{B\-P\-\_\-\-Input@{B\-P\-\_\-\-Input}!vars@{vars}}
+\index{vars@{vars}!BP_Input@{B\-P\-\_\-\-Input}}
+\subsubsection[{vars}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf var}$>$ B\-P\-\_\-\-Input\-::vars\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_b_p___input_a57b4dee2857fb8155af4521fca27fb89}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_b_p___data_8hpp}{B\-P\-\_\-\-Data.\-hpp}\item 
+\hyperlink{_b_p___data_8cpp}{B\-P\-\_\-\-Data.\-cpp}\end{DoxyCompactItemize}

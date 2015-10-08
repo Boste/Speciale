@@ -1,0 +1,254 @@
+\hypertarget{class_general_solver}{\section{General\-Solver Class Reference}
+\label{class_general_solver}\index{General\-Solver@{General\-Solver}}
+}
+
+
+{\ttfamily \#include $<$General\-Solver.\-hpp$>$}
+
+
+
+Inheritance diagram for General\-Solver\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_general_solver__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_general_solver_af6a162313c6ca4252b3fb09335e44add}{General\-Solver} ()
+\item 
+\hyperlink{class_general_solver_adca6fe5293d5216c11b82313a6684c44}{$\sim$\-General\-Solver} ()
+\item 
+\hyperlink{class_general_solver}{General\-Solver} \& \hyperlink{class_general_solver_a39fa8b0891ddd2a84d07e08e781c560a}{operator=} (const \hyperlink{class_general_solver}{General\-Solver} \&a)
+\item 
+void \hyperlink{class_general_solver_aa431b9e98724dde0d6c6cbe850f9e801}{linear} (std\-::vector$<$ int $>$ \&coefficients, std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \&variables, int relation, int ub, unsigned priority)
+\item 
+void \hyperlink{class_general_solver_a11f08371a72b67b40e72822ac15bfd69}{create\-Int\-Vars} (unsigned number\-Of\-Variables, int lb, int ub)
+\item 
+void \hyperlink{class_general_solver_a0aef6a5662ed6cc2b87a04959221c0e4}{create\-Int\-Var} (int lb, int ub)
+\begin{DoxyCompactList}\small\item\em Create a single variable with given lower and upper bound. \end{DoxyCompactList}\item 
+std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \& \hyperlink{class_general_solver_a0ca7cec1b92600361e1b7d4aeefa4d20}{get\-All\-Variables} ()
+\item 
+void \hyperlink{class_general_solver_a35a41c86b56b652bb8c6b7b96a4e8713}{print} (std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $>$ \&Integer\-Variables)
+\begin{DoxyCompactList}\small\item\em Only for testing, should be removed. \end{DoxyCompactList}\item 
+void \hyperlink{class_general_solver_a8da2ce27fc096edaee250ea3ed068072}{Initial\-Solution} (int Time\-For\-Gecode)
+\item 
+void \hyperlink{class_general_solver_a3ab6827d7643be316d88e689845b86ec}{relax} (int times\-Relaxed)
+\item 
+void \hyperlink{class_general_solver_ac8980bcadaf659185f8d1f253e000239}{simple\-Relax} (int times\-Relaxed)
+\item 
+void \hyperlink{class_general_solver_a2b0f1c903cb82da4dc365c54f99f7dc7}{initialize\-L\-S} ()
+\item 
+bool \hyperlink{class_general_solver_ad33424f327d023dbd9036f6c00d67016}{can\-Be\-Made\-Oneway} (\hyperlink{class_integer_variable}{Integer\-Variable} $\ast$iv, \hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint} cons)
+\item 
+void \hyperlink{class_general_solver_a791480a81d20c730b3922626b17ef86a}{make\-Oneway} (\hyperlink{class_integer_variable}{Integer\-Variable} $\ast$iv, \hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint} cons, int coeff)
+\item 
+int \hyperlink{class_general_solver_a26335b71277441fd0231e6d59f0da504}{get\-Initial\-Value} ()
+\item 
+void \hyperlink{class_general_solver_a9450eca3384912647dc14542daff80d0}{optimize\-Solution} (int time)
+\item 
+void \hyperlink{class_general_solver_ae3a2883d94de6f10d13c815a500e515a}{print\-Current} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_general_solver_a5dc280bd7c1d8527f3127147faf885d0}{print\-\_\-stats} (Gecode\-::\-Search\-::\-Statistics \&stat)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::shared\-\_\-ptr$<$ \hyperlink{class_model}{Model} $>$ \hyperlink{class_general_solver_a83831a1f3765851d544a8badccab3178}{model} = std\-::make\-\_\-shared$<$\hyperlink{class_model}{Model}$>$ ()
+\item 
+std\-::shared\-\_\-ptr$<$ \hyperlink{class_state}{State} $>$ \hyperlink{class_general_solver_aa8f7806985c11c39b355f0720764ce66}{st} = std\-::make\-\_\-shared$<$\hyperlink{class_state}{State}$>$(\hyperlink{class_general_solver_a83831a1f3765851d544a8badccab3178}{model})
+\item 
+std\-::unique\-\_\-ptr$<$ \hyperlink{class_l_s_space}{L\-S\-Space} $>$ \hyperlink{class_general_solver_ad70adfee5b2c8779c975d91cb24efcc5}{L\-S} = std\-::unique\-\_\-ptr$<$\hyperlink{class_l_s_space}{L\-S\-Space}$>$ (new \hyperlink{class_l_s_space}{L\-S\-Space}(\hyperlink{class_general_solver_a83831a1f3765851d544a8badccab3178}{model}))
+\item 
+std\-::unique\-\_\-ptr$<$ \hyperlink{class_gecode_solver}{Gecode\-Solver} $>$ \hyperlink{class_general_solver_a7edfe7eb7a5b8c492e2aa4b697959a3e}{G\-S} = std\-::unique\-\_\-ptr$<$\hyperlink{class_gecode_solver}{Gecode\-Solver}$>$ (new \hyperlink{class_gecode_solver}{Gecode\-Solver}(\hyperlink{class_general_solver_a83831a1f3765851d544a8badccab3178}{model}))
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_general_solver_a5b78b1c2e1fa07ffed92da365593eaa4}{Test}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_general_solver_af6a162313c6ca4252b3fb09335e44add}{\index{General\-Solver@{General\-Solver}!General\-Solver@{General\-Solver}}
+\index{General\-Solver@{General\-Solver}!GeneralSolver@{General\-Solver}}
+\subsubsection[{General\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}General\-Solver\-::\-General\-Solver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_af6a162313c6ca4252b3fb09335e44add}
+\hypertarget{class_general_solver_adca6fe5293d5216c11b82313a6684c44}{\index{General\-Solver@{General\-Solver}!$\sim$\-General\-Solver@{$\sim$\-General\-Solver}}
+\index{$\sim$\-General\-Solver@{$\sim$\-General\-Solver}!GeneralSolver@{General\-Solver}}
+\subsubsection[{$\sim$\-General\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}General\-Solver\-::$\sim$\-General\-Solver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_adca6fe5293d5216c11b82313a6684c44}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_general_solver_ad33424f327d023dbd9036f6c00d67016}{\index{General\-Solver@{General\-Solver}!can\-Be\-Made\-Oneway@{can\-Be\-Made\-Oneway}}
+\index{can\-Be\-Made\-Oneway@{can\-Be\-Made\-Oneway}!GeneralSolver@{General\-Solver}}
+\subsubsection[{can\-Be\-Made\-Oneway}]{\setlength{\rightskip}{0pt plus 5cm}bool General\-Solver\-::can\-Be\-Made\-Oneway (
+\begin{DoxyParamCaption}
+\item[{{\bf Integer\-Variable} $\ast$}]{iv, }
+\item[{{\bf constraint}}]{cons}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_ad33424f327d023dbd9036f6c00d67016}
+\hypertarget{class_general_solver_a0aef6a5662ed6cc2b87a04959221c0e4}{\index{General\-Solver@{General\-Solver}!create\-Int\-Var@{create\-Int\-Var}}
+\index{create\-Int\-Var@{create\-Int\-Var}!GeneralSolver@{General\-Solver}}
+\subsubsection[{create\-Int\-Var}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::create\-Int\-Var (
+\begin{DoxyParamCaption}
+\item[{int}]{lb, }
+\item[{int}]{ub}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a0aef6a5662ed6cc2b87a04959221c0e4}
+
+
+Create a single variable with given lower and upper bound. 
+
+\hypertarget{class_general_solver_a11f08371a72b67b40e72822ac15bfd69}{\index{General\-Solver@{General\-Solver}!create\-Int\-Vars@{create\-Int\-Vars}}
+\index{create\-Int\-Vars@{create\-Int\-Vars}!GeneralSolver@{General\-Solver}}
+\subsubsection[{create\-Int\-Vars}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::create\-Int\-Vars (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{number\-Of\-Variables, }
+\item[{int}]{lb, }
+\item[{int}]{ub}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a11f08371a72b67b40e72822ac15bfd69}
+\hypertarget{class_general_solver_a0ca7cec1b92600361e1b7d4aeefa4d20}{\index{General\-Solver@{General\-Solver}!get\-All\-Variables@{get\-All\-Variables}}
+\index{get\-All\-Variables@{get\-All\-Variables}!GeneralSolver@{General\-Solver}}
+\subsubsection[{get\-All\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Integer\-Variable}$\ast$$>$\& General\-Solver\-::get\-All\-Variables (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a0ca7cec1b92600361e1b7d4aeefa4d20}
+\hypertarget{class_general_solver_a26335b71277441fd0231e6d59f0da504}{\index{General\-Solver@{General\-Solver}!get\-Initial\-Value@{get\-Initial\-Value}}
+\index{get\-Initial\-Value@{get\-Initial\-Value}!GeneralSolver@{General\-Solver}}
+\subsubsection[{get\-Initial\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int General\-Solver\-::get\-Initial\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a26335b71277441fd0231e6d59f0da504}
+\hypertarget{class_general_solver_a2b0f1c903cb82da4dc365c54f99f7dc7}{\index{General\-Solver@{General\-Solver}!initialize\-L\-S@{initialize\-L\-S}}
+\index{initialize\-L\-S@{initialize\-L\-S}!GeneralSolver@{General\-Solver}}
+\subsubsection[{initialize\-L\-S}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::initialize\-L\-S (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a2b0f1c903cb82da4dc365c54f99f7dc7}
+Sort constraints a variable is part of in decreasing order according to domain
+
+Sort integer variables decreasing order according to number of constraints they are involved
+
+Omskriv det hele. Alt skal bygges op model-\/$>$invariant fungerer som en prioritet invariant skal opdateres i. Hver variable har deres egen kø. \hypertarget{class_general_solver_a8da2ce27fc096edaee250ea3ed068072}{\index{General\-Solver@{General\-Solver}!Initial\-Solution@{Initial\-Solution}}
+\index{Initial\-Solution@{Initial\-Solution}!GeneralSolver@{General\-Solver}}
+\subsubsection[{Initial\-Solution}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::\-Initial\-Solution (
+\begin{DoxyParamCaption}
+\item[{int}]{Time\-For\-Gecode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a8da2ce27fc096edaee250ea3ed068072}
+Uses Gecode to find initial solution returns a new \hyperlink{class_general_solver}{General\-Solver} with the initial solution the old (the one this method is called from) is not updated with new solution. \hypertarget{class_general_solver_aa431b9e98724dde0d6c6cbe850f9e801}{\index{General\-Solver@{General\-Solver}!linear@{linear}}
+\index{linear@{linear}!GeneralSolver@{General\-Solver}}
+\subsubsection[{linear}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::linear (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ int $>$ \&}]{coefficients, }
+\item[{std\-::vector$<$ {\bf Integer\-Variable} $\ast$ $>$ \&}]{variables, }
+\item[{int}]{relation, }
+\item[{int}]{ub, }
+\item[{unsigned}]{priority}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_aa431b9e98724dde0d6c6cbe850f9e801}
+\hypertarget{class_general_solver_a791480a81d20c730b3922626b17ef86a}{\index{General\-Solver@{General\-Solver}!make\-Oneway@{make\-Oneway}}
+\index{make\-Oneway@{make\-Oneway}!GeneralSolver@{General\-Solver}}
+\subsubsection[{make\-Oneway}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::make\-Oneway (
+\begin{DoxyParamCaption}
+\item[{{\bf Integer\-Variable} $\ast$}]{iv, }
+\item[{{\bf constraint}}]{cons, }
+\item[{int}]{coeff}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a791480a81d20c730b3922626b17ef86a}
+\hypertarget{class_general_solver_a39fa8b0891ddd2a84d07e08e781c560a}{\index{General\-Solver@{General\-Solver}!operator=@{operator=}}
+\index{operator=@{operator=}!GeneralSolver@{General\-Solver}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf General\-Solver}\& General\-Solver\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf General\-Solver} \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a39fa8b0891ddd2a84d07e08e781c560a}
+\hypertarget{class_general_solver_a9450eca3384912647dc14542daff80d0}{\index{General\-Solver@{General\-Solver}!optimize\-Solution@{optimize\-Solution}}
+\index{optimize\-Solution@{optimize\-Solution}!GeneralSolver@{General\-Solver}}
+\subsubsection[{optimize\-Solution}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::optimize\-Solution (
+\begin{DoxyParamCaption}
+\item[{int}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a9450eca3384912647dc14542daff80d0}
+\hypertarget{class_general_solver_a35a41c86b56b652bb8c6b7b96a4e8713}{\index{General\-Solver@{General\-Solver}!print@{print}}
+\index{print@{print}!GeneralSolver@{General\-Solver}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::print (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Integer\-Variable} $>$ \&}]{Integer\-Variables}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a35a41c86b56b652bb8c6b7b96a4e8713}
+
+
+Only for testing, should be removed. 
+
+\hypertarget{class_general_solver_a5dc280bd7c1d8527f3127147faf885d0}{\index{General\-Solver@{General\-Solver}!print\-\_\-stats@{print\-\_\-stats}}
+\index{print\-\_\-stats@{print\-\_\-stats}!GeneralSolver@{General\-Solver}}
+\subsubsection[{print\-\_\-stats}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::print\-\_\-stats (
+\begin{DoxyParamCaption}
+\item[{Gecode\-::\-Search\-::\-Statistics \&}]{stat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}}\label{class_general_solver_a5dc280bd7c1d8527f3127147faf885d0}
+\hypertarget{class_general_solver_ae3a2883d94de6f10d13c815a500e515a}{\index{General\-Solver@{General\-Solver}!print\-Current@{print\-Current}}
+\index{print\-Current@{print\-Current}!GeneralSolver@{General\-Solver}}
+\subsubsection[{print\-Current}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::print\-Current (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_ae3a2883d94de6f10d13c815a500e515a}
+\hypertarget{class_general_solver_a3ab6827d7643be316d88e689845b86ec}{\index{General\-Solver@{General\-Solver}!relax@{relax}}
+\index{relax@{relax}!GeneralSolver@{General\-Solver}}
+\subsubsection[{relax}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::relax (
+\begin{DoxyParamCaption}
+\item[{int}]{times\-Relaxed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_a3ab6827d7643be316d88e689845b86ec}
+relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time. Only works for binary Different relaxation can be chosen (not atm) needs to create a new \hyperlink{class_gecode_solver}{Gecode\-Solver} (Space) and recreate some of the calls the user made (those that should not be relaxed). \hypertarget{class_general_solver_ac8980bcadaf659185f8d1f253e000239}{\index{General\-Solver@{General\-Solver}!simple\-Relax@{simple\-Relax}}
+\index{simple\-Relax@{simple\-Relax}!GeneralSolver@{General\-Solver}}
+\subsubsection[{simple\-Relax}]{\setlength{\rightskip}{0pt plus 5cm}void General\-Solver\-::simple\-Relax (
+\begin{DoxyParamCaption}
+\item[{int}]{times\-Relaxed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_general_solver_ac8980bcadaf659185f8d1f253e000239}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_general_solver_a5b78b1c2e1fa07ffed92da365593eaa4}{\index{General\-Solver@{General\-Solver}!Test@{Test}}
+\index{Test@{Test}!GeneralSolver@{General\-Solver}}
+\subsubsection[{Test}]{\setlength{\rightskip}{0pt plus 5cm}friend class Test\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_general_solver_a5b78b1c2e1fa07ffed92da365593eaa4}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_general_solver_a7edfe7eb7a5b8c492e2aa4b697959a3e}{\index{General\-Solver@{General\-Solver}!G\-S@{G\-S}}
+\index{G\-S@{G\-S}!GeneralSolver@{General\-Solver}}
+\subsubsection[{G\-S}]{\setlength{\rightskip}{0pt plus 5cm}std\-::unique\-\_\-ptr$<${\bf Gecode\-Solver}$>$ General\-Solver\-::\-G\-S = std\-::unique\-\_\-ptr$<${\bf Gecode\-Solver}$>$ (new {\bf Gecode\-Solver}({\bf model}))\hspace{0.3cm}{\ttfamily [private]}}}\label{class_general_solver_a7edfe7eb7a5b8c492e2aa4b697959a3e}
+\hypertarget{class_general_solver_ad70adfee5b2c8779c975d91cb24efcc5}{\index{General\-Solver@{General\-Solver}!L\-S@{L\-S}}
+\index{L\-S@{L\-S}!GeneralSolver@{General\-Solver}}
+\subsubsection[{L\-S}]{\setlength{\rightskip}{0pt plus 5cm}std\-::unique\-\_\-ptr$<${\bf L\-S\-Space}$>$ General\-Solver\-::\-L\-S = std\-::unique\-\_\-ptr$<${\bf L\-S\-Space}$>$ (new {\bf L\-S\-Space}({\bf model}))\hspace{0.3cm}{\ttfamily [private]}}}\label{class_general_solver_ad70adfee5b2c8779c975d91cb24efcc5}
+\hypertarget{class_general_solver_a83831a1f3765851d544a8badccab3178}{\index{General\-Solver@{General\-Solver}!model@{model}}
+\index{model@{model}!GeneralSolver@{General\-Solver}}
+\subsubsection[{model}]{\setlength{\rightskip}{0pt plus 5cm}std\-::shared\-\_\-ptr$<${\bf Model}$>$ General\-Solver\-::model = std\-::make\-\_\-shared$<${\bf Model}$>$ ()\hspace{0.3cm}{\ttfamily [private]}}}\label{class_general_solver_a83831a1f3765851d544a8badccab3178}
+\hypertarget{class_general_solver_aa8f7806985c11c39b355f0720764ce66}{\index{General\-Solver@{General\-Solver}!st@{st}}
+\index{st@{st}!GeneralSolver@{General\-Solver}}
+\subsubsection[{st}]{\setlength{\rightskip}{0pt plus 5cm}std\-::shared\-\_\-ptr$<${\bf State}$>$ General\-Solver\-::st = std\-::make\-\_\-shared$<${\bf State}$>$({\bf model})\hspace{0.3cm}{\ttfamily [private]}}}\label{class_general_solver_aa8f7806985c11c39b355f0720764ce66}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_general_solver_8hpp}{General\-Solver.\-hpp}\end{DoxyCompactItemize}

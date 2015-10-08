@@ -1,0 +1,269 @@
+\hypertarget{class_integer_variable}{\section{Integer\-Variable Class Reference}
+\label{class_integer_variable}\index{Integer\-Variable@{Integer\-Variable}}
+}
+
+
+{\ttfamily \#include $<$Integer\-Variable.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_constants_8hpp_a02baa5ed1a26d5d8a8c4adb2d0e59a57}{Variable\-In\-Constraints} \& \hyperlink{class_integer_variable_a5e9776b7de2cecf0c68a321908996240}{used\-In\-Constraints} ()
+\item 
+void \hyperlink{class_integer_variable_ac7d3b8458189707ec2bc30ed8223d476}{add\-To\-Used\-In\-Constraints} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_constraint}{Constraint} $>$ \hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint})
+\item 
+\hyperlink{_constants_8hpp_ac9b562f250a09412c017b68185321eba}{invariant} \hyperlink{class_integer_variable_a397ba35a4bae5508d4d44e164d02c2ac}{get\-Oneway} ()
+\item 
+void \hyperlink{class_integer_variable_abdaa77cb4582cf6db133ffb1a1cf839d}{set\-Defined\-By} (\hyperlink{_constants_8hpp_ac9b562f250a09412c017b68185321eba}{invariant} invar, \hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint} cons)
+\item 
+\hyperlink{class_integer_variable_ae04ab8d89dbffd42c7bba04f0db31456}{Integer\-Variable} (int lowerbound, int upperbound, int id)
+\item 
+void \hyperlink{class_integer_variable_a6a1823e3601a6375b55b5cfc3112179d}{set\-Current\-Value} (int val)
+\item 
+bool \hyperlink{class_integer_variable_a773c5fa99af9215ba9a56f97ea25ed80}{is\-Integer\-Variable} ()
+\item 
+int \hyperlink{class_integer_variable_a31c31e2a2950e3a9f3cfd46c59485414}{get\-Current\-Value} ()
+\item 
+void \hyperlink{class_integer_variable_aad10aa4509149b887c26133af7f04fa0}{add\-To\-Update} (\hyperlink{_constants_8hpp_a1c0fa2df7430fc28b51f047f98434f6c}{update\-Type} \hyperlink{_constants_8hpp_ac9b562f250a09412c017b68185321eba}{invariant})
+\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \& \hyperlink{class_integer_variable_a20399e3432e0c85d5e182ad46bb3213c}{get\-Update\-Vector} ()
+\item 
+int \hyperlink{class_integer_variable_a5727e5eab36698720856f869fe29a861}{get\-I\-D} ()
+\item 
+Gecode\-::\-Int\-Var $\ast$ \hyperlink{class_integer_variable_a876ac87baa262f777360ee808c80520e}{get\-Variable\-Pointer} ()
+\item 
+void \hyperlink{class_integer_variable_aa61e4b1eff871273612179b692fc9e85}{set\-Variable\-Pointer} (Gecode\-::\-Int\-Var \&gecode\-Var)
+\item 
+int \hyperlink{class_integer_variable_a622dc92ec02f3abd466982a6ec677ef4}{get\-Lower\-Bound} ()
+\item 
+int \hyperlink{class_integer_variable_af809accc4b926b5bad3b333183d8cda0}{get\-Upper\-Bound} ()
+\item 
+\hyperlink{class_integer_variable_aeb6f77ae09b2951156f6d3083b11a6a9}{$\sim$\-Integer\-Variable} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_integer_variable_aa1c0490d21bfb3c86042af9407e1b369}{used\-In} = 0
+\begin{DoxyCompactList}\small\item\em Only used for testing instances. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_integer_variable_a40d6a9f54ab13673a1c209351f162468}{clear\-Update\-Vector} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_integer_variable_a3aeb7c174cc51b436125d0b89d6acf6a}{lower\-Bound}
+\item 
+int \hyperlink{class_integer_variable_af970be2cc8ecd64ea7e7c021b1e2788e}{upper\-Bound}
+\item 
+int \hyperlink{class_integer_variable_ae81f86d5b1436c30b535e17b8b0101ed}{vector\-I\-D}
+\item 
+int \hyperlink{class_integer_variable_afbdeafc29f2cde02d187f37dc9787e7e}{value} = 0
+\item 
+bool \hyperlink{class_integer_variable_aff13579bdd9546684ebfe66f92297344}{is\-Integer} = false
+\item 
+bool \hyperlink{class_integer_variable_adab57321e01f48d8c977af72b4507e0b}{is\-Defined} = false
+\item 
+\hyperlink{_constants_8hpp_a02baa5ed1a26d5d8a8c4adb2d0e59a57}{Variable\-In\-Constraints} \hyperlink{class_integer_variable_a3622cee463344a82ebec9559a0cc0925}{constraints}
+\item 
+\hyperlink{_constants_8hpp_ac9b562f250a09412c017b68185321eba}{invariant} \hyperlink{class_integer_variable_a94970626989383f0fbc4b6c7b748f0fe}{oneway}
+\item 
+\hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint} \hyperlink{class_integer_variable_aab3394e928b38ae8fb8474a02fffeb80}{defined\-By\-Cons}
+\item 
+\hyperlink{_constants_8hpp_a318698c81469739a632fe21db9b9eb3b}{update\-Vector} \hyperlink{class_integer_variable_ab4b11ddfbd5cc6cb2d2785693d532b2c}{update}
+\item 
+Gecode\-::\-Int\-Var\-Array $\ast$ \hyperlink{class_integer_variable_ab65c2230563c105c5f558fe709ad11b8}{Array\-Pointer}
+\item 
+Gecode\-::\-Int\-Var $\ast$ \hyperlink{class_integer_variable_ac8d0d023d1051a0f046bed10c072b993}{Variable\-Pointer}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_integer_variable_a831d0dd732f452551b0c77214ccbf558}{General\-Solver}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_integer_variable_ae04ab8d89dbffd42c7bba04f0db31456}{\index{Integer\-Variable@{Integer\-Variable}!Integer\-Variable@{Integer\-Variable}}
+\index{Integer\-Variable@{Integer\-Variable}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{Integer\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}Integer\-Variable\-::\-Integer\-Variable (
+\begin{DoxyParamCaption}
+\item[{int}]{lowerbound, }
+\item[{int}]{upperbound, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_ae04ab8d89dbffd42c7bba04f0db31456}
+\hypertarget{class_integer_variable_aeb6f77ae09b2951156f6d3083b11a6a9}{\index{Integer\-Variable@{Integer\-Variable}!$\sim$\-Integer\-Variable@{$\sim$\-Integer\-Variable}}
+\index{$\sim$\-Integer\-Variable@{$\sim$\-Integer\-Variable}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{$\sim$\-Integer\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}Integer\-Variable\-::$\sim$\-Integer\-Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_aeb6f77ae09b2951156f6d3083b11a6a9}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_integer_variable_aad10aa4509149b887c26133af7f04fa0}{\index{Integer\-Variable@{Integer\-Variable}!add\-To\-Update@{add\-To\-Update}}
+\index{add\-To\-Update@{add\-To\-Update}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{add\-To\-Update}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::add\-To\-Update (
+\begin{DoxyParamCaption}
+\item[{{\bf update\-Type}}]{invariant}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_aad10aa4509149b887c26133af7f04fa0}
+\hypertarget{class_integer_variable_ac7d3b8458189707ec2bc30ed8223d476}{\index{Integer\-Variable@{Integer\-Variable}!add\-To\-Used\-In\-Constraints@{add\-To\-Used\-In\-Constraints}}
+\index{add\-To\-Used\-In\-Constraints@{add\-To\-Used\-In\-Constraints}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{add\-To\-Used\-In\-Constraints}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::add\-To\-Used\-In\-Constraints (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Constraint} $>$}]{constraint}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_ac7d3b8458189707ec2bc30ed8223d476}
+\hypertarget{class_integer_variable_a40d6a9f54ab13673a1c209351f162468}{\index{Integer\-Variable@{Integer\-Variable}!clear\-Update\-Vector@{clear\-Update\-Vector}}
+\index{clear\-Update\-Vector@{clear\-Update\-Vector}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{clear\-Update\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::clear\-Update\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{class_integer_variable_a40d6a9f54ab13673a1c209351f162468}
+\hypertarget{class_integer_variable_a31c31e2a2950e3a9f3cfd46c59485414}{\index{Integer\-Variable@{Integer\-Variable}!get\-Current\-Value@{get\-Current\-Value}}
+\index{get\-Current\-Value@{get\-Current\-Value}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Current\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::get\-Current\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a31c31e2a2950e3a9f3cfd46c59485414}
+\hypertarget{class_integer_variable_a5727e5eab36698720856f869fe29a861}{\index{Integer\-Variable@{Integer\-Variable}!get\-I\-D@{get\-I\-D}}
+\index{get\-I\-D@{get\-I\-D}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::get\-I\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a5727e5eab36698720856f869fe29a861}
+\hypertarget{class_integer_variable_a622dc92ec02f3abd466982a6ec677ef4}{\index{Integer\-Variable@{Integer\-Variable}!get\-Lower\-Bound@{get\-Lower\-Bound}}
+\index{get\-Lower\-Bound@{get\-Lower\-Bound}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Lower\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::get\-Lower\-Bound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a622dc92ec02f3abd466982a6ec677ef4}
+\hypertarget{class_integer_variable_a397ba35a4bae5508d4d44e164d02c2ac}{\index{Integer\-Variable@{Integer\-Variable}!get\-Oneway@{get\-Oneway}}
+\index{get\-Oneway@{get\-Oneway}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Oneway}]{\setlength{\rightskip}{0pt plus 5cm}{\bf invariant} Integer\-Variable\-::get\-Oneway (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a397ba35a4bae5508d4d44e164d02c2ac}
+\hypertarget{class_integer_variable_a20399e3432e0c85d5e182ad46bb3213c}{\index{Integer\-Variable@{Integer\-Variable}!get\-Update\-Vector@{get\-Update\-Vector}}
+\index{get\-Update\-Vector@{get\-Update\-Vector}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Update\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container}\& Integer\-Variable\-::get\-Update\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a20399e3432e0c85d5e182ad46bb3213c}
+\hypertarget{class_integer_variable_af809accc4b926b5bad3b333183d8cda0}{\index{Integer\-Variable@{Integer\-Variable}!get\-Upper\-Bound@{get\-Upper\-Bound}}
+\index{get\-Upper\-Bound@{get\-Upper\-Bound}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Upper\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::get\-Upper\-Bound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_af809accc4b926b5bad3b333183d8cda0}
+\hypertarget{class_integer_variable_a876ac87baa262f777360ee808c80520e}{\index{Integer\-Variable@{Integer\-Variable}!get\-Variable\-Pointer@{get\-Variable\-Pointer}}
+\index{get\-Variable\-Pointer@{get\-Variable\-Pointer}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{get\-Variable\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}Gecode\-::\-Int\-Var$\ast$ Integer\-Variable\-::get\-Variable\-Pointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a876ac87baa262f777360ee808c80520e}
+\hypertarget{class_integer_variable_a773c5fa99af9215ba9a56f97ea25ed80}{\index{Integer\-Variable@{Integer\-Variable}!is\-Integer\-Variable@{is\-Integer\-Variable}}
+\index{is\-Integer\-Variable@{is\-Integer\-Variable}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{is\-Integer\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}bool Integer\-Variable\-::is\-Integer\-Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a773c5fa99af9215ba9a56f97ea25ed80}
+\hypertarget{class_integer_variable_a6a1823e3601a6375b55b5cfc3112179d}{\index{Integer\-Variable@{Integer\-Variable}!set\-Current\-Value@{set\-Current\-Value}}
+\index{set\-Current\-Value@{set\-Current\-Value}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{set\-Current\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::set\-Current\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a6a1823e3601a6375b55b5cfc3112179d}
+\hypertarget{class_integer_variable_abdaa77cb4582cf6db133ffb1a1cf839d}{\index{Integer\-Variable@{Integer\-Variable}!set\-Defined\-By@{set\-Defined\-By}}
+\index{set\-Defined\-By@{set\-Defined\-By}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{set\-Defined\-By}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::set\-Defined\-By (
+\begin{DoxyParamCaption}
+\item[{{\bf invariant}}]{invar, }
+\item[{{\bf constraint}}]{cons}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_abdaa77cb4582cf6db133ffb1a1cf839d}
+\hypertarget{class_integer_variable_aa61e4b1eff871273612179b692fc9e85}{\index{Integer\-Variable@{Integer\-Variable}!set\-Variable\-Pointer@{set\-Variable\-Pointer}}
+\index{set\-Variable\-Pointer@{set\-Variable\-Pointer}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{set\-Variable\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}void Integer\-Variable\-::set\-Variable\-Pointer (
+\begin{DoxyParamCaption}
+\item[{Gecode\-::\-Int\-Var \&}]{gecode\-Var}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_aa61e4b1eff871273612179b692fc9e85}
+\hypertarget{class_integer_variable_a5e9776b7de2cecf0c68a321908996240}{\index{Integer\-Variable@{Integer\-Variable}!used\-In\-Constraints@{used\-In\-Constraints}}
+\index{used\-In\-Constraints@{used\-In\-Constraints}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{used\-In\-Constraints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Variable\-In\-Constraints}\& Integer\-Variable\-::used\-In\-Constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_integer_variable_a5e9776b7de2cecf0c68a321908996240}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_integer_variable_a831d0dd732f452551b0c77214ccbf558}{\index{Integer\-Variable@{Integer\-Variable}!General\-Solver@{General\-Solver}}
+\index{General\-Solver@{General\-Solver}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{General\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf General\-Solver}\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_integer_variable_a831d0dd732f452551b0c77214ccbf558}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_integer_variable_ab65c2230563c105c5f558fe709ad11b8}{\index{Integer\-Variable@{Integer\-Variable}!Array\-Pointer@{Array\-Pointer}}
+\index{Array\-Pointer@{Array\-Pointer}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{Array\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}Gecode\-::\-Int\-Var\-Array$\ast$ Integer\-Variable\-::\-Array\-Pointer\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_ab65c2230563c105c5f558fe709ad11b8}
+\hypertarget{class_integer_variable_a3622cee463344a82ebec9559a0cc0925}{\index{Integer\-Variable@{Integer\-Variable}!constraints@{constraints}}
+\index{constraints@{constraints}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{constraints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Variable\-In\-Constraints} Integer\-Variable\-::constraints\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_a3622cee463344a82ebec9559a0cc0925}
+\hypertarget{class_integer_variable_aab3394e928b38ae8fb8474a02fffeb80}{\index{Integer\-Variable@{Integer\-Variable}!defined\-By\-Cons@{defined\-By\-Cons}}
+\index{defined\-By\-Cons@{defined\-By\-Cons}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{defined\-By\-Cons}]{\setlength{\rightskip}{0pt plus 5cm}{\bf constraint} Integer\-Variable\-::defined\-By\-Cons\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_aab3394e928b38ae8fb8474a02fffeb80}
+\hypertarget{class_integer_variable_adab57321e01f48d8c977af72b4507e0b}{\index{Integer\-Variable@{Integer\-Variable}!is\-Defined@{is\-Defined}}
+\index{is\-Defined@{is\-Defined}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{is\-Defined}]{\setlength{\rightskip}{0pt plus 5cm}bool Integer\-Variable\-::is\-Defined = false\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_adab57321e01f48d8c977af72b4507e0b}
+\hypertarget{class_integer_variable_aff13579bdd9546684ebfe66f92297344}{\index{Integer\-Variable@{Integer\-Variable}!is\-Integer@{is\-Integer}}
+\index{is\-Integer@{is\-Integer}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{is\-Integer}]{\setlength{\rightskip}{0pt plus 5cm}bool Integer\-Variable\-::is\-Integer = false\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_aff13579bdd9546684ebfe66f92297344}
+\hypertarget{class_integer_variable_a3aeb7c174cc51b436125d0b89d6acf6a}{\index{Integer\-Variable@{Integer\-Variable}!lower\-Bound@{lower\-Bound}}
+\index{lower\-Bound@{lower\-Bound}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{lower\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::lower\-Bound\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_a3aeb7c174cc51b436125d0b89d6acf6a}
+\hypertarget{class_integer_variable_a94970626989383f0fbc4b6c7b748f0fe}{\index{Integer\-Variable@{Integer\-Variable}!oneway@{oneway}}
+\index{oneway@{oneway}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{oneway}]{\setlength{\rightskip}{0pt plus 5cm}{\bf invariant} Integer\-Variable\-::oneway\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_a94970626989383f0fbc4b6c7b748f0fe}
+\hypertarget{class_integer_variable_ab4b11ddfbd5cc6cb2d2785693d532b2c}{\index{Integer\-Variable@{Integer\-Variable}!update@{update}}
+\index{update@{update}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}{\bf update\-Vector} Integer\-Variable\-::update\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_ab4b11ddfbd5cc6cb2d2785693d532b2c}
+\hypertarget{class_integer_variable_af970be2cc8ecd64ea7e7c021b1e2788e}{\index{Integer\-Variable@{Integer\-Variable}!upper\-Bound@{upper\-Bound}}
+\index{upper\-Bound@{upper\-Bound}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{upper\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::upper\-Bound\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_af970be2cc8ecd64ea7e7c021b1e2788e}
+\hypertarget{class_integer_variable_aa1c0490d21bfb3c86042af9407e1b369}{\index{Integer\-Variable@{Integer\-Variable}!used\-In@{used\-In}}
+\index{used\-In@{used\-In}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{used\-In}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::used\-In = 0}}\label{class_integer_variable_aa1c0490d21bfb3c86042af9407e1b369}
+
+
+Only used for testing instances. 
+
+\hypertarget{class_integer_variable_afbdeafc29f2cde02d187f37dc9787e7e}{\index{Integer\-Variable@{Integer\-Variable}!value@{value}}
+\index{value@{value}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::value = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_afbdeafc29f2cde02d187f37dc9787e7e}
+\hypertarget{class_integer_variable_ac8d0d023d1051a0f046bed10c072b993}{\index{Integer\-Variable@{Integer\-Variable}!Variable\-Pointer@{Variable\-Pointer}}
+\index{Variable\-Pointer@{Variable\-Pointer}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{Variable\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}Gecode\-::\-Int\-Var$\ast$ Integer\-Variable\-::\-Variable\-Pointer\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_ac8d0d023d1051a0f046bed10c072b993}
+\hypertarget{class_integer_variable_ae81f86d5b1436c30b535e17b8b0101ed}{\index{Integer\-Variable@{Integer\-Variable}!vector\-I\-D@{vector\-I\-D}}
+\index{vector\-I\-D@{vector\-I\-D}!IntegerVariable@{Integer\-Variable}}
+\subsubsection[{vector\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}int Integer\-Variable\-::vector\-I\-D\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_integer_variable_ae81f86d5b1436c30b535e17b8b0101ed}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_integer_variable_8hpp}{Integer\-Variable.\-hpp}\end{DoxyCompactItemize}

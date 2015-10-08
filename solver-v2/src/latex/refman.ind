@@ -1,0 +1,1267 @@
+\begin{theindex}
+
+  \item {$\sim $\discretionary {-}{}{}B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{12}
+  \item {$\sim $\discretionary {-}{}{}B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+  \item {$\sim $\discretionary {-}{}{}Constraint}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {$\sim $\discretionary {-}{}{}Flip\discretionary {-}{}{}Move}
+    \subitem {Flip\discretionary {-}{}{}Move}, \hyperpage{18}
+  \item {$\sim $\discretionary {-}{}{}Gecode\discretionary {-}{}{}Solver}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {$\sim $\discretionary {-}{}{}General\discretionary {-}{}{}Solver}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {$\sim $\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {$\sim $\discretionary {-}{}{}Invariant}
+    \subitem {Invariant}, \hyperpage{26}
+  \item {$\sim $\discretionary {-}{}{}L\discretionary {-}{}{}S\discretionary {-}{}{}Space}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+  \item {$\sim $\discretionary {-}{}{}Linear}
+    \subitem {Linear}, \hyperpage{29}
+  \item {$\sim $\discretionary {-}{}{}Model}
+    \subitem {Model}, \hyperpage{32}
+  \item {$\sim $\discretionary {-}{}{}Move}
+    \subitem {Move}, \hyperpage{35}
+  \item {$\sim $\discretionary {-}{}{}Multistop}
+    \subitem {Multistop}, \hyperpage{37}
+  \item {$\sim $\discretionary {-}{}{}Neighborhood\discretionary {-}{}{}Explorer}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {$\sim $\discretionary {-}{}{}Options}
+    \subitem {Options}, \hyperpage{39}
+  \item {$\sim $\discretionary {-}{}{}State}
+    \subitem {State}, \hyperpage{41}
+  \item {$\sim $\discretionary {-}{}{}Sum}
+    \subitem {Sum}, \hyperpage{43}
+  \item {$\sim $\discretionary {-}{}{}Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}
+    \subitem {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{45}
+  \item {$\sim $bounds}
+    \subitem {bounds}, \hyperpage{7}
+  \item {$\sim $elem}
+    \subitem {elem}, \hyperpage{16}
+  \item {$\sim $var}
+    \subitem {var}, \hyperpage{46}
+
+  \indexspace
+
+  \item {add\discretionary {-}{}{}Binary\discretionary {-}{}{}Variable}
+    \subitem {Model}, \hyperpage{32}
+  \item {add\discretionary {-}{}{}Change}
+    \subitem {Invariant}, \hyperpage{26}
+    \subitem {Sum}, \hyperpage{43}
+  \item {add\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}
+    \subitem {Model}, \hyperpage{32}
+  \item {add\discretionary {-}{}{}To\discretionary {-}{}{}Update}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {Invariant}, \hyperpage{26}
+  \item {add\discretionary {-}{}{}To\discretionary {-}{}{}Used\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {all\discretionary {-}{}{}Constraints}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {arguments}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {Array\discretionary {-}{}{}Pointer}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {assign}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+  \item {assignment}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+
+  \indexspace
+
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Data.\discretionary {-}{}{}cpp}, 
+		\hyperpage{47}
+    \subitem {operator$<$$<$}, \hyperpage{47}
+    \subitem {operator$>$$>$}, \hyperpage{47}
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Data.\discretionary {-}{}{}hpp}, 
+		\hyperpage{47}
+    \subitem {D\discretionary {-}{}{}E\discretionary {-}{}{}B\discretionary {-}{}{}U\discretionary {-}{}{}G}, 
+		\hyperpage{48}
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+    \subitem {$\sim $\discretionary {-}{}{}B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+    \subitem {bterms}, \hyperpage{9}
+    \subitem {direction}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Bterms}, \hyperpage{8}
+    \subitem {get\discretionary {-}{}{}Direction}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Matcoeff}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Matcoeff2}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Ncons}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Nvars}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Scale}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Var}, \hyperpage{9}
+    \subitem {get\discretionary {-}{}{}Vars}, \hyperpage{9}
+    \subitem {matcoeff}, \hyperpage{9}
+    \subitem {matcoeff2}, \hyperpage{9}
+    \subitem {nbinvars}, \hyperpage{9}
+    \subitem {ncons}, \hyperpage{9}
+    \subitem {nintvars}, \hyperpage{9}
+    \subitem {nvars}, \hyperpage{9}
+    \subitem {operator$<$$<$}, \hyperpage{9}
+    \subitem {scale}, \hyperpage{9}
+    \subitem {set\discretionary {-}{}{}Digits}, \hyperpage{9}
+    \subitem {vars}, \hyperpage{9}
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{9}
+    \subitem {assign}, \hyperpage{10}
+    \subitem {assignment}, \hyperpage{10}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+    \subitem {in}, \hyperpage{11}
+    \subitem {operator$<$$<$}, \hyperpage{10}
+    \subitem {operator$>$$>$}, \hyperpage{10}
+    \subitem {operator=}, \hyperpage{10}
+    \subitem {var\discretionary {-}{}{}Assignment}, \hyperpage{11}
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{11}
+    \subitem {$\sim $\discretionary {-}{}{}B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{12}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{12}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{12}
+    \subitem {print\discretionary {-}{}{}Current}, \hyperpage{12}
+  \item {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver.\discretionary {-}{}{}hpp}, 
+		\hyperpage{48}
+  \item {best\discretionary {-}{}{}Improvement}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {bin}
+    \subitem {var}, \hyperpage{46}
+  \item {bin\discretionary {-}{}{}Vars}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+  \item {bounds}, \hyperpage{7}
+    \subitem {$\sim $bounds}, \hyperpage{7}
+    \subitem {lb}, \hyperpage{7}
+    \subitem {type}, \hyperpage{7}
+    \subitem {ub}, \hyperpage{8}
+  \item {branch}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {bterms}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+
+  \indexspace
+
+  \item {calculate\discretionary {-}{}{}Delta\discretionary {-}{}{}Change}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {calculate\discretionary {-}{}{}Delta\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{26}
+    \subitem {Sum}, \hyperpage{43}
+  \item {called}
+    \subitem {Multistop}, \hyperpage{37}
+  \item {can\discretionary {-}{}{}Be\discretionary {-}{}{}Made\discretionary {-}{}{}Oneway}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {clear\discretionary {-}{}{}Update\discretionary {-}{}{}Vector}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {Clock}, \hyperpage{12}
+    \subitem {global\discretionary {-}{}{}Clock}, \hyperpage{12}
+  \item {Clock.\discretionary {-}{}{}cpp}, \hyperpage{49}
+  \item {Clock.\discretionary {-}{}{}hpp}, \hyperpage{50}
+  \item {coef\discretionary {-}{}{}Type}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {coeff}
+    \subitem {elem}, \hyperpage{16}
+  \item {coefficients}
+    \subitem {Constraint}, \hyperpage{15}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {commit\discretionary {-}{}{}Move}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {Constants.\discretionary {-}{}{}hpp}, \hyperpage{50}
+    \subitem {all\discretionary {-}{}{}Constraints}, \hyperpage{53}
+    \subitem {coef\discretionary {-}{}{}Type}, \hyperpage{53}
+    \subitem {constraint}, \hyperpage{53}
+    \subitem {constraint\discretionary {-}{}{}Container}, 
+		\hyperpage{53}
+    \subitem {debug}, \hyperpage{52}
+    \subitem {E\discretionary {-}{}{}Q}, \hyperpage{52}
+    \subitem {F\discretionary {-}{}{}L\discretionary {-}{}{}I\discretionary {-}{}{}P}, 
+		\hyperpage{52}
+    \subitem {G\discretionary {-}{}{}Q}, \hyperpage{52}
+    \subitem {G\discretionary {-}{}{}R}, \hyperpage{52}
+    \subitem {H\discretionary {-}{}{}A\discretionary {-}{}{}R\discretionary {-}{}{}D}, 
+		\hyperpage{52}
+    \subitem {ini\discretionary {-}{}{}Trails}, \hyperpage{52}
+    \subitem {invariant}, \hyperpage{53}
+    \subitem {Invariant\discretionary {-}{}{}Container}, \hyperpage{53}
+    \subitem {L\discretionary {-}{}{}E}, \hyperpage{52}
+    \subitem {L\discretionary {-}{}{}I\discretionary {-}{}{}N\discretionary {-}{}{}E\discretionary {-}{}{}A\discretionary {-}{}{}R}, 
+		\hyperpage{52}
+    \subitem {L\discretionary {-}{}{}Q}, \hyperpage{52}
+    \subitem {max\discretionary {-}{}{}Iter}, \hyperpage{52}
+    \subitem {max\discretionary {-}{}{}Moves}, \hyperpage{52}
+    \subitem {non\discretionary {-}{}{}Term}, \hyperpage{52}
+    \subitem {O\discretionary {-}{}{}B\discretionary {-}{}{}J}, 
+		\hyperpage{52}
+    \subitem {P\discretionary {-}{}{}R\discretionary {-}{}{}I\discretionary {-}{}{}N\discretionary {-}{}{}T}, 
+		\hyperpage{52}
+    \subitem {R\discretionary {-}{}{}A\discretionary {-}{}{}N\discretionary {-}{}{}D\discretionary {-}{}{}O\discretionary {-}{}{}M\discretionary {-}{}{}S\discretionary {-}{}{}E\discretionary {-}{}{}E\discretionary {-}{}{}D}, 
+		\hyperpage{53}
+    \subitem {S\discretionary {-}{}{}O\discretionary {-}{}{}F\discretionary {-}{}{}T}, 
+		\hyperpage{53}
+    \subitem {S\discretionary {-}{}{}U\discretionary {-}{}{}M}, 
+		\hyperpage{53}
+    \subitem {S\discretionary {-}{}{}W\discretionary {-}{}{}A\discretionary {-}{}{}P}, 
+		\hyperpage{53}
+    \subitem {tabulist\discretionary {-}{}{}L\discretionary {-}{}{}B}, 
+		\hyperpage{53}
+    \subitem {tabulist\discretionary {-}{}{}U\discretionary {-}{}{}B}, 
+		\hyperpage{53}
+    \subitem {update\discretionary {-}{}{}Type}, \hyperpage{53}
+    \subitem {update\discretionary {-}{}{}Vector}, \hyperpage{53}
+    \subitem {V\discretionary {-}{}{}A\discretionary {-}{}{}L\discretionary {-}{}{}U\discretionary {-}{}{}E\discretionary {-}{}{}C\discretionary {-}{}{}H\discretionary {-}{}{}A\discretionary {-}{}{}N\discretionary {-}{}{}G\discretionary {-}{}{}E}, 
+		\hyperpage{53}
+    \subitem {variable\discretionary {-}{}{}Container}, \hyperpage{53}
+    \subitem {Variable\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}, 
+		\hyperpage{53}
+    \subitem {weight}, \hyperpage{53}
+  \item {Constraint}, \hyperpage{12}
+    \subitem {$\sim $\discretionary {-}{}{}Constraint}, \hyperpage{14}
+    \subitem {arguments}, \hyperpage{15}
+    \subitem {coefficients}, \hyperpage{15}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Delta\discretionary {-}{}{}Violation}, \hyperpage{15}
+    \subitem {Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{15}
+    \subitem {get\discretionary {-}{}{}Argument}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Coefficients}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation}, 
+		\hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Invariant}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}, 
+		\hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Scope\discretionary {-}{}{}Size}, 
+		\hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Type}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Variables}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Violation}, \hyperpage{14}
+    \subitem {get\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{14}
+    \subitem {invariant}, \hyperpage{15}
+    \subitem {is\discretionary {-}{}{}Oneway}, \hyperpage{14}
+    \subitem {number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}, 
+		\hyperpage{15}
+    \subitem {oneway}, \hyperpage{15}
+    \subitem {operator$<$}, \hyperpage{14}
+    \subitem {operator$>$}, \hyperpage{14}
+    \subitem {priority}, \hyperpage{15}
+    \subitem {scope\discretionary {-}{}{}Size}, \hyperpage{15}
+    \subitem {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation}, 
+		\hyperpage{14}
+    \subitem {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{14}
+    \subitem {set\discretionary {-}{}{}Invariant}, \hyperpage{14}
+    \subitem {set\discretionary {-}{}{}Number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}, 
+		\hyperpage{14}
+    \subitem {test\discretionary {-}{}{}Cons}, \hyperpage{14}
+    \subitem {test\discretionary {-}{}{}Obj}, \hyperpage{14}
+    \subitem {type}, \hyperpage{15}
+    \subitem {update\discretionary {-}{}{}Violation}, \hyperpage{15}
+    \subitem {update\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{15}
+    \subitem {variables}, \hyperpage{15}
+    \subitem {Violation}, \hyperpage{15}
+    \subitem {Violation\discretionary {-}{}{}Degree}, \hyperpage{15}
+  \item {constraint}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Constraint.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Constraint\discretionary {-}{}{}::\discretionary {-}{}{}Sort\discretionary {-}{}{}Greater}, 
+		\hyperpage{40}
+    \subitem {operator()}, \hyperpage{40}
+  \item {constraint\discretionary {-}{}{}Container}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {constraint\discretionary {-}{}{}Priority}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {Constraint\discretionary {-}{}{}Sorter}, \hyperpage{15}
+    \subitem {Constraint\discretionary {-}{}{}Sorter}, \hyperpage{16}
+    \subitem {Constraint\discretionary {-}{}{}Sorter}, \hyperpage{16}
+    \subitem {operator()}, \hyperpage{16}
+  \item {Constraints}
+    \subitem {Model}, \hyperpage{33}
+  \item {constraints}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {copy}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {Move}, \hyperpage{35}
+  \item {create\discretionary {-}{}{}Array}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {create\discretionary {-}{}{}Gecode\discretionary {-}{}{}Variable}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {create\discretionary {-}{}{}Int\discretionary {-}{}{}Var}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {create\discretionary {-}{}{}Int\discretionary {-}{}{}Vars}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {Current\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{27}
+
+  \indexspace
+
+  \item {D\discretionary {-}{}{}E\discretionary {-}{}{}B\discretionary {-}{}{}U\discretionary {-}{}{}G}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Data.\discretionary {-}{}{}hpp}, 
+		\hyperpage{48}
+  \item {debug}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {defined\discretionary {-}{}{}By\discretionary {-}{}{}Cons}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {Delta\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {delta\discretionary {-}{}{}Value\discretionary {-}{}{}First}
+    \subitem {Move}, \hyperpage{35}
+  \item {delta\discretionary {-}{}{}Value\discretionary {-}{}{}Second}
+    \subitem {Move}, \hyperpage{35}
+  \item {delta\discretionary {-}{}{}Value\discretionary {-}{}{}Third}
+    \subitem {Move}, \hyperpage{35}
+  \item {Delta\discretionary {-}{}{}Violation}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {direction}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {Double}
+    \subitem {Random}, \hyperpage{39}
+
+  \indexspace
+
+  \item {E\discretionary {-}{}{}Q}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {elem}, \hyperpage{16}
+    \subitem {$\sim $elem}, \hyperpage{16}
+    \subitem {coeff}, \hyperpage{16}
+    \subitem {index}, \hyperpage{16}
+
+  \indexspace
+
+  \item {F\discretionary {-}{}{}L\discretionary {-}{}{}I\discretionary {-}{}{}P}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {Find\discretionary {-}{}{}Solution}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {first}
+    \subitem {Move}, \hyperpage{35}
+  \item {fix\discretionary {-}{}{}Variables}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {flip}
+    \subitem {Move}, \hyperpage{35}
+  \item {Flip\discretionary {-}{}{}Move}, \hyperpage{16}
+    \subitem {$\sim $\discretionary {-}{}{}Flip\discretionary {-}{}{}Move}, 
+		\hyperpage{18}
+    \subitem {Flip\discretionary {-}{}{}Move}, \hyperpage{17}
+    \subitem {Flip\discretionary {-}{}{}Move}, \hyperpage{17}
+    \subitem {operator=}, \hyperpage{18}
+  \item {Flip\discretionary {-}{}{}Move.\discretionary {-}{}{}cpp}, 
+		\hyperpage{54}
+  \item {Flip\discretionary {-}{}{}Move.\discretionary {-}{}{}hpp}, 
+		\hyperpage{55}
+  \item {fs}
+    \subitem {Multistop}, \hyperpage{37}
+
+  \indexspace
+
+  \item {G\discretionary {-}{}{}Q}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {G\discretionary {-}{}{}R}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {G\discretionary {-}{}{}S}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {Gecode\discretionary {-}{}{}Solver}, \hyperpage{18}
+    \subitem {$\sim $\discretionary {-}{}{}Gecode\discretionary {-}{}{}Solver}, 
+		\hyperpage{19}
+    \subitem {bin\discretionary {-}{}{}Vars}, \hyperpage{20}
+    \subitem {branch}, \hyperpage{19}
+    \subitem {copy}, \hyperpage{19}
+    \subitem {create\discretionary {-}{}{}Array}, \hyperpage{19}
+    \subitem {create\discretionary {-}{}{}Gecode\discretionary {-}{}{}Variable}, 
+		\hyperpage{19}
+    \subitem {Find\discretionary {-}{}{}Solution}, \hyperpage{19}
+    \subitem {fix\discretionary {-}{}{}Variables}, \hyperpage{19}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {initialize}, \hyperpage{19}
+    \subitem {Int\discretionary {-}{}{}Vars}, \hyperpage{20}
+    \subitem {linear}, \hyperpage{19}
+    \subitem {model}, \hyperpage{20}
+    \subitem {post\discretionary {-}{}{}Cov\discretionary {-}{}{}Sol}, 
+		\hyperpage{19}
+    \subitem {print}, \hyperpage{19}
+    \subitem {print\discretionary {-}{}{}\_\discretionary {-}{}{}stats}, 
+		\hyperpage{19}
+    \subitem {print\discretionary {-}{}{}Space\discretionary {-}{}{}Status}, 
+		\hyperpage{20}
+    \subitem {Set\discretionary {-}{}{}Values}, \hyperpage{20}
+    \subitem {tmp\discretionary {-}{}{}Vars}, \hyperpage{20}
+  \item {Gecode\discretionary {-}{}{}Solver.\discretionary {-}{}{}cpp}, 
+		\hyperpage{56}
+  \item {Gecode\discretionary {-}{}{}Solver.\discretionary {-}{}{}hpp}, 
+		\hyperpage{57}
+  \item {General\discretionary {-}{}{}Solver}, \hyperpage{20}
+    \subitem {$\sim $\discretionary {-}{}{}General\discretionary {-}{}{}Solver}, 
+		\hyperpage{21}
+    \subitem {can\discretionary {-}{}{}Be\discretionary {-}{}{}Made\discretionary {-}{}{}Oneway}, 
+		\hyperpage{21}
+    \subitem {create\discretionary {-}{}{}Int\discretionary {-}{}{}Var}, 
+		\hyperpage{21}
+    \subitem {create\discretionary {-}{}{}Int\discretionary {-}{}{}Vars}, 
+		\hyperpage{21}
+    \subitem {G\discretionary {-}{}{}S}, \hyperpage{22}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+    \subitem {get\discretionary {-}{}{}All\discretionary {-}{}{}Variables}, 
+		\hyperpage{21}
+    \subitem {get\discretionary {-}{}{}Initial\discretionary {-}{}{}Value}, 
+		\hyperpage{21}
+    \subitem {Initial\discretionary {-}{}{}Solution}, \hyperpage{21}
+    \subitem {initialize\discretionary {-}{}{}L\discretionary {-}{}{}S}, 
+		\hyperpage{21}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {Invariant}, \hyperpage{27}
+    \subitem {L\discretionary {-}{}{}S}, \hyperpage{22}
+    \subitem {linear}, \hyperpage{22}
+    \subitem {make\discretionary {-}{}{}Oneway}, \hyperpage{22}
+    \subitem {model}, \hyperpage{22}
+    \subitem {operator=}, \hyperpage{22}
+    \subitem {optimize\discretionary {-}{}{}Solution}, \hyperpage{22}
+    \subitem {print}, \hyperpage{22}
+    \subitem {print\discretionary {-}{}{}\_\discretionary {-}{}{}stats}, 
+		\hyperpage{22}
+    \subitem {print\discretionary {-}{}{}Current}, \hyperpage{22}
+    \subitem {relax}, \hyperpage{22}
+    \subitem {simple\discretionary {-}{}{}Relax}, \hyperpage{22}
+    \subitem {st}, \hyperpage{22}
+    \subitem {Test}, \hyperpage{22}
+  \item {General\discretionary {-}{}{}Solver.\discretionary {-}{}{}cpp}, 
+		\hyperpage{58}
+  \item {General\discretionary {-}{}{}Solver.\discretionary {-}{}{}hpp}, 
+		\hyperpage{58}
+  \item {get\discretionary {-}{}{}All\discretionary {-}{}{}Variables}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+    \subitem {Model}, \hyperpage{32}
+  \item {get\discretionary {-}{}{}Argument}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Bterms}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{8}
+  \item {get\discretionary {-}{}{}Coefficients}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Invariant}, \hyperpage{26}
+  \item {get\discretionary {-}{}{}Constraint\discretionary {-}{}{}Number}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Constraints}
+    \subitem {Model}, \hyperpage{32}
+  \item {get\discretionary {-}{}{}Constraints\discretionary {-}{}{}With\discretionary {-}{}{}Priority}
+    \subitem {Model}, \hyperpage{32}
+  \item {get\discretionary {-}{}{}Current\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S}
+    \subitem {get\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S.\discretionary {-}{}{}hpp}, 
+		\hyperpage{60}
+  \item {get\discretionary {-}{}{}Current\discretionary {-}{}{}Value}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Direction}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}I\discretionary {-}{}{}D}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {get\discretionary {-}{}{}Initial\discretionary {-}{}{}Value}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {get\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}
+    \subitem {Model}, \hyperpage{32}
+  \item {get\discretionary {-}{}{}Invariant}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Invariants}
+    \subitem {Model}, \hyperpage{32}
+  \item {get\discretionary {-}{}{}Lower\discretionary {-}{}{}Bound}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {get\discretionary {-}{}{}Mask}
+    \subitem {Model}, \hyperpage{33}
+  \item {get\discretionary {-}{}{}Mask\discretionary {-}{}{}At}
+    \subitem {Model}, \hyperpage{33}
+  \item {get\discretionary {-}{}{}Matcoeff}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Matcoeff2}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Ncons}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variable}
+    \subitem {Model}, \hyperpage{33}
+  \item {get\discretionary {-}{}{}Non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variables}
+    \subitem {Model}, \hyperpage{33}
+  \item {get\discretionary {-}{}{}Number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Nvars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Objective\discretionary {-}{}{}Value}
+    \subitem {State}, \hyperpage{41}
+  \item {get\discretionary {-}{}{}Objectives}
+    \subitem {Model}, \hyperpage{33}
+  \item {get\discretionary {-}{}{}Oneway}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {get\discretionary {-}{}{}Peak\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S}
+    \subitem {get\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S.\discretionary {-}{}{}hpp}, 
+		\hyperpage{60}
+  \item {get\discretionary {-}{}{}Priority}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S.\discretionary {-}{}{}hpp}, 
+		\hyperpage{60}
+    \subitem {get\discretionary {-}{}{}Current\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S}, 
+		\hyperpage{60}
+    \subitem {get\discretionary {-}{}{}Peak\discretionary {-}{}{}R\discretionary {-}{}{}S\discretionary {-}{}{}S}, 
+		\hyperpage{60}
+  \item {get\discretionary {-}{}{}Scale}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Scope\discretionary {-}{}{}Size}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Solution}
+    \subitem {State}, \hyperpage{41}
+  \item {get\discretionary {-}{}{}Solution\discretionary {-}{}{}Value}
+    \subitem {State}, \hyperpage{41}
+  \item {get\discretionary {-}{}{}Type}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Update\discretionary {-}{}{}Vector}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Upper\discretionary {-}{}{}Bound}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {get\discretionary {-}{}{}Used\discretionary {-}{}{}In\discretionary {-}{}{}Objective}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Var}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Variable\discretionary {-}{}{}I\discretionary {-}{}{}D}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Variable\discretionary {-}{}{}Pointer}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {get\discretionary {-}{}{}Variables}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {get\discretionary {-}{}{}Vars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {get\discretionary {-}{}{}Violation}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {get\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {global\discretionary {-}{}{}Clock}
+    \subitem {Clock}, \hyperpage{12}
+
+  \indexspace
+
+  \item {H\discretionary {-}{}{}A\discretionary {-}{}{}R\discretionary {-}{}{}D}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+
+  \indexspace
+
+  \item {in}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{11}
+  \item {index}
+    \subitem {elem}, \hyperpage{16}
+  \item {ini\discretionary {-}{}{}Trails}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {Initial\discretionary {-}{}{}Solution}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {initial\discretionary {-}{}{}Value}
+    \subitem {Model}, \hyperpage{33}
+  \item {initialize}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {initialize\discretionary {-}{}{}Constraints}
+    \subitem {State}, \hyperpage{41}
+  \item {initialize\discretionary {-}{}{}Invariants}
+    \subitem {State}, \hyperpage{41}
+  \item {initialize\discretionary {-}{}{}L\discretionary {-}{}{}S}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{21}
+  \item {initialize\discretionary {-}{}{}Objective}
+    \subitem {State}, \hyperpage{41}
+  \item {Int\discretionary {-}{}{}Vars}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+  \item {Integer}
+    \subitem {Random}, \hyperpage{39}
+  \item {Integer\discretionary {-}{}{}Variable}, \hyperpage{22}
+    \subitem {$\sim $\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}, 
+		\hyperpage{24}
+    \subitem {add\discretionary {-}{}{}To\discretionary {-}{}{}Update}, 
+		\hyperpage{24}
+    \subitem {add\discretionary {-}{}{}To\discretionary {-}{}{}Used\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}, 
+		\hyperpage{24}
+    \subitem {Array\discretionary {-}{}{}Pointer}, \hyperpage{24}
+    \subitem {clear\discretionary {-}{}{}Update\discretionary {-}{}{}Vector}, 
+		\hyperpage{24}
+    \subitem {constraints}, \hyperpage{24}
+    \subitem {defined\discretionary {-}{}{}By\discretionary {-}{}{}Cons}, 
+		\hyperpage{24}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Current\discretionary {-}{}{}Value}, 
+		\hyperpage{24}
+    \subitem {get\discretionary {-}{}{}I\discretionary {-}{}{}D}, 
+		\hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Lower\discretionary {-}{}{}Bound}, 
+		\hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Oneway}, \hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Update\discretionary {-}{}{}Vector}, 
+		\hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Upper\discretionary {-}{}{}Bound}, 
+		\hyperpage{24}
+    \subitem {get\discretionary {-}{}{}Variable\discretionary {-}{}{}Pointer}, 
+		\hyperpage{24}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+    \subitem {is\discretionary {-}{}{}Defined}, \hyperpage{24}
+    \subitem {is\discretionary {-}{}{}Integer}, \hyperpage{24}
+    \subitem {is\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}, 
+		\hyperpage{24}
+    \subitem {lower\discretionary {-}{}{}Bound}, \hyperpage{24}
+    \subitem {oneway}, \hyperpage{24}
+    \subitem {set\discretionary {-}{}{}Current\discretionary {-}{}{}Value}, 
+		\hyperpage{24}
+    \subitem {set\discretionary {-}{}{}Defined\discretionary {-}{}{}By}, 
+		\hyperpage{24}
+    \subitem {set\discretionary {-}{}{}Variable\discretionary {-}{}{}Pointer}, 
+		\hyperpage{24}
+    \subitem {update}, \hyperpage{25}
+    \subitem {upper\discretionary {-}{}{}Bound}, \hyperpage{25}
+    \subitem {used\discretionary {-}{}{}In}, \hyperpage{25}
+    \subitem {used\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}, 
+		\hyperpage{24}
+    \subitem {value}, \hyperpage{25}
+    \subitem {Variable\discretionary {-}{}{}Pointer}, \hyperpage{25}
+    \subitem {vector\discretionary {-}{}{}I\discretionary {-}{}{}D}, 
+		\hyperpage{25}
+  \item {Integer\discretionary {-}{}{}Variable.\discretionary {-}{}{}cpp}, 
+		\hyperpage{60}
+  \item {Integer\discretionary {-}{}{}Variable.\discretionary {-}{}{}hpp}, 
+		\hyperpage{60}
+  \item {Integer\discretionary {-}{}{}Variables}
+    \subitem {Model}, \hyperpage{33}
+  \item {Invariant}, \hyperpage{25}
+    \subitem {$\sim $\discretionary {-}{}{}Invariant}, \hyperpage{26}
+    \subitem {add\discretionary {-}{}{}Change}, \hyperpage{26}
+    \subitem {add\discretionary {-}{}{}To\discretionary {-}{}{}Update}, 
+		\hyperpage{26}
+    \subitem {calculate\discretionary {-}{}{}Delta\discretionary {-}{}{}Value}, 
+		\hyperpage{26}
+    \subitem {coefficients}, \hyperpage{27}
+    \subitem {constraint\discretionary {-}{}{}Priority}, \hyperpage{27}
+    \subitem {Current\discretionary {-}{}{}Value}, \hyperpage{27}
+    \subitem {Delta\discretionary {-}{}{}Value}, \hyperpage{27}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Coefficients}, \hyperpage{26}
+    \subitem {get\discretionary {-}{}{}Constraint\discretionary {-}{}{}Number}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Current\discretionary {-}{}{}Value}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Delta\discretionary {-}{}{}Value}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Priority}, \hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Type}, \hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Update\discretionary {-}{}{}Vector}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Used\discretionary {-}{}{}In\discretionary {-}{}{}Objective}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Variable\discretionary {-}{}{}I\discretionary {-}{}{}D}, 
+		\hyperpage{27}
+    \subitem {get\discretionary {-}{}{}Variables}, \hyperpage{27}
+    \subitem {initialize}, \hyperpage{27}
+    \subitem {Invariant}, \hyperpage{26}
+    \subitem {invariants}, \hyperpage{27}
+    \subitem {set\discretionary {-}{}{}Used\discretionary {-}{}{}By\discretionary {-}{}{}Constraint}, 
+		\hyperpage{27}
+    \subitem {set\discretionary {-}{}{}Used\discretionary {-}{}{}By\discretionary {-}{}{}Objective}, 
+		\hyperpage{27}
+    \subitem {start\discretionary {-}{}{}Value}, \hyperpage{27}
+    \subitem {test}, \hyperpage{27}
+    \subitem {type}, \hyperpage{28}
+    \subitem {update}, \hyperpage{28}
+    \subitem {update\discretionary {-}{}{}Value}, \hyperpage{27}
+    \subitem {used\discretionary {-}{}{}In\discretionary {-}{}{}Constraint\discretionary {-}{}{}Nr}, 
+		\hyperpage{28}
+    \subitem {used\discretionary {-}{}{}In\discretionary {-}{}{}Objective\discretionary {-}{}{}Nr}, 
+		\hyperpage{28}
+    \subitem {variable\discretionary {-}{}{}I\discretionary {-}{}{}D}, 
+		\hyperpage{28}
+    \subitem {Variable\discretionary {-}{}{}Pointers}, \hyperpage{28}
+  \item {invariant}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {Invariant.\discretionary {-}{}{}hpp}, \hyperpage{61}
+  \item {Invariant\discretionary {-}{}{}Container}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Invariants}
+    \subitem {Model}, \hyperpage{33}
+  \item {invariants}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {is\discretionary {-}{}{}Defined}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {is\discretionary {-}{}{}Integer}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {is\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {is\discretionary {-}{}{}Oneway}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {iterations}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+
+  \indexspace
+
+  \item {kind}
+    \subitem {var}, \hyperpage{46}
+
+  \indexspace
+
+  \item {L\discretionary {-}{}{}E}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {L\discretionary {-}{}{}I\discretionary {-}{}{}N\discretionary {-}{}{}E\discretionary {-}{}{}A\discretionary {-}{}{}R}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {L\discretionary {-}{}{}Q}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {L\discretionary {-}{}{}S}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{30}
+    \subitem {$\sim $\discretionary {-}{}{}L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+    \subitem {best\discretionary {-}{}{}Improvement}, \hyperpage{31}
+    \subitem {iterations}, \hyperpage{31}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+    \subitem {model}, \hyperpage{31}
+    \subitem {optimize\discretionary {-}{}{}Solution}, \hyperpage{31}
+    \subitem {print\discretionary {-}{}{}Current}, \hyperpage{31}
+    \subitem {simple\discretionary {-}{}{}Move}, \hyperpage{31}
+    \subitem {Test}, \hyperpage{31}
+    \subitem {Violations}, \hyperpage{31}
+  \item {L\discretionary {-}{}{}S\discretionary {-}{}{}Space.\discretionary {-}{}{}cpp}, 
+		\hyperpage{64}
+  \item {L\discretionary {-}{}{}S\discretionary {-}{}{}Space.\discretionary {-}{}{}hpp}, 
+		\hyperpage{64}
+  \item {lb}
+    \subitem {bounds}, \hyperpage{7}
+  \item {Linear}, \hyperpage{28}
+    \subitem {$\sim $\discretionary {-}{}{}Linear}, \hyperpage{29}
+    \subitem {Linear}, \hyperpage{29}
+    \subitem {relation}, \hyperpage{30}
+    \subitem {rhs}, \hyperpage{30}
+    \subitem {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation}, 
+		\hyperpage{29}
+    \subitem {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{29}
+    \subitem {test\discretionary {-}{}{}Cons}, \hyperpage{30}
+    \subitem {test\discretionary {-}{}{}Obj}, \hyperpage{30}
+    \subitem {update\discretionary {-}{}{}Violation}, \hyperpage{30}
+    \subitem {update\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}, 
+		\hyperpage{30}
+  \item {linear}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {Linear.\discretionary {-}{}{}hpp}, \hyperpage{62}
+  \item {lower\discretionary {-}{}{}Bound}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.\discretionary {-}{}{}cpp}, \hyperpage{66}
+  \item {main.\discretionary {-}{}{}cpp}, \hyperpage{65}
+    \subitem {main}, \hyperpage{66}
+  \item {make\discretionary {-}{}{}Move}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {make\discretionary {-}{}{}Oneway}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {mask}
+    \subitem {Model}, \hyperpage{33}
+    \subitem {State}, \hyperpage{41}
+  \item {mask\discretionary {-}{}{}At}
+    \subitem {State}, \hyperpage{41}
+  \item {matcoeff}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {matcoeff2}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {max\discretionary {-}{}{}Iter}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {max\discretionary {-}{}{}Moves}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {Model}, \hyperpage{31}
+    \subitem {$\sim $\discretionary {-}{}{}Model}, \hyperpage{32}
+    \subitem {add\discretionary {-}{}{}Binary\discretionary {-}{}{}Variable}, 
+		\hyperpage{32}
+    \subitem {add\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}, 
+		\hyperpage{32}
+    \subitem {Constraints}, \hyperpage{33}
+    \subitem {get\discretionary {-}{}{}All\discretionary {-}{}{}Variables}, 
+		\hyperpage{32}
+    \subitem {get\discretionary {-}{}{}Constraints}, \hyperpage{32}
+    \subitem {get\discretionary {-}{}{}Constraints\discretionary {-}{}{}With\discretionary {-}{}{}Priority}, 
+		\hyperpage{32}
+    \subitem {get\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}, 
+		\hyperpage{32}
+    \subitem {get\discretionary {-}{}{}Invariants}, \hyperpage{32}
+    \subitem {get\discretionary {-}{}{}Mask}, \hyperpage{33}
+    \subitem {get\discretionary {-}{}{}Mask\discretionary {-}{}{}At}, 
+		\hyperpage{33}
+    \subitem {get\discretionary {-}{}{}Non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variable}, 
+		\hyperpage{33}
+    \subitem {get\discretionary {-}{}{}Non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variables}, 
+		\hyperpage{33}
+    \subitem {get\discretionary {-}{}{}Objectives}, \hyperpage{33}
+    \subitem {initial\discretionary {-}{}{}Value}, \hyperpage{33}
+    \subitem {Integer\discretionary {-}{}{}Variables}, \hyperpage{33}
+    \subitem {Invariants}, \hyperpage{33}
+    \subitem {mask}, \hyperpage{33}
+    \subitem {Model}, \hyperpage{32}
+    \subitem {non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variables}, 
+		\hyperpage{33}
+    \subitem {non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Variables}, 
+		\hyperpage{33}
+    \subitem {original}, \hyperpage{33}
+    \subitem {update\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}, 
+		\hyperpage{33}
+  \item {model}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+    \subitem {State}, \hyperpage{41}
+  \item {Model.\discretionary {-}{}{}cpp}, \hyperpage{66}
+  \item {Model.\discretionary {-}{}{}hpp}, \hyperpage{67}
+  \item {Move}, \hyperpage{34}
+    \subitem {$\sim $\discretionary {-}{}{}Move}, \hyperpage{35}
+    \subitem {copy}, \hyperpage{35}
+    \subitem {delta\discretionary {-}{}{}Value\discretionary {-}{}{}First}, 
+		\hyperpage{35}
+    \subitem {delta\discretionary {-}{}{}Value\discretionary {-}{}{}Second}, 
+		\hyperpage{35}
+    \subitem {delta\discretionary {-}{}{}Value\discretionary {-}{}{}Third}, 
+		\hyperpage{35}
+    \subitem {first}, \hyperpage{35}
+    \subitem {flip}, \hyperpage{35}
+    \subitem {Move}, \hyperpage{35}
+    \subitem {move\discretionary {-}{}{}Type}, \hyperpage{35}
+    \subitem {operator=}, \hyperpage{35}
+    \subitem {second}, \hyperpage{35}
+    \subitem {third}, \hyperpage{35}
+  \item {Move.\discretionary {-}{}{}hpp}, \hyperpage{68}
+  \item {move\discretionary {-}{}{}Type}
+    \subitem {Move}, \hyperpage{35}
+  \item {mt}
+    \subitem {Random}, \hyperpage{39}
+  \item {Multistop}, \hyperpage{35}
+    \subitem {$\sim $\discretionary {-}{}{}Multistop}, \hyperpage{37}
+    \subitem {called}, \hyperpage{37}
+    \subitem {fs}, \hyperpage{37}
+    \subitem {Multistop}, \hyperpage{37}
+    \subitem {ns}, \hyperpage{37}
+    \subitem {stop}, \hyperpage{37}
+    \subitem {ts}, \hyperpage{37}
+  \item {Multistop.\discretionary {-}{}{}cpp}, \hyperpage{70}
+  \item {Multistop.\discretionary {-}{}{}hpp}, \hyperpage{70}
+
+  \indexspace
+
+  \item {nbinvars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {ncons}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {Neighborhood\discretionary {-}{}{}Explorer}, \hyperpage{37}
+    \subitem {$\sim $\discretionary {-}{}{}Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+    \subitem {best\discretionary {-}{}{}Improvement}, \hyperpage{38}
+    \subitem {calculate\discretionary {-}{}{}Delta\discretionary {-}{}{}Change}, 
+		\hyperpage{38}
+    \subitem {commit\discretionary {-}{}{}Move}, \hyperpage{38}
+    \subitem {make\discretionary {-}{}{}Move}, \hyperpage{38}
+    \subitem {model}, \hyperpage{38}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+    \subitem {random\discretionary {-}{}{}Walk}, \hyperpage{38}
+  \item {Neighborhood\discretionary {-}{}{}Explorer.\discretionary {-}{}{}cpp}, 
+		\hyperpage{71}
+  \item {Neighborhood\discretionary {-}{}{}Explorer.\discretionary {-}{}{}hpp}, 
+		\hyperpage{72}
+  \item {nintvars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Binary\discretionary {-}{}{}Variables}
+    \subitem {Model}, \hyperpage{33}
+  \item {non\discretionary {-}{}{}Fixed\discretionary {-}{}{}Variables}
+    \subitem {Model}, \hyperpage{33}
+  \item {non\discretionary {-}{}{}Term}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {ns}
+    \subitem {Multistop}, \hyperpage{37}
+  \item {number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {number\discretionary {-}{}{}Of\discretionary {-}{}{}Violations}
+    \subitem {State}, \hyperpage{42}
+  \item {nvars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+
+  \indexspace
+
+  \item {O\discretionary {-}{}{}B\discretionary {-}{}{}J}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {objcoeff}
+    \subitem {var}, \hyperpage{46}
+  \item {oneway}
+    \subitem {Constraint}, \hyperpage{15}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {operator$<$}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {operator$<$$<$}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Data.\discretionary {-}{}{}cpp}, 
+		\hyperpage{47}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+  \item {operator$>$}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {operator$>$$>$}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Data.\discretionary {-}{}{}cpp}, 
+		\hyperpage{47}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+  \item {operator()}
+    \subitem {Constraint\discretionary {-}{}{}::\discretionary {-}{}{}Sort\discretionary {-}{}{}Greater}, 
+		\hyperpage{40}
+    \subitem {Constraint\discretionary {-}{}{}Sorter}, \hyperpage{16}
+  \item {operator=}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{10}
+    \subitem {Flip\discretionary {-}{}{}Move}, \hyperpage{18}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+    \subitem {Move}, \hyperpage{35}
+    \subitem {Sum}, \hyperpage{43}
+    \subitem {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{45}
+  \item {optimize\discretionary {-}{}{}Solution}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+  \item {Options}, \hyperpage{38}
+    \subitem {$\sim $\discretionary {-}{}{}Options}, \hyperpage{39}
+    \subitem {Options}, \hyperpage{39}
+    \subitem {timelimit}, \hyperpage{39}
+  \item {Options.\discretionary {-}{}{}cpp}, \hyperpage{74}
+  \item {Options.\discretionary {-}{}{}hpp}, \hyperpage{74}
+  \item {original}
+    \subitem {Model}, \hyperpage{33}
+
+  \indexspace
+
+  \item {P\discretionary {-}{}{}R\discretionary {-}{}{}I\discretionary {-}{}{}N\discretionary {-}{}{}T}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{52}
+  \item {post\discretionary {-}{}{}Cov\discretionary {-}{}{}Sol}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+  \item {print}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {print\discretionary {-}{}{}\_\discretionary {-}{}{}stats}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{19}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {print\discretionary {-}{}{}Current}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}Solver}, 
+		\hyperpage{12}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+  \item {print\discretionary {-}{}{}Space\discretionary {-}{}{}Status}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+  \item {priority}
+    \subitem {Constraint}, \hyperpage{15}
+
+  \indexspace
+
+  \item {R\discretionary {-}{}{}A\discretionary {-}{}{}N\discretionary {-}{}{}D\discretionary {-}{}{}O\discretionary {-}{}{}M\discretionary {-}{}{}S\discretionary {-}{}{}E\discretionary {-}{}{}E\discretionary {-}{}{}D}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Random}, \hyperpage{39}
+    \subitem {Double}, \hyperpage{39}
+    \subitem {Integer}, \hyperpage{39}
+    \subitem {mt}, \hyperpage{39}
+    \subitem {Seed}, \hyperpage{39}
+    \subitem {seed}, \hyperpage{39}
+  \item {Random.\discretionary {-}{}{}cpp}, \hyperpage{75}
+  \item {Random.\discretionary {-}{}{}hpp}, \hyperpage{75}
+  \item {random\discretionary {-}{}{}Walk}
+    \subitem {Neighborhood\discretionary {-}{}{}Explorer}, 
+		\hyperpage{38}
+  \item {recalculate\discretionary {-}{}{}All}
+    \subitem {State}, \hyperpage{41}
+  \item {relation}
+    \subitem {Linear}, \hyperpage{30}
+  \item {relax}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {rhs}
+    \subitem {Linear}, \hyperpage{30}
+
+  \indexspace
+
+  \item {S\discretionary {-}{}{}O\discretionary {-}{}{}F\discretionary {-}{}{}T}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {S\discretionary {-}{}{}U\discretionary {-}{}{}M}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {S\discretionary {-}{}{}W\discretionary {-}{}{}A\discretionary {-}{}{}P}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {save\discretionary {-}{}{}Solution}
+    \subitem {State}, \hyperpage{41}
+  \item {scale}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {scope\discretionary {-}{}{}Size}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {second}
+    \subitem {Move}, \hyperpage{35}
+  \item {Seed}
+    \subitem {Random}, \hyperpage{39}
+  \item {seed}
+    \subitem {Random}, \hyperpage{39}
+  \item {set\discretionary {-}{}{}Current\discretionary {-}{}{}Value}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {set\discretionary {-}{}{}Defined\discretionary {-}{}{}By}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Linear}, \hyperpage{29}
+  \item {set\discretionary {-}{}{}Delta\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Linear}, \hyperpage{29}
+  \item {set\discretionary {-}{}{}Digits}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {set\discretionary {-}{}{}Invariant}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {set\discretionary {-}{}{}Number\discretionary {-}{}{}Of\discretionary {-}{}{}Integer\discretionary {-}{}{}Variables}
+    \subitem {Constraint}, \hyperpage{14}
+  \item {set\discretionary {-}{}{}Solution}
+    \subitem {State}, \hyperpage{41}
+  \item {set\discretionary {-}{}{}Used\discretionary {-}{}{}By\discretionary {-}{}{}Constraint}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {set\discretionary {-}{}{}Used\discretionary {-}{}{}By\discretionary {-}{}{}Objective}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {Set\discretionary {-}{}{}Values}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+  \item {set\discretionary {-}{}{}Variable\discretionary {-}{}{}Pointer}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {shuffle\discretionary {-}{}{}Mask}
+    \subitem {State}, \hyperpage{41}
+  \item {simple\discretionary {-}{}{}Move}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+  \item {simple\discretionary {-}{}{}Relax}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {solution}
+    \subitem {State}, \hyperpage{42}
+  \item {solution\discretionary {-}{}{}Value}
+    \subitem {State}, \hyperpage{42}
+  \item {st}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+  \item {start\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {State}, \hyperpage{40}
+    \subitem {$\sim $\discretionary {-}{}{}State}, \hyperpage{41}
+    \subitem {get\discretionary {-}{}{}Objective\discretionary {-}{}{}Value}, 
+		\hyperpage{41}
+    \subitem {get\discretionary {-}{}{}Solution}, \hyperpage{41}
+    \subitem {get\discretionary {-}{}{}Solution\discretionary {-}{}{}Value}, 
+		\hyperpage{41}
+    \subitem {initialize\discretionary {-}{}{}Constraints}, 
+		\hyperpage{41}
+    \subitem {initialize\discretionary {-}{}{}Invariants}, 
+		\hyperpage{41}
+    \subitem {initialize\discretionary {-}{}{}Objective}, 
+		\hyperpage{41}
+    \subitem {mask}, \hyperpage{41}
+    \subitem {mask\discretionary {-}{}{}At}, \hyperpage{41}
+    \subitem {model}, \hyperpage{41}
+    \subitem {number\discretionary {-}{}{}Of\discretionary {-}{}{}Violations}, 
+		\hyperpage{42}
+    \subitem {recalculate\discretionary {-}{}{}All}, \hyperpage{41}
+    \subitem {save\discretionary {-}{}{}Solution}, \hyperpage{41}
+    \subitem {set\discretionary {-}{}{}Solution}, \hyperpage{41}
+    \subitem {shuffle\discretionary {-}{}{}Mask}, \hyperpage{41}
+    \subitem {solution}, \hyperpage{42}
+    \subitem {solution\discretionary {-}{}{}Value}, \hyperpage{42}
+    \subitem {State}, \hyperpage{41}
+  \item {State.\discretionary {-}{}{}cpp}, \hyperpage{76}
+  \item {State.\discretionary {-}{}{}hpp}, \hyperpage{77}
+  \item {stop}
+    \subitem {Multistop}, \hyperpage{37}
+  \item {Sum}, \hyperpage{42}
+    \subitem {$\sim $\discretionary {-}{}{}Sum}, \hyperpage{43}
+    \subitem {add\discretionary {-}{}{}Change}, \hyperpage{43}
+    \subitem {calculate\discretionary {-}{}{}Delta\discretionary {-}{}{}Value}, 
+		\hyperpage{43}
+    \subitem {operator=}, \hyperpage{43}
+    \subitem {Sum}, \hyperpage{43}
+    \subitem {test}, \hyperpage{43}
+    \subitem {Variable\discretionary {-}{}{}Change}, \hyperpage{43}
+  \item {Sum.\discretionary {-}{}{}cpp}, \hyperpage{78}
+  \item {Sum.\discretionary {-}{}{}hpp}, \hyperpage{79}
+
+  \indexspace
+
+  \item {tabulist\discretionary {-}{}{}L\discretionary {-}{}{}B}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {tabulist\discretionary {-}{}{}U\discretionary {-}{}{}B}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Test}
+    \subitem {General\discretionary {-}{}{}Solver}, \hyperpage{22}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+  \item {test}
+    \subitem {Invariant}, \hyperpage{27}
+    \subitem {Sum}, \hyperpage{43}
+  \item {test\discretionary {-}{}{}Cons}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Linear}, \hyperpage{30}
+  \item {test\discretionary {-}{}{}Obj}
+    \subitem {Constraint}, \hyperpage{14}
+    \subitem {Linear}, \hyperpage{30}
+  \item {third}
+    \subitem {Move}, \hyperpage{35}
+  \item {timelimit}
+    \subitem {Options}, \hyperpage{39}
+  \item {tmp\discretionary {-}{}{}Vars}
+    \subitem {Gecode\discretionary {-}{}{}Solver}, \hyperpage{20}
+  \item {ts}
+    \subitem {Multistop}, \hyperpage{37}
+  \item {type}
+    \subitem {bounds}, \hyperpage{7}
+    \subitem {Constraint}, \hyperpage{15}
+    \subitem {Invariant}, \hyperpage{28}
+
+  \indexspace
+
+  \item {ub}
+    \subitem {bounds}, \hyperpage{8}
+  \item {update}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+    \subitem {Invariant}, \hyperpage{28}
+  \item {update\discretionary {-}{}{}Integer\discretionary {-}{}{}Variable}
+    \subitem {Model}, \hyperpage{33}
+  \item {update\discretionary {-}{}{}Type}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {update\discretionary {-}{}{}Value}
+    \subitem {Invariant}, \hyperpage{27}
+  \item {update\discretionary {-}{}{}Vector}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {update\discretionary {-}{}{}Violation}
+    \subitem {Constraint}, \hyperpage{15}
+    \subitem {Linear}, \hyperpage{30}
+  \item {update\discretionary {-}{}{}Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{15}
+    \subitem {Linear}, \hyperpage{30}
+  \item {upper\discretionary {-}{}{}Bound}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+  \item {used\discretionary {-}{}{}In}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+  \item {used\discretionary {-}{}{}In\discretionary {-}{}{}Constraint\discretionary {-}{}{}Nr}
+    \subitem {Invariant}, \hyperpage{28}
+  \item {used\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{24}
+  \item {used\discretionary {-}{}{}In\discretionary {-}{}{}Objective\discretionary {-}{}{}Nr}
+    \subitem {Invariant}, \hyperpage{28}
+
+  \indexspace
+
+  \item {V\discretionary {-}{}{}A\discretionary {-}{}{}L\discretionary {-}{}{}U\discretionary {-}{}{}E\discretionary {-}{}{}C\discretionary {-}{}{}H\discretionary {-}{}{}A\discretionary {-}{}{}N\discretionary {-}{}{}G\discretionary {-}{}{}E}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {value}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+  \item {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{44}
+    \subitem {$\sim $\discretionary {-}{}{}Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{45}
+    \subitem {operator=}, \hyperpage{45}
+    \subitem {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{44, 45}
+    \subitem {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move}, 
+		\hyperpage{44, 45}
+  \item {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move.\discretionary {-}{}{}cpp}, 
+		\hyperpage{81}
+  \item {Value\discretionary {-}{}{}Change\discretionary {-}{}{}Move.\discretionary {-}{}{}hpp}, 
+		\hyperpage{82}
+  \item {var}, \hyperpage{45}
+    \subitem {$\sim $var}, \hyperpage{46}
+    \subitem {bin}, \hyperpage{46}
+    \subitem {kind}, \hyperpage{46}
+    \subitem {objcoeff}, \hyperpage{46}
+  \item {var\discretionary {-}{}{}Assignment}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Output}, 
+		\hyperpage{11}
+  \item {Variable\discretionary {-}{}{}Change}
+    \subitem {Sum}, \hyperpage{43}
+  \item {variable\discretionary {-}{}{}Container}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {variable\discretionary {-}{}{}I\discretionary {-}{}{}D}
+    \subitem {Invariant}, \hyperpage{28}
+  \item {Variable\discretionary {-}{}{}In\discretionary {-}{}{}Constraints}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+  \item {Variable\discretionary {-}{}{}Pointer}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+  \item {Variable\discretionary {-}{}{}Pointers}
+    \subitem {Invariant}, \hyperpage{28}
+  \item {variables}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {vars}
+    \subitem {B\discretionary {-}{}{}P\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Input}, 
+		\hyperpage{9}
+  \item {vector\discretionary {-}{}{}I\discretionary {-}{}{}D}
+    \subitem {Integer\discretionary {-}{}{}Variable}, \hyperpage{25}
+  \item {Violation}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {Violation\discretionary {-}{}{}Degree}
+    \subitem {Constraint}, \hyperpage{15}
+  \item {Violations}
+    \subitem {L\discretionary {-}{}{}S\discretionary {-}{}{}Space}, 
+		\hyperpage{31}
+
+  \indexspace
+
+  \item {weight}
+    \subitem {Constants.\discretionary {-}{}{}hpp}, \hyperpage{53}
+
+\end{theindex}

@@ -1,0 +1,326 @@
+\hypertarget{class_invariant}{\section{Invariant Class Reference}
+\label{class_invariant}\index{Invariant@{Invariant}}
+}
+
+
+{\ttfamily \#include $<$Invariant.\-hpp$>$}
+
+
+
+Inheritance diagram for Invariant\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=134pt]{class_invariant__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_invariant_aee61aac8e05fd3e6162b5b42655b4784}{Invariant} ()
+\item 
+\hyperlink{class_invariant_ac45b5d3cf54ef322c9827c603e4d1a56}{Invariant} (const \hyperlink{class_invariant}{Invariant} \&a)
+\item 
+virtual void \hyperlink{class_invariant_a76632dc09fe3537f159230620406fdff}{add\-Change} (int variable\-Number, int change)
+\item 
+virtual int \hyperlink{class_invariant_a4797e907bd38e68769962949b453ae7a}{calculate\-Delta\-Value} ()
+\item 
+virtual void \hyperlink{class_invariant_af04129a6e93870f87bc841db6475ae58}{initialize} ()
+\item 
+int \hyperlink{class_invariant_a4a5784dedbcafc641a927e47a5979b8f}{get\-Delta\-Value} ()
+\item 
+virtual bool \hyperlink{class_invariant_ab3fd6fa5c99ed9854756347a439e0fd9}{test} ()
+\item 
+virtual \hyperlink{class_invariant_a5e04ac8b0598cb050b485adebe0d5996}{$\sim$\-Invariant} ()
+\item 
+int \hyperlink{class_invariant_a570739630823019ab560dcf5ed5d9c79}{get\-Current\-Value} ()
+\item 
+void \hyperlink{class_invariant_ad6a0db294da40ee07bc432e4c082bdcd}{update\-Value} ()
+\item 
+void \hyperlink{class_invariant_a8c29176c35253050aabc33f43242c5b2}{set\-Used\-By\-Constraint} (int \hyperlink{_constants_8hpp_ab3a9f5ca3242dd173f530bb9f68fc611}{constraint}, int priority)
+\item 
+void \hyperlink{class_invariant_a5f3ca0104c32cbbf6b1f943b4691cc57}{set\-Used\-By\-Objective} (int objective)
+\item 
+int \hyperlink{class_invariant_aa8c83f6b8d3d1d907345d2784a7119ca}{get\-Constraint\-Number} ()
+\item 
+int \hyperlink{class_invariant_a77206bbdf0e95ac679787c18340c8ed7}{get\-Used\-In\-Objective} ()
+\item 
+unsigned \hyperlink{class_invariant_afff1e871c21c07ec683cced1733b9526}{get\-Priority} ()
+\item 
+int \hyperlink{class_invariant_a8b00f5d2bd3b5d656204ac3a3f051255}{get\-Type} ()
+\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \& \hyperlink{class_invariant_a8bafd08ffb19446230d2c53ac5694e83}{get\-Update\-Vector} ()
+\item 
+void \hyperlink{class_invariant_af74c12c8720d388fc0897587d1c1d91c}{add\-To\-Update} (\hyperlink{_constants_8hpp_ac9b562f250a09412c017b68185321eba}{invariant} invar)
+\item 
+std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \& \hyperlink{class_invariant_a09053cbce110bc98986bab0cbf03f322}{get\-Variables} ()
+\item 
+std\-::unordered\-\_\-map$<$ int, \hyperlink{_constants_8hpp_a08c47c54ab9fb1545c341ec853cc2278}{coef\-Type} $>$ \hyperlink{class_invariant_a35361b85223cf640130f903b795e7d9f}{get\-Coefficients} ()
+\begin{DoxyCompactList}\small\item\em Passing by value. \end{DoxyCompactList}\item 
+int \hyperlink{class_invariant_adc8d7a742f61131108e8be28fc7b7398}{get\-Variable\-I\-D} ()
+\begin{DoxyCompactList}\small\item\em Only used when the invariant defines a variable through a oneway constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ \hyperlink{class_integer_variable}{Integer\-Variable} $\ast$ $>$ \hyperlink{class_invariant_a86da68637f1714836eb31c302c01362b}{Variable\-Pointers}
+\begin{DoxyCompactList}\small\item\em Correspond to the priority the invariant should be updated. \end{DoxyCompactList}\item 
+double \hyperlink{class_invariant_a7208e25abfb820cc51b10659316deef2}{Current\-Value} = 0
+\item 
+double \hyperlink{class_invariant_ad447ae680438882a5c7fdd413ac3f672}{Delta\-Value} = 0
+\item 
+unsigned \hyperlink{class_invariant_a8d6f849b13550302c1d8e6f864f3962d}{constraint\-Priority}
+\item 
+int \hyperlink{class_invariant_a504c74e6a18a4e5bc2725961973d0fb3}{used\-In\-Constraint\-Nr}
+\item 
+int \hyperlink{class_invariant_a938a068c1f8bf551a2f53fba703927b1}{used\-In\-Objective\-Nr}
+\item 
+std\-::unordered\-\_\-map$<$ int, \hyperlink{_constants_8hpp_a08c47c54ab9fb1545c341ec853cc2278}{coef\-Type} $>$ \hyperlink{class_invariant_a6967f2c1b39c944ffd432528c40d4f23}{coefficients}
+\item 
+int \hyperlink{class_invariant_ae3f0977038deba2ace1016bc08c35c16}{type}
+\item 
+int \hyperlink{class_invariant_a7ec1254b39fa2214a2651e366d7dd4b1}{start\-Value} = 0
+\begin{DoxyCompactList}\small\item\em Should be defined when creating oneway constraints that define (integer)variables. \end{DoxyCompactList}\item 
+int \hyperlink{class_invariant_a7fe4c133c9815c49a3fa4e1ff38b444a}{variable\-I\-D}
+\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \hyperlink{class_invariant_aca92a5d3c48153074a3b542ed7d8bb88}{invariants}
+\item 
+\hyperlink{_constants_8hpp_a5ea9d0c2efe357d2a7f5bcd80cdf179a}{Invariant\-Container} \hyperlink{class_invariant_ac88f162ea49e7b4469917e010f639da3}{update}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_invariant_a831d0dd732f452551b0c77214ccbf558}{General\-Solver}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_invariant_aee61aac8e05fd3e6162b5b42655b4784}{\index{Invariant@{Invariant}!Invariant@{Invariant}}
+\index{Invariant@{Invariant}!Invariant@{Invariant}}
+\subsubsection[{Invariant}]{\setlength{\rightskip}{0pt plus 5cm}Invariant\-::\-Invariant (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_aee61aac8e05fd3e6162b5b42655b4784}
+\hypertarget{class_invariant_ac45b5d3cf54ef322c9827c603e4d1a56}{\index{Invariant@{Invariant}!Invariant@{Invariant}}
+\index{Invariant@{Invariant}!Invariant@{Invariant}}
+\subsubsection[{Invariant}]{\setlength{\rightskip}{0pt plus 5cm}Invariant\-::\-Invariant (
+\begin{DoxyParamCaption}
+\item[{const {\bf Invariant} \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_ac45b5d3cf54ef322c9827c603e4d1a56}
+\hypertarget{class_invariant_a5e04ac8b0598cb050b485adebe0d5996}{\index{Invariant@{Invariant}!$\sim$\-Invariant@{$\sim$\-Invariant}}
+\index{$\sim$\-Invariant@{$\sim$\-Invariant}!Invariant@{Invariant}}
+\subsubsection[{$\sim$\-Invariant}]{\setlength{\rightskip}{0pt plus 5cm}virtual Invariant\-::$\sim$\-Invariant (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_invariant_a5e04ac8b0598cb050b485adebe0d5996}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_invariant_a76632dc09fe3537f159230620406fdff}{\index{Invariant@{Invariant}!add\-Change@{add\-Change}}
+\index{add\-Change@{add\-Change}!Invariant@{Invariant}}
+\subsubsection[{add\-Change}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Invariant\-::add\-Change (
+\begin{DoxyParamCaption}
+\item[{int}]{variable\-Number, }
+\item[{int}]{change}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_invariant_a76632dc09fe3537f159230620406fdff}
+
+
+Reimplemented in \hyperlink{class_sum_aa66687e018c67ebedcabd69750374e2d}{Sum}.
+
+\hypertarget{class_invariant_af74c12c8720d388fc0897587d1c1d91c}{\index{Invariant@{Invariant}!add\-To\-Update@{add\-To\-Update}}
+\index{add\-To\-Update@{add\-To\-Update}!Invariant@{Invariant}}
+\subsubsection[{add\-To\-Update}]{\setlength{\rightskip}{0pt plus 5cm}void Invariant\-::add\-To\-Update (
+\begin{DoxyParamCaption}
+\item[{{\bf invariant}}]{invar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_af74c12c8720d388fc0897587d1c1d91c}
+\hypertarget{class_invariant_a4797e907bd38e68769962949b453ae7a}{\index{Invariant@{Invariant}!calculate\-Delta\-Value@{calculate\-Delta\-Value}}
+\index{calculate\-Delta\-Value@{calculate\-Delta\-Value}!Invariant@{Invariant}}
+\subsubsection[{calculate\-Delta\-Value}]{\setlength{\rightskip}{0pt plus 5cm}virtual int Invariant\-::calculate\-Delta\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_invariant_a4797e907bd38e68769962949b453ae7a}
+
+
+Reimplemented in \hyperlink{class_sum_a6b0ada7dc577609e3140a8695155f280}{Sum}.
+
+\hypertarget{class_invariant_a35361b85223cf640130f903b795e7d9f}{\index{Invariant@{Invariant}!get\-Coefficients@{get\-Coefficients}}
+\index{get\-Coefficients@{get\-Coefficients}!Invariant@{Invariant}}
+\subsubsection[{get\-Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}std\-::unordered\-\_\-map$<$int, {\bf coef\-Type}$>$ Invariant\-::get\-Coefficients (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a35361b85223cf640130f903b795e7d9f}
+
+
+Passing by value. 
+
+\hypertarget{class_invariant_aa8c83f6b8d3d1d907345d2784a7119ca}{\index{Invariant@{Invariant}!get\-Constraint\-Number@{get\-Constraint\-Number}}
+\index{get\-Constraint\-Number@{get\-Constraint\-Number}!Invariant@{Invariant}}
+\subsubsection[{get\-Constraint\-Number}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Constraint\-Number (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_aa8c83f6b8d3d1d907345d2784a7119ca}
+\hypertarget{class_invariant_a570739630823019ab560dcf5ed5d9c79}{\index{Invariant@{Invariant}!get\-Current\-Value@{get\-Current\-Value}}
+\index{get\-Current\-Value@{get\-Current\-Value}!Invariant@{Invariant}}
+\subsubsection[{get\-Current\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Current\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a570739630823019ab560dcf5ed5d9c79}
+\hypertarget{class_invariant_a4a5784dedbcafc641a927e47a5979b8f}{\index{Invariant@{Invariant}!get\-Delta\-Value@{get\-Delta\-Value}}
+\index{get\-Delta\-Value@{get\-Delta\-Value}!Invariant@{Invariant}}
+\subsubsection[{get\-Delta\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Delta\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a4a5784dedbcafc641a927e47a5979b8f}
+\hypertarget{class_invariant_afff1e871c21c07ec683cced1733b9526}{\index{Invariant@{Invariant}!get\-Priority@{get\-Priority}}
+\index{get\-Priority@{get\-Priority}!Invariant@{Invariant}}
+\subsubsection[{get\-Priority}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Invariant\-::get\-Priority (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_afff1e871c21c07ec683cced1733b9526}
+\hypertarget{class_invariant_a8b00f5d2bd3b5d656204ac3a3f051255}{\index{Invariant@{Invariant}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Invariant@{Invariant}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a8b00f5d2bd3b5d656204ac3a3f051255}
+\hypertarget{class_invariant_a8bafd08ffb19446230d2c53ac5694e83}{\index{Invariant@{Invariant}!get\-Update\-Vector@{get\-Update\-Vector}}
+\index{get\-Update\-Vector@{get\-Update\-Vector}!Invariant@{Invariant}}
+\subsubsection[{get\-Update\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container}\& Invariant\-::get\-Update\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a8bafd08ffb19446230d2c53ac5694e83}
+\hypertarget{class_invariant_a77206bbdf0e95ac679787c18340c8ed7}{\index{Invariant@{Invariant}!get\-Used\-In\-Objective@{get\-Used\-In\-Objective}}
+\index{get\-Used\-In\-Objective@{get\-Used\-In\-Objective}!Invariant@{Invariant}}
+\subsubsection[{get\-Used\-In\-Objective}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Used\-In\-Objective (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a77206bbdf0e95ac679787c18340c8ed7}
+\hypertarget{class_invariant_adc8d7a742f61131108e8be28fc7b7398}{\index{Invariant@{Invariant}!get\-Variable\-I\-D@{get\-Variable\-I\-D}}
+\index{get\-Variable\-I\-D@{get\-Variable\-I\-D}!Invariant@{Invariant}}
+\subsubsection[{get\-Variable\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::get\-Variable\-I\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_adc8d7a742f61131108e8be28fc7b7398}
+
+
+Only used when the invariant defines a variable through a oneway constraint. 
+
+\hypertarget{class_invariant_a09053cbce110bc98986bab0cbf03f322}{\index{Invariant@{Invariant}!get\-Variables@{get\-Variables}}
+\index{get\-Variables@{get\-Variables}!Invariant@{Invariant}}
+\subsubsection[{get\-Variables}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Integer\-Variable}$\ast$$>$\& Invariant\-::get\-Variables (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a09053cbce110bc98986bab0cbf03f322}
+\hypertarget{class_invariant_af04129a6e93870f87bc841db6475ae58}{\index{Invariant@{Invariant}!initialize@{initialize}}
+\index{initialize@{initialize}!Invariant@{Invariant}}
+\subsubsection[{initialize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Invariant\-::initialize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_invariant_af04129a6e93870f87bc841db6475ae58}
+\hypertarget{class_invariant_a8c29176c35253050aabc33f43242c5b2}{\index{Invariant@{Invariant}!set\-Used\-By\-Constraint@{set\-Used\-By\-Constraint}}
+\index{set\-Used\-By\-Constraint@{set\-Used\-By\-Constraint}!Invariant@{Invariant}}
+\subsubsection[{set\-Used\-By\-Constraint}]{\setlength{\rightskip}{0pt plus 5cm}void Invariant\-::set\-Used\-By\-Constraint (
+\begin{DoxyParamCaption}
+\item[{int}]{constraint, }
+\item[{int}]{priority}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a8c29176c35253050aabc33f43242c5b2}
+\hypertarget{class_invariant_a5f3ca0104c32cbbf6b1f943b4691cc57}{\index{Invariant@{Invariant}!set\-Used\-By\-Objective@{set\-Used\-By\-Objective}}
+\index{set\-Used\-By\-Objective@{set\-Used\-By\-Objective}!Invariant@{Invariant}}
+\subsubsection[{set\-Used\-By\-Objective}]{\setlength{\rightskip}{0pt plus 5cm}void Invariant\-::set\-Used\-By\-Objective (
+\begin{DoxyParamCaption}
+\item[{int}]{objective}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_a5f3ca0104c32cbbf6b1f943b4691cc57}
+\hypertarget{class_invariant_ab3fd6fa5c99ed9854756347a439e0fd9}{\index{Invariant@{Invariant}!test@{test}}
+\index{test@{test}!Invariant@{Invariant}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Invariant\-::test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_invariant_ab3fd6fa5c99ed9854756347a439e0fd9}
+
+
+Reimplemented in \hyperlink{class_sum_a1adcbbefeb5f25445563fada563d4fa1}{Sum}.
+
+\hypertarget{class_invariant_ad6a0db294da40ee07bc432e4c082bdcd}{\index{Invariant@{Invariant}!update\-Value@{update\-Value}}
+\index{update\-Value@{update\-Value}!Invariant@{Invariant}}
+\subsubsection[{update\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Invariant\-::update\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_invariant_ad6a0db294da40ee07bc432e4c082bdcd}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_invariant_a831d0dd732f452551b0c77214ccbf558}{\index{Invariant@{Invariant}!General\-Solver@{General\-Solver}}
+\index{General\-Solver@{General\-Solver}!Invariant@{Invariant}}
+\subsubsection[{General\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf General\-Solver}\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_invariant_a831d0dd732f452551b0c77214ccbf558}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_invariant_a6967f2c1b39c944ffd432528c40d4f23}{\index{Invariant@{Invariant}!coefficients@{coefficients}}
+\index{coefficients@{coefficients}!Invariant@{Invariant}}
+\subsubsection[{coefficients}]{\setlength{\rightskip}{0pt plus 5cm}std\-::unordered\-\_\-map$<$int, {\bf coef\-Type}$>$ Invariant\-::coefficients\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a6967f2c1b39c944ffd432528c40d4f23}
+\hypertarget{class_invariant_a8d6f849b13550302c1d8e6f864f3962d}{\index{Invariant@{Invariant}!constraint\-Priority@{constraint\-Priority}}
+\index{constraint\-Priority@{constraint\-Priority}!Invariant@{Invariant}}
+\subsubsection[{constraint\-Priority}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Invariant\-::constraint\-Priority\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a8d6f849b13550302c1d8e6f864f3962d}
+\hypertarget{class_invariant_a7208e25abfb820cc51b10659316deef2}{\index{Invariant@{Invariant}!Current\-Value@{Current\-Value}}
+\index{Current\-Value@{Current\-Value}!Invariant@{Invariant}}
+\subsubsection[{Current\-Value}]{\setlength{\rightskip}{0pt plus 5cm}double Invariant\-::\-Current\-Value = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a7208e25abfb820cc51b10659316deef2}
+\hypertarget{class_invariant_ad447ae680438882a5c7fdd413ac3f672}{\index{Invariant@{Invariant}!Delta\-Value@{Delta\-Value}}
+\index{Delta\-Value@{Delta\-Value}!Invariant@{Invariant}}
+\subsubsection[{Delta\-Value}]{\setlength{\rightskip}{0pt plus 5cm}double Invariant\-::\-Delta\-Value = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_ad447ae680438882a5c7fdd413ac3f672}
+\hypertarget{class_invariant_aca92a5d3c48153074a3b542ed7d8bb88}{\index{Invariant@{Invariant}!invariants@{invariants}}
+\index{invariants@{invariants}!Invariant@{Invariant}}
+\subsubsection[{invariants}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container} Invariant\-::invariants\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_aca92a5d3c48153074a3b542ed7d8bb88}
+\hypertarget{class_invariant_a7ec1254b39fa2214a2651e366d7dd4b1}{\index{Invariant@{Invariant}!start\-Value@{start\-Value}}
+\index{start\-Value@{start\-Value}!Invariant@{Invariant}}
+\subsubsection[{start\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::start\-Value = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a7ec1254b39fa2214a2651e366d7dd4b1}
+
+
+Should be defined when creating oneway constraints that define (integer)variables. 
+
+\hypertarget{class_invariant_ae3f0977038deba2ace1016bc08c35c16}{\index{Invariant@{Invariant}!type@{type}}
+\index{type@{type}!Invariant@{Invariant}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::type\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_ae3f0977038deba2ace1016bc08c35c16}
+\hypertarget{class_invariant_ac88f162ea49e7b4469917e010f639da3}{\index{Invariant@{Invariant}!update@{update}}
+\index{update@{update}!Invariant@{Invariant}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Invariant\-Container} Invariant\-::update\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_ac88f162ea49e7b4469917e010f639da3}
+\hypertarget{class_invariant_a504c74e6a18a4e5bc2725961973d0fb3}{\index{Invariant@{Invariant}!used\-In\-Constraint\-Nr@{used\-In\-Constraint\-Nr}}
+\index{used\-In\-Constraint\-Nr@{used\-In\-Constraint\-Nr}!Invariant@{Invariant}}
+\subsubsection[{used\-In\-Constraint\-Nr}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::used\-In\-Constraint\-Nr\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a504c74e6a18a4e5bc2725961973d0fb3}
+\hypertarget{class_invariant_a938a068c1f8bf551a2f53fba703927b1}{\index{Invariant@{Invariant}!used\-In\-Objective\-Nr@{used\-In\-Objective\-Nr}}
+\index{used\-In\-Objective\-Nr@{used\-In\-Objective\-Nr}!Invariant@{Invariant}}
+\subsubsection[{used\-In\-Objective\-Nr}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::used\-In\-Objective\-Nr\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a938a068c1f8bf551a2f53fba703927b1}
+\hypertarget{class_invariant_a7fe4c133c9815c49a3fa4e1ff38b444a}{\index{Invariant@{Invariant}!variable\-I\-D@{variable\-I\-D}}
+\index{variable\-I\-D@{variable\-I\-D}!Invariant@{Invariant}}
+\subsubsection[{variable\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}int Invariant\-::variable\-I\-D\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a7fe4c133c9815c49a3fa4e1ff38b444a}
+\hypertarget{class_invariant_a86da68637f1714836eb31c302c01362b}{\index{Invariant@{Invariant}!Variable\-Pointers@{Variable\-Pointers}}
+\index{Variable\-Pointers@{Variable\-Pointers}!Invariant@{Invariant}}
+\subsubsection[{Variable\-Pointers}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Integer\-Variable}$\ast$$>$ Invariant\-::\-Variable\-Pointers\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_invariant_a86da68637f1714836eb31c302c01362b}
+
+
+Correspond to the priority the invariant should be updated. 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_invariant_8hpp}{Invariant.\-hpp}\end{DoxyCompactItemize}

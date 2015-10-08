@@ -3,6 +3,8 @@
 #include "Invariant.hpp"
 #include <memory>
 #include <functional>
+#include "Constants.hpp"
+//#include "IntegerVariable.hpp"
 
 class Constraint {
 protected:
@@ -13,13 +15,15 @@ protected:
     int priority;
     int type;
     bool oneway = false;
-//    bool containsOneway = false;
+    //    bool containsOneway = false;
     int numberOfIntegerVariables = 0;
-    unsigned domainSize;
+    unsigned scopeSize;
     std::vector<int> arguments;
+    std::vector<IntegerVariable*> variables;
+    std::unordered_map<int, coefType> coefficients;
     //    std::vector<std::shared_ptr<Invariant>> invariants;
     std::shared_ptr<Invariant> invariant;
-//    std::shared_ptr<Invariant> orgInvariant;
+    //    std::shared_ptr<Invariant> orgInvariant;
     //    Invariant* invariant;
     //    Invariant* invariant;
 
@@ -80,17 +84,28 @@ public:
     }
 
     void isOneway(bool set) {
-//        containsOneway = set;
+        //        containsOneway = set;
         oneway = set;
     }
+    int getPriority(){
+        return priority;
+    }
 
-//    bool gotOneway() {
-//        return containsOneway;
-//    }
+    std::unordered_map<int, coefType>& getCoefficients() {
+        return coefficients;
+    }
 
-//    void gotOneway(bool set) {
-//        containsOneway = set;
-//    }
+    std::vector<IntegerVariable*>& getVariables() {
+        return variables;
+    }
+
+    //    bool gotOneway() {
+    //        return containsOneway;
+    //    }
+
+    //    void gotOneway(bool set) {
+    //        containsOneway = set;
+    //    }
 
     int getViolationDegree() {
         return ViolationDegree;
@@ -100,16 +115,21 @@ public:
         return arguments[i];
     }
 
-//    std::shared_ptr<Invariant>& getOrgInvariant() {
-//        return orgInvariant;
-//    }
+    //    std::shared_ptr<Invariant>& getOrgInvariant() {
+    //        return orgInvariant;
+    //    }
 
+    void setInvariant(std::shared_ptr<Invariant> invar){
+        invariant = invar;
+    }
+    
     std::shared_ptr<Invariant>& getInvariant() {
-        
+
         return invariant;
     }
-    unsigned getDomainSize(){
-        return domainSize;
+
+    unsigned getScopeSize() {
+        return scopeSize;
     }
     //    std::shared_ptr<Invariant> getInvariant(int i){
     //        return invariants[i];
@@ -117,20 +137,20 @@ public:
 
     struct SortGreater {
 
-        bool operator()(const std::shared_ptr<Constraint>& cons1,const std::shared_ptr<Constraint>& cons2) const {
-//            std::cout << "sorter" << std::endl;
-            
-            return (cons1->getDomainSize() > cons2->getDomainSize());
+        bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
+            //            std::cout << "sorter" << std::endl;
+
+            return (cons1->getScopeSize() > cons2->getScopeSize());
         }
     };
-//    struct SortGreater {
-//
-//        bool operator()(const std::shared_ptr<Constraint>& cons1,const std::shared_ptr<Constraint>& cons2) const {
-////            std::cout << "sorter" << std::endl;
-//
-//            return (cons1->getOrgInvariant()->getVariables().size() > cons2->getOrgInvariant()->getVariables().size());
-//        }
-//    };
+    //    struct SortGreater {
+    //
+    //        bool operator()(const std::shared_ptr<Constraint>& cons1,const std::shared_ptr<Constraint>& cons2) const {
+    ////            std::cout << "sorter" << std::endl;
+    //
+    //            return (cons1->getOrgInvariant()->getVariables().size() > cons2->getOrgInvariant()->getVariables().size());
+    //        }
+    //    };
 
     bool operator<(Constraint& cons) const {
         std::cout << "used to sort <" << std::endl;
@@ -192,10 +212,12 @@ public:
 
 class ConstraintSorter {
 public:
-    ConstraintSorter(){
-        
+
+    ConstraintSorter() {
+
     }
-    bool operator()(std::shared_ptr<Constraint>& cons1, std::shared_ptr<Constraint>& cons2){
+
+    bool operator()(std::shared_ptr<Constraint>& cons1, std::shared_ptr<Constraint>& cons2) {
         return (cons1->getInvariant()->getVariables().size() > cons2->getInvariant()->getVariables().size());
     }
 };

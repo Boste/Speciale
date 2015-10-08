@@ -70,6 +70,8 @@ void Model::addBinaryVariable(int lb, int ub) {
 }
 
 void Model::addIntegerVariable(int lb, int ub) {
+//    std::cout << lb << " " << ub << std::endl;
+//    sleep(1);
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
@@ -80,8 +82,10 @@ void Model::addIntegerVariable(int lb, int ub) {
 //    return numberOfVariables;
 //}
 
-void Model::nonFixedVariables(std::vector<IntegerVariable*>* nonFixed) {
-    nonFixedBinaryVariables = *nonFixed;
+void Model::nonFixedVariables(std::vector<IntegerVariable*>& nonFixed) {
+    nonFixedBinaryVariables = nonFixed;
+    mask = nonFixed;
+    shuffleMask();
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
 //void Model::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
@@ -177,11 +181,16 @@ void Model::nonFixedVariables(std::vector<IntegerVariable*>* nonFixed) {
 //        iv->setVariablePointer(gecodeVars[iv->getID()]);
 //    }
 //}
-IntegerVariable* Model::getMaskat(int i){
+IntegerVariable* Model::getMaskAt(int i){
     return mask.at(i);
 }
 std::vector<IntegerVariable*>& Model::getMask(){
     return mask;
+}
+
+void Model::shuffleMask() {
+    std::random_shuffle(mask.begin(), mask.end());
+
 }
 void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
     getNonFixedBinaryVariable(index)->setVariablePointer(variable);
@@ -201,35 +210,42 @@ InvariantContainer& Model::getInvariants() {
     //std::vector<Invariant*>* Model::getInvariants() {
     return Invariants;
 }
-InvariantContainer& Model::getOrgInvariants() {
-    //std::vector<Invariant*>* Model::getInvariants() {
-    return orgInvariants;
+
+/// Probably dont work
+void Model::addInvariant(std::shared_ptr<Invariant> invar){
+//    std::cout <<invar.get() << std::endl;
+//    invar->changeAdd  = true;
+    Invariants.push_back(invar);
 }
+//InvariantContainer& Model::getOrgInvariants() {
+//    //std::vector<Invariant*>* Model::getInvariants() {
+//    return orgInvariants;
+//}
 
 allConstraints& Model::getConstraints() {
     return Constraints;
 }
-allConstraints& Model::getOrgConstraints() {
-    return orgConstraints;
-}
+//allConstraints& Model::getConstraints() {
+//    return Constraints;
+//}
 
-constraintContainer& Model::getConstraintsWithPriority(int prio) {
+constraintContainer Model::getConstraintsWithPriority(int prio) {
     return Constraints.at(prio);
 }
-constraintContainer& Model::getOrgConstraintsWithPriority(int prio) {
-    return orgConstraints.at(prio);
-}
+//constraintContainer& Model::getConstraintsWithPriority(int prio) {
+//    return Constraints.at(prio);
+//}
 
 //std::vector<Constraint*>* Model::getSoftConstraints() {
 //    return SoftConstraints;
 //}
 
-constraintContainer& Model::getOrgObjectives() {
-    return orgConstraints.at(0);
-}
-constraintContainer& Model::getObjectives() {
+constraintContainer Model::getObjectives() {
     return Constraints.at(0);
 }
+//constraintContainer& Model::getObjectives() {
+//    return Constraints.at(0);
+//}
 
 
 //std::vector<std::shared_ptr<std::pair<int,int>>>& Model::getConstraintsWithIntegerVariables(){

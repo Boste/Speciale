@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include "IntegerVariable.hpp"
 #include "Invariant.hpp" 
-
+//#include "DependencyDigraph.hpp"
 //#include <utility>
 //struct elem {
 //	int index;
@@ -13,6 +13,8 @@
 //	~elem() {};
 //};
 class Sum : public Invariant {
+   
+        
 protected:
     
 //    std::vector<IntegerVariable*> VariablePointers;
@@ -50,6 +52,7 @@ public:
 //    void usedByObjective(int constraint, int priority);
 
     void addChange(int variableNumber, int changeInValue);
+    
 
 
 //    void addChange(std::vector<int> variableNumbers, std::vector<int> changes);

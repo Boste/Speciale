@@ -11,6 +11,7 @@ private:
     std::shared_ptr<Model> model;
     std::vector<int> solution;
     propagation_queue deltaQueue;
+    
 
 public:
     int numberOfViolations;

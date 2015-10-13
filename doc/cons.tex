@@ -1,0 +1,45 @@
+The variables will be restricted by $C$ that is a m-tuple of constraints $C= \langle 
+c_1,c_2, \dots , c_m \rangle $. The set of variables to which the constraint $c_j$ applies is called its scope and 
+is denoted $V(c_j)$ or ($X(c_j)$ and $Y(c_j)$ for the binary and integer variables respectivly). Each $c_j \in C$ is a 
+pair $\langle R_{V(c_j)}, V(c_j) \rangle $ where $ R_{V(c_j)}$ is a subset of the 
+cartesian product of the domains of the variables in $V(c_j)$ also called the relation on $c_j$. \\ 
+The Constraint Satisfaction Problem (CSP) can then be defined as a triple $\mathbb{P} = \langle V,D,C \rangle$. A 
+solution to the CSP $\mathbb{P}$ is a n-tuple $A = \langle a_1,a_2,\dots,a_n\rangle $ where $a_i \in 
+D_i$. The solution is feasible if the projection of $A$ onto $V(c_j)$ is included in $R_{V(c_j)}$ for all 
+$c_j \in C$.\\ 
+The solution of interest could be all feasible solutions $sol(P)$, any feasible solution $S$ or if there 
+exists a solution or not. \\ 
+The CSP can be expanded to a Constraint Satisfaction Optimization Problem (CSOP) with an objective function $f(S)$ 
+that evaluate the quality of the solution $S$. The task is then to find a solution $\hat{S}$ that gives minimum or 
+maximum value of $f(\hat{S})$ depending on the requirements of the problem. \\ \\ 
+While constraint programming often offers a wide selection of constraints to use, this thesis focus mostly on the 
+constraint Linear that is defined by a left hand side, a relation and a 
+right hand side, which is a constant bound $b$. The left hand side is a linear function of decision variables 
+multiplied with their coefficient. The relation between left hand side and right hand side is restricted to be one of 
+the six: less ($<$), less or equal ($\leq$), greater($>$), greater or equal($\geq$), equal ($=$), and disequal 
+($\neq$). \boste{Ikke særlig pænt, men ved ikke hvordan jeg 
+skal beskrive det ellers (Gecode har seks, MIP og IP har kun 3)}\\ 
+A linear constraint $c$ can be described as: 
+\begin{equation}
+ \sum A(c) \cdot V(c) \lesseqgtr B_c
+\end{equation}
+The coefficients $A(c)$ are the coefficients of the variables in the scope of $c$. The decision variables $V(c)$ are 
+the variables that $c$ applies to. The bound $B_c$ is the bound for the left hand side in constraint $c$. \\ 
+MIP, IP and BP are restricted to use the linear constraint and the model is often written as: 
+\begin{align}
+ \text{Minimize } & \mathbf{c}^T\mathbf{x} \nonumber \\ 
+ \text{Subject to } &\mathbf{Ax} \leq \mathbf{b} \nonumber\\
+ &\mathbf{x} \in \mathbf{D}
+\end{align}
+
+
+
+
+
+%In order to define mixed integer programming and integer programming we need to define a function $f(X) = 
+%\sum_{x_i \in X} 
+%c_i x_i$ where $c_i \in E 
+
+
+%We can reduce the CSP to 3-SAT by restricting the domain of the variables to zero and one and restrict the scope of 
+%all constraints to exactly three. By that we can conclude that some CSP are NP-complete and not easy to solve.  

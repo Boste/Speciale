@@ -13,7 +13,7 @@
 class Constraint;
 class Invariant;
 class IntegerVariable;
-struct compare_invariant;
+//struct compare_invariant;
 //#include "Invariant.hpp"
 // Old stuff not needed
 #define nonTerm 0.000000000001
@@ -124,8 +124,8 @@ typedef std::vector<invariant> InvariantContainer;
 //typedef std::priority_queue<invariant,std::vector<invariant>,compare_invariant> updateVector;
 
 //typedef std::vector<InvariantContainer> updateVector;
-typedef Invariant* updateType;
-//typedef invariant updateType;
+//typedef Invariant* updateType;
+typedef invariant updateType;
 typedef std::shared_ptr<std::vector<constraint>> constraintContainer;
 typedef std::vector<constraintContainer> allConstraints;
 

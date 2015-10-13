@@ -4,6 +4,7 @@
 State::State(std::shared_ptr<Model> model) {
     //    std::cout << "create state" << std::endl;
     this->model = model;
+    
     solutionValue = std::numeric_limits<int>::max();
     //    mask = new std::vector<int>();
 
@@ -32,10 +33,12 @@ void State::initializeInvariants() {
 
         assert(!current->isIntegerVariable());
         if (current->getCurrentValue() != 0) {
-            for (updateType inv : current->getPropagationQueue()) {
+            for (updateType inv : model->getPropagationQueue(current)) {
+                //            for (updateType inv : current->getPropagationQueue()) {
                 deltaQueue.insert(inv);
+                //                deltaQueue.push(inv);
             }
-            for (updateType invar : current->getUpdateVector()) {
+            for (updateType invar : model->getUpdate(current)) {
                 //                current->getUpdateVector().
                 invar->addChange(current->getID(), current->getCurrentValue());
             }
@@ -48,14 +51,20 @@ void State::initializeInvariants() {
 
     }
     std::cout << "size " << deltaQueue.size() << std::endl;
-
+    unsigned last = 0;
     for (updateType invar : deltaQueue) {
-        std::cout << invar->getID() << std::endl;
-        sleep(1);
+        if (invar->getID() <= last) {
+            std::cout << "Wrong" << std::endl;
+            exit(1);
+        } else {
+            last = invar->getID();
+        }
+        //        std::cout << invar->getID() << std::endl;
+        //        sleep(1);
     }
     debug;
     //    std::cout << model->getInvariants().size() << std::endl;
-    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+    for (std::shared_ptr<Invariant> invar : deltaQueue) {
         //        std::cout << "Testing part" << std::endl;
 
         //        std::cout << invar.get() << std::endl;
@@ -72,66 +81,76 @@ void State::initializeInvariants() {
         //            std::cout << "vars " << invar->getVariables().size() << std::endl;
         //            std::cout << "invars " << invar->getInvariants().size() << std::endl;
         //        }
-        invar->calculateDeltaValue();
-    }
-    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
-
-
-        //        std::cout << std::endl;
+        int delta = invar->calculateDeltaValue();
+        for (updateType inv : model->getUpdate(invar)) {
+            inv->addChange(invar->getID(),delta);
+        }
         invar->updateValue();
-        //        sleep(1);
-        //        if(invar->changeAdd){
-        //            std::cout << "Some change added" << std::endl;
-        //        }
-        int value = invar->getCurrentValue();
-        auto coef = invar->getCoefficients();
-        //        if (invar->getVariableID() == 53552) {
-        //            for (invariant inv : invar->getInvariants()) {
-        //                //                std::cout << coef.at(inv->getVariableID()) << " ";
-        //            }
-        //            std::cout << std::endl;
-        //            for(int i = invar->getInvariants().size()-1;i >=0; i--){
-        //                std::cout <<invar->getInvariants().at(i)->getCurrentValue() << " ";
-        //            }
-        ////            for (invariant inv : invar->getInvariants()) {
-        ////                std::cout << inv->getCurrentValue() << " ";
-        ////            }
-        //            std::cout << std::endl;
-        //
-        //        }
-        int check = 0;
-        for (IntegerVariable* iv : invar->getVariables()) {
-            assert(!iv->isIntegerVariable());
-            check += coef.at(iv->getID()) * iv->getCurrentValue();
-            //            std::cout << coef.at(iv->getID()) * iv->getCurrentValue() << " + ";
-            //            if (coef.at(iv->getID()) * iv->getCurrentValue() != 0) {
-            //                std::cout << "id of this is " << iv->getID() << " is integer " << iv->isIntegerVariable() << " + ";
-            //            }
-        }
-        //        //        std::cout << "my id " << invar->getVariableID() << std::endl;
-        //
-        for (invariant inv : invar->getInvariants()) {
-            if (invar->getType() == SUM) {
-                check += inv->getCurrentValue() * coef.at(inv->getVariableID());
-            } else {
-                check = inv->getCurrentValue();
-            }
-            //            std::cout << inv->getVariableID() << " ";
-            //            std::cout << inv->getCurrentValue() << " + ";
-        }
-        //        //        std::cout << std::endl;
-        if (check + invar->getStartValue() < 0 && invar->getVariableID() != -1) {
-            check = 0;
-            //            std::cout <<" does this happen " << std::endl;
-        } else {
-            check += invar->getStartValue();
-        }
-        //        //        std::cout << invar->getStartValue() << std::endl;
-        if (value != check) {
-            std::cout << "Value " << value << "  vs  check " << check << " ini val " << invar->getStartValue() << " " << invar->getVariableID() << std::endl;
-        }
 
     }
+    for(invariant invar : model->getInvariants()){
+        std::cout << invar->getCurrentValue() << " ";
+    }
+    std::cout << std::endl;
+    debug;
+//    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+//
+//
+//        //        std::cout << std::endl;
+////        invar->updateValue();
+//        //        sleep(1);
+//        //        if(invar->changeAdd){
+//        //            std::cout << "Some change added" << std::endl;
+//        //        }
+//        int value = invar->getCurrentValue();
+//        auto coef = invar->getCoefficients();
+////                if (invar->getVariableID() == 53552) {
+////                    for (invariant inv : model->getUpdate(invar)) {
+////                                        std::cout << coef.at(inv->getVariableID()) << " ";
+////                    }
+////                    std::cout << std::endl;
+//////                    for(int i = model->getUpdate(invar).size()-1;i >=0; i--){
+//////                        std::cout <<model->getUpdate(invar).at(i)->getCurrentValue() << " ";
+//////                    }
+////                    for (invariant inv : model->getUpdate(invar)) {
+////                        std::cout << inv->getCurrentValue() << " ";
+////                    }
+////                    std::cout << std::endl;
+////        
+////                }
+//                int check = 0;
+//                for (IntegerVariable* iv : invar->getVariables()) {
+//                    assert(!iv->isIntegerVariable());
+//                    check += coef.at(iv->getID()) * iv->getCurrentValue();
+//                    //            std::cout << coef.at(iv->getID()) * iv->getCurrentValue() << " + ";
+//                    //            if (coef.at(iv->getID()) * iv->getCurrentValue() != 0) {
+//                    //                std::cout << "id of this is " << iv->getID() << " is integer " << iv->isIntegerVariable() << " + ";
+//                    //            }
+//                }
+//                //        //        std::cout << "my id " << invar->getVariableID() << std::endl;
+//                //
+//                for (invariant inv : invar->getInvariants()) {
+//                    if (invar->getType() == SUM) {
+//                        check += inv->getCurrentValue() * coef.at(inv->getVariableID());
+//                    } else {
+//                        check = inv->getCurrentValue();
+//                    }
+//                    //            std::cout << inv->getVariableID() << " ";
+//                    //            std::cout << inv->getCurrentValue() << " + ";
+//                }
+//                //        //        std::cout << std::endl;
+//                if (check + invar->getStartValue() < 0 && invar->getVariableID() != -1) {
+//                    check = 0;
+//                    //            std::cout <<" does this happen " << std::endl;
+//                } else {
+//                    check += invar->getStartValue();
+//                }
+//                //        //        std::cout << invar->getStartValue() << std::endl;
+//                if (value != check) {
+//                    std::cout << "Value " << value << "  vs  check " << check << " ini val " << invar->getStartValue() << " " << invar->getVariableID() << std::endl;
+//                }
+//
+//    }
 
 
 }

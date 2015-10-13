@@ -5,6 +5,7 @@
 #include <limits>
 #include <memory>
 #include <list>
+#include "DependencyDigraph.hpp"
 #ifndef MODEL_HPP
 #define	MODEL_HPP
 
@@ -15,6 +16,7 @@ private:
     variableContainer original;
     /// Binary Variables that are not fixed by preprocessing 
     variableContainer nonFixedBinaryVariables;
+    //    variableContainer binaryVariables;
     //    std::vector<Gecode::BoolVar> BoolVarVector;
     /// Invariants for original model, before oneway constraints are made. 
     //    InvariantContainer orgInvariants;
@@ -36,8 +38,12 @@ private:
     //    std::vector<int>* solution;
     //    int solutionValue;
     //    std::vector<int>* mask;
+    std::shared_ptr<DependencyDigraph> DDG = std::make_shared<DependencyDigraph>();
+    /// Only used to give invariants id
+    unsigned id;
 public:
     /// Should be moved to state
+
     int initialValue;
     std::vector<int> test;
     //    unsigned numberOfLayers = 0;
@@ -72,6 +78,7 @@ public:
 
 
     //    IntegerVariable* addIntegerVariable( int lb, int ub);
+    void startUp();
     void addBinaryVariable(int lb, int ub);
     void addIntegerVariable(int lb, int ub);
     //    void initializeInvariants();
@@ -80,6 +87,17 @@ public:
     void shuffleMask();
 
 
+    // Was used aroung line 382 GS. Creating non oneway invariants
+    void addInvariantToDDG(invariant invar, variableContainer& variables);
+    void addInvariantToDDG(invariant invar, InvariantContainer& invariants);
+    void addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants);
+    void addVariablesToDDG(variableContainer& vars);
+    /// Adds nonFixedBinaryVariables
+    void addVariablesToDDG();
+    void createPropagationQueue();
+    propagation_queue& getPropagationQueue(IntegerVariable* iv);
+    updateVector& getUpdate(IntegerVariable* iv);
+    updateVector& getUpdate(invariant invar);
     //    void initializeConstraints();
 
     //    void initializeObjective();
@@ -88,6 +106,8 @@ public:
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     variableContainer& getNonFixedBinaryVariables();
     variableContainer& getAllVariables();
+    void nonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
+
     InvariantContainer& getInvariants();
     void addInvariant(std::shared_ptr<Invariant> invar);
     //    InvariantContainer& getOrgInvariants();
@@ -106,7 +126,6 @@ public:
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
     void updateIntegerVariable(int index, Gecode::IntVar& variable);
     //    int getNumberOfVariables();
-    void nonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
     //        return IntVarVector->size();
     ////    }
     //    void saveSolution();

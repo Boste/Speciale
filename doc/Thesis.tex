@@ -1,13 +1,15 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{color}
 \usepackage{amssymb}
 
+
 \usepackage{algorithmic}
 %\usepackage{algorithm}
-\usepackage{algorithm2e}
+%\usepackage{algorithm2e}
+\usepackage[linesnumbered, ruled]{algorithm2e}
 %opening
 
 \include{style}
@@ -35,28 +37,31 @@
 \section{Modeling}
 %\subsection{Variables}
 
-  \subsection{Variables and Constraints}
-  \input{varcons}
-  \subsection{Types of Modeling}
+  \subsection{Variables} 
+  \input{vars}
+  \subsection{Constraints}
+  \input{cons}
+    \subsection{Invariants and One-way Constraints}
+  \subsection{Types of Modeling \boste{not sure this should be here}}
   \input{modeling}
+
 \section{Different Solvers \boste{properly not the best name}}
   \subsection{Comet}
-  Invariant bliver introduceret her, så endten skal det være efter min struktur eller også skal jeg definere invariant 
-  og oneway før det her. 
+
   \subsection{Gecode}
   \subsection{LocalSolver}
   \subsection{OscaR}
-  \subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
+  \subsection{\boste{This solver} Constraint Based Local Search with Limitations} % GeLS?
 \section{Preprocessing and Simplification}
   \subsection{Gecode Engine}
     \subsubsection{Relaxation}
   \subsection{Initial Solution}
 \section{Structuring Local Search Model}
+\input{strucLS}
   \subsection{Simplification}
-  \subsection{Invariants and One-way Constraints}
     \input{updateCons}
-  \subsection{Maintaining Invariants}
-  \subsection{Maintenance Graph}
+  \subsection{Dependency Digraph}
+  
 \section{Local Search Engine}
   \subsection{Neighborhoods}
     \subsubsection{Moves}

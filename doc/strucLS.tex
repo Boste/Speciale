@@ -1,0 +1,11 @@
+Once an initial solution to the problem has been found by Gecode the model is transformed to create a model better 
+suited for local search. The procedure can be split in several steps before the local search can begin. 
+\begin{enumerate}
+ \item Try to define integer variables by one-way constraints
+ \item Define invariants for the constraints
+ \item Create a dependency directed graph for variables and invariants
+ \item Create propagation queue for variables
+ \item Initialize the invariants
+ \item Initialize the constraints
+ \item Initialize the objective function
+\end{enumerate}

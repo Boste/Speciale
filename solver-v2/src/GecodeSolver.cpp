@@ -211,15 +211,18 @@ void GecodeSolver::fixVariables() {
                 preprocessed.push_back(iv);
             } else {
                 numberOfFixedVariables++;
+                iv->setAsFixed();
             }
         } else if (iv->getVariablePointer()->assigned()) {
             numberOfFixedVariables++;
+            iv->setAsFixed();
+
             std::cout << "Fixed Integer variable" << std::endl;
         }
     }
     std::cout << "Number of variables fixed in preprocessing " << numberOfFixedVariables << std::endl;
     model->nonFixedVariables(preprocessed);
-//    delete preprocessed;
+    //    delete preprocessed;
     //        for (IntegerVariable* iv : )
     //        GS->print(cout);
 }
@@ -257,7 +260,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     if (fix) {
         fixVariables();
     }
-    
+
     so->a_d = IntVars.size() - 1;
     so->c_d = IntVars.size() - 1;
     //    this->print(std::cout);

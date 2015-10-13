@@ -17,20 +17,21 @@
 ////    invariantID = id;
 //}
 
-Max::Max(IntegerVariable* var, int integer, int id) {
+Max::Max(IntegerVariable* var, int integer, unsigned id) {
     type = MAX;
     variableID = id;
     variableValue = var->getCurrentValue();
     Integer = integer;
-    VariablePointers.push_back(var);
+//    VariablePointers.push_back(var);
 }
 
-Max::Max(invariant invar, int integer, int id) {
+//Max::Max(invariant invar, int integer, int id) {
+Max::Max(invariant invar, int bound, unsigned id) {
     type = MAX;
     variableID = id;
     variableValue = invar->getCurrentValue();
-    Integer = integer;
-    invariants.push_back(invar);
+    Integer = bound;
+//    invariants.push_back(invar);
 }
 //Max::Max(const Max& orig) {
 //}

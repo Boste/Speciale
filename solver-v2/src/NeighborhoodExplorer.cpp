@@ -113,7 +113,7 @@ std::vector<int> NeighborhoodExplorer::calculateDeltaChange(Move* mv) {
 
     if (mv->moveType == FLIP) {
         IntegerVariable* variable = mv->first;
-        updateVector update = variable->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        updateVector update = model->getUpdate(variable); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //        int violationChange = 0;
         //        int objectiveChange = 0;
         //    std::cout << "Variable " << variableNumber << std::endl;
@@ -167,7 +167,7 @@ void NeighborhoodExplorer::commitMove(Move* mv, std::shared_ptr<State> st) {
 
         // Skal genberegne!!!!!
         calculateDeltaChange(mv);
-        updateVector update = var->getUpdateVector(); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        updateVector update = model->getUpdate(var); // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (updateType invar : update) {
             //        for (unsigned i = 0; i < update->size(); i++) {
 

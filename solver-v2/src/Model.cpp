@@ -56,7 +56,7 @@ Model::~Model() {
 
 }
 
-std::list<IntegerVariable*>& Model::getIntegerVariables(){
+std::list<IntegerVariable*>& Model::getIntegerVariables() {
     return IntegerVariables;
 }
 //IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
@@ -66,17 +66,18 @@ void Model::addBinaryVariable(int lb, int ub) {
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
+//    binaryVariables.push_back(v);
 
 }
 
 void Model::addIntegerVariable(int lb, int ub) {
-//    std::cout << lb << " " << ub << std::endl;
-//    sleep(1);
+    //    std::cout << lb << " " << ub << std::endl;
+    //    sleep(1);
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
     IntegerVariables.push_back(v);
-    
+
 }
 //int Model::getNumberOfVariables(){
 //    return numberOfVariables;
@@ -88,103 +89,53 @@ void Model::nonFixedVariables(std::vector<IntegerVariable*>& nonFixed) {
     shuffleMask();
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
-//void Model::addInvariantToIntVariable(int variableNumber, int invariantNumber) {
-//    IntVarVector->at(variableNumber)->addToUpdate(invariantNumber);
-//}
-//
-//void Model::initializeInvariants() {
-//
-//
-//    mask->resize(getNumberOfVariables());
-//    for (int i = 0; i < getNumberOfVariables(); i++) {
-//        mask->at(i) = i;
-//    }
-//    shuffleMask();
-//    //    std::random_shuffle(mask->begin(), mask->end());
-//    solution->resize(getNumberOfVariables());
-//    //    for (unsigned i = 0; i < IntVarVector->size(); i++) {
-//    for (IntegerVariable* current : *IntVarVector) {
-//        //        IntegerVariable* current = IntVarVector->at(i);
-//        //        for (unsigned j = 0; j < current->getUpdateVector()->size(); j++) {
-//        for (int invariantNumber : *current->getUpdateVector()) {
-//            //            int invariantNumber = current->getUpdateVector()->at(j);
-//            Invariants->at(invariantNumber)->addChange(current->getID(), current->getCurrentValue());
-//        }
-//    }
-//    //    for (unsigned i = 0; i < Invariants->size(); i++) {
-//    for (std::shared_ptr<Invariant> invar : *Invariants) {
-//        invar->calculateDeltaValue();
-//        invar->updateValue();
-//        //        Invariants->at(i)->calculateDeltaValue();
-//        //        Invariants->at(i)->updateValue();
-//        //        Invariants->at(i)->test();
-//    }
-//}
-//
-//void Model::initializeConstraints() {
-//
-//    int violations = 0;
-//    for (unsigned i = 1; i < Constraints->size(); i++) {
-//        std::vector<std::shared_ptr < Constraint>>*prio = Constraints->at(i);
-//        //        for (unsigned j = 0; j < prio->size(); j++) {
-//        for (std::shared_ptr<Constraint> cons : *prio) {
-//            violations += cons->updateViolation();
-//        }
-//    }
-//    if (violations != 0) {
-//        std::cout << "Initial solution not feasible? violations: " << violations << std::endl;
-//        numberOfViolations = violations;
-//        sleep(2);
-//    } else {
-//        assert(violations == 0);
-//        numberOfViolations = violations;
-//    }
-//}
-//
-//void Model::initializeObjective() {
-//    int violations = 0;
-//    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
-//    for (std::shared_ptr < Constraint> obj : *(Constraints->at(0))) {
-//
-//        violations += obj->setDeltaViolationDegree();
-//        obj->updateViolationDegree();
-//    }
-//    solutionValue = violations;
-//    std::cout << "Initial solution value: " << violations << std::endl;
-//    //    return violations;
-//}
 
-//void Model::shuffleMask() {
-//    std::random_shuffle(mask->begin(), mask->end());
-//
-//}
-//
-//int Model::maskAt(int i) {
-//    return mask->at(i);
-//}
-//
-//int Model::getObjectiveValue() {
-//    int value = 0;
-//    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
-//    for (std::shared_ptr < Constraint> obj : *(Constraints->at(0))) {
-//
-//        value += obj->getViolationDegree();
-//    }
-//    return value;
-//}
+void Model::addInvariantToDDG(invariant invar, variableContainer& variables) {
+    DDG->addInvariant(invar, variables);
+}
 
-//void Model::updateIntegerVariables(Gecode::IntVarArray& gecodeVars) {
-////    std::cout << "update" << std::endl;
-//    for(IntegerVariable* iv : *original){
-////    for (int i = 0; i < original->size(); i++) {
-////        IntegerVariable* iv = original->at(i);
-//        iv->setVariablePointer(gecodeVars[iv->getID()]);
-//    }
-//}
-IntegerVariable* Model::getMaskAt(int i){
+void Model::addInvariantToDDG(invariant invar, InvariantContainer& invariants) {
+    DDG->addInvariant(invar, invariants);
+}
+
+void Model::addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants) {
+        DDG->addInvariant(invar, variables, invariants);
+}
+
+void Model::addVariablesToDDG() {
+    DDG->addVariables(nonFixedBinaryVariables);
+
+}
+
+void Model::addVariablesToDDG(variableContainer& vars) {
+    DDG->addVariables(vars);
+}
+
+void Model::createPropagationQueue() {
+    DDG->createPropagationQueue();
+}
+
+propagation_queue& Model::getPropagationQueue(IntegerVariable* iv) {
+    assert(DDG->propagationQueueHasBeenMade());
+    return DDG->getPropagationQueue(iv);
+
+}
+
+updateVector& Model::getUpdate(invariant invar) {
+    return DDG->getUpdate(invar);
+}
+updateVector& Model::getUpdate(IntegerVariable* iv) {
+    return DDG->getUpdate(iv);
+}
+void Model::startUp(){
+    id = original.size();
+}
+
+IntegerVariable* Model::getMaskAt(int i) {
     return mask.at(i);
 }
-std::vector<IntegerVariable*>& Model::getMask(){
+
+std::vector<IntegerVariable*>& Model::getMask() {
     return mask;
 }
 
@@ -192,6 +143,7 @@ void Model::shuffleMask() {
     std::random_shuffle(mask.begin(), mask.end());
 
 }
+
 void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
     getNonFixedBinaryVariable(index)->setVariablePointer(variable);
 }
@@ -199,22 +151,27 @@ void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
 variableContainer& Model::getNonFixedBinaryVariables() {
     return nonFixedBinaryVariables;
 }
+
 IntegerVariable* Model::getNonFixedBinaryVariable(int i) {
     return nonFixedBinaryVariables.at(i);
 }
+
 variableContainer& Model::getAllVariables() {
     return original;
 }
 
 InvariantContainer& Model::getInvariants() {
+    
     //std::vector<Invariant*>* Model::getInvariants() {
     return Invariants;
 }
 
-/// Probably dont work
-void Model::addInvariant(std::shared_ptr<Invariant> invar){
-//    std::cout <<invar.get() << std::endl;
-//    invar->changeAdd  = true;
+/// adds Invariant and gives it an id.
+
+void Model::addInvariant(std::shared_ptr<Invariant> invar) {
+    //    std::cout <<invar.get() << std::endl;
+    //    invar->changeAdd  = true;
+    invar->invariantID = id++;
     Invariants.push_back(invar);
 }
 //InvariantContainer& Model::getOrgInvariants() {

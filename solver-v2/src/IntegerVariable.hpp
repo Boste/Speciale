@@ -7,7 +7,7 @@
 //#include "../include/constraints/invariant.hpp"
 
 //class Constraint;
-//class Invariant;
+class Invariant;
 
 class IntegerVariable {
     friend class GeneralSolver;
@@ -21,11 +21,11 @@ protected:
     int CurrentValue = 0;
     bool isInteger = false;
     bool isDefined = false;
+    bool isFix = false;
     VariableInConstraints constraints;
     invariant oneway;
     constraint definedByCons;
 //    propagation_queue propagationQueue;
-    std::set<Invariant*, compare_invariant> propagationQueue;
 //    invariant definedByInvar;
     
     /// Current Value of variable
@@ -39,8 +39,7 @@ protected:
 //        return CurrentValue < asd;
 //    }
 //    updateVector update;
-    std::set<Invariant*, compare_invariant> update;
-    Gecode::IntVarArray* ArrayPointer;
+//    Gecode::IntVarArray* ArrayPointer;
     Gecode::IntVar* VariablePointer;
 
 //    void clearUpdateVector() {
@@ -60,6 +59,7 @@ public:
     VariableInConstraints& usedInConstraints(){
         return constraints;
     }
+    
     void addToUsedInConstraints(std::shared_ptr<Constraint> constraint){
         constraints.push_back(constraint);
     }
@@ -70,6 +70,12 @@ public:
         definedByCons = cons;
         oneway = invar;
         isDefined = true;
+    }
+    bool isFixed(){
+        return isFix;
+    }
+    void setAsFixed(){
+        isFix = true;
     }
 
     IntegerVariable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
@@ -96,17 +102,16 @@ public:
         return CurrentValue;
     }
 
-    void addToUpdate(updateType invariant) {
-//        update.push(invariant);//push(invariant);
+//    void addToUpdate(updateType invariant) {
+////        update.push(invariant);//push(invariant);
 //        update.insert(update.end(),invariant);
-        update.insert(update.end(),invariant);
-    }
-    
-    updateVector& getUpdateVector() {
-        return update;
-    }
+//    }
+//    
+//    updateVector& getUpdateVector() {
+//        return update;
+//    }
 
-    int getID() {
+    unsigned getID() {
         return vectorID;
     }
 
@@ -129,15 +134,14 @@ public:
     int getUpperBound() {
         return upperBound;
     }
-    propagation_queue& getPropagationQueue(){
-        return propagationQueue;
-    }
-    void addToPropagationQueue(invariant& invar){
-//        propagationQueue.push(invar);
+//    propagation_queue& getPropagationQueue(){
+//        return propagationQueue;
+//    }
+//    void addToPropagationQueue(invariant& invar){
+////        propagationQueue.push(invar);
 //        propagationQueue.insert(invar);
-        propagationQueue.insert(invar.get());
-       
-    }
+//       
+//    }
     ~IntegerVariable() {
         //        delete VariablePointer;
 

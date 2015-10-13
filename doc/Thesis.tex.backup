@@ -3,9 +3,11 @@
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{color}
+\usepackage{amssymb}
 
 \usepackage{algorithmic}
-\usepackage{algorithm}
+%\usepackage{algorithm}
+\usepackage{algorithm2e}
 %opening
 
 \include{style}
@@ -20,62 +22,86 @@
 
 %\end{abstract}
 %\newpage
+\tableofcontents
+\newpage
 \section{Introduction}
-\subsection{Mixed Integer Programming}
-\subsection{Constraint Programming}
-\subsection{Heuristics and Local Search}
-\subsubsection{Construction Heuristics}
-\subsubsection{Local Search and Neighbourhoods}
-\subsubsection{Metaheuristics}
+  \subsection{Mixed Integer Programming}
+  \subsection{Constraint Programming}
+  \subsection{Heuristics and Local Search}
+  \subsubsection{Construction Heuristics}
+  \subsubsection{Local Search and Neighborhoods}
+  \subsubsection{Metaheuristics}
 
-\section{Modelling}
-\subsection{Integer Programming with limitations}
-\subsection{Variables}
-\subsection{Constraints}
-\section{Preprocessing and simplification}
-\subsection{Gecode Engine}
-\subsubsection{Simplification}
-\subsection{Local Search}
-\subsection{Neighbourhoods}
-%\newpage
-\section{Heuristics and Metaheuristics}
-\subsection{Heuristics}
-%\newpage
-\section{Defenitions of structures in a solver}
-\input{structures}
-\subsection{variables}
-\subsection{Moves}
-\subsection{Constriants}
-\subsection{Invariant}
-\input{invariant}
-\subsection{Oneway Constraints}
-\input{oneway}
-\subsection{State}
-%\subsection{Metaheuristics implemeted}
-%\newpage
-\section{Existing Solvers}
-\input{comet}
-\input{gecode}
-\input{localsolver}
-%\input{OsCar}
-%\newpage
-\section{Graph}
-\input{graph}
-\newpage
-\subsection{Creating the Update Graph} \label{updategraph}
-\input{updateCons}
-\newpage
-\section{Structure (or Architecture?) of My Solver}
+\section{Modeling}
+%\subsection{Variables}
+
+  \subsection{Variables and Constraints}
+  \input{varcons}
+    \subsection{Invariants and One-way Constraints}
+  \subsection{Types of Modeling \boste{not sure this should be here}}
+  \input{modeling}
+\section{Different Solvers \boste{properly not the best name}}
+  \subsection{Comet}
+
+  \subsection{Gecode}
+  \subsection{LocalSolver}
+  \subsection{OscaR}
+  \subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
+\section{Preprocessing and Simplification}
+  \subsection{Gecode Engine}
+    \subsubsection{Relaxation}
+  \subsection{Initial Solution}
+\section{Structuring Local Search Model}
+  \subsection{Simplification}
+    \input{updateCons}
+  \subsection{Maintaining Invariants}
+  \subsection{Maintenance Graph}
+\section{Local Search Engine}
+  \subsection{Neighborhoods}
+    \subsubsection{Moves}
+  \subsection{Metaheuristics}
 \section{Tests}
 \section{Results}
 \section{Conclusion}
+%\newpage
+%\newpage
+%\section{Defenitions of structures in a solver}
+%\input{structures}
+%\subsection{variables}
+%\subsection{Moves}
+%\subsection{Constriants}
+%\subsection{Invariant}
+%\input{invariant}
+%\subsection{Oneway Constraints}
+%\input{oneway}
+%\subsection{State}
+%\subsection{Metaheuristics implemeted}
+%\newpage
+%\section{Existing Solvers}
+%\input{comet}
+%\input{gecode}
+%\input{localsolver}
+%\input{OsCar}
+%\newpage
+%\section{Graph}
+%\input{graph}
+%\newpage
+%\subsection{Creating the Update Graph} \label{updategraph}
+%\input{updateCons}
+%\newpage
+%\section{Structure (or Architecture?) of My Solver}
+%\section{Tests}
+%\section{Results}
+%\section{Conclusion}
 
 %\input{structure}
 
 
 % Generelle fejl
 
-% Can, be precise
+% Can, be precise -> is 
 % Define 
+% which og that 
+% properly vs probably
 
 \end{document}

@@ -32,6 +32,7 @@
 Sum::Sum(std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
     type = SUM;
     //    invariantID = id;
+    
     coefficients.insert(map.begin(), map.end());
 
 }
@@ -99,9 +100,9 @@ int Sum::calculateDeltaValue() {
 
         VariableChange.pop_back();
     }
-    for(updateType invar : update){
-        invar->addChange(this->getVariableID(),DeltaValue);
-    }
+//    for(updateType invar : DDG->update){
+//        invar->addChange(this->getVariableID(),DeltaValue);
+//    }
     //    }
     //        std::cout << valueChange << " ";
     DeltaValue = valueChange;

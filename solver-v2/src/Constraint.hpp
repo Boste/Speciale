@@ -152,15 +152,15 @@ public:
     //        }
     //    };
 
-    bool operator<(Constraint& cons) const {
-        std::cout << "used to sort <" << std::endl;
-        return (invariant->getVariables().size() < cons.getInvariant()->getVariables().size());
-    }
-
-    bool operator>(Constraint& cons) const {
-        std::cout << "used to sort >" << std::endl;
-        return (invariant->getVariables().size() > cons.getInvariant()->getVariables().size());
-    }
+//    bool operator<(Constraint& cons) const {
+//        std::cout << "used to sort <" << std::endl;
+//        return (invariant->getVariables().size() < cons.getInvariant()->getVariables().size());
+//    }
+//
+//    bool operator>(Constraint& cons) const {
+//        std::cout << "used to sort >" << std::endl;
+//        return (invariant->getVariables().size() > cons.getInvariant()->getVariables().size());
+//    }
 
     virtual int setDeltaViolation() {
         std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
@@ -210,17 +210,17 @@ public:
 
 };
 
-class ConstraintSorter {
-public:
-
-    ConstraintSorter() {
-
-    }
-
-    bool operator()(std::shared_ptr<Constraint>& cons1, std::shared_ptr<Constraint>& cons2) {
-        return (cons1->getInvariant()->getVariables().size() > cons2->getInvariant()->getVariables().size());
-    }
-};
+//class ConstraintSorter {
+//public:
+//
+//    ConstraintSorter() {
+//
+//    }
+//
+//    bool operator()(std::shared_ptr<Constraint>& cons1, std::shared_ptr<Constraint>& cons2) {
+//        return (cons1->getInvariant()->getVariables().size() > cons2->getInvariant()->getVariables().size());
+//    }
+//};
 
 #endif	/* CONSTRAINT_HPP */
 

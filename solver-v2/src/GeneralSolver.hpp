@@ -177,6 +177,7 @@ public:
     //    GeneralSolver* InitialSolution(Gecode::Search::Options* so) {
 
     void InitialSolution(int TimeForGecode) {
+        
         GS->createArray();
         //        int counter = 0;
         //        for (int id : model->getIntegerVariableID()) {
@@ -303,7 +304,7 @@ public:
     }
 
     void initializeLS() {
-
+        
         /// Sort constraints a variable is part of in decreasing order according to domain
 
         /// Sort integer variables decreasing order according to number of constraints they are involved
@@ -316,8 +317,8 @@ public:
         //        model->getConstraintsWithIntegerVariables();
         //        ConstraintSorter sorter();
 
-
-
+        model->startUp();
+        model->addVariablesToDDG(model->getNonFixedBinaryVariables());
 
 
         //#####################################################################################################################################
@@ -356,14 +357,21 @@ public:
             }
             //            layer++;
         }
-
         if (queue.size() != 0) {
             std::cout << "Cannot make all integer variables oneway" << std::endl;
             exit(1);
         }
         std::cout << "All Integer variables can be made oneway" << std::endl;
 
-
+        for (IntegerVariable* iv : model->getIntegerVariables()) {
+            if (!iv->isInteger) {
+                std::cout << "integer not integer" << std::endl;
+            }
+            if (!iv->isDefined) {
+                std::cout << "integer but not defined" << std::endl;
+            }
+            assert(iv->isInteger == iv->isDefined);
+        }
 
 
         //        unsigned highestLayer;
@@ -376,22 +384,28 @@ public:
             for (constraint cons : *model->getConstraintsWithPriority(i)) {
                 if (!cons->isOneway()) {
                     std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getCoefficients());
-                    sumInvariant->invariantID = model->getInvariants().size();
+                    //                    sumInvariant->invariantID = model->getInvariants().size();
+                    variableContainer variables;
+                    InvariantContainer invars;
                     for (IntegerVariable* iv : cons->getVariables()) {
                         if (!iv->isDefined) {
-                            sumInvariant->VariablePointers.push_back(iv);
-                            iv->addToUpdate(sumInvariant.get());
-//                            iv->addToUpdate(sumInvariant);
+
+
+                            variables.push_back(iv);
+                            //                            iv->addToUpdate(sumInvariant.get());
+
+                            //                            iv->addToUpdate(sumInvariant);
                         } else {
 
 
-                            sumInvariant->invariants.push_back(iv->oneway);
-                            iv->oneway->addToUpdate(sumInvariant.get());
-//                            iv->oneway->addToUpdate(sumInvariant);
+                            invars.push_back(iv->oneway);
+                            //                            iv->oneway->addToUpdate(sumInvariant.get());
+                            //                            iv->oneway->addToUpdate(sumInvariant);
 
                         }
                     }
                     model->addInvariant(sumInvariant);
+                    model->addInvariantToDDG(sumInvariant, variables, invars);
                     cons->setInvariant(sumInvariant);
                     //                    std::cout << cons->getInvariant()->VariablePointers.size() << std::endl;
 
@@ -409,32 +423,40 @@ public:
             }
         }
         /// Create propagate queue either from invariant or variables
-        for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
-            //            propagation_queue& queue = iv->getPropagationQueue();
-            //            updateVector allUpdates;
-            propagation_queue& allUpdates = iv->getPropagationQueue();
-            addToQueue(allUpdates, iv->getUpdateVector());
-            //            addToQueue(allUpdates, iv->getUpdateVector());
-            //            bool first = true;
-            //            invariant lastInvar;
-//            for (invariant invar : allUpdates) {
-//                //                if(first){
-//                //                    lastInvar = invar;
-//                //                    first=false;
-//                //                } else {
-//                //                    if(invar == lastInvar){
-//                //                        std::cout << invar->getID() << " " << lastInvar->getID() << std::endl;
-//                //                    }
-//                //                }
-//                iv->addToPropagationQueue(invar);
-//                //                
-//            }
-//            std::cout << iv->getPropagationQueue().size() << std::endl;
+        std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+        std::cout << "Create propagator queues" << std::endl;
+        model->createPropagationQueue();
+        std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+        //        for(IntegerVariable* iv : model->getNonFixedBinaryVariables()){
+        //            std::cout << model->getPropagationQueue(iv).size() << std::endl;
 
-        }
+        //        }
+        //        for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
+        //            //            propagation_queue& queue = iv->getPropagationQueue();
+        //            //            updateVector allUpdates;
+        //            propagation_queue& allUpdates = iv->getPropagationQueue();
+        //            addToQueue(allUpdates, iv->getUpdateVector());
+        //            //            addToQueue(allUpdates, iv->getUpdateVector());
+        //            //            bool first = true;
+        //            //            invariant lastInvar;
+        ////            for (invariant invar : allUpdates) {
+        ////                //                if(first){
+        ////                //                    lastInvar = invar;
+        ////                //                    first=false;
+        ////                //                } else {
+        ////                //                    if(invar == lastInvar){
+        ////                //                        std::cout << invar->getID() << " " << lastInvar->getID() << std::endl;
+        ////                //                    }
+        ////                //                }
+        ////                iv->addToPropagationQueue(invar);
+        ////                //                
+        ////            }
+        ////            std::cout << iv->getPropagationQueue().size() << std::endl;
+        //
+        //        }
         unsigned last = -1;
         for (invariant invar : model->getInvariants()) {
-            unsigned current = invar->invariantID;
+            unsigned current = invar->getID();
             if (current != last + 1) {
                 std::cout << "last " << last << " current " << current << std::endl;
                 sleep(10);
@@ -523,7 +545,9 @@ public:
 
 
         //        std::cout << "sorted" << std::endl;
-        debug;
+        std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+
+        sleep(4);
         st->initializeInvariants();
 
         // Kan check the obj func
@@ -553,19 +577,19 @@ public:
         st->initializeObjective();
         //        std::cout << "objective" << std::endl;
         model->initialValue = st->getSolutionValue();
-
+        std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     }
     //        void addToQueue(propagation_queue& orgQueue, updateVector& queue, IntegerVariable* iv){
 
-    void addToQueue(updateVector& orgQueue, updateVector& queue) {
-        for (updateType invar : queue) {
-            orgQueue.insert(invar);
-            //                iv->addToPropagationQueue(invar);
-            addToQueue(orgQueue, invar->getUpdateVector());
-        }
-
-
-    }
+    //    void addToQueue(updateVector& orgQueue, updateVector& queue) {
+    //        for (updateType invar : queue) {
+    //            orgQueue.insert(invar);
+    //            //                iv->addToPropagationQueue(invar);
+    //            addToQueue(orgQueue, invar->getUpdateVector());
+    //        }
+    //
+    //
+    //    }
 
     // Not taking into account if the coefficient in objective function is negative
 
@@ -637,7 +661,6 @@ public:
         std::unordered_map<int, coefType> coefficients = cons->getCoefficients();
         std::unordered_map<int, coefType> newCoefficients;
 
-
         if (coeff == -1) {
             for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
                 std::pair<int, coefType> coef(it->first, it->second);
@@ -667,69 +690,64 @@ public:
         //        } else {
 
         //        std::cout << sumInvariant->getVariableID() << std::endl;
+        InvariantContainer invars;
+        variableContainer vars;
         for (IntegerVariable* oldiv : oldVars) {
+
 
             if (oldiv != iv) {
                 if (oldiv->isInteger) {
                     assert(oldiv->isDefined);
-                    sumInvariant->addInvariant(oldiv->oneway);
-                    oldiv->getOneway()->addToUpdate(sumInvariant.get());
-//                    oldiv->getOneway()->addToUpdate(sumInvariant);
+                    invars.push_back(oldiv->oneway);
+                    //                    sumInvariant->addInvariant(oldiv->oneway);
+                    //                    oldiv->getOneway()->addToUpdate(sumInvariant.get());
+                    //                    oldiv->getOneway()->addToUpdate(sumInvariant);
 
 
 
                 } else {
-                    sumInvariant->addVariable(oldiv);
+                    vars.push_back(oldiv);
+                    //                    sumInvariant->addVariable(oldiv);
 
                     //                    std::cout << sumInvariant.get() << std::endl;
-                    oldiv->addToUpdate(sumInvariant.get());
-//                    oldiv->addToUpdate(sumInvariant);
+                    //                    oldiv->addToUpdate(sumInvariant.get());
+                    //                    oldiv->addToUpdate(sumInvariant);
                     //                    sleep(1);
                 }
             }
         }
-
-        //        for (IntegerVariable* 
-        //        }
-
-        // Prob not from invariant i get coefficients
-
-        //
-        //        for (IntegerVariable* iv : variables) {
-        //            iv->addToUpdate(sumInvariant);
-        //        }
-        //        for (invariant invar : invariants) {
-        //            sumInvariant->invariants.push_back(invar);
-        //            invar->addToUpdate(sumInvariant);
-        //        }
-        //        sumInvariant->layer = layer;
-        //        sumInvariant->CurrentValue = -cons->getArgument(1);
-        //        sumInvariant->startValue = -cons->getArgument(1);
-        sumInvariant->invariantID = model->getInvariants().size();
-        sumInvariant->setValue(-cons->getArgument(1));
+//        sumInvariant->invariantID = model->getInvariants().size();
         model->addInvariant(sumInvariant);
+
+        model->addInvariantToDDG(sumInvariant, vars, invars);
+        sumInvariant->setValue(-cons->getArgument(1));
 
         if (cons->getArgument(0) == LQ) {
 
             std::shared_ptr<Max> maxInvariant = std::make_shared<Max>(sumInvariant, iv->getLowerBound(), iv->getID());
-            sumInvariant->addToUpdate(maxInvariant.get());
-//            sumInvariant->addToUpdate(maxInvariant);
+            InvariantContainer invars;
+            invars.push_back(sumInvariant);
+//            maxInvariant->invariantID = model->getInvariants().size();
+            model->addInvariant(maxInvariant);
+            model->addInvariantToDDG(maxInvariant, invars);
+            //            sumInvariant->addToUpdate(maxInvariant.get());
+            //            sumInvariant->addToUpdate(maxInvariant);
             iv->setDefinedBy(maxInvariant, cons);
             cons->setInvariant(maxInvariant);
-            maxInvariant->invariantID = model->getInvariants().size();
-            model->addInvariant(maxInvariant);
 
 
         } else {
 
             iv->setDefinedBy(sumInvariant, cons);
             cons->setInvariant(sumInvariant);
-            sumInvariant->variableID = iv->getID();
+//            sumInvariant->variableID = iv->getID();
+            sumInvariant->setVariableID(iv->getID());
 
         }
 
         //        sumInvariant->setBounds(iv->lowerBound, iv->upperBound);
         cons->isOneway(true);
+
     }
 
     int getInitialValue() {

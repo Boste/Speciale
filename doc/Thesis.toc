@@ -8,8 +8,8 @@
 \contentsline {section}{\numberline {2}Modeling}{3}
 \contentsline {subsection}{\numberline {2.1}Variables}{3}
 \contentsline {subsection}{\numberline {2.2}Constraints}{3}
-\contentsline {subsection}{\numberline {2.3}Invariants and One-way Constraints}{4}
-\contentsline {subsection}{\numberline {2.4}Types of Modeling {\textbf {\color {blue}(not sure this should be here)}}}{4}
+\contentsline {subsection}{\numberline {2.3}Invariants and One-way Constraints}{5}
+\contentsline {subsection}{\numberline {2.4}Types of Modeling {\textbf {\color {blue}(not sure this should be here)}}}{5}
 \contentsline {section}{\numberline {3}Different Solvers {\textbf {\color {blue}(properly not the best name)}}}{5}
 \contentsline {subsection}{\numberline {3.1}Comet}{5}
 \contentsline {subsection}{\numberline {3.2}Gecode}{5}

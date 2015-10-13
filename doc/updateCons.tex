@@ -33,12 +33,12 @@ of constraints where integer variable $y$ has a non zero coefficient. \\
 \end{algorithm}\DecMargin{1em}
 \noindent
 The algorithm try to make all integer variables one-way. It uses two other algorithms 
-\canBeMadeOneway{c,v}\ref{algo_checkoneway} and \makeOneway{c,v}\ref{algo_makeoneway}. The first algorithm check if the 
+\canBeMadeOneway{c,y}\ref{algo_checkoneway} and \makeOneway{c,y}\ref{algo_makeoneway}. The first algorithm check if the 
 \cons $c$ can be used to define \var $y$ and the second algorithm transforms $c$ into a one-way constraint defining 
 $y$. \boste{Need complexity arguments} \\ 
-The coefficients of variables in constraint $c$ is denoted $A(c)$ and the coefficients of variables in the objective 
-function $f(\vec{y}) \in F$ denoted as $A(f(y))$.  \boste{Maybe call it evalutation functions} Then the coefficent of 
-variable $y$ in constriant $c$ is $A(c,y)$. \\  
+The coefficients of the variables in constraint $c$ are denoted $A(c)$ and the coefficients of variables in the 
+objective function $f(\vec{y}) \in F$ denoted as $A(f(y))$.  \boste{Maybe call it evalutation functions} Then the 
+coefficent of variable $y$ in constriant $c$ is $A(c,y)$. \\  
 
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -55,10 +55,10 @@ variable $y$ in constriant $c$ is $A(c,y)$. \\
 %\int coeff = \coeff{c,v}\;
 %\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{
 \ForEach{a \upshape in $A(f(y))$ }{
-\If{$A(c,v) \cdot a > 0$}{\Return{false}}}
+\If{$A(c,y) \cdot a > 0$}{\Return{false}}}
 \Return{true}\;
 
- \caption{Test if a constraint $c$ can define a variable $v$ } \label{algo_checkoneway}
+ \caption{Test if a constraint $c$ can define a variable $y$ } \label{algo_checkoneway}
 \end{algorithm}
 \DecMargin{1em}
 The variables that a constraint $c$ applies to is the scope $V(c)$. The constraints are of the type \class{Linear} and 
@@ -72,8 +72,8 @@ a constraint $c$ have a right hand side $B(c)$. \\
 \int $coef = A(c,y)$\;
 $A(c) = A(c) \backslash \{A(c,y)\}$\;
 $V(c) = V(c) \backslash \{y\}$\;
-\ForEach{$A(c,u)$ \upshape in $A(c)$}{
-  $A(c,u) = A(c,u) \cdot \frac{-1}{coef}$
+\ForEach{$A(c,v)$ \upshape in $A(c)$}{
+  $A(c,v) = A(c,v) \cdot \frac{-1}{coef}$
 }
 \int $b = B(c)$ \;
 \If{\relation{c} == Equal}{

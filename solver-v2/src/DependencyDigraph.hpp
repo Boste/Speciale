@@ -70,6 +70,15 @@ typedef std::set<invariant, compare_invariant> propagation_queue;
 typedef std::list<invariant> updateVector;
 //typedef std::vector<invariant> updateVector;
 
+struct invariantNode {
+
+    updateVector update;
+    unsigned id;
+    //    invariant invar;
+    invariant invar;
+};
+
+
 struct variableNode {
 
     updateVector update;
@@ -79,13 +88,7 @@ struct variableNode {
     IntegerVariable* iv;
 };
 
-struct invariantNode {
 
-    updateVector update;
-    unsigned id;
-    //    invariant invar;
-    invariant invar;
-};
 
 class DependencyDigraph {
 public:
@@ -97,8 +100,8 @@ public:
     void addInvariant(invariant invar, variableContainer& vars, InvariantContainer& invars);
     void addInvariant(invariant invar, InvariantContainer& invars);
     void addInvariant(invariant invar, variableContainer& vars);
-    updateVector& getUpdate(invariant invar);
-    updateVector& getUpdate(IntegerVariable* var);
+    updateVector& getInvariantUpdate(unsigned invarID);
+    updateVector& getVariableUpdate(unsigned varID);
     propagation_queue& getPropagationQueue(IntegerVariable* iv);
     bool propagationQueueHasBeenMade();
     void createPropagationQueue();

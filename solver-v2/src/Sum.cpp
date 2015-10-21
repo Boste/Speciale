@@ -29,10 +29,11 @@
 
 //Sum::Sum(std::unordered_map<int, coefType> map, unsigned id)  {//:IntVariables(vars),coefficients(c) {
 
-Sum::Sum(std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::unordered_map<int, coefType> map, std::shared_ptr<DependencyDigraph> DDG) {//:IntVariables(vars),coefficients(c) {
     type = SUM;
+    this->DDG = DDG;
     //    invariantID = id;
-    
+
     coefficients.insert(map.begin(), map.end());
 
 }
@@ -97,12 +98,18 @@ int Sum::calculateDeltaValue() {
         valueChange += VariableChange.back();
         //        std::pair<int, int> currentPair = VariableChange.back();
         //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
-
+//        std::cout << "value change " << valueChange << std::endl;
         VariableChange.pop_back();
     }
-//    for(updateType invar : DDG->update){
-//        invar->addChange(this->getVariableID(),DeltaValue);
-//    }
+    if (valueChange != 0) {
+        for (updateType invar : DDG->getInvariantUpdate(this->invariantID)) {
+            invar->addChange(this->getVariableID(), valueChange);
+        }
+    }
+
+    //    }
+    //    if(invariantID == 253122){
+    //        std::cout <<"changed delta of obj func " << valueChange << std::endl;
     //    }
     //        std::cout << valueChange << " ";
     DeltaValue = valueChange;
@@ -115,6 +122,7 @@ int Sum::calculateDeltaValue() {
 }
 
 void Sum::addChange(int variableNumber, int changeInValue) {
+    //    std::cout << variableNumber << " ";
     int deltaChange = coefficients.at(variableNumber) * changeInValue;
     VariableChange.push_back(deltaChange);
     //    changeAdd = true;
@@ -124,6 +132,11 @@ void Sum::addChange(int variableNumber, int changeInValue) {
 
     //        std::cout << "addChange in sum" << std::endl;
     //        sleep(5000);
+}
+
+void Sum::updateValue() {
+    CurrentValue += DeltaValue;
+//    DeltaValue = 0;
 }
 /// update currentValue by adding currentValue*coeff of all variables and invariants 
 

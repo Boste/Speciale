@@ -4,7 +4,7 @@
 #include <cmath>
 #include <algorithm>
 
-
+#include <iostream>
 #include "BP_Data.hpp"
 #include "GeneralSolver.hpp"
 #include "IntegerVariable.hpp"
@@ -43,7 +43,7 @@ public:
 
         }
         std::cout << "Number of binary variables " << counter << std::endl;
-        
+
         //        std::cout << "Variables created" << std::endl;
         vector<IntegerVariable*>& varInt = getAllVariables();
         //        for (unsigned i = 0; i < varInt->size(); i++) {
@@ -56,7 +56,7 @@ public:
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
             vector<int> c(leftside.size());
-            if(leftside.size() == 1 ){
+            if (leftside.size() == 1) {
                 counter++;
             }
             //                        vector<IntegerVariable*> x(leftside.size());
@@ -88,7 +88,7 @@ public:
             //            std::cout << std::endl;
             //            sleep(1);
         }
-        std::cout <<  "Number of Singleton constraints " << counter << std::endl;
+        std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
         std::vector<int> c(varInt.size());

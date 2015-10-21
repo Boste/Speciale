@@ -1,20 +1,48 @@
 #include "State.hpp"
 #include "Model.hpp"
 
+/// Model should be initialized before making a State (since State is only used in LS hence model should be made LS friendly)
+
 State::State(std::shared_ptr<Model> model) {
     //    std::cout << "create state" << std::endl;
     this->model = model;
-    
-    solutionValue = std::numeric_limits<int>::max();
+
+    for (IntegerVariable* iv : model->getAllVariables()) {
+        solution.push_back(iv->getCurrentValue());
+    }
+    for (unsigned i = 0; i < model->getInitialEvaluation().size(); i++) {
+        evaluation.push_back(model->getInitialEvaluation().at(i));
+    }
+    //    solutionValue = model->initialValue;
+    //    numberOfViolations = model->initialViolations;
+
     //    mask = new std::vector<int>();
 
 }
+/// Careful using this, not sure how much is copied and how much references to same objects. (prob same model, copy of value and solution) 
+/// Use copy instead
 
 State::State(const State& orig) {
     this->solution = orig.solution;
-    this->solutionValue = orig.solutionValue;
+    //    this->solutionValue = orig.solutionValue;
     //    this->mask = orig.mask;
+    this->evaluation = orig.evaluation;
+    //    std::cout << &evaluation[0] << " vs " &orig.evaluation[0] << std::endl;
     this->model = orig.model;
+}
+
+void State::copy(std::shared_ptr<State> st) {
+    this->saveSolution();
+    for(unsigned i = 0; i< solution.size();i++){
+//        solution[i] = st->getSolution()[i];
+        std::cout << solution[i] << " ";
+    }
+    std::cout << std::endl;
+    //    this->solutionValue = orig.solutionValue;
+    //    this->mask = orig.mask;
+    this->evaluation = st->evaluation;
+    //    std::cout << &evaluation[0] << " vs " << &st->evaluation[0] << std::endl;
+    this->model = st->model;
 }
 
 State::~State() {
@@ -22,244 +50,123 @@ State::~State() {
     //    delete solution;
 }
 
+/// Saves current value of all non-fixed binary variable and set solutionValue to the sum of obj functions. 
 
-/// Shoudl prob be in model instead
+void State::saveSolution() {
 
-void State::initializeInvariants() {
-
-    solution.resize(model->getAllVariables().size());
-
-    for (IntegerVariable* current : model->getNonFixedBinaryVariables()) {
-
-        assert(!current->isIntegerVariable());
-        if (current->getCurrentValue() != 0) {
-            for (updateType inv : model->getPropagationQueue(current)) {
-                //            for (updateType inv : current->getPropagationQueue()) {
-                deltaQueue.insert(inv);
-                //                deltaQueue.push(inv);
-            }
-            for (updateType invar : model->getUpdate(current)) {
-                //                current->getUpdateVector().
-                invar->addChange(current->getID(), current->getCurrentValue());
-            }
-            //            for (updateType invariant : current->getUpdateVector()) {
-            //                invariant->calculateDeltaValue();
-            //
-            //            }
-            //            sleep(1);
-        }
-
+    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
+        solution.at(iv->getID()) = iv->getCurrentValue();
     }
-    std::cout << "size " << deltaQueue.size() << std::endl;
-    unsigned last = 0;
-    for (updateType invar : deltaQueue) {
-        if (invar->getID() <= last) {
-            std::cout << "Wrong" << std::endl;
-            exit(1);
-        } else {
-            last = invar->getID();
-        }
-        //        std::cout << invar->getID() << std::endl;
-        //        sleep(1);
-    }
-    debug;
-    //    std::cout << model->getInvariants().size() << std::endl;
-    for (std::shared_ptr<Invariant> invar : deltaQueue) {
-        //        std::cout << "Testing part" << std::endl;
 
-        //        std::cout << invar.get() << std::endl;
-        //        int id = invar->getVariables().at(0)->getID();
-        //        invar->addChange(id,1000);
-        //        invar->calculateDeltaValue();
-        //        std::cout << "test part done " << std::endl;
-        //        int id = invar->getVariableID();
-        //        if (invar->getType() == MAX) {
-        //            std::cout << "max " << std::endl;
-        //        }
-        //        if (id == 53552 || id == 110133 || id == 119734) {
-        //            std::cout << "id " << id << std::endl;
-        //            std::cout << "vars " << invar->getVariables().size() << std::endl;
-        //            std::cout << "invars " << invar->getInvariants().size() << std::endl;
-        //        }
-        int delta = invar->calculateDeltaValue();
-        for (updateType inv : model->getUpdate(invar)) {
-            inv->addChange(invar->getID(),delta);
-        }
-        invar->updateValue();
+}
+/// Returns a solution that is saved. 
 
-    }
-    for(invariant invar : model->getInvariants()){
-        std::cout << invar->getCurrentValue() << " ";
-    }
-    std::cout << std::endl;
-    debug;
-//    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
-//
-//
-//        //        std::cout << std::endl;
-////        invar->updateValue();
-//        //        sleep(1);
-//        //        if(invar->changeAdd){
-//        //            std::cout << "Some change added" << std::endl;
-//        //        }
-//        int value = invar->getCurrentValue();
-//        auto coef = invar->getCoefficients();
-////                if (invar->getVariableID() == 53552) {
-////                    for (invariant inv : model->getUpdate(invar)) {
-////                                        std::cout << coef.at(inv->getVariableID()) << " ";
-////                    }
-////                    std::cout << std::endl;
-//////                    for(int i = model->getUpdate(invar).size()-1;i >=0; i--){
-//////                        std::cout <<model->getUpdate(invar).at(i)->getCurrentValue() << " ";
-//////                    }
-////                    for (invariant inv : model->getUpdate(invar)) {
-////                        std::cout << inv->getCurrentValue() << " ";
-////                    }
-////                    std::cout << std::endl;
-////        
-////                }
-//                int check = 0;
-//                for (IntegerVariable* iv : invar->getVariables()) {
-//                    assert(!iv->isIntegerVariable());
-//                    check += coef.at(iv->getID()) * iv->getCurrentValue();
-//                    //            std::cout << coef.at(iv->getID()) * iv->getCurrentValue() << " + ";
-//                    //            if (coef.at(iv->getID()) * iv->getCurrentValue() != 0) {
-//                    //                std::cout << "id of this is " << iv->getID() << " is integer " << iv->isIntegerVariable() << " + ";
-//                    //            }
-//                }
-//                //        //        std::cout << "my id " << invar->getVariableID() << std::endl;
-//                //
-//                for (invariant inv : invar->getInvariants()) {
-//                    if (invar->getType() == SUM) {
-//                        check += inv->getCurrentValue() * coef.at(inv->getVariableID());
-//                    } else {
-//                        check = inv->getCurrentValue();
-//                    }
-//                    //            std::cout << inv->getVariableID() << " ";
-//                    //            std::cout << inv->getCurrentValue() << " + ";
-//                }
-//                //        //        std::cout << std::endl;
-//                if (check + invar->getStartValue() < 0 && invar->getVariableID() != -1) {
-//                    check = 0;
-//                    //            std::cout <<" does this happen " << std::endl;
-//                } else {
-//                    check += invar->getStartValue();
-//                }
-//                //        //        std::cout << invar->getStartValue() << std::endl;
-//                if (value != check) {
-//                    std::cout << "Value " << value << "  vs  check " << check << " ini val " << invar->getStartValue() << " " << invar->getVariableID() << std::endl;
-//                }
-//
-//    }
+std::vector<int>& State::getSolution() {
+    return solution;
+}
+/// Get the solutionValue last saved. 
 
+//int State::getSolutionValue() {
+//    return solutionValue;
+//}
+
+std::vector<int>& State::getEvaluation() {
+    return evaluation;
 
 }
 
-void State::initializeConstraints() {
-    std::cout << "ini cons" << std::endl;
+void State::updateEvaluation(std::vector<int>& changes) {
+    for (unsigned i = 0; i < evaluation.size(); i++) {
+        evaluation[i] += changes[i];
+    }
+}
+
+bool State::isFeasible() {
+    feasible = true;
+    for (unsigned i = 1; i < evaluation.size(); i++) {  
+        if (evaluation.at(i) > 0) {
+            feasible = false;
+        }
+    }
+    return feasible;
+}
+
+
+/// Recomputes all invariant, constraints and obj func, from the last saved solution (expensive)
+/// Not necessary for return the objective value
+
+void State::setSolution() {
+
+    int change;
+    //    for (unsigned i = 0; i < solution->size(); i++) {
+    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
+
+        //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
+        //            for (unsigned j = 0; j < model->getUpdate(iv); j++) {
+        for (updateType invar : model->getUpdate(iv)) {
+            //                updateType invariant = iv->getUpdateVector().at(j);
+            change = solution.at(iv->getID()) - iv->getCurrentValue();
+            if (change != 0) {
+                invar->addChange(iv->getID(), solution.at(iv->getID()) - iv->getCurrentValue());
+                iv->setCurrentValue(solution.at(iv->getID()));
+            }
+        }
+
+    }
+    //    for (unsigned i = 0; i < model->getInvariants()->size(); i++) {
+    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+        invar->calculateDeltaValue();
+        invar->updateValue();
+        if (invar->getVariableID() != -1) {
+            IntegerVariable* iv = model->getVariable(invar->getVariableID());
+            assert(iv->getOneway() == invar);
+            if (invar->getCurrentValue() < iv->getLowerBound()) {
+                std::cout << "FML!!!!!!!!!!!" << std::endl;
+                debug;
+                exit(1);
+
+            }
+            assert(invar->getCurrentValue() >= iv->getLowerBound());
+            iv->setCurrentValue(invar->getCurrentValue());
+        }
+        //        model->getInvariants()->at(i)->calculateDeltaValue();
+        //        model->getInvariants()->at(i)->updateValue();
+    }
+    // Setting constraints
     int violations = 0;
     for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-        constraintContainer prio = model->getConstraints().at(i);
+        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraintsWithPriority(i);
         //        for (unsigned j = 0; j < prio->size(); j++) {
-        std::cout << i << std::endl;
+
         for (std::shared_ptr<Constraint> cons : *prio) {
             if (!cons->isOneway()) {
                 violations += cons->updateViolation();
             }
         }
     }
+    evaluation.at(1) = violations;
     if (violations != 0) {
-        std::cout << "Initial solution not feasible? violations: " << violations << std::endl;
-        numberOfViolations = violations;
+        std::cout << "Final solution not feasible? violations: " << violations << std::endl;
         sleep(2);
-    } else {
-        assert(violations == 0);
-        numberOfViolations = violations;
     }
-}
-
-void State::initializeObjective() {
-    int violations = 0;
-    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
-    for (std::shared_ptr < Constraint> obj : *model->getConstraints().at(0)) {
-
-        violations += obj->setDeltaViolationDegree();
-        obj->updateViolationDegree();
+    // setting objective value
+    int value = 0;
+    for (invariant invar : model->getObjectiveInvariant()) {
+        value += invar->getCurrentValue();
     }
-    solutionValue = violations;
-    std::cout << "Initial solution value: " << violations << std::endl;
-    //        return violations;
-
-}
-
-void State::saveSolution() {
-    solutionValue = getObjectiveValue();
-
-    //     for (int i = 0; i < model->getIntegerVariables()->size(); i++) {
-    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
-
-
-        solution.at(iv->getID()) = iv->getCurrentValue();
-
-    }
-
-
-}
-
-std::vector<int>& State::getSolution() {
-    return solution;
-}
-
-int State::getSolutionValue() {
-    return solutionValue;
-}
-
-void State::setSolution() {
-    //
-    //    // setting invariants
-    //
-    //    //    for (unsigned i = 0; i < solution->size(); i++) {
-    //    for (IntegerVariable* iv : model->getAllVariables()) {
-    //
-    //        //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
-    //        for (unsigned j = 0; j < iv->getUpdateVector().size(); j++) { // FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //            updateType invariant = iv->getUpdateVector().at(j);
-    //            invariant->addChange(iv->getID(), solution.at(iv->getID()) - iv->getCurrentValue());
-    //        }
-    //    }
-    //    //    for (unsigned i = 0; i < model->getInvariants()->size(); i++) {
-    //    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
-    //        invar->calculateDeltaValue();
-    //        invar->updateValue();
-    //        //        model->getInvariants()->at(i)->calculateDeltaValue();
-    //        //        model->getInvariants()->at(i)->updateValue();
-    //    }
-    //    // Setting constraints
-    //    int violations = 0;
-    //    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-    //        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraintsWithPriority(i);
-    //        //        for (unsigned j = 0; j < prio->size(); j++) {
-    //        for (std::shared_ptr<Constraint> cons : *prio) {
-    //            violations += cons->updateViolation();
-    //        }
-    //    }
-    //    if (violations != 0) {
-    //        std::cout << "Final solution not feasible? violations: " << violations << std::endl;
-    //        sleep(2);
-    //    }
-    //    // setting objective value
-    //    violations = 0;
-    //    //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
+    //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
     //    for (std::shared_ptr<Constraint> obj : *model->getConstraints().at(0)) {
-    //        violations += obj->updateViolationDegree();
+    //        value += obj->updateViolationDegree();
     //        //        violations += getConstraintsWithPriority(0)->at(i)->updateViolationDegree();
     //    }
-    //    std::cout << "Final solution " << violations << " (" << solutionValue << ")" << std::endl;
-    //    solutionValue = violations;
+    std::cout << "Final solution " << value << " (" << violations << ")" << std::endl;
+    evaluation.at(0) = value;
 
 }
+/// Test all invariants, constraints and obj funcs according to their test() 
 
 bool State::recalculateAll() {
+    debug;
     //    std::cout << Invariants->at(0)->getUsedInConstraint() << std::endl;
     //    std::cout << "lhs " << Invariants->at(0)->getCurrentValue() << std::endl;
     //    for(int i = 0; i < numberOfVariables; i++ ){
@@ -286,13 +193,13 @@ bool State::recalculateAll() {
         }
     }
     //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
-    for (std::shared_ptr<Constraint> obj : *model->getConstraintsWithPriority(0)) {
-
-        //        std::shared_ptr<Constraint> obj = getConstraintsWithPriority(0)->at(i);
-        if (!obj->testObj()) {
-            success = false;
-        }
-    }
+    //    for (std::shared_ptr<Constraint> obj : *model->getConstraintsWithPriority(0)) {
+    //
+    //        //        std::shared_ptr<Constraint> obj = getConstraintsWithPriority(0)->at(i);
+    //        if (!obj->testObj()) {
+    //            success = false;
+    //        }
+    //    }
     return success;
 }
 
@@ -308,13 +215,16 @@ bool State::recalculateAll() {
 //    return mask->at(i);
 //}
 
-int State::getObjectiveValue() {
-    int value = 0;
-    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
-    for (std::shared_ptr < Constraint> obj : *(model->getConstraints().at(0))) {
 
-        value += obj->getViolationDegree();
-    }
+/// Returns the sum of obj functions violation Degree (They are implemented as constraints still)
 
-    return value;
-}
+//int State::getObjectiveValue() {
+//    int value = 0;
+//    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
+//    for (invariant invar : model->getObjectiveInvariant()) {
+//
+//        value += invar->getCurrentValue();
+//    }
+//    //    std::cout << value << std::endl;
+//    return value;
+//}

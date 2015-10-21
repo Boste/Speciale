@@ -4,7 +4,8 @@
 #include "Constants.hpp"
 #include <unordered_map>
 #include "IntegerVariable.hpp"
-#include "Invariant.hpp" 
+#include "Invariant.hpp"
+#include "DependencyDigraph.hpp" 
 //#include "DependencyDigraph.hpp"
 //#include <utility>
 //struct elem {
@@ -21,6 +22,7 @@ protected:
     //    double oldValue = 0;
 //    std::vector<std::pair<int, int>> VariableChange;
     std::vector<int> VariableChange;
+    std::shared_ptr<DependencyDigraph> DDG;
 
     
 public:
@@ -28,7 +30,7 @@ public:
 //    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id);
 //    Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int,coefType> map, unsigned id);
 //    Sum(std::unordered_map<int,coefType> map, unsigned id);
-    Sum(std::unordered_map<int,coefType> map);
+    Sum(std::unordered_map<int,coefType> map,  std::shared_ptr<DependencyDigraph> DDG);
     
     
     Sum(const Sum &a);
@@ -52,7 +54,7 @@ public:
 //    void usedByObjective(int constraint, int priority);
 
     void addChange(int variableNumber, int changeInValue);
-    
+    void updateValue();
 
 
 //    void addChange(std::vector<int> variableNumbers, std::vector<int> changes);

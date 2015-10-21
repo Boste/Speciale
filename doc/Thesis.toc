@@ -5,27 +5,26 @@
 \contentsline {subsubsection}{\numberline {1.3.1}Construction Heuristics}{3}
 \contentsline {subsubsection}{\numberline {1.3.2}Local Search and Neighborhoods}{3}
 \contentsline {subsubsection}{\numberline {1.3.3}Metaheuristics}{3}
-\contentsline {section}{\numberline {2}Modeling}{3}
-\contentsline {subsection}{\numberline {2.1}Variables}{3}
-\contentsline {subsection}{\numberline {2.2}Constraints}{3}
-\contentsline {subsection}{\numberline {2.3}Invariants and One-way Constraints}{5}
-\contentsline {subsection}{\numberline {2.4}Types of Modeling {\textbf {\color {blue}(not sure this should be here)}}}{5}
-\contentsline {section}{\numberline {3}Different Solvers {\textbf {\color {blue}(properly not the best name)}}}{5}
+\contentsline {section}{\numberline {2}Modeling in CBLS}{3}
+\contentsline {subsection}{\numberline {2.1}Types of Modeling {\textbf {\color {blue}(not sure this should be here)}}}{3}
+\contentsline {subsection}{\numberline {2.2}Variables}{3}
+\contentsline {subsection}{\numberline {2.3}Constraints}{3}
+\contentsline {subsection}{\numberline {2.4}Considered Constriants {\textbf {\color {blue}(Not sure about the title and not finished yet)}}}{4}
+\contentsline {subsection}{\numberline {2.5}Invariants and One-way Constraints}{5}
+\contentsline {section}{\numberline {3}Previous Work}{5}
 \contentsline {subsection}{\numberline {3.1}Comet}{5}
 \contentsline {subsection}{\numberline {3.2}Gecode}{5}
 \contentsline {subsection}{\numberline {3.3}LocalSolver}{5}
 \contentsline {subsection}{\numberline {3.4}OscaR}{5}
-\contentsline {subsection}{\numberline {3.5}{\textbf {\color {blue}(This solver)}} Constraint Based Local Search with Limitations}{5}
 \contentsline {section}{\numberline {4}Preprocessing and Simplification}{5}
-\contentsline {subsection}{\numberline {4.1}Gecode Engine}{5}
-\contentsline {subsubsection}{\numberline {4.1.1}Relaxation}{5}
+\contentsline {subsection}{\numberline {4.1}Domain Reduction}{5}
 \contentsline {subsection}{\numberline {4.2}Initial Solution}{5}
 \contentsline {section}{\numberline {5}Structuring Local Search Model}{5}
-\contentsline {subsection}{\numberline {5.1}Simplification}{6}
+\contentsline {subsection}{\numberline {5.1}Simplification}{5}
 \contentsline {subsection}{\numberline {5.2}Dependency Digraph}{8}
 \contentsline {section}{\numberline {6}Local Search Engine}{8}
 \contentsline {subsection}{\numberline {6.1}Neighborhoods}{8}
-\contentsline {subsubsection}{\numberline {6.1.1}Moves}{8}
+\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{8}
 \contentsline {subsection}{\numberline {6.2}Metaheuristics}{8}
 \contentsline {section}{\numberline {7}Tests}{8}
 \contentsline {section}{\numberline {8}Results}{8}

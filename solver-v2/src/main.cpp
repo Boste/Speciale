@@ -90,6 +90,7 @@ int main(int argc, char* argv[]) {
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
     //    delete test;  
+    
     BPSolver* userModel = new BPSolver(input);
 
 
@@ -124,7 +125,7 @@ int main(int argc, char* argv[]) {
 
     //    userModel->initializeLS();
     userModel->optimizeSolution(time);
-    std::cout << userModel->getInitialValue() << " "; // value of solution gecode found
+//    std::cout << userModel->getInitial() << " "; // value of solution gecode found
     std::cout << iniTime << " "; // time for initializing problem 
     std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 

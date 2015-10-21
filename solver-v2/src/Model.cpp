@@ -66,7 +66,7 @@ void Model::addBinaryVariable(int lb, int ub) {
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
-//    binaryVariables.push_back(v);
+    //    binaryVariables.push_back(v);
 
 }
 
@@ -99,7 +99,7 @@ void Model::addInvariantToDDG(invariant invar, InvariantContainer& invariants) {
 }
 
 void Model::addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants) {
-        DDG->addInvariant(invar, variables, invariants);
+    DDG->addInvariant(invar, variables, invariants);
 }
 
 void Model::addVariablesToDDG() {
@@ -115,6 +115,10 @@ void Model::createPropagationQueue() {
     DDG->createPropagationQueue();
 }
 
+std::shared_ptr<DependencyDigraph>& Model::getDDG() {
+    return DDG;
+}
+
 propagation_queue& Model::getPropagationQueue(IntegerVariable* iv) {
     assert(DDG->propagationQueueHasBeenMade());
     return DDG->getPropagationQueue(iv);
@@ -122,12 +126,14 @@ propagation_queue& Model::getPropagationQueue(IntegerVariable* iv) {
 }
 
 updateVector& Model::getUpdate(invariant invar) {
-    return DDG->getUpdate(invar);
+    return DDG->getInvariantUpdate(invar->getID());
 }
+
 updateVector& Model::getUpdate(IntegerVariable* iv) {
-    return DDG->getUpdate(iv);
+    return DDG->getVariableUpdate(iv->getID());
 }
-void Model::startUp(){
+
+void Model::startUp() {
     id = original.size();
 }
 
@@ -156,12 +162,16 @@ IntegerVariable* Model::getNonFixedBinaryVariable(int i) {
     return nonFixedBinaryVariables.at(i);
 }
 
+IntegerVariable* Model::getVariable(unsigned id) {
+    return original.at(id);
+}
+
 variableContainer& Model::getAllVariables() {
     return original;
 }
 
 InvariantContainer& Model::getInvariants() {
-    
+
     //std::vector<Invariant*>* Model::getInvariants() {
     return Invariants;
 }
@@ -171,6 +181,8 @@ InvariantContainer& Model::getInvariants() {
 void Model::addInvariant(std::shared_ptr<Invariant> invar) {
     //    std::cout <<invar.get() << std::endl;
     //    invar->changeAdd  = true;
+//    std::cout << "setting id " << id << std::endl;
+//    sleep(1);
     invar->invariantID = id++;
     Invariants.push_back(invar);
 }
@@ -202,6 +214,135 @@ constraintContainer Model::getObjectives() {
 }
 //constraintContainer& Model::getObjectives() {
 //    return Constraints.at(0);
+//}
+
+InvariantContainer& Model::getObjectiveInvariant() {
+    return objectiveInvariant;
+}
+
+void Model::addToObjectiveInvariant(invariant invar) {
+    objectiveInvariant.push_back(invar);
+}
+
+std::vector<int>& Model::getInitialEvaluation() {
+    return initialEvaluation;
+}
+
+void Model::initialize() {
+    //    std::cout << "ini cons" << std::endl;
+    std::vector<int> violations(Constraints.size());
+    for (unsigned i = 1; i < getConstraints().size(); i++) {
+        constraintContainer prio = getConstraints().at(i);
+        //        for (unsigned j = 0; j < prio->size(); j++) {
+        //        std::cout << i << std::endl;
+        for (std::shared_ptr<Constraint> cons : *prio) {
+            if (!cons->isOneway()) {
+                int change = cons->updateViolation();
+                if (change != 0) {
+                    //                    auto vars = cons->getVariables();
+                    //                    auto coeff = cons->getCoefficients();
+                    //                    assert(vars.size() == coeff.size());
+                    //                    
+                    //                    for (unsigned j = 0; j < vars.size(); j++) {
+                    //
+                    //                        if (vars.at(j)->isDef()) {
+                    //                            invariant invar = vars.at(j)->getOneway();
+                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"("<<invar->getCurrentValue()<<")" << " + ";
+                    //                        } else {
+                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"["<<vars.at(j)->getID()<<"]" << " + ";
+                    //                        }
+                    //                    }
+                    //                    std::cout << " = 1" << std::endl;
+                    //                    sleep(1);   
+                    //                    std::cout << "change " << change << " invariant id " << cons->getInvariant()->getID() << " type " << cons->getInvariant()->getType() << " " << "     ";
+                    //                    if(cons->getArgument(0) == EQ){
+                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " = " << cons->getArgument(1) << std::endl;
+                    //                    } else {
+                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " <= " << cons->getArgument(1) << std::endl;
+                    //                    }
+                }
+                violations.at(cons->getPriority()) += change;
+            }
+        }
+    }
+    //    if (violations != 0) {
+    std::cout << "Initial solution not feasible? violations: " << violations.at(1) << std::endl;
+    initialEvaluation = violations;
+    //        sleep(2);
+    //    } else {
+    //        assert(violations == 0);
+    //        initialEvaluation = violations;
+    //    }
+
+    for (invariant invar : getObjectiveInvariant()) {
+        initialEvaluation.at(0) += invar->getCurrentValue();
+    }
+    //    for (IntegerVariable* iv : getAllVariables()) {
+    //        //        if (iv->isDef()) {
+    //
+    //        //            iv->setCurrentValue(iv->getOneway()->getCurrentValue());
+    //        solution[iv->getID()] = iv->getCurrentValue();
+    //        //        } else {
+    //        //            solution.at(iv->getID()) = iv->getCurrentValue();
+    //        //        }
+    //
+    //    }
+}
+
+//void Model::initializeObjective() {
+//    for (invariant invar : getObjectiveInvariant()) {
+//        solutionValue = invar->getCurrentValue();
+//    }
+//    for (IntegerVariable* iv : getAllVariables()) {
+////        if (iv->isDef()) {
+//            
+////            iv->setCurrentValue(iv->getOneway()->getCurrentValue());
+//            solution[iv->getID()] = iv->getCurrentValue();
+////        } else {
+////            solution.at(iv->getID()) = iv->getCurrentValue();
+////        }
+//
+//    }
+//
+//    for (constraint con : *getConstraintsWithPriority(0).get()) {
+//        if (con->isOneway()) {
+//            continue;
+//        }
+//        auto coefficients = con->getCoefficients();
+//        auto variables = con->getVariables();
+//        int lhs = 0;
+//        for (IntegerVariable* iv : variables) {
+//            if (coefficients.at(iv->getID()) != 0) {
+//                std::cout << coefficients.at(iv->getID()) << "*" << iv->getCurrentValue() << " + ";
+//            }
+//            lhs += iv->getCurrentValue() * coefficients.at(iv->getID());
+//        }
+//        std::cout << " = " << lhs << std::endl;
+////        std::cout << "obj val " << con->getViolationDegree() << std::endl;
+//        invariant invar = getObjectiveInvariant().at(0);
+//        int invarVal = invar->getCurrentValue();
+//        auto rhs = con->getArgument(1);
+//        auto rel = con->getArgument(0);
+//        std::string all = std::to_string(lhs) + " " + std::to_string(rel) + " " + std::to_string(rhs) + "\n" + std::to_string(invarVal);
+//        //            if (invarVal != lhs) {
+//        std::cout << all << std::endl;
+//        std::cout << invar->getType() << " " << invar->getID() << std::endl;
+//    }
+//
+//
+//
+//    int violations = 0;
+//    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
+//    for (std::shared_ptr < Constraint> obj : *getConstraints().at(0)) {
+//
+//        //        violations += obj->getViolationDegree();
+//        obj->updateViolationDegree();
+//        violations += obj->getViolationDegree();
+//    }
+//    solutionValue = violations;
+//    std::cout << "Initial solution value: " << violations << std::endl;
+//        return violations;
+//
 //}
 
 

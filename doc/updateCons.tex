@@ -1,8 +1,8 @@
-We want all the integer variables to be defined by one-way constraints such that the search space in local search only 
-consists of binary variables. The following algorithms describe how integer variables get defined by one-way 
-constraints. \\ 
-let $Y$ be a list of integer variables and $y \in Y$. The subset of constraints $y(c) \subseteq C$ is the set 
-of constraints where integer variable $y$ has a non zero coefficient. \\ 
+We define as many variables to be one-way constraints as posible, starting with integer variables, such that the search 
+space in local search only consists of binary variables. The following algorithms describe how one-way 
+constraints a create to define a variable $x$. \\ 
+Let $X$ be a set of variables and $x \in X$. The subset of constraints $C(x) \subseteq C$ is the set 
+of constraints that applies to $x$.\\ 
 \IncMargin{1em}
 \begin{algorithm}[H]
 \SetKwData{Oneway}{oneway}
@@ -11,20 +11,20 @@ of constraints where integer variable $y$ has a non zero coefficient. \\
 \SetKwFunction{Next}{next}\SetKwFunction{Constraints}{Constraints}\SetKwFunction{Remove}{remove}
 \SetKwFunction{canBeMadeOneway}{canBeMadeOneway}
 \algdata 
-\Input{A List $Y$ of integer variables}
-%\Output{A partition of the bitmap}
+\Input{A set $X$ of variables \boste{Sorting order?}}
+\Output{A model better suited for local search}
 \BlankLine
 %\emph{special treatment of the first line}\;
-\Bool $change = true$\;
-\While{$Y \neq \emptyset$ \textbf{and} $change$}{
-  $change = false$ \;
-  \Var $y = $ \upshape next \Var in $Y$\;
-  \ForEach{\Con $c$ \upshape in $y(c)$}{
-    \Bool $flag = $ \canBeMadeOneway{c,y}\;  
+\Bool $change = $ \true\;
+\While{$X \neq \emptyset$ \textbf{and} $change$}{
+  $change = $\false \;
+  \upshape select \Var $x$ \upshape from $X$\;
+  \ForEach{\Con $c$ \upshape in $C(x)$}{
+    \Bool $flag = $ \canBeMadeOneway{c,x}\;  
     \If{$flag$}{
-      \makeOneway{c,y}\;
-      Remove $y$ from $Y$\;
-      $change = true$\;
+      \makeOneway{c,x}\;
+      Remove $x$ from $X$\;
+      $change = \true$\;
       \bre\;
     }
   }
@@ -32,13 +32,13 @@ of constraints where integer variable $y$ has a non zero coefficient. \\
 \caption{Defining integer variables by one-way constraints}\label{algo_defintvar}
 \end{algorithm}\DecMargin{1em}
 \noindent
-The algorithm try to make all integer variables one-way. It uses two other algorithms 
-\canBeMadeOneway{c,y}\ref{algo_checkoneway} and \makeOneway{c,y}\ref{algo_makeoneway}. The first algorithm check if the 
-\cons $c$ can be used to define \var $y$ and the second algorithm transforms $c$ into a one-way constraint defining 
-$y$. \boste{Need complexity arguments} \\ 
-The coefficients of the variables in constraint $c$ are denoted $A(c)$ and the coefficients of variables in the 
-objective function $f(\vec{y}) \in F$ denoted as $A(f(y))$.  \boste{Maybe call it evalutation functions} Then the 
-coefficent of variable $y$ in constriant $c$ is $A(c,y)$. \\  
+The algorithm tries to make all integer variables one-way. It uses two other algorithms 
+\canBeMadeOneway{c,x} and \makeOneway{c,x}. The first algorithm checks if the 
+\cons $c$ can be used to define \var $x$ and the second algorithm transforms $c$ into a one-way constraint defining 
+$x$. \boste{Need complexity arguments} \\ 
+The coefficient of a variable $x_j$ in constraint $c_i$ is denoted $a_{ij}$. Let $\mathcal{F} = \{f_1,f_2,\dots ,\f_k$ 
+be the family of objective functions and the coefficient of variable $x_j$ in $f_k$ be $a_{kj}$. \boste{Maybe call it 
+evalutation functions. Does not make sense since $a_{34}$ referes both to constraint and obj. func} 		 \\  
 
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -46,19 +46,22 @@ coefficent of variable $y$ in constriant $c$ is $A(c,y)$. \\
 \SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
 \SetKwFunction{objcoeff}{objectiveCoefficients}
 \algdata
-\Input{\Con $c$ and \Var $y$}
+\Input{\Con $c$ and \Var $x$}
 \Output{Boolean}
 \BlankLine
-\If{c \upshape defines a oneway constraint}{\Return{false}}
-\If{\upshape Number of integer variables not defined $> 1$}{\Return{false}}
-\If{\relation{c} == Equal}{\Return{true}}
+\If{c \upshape defines a oneway constraint}{\Return{} \false}
+\If{\upshape Number of integer variables not defined $> 1$}{\Return{} \false}
+\If{\relation{c} == Equal}{\Return{} \true}
 %\int coeff = \coeff{c,v}\;
 %\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{
-\ForEach{a \upshape in $A(f(y))$ }{
-\If{$A(c,y) \cdot a > 0$}{\Return{false}}}
-\Return{true}\;
-
- \caption{Test if a constraint $c$ can define a variable $y$ } \label{algo_checkoneway}
+\ForEach{a \upshape in $A(f(x))$ }{
+  \If{$A(c,x) \cdot a > 0$}{
+    \Return{} \false
+  }
+}
+\Return{} \true\;
+ \caption{canBeMadeOneway(\textsf{Constraint} c, \textsf{Variable} x)} \label{algo_checkoneway}
+% \caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
 \end{algorithm}
 \DecMargin{1em}
 The variables that a constraint $c$ applies to is the scope $V(c)$. The constraints are of the type \class{Linear} and 
@@ -66,12 +69,12 @@ a constraint $c$ have a right hand side $B(c)$. \\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \algdata
-\Input{\Con $c$ and \Var $y$}
+\Input{\Con $c$ and \Var $x$}
 \Output{An Invariant}
 \BlankLine
-\int $coef = A(c,y)$\;
-$A(c) = A(c) \backslash \{A(c,y)\}$\;
-$V(c) = V(c) \backslash \{y\}$\;
+\int $coef = A(c,x)$\;
+$A(c) = A(c) \backslash \{A(c,x)\}$\;
+$V(c) = V(c) \backslash \{x\}$\;
 \ForEach{$A(c,v)$ \upshape in $A(c)$}{
   $A(c,v) = A(c,v) \cdot \frac{-1}{coef}$
 }
@@ -84,7 +87,7 @@ $V(c) = V(c) \backslash \{y\}$\;
   \Return{\Max{inv,b}}
 }
 
- \caption{Make one-way constraint from $c$ defining variable $y$ } \label{algo_makeoneway}
+ \caption{Make one-way constraint from $c$ defining variable $x$ } \label{algo_makeoneway}
 \end{algorithm}\DecMargin{1em}
 
 
@@ -106,11 +109,11 @@ $V(c) = V(c) \backslash \{y\}$\;
 %	  \STATE{$Q.psuhback($var$)$}
 %	  \STATE{\Break }
 %	\ELSE
-%	\STATE{change = \false}
+%	\STATE{change = \\false}
 %	\ENDIF
 %      \ENDFOR
 %    \ENDFOR
-%   % \STATE{layer$++$}
+%   % \STATE{laxer$++$}
 %%{$j\leftarrow 1$ \TO $i-1$}
 %  \ENDWHILE
 % \end{algorithmic}
@@ -123,17 +126,17 @@ $V(c) = V(c) \backslash \{y\}$\;
 % \caption{\bool \method{canBeMadeOneway}(\var \text{var}, \cons cons) \qquad O$(V_{mav} + $O$($\method{makeOneway}$))$}
 % \begin{algorithmic}\label{updateGraph1}
 % \IF{cons.isOneway()}
-%  \RETURN \false
+%  \RETURN \\false
 %  \ENDIF
 % \STATE{\Int notDefined = 0} 
 % \FOR { \var v in cons.getVariables}
 % \IF{v.isInteger()}
-%  \IF{!v.isDefinedByOneway}
+%  \IF{!v.isDefinedBxOneway}
 %  \STATE{notDefined++}
 %  \ENDIF
 %  \ENDIF
 %  \IF{notDefined $> 1$}
-%    \RETURN \false  
+%    \RETURN \\false  
 % \ENDIF
 % \ENDFOR
 % \STATE{\Int coef = var.getCoefficient(cons)}
@@ -143,7 +146,7 @@ $V(c) = V(c) \backslash \{y\}$\;
 %    \STATE{\method{makeOneway}(\var var, \cons cons)}
 %    \RETURN \true
 % \ENDIF
-% \RETURN \false
+% \RETURN \\false
 % \end{algorithmic}
 %\end{algorithm}
 
@@ -160,7 +163,7 @@ $V(c) = V(c) \backslash \{y\}$\;
 % \ENDIF
 % \STATE{\invar invar$(variables, coefficients)$}
 % \FOR{\var v in variables}
-%  \IF{v.isDefinedByOneway}
+%  \IF{v.isDefinedBxOneway}
 %    \STATE{\invar inv = v.oneway}
 %    \STATE{inv.updateList.pushback(invar)}
 %  \ELSE
@@ -169,7 +172,7 @@ $V(c) = V(c) \backslash \{y\}$\;
 %   \ENDFOR
 %   \STATE{cons.isOneway = \true }
 %   \STATE{cons.defines = invar }
-%   \STATE{var.setDefinedBy(invar,cons)}
+%   \STATE{var.setDefinedBx(invar,cons)}
 %   \STATE{model.add(invar)}
 %   \STATE{invar.currentvalue = -cons.getArgument(1)} 
 % \end{algorithmic}

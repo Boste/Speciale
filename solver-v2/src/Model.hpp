@@ -10,7 +10,8 @@
 #define	MODEL_HPP
 
 class Model {
-    //    friend class LSSpace;
+        friend class GeneralSolver;
+        
 private:
     /// All variables given by user
     variableContainer original;
@@ -29,6 +30,7 @@ private:
     //    std::vector<Invariant*>* Invariants;
     // All constraints posted
     allConstraints Constraints;
+    InvariantContainer objectiveInvariant;
     /// All Constraints after some has been made oneway (oneway is not included, oneway is invariants)
     //    allConstraints Constraints;
     std::vector<IntegerVariable*> mask;
@@ -43,9 +45,10 @@ private:
     unsigned id;
 public:
     /// Should be moved to state
-
-    int initialValue;
-    std::vector<int> test;
+    std::vector<int> initialEvaluation;
+//    int initialValue;
+//    unsigned initialViolations;
+//    std::vector<int> test;
     //    unsigned numberOfLayers = 0;
     //    int numberOfViolations;
 
@@ -85,7 +88,7 @@ public:
     IntegerVariable* getMaskAt(int i);
     std::vector<IntegerVariable*>& getMask();
     void shuffleMask();
-
+    std::shared_ptr<DependencyDigraph>& getDDG();
 
     // Was used aroung line 382 GS. Creating non oneway invariants
     void addInvariantToDDG(invariant invar, variableContainer& variables);
@@ -105,6 +108,7 @@ public:
     std::list<IntegerVariable*>& getIntegerVariables();
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     variableContainer& getNonFixedBinaryVariables();
+    IntegerVariable* getVariable(unsigned id);
     variableContainer& getAllVariables();
     void nonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
 
@@ -125,16 +129,11 @@ public:
     //    int getObjectiveValue();
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
     void updateIntegerVariable(int index, Gecode::IntVar& variable);
-    //    int getNumberOfVariables();
-    //        return IntVarVector->size();
-    ////    }
-    //    void saveSolution();
-    //    std::vector<int>* getSolution();
-    //    int getSolutionValue();
-    //    void setSolution();
-    //    bool recalculateAll();
-    //        int maskAt(int i);
-
+    std::vector<int>& getInitialEvaluation();
+    InvariantContainer& getObjectiveInvariant();
+    void addToObjectiveInvariant(invariant invar);
+    void initialize();
+    
 
 
 };

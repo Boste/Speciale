@@ -1,4 +1,4 @@
-#include "Model.hpp"
+//#include "Model.hpp"
 #include "IntegerVariable.hpp"
 
 #ifndef MOVE_HPP
@@ -14,6 +14,7 @@ protected:
     //    std::vector<int> newValue;
     //    std::vector<int> deltaValue;
 
+    std::vector<int> deltaVector;
 
 
 public:
@@ -24,13 +25,31 @@ public:
     IntegerVariable* third;
     int deltaValueThird;
     int moveType;
-    
-    
+
+//    void updateDelta(std::vector<int>& delta) {
+//        assert(deltaChanges.size() == delta.size());
+//        for (unsigned i = 0; i < delta.size(); i++) {
+//            deltaChanges[i] = delta[i];
+//        }
+//    }
+
+    /// Set size of delta vector;
+    void setDeltaChangeSize(unsigned size) {
+        for (unsigned i = deltaVector.size(); i < size; i++) {
+            deltaVector.push_back(0);
+        }
+    }
+
+    /// Return a vector of changes (obj, violations1, violations2, ..) by reference
+    std::vector<int>& getDeltaVector() {
+        return deltaVector;
+    }
 
     Move() :
     first(NULL), deltaValueFirst(0), second(NULL), deltaValueSecond(0), third(NULL), deltaValueThird(0), moveType(0) {
-        
+
     }
+
     Move(IntegerVariable* var1, int delta1, int type) :
     first(var1), deltaValueFirst(delta1), second(NULL), deltaValueSecond(0), third(NULL), deltaValueThird(0), moveType(type) {
         assert(type < 4);
@@ -52,14 +71,15 @@ public:
         assert(var2 != var3);
         assert(var1 != var3);
     }
-    void flip(){
+
+    void flip() {
         assert(moveType == FLIP);
-        deltaValueFirst = 1-first->getCurrentValue()-first->getCurrentValue();
+        deltaValueFirst = 1 - first->getCurrentValue() - first->getCurrentValue();
     }
 
     ~Move() {
         first = NULL;
-        second=NULL;
+        second = NULL;
         third = NULL;
         //        delete &variables;
         //        delete &deltaValue;
@@ -96,7 +116,8 @@ public:
         }
         return *this;
     }
-    void copy(Move* mv){
+
+    void copy(Move* mv) {
         if (this != mv) {
             this->first = mv->first;
             this->second = mv->second;
@@ -105,8 +126,16 @@ public:
             this->deltaValueSecond = mv->deltaValueSecond;
             this->deltaValueThird = mv->deltaValueThird;
             this->moveType = mv->moveType;
+//            std::cout << "copy move ";
+            for (unsigned i = 0; i < mv->deltaVector.size(); i++) {
+
+                    this->deltaVector[i] = mv->deltaVector[i];
+//                    std::cout << deltaChanges[i] << " ";
+                
+            }
+//            std::cout << std::endl; 
         }
-    } 
+    }
 
     //    std::vector<IntegerVariable*>* getVariables() {
     //        return &variables;

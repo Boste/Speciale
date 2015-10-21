@@ -1,16 +1,20 @@
 //#include <../../../gecode/release-4.3.3/gecode/int.hh>
-#include <gecode/int.hh>
+//#include <gecode/int.hh>
 //#include "../include/Constraints.hpp"
+#include "State.hpp"
 #include "IntegerVariable.hpp"
 #include "Invariant.hpp"
 #include "Constraint.hpp"
 #include "Sum.hpp"
 #include "Linear.hpp"
+#include "Constraint.hpp"
+#include "IntegerVariable.hpp"
 #include "Model.hpp"
 #include "NeighborhoodExplorer.hpp"
 #include "Constants.hpp"
 #include <memory>
-#include "State.hpp"
+#include "Clock.hpp"
+#include "Max.hpp"
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 
@@ -23,65 +27,23 @@ private:
 //    int ObjectiveValue = 0;
     int iterations = 0;
     std::shared_ptr<Model> model;
+    std::shared_ptr<State> currentState;
+    std::shared_ptr<State> bestState;
     
 //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
     
 public:
     LSSpace(std::shared_ptr<Model> model);
     void printCurrent();
-//    int initialValue;
-    //    std::vector<IntegerVariable*> IntVarVector;
-//    std::vector<Gecode::BoolVar> BoolVarVector;
-    //    std::vector<Invariant*> Invariants;
-    //    std::vector<Constraint*> Constraints;
-    //    std::vector<Constraint*> ObjectiveFunction;
-
-    //        LSSpace(LSSpace &c) {
-    //            this->IntVarVector = c.IntVarVector;
-    //            this->BoolVarVector = c.BoolVarVector;
-    //            this->Invariants = c.Invariants;
-    //            this->Constraints = c.Constraints;
-    //            this->ObjectiveFunction = c.ObjectiveFunction;
-    //            this->Violations = c.Violations;
-    //            this->ObjectiveValue = c.ObjectiveValue;
-    //        }
-    //    
-    //        LSSpace& operator=(const LSSpace &c) {
-    //            this->IntVarVector = c.IntVarVector;
-    //            this->BoolVarVector = c.BoolVarVector;
-    //            this->Invariants = c.Invariants;
-    //            this->Constraints = c.Constraints;
-    //            this->ObjectiveFunction = c.ObjectiveFunction;
-    //            this->Violations = c.Violations;
-    //            this->ObjectiveValue = c.ObjectiveValue;
-    //            return *this;
-    //        }
-    //    
 
     ~LSSpace() {
-//        std::cout << "Destructing LSSpace" << std::endl;
-        //            delete &IntVarVector;
-//        delete &BoolVarVector;
-        //            delete &Invariants;
-        //            delete &Constraints;
-        //            delete &ObjectiveFunction;
-        //            delete &Violations;
-        //            delete &ObjectiveValue;
-//        delete  st;
+
     }
-
-
-    //        IntVarVector.at(variableNumber)->addToUpdate(invariantNumber);
-    //    }
-
-//    Model* st;
-//    std::vector<IntegerVariable*>* addIntVariablesToModel(Gecode::IntVarArray* vars);
-//    void SetValues(Gecode::IntVarArray vars);
-
-    // Not able to add obj fnc. 
-//    void linear(std::vector<int>* coefficients, vector<IntegerVariable*>* variables, int relation, int upperbound, int type);
-    void optimizeSolution(int time, std::shared_ptr<State> st);
-    void simpleMove(int variabelNr);
+    void initializeLS();
+    bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
+    void makeOneway(IntegerVariable* iv, constraint cons, int coef);
+    void optimizeSolution(int time);
+//    void simpleMove(int variabelNr);
     bool bestImprovement();
 
     // Assumes initial value is 0, hence can only be used to initialize once. 

@@ -28,7 +28,7 @@ public:
 
 private:
     //    template<typename returnType>
-    std::vector<int> calculateDeltaChange(Move* mv);
+    void calculateDeltaChange(Move* mv);
 //    std::pair<int, int> calculateDeltaChange(Move* mv, std::shared_ptr<State> st);
     void commitMove(Move* mv, std::shared_ptr<State> st);
 

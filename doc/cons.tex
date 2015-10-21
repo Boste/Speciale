@@ -1,31 +1,39 @@
-The variables will be restricted by $C$ that is a m-tuple of constraints $C= \langle 
-c_1,c_2, \dots , c_m \rangle $. The set of variables to which the constraint $c_j$ applies is called its scope and 
-is denoted $V(c_j)$ or ($X(c_j)$ and $Y(c_j)$ for the binary and integer variables respectivly). Each $c_j \in C$ is a 
-pair $\langle R_{V(c_j)}, V(c_j) \rangle $ where $ R_{V(c_j)}$ is a subset of the 
-cartesian product of the domains of the variables in $V(c_j)$ also called the relation on $c_j$. \\ 
-The Constraint Satisfaction Problem (CSP) can then be defined as a triple $\mathbb{P} = \langle V,D,C \rangle$. A 
-solution to the CSP $\mathbb{P}$ is a n-tuple $A = \langle a_1,a_2,\dots,a_n\rangle $ where $a_i \in 
-D_i$. The solution is feasible if the projection of $A$ onto $V(c_j)$ is included in $R_{V(c_j)}$ for all 
-$c_j \in C$.\\ 
-The solution of interest could be all feasible solutions $sol(P)$, any feasible solution $S$ or if there 
-exists a solution or not. \\ 
-The CSP can be expanded to a Constraint Satisfaction Optimization Problem (CSOP) with an objective function $f(S)$ 
-that evaluate the quality of the solution $S$. The task is then to find a solution $\hat{S}$ that gives minimum or 
-maximum value of $f(\hat{S})$ depending on the requirements of the problem. \\ \\ 
-While constraint programming often offers a wide selection of constraints to use, this thesis focus mostly on the 
-constraint Linear that is defined by a left hand side, a relation and a 
-right hand side, which is a constant bound $b$. The left hand side is a linear function of decision variables 
-multiplied with their coefficient. The relation between left hand side and right hand side is restricted to be one of 
-the six: less ($<$), less or equal ($\leq$), greater($>$), greater or equal($\geq$), equal ($=$), and disequal 
-($\neq$). \boste{Ikke særlig pænt, men ved ikke hvordan jeg 
-skal beskrive det ellers (Gecode har seks, MIP og IP har kun 3)}\\ 
+% \in C$ is a pair $\langle R_{X(c_j)}, X(c_j) \rangle $ where $ R_{X(c_j)}$  also 
+%called the relation on $c_j$. \\ 
+The variables will be restricted by $C$ that is a set of $m$ constraints $C= \{ 
+c_1,c_2, \dots , c_m \} $. The set of variables to which the constraint $c_j$  \boste{Drop subscript j?} applies is 
+called its \emph{scope} and 
+is denoted $X(c_j) = \{c_{i_1} ,$ $ \dots , c_{i_{|X(c_j)|}}\}$. The size of a scope $|X(c)|$ is called the 
+\emph{arity} $\alpha(c)$. The constraint $c_j$ is a subset of the cartesian product of the domains of the variables in 
+the scope $X(c_j)$ of $c_j$. $c_j \subseteq D(x_{i_1}) \times D(x_{i_2}) \times \dots \times D(x_{i_{\alpha(c_j)}})$.
+The Constraint Satisfaction Problem (CSP) can then be defined as a triple $\mathbb{P} = \langle X,D,C \rangle$. A 
+\emph{solution} to the CSP $\mathbb{P}$ is a n-tuple $\Tau = \langle \tau_1,\tau_2,\dots,\tau_n\rangle $ where $\tau_i 
+\in D_i$. The solution is feasible if $\Tau$ can be projected onto $c_j$ for all 
+$c_j \in C$. \boste{Er det helt rigtigt?}\\ 
+The questions to a CSP could be to report all feasible solutions $sol(P)$, any feasible solution $\Tau$ or if there 
+exists a solution $\Tau$ or not. \\
+The CSP $\mathbb{P}$ can be expanded to a Constraint Satisfaction Optimization Problem (CSOP) $\mathbb{P'}$ 
+with an objective function $f(\Tau)$ that evaluates the quality of the solution $\Tau$, $\mathbb{P'} = \langle 
+X,D,C,f(\Tau) \rangle$. The task is then to find a 
+solution $\hat{\Tau}$ that gives minimum or maximum value of $f(\hat{\Tau})$ depending on the requirements of the 
+problem. \\ \\ 
+\subsection{Considered Constriants \boste{Not sure about the title and not finished yet}}
+While Constraint Programming often offers a wide selection of constraints to use, this work focuses mostly on the 
+constraint \Linear that is defined by a left hand side, a relation $R$ and a 
+right hand side, which is a bound $b$. The left hand side is a linear function of decision variables 
+multiplied by coefficients. The relation $R$ between left hand side and right hand side is restricted to be one of 
+the six $R \in \{<,\leq,>,\geq,=,\neq\}$ \\
+%less ($<$), less or equal ($\leq$), greater($>$), greater or equal($\geq$), equal ($=$), and disequal 
+%($\neq$). \boste{Ikke særlig pænt, men ved ikke hvordan jeg 
+%skal beskrive det ellers (Gecode har seks, MIP og IP har kun 3)}\\ 
 A linear constraint $c$ can be described as: 
 \begin{equation}
- \sum A(c) \cdot V(c) \lesseqgtr B_c
+ \sum\limits_{x_j \in X(c)} a(x_j) \cdot x_j \;\; R \;\; b(c) \qquad R \in \{<,\leq,>,\geq,=,\neq\}%\lesseqgtr B_c
 \end{equation}
-The coefficients $A(c)$ are the coefficients of the variables in the scope of $c$. The decision variables $V(c)$ are 
-the variables that $c$ applies to. The bound $B_c$ is the bound for the left hand side in constraint $c$. \\ 
-MIP, IP and BP are restricted to use the linear constraint and the model is often written as: 
+The coefficients $A(c)$ are the coefficients of the variables in the scope of $c$. The decision variables $X(c)$ are 
+the variables that $c$ applies to. The bound $B_c$ is the bound for the left hand side in constraint $c$. \\
+\boste{Follwing should be a note about CSP is a superset of MIP,IP,BP}
+MIP, IP and BP are restricted to use the linear constraint and the model can be written as: 
 \begin{align}
  \text{Minimize } & \mathbf{c}^T\mathbf{x} \nonumber \\ 
  \text{Subject to } &\mathbf{Ax} \leq \mathbf{b} \nonumber\\

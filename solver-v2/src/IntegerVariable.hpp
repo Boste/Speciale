@@ -25,56 +25,65 @@ protected:
     VariableInConstraints constraints;
     invariant oneway;
     constraint definedByCons;
-//    propagation_queue propagationQueue;
-//    invariant definedByInvar;
-    
+    //    propagation_queue propagationQueue;
+    //    invariant definedByInvar;
+
     /// Current Value of variable
-    operator int (){
+
+    operator int () {
         return CurrentValue;
     }
-    
-    
-    
-//    bool operator <(int asd){
-//        return CurrentValue < asd;
-//    }
-//    updateVector update;
-//    Gecode::IntVarArray* ArrayPointer;
+
+
+
+    //    bool operator <(int asd){
+    //        return CurrentValue < asd;
+    //    }
+    //    updateVector update;
+    //    Gecode::IntVarArray* ArrayPointer;
     Gecode::IntVar* VariablePointer;
 
-//    void clearUpdateVector() {
-////        for(InvariantContainer invars : update){
-////            invars.clear();
-////            invars.resize(0);
-////        }
-//        
-//        update.clear();
-//        update.resize(0);
-//    }
+    //    void clearUpdateVector() {
+    ////        for(InvariantContainer invars : update){
+    ////            invars.clear();
+    ////            invars.resize(0);
+    ////        }
+    //        
+    //        update.clear();
+    //        update.resize(0);
+    //    }
 
 
 public:
     /// Only used for testing instances
     int usedIn = 0;
-    VariableInConstraints& usedInConstraints(){
+
+    VariableInConstraints& usedInConstraints() {
         return constraints;
     }
-    
-    void addToUsedInConstraints(std::shared_ptr<Constraint> constraint){
+
+    void addToUsedInConstraints(std::shared_ptr<Constraint> constraint) {
         constraints.push_back(constraint);
     }
-    invariant getOneway(){
+
+    invariant getOneway() {
         return oneway;
     }
-    void setDefinedBy(invariant invar, constraint cons){
+
+    void setDefinedBy(invariant invar, constraint cons) {
         definedByCons = cons;
         oneway = invar;
         isDefined = true;
     }
-    bool isFixed(){
+    bool isDef(){
+        return isDefined;
+    }
+
+    bool isFixed() {
         return isFix;
     }
-    void setAsFixed(){
+
+    void setAsFixed() {
         isFix = true;
     }
 
@@ -102,14 +111,14 @@ public:
         return CurrentValue;
     }
 
-//    void addToUpdate(updateType invariant) {
-////        update.push(invariant);//push(invariant);
-//        update.insert(update.end(),invariant);
-//    }
-//    
-//    updateVector& getUpdateVector() {
-//        return update;
-//    }
+    //    void addToUpdate(updateType invariant) {
+    ////        update.push(invariant);//push(invariant);
+    //        update.insert(update.end(),invariant);
+    //    }
+    //    
+    //    updateVector& getUpdateVector() {
+    //        return update;
+    //    }
 
     unsigned getID() {
         return vectorID;
@@ -123,9 +132,9 @@ public:
         VariablePointer = &gecodeVar;
     }
 
-//    Gecode::IntVarArray* getArrayPointer() {
-//        return ArrayPointer;
-//    }
+    //    Gecode::IntVarArray* getArrayPointer() {
+    //        return ArrayPointer;
+    //    }
 
     int getLowerBound() {
         return lowerBound;
@@ -134,14 +143,15 @@ public:
     int getUpperBound() {
         return upperBound;
     }
-//    propagation_queue& getPropagationQueue(){
-//        return propagationQueue;
-//    }
-//    void addToPropagationQueue(invariant& invar){
-////        propagationQueue.push(invar);
-//        propagationQueue.insert(invar);
-//       
-//    }
+    //    propagation_queue& getPropagationQueue(){
+    //        return propagationQueue;
+    //    }
+    //    void addToPropagationQueue(invariant& invar){
+    ////        propagationQueue.push(invar);
+    //        propagationQueue.insert(invar);
+    //       
+    //    }
+
     ~IntegerVariable() {
         //        delete VariablePointer;
 

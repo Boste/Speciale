@@ -9,9 +9,11 @@ class Max : public Invariant {
 public:
 
     //    Max(T1 first, T2 sec, unsigned id);
-    Max(IntegerVariable* first, int sec, unsigned variableID, std::shared_ptr<DependencyDigraph> DDG);
-    Max(invariant first, int sec, unsigned id, std::shared_ptr<DependencyDigraph> DDG);
-    //    Max(invariant first, int sec, int variableID);
+    //    Max(IntegerVariable* first, int sec, unsigned variableID, std::shared_ptr<DependencyDigraph> DDG);
+    Max(IntegerVariable* first, int sec, unsigned variableID);
+    //    Max(invariant first, int sec, unsigned id, std::shared_ptr<DependencyDigraph> DDG);
+//    Max(invariant first, int sec, unsigned variableID);
+    Max(invariant first, int sec, unsigned variableID);
     //    Max(IntegerVariable* var, int integer);
     //    Max(invariant invar, int integer);
     //    Max(const Max& orig);
@@ -28,8 +30,9 @@ private:
     std::vector<int> VariableChange;
     int second;
     int variableValue;
+    invariant invar;
     int firstChange;
-    std::shared_ptr<DependencyDigraph> DDG;
+//    std::shared_ptr<DependencyDigraph> DDG;
 
 
 

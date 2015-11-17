@@ -1,12 +1,12 @@
 Once an initial solution to the problem has been found by Gecode the model is transformed to create a model better 
 suited for local search. \boste{talk briefly about DDG and propagation queue (what are they used for)} procedure can 
 be split in several steps before the local search can begin. 
-\begin{enumerate}
- \item Define variables by one-way constraints
- \item Define invariants for the remaining constraints
+\begin{itemize}
+  \item Define variables by one-way constraints
+ \item Create invariants for the remaining constraints
  \item Create a dependency directed graph for variables and invariants
- \item Create propagation queue for variables
- \item Initialize the invariants
+ \item Create propagation queue for all non fixed variables
+%\item Initialize the invariants
 % \item Initialize the constraints
 % \item Initialize the objective function
-\end{enumerate}
+\end{itemize}

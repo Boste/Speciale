@@ -1,25 +1,22 @@
 
 
-\subsection{Comet}
 % Figur om opbygning af comet som i bogen
-Comet is an object orientated programming language that uses the modeling language of constraint programming and uses a 
+Comet is an object oriented programming language that uses the modeling language of constraint programming and uses a 
 general purpose local search solver. Comet is now an abandoned project but the architecture used is still of interest. 
 The core of the language is the incremental store that contains various incremental objects fx. incremental variables. 
 Invariants, also called one-way constraints, are expressions that are defined by incremental variables and a relation of 
 those. An incremental variable $v$ can for instance be expressed as a sum of other variables. The variable $v$ will 
-automatically be updated if one of the other variables changes value. The order in which the invariants gets updated can 
-be implemented to achieve higher performance. \\ \medskip
+automatically be updated if one of the other variables changes value. The order in which the invariants are updated can 
+be implemented to achieve higher performance.  \medskip \\
 One layer above the invariants is the differentiable objects that can use the invariants and the incremental objects. 
 Both constraints and objective are implemented as differentiable objects. They are called differentiable 
 because it is possible to compute how the change of a variable value will affect the differentiable object's values. 
-All 
-constraints are implemented using the same interface, that means that all constraint have some methods in common. These 
-method is defined as invariants hence they are always updated when a change is made to one of their variables. This is 
-especially useful when combining multiple constraints in a constraint system, that also implements the constraint 
-interface. The constraints can be combined in a constraint system that then uses the method from the individual 
-constraints to calculated its own methods. Just like the \interface{constraint} interface there exist a 
-\interface{objective} interface. Both 
-will be described further in section \ref{difObj}. \\ \medskip
+All constraints are implemented using the same interface, that means that all constraint have some methods in common. 
+These method is defined as invariants hence they are always updated when a change is made to one of their variables. 
+This is especially useful when combining multiple constraints in a constraint system, that also implements the 
+constraint interface. The constraints can be combined in a constraint system that then uses the method from the 
+individual constraints to calculated its own methods. Just like the \interface{constraint} interface there exist a 
+\interface{objective} interface. Both will be described further in section \ref{difObj}. \medskip \\ 
 The next layer is where the user models their problem and use the objects mentioned above. Several search method are 
 implemented that can be used. The benefit of this architecture is the user can focus on modeling the problem 
 efficiently on a high level and thereby avoid small implementation mistakes. Using constraint programming inspired 

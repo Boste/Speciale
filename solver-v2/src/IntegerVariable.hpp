@@ -4,6 +4,8 @@
 #include <gecode/int.hh>
 
 #include "Constants.hpp"
+#include "Constraint.hpp"
+//#include "BP_Data.hpp"
 //#include "../include/constraints/invariant.hpp"
 
 //class Constraint;
@@ -25,8 +27,9 @@ protected:
     VariableInConstraints constraints;
     invariant oneway;
     constraint definedByCons;
+    unsigned searchPrio = 0;
     //    propagation_queue propagationQueue;
-    //    invariant definedByInvar;
+    //    invariant definedByInvar; 
 
     /// Current Value of variable
 
@@ -56,12 +59,17 @@ protected:
 
 public:
     /// Only used for testing instances
-    int usedIn = 0;
+    unsigned usedIn = 0;
 
     VariableInConstraints& usedInConstraints() {
+        usedIn++;
         return constraints;
     }
-
+    unsigned getSerachPriority(){
+        return searchPrio;
+    }
+    
+    /// Just used for testing but the counter for constraints is used.
     void addToUsedInConstraints(std::shared_ptr<Constraint> constraint) {
         constraints.push_back(constraint);
     }
@@ -75,7 +83,8 @@ public:
         oneway = invar;
         isDefined = true;
     }
-    bool isDef(){
+
+    bool isDef() {
         return isDefined;
     }
 
@@ -123,6 +132,10 @@ public:
     unsigned getID() {
         return vectorID;
     }
+    void undefine(){
+        isDefined = false;
+        definedByCons->isOneway(false);
+    }
 
     Gecode::IntVar* getVariablePointer() {
         return VariablePointer;
@@ -155,6 +168,26 @@ public:
     ~IntegerVariable() {
         //        delete VariablePointer;
 
+    }
+
+    
+    /// Sort in order of decreasing domain
+    struct SortGreater {
+
+        bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
+                //            std::cout << "sorter" << std::endl;
+            int ds1 = var1->upperBound-var1->lowerBound;
+            int ds2 = var2->upperBound-var2->lowerBound;
+            if(ds1==ds2){
+                return (var1->constraints.size() > var2->constraints.size());
+            }
+            return (var1->upperBound-var1->lowerBound  > var2->upperBound-var2->lowerBound);
+        }
+    };
+    
+    /// Just for testing
+    unsigned numberOfConstraints(){
+        return constraints.size();
     }
 
     //    IntegerVariable(const IntegerVariable& orig);

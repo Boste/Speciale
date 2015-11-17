@@ -37,7 +37,7 @@ public:
     void saveSolution();
     std::vector<int>& getSolution();
     int getSolutionValue();
-    void setSolution();
+//    void setSolution();
     bool recalculateAll();
     bool isFeasible();
     //    int maskAt(int i);

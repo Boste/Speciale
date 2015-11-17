@@ -4,7 +4,7 @@
 #include "Sum.hpp"
 #include "Linear.hpp"
 #include "Constraint.hpp"
-#include <boost/timer.hpp>
+//#include <boost/timer.hpp>
 #include <ctime>
 #include <math.h>
 

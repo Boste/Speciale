@@ -4,6 +4,7 @@
 #include <memory>
 #include <functional>
 #include "Constants.hpp"
+#include <unordered_map>
 //#include "IntegerVariable.hpp"
 
 class Constraint {
@@ -82,18 +83,6 @@ public:
         return variables;
     }
 
-    //    bool gotOneway() {
-    //        return containsOneway;
-    //    }
-
-    //    void gotOneway(bool set) {
-    //        containsOneway = set;
-    //    }
-
-//    int getViolationDegree() {
-//        return ViolationDegree;
-//    }
-
     int getArgument(int i) {
         return arguments[i];
     }
@@ -112,7 +101,7 @@ public:
     }
 
     unsigned getScopeSize() {
-        return scopeSize;
+        return variables.size();
     }
     //    std::shared_ptr<Invariant> getInvariant(int i){
     //        return invariants[i];
@@ -124,6 +113,14 @@ public:
             //            std::cout << "sorter" << std::endl;
 
             return (cons1->getScopeSize() > cons2->getScopeSize());
+        }
+    };
+    struct Sortlower {
+
+        bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
+            //            std::cout << "sorter" << std::endl;
+
+            return (cons1->getScopeSize() < cons2->getScopeSize());
         }
     };
     //    struct SortGreater {
@@ -145,6 +142,7 @@ public:
 //        return (invariant->getVariables().size() > cons.getInvariant()->getVariables().size());
 //    }
 
+//    virtual int setDeltaViolation();
     virtual int setDeltaViolation() {
         std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
         sleep(1);

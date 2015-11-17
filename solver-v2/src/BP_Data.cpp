@@ -16,10 +16,10 @@ BP_Input::BP_Input(string file_name) {
 
 
     CoinMpsIO t;
-   
+
     //    std::cout << "Can coin read?" << std::endl;
     t.readMps(file_name.c_str());
-//        std::cout << "Coin have read" << std::endl;
+    //        std::cout << "Coin have read" << std::endl;
     ncons = t.getNumRows();
     nvars = t.getNumCols();
     vars.resize(nvars);
@@ -64,18 +64,19 @@ BP_Input::BP_Input(string file_name) {
 
         tmp.lb = t.getColLower()[j];
         tmp.ub = t.getColUpper()[j];
-        if(tmp.ub > std::numeric_limits<int>::max()-1){
-            tmp.ub = std::numeric_limits<int>::max()-1;
+
+        if (tmp.ub > std::numeric_limits<int>::max() - 1) {
+            tmp.ub = std::numeric_limits<int>::max() - 1;
         }
-//        std::cout << tmp.ub << " ";
-//        if( tmp.lb != 0 ){
-//            std::cout << tmp.lb << std::endl;
-//        }
-//        
-//        if(tmp.ub != 1){
-//            std::cout << tmp.ub << std::endl;
-//        }
-//        assert(tmp.lb >=0 && tmp.ub <=1);
+        //        std::cout << tmp.ub << " ";
+        //        if( tmp.lb != 0 ){
+        //            std::cout << tmp.lb << std::endl;
+        //        }
+        //        
+        //        if(tmp.ub != 1){
+        //            std::cout << tmp.ub << std::endl;
+        //        }
+        //        assert(tmp.lb >=0 && tmp.ub <=1);
         vars[j] = tmp;
     }
 

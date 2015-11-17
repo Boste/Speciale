@@ -15,7 +15,7 @@
 #include "GecodeSolver.hpp"
 #include "Test.hpp"
 #include "Multistop.hpp"
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
 //#include "GecodeLinear.hpp"
 
 //#include "BP_Helpers.hpp"
@@ -41,14 +41,14 @@ using namespace Gecode;
 int main(int argc, char* argv[]) {
 
 
-
+    
 
     std::vector<std::string> strs;
 
     //    string str = argv[1];
-    boost::split(strs, argv[1], boost::is_any_of("/"));
-    string name = strs.back();
-    std::cout << name << std::endl;
+//    boost::split(strs, argv[1], boost::is_any_of("/"));
+//    string name = strs.back();
+//    std::cout << name << std::endl;
     int time;
     if (argc >= 3) {
         time = std::atoi(argv[2]);
@@ -80,20 +80,17 @@ int main(int argc, char* argv[]) {
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
     //    Search::Options* so = new Gecode::Search::Options();
 
-
     // Let's start the Timer
     Support::Timer t;
     t.start();
-
     //    Script::run<MagicSquare, DFS, InstanceOptions>(opt);
     //    size_t peakSize3 = getPeakRSS();
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
     //    delete test;  
     
-    BPSolver* userModel = new BPSolver(input);
-
-
+//    BPSolver* userModel = new BPSolver(input);
+    BPSolver userModel(input);
     std::cout << "Initialize solution" << std::endl;
     //Need my own option class
 
@@ -102,7 +99,7 @@ int main(int argc, char* argv[]) {
 
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     //    GeneralSolver* GS = m->InitialSolution(so);
-    userModel->InitialSolution(TimeForGecode);
+    userModel.InitialSolution(TimeForGecode);
 
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
@@ -124,7 +121,7 @@ int main(int argc, char* argv[]) {
     //    m->printCurrent();
 
     //    userModel->initializeLS();
-    userModel->optimizeSolution(time);
+    userModel.optimizeSolution(time);
 //    std::cout << userModel->getInitial() << " "; // value of solution gecode found
     std::cout << iniTime << " "; // time for initializing problem 
     std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
@@ -140,17 +137,16 @@ int main(int argc, char* argv[]) {
     //    while (ss >> temp)
     //        array.push_back(temp);
     std::cout << getPeakRSS() / 1024 / 1024; // peak memory in mb
-    std::cout << " " << name; // Instance name
+//    std::cout << " " << name; // Instance name
     std::cout << std::endl;
-
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
-
+    std::cout << "solution, time Gecode used, total time, peak memory in mb, " << std::endl;
 
 
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
-    delete userModel;
+//    delete userModel;
     delete input;
 
     //    m->printCurrent();

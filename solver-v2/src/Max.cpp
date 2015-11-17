@@ -17,23 +17,28 @@
 ////    invariantID = id;
 //}
 
-Max::Max(IntegerVariable* var, int second, unsigned id, std::shared_ptr<DependencyDigraph> DDG) {
+//Max::Max(IntegerVariable* var, int second, unsigned id, std::shared_ptr<DependencyDigraph> DDG) {
+
+Max::Max(IntegerVariable* var, int second, unsigned id) {
     type = MAX;
     variableID = id;
     variableValue = var->getCurrentValue();
     this->second = second;
-    this->DDG = DDG;
+    //    this->DDG = DDG;
     //    VariablePointers.push_back(var);
 }
 
 //Max::Max(invariant invar, int integer, int id) {
 
-Max::Max(invariant invar, int bound, unsigned id, std::shared_ptr<DependencyDigraph> DDG) {
+//Max::Max(invariant invar, int bound, unsigned id, std::shared_ptr<DependencyDigraph> DDG) {
+
+Max::Max(invariant invar, int bound, unsigned id) {
     type = MAX;
     variableID = id;
     variableValue = invar->getCurrentValue();
     second = bound;
-    this->DDG = DDG;
+    this->invar = invar;
+    //    this->DDG = DDG;
     //    invariants.push_back(invar);
 }
 //Max::Max(const Max& orig) {
@@ -42,12 +47,13 @@ Max::Max(invariant invar, int bound, unsigned id, std::shared_ptr<DependencyDigr
 Max::~Max() {
 }
 
+
 void Max::addChange(int id, int change) {
     VariableChange.push_back(change);
-
-    if (id != -1) {
-        std::cout << "id should be -1" << std::endl;
-    }
+    
+    //    if (id != -1) {
+    //        std::cout << "id should be -1" << std::endl;
+    //    }
 
 }
 
@@ -57,10 +63,9 @@ int Max::calculateDeltaValue() {
 
     //    int tmp2 = secondValue;
     while (!VariableChange.empty()) {
-        int change = VariableChange.back();
+        firstChange += VariableChange.back();
         //        assert(change.first == T1 || change.second == T2);
         //        if (change.first == T1) {
-        firstChange += change;
         VariableChange.pop_back();
         //        } else {
         //            tmp2 += change.second;
@@ -72,24 +77,39 @@ int Max::calculateDeltaValue() {
     } else {
         DeltaValue = second - CurrentValue;
     }
-    if (DeltaValue != 0) {
-        for (updateType invar : DDG->getInvariantUpdate(this->invariantID)) {
-            invar->addChange(this->getVariableID(), DeltaValue);
-        }
-    }
+    //    if (DeltaValue != 0) {
+    //        for (updateType invar : DDG->getInvariantUpdate(this->invariantID)) {
+    //            invar->addChange(this->getVariableID(), DeltaValue);
+    //        }
+    //    }
+    assert(DeltaValue == std::max(firstChange + variableValue, second) - CurrentValue);
+    //    if(DeltaValue == -CurrentValue || DeltaValue == firstChange){
+    //        
+    //    } else {
+    //        std::cout << "DeltaValue " << DeltaValue << " currentValue " << CurrentValue << " firstChange " << firstChange << std::endl;
+    //        debug;
+    //    }
     return DeltaValue;
 }
 
 void Max::updateValue() {
     CurrentValue += DeltaValue;
-    variableValue += firstChange;
+    assert(CurrentValue >= 0);
 
-    firstChange = 0;
-    DeltaValue = 0;
+    variableValue += firstChange;
+    assert(CurrentValue == std::max(variableValue, 0));
+    assert(CurrentValue == std::max(0, invar->getCurrentValue()));
+    assert(variableValue <= CurrentValue);
+    //    firstChange = 0;
+    //    DeltaValue = 0;
 }
 
 bool Max::test() {
-    return true;
+    if (CurrentValue == std::max(0, invar->getCurrentValue())) {
+        return true;
+    } else {
+        return false;
+    }
 }
 //template<class T1, class T2>
 //Max<T1, T2>::~Max() {

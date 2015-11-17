@@ -16,37 +16,31 @@ private:
     /// All variables given by user
     variableContainer original;
     /// Binary Variables that are not fixed by preprocessing 
-    variableContainer nonFixedBinaryVariables;
-    //    variableContainer binaryVariables;
-    //    std::vector<Gecode::BoolVar> BoolVarVector;
-    /// Invariants for original model, before oneway constraints are made. 
-    //    InvariantContainer orgInvariants;
+    variableContainer nonFixedVariables;
     /// Invariants including oneway constraints but not the invariant from the constraints oneway is made
     InvariantContainer Invariants;
     //    variableContainer IntegerVariables;
     /// All integer variables in the model
-    std::list<IntegerVariable*> IntegerVariables;
-    //    std::vector<std::shared_ptr<std::pair<int, int>>> ConstraintsWithIntegerVariables;
-    //    std::vector<Invariant*>* Invariants;
-    // All constraints posted
+    std::vector<IntegerVariable*> IntegerVariables;
+    /// All constraints posted
     allConstraints Constraints;
+    /// Variables for LS
+    variableContainer LSVariables;
     InvariantContainer objectiveInvariant;
-    /// All Constraints after some has been made oneway (oneway is not included, oneway is invariants)
-    //    allConstraints Constraints;
     std::vector<IntegerVariable*> mask;
-    //    int numberOfVariables =0;;
-    //    std::vector<Constraint*>* SoftConstraints;
-    //    std::vector<Constraint*>* ObjectiveFunction;
-    //    std::vector<int>* solution;
-    //    int solutionValue;
-    //    std::vector<int>* mask;
     std::shared_ptr<DependencyDigraph> DDG = std::make_shared<DependencyDigraph>();
+    /// The search priority vectors given by user when calling search(std::vector<IntegerVarible*> variables)
+    std::vector<std::vector<IntegerVariable*>> priorityVectorsOfVariables;
     /// Only used to give invariants id
-    unsigned id;
+    unsigned id = 0;
+    std::vector<constraint> functionalConstraints;
+    
 public:
     /// Should be moved to state
     std::vector<int> initialEvaluation;
 //    int initialValue;
+    /// Test if it improves bestImprovement
+//    unsigned highestPriority = 0;
 //    unsigned initialViolations;
 //    std::vector<int> test;
     //    unsigned numberOfLayers = 0;
@@ -55,35 +49,14 @@ public:
     Model();
     Model(const Model& orig);
     ~Model();
-
-    //    std::vector<int> getTestVal(){
-    //        return test;
-    //    }
-    //    std::vector<int>& getTestRef(){
-    //        return test;
-    //    }
-    //    void fillTest(int elements){
-    //        for(int i = 0; i < elements; i++){
-    //            test.push_back(i);
-    //        }
-    //        std::cout << "test " << &test << std::endl;
-    //    }
-    //    void incTest(int nr){
-    //        test.at(nr) = nr+1;
-    //        std::cout << test.at(nr) << std::endl;
-    //    }
-
-    //        std::vector<IntegerVariable*> IntVarVector;
-    //    std::vector<Gecode::BoolVar> BoolVarVector;
-    //    std::vector<std::shared_ptr<Invariant>> Invariants;
-    //    std::vector<Constraint*> Constraints;
-    //    std::vector<Constraint*> ObjectiveFunction;
-
+    std::vector<constraint>& getFunctionalConstraints();
+    std::vector<std::vector<IntegerVariable*>>& getPriorityVectors();
+    std::vector<IntegerVariable*>& getPriorityVectorNr(unsigned i);
 
     //    IntegerVariable* addIntegerVariable( int lb, int ub);
     void startUp();
-    void addBinaryVariable(int lb, int ub);
-    void addIntegerVariable(int lb, int ub);
+    IntegerVariable* addBinaryVariable(int lb, int ub);
+    IntegerVariable* addIntegerVariable(int lb, int ub);
     //    void initializeInvariants();
     IntegerVariable* getMaskAt(int i);
     std::vector<IntegerVariable*>& getMask();
@@ -91,13 +64,13 @@ public:
     std::shared_ptr<DependencyDigraph>& getDDG();
 
     // Was used aroung line 382 GS. Creating non oneway invariants
-    void addInvariantToDDG(invariant invar, variableContainer& variables);
-    void addInvariantToDDG(invariant invar, InvariantContainer& invariants);
-    void addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants);
-    void addVariablesToDDG(variableContainer& vars);
-    /// Adds nonFixedBinaryVariables
-    void addVariablesToDDG();
-    void createPropagationQueue();
+//    void addInvariantToDDG(invariant invar, variableContainer& variables);
+//    void addInvariantToDDG(invariant invar, InvariantContainer& invariants);
+//    void addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants);
+//    void addVariablesToDDG(variableContainer& vars);
+//    /// Adds nonFixedBinaryVariables
+//    void addVariablesToDDG();
+//    void createPropagationQueue(variableContainer& vars,InvariantContainer& invars);
     propagation_queue& getPropagationQueue(IntegerVariable* iv);
     updateVector& getUpdate(IntegerVariable* iv);
     updateVector& getUpdate(invariant invar);
@@ -105,18 +78,18 @@ public:
 
     //    void initializeObjective();
     /// Returns all integer variables as a list. only used to make oneway constraints
-    std::list<IntegerVariable*>& getIntegerVariables();
+    std::vector<IntegerVariable*>& getIntegerVariables();
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
-    variableContainer& getNonFixedBinaryVariables();
+    variableContainer& getNonFixedVariables();
     IntegerVariable* getVariable(unsigned id);
     variableContainer& getAllVariables();
-    void nonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
-
+    void setNonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
+    variableContainer& getLSVariables();
     InvariantContainer& getInvariants();
     void addInvariant(std::shared_ptr<Invariant> invar);
     //    InvariantContainer& getOrgInvariants();
     //    std::vector<Invariant*>* getInvariants();
-
+    void cleanUp();
     //    std::vector<std::shared_ptr<std::pair<int, int>>>& getConstraintsWithIntegerVariables();
     //    constraintContainer& getConstraintsWithPriority(int prio);
     constraintContainer getConstraintsWithPriority(int prio);
@@ -125,7 +98,7 @@ public:
     //    std::vector<Constraint*>* getSoftConstraints();
     //    constraintContainer& getObjectives();
     constraintContainer getObjectives();
-    IntegerVariable* getNonFixedBinaryVariable(int i);
+    IntegerVariable* getNonFixedVariable(int i);
     //    int getObjectiveValue();
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
     void updateIntegerVariable(int index, Gecode::IntVar& variable);

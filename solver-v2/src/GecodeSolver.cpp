@@ -1,7 +1,5 @@
-#include <gecode/int.hh>
 
 #include "GecodeSolver.hpp"
-#include "Model.hpp"
 
 GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
     this->model = model;
@@ -12,7 +10,6 @@ GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
 
 GecodeSolver::~GecodeSolver() {
 
-    //    delete &IntVars;
 }
 
 void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound) {
@@ -131,7 +128,7 @@ Gecode::Space(share, s) {
     //        std::cout << "this is not a line " << IntVars->size() << std::endl;
     //    for (IntVar iv : IntVars) {
     //    std::cout << "Made clone " << std::endl;
-    IntVars.update(*this, share, s.IntVars);
+    AllVars.update(*this, share, s.AllVars);
 
     // remember to update your main variables!
     //		model = s.model;
@@ -140,7 +137,7 @@ Gecode::Space(share, s) {
 }
 
 void GecodeSolver::print(std::ostream & os) const {
-    for (IntVar iv : IntVars) {
+    for (IntVar iv : AllVars) {
         os << iv << ", ";
     }
     os << std::endl;
@@ -148,11 +145,11 @@ void GecodeSolver::print(std::ostream & os) const {
 
 void GecodeSolver::createArray() {
     //    std::cout << "CreateArray" << std::endl;
-    IntVars = IntVarArray(*this, tmpVars);
+    AllVars = IntVarArray(*this, tmpVars);
     std::vector<IntegerVariable*>& m = model->getAllVariables();
-    for (int i = 0; i < IntVars.size(); i++) {
+    for (int i = 0; i < AllVars.size(); i++) {
         //        assert(m->size() == IntVars.size());
-        m.at(i)->setVariablePointer(IntVars[i]);
+        m.at(i)->setVariablePointer(AllVars[i]);
 
         //            std::cout << &IntVars[i] << " ";
         //            std::cout << &tmpVars[i] << std::endl;
@@ -167,31 +164,21 @@ void GecodeSolver::createArray() {
 }
 
 void GecodeSolver::branch() {
-    //    for (int i = 0; i < IntVars.size(); i++) {
-    //        std::cout << &IntVars[i] << " " << std::endl;
-    //    }
-    //    for (int i = 0; i < tmpVars.size(); i++) {
-    //        std::cout << tmpVars[i].same(IntVars[i]) << " " << std::endl;
-    //    }
-    //    print(std::cout);
-    //    std::cout << "branch" << std::endl;
-
-    //    Gecode::IntVarArgs x(IntVars->size());
-    //    for (unsigned i = 0; i < IntVars->size(); i++) {
-    //        x[i] = IntVars[i];
-    //        std::cout << "nr " << i << " Pointer "<< &x[i] << " assigned? " << x[i].assigned() << std::endl;
-    //        std::cout << "nr " << i << " Pointer "<< IntVars->at(i) << " assigned? " <<IntVars->at(i)->assigned() << std::endl;
-    //        //        std::cout << i << " " << IntVars[i].assigned() << std::endl;
-    //    }
-    //    if (fix) {
-    //        fixVariables();
-    //        std::cout << "Should fix those variables that is fixed be preprocessing" << std::endl;
-    //    }
 
 
-    //    std::cout <<IntVars << std::endl;
+    for (std::vector<IntegerVariable*>& vector : model->getPriorityVectors()) {
+        Gecode::IntVarArgs priority;
+
+        for (IntegerVariable* iv : vector) {
+            //    for(int i = 0; i< model->getPriorityVectorNr(0).size();i++){
+            priority << *iv->getVariablePointer();
+        }
+//        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+        Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+
+    }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+    //    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //    std::cout << "branched" << std::endl;
 
 }
@@ -206,22 +193,21 @@ void GecodeSolver::fixVariables() {
         //        std::cout << "Gecode Var pointer " << iv->getVariablePointer() << " assigned? " << std::endl;
         //        std::cout << iv->getVariablePointer()->assigned() << std::endl;
         //        std::cout << "ID " << iv->getID() << std::endl;
-        if (!iv->isIntegerVariable()) {
+//        if (!iv->isIntegerVariable()) {
             if (!iv->getVariablePointer()->assigned()) {
                 preprocessed.push_back(iv);
             } else {
                 numberOfFixedVariables++;
                 iv->setAsFixed();
             }
-        } else if (iv->getVariablePointer()->assigned()) {
-            numberOfFixedVariables++;
-            iv->setAsFixed();
-
-            std::cout << "Fixed Integer variable" << std::endl;
-        }
+//        } else if (iv->getVariablePointer()->assigned()) {
+//            numberOfFixedVariables++;
+//            iv->setAsFixed();
+//            std::cout << "Fixed Integer variable" << std::endl;
+//        }
     }
     std::cout << "Number of variables fixed in preprocessing " << numberOfFixedVariables << std::endl;
-    model->nonFixedVariables(preprocessed);
+    model->setNonFixedVariables(preprocessed);
     //    delete preprocessed;
     //        for (IntegerVariable* iv : )
     //        GS->print(cout);
@@ -261,8 +247,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
         fixVariables();
     }
 
-    so->a_d = IntVars.size() - 1;
-    so->c_d = IntVars.size() - 1;
+    so->a_d = AllVars.size() - 1;
+    so->c_d = AllVars.size() - 1;
     //    this->print(std::cout);
     bool solutionFound = false;
     GecodeSolver* s;
@@ -300,7 +286,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
             //            }
             //            s->print(std::cout);            //            this->print(std::cout);
-            SetValues(s->IntVars);
+            SetValues(s->AllVars);
 
             solutionFound = true;
             std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;

@@ -128,6 +128,6 @@ typedef std::vector<invariant> InvariantContainer;
 typedef invariant updateType;
 typedef std::shared_ptr<std::vector<constraint>> constraintContainer;
 typedef std::vector<constraintContainer> allConstraints;
-
+#define print1 
 
 #endif

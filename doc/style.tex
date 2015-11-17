@@ -10,6 +10,7 @@
 \newcommand{\var}[0]{\textbf{Variable} }
 \newcommand{\cons}[0]{\textbf{Constraint} }
 \newcommand{\invar}[0]{\textbf{Invariant} }
+\newcommand{\oneway}[0]{\textbf{One-way constriant} }
 \newcommand{\bool}{\textbf{bool }}
 \newcommand{\true}{\textbf{true }}
 \newcommand{\false}{\textbf{false }}
@@ -22,4 +23,10 @@ input}\SetKwInOut{Output}{output}\SetKwData{int}{int}\DontPrintSemicolon\SetKwDa
 % Useful commands: 
 % \sum_{\substack{x_i \in X_S\\ c_i \in C_S }}     Creates a sum with multiple argument stacked underneath
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tikzstyle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{arc}= [draw,thick,->,shorten >=1pt,>=stealth'] 
+%\tikzstyle{vertex}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=10pt]
+\newcommand{\vertex}{\node[vertex]}

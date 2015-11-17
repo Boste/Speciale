@@ -4,91 +4,28 @@
 #include "Invariant.hpp"
 #include "IntegerVariable.hpp"
 #include <list>
+#include <memory>
+#include "Random.hpp"
 //#include <boost/heap/binomial_heap.hpp>
 
-struct compare_invariant : public std::binary_function<invariant, invariant, bool> {
 
-    bool operator()(const invariant invar1, const invariant invar2) const {
-        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
-        //                sleep(1);
-        return (invar1->getID() < invar2->getID());
-    }
-
-    bool operator()(invariant invar1, invariant invar2) {
-
-        //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
-        //                sleep(1);
-        return (invar1->getID() < invar2->getID());
-    }
-    //
-    //    bool operator<(const invariant invar) const {
-    //                std::cout << "used to sort1 <" << std::endl;
-    //        return (this->operator<(invar));
-    //    }
-    //
-    //    bool operator>(const invariant invar) const {
-    //                std::cout << "used to sort2 >" << std::endl;
-    //        return (this->operator>(invar));
-    //    }
-    //    bool operator>=(const invariant invar) const {
-    //                std::cout << "used to sort3 >" << std::endl;
-    //        return (this->operator>=(invar));
-    //    }
-    //    bool operator<=(const invariant invar) const {
-    //                std::cout << "used to sort4 >" << std::endl;
-    //        return (this->operator<=(invar));
-    //    }
-    //    bool operator==(const invariant invar) const {
-    //                std::cout << "used to sort5 >" << std::endl;
-    //        return (this->operator==(invar));
-    //    }
-    //    bool operator<( invariant invar)  {
-    //                std::cout << "used to sort11 <" << std::endl;
-    //        return (this->operator<(invar));
-    //    }
-    //
-    //    bool operator>( invariant invar)  {
-    //                std::cout << "used to sort12 >" << std::endl;
-    //        return (this->operator>(invar));
-    //    }
-    //    bool operator>=( invariant invar)  {
-    //                std::cout << "used to sort13 >" << std::endl;
-    //        return (this->operator>=(invar));
-    //    }
-    //    bool operator<=( invariant invar)  {
-    //                std::cout << "used to sort14 >" << std::endl;
-    //        return (this->operator<=(invar));
-    //    }
-    //    bool operator==( invariant invar)  {
-    //                std::cout << "used to sort15 >" << std::endl;
-    //        return (this->operator==(invar));
-    //    }
-};
-typedef std::set<invariant, compare_invariant> propagation_queue;
+//typedef std::list<invariant> propagation_queue;
 //typedef boost::heap::binomial_heap<invariant,boost::heap::compare<compare_invariant>> propagation_queue;
 //typedef std::set<invariant, compare_invariant> updateVector;
-typedef std::list<invariant> updateVector;
-//typedef std::vector<invariant> updateVector;
-
-struct invariantNode {
-
-    updateVector update;
-    unsigned id;
-    //    invariant invar;
-    invariant invar;
-};
+//typedef std::list<invariant> updateVector;
+typedef std::vector<invariant> updateVector;
+//typedef std::vector<std::shared_ptr<invariantNode>> updateVector;
 
 
-struct variableNode {
-
-    updateVector update;
-    propagation_queue propagationQueue;
-    unsigned id;
-    //    invariant invar;
-    IntegerVariable* iv;
-};
 
 
+struct variableNode;
+struct invariantNode;
+struct compare_invariant;
+typedef std::set<invariant, compare_invariant> propagation_queue;
+
+typedef std::vector<std::shared_ptr<variableNode>> variableNodeContainer;
+typedef std::vector<std::shared_ptr<invariantNode>> invariantNodeContainer;
 
 class DependencyDigraph {
 public:
@@ -104,14 +41,87 @@ public:
     updateVector& getVariableUpdate(unsigned varID);
     propagation_queue& getPropagationQueue(IntegerVariable* iv);
     bool propagationQueueHasBeenMade();
-    void createPropagationQueue();
+    /// Create propagation queue for each variable used in local search
+    void createPropagationQueue(variableContainer& vars, InvariantContainer& invars);
+    /// Merges variable nodes with the oneway constraints defining them
+    void cleanUpGraph(std::vector<IntegerVariable*>& vars);
+    /// merges variable node and invariant node into the invariant node. 
+    void mergeNodes(std::shared_ptr<variableNode>& vn, std::shared_ptr<invariantNode>& in);
+    /// Used to find cycles and give timestamps 
+    void DFS(std::shared_ptr<invariantNode>& in);
+
+    /// Uses two DFS to check for cycles and report them. 
+    void checkForCycles(InvariantContainer& invars);
+//    void breakCycles( std::vector<std::shared_ptr<invariantNode>>& cycle);
+    void breakCycles();
+    std::shared_ptr<invariantNode> breakTie(unsigned cycleNumber);
+    void undefineVariable(std::shared_ptr<invariantNode> invar);
     void addToQueue(propagation_queue& orgQueue, updateVector& queue);
+    void printSizes();
+    std::vector<bool>& getBrokenInvariants();
 
 private:
-    std::unordered_map<unsigned, std::shared_ptr<variableNode>> variable_nodes;
-    std::unordered_map<unsigned, std::shared_ptr<invariantNode>> invariant_nodes;
+    //    std::unordered_map<unsigned, std::shared_ptr<variableNode>> variable_nodes;
+    //    std::unordered_map<unsigned, std::shared_ptr<invariantNode>> invariant_nodes;
+    /// Used for constant lookup based on id. (segfaults if one attempt to look up an ID not existing)
+    variableNodeContainer variable_nodes;
+//    variableNodeContainer variable_nodes  =variableNodeContainer();
+    /// Used for constant lookup based on id. (segfaults if one attempt to look up an ID not existing)
+    invariantNodeContainer invariant_nodes;
+//    invariantNodeContainer invariant_nodes = invariantNodeContainer();
+    /// Vector of all invariants (probably sorted by id but maybe id != index)
+    //    invariantNodeContainer invariants;
+    std::vector<bool> brokenInvariants;
+    std::vector<bool> brokenCycles;
     bool madePropagationQueues = false;
-    //    int counter = 0;
+    unsigned timestampCounter = 0;
+//    unsigned timeCounter;
+    std::vector<std::shared_ptr<invariantNode>> SCC;
+//    std::vector<std::shared_ptr<invariantNode>> SCC = invariantNodeContainer();
+    int cycleCounter = 0;
+    std::vector<std::vector<unsigned >> cycles;
+    std::vector<std::vector<unsigned >> invariantsCycles;
+
+};
+struct invariantNode {
+    //    std::vector<std::shared_ptr<invariantNode>> update;
+    updateVector update;
+    unsigned id;
+    //    invariant invar;
+    invariant invar;
+    unsigned timestamp = 0;
+    unsigned lowestLink;
+    bool inCurrentSSC = false;
+    IntegerVariable* iv; 
+//    std::vector<std::shared_ptr<invariantNode>> myInvariants;
+    //    std::vector<std::shared_ptr<invariantNode>> myInvariants;
+    //    std::vector<std::shared_ptr<variableNode>> myVariables;
+};
+struct compare_invariant : public std::binary_function<invariant, invariant, bool> {
+
+    bool operator()(const invariant invar1, const invariant invar2) const {
+        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+        //                sleep(1);
+        return (invar1->getTimestamp() > invar2->getTimestamp());
+    }
+
+    bool operator()(invariant invar1, invariant invar2) {
+
+        //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+        //                sleep(1);
+//        unsigned t1 = invariant_nodes.at(invar1->getID())->timestamp; 
+        return (invar1->getTimestamp() >     invar2->getTimestamp());
+    }
+   
+};
+
+
+struct variableNode {
+    updateVector update;
+    propagation_queue propagationQueue;
+    unsigned id;
+    //    invariant invar;
+    IntegerVariable* iv;
 };
 
 #endif	/* DEPENDENCYDIGRAPH_HPP */

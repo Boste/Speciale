@@ -22,27 +22,31 @@ GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport #-lgecod
 #EASYLOCALLIB = -lEasyLocal -lboost_program_options
 
 #LDFLAGS = -L$(EASYLOCAL)/lib -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
-LDFLAGS = -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
+#LDFLAGS = -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
+LDFLAGS = -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
 #LIBS = $(EASYLOCALLIB) 
 
 
 
 
 LD=g++
-CXX=g++
+#CXX=g++
+#CXX=clang
 
 #CXXFLAGS = -std=c++11 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
-CXXFLAGS = -std=c++14 -g -Wextra -Wall -Wfatal-errors # -DNDEBUG
+CXXFLAGS = -std=c++14 -g -Wextra -Wall  -Wfatal-errors #-fopenmp  # -DNDEBUG
 #CXXFLAGS = -std=c++14 -O3 -Wextra -Wall  -Wfatal-errors # -DNDEBUG
-CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
+#CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
+CPPFLAGS = -I../include -I$(COIN)/include -I${GECODE_HOME} 
 #CPPFLAGS = -I$(EASYLOCAL)/include -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
-LDFLAGS +=  -pthread -Wl,--rpath,$(GECODE_HOME) -Wl,--rpath,$(COIN)/lib -L${GECODE_HOME} -L$(COIN)/lib#-Wl, --rpath,$(LIBDIR)
-LIBS += ${GECODE_LINKS} -lCoinUtils -lz -llapack -lblas -lm -lbz2 
+LDFLAGS +=   -pthread -Wl,--rpath,$(GECODE_HOME) -Wl,--rpath,$(COIN)/lib -L${GECODE_HOME} -L$(COIN)/lib  #-L/usr/lib/gcc/i686-linux-gnu/4.9#-Wl, --rpath,$(LIBDIR)
+LIBS += ${GECODE_LINKS} -lCoinUtils -lz -llapack -lblas -lm -lbz2  #-lgomp
 
 #SOURCE_FILES = main.cpp BP_Data.cpp LSSpace.cpp GeneralSolver.cpp ../include/constraints/linear.cpp Sum.cpp #../include/constraints/invariant.cpp #IntegerVariable.cpp
 # BP_Basics.cpp BP_Helpers.cpp 
 # ../include/constraints/Equal.cpp ../include/constraints/LinearComb.cpp ../include/constraints/Constraint.cpp ../include/constraints/ConstraintSystem.cpp
-OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  IntegerVariable.o Sum.o Model.o State.o NeighborhoodExplorer.o Random.o Clock.o Multistop.o GecodeSolver.o Max.o DependencyDigraph.o # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o
+OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  IntegerVariable.o Sum.o Model.o State.o Neighborhood.o FlipNeighborhood.o \
+Random.o Clock.o Multistop.o GecodeSolver.o Max.o DependencyDigraph.o BestImprovement.o RandomWalk.o # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o
 # BP_Basics.o BP_Helpers.o 
 #../include/constraints/Equal.o ../include/constraints/LinearComb.o ../include/constraints/Constraint.o ../include/constraints/ConstraintSystem.o
 #HEADER_FILES = BP_Data.hpp Constants.hpp LSSpace.hpp GeneralSolver.hpp ../include/constraints/Sum.hpp ../include/constraints/linear.hpp IntegerVariable.hpp invariant.hpp

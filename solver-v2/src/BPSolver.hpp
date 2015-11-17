@@ -30,15 +30,19 @@ public:
 
     BPSolver(BP_Input *in) {
         //        std::vector<IntegerVariable*>* varInt;
-        //  
         int counter = 0;
-
+        std::vector<IntegerVariable*> integerVariables;
+        std::vector<IntegerVariable*> binaryVariables;
         for (var intVar : in->getVars()) {
             //            counter++;
             //            std::cout << "adding variable number " << counter << std::endl;
-            createIntVar(intVar.lb, intVar.ub);
+            IntegerVariable* iv = createIntVar(intVar.lb, intVar.ub);
+
             if (intVar.ub == 1) {
                 counter++;
+                binaryVariables.push_back(iv);
+            } else {
+                integerVariables.push_back(iv);
             }
 
         }
@@ -95,12 +99,19 @@ public:
         std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
 
         for (unsigned i = 0; i < varInt.size(); i++) {
+
             c.at(i) = static_cast<int> (in->getVar(i).objcoeff);
             x->at(i) = varInt.at(i);
         }
 
         GeneralSolver::linear(c, *x, LQ, 0, OBJ);
         delete x;
+
+        //        Search(getAllVariables());
+        Search(binaryVariables);
+        Search(integerVariables);
+
+
         //        std::cout << "Model posted" << std::endl;
         //        std::cout << "done " << std::endl;
         //        GeneralSolver::linear(*this, c, varInt, LQ, 0, Gecode::ICL_DOM, OBJ);

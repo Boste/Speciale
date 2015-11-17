@@ -4,6 +4,8 @@
 \usepackage{mathtools}
 \usepackage{color}
 \usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tkz-graph}
 
 
 \usepackage{algorithmic}
@@ -27,7 +29,7 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-  \subsection{Mixed Integer Programming}
+  \subsection{Discrete Optimization}
   \subsection{Constraint Programming}
   \subsection{Heuristics and Local Search}
   \subsubsection{Construction Heuristics}
@@ -35,37 +37,44 @@
   \subsubsection{Metaheuristics}
 
 \section{Modeling in CBLS}
-%\subsection{Variables}
-  \subsection{Types of Modeling \boste{not sure this should be here}}
+  \boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
+  %\subsection{Types of Modeling \boste{not sure this should be here}}
   %\input{modeling}
   \subsection{Variables} 
   \input{vars}
   \subsection{Constraints}
   \input{cons}
-    \subsection{Invariants and One-way Constraints}
-  
-  
+    \subsubsection{Implicit Constraints}
+    \input{implicitCons}
+    \subsubsection{Invariants and One-way Constraints}
+    \input{invariant}
+    \subsubsection{Soft Constraints}
+    \input{softCons}
+  \subsection{Objective Functions}
+  \input{objFunc}
 
 \section{Previous Work}
   \subsection{Comet}
-
+  \input{comet}
   \subsection{Gecode}
   \subsection{LocalSolver}
   \subsection{OscaR}
+\section{Structure of this CBLS \boste{Differences from oscar and comet.}}
   
 \section{Preprocessing and Simplification}
   \subsection{Domain Reduction}
   \subsection{Initial Solution}
 \section{Structuring Local Search Model}
 \input{strucLS}
-  \subsection{Simplification}
+  \subsection{Simplification and Dependency Digraph}
     \input{updateCons}
-  \subsection{Dependency Digraph}
+    
+  
   
 \section{Local Search Engine}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}
-  \subsection{Metaheuristics}
+\section{Metaheuristics}
 \section{Tests}
 \section{Results}
 \section{Conclusion}

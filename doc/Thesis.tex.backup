@@ -1,13 +1,15 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{color}
 \usepackage{amssymb}
 
+
 \usepackage{algorithmic}
 %\usepackage{algorithm}
-\usepackage{algorithm2e}
+%\usepackage{algorithm2e}
+\usepackage[linesnumbered, ruled]{algorithm2e}
 %opening
 
 \include{style}
@@ -25,40 +27,49 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-  \subsection{Mixed Integer Programming}
+  \subsection{Mixed Integer Programming \boste{real and integer variables, or integer and binary variables}}
   \subsection{Constraint Programming}
   \subsection{Heuristics and Local Search}
   \subsubsection{Construction Heuristics}
   \subsubsection{Local Search and Neighborhoods}
   \subsubsection{Metaheuristics}
 
-\section{Modeling}
-%\subsection{Variables}
+\section{Modeling in CBLS}
+  \boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
+  %\subsection{Types of Modeling \boste{not sure this should be here}}
+  %\input{modeling}
+  \subsection{Variables} 
+  \input{vars}
+  \subsection{Constraints}
+  \input{cons}
 
-  \subsection{Variables and Constraints}
-  \input{varcons}
-    \subsection{Invariants and One-way Constraints}
-  \subsection{Types of Modeling \boste{not sure this should be here}}
-  \input{modeling}
-\section{Different Solvers \boste{properly not the best name}}
+  \subsubsection{Soft Constraints}
+  \subsubsection{Invariants and One-way Constraints}
+  \input{invariant}
+    \subsubsection{Implicit Constraints}
+  \input{ImplicitCons}
+  
+
+\section{Previous Work}
   \subsection{Comet}
-
+%  \input{comet}
   \subsection{Gecode}
   \subsection{LocalSolver}
   \subsection{OscaR}
-  \subsection{\boste{(This solver)} Constraint Based Local Search with Limitations} % GeLS?
+\section{Structure of this CBLS \boste{Differences from oscar and comet.}}
+  
 \section{Preprocessing and Simplification}
-  \subsection{Gecode Engine}
-    \subsubsection{Relaxation}
+  \subsection{Domain Reduction}
   \subsection{Initial Solution}
 \section{Structuring Local Search Model}
+\input{strucLS}
   \subsection{Simplification}
     \input{updateCons}
-  \subsection{Maintaining Invariants}
-  \subsection{Maintenance Graph}
+  \subsection{Dependency Digraph}
+  
 \section{Local Search Engine}
   \subsection{Neighborhoods}
-    \subsubsection{Moves}
+    \subsubsection{Neighborhood Operations}
   \subsection{Metaheuristics}
 \section{Tests}
 \section{Results}

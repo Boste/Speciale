@@ -1,6 +1,18 @@
-Invariants are variables, which value is purely determined by other variables. The variable defined is not necessarily 
-one of the variable currently in the system but it can be a new auxiliary variable which value is of interest.  
-The invariants all have generic methods that needs to be defined for the different types of invariants. One of these 
+\emph{Invariants} are variables, whose value are functionally defined by other variables. Invariants are introduced by 
+the solver and neither the variable defined nor the variables defining the variable need not to be decision variables 
+in the CSP or CSOP but can be auxiliary variables whose value are of interest. \\ 
+\emph{One-way constraints} are constraints that defines the value of an invariant. 
+\begin{equation}
+ x = f(\mathbf{z}) 
+\end{equation}
+$f(\mathbf{z})$ is a \oneway with a set of input variables $z$ that functionally defines the \invar $x$. \\ \medskip
+
+
+
+%currently in the system but they can be new auxiliary variables whose value are of interest. 
+\iffalse
+The invariants all have generic methods that needs to be defined for the different types of invariants. One of 
+these 
 methods is for instance \method{getCurrentValue()} that return the value of the invariant. If a variable $v$ 
 changes value then the invariants that are defined by $v$ needs to update their current value. This is done 
 through the \method{addChange(arguments)} method, \method{calculateDeltaValue()}, and  \method{updateValue()}. They 
@@ -17,6 +29,12 @@ a \method{Sum} invariant $S$ the value is defined as: \\
 \end{equation}
 
 
+One-way constraints are constraints that is used to define the value of a single variable. The single variable is made 
+as an \class{invariant} and can only change when one of the variables that defines it changes. One-way 
+constraints reduces the search space \boste{(which should be discussed before this I guess)} since the variable defined 
+by a one-way constraint can only be changed by a move indirectly. 
+
+\fi	
 
 %which value is defined by the sum of the variables and invariant  times their coefficient. 
 %Invariants are used to create auxiliary variables based on other variables and/or invariants. 

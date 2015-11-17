@@ -11,4 +11,4 @@ jobs/
 log/
 submitted/
 *.backup
-
+*.out

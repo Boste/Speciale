@@ -1,6 +1,6 @@
 
 #include "Model.hpp"
-#include "Random.hpp"
+//#include "Random.hpp"
 
 Model::Model() {
     //    std::cout << "Create model " << std::endl;
@@ -56,64 +56,76 @@ Model::~Model() {
 
 }
 
-std::list<IntegerVariable*>& Model::getIntegerVariables() {
+std::vector<std::vector<IntegerVariable*>>&Model::getPriorityVectors() {
+    return priorityVectorsOfVariables;
+}
+
+std::vector<IntegerVariable*>& Model::getPriorityVectorNr(unsigned i) {
+    assert(i < priorityVectorsOfVariables.size());
+    return priorityVectorsOfVariables.at(i);
+}
+
+std::vector<IntegerVariable*>& Model::getIntegerVariables() {
     return IntegerVariables;
 }
 //IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
 
-void Model::addBinaryVariable(int lb, int ub) {
+IntegerVariable* Model::addBinaryVariable(int lb, int ub) {
     //    for (int i = 0; i < numberOfVariables; i++) {
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
+    return v;
     //    binaryVariables.push_back(v);
 
 }
 
-void Model::addIntegerVariable(int lb, int ub) {
+IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
     //    std::cout << lb << " " << ub << std::endl;
     //    sleep(1);
     int id = original.size();
     IntegerVariable* v = new IntegerVariable(lb, ub, id);
     original.push_back(v);
     IntegerVariables.push_back(v);
+    return v;
 
 }
 //int Model::getNumberOfVariables(){
 //    return numberOfVariables;
 //}
 
-void Model::nonFixedVariables(std::vector<IntegerVariable*>& nonFixed) {
-    nonFixedBinaryVariables = nonFixed;
-    mask = nonFixed;
-    shuffleMask();
+void Model::setNonFixedVariables(std::vector<IntegerVariable*>& nonFixed) {
+    nonFixedVariables = nonFixed;
+    //    mask = nonFixed;
+    //    shuffleMask();
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
 
-void Model::addInvariantToDDG(invariant invar, variableContainer& variables) {
-    DDG->addInvariant(invar, variables);
-}
-
-void Model::addInvariantToDDG(invariant invar, InvariantContainer& invariants) {
-    DDG->addInvariant(invar, invariants);
-}
-
-void Model::addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants) {
-    DDG->addInvariant(invar, variables, invariants);
-}
-
-void Model::addVariablesToDDG() {
-    DDG->addVariables(nonFixedBinaryVariables);
-
-}
-
-void Model::addVariablesToDDG(variableContainer& vars) {
-    DDG->addVariables(vars);
-}
-
-void Model::createPropagationQueue() {
-    DDG->createPropagationQueue();
-}
+//void Model::addInvariantToDDG(invariant invar, variableContainer& variables) {
+//    DDG->addInvariant(invar, variables);
+//}
+//
+//void Model::addInvariantToDDG(invariant invar, InvariantContainer& invariants) {
+//    DDG->addInvariant(invar, invariants);
+//}
+//
+//void Model::addInvariantToDDG(invariant invar, variableContainer& variables, InvariantContainer& invariants) {
+//    //    debug;
+//    DDG->addInvariant(invar, variables, invariants);
+//}
+//
+//void Model::addVariablesToDDG() {
+//    DDG->addVariables(nonFixedVariables);
+//
+//}
+//
+//void Model::addVariablesToDDG(variableContainer& vars) {
+//    DDG->addVariables(vars);
+//}
+//
+//void Model::createPropagationQueue(variableContainer& vars) {
+//    DDG->createPropagationQueue(vars);
+//}
 
 std::shared_ptr<DependencyDigraph>& Model::getDDG() {
     return DDG;
@@ -133,8 +145,13 @@ updateVector& Model::getUpdate(IntegerVariable* iv) {
     return DDG->getVariableUpdate(iv->getID());
 }
 
-void Model::startUp() {
-    id = original.size();
+//void Model::startUp() {
+//    id = original.size();
+////    highestPriority = getConstraints().size();
+//}
+
+std::vector<constraint>& Model::getFunctionalConstraints() {
+    return functionalConstraints;
 }
 
 IntegerVariable* Model::getMaskAt(int i) {
@@ -151,15 +168,20 @@ void Model::shuffleMask() {
 }
 
 void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
-    getNonFixedBinaryVariable(index)->setVariablePointer(variable);
+    getNonFixedVariable(index)->setVariablePointer(variable);
+}
+/// Should only be used before propagation queue is made
+variableContainer& Model::getNonFixedVariables() {
+    return nonFixedVariables;
+}
+/// Mask is just as useful
+variableContainer& Model::getLSVariables() {
+    return LSVariables;
 }
 
-variableContainer& Model::getNonFixedBinaryVariables() {
-    return nonFixedBinaryVariables;
-}
 
-IntegerVariable* Model::getNonFixedBinaryVariable(int i) {
-    return nonFixedBinaryVariables.at(i);
+IntegerVariable* Model::getNonFixedVariable(int i) {
+    return nonFixedVariables.at(i);
 }
 
 IntegerVariable* Model::getVariable(unsigned id) {
@@ -181,8 +203,8 @@ InvariantContainer& Model::getInvariants() {
 void Model::addInvariant(std::shared_ptr<Invariant> invar) {
     //    std::cout <<invar.get() << std::endl;
     //    invar->changeAdd  = true;
-//    std::cout << "setting id " << id << std::endl;
-//    sleep(1);
+    //    std::cout << "setting id " << id << std::endl;
+    //    sleep(1);
     invar->invariantID = id++;
     Invariants.push_back(invar);
 }
@@ -265,28 +287,54 @@ void Model::initialize() {
             }
         }
     }
-    //    if (violations != 0) {
-    std::cout << "Initial solution not feasible? violations: " << violations.at(1) << std::endl;
-    initialEvaluation = violations;
-    //        sleep(2);
-    //    } else {
-    //        assert(violations == 0);
-    //        initialEvaluation = violations;
-    //    }
+
+    if (violations.at(1) != 0) {
+        std::cout << "Initial solution not feasible? violations: " << violations.at(1) << std::endl;
+        initialEvaluation = violations;
+        //        sleep(2);
+    } else {
+        assert(violations.at(1) == 0);
+        initialEvaluation = violations;
+    }
 
     for (invariant invar : getObjectiveInvariant()) {
         initialEvaluation.at(0) += invar->getCurrentValue();
     }
-    //    for (IntegerVariable* iv : getAllVariables()) {
-    //        //        if (iv->isDef()) {
-    //
-    //        //            iv->setCurrentValue(iv->getOneway()->getCurrentValue());
-    //        solution[iv->getID()] = iv->getCurrentValue();
-    //        //        } else {
-    //        //            solution.at(iv->getID()) = iv->getCurrentValue();
-    //        //        }
-    //
-    //    }
+    for (IntegerVariable* iv : getAllVariables()) {
+        if (iv->isDef() || iv->isFixed()) {
+            continue;
+        } else {
+            LSVariables.push_back(iv);
+            mask.push_back(iv);
+        }
+    }
+    shuffleMask();
+
+}
+//    for (IntegerVariable* iv : getAllVariables()) {
+//        //        if (iv->isDef()) {
+//
+//        //            iv->setCurrentValue(iv->getOneway()->getCurrentValue());
+//        solution[iv->getID()] = iv->getCurrentValue();
+//        //        } else {
+//        //            solution.at(iv->getID()) = iv->getCurrentValue();
+//        //        }
+//
+//    }
+
+void Model::cleanUp() {
+    std::vector<bool>& brokenInvars = getDDG()->getBrokenInvariants();
+
+    assert(Invariants.size() == brokenInvars.size());
+    InvariantContainer tmp;
+    for (unsigned i = 0; i < Invariants.size(); i++) {
+        if (!brokenInvars.at(i)) {
+            tmp.push_back(Invariants.at(i));
+        }
+
+    }
+    Invariants.swap(tmp);
+    std::cout << "broken size " << brokenInvars.size() << " Invariants size " << Invariants.size() << std::endl;
 }
 
 //void Model::initializeObjective() {

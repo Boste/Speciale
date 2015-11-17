@@ -48,7 +48,7 @@ public:
     //    bool changeAdd = false;
 
     Invariant() {
-        //        std::cout << "invariant" << std::endl;
+        //                std::cout << "invariant" << std::endl;
     }
 
     Invariant(const Invariant &a) {
@@ -108,39 +108,7 @@ public:
     }
     /// Set Current value = Current Value + Delta value (should only be called after recomputing the delta value)
 
-    virtual void updateValue() {
-//        if (invariantID == 253122) {
-//            std::cout << "Change value of obj func " << CurrentValue << " + " << DeltaValue << " = " << CurrentValue + DeltaValue << std::endl;
-//        }
-        std::cout << "in invariant" << std::endl;
-//        CurrentValue += DeltaValue;
-//        DeltaValue = 0;
-
-        //        int realChange;
-        //        if (value < lowerbound) {
-        //            realChange = CurrentValue - lowerbound;
-        //            CurrentValue = lowerbound;
-        //
-        //        } else {
-        //            CurrentValue = value;
-        //            realChange = DeltaValue;
-        //        }
-        //        CurrentValue += DeltaValue;
-        //        for (updateType invar : update) {
-        //            //            std::cout << invar->getVariableID() << std::endl;
-        //
-        //            //            std::cout << invar->coefficients.size() << std::endl;
-        //            if (variableID == -1 && invar->type != MAX) {
-        //                std::cout << "should not be here" << std::endl;
-        //                //                std::cout << usedInObjectiveNr << std::endl;
-        //                //                std::cout << usedInConstraintNr << std::endl;
-        ////                std::cout << update.size() << std::endl;
-        //                exit(1);
-        //            }
-        //            invar->updateValue();
-        //            invar->addChange(variableID, DeltaValue);
-        //        }
-    }
+    virtual void updateValue() =0;
 
     // should be pointer instead of integers
 
@@ -166,24 +134,11 @@ public:
     bool isUsedByConstraint() {
         return usedByConstraint;
     }
-    // should be pointer instead of integers
 
-    //    void setUsedByObjective(int objective) {
-    //        usedInObjectiveNr = objective;
-    //        constraintPriority = 0;
-    //  
-    //
-    //    }
-
-    // should be pointer instead of integers
-
-    //    int getConstraint() {
-    //        return usedInConstraint;
-    //    } 
 
     /// Return the constraint this invariant is used by
 
-    constraint getConstraint() {
+    constraint& getConstraint() {
         return usedInConstraint;
     }
 
@@ -197,6 +152,7 @@ public:
     unsigned getPriority() {
         if (!usedByConstraint) {
             std::cout << invariantID << " " << constraintPriority << std::endl;
+            debug;
         }
         assert(usedByConstraint || constraintPriority == 0);
         return constraintPriority;
@@ -205,28 +161,6 @@ public:
     int getType() {
         return type;
     }
-
-    //    updateVector& getUpdateVector() {
-    //    std::set<Invariant*, compare_invariant>& getUpdateVector() {
-    //        return update;
-    //    }
-
-    //    void addToUpdate(updateType invar) {
-    //        update.insert(invar);
-    //        //        update.push(invar);
-    //        //        update.push_back(invar);
-    //    }
-
-    /// Varibles defining this invariant 
-
-    //    std::vector<IntegerVariable*>& getVariables() {
-    //        return VariablePointers;
-    //    }
-    /// Invariants defining this invariant
-
-    //    InvariantContainer& getInvariants() {
-    //        return invariants;
-    //    }
 
     /// not passing by value
     /// Should only be used for testing i think
@@ -258,7 +192,11 @@ public:
 
     /// only for start value
 
-    void setValue(int value) {
+    void setValue(double value) {
+        CurrentValue = value;
+    }
+
+    void setStartValue(double value) {
         startValue = value;
         //        this->value = value;
         //        if (value < lowerbound) {
@@ -273,16 +211,7 @@ public:
     unsigned getID() {
         return invariantID;
     }
-    /// add invariant that defines this invariant
 
-    //    void addInvariant(invariant invar) {
-    //        invariants.push_back(invar);
-    //    }
-    /// add variable that defines this invariant
-
-    //    void addVariable(IntegerVariable* var) {
-    //        VariablePointers.push_back(var);
-    //    }
     ///Only when making invariants (if not called lb = integer min +1 and ub = integer max -1, (gecode limits))
 
     void setBounds(double lb, double ub) {
@@ -290,52 +219,27 @@ public:
         upperbound = ub;
     }
 
-    //    bool operator<(const invariant invar) {
-    //        std::cout << "used to sort1 <" << std::endl;
-    //        debug;
-    //        return (this->getID() < invar->getID());
-    //    }
-    //
-    //    bool operator>(const invariant invar) {
-    //        std::cout << "used to sort2 <" << std::endl;
-    //        debug;
-    //        return (this->getID() > invar->getID());
-    //    }
-    //
-    //    bool operator<( const Invariant& invar) const {
-    //        std::cout << "used to sort1 <" << std::endl;
-    //        unsigned i1 = invariantID;
-    //        unsigned i2 = invar.invariantID;
-    //        debug;
-    //        return i1<i2;
-    ////        return (getID() < invar.getID());
-    //    }
-    //    bool operator>( const Invariant& invar) const {
-    //        std::cout << "used to sort1 <" << std::endl;
-    //        unsigned i1 = invariantID;
-    //        unsigned i2 = invar.invariantID;
-    //        debug;
-    //        return i1>i2;
-    ////        return (getID() < invar.getID());
-    //    }
-    //
-    ////    bool operator>(const Invariant& invar) const {
-    ////        std::cout << "used to sort2 <" << std::endl;
-    ////        debug;
-    ////        return (this->getID() > invar.getID());
-    ////    }
-    //
-    //    bool operator==(const invariant invar) {
-    //        std::cout << "used to sort3 <" << std::endl;
-    //        debug;
-    //        return (this == invar.get());
-    //        //        return (this->getID() == invar->getID());
-    //    }
+    /// Only used for testing
 
+    void setVariablePointers(std::vector<IntegerVariable*>& vars) {
+        VariablePointers = vars;
+    }
+
+    std::vector<IntegerVariable*>& getVariablePointers() {
+        return VariablePointers;
+    }
+
+    unsigned getTimestamp() {
+        return timestamp;
+    }
+
+    void setTimestamp(unsigned time) {
+        timestamp = time;
+    }
 
 
 protected:
-    //    std::vector<IntegerVariable*> VariablePointers;
+    std::vector<IntegerVariable*> VariablePointers;
     //    int value = 0;
     unsigned invariantID;
     int DeltaValue = 0;
@@ -348,10 +252,11 @@ protected:
     std::unordered_map<int, coefType> coefficients;
     int type;
     /// Should be defined when creating oneway constraints that define (integer)variables 
-    int startValue = 0;
+    double startValue = 0;
     int lowerbound = std::numeric_limits<int>::min() + 1;
     int upperbound = std::numeric_limits<int>::max() - 1;
     int CurrentValue = 0;
+    unsigned timestamp;
 
     int variableID = -1;
     //    InvariantContainer invariants;

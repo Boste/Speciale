@@ -74,6 +74,9 @@ public:
     }
 
     var getVar(const int j) const {
+//        if(j < 0 || j >= nvars){
+//            std::cout << "j " << j << " nvars " << nvars;
+//        }
         assert(j >= 0 && j < nvars);
         return vars[j];
     }

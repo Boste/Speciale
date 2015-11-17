@@ -1,23 +1,30 @@
 % \in C$ is a pair $\langle R_{X(c_j)}, X(c_j) \rangle $ where $ R_{X(c_j)}$  also 
 %called the relation on $c_j$. \\ 
-The variables will be restricted by $C$ that is a set of $m$ constraints $C= \{ 
+The operant of values to variables will be restricted by a set of $m$ constraints $C= \{ 
 c_1,c_2, \dots , c_m \} $. The set of variables to which the constraint $c_j$  \boste{Drop subscript j?} applies is 
 called its \emph{scope} and 
-is denoted $X(c_j) = \{c_{i_1} ,$ $ \dots , c_{i_{|X(c_j)|}}\}$. The size of a scope $|X(c)|$ is called the 
+is denoted $X(c_j) = \{x_{j,1}, x_{j,i} , \dots \}$. The size of a scope $|X(c)|$ is called the 
 \emph{arity} $\alpha(c)$. The constraint $c_j$ is a subset of the cartesian product of the domains of the variables in 
-the scope $X(c_j)$ of $c_j$. $c_j \subseteq D(x_{i_1}) \times D(x_{i_2}) \times \dots \times D(x_{i_{\alpha(c_j)}})$.
+the scope $X(c_j)$ of $c_j$, ie, $c_j \subseteq D(x_{i_1}) \times D(x_{i_2}) \times \dots \times 
+D(x_{i_{\alpha(c_j)}})$. \\
 The Constraint Satisfaction Problem (CSP) can then be defined as a triple $\mathbb{P} = \langle X,D,C \rangle$. A 
-\emph{solution} to the CSP $\mathbb{P}$ is a n-tuple $\Tau = \langle \tau_1,\tau_2,\dots,\tau_n\rangle $ where $\tau_i 
-\in D_i$. The solution is feasible if $\Tau$ can be projected onto $c_j$ for all 
-$c_j \in C$. \boste{Er det helt rigtigt?}\\ 
-The questions to a CSP could be to report all feasible solutions $sol(P)$, any feasible solution $\Tau$ or if there 
-exists a solution $\Tau$ or not. \\
+\emph{solution} to the CSP $\mathbb{P}$ is a vector of n elements $\Tau = (\tau_1,\tau_2,\dots,\tau_n) $ 
+where $\tau_i 
+\in D_i$. The solution is feasible if $\Tau$ can be projected \boste{definition needed} onto $c_j$ for all $c_j \in C$. 
+\boste{Er det helt rigtigt?}\\ 
+The questions to a CSP could be to report all feasible solutions $sol(P)$, any feasible solution $\mathbf{\tau}\ in 
+sol(\mathbb{P}$ or if there 
+exists a solution $\mathbf{\tau}$ or not. \\
 The CSP $\mathbb{P}$ can be expanded to a Constraint Satisfaction Optimization Problem (CSOP) $\mathbb{P'}$ 
-with an objective function $f(\Tau)$ that evaluates the quality of the solution $\Tau$, $\mathbb{P'} = \langle 
-X,D,C,f(\Tau) \rangle$. The task is then to find a 
-solution $\hat{\Tau}$ that gives minimum or maximum value of $f(\hat{\Tau})$ depending on the requirements of the 
-problem. \\ \\ 
-\subsection{Considered Constriants \boste{Not sure about the title and not finished yet}}
+with an objective function $f(\mathbf{\tau})$ that evaluates the quality of the solution $\mathbf{\tau}$, $\mathbb{P'} 
+= \langle 
+X,D,C,f(\mathbf{\tau}) \rangle$. The task is then to find a 
+solution $\hat{\mathbf{\tau}}$ that gives minimum or maximum value of $f(\hat{\mathbf{\tau}})$ depending on the 
+requirements of the 
+problem. 
+\iffalse
+\subsubsection{Considered Constriants \boste{Not sure about the title and not finished yet. Maybe move to ``Structure 
+of this CBLS''}}
 While Constraint Programming often offers a wide selection of constraints to use, this work focuses mostly on the 
 constraint \Linear that is defined by a left hand side, a relation $R$ and a 
 right hand side, which is a bound $b$. The left hand side is a linear function of decision variables 
@@ -39,7 +46,7 @@ MIP, IP and BP are restricted to use the linear constraint and the model can be 
  \text{Subject to } &\mathbf{Ax} \leq \mathbf{b} \nonumber\\
  &\mathbf{x} \in \mathbf{D}
 \end{align}
-
+\fi
 
 
 

@@ -17,21 +17,20 @@
 
 /// Construct that copies a Coefficient map. Size can be different when this sum contains invariants
 
-//Sum::Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int, coefType> map, unsigned id)  {//:IntVariables(vars),coefficients(c) {
-//    type = SUM;
-//    invariantID = id;
-//    //    assert(map.size() == vars.size());
-//    coefficients = map;
-//    VariablePointers = vars;
-//
-//    //        std::cout << std::endl;
-//}
+Sum::Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
+    type = SUM;
+    //    invariantID = id;
+    //    assert(map.size() == vars.size());
+    coefficients.insert(map.begin(), map.end());
+    VariablePointers = vars;
+    //
+    //    //        std::cout << std::endl;
+}
 
 //Sum::Sum(std::unordered_map<int, coefType> map, unsigned id)  {//:IntVariables(vars),coefficients(c) {
 
-Sum::Sum(std::unordered_map<int, coefType> map, std::shared_ptr<DependencyDigraph> DDG) {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
     type = SUM;
-    this->DDG = DDG;
     //    invariantID = id;
 
     coefficients.insert(map.begin(), map.end());
@@ -98,14 +97,14 @@ int Sum::calculateDeltaValue() {
         valueChange += VariableChange.back();
         //        std::pair<int, int> currentPair = VariableChange.back();
         //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
-//        std::cout << "value change " << valueChange << std::endl;
+        //        std::cout << "value change " << valueChange << std::endl;
         VariableChange.pop_back();
     }
-    if (valueChange != 0) {
-        for (updateType invar : DDG->getInvariantUpdate(this->invariantID)) {
-            invar->addChange(this->getVariableID(), valueChange);
-        }
-    }
+    //    if (valueChange != 0) {
+    //        for (updateType invar : DDG->getInvariantUpdate(this->invariantID)) {
+    //            invar->addChange(this->getVariabl eID(), valueChange);
+    //        }
+    //    }
 
     //    }
     //    if(invariantID == 253122){
@@ -121,9 +120,19 @@ int Sum::calculateDeltaValue() {
     return valueChange;
 }
 
+/// What if coef* change is double?
 void Sum::addChange(int variableNumber, int changeInValue) {
     //    std::cout << variableNumber << " ";
+
     int deltaChange = coefficients.at(variableNumber) * changeInValue;
+    
+//    if (deltaChange < -9 || deltaChange > 10) {
+//        std::cout << "Delta change in addChange " << deltaChange << std::endl;
+//        std::cout <<  coefficients.at(variableNumber) << "*" << changeInValue << std::endl;
+//        debug;
+//    }
+
+
     VariableChange.push_back(deltaChange);
     //    changeAdd = true;
 
@@ -135,8 +144,18 @@ void Sum::addChange(int variableNumber, int changeInValue) {
 }
 
 void Sum::updateValue() {
+
+//    if (DeltaValue < -9 || DeltaValue > 10) {
+//        std::cout << "DeltaValue " << DeltaValue << std::endl;
+//    }
     CurrentValue += DeltaValue;
-//    DeltaValue = 0;
+    assert(CurrentValue >= lowerbound);
+    assert(CurrentValue <= upperbound);
+    
+    //    std::cout << "made move" << std::endl;
+    test();
+
+    //    DeltaValue = 0;
 }
 /// update currentValue by adding currentValue*coeff of all variables and invariants 
 
@@ -170,6 +189,55 @@ void Sum::updateValue() {
 //}
 
 bool Sum::test() {
+    double realValue = 0;
+    //    bool test = false;
+    //    if (variableID == 256) {
+    //        test = true;
+    //    }
+    for (IntegerVariable* iv : VariablePointers) {
+        unsigned id = iv->getID();
+        double coef = coefficients.at(id);
+        int varValue;
+
+
+        if (iv->isDef()) {
+            varValue = iv->getOneway()->getCurrentValue();
+            //            if(varValue <0){
+            if (varValue < iv->getLowerBound()) {
+                std::cout << "this should never happen, prob defined by wrong invariant (sum instead of max)" << std::endl;
+                std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
+                std::cout << "value of variable " << varValue << std::endl;
+                debug;
+                
+            }
+            if (iv->getCurrentValue() != varValue) {
+                //                std::cout << "should update the variable value according to the oneway defining it" << std::endl;
+            }
+        } else {
+            varValue = iv->getCurrentValue();
+        }
+        //        if (test && varValue!=0) {
+        //            std::cout << coef << "*"<< varValue  << " + ";
+        //        }
+        realValue += varValue*coef;
+    }
+    //    if (test) {
+    //        std::cout << startValue << std::endl;
+    //        std::cout << "total value " << realValue << std::endl;
+    //    }
+    realValue += startValue;
+    if (CurrentValue != realValue) {
+        std::cout << "ID: " << getID() << " real value " << realValue << " current value " << CurrentValue << " variableID = "
+                << variableID << " start value " << startValue << " is used by constriant " << isUsedByConstraint() << std::endl;
+        debug;
+
+    }
+
+    if (realValue < 0 && this->getVariableID() != -1) {
+        std::cout << "defining a variable but is negative" << std::endl;
+        debug;
+    }
+
     //    double testValue = 0;
 
     //    for (unsigned i = 0; i < VariablePointers.size(); i++) {

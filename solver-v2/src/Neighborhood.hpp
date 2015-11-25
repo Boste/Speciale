@@ -10,8 +10,8 @@ public:
     virtual ~Neighborhood() = 0;
     virtual bool hasNext() = 0;
     virtual Move* next() = 0;
-    virtual void calculateDelta(Move* mv) = 0;
-    virtual void commitMove(Move* mv) = 0;
+    virtual bool calculateDelta(Move* mv) = 0;
+    virtual bool commitMove(Move* mv) = 0;
     virtual int compareMoves(Move* mv1, Move* mv2);
     int numberOfEqualMoves = 0;
 

@@ -29,8 +29,8 @@ public:
     //    void makeMove(Move* mv, std::shared_ptr<State> st);
     bool hasNext();
     Move* next();
-    void commitMove(Move* mv);
-    void calculateDelta(Move* mv);
+    bool commitMove(Move* mv);
+    bool calculateDelta(Move* mv);
 
 
 private:

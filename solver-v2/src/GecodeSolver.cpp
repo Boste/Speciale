@@ -165,7 +165,6 @@ void GecodeSolver::createArray() {
 
 void GecodeSolver::branch() {
 
-
     for (std::vector<IntegerVariable*>& vector : model->getPriorityVectors()) {
         Gecode::IntVarArgs priority;
 
@@ -173,8 +172,9 @@ void GecodeSolver::branch() {
             //    for(int i = 0; i< model->getPriorityVectorNr(0).size();i++){
             priority << *iv->getVariablePointer();
         }
-//        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+        //        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
         Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+//        Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -193,18 +193,18 @@ void GecodeSolver::fixVariables() {
         //        std::cout << "Gecode Var pointer " << iv->getVariablePointer() << " assigned? " << std::endl;
         //        std::cout << iv->getVariablePointer()->assigned() << std::endl;
         //        std::cout << "ID " << iv->getID() << std::endl;
-//        if (!iv->isIntegerVariable()) {
-            if (!iv->getVariablePointer()->assigned()) {
-                preprocessed.push_back(iv);
-            } else {
-                numberOfFixedVariables++;
-                iv->setAsFixed();
-            }
-//        } else if (iv->getVariablePointer()->assigned()) {
-//            numberOfFixedVariables++;
-//            iv->setAsFixed();
-//            std::cout << "Fixed Integer variable" << std::endl;
-//        }
+        //        if (!iv->isIntegerVariable()) {
+        if (!iv->getVariablePointer()->assigned()) {
+            preprocessed.push_back(iv);
+        } else {
+            numberOfFixedVariables++;
+            iv->setAsFixed();
+        }
+        //        } else if (iv->getVariablePointer()->assigned()) {
+        //            numberOfFixedVariables++;
+        //            iv->setAsFixed();
+        //            std::cout << "Fixed Integer variable" << std::endl;
+        //        }
     }
     std::cout << "Number of variables fixed in preprocessing " << numberOfFixedVariables << std::endl;
     model->setNonFixedVariables(preprocessed);
@@ -258,6 +258,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
         Gecode::DFS<GecodeSolver> e(this, *so);
         std::cout << "Still searching for solution" << std::endl;
         s = e.next();
+
         std::cout << "stop called " << ms->called << " times" << std::endl;
         if (e.stopped()) {
             std::cout << "WARNING: solver stopped, solution is not optimal!\n";
@@ -287,7 +288,6 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
             //            }
             //            s->print(std::cout);            //            this->print(std::cout);
             SetValues(s->AllVars);
-
             solutionFound = true;
             std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
             std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
@@ -311,9 +311,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
 void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     //    for (int i = 0; i < model->getAllIntegerVariables()->size(); i++) {
-
     for (IntegerVariable* iv : model->getAllVariables()) {
-
         if (vars[iv->getID()].assigned()) {
             iv->setCurrentValue(vars[iv->getID() ].val());
         } else {
@@ -330,7 +328,7 @@ void GecodeSolver::printSpaceStatus() {
         std::cout << "Status: " << this->status() << " the space is failed at root."
                 << std::endl;
         std::cout << "No feasible solution" << std::endl;
-        //            exit(1);
+        exit(1);
     } else if (status == Gecode::SS_SOLVED) {
         std::cout << "Status: " << this->status()
                 << " the space is not failed but the space has no brancher left."

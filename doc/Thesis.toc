@@ -19,16 +19,16 @@
 \contentsline {subsection}{\numberline {3.2}Gecode}{7}
 \contentsline {subsection}{\numberline {3.3}LocalSolver}{7}
 \contentsline {subsection}{\numberline {3.4}OscaR}{7}
-\contentsline {section}{\numberline {4}Structure of this CBLS {\textbf {\color {blue}(Differences from oscar and comet.)}}}{7}
-\contentsline {section}{\numberline {5}Preprocessing and Simplification}{7}
-\contentsline {subsection}{\numberline {5.1}Domain Reduction}{7}
-\contentsline {subsection}{\numberline {5.2}Initial Solution}{7}
-\contentsline {section}{\numberline {6}Structuring Local Search Model}{7}
-\contentsline {subsection}{\numberline {6.1}Simplification and Dependency Digraph}{7}
-\contentsline {section}{\numberline {7}Local Search Engine}{11}
-\contentsline {subsection}{\numberline {7.1}Neighborhoods}{11}
-\contentsline {subsubsection}{\numberline {7.1.1}Neighborhood Operations}{11}
-\contentsline {section}{\numberline {8}Metaheuristics}{11}
-\contentsline {section}{\numberline {9}Tests}{11}
-\contentsline {section}{\numberline {10}Results}{11}
-\contentsline {section}{\numberline {11}Conclusion}{11}
+\contentsline {section}{\numberline {4}Preprocessing and Initial Solution}{7}
+\contentsline {subsection}{\numberline {4.1}Domain Reduction}{7}
+\contentsline {subsection}{\numberline {4.2}Finding an Initial Solution}{7}
+\contentsline {section}{\numberline {5}Structuring Local Search Model}{7}
+\contentsline {subsection}{\numberline {5.1}Simplification and Dependency Digraph}{8}
+\contentsline {subsection}{\numberline {5.2}Propagation Queue}{16}
+\contentsline {section}{\numberline {6}Local Search Engine}{16}
+\contentsline {subsection}{\numberline {6.1}Neighborhoods}{16}
+\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{16}
+\contentsline {section}{\numberline {7}Metaheuristics}{16}
+\contentsline {section}{\numberline {8}Tests}{16}
+\contentsline {section}{\numberline {9}Results}{16}
+\contentsline {section}{\numberline {10}Conclusion}{16}

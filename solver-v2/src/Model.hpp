@@ -110,6 +110,23 @@ public:
 
 
 };
-
+struct compare_invariant;
+//: public std::binary_function<invariant, invariant, bool> {
+//
+//    bool operator()(const invariant invar1, const invariant invar2) const {
+//        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+//        //                sleep(1);
+//        return (invar1->getTimestamp() > invar2->getTimestamp());
+//    }
+//
+//    bool operator()(invariant invar1, invariant invar2) {
+//
+//        //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+//        //                sleep(1);
+////        unsigned t1 = invariant_nodes.at(invar1->getID())->timestamp; 
+//        return (invar1->getTimestamp() >     invar2->getTimestamp());
+//    }
+//   
+//};
 #endif	/* MODEL_HPP */
 

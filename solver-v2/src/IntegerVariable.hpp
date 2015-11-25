@@ -3,8 +3,10 @@
 //#include <gecode/driver.hh>
 #include <gecode/int.hh>
 
-#include "Constants.hpp"
+
 #include "Constraint.hpp"
+#include "Constants.hpp"
+
 //#include "BP_Data.hpp"
 //#include "../include/constraints/invariant.hpp"
 

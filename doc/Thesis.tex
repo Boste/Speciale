@@ -11,7 +11,8 @@
 \usepackage{algorithmic}
 %\usepackage{algorithm}
 %\usepackage{algorithm2e}
-\usepackage[linesnumbered, ruled]{algorithm2e}
+\usepackage[linesnumbered, ruled,lined,boxed,commentsnumbered]{algorithm2e}
+
 %opening
 
 \include{style}
@@ -59,15 +60,19 @@
   \subsection{Gecode}
   \subsection{LocalSolver}
   \subsection{OscaR}
-\section{Structure of this CBLS \boste{Differences from oscar and comet.}}
+%\subsection{Structure of this CBLS \boste{Differences from oscar and comet.}}
   
-\section{Preprocessing and Simplification}
+\section{Preprocessing and Initial Solution}
   \subsection{Domain Reduction}
-  \subsection{Initial Solution}
+  \input{dom}
+  \subsection{Finding an Initial Solution}
+  \input{inisol}
 \section{Structuring Local Search Model}
 \input{strucLS}
   \subsection{Simplification and Dependency Digraph}
-    \input{updateCons}
+    \input{ddg} \label{sec_ddg}
+  \subsection{Propagation Queue}  
+    \input{propaqueue}\label{sec_propaqueue}
     
   
   
@@ -78,6 +83,9 @@
 \section{Tests}
 \section{Results}
 \section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{main}
 %\newpage
 %\newpage
 %\section{Defenitions of structures in a solver}

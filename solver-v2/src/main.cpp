@@ -64,6 +64,7 @@ int main(int argc, char* argv[]) {
         std::cout << "Time for Gecode not given (arg 3) time set to 10 sec" << std::endl;
     }
     Random::Seed(RANDOMSEED);
+    std::cout <<  "Random seed " << Random::seed << std::endl;
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();
     //    InstanceOptions opt("BPSolver");

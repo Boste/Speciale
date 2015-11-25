@@ -87,8 +87,10 @@ struct invariantNode {
     //    std::vector<std::shared_ptr<invariantNode>> update;
     updateVector update;
     unsigned id;
+    invariant SumUsedInMax;
     //    invariant invar;
     invariant invar;
+    
     unsigned timestamp = 0;
     unsigned lowestLink;
     bool inCurrentSSC = false;

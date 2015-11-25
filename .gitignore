@@ -12,3 +12,6 @@ log/
 submitted/
 *.backup
 *.out
+*.blg
+*.bbl
+*.swp

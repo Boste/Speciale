@@ -47,21 +47,21 @@ Max::Max(invariant invar, int bound, unsigned id) {
 Max::~Max() {
 }
 
-
 void Max::addChange(int id, int change) {
     VariableChange.push_back(change);
-    
+//    assert(id == -1);
     //    if (id != -1) {
     //        std::cout << "id should be -1" << std::endl;
     //    }
 
 }
 
-int Max::calculateDeltaValue() {
+bool Max::calculateDeltaValue() {
     firstChange = 0;
     DeltaValue = 0;
-
-    //    int tmp2 = secondValue;
+    //    std::cout << "lowerbound " << lowerbound << std::endl;
+    //    debug;
+    //        int tmp2 = secondValue;
     while (!VariableChange.empty()) {
         firstChange += VariableChange.back();
         //        assert(change.first == T1 || change.second == T2);
@@ -82,24 +82,44 @@ int Max::calculateDeltaValue() {
     //            invar->addChange(this->getVariableID(), DeltaValue);
     //        }
     //    }
-    assert(DeltaValue == std::max(firstChange + variableValue, second) - CurrentValue);
+//    if (DeltaValue + CurrentValue < lowerbound) {
+//        std::cout << "never the case i think" << std::endl;
+//        debug;
+//        return false;
+//
+//    }
+//    if (DeltaValue + CurrentValue > upperbound) {
+//        std::cout << "never the case i think" << std::endl;
+//        debug;
+//        return false;
+//    }
+//    if(variableValue != invar->getCurrentValue()){
+//        std::cout << "this timestamp " << timestamp << " invar timestamp " << invar->getTimestamp() <<
+//                " values: this " << variableValue << " invars " << invar->getCurrentValue() << std::endl;
+//    }
+//    assert(variableValue == invar->getCurrentValue());
+
+//    assert(DeltaValue == std::max(firstChange + variableValue, second) - CurrentValue);
     //    if(DeltaValue == -CurrentValue || DeltaValue == firstChange){
     //        
     //    } else {
     //        std::cout << "DeltaValue " << DeltaValue << " currentValue " << CurrentValue << " firstChange " << firstChange << std::endl;
     //        debug;
     //    }
-    return DeltaValue;
+    return true;
 }
 
 void Max::updateValue() {
     CurrentValue += DeltaValue;
-    assert(CurrentValue >= 0);
+//    assert(CurrentValue >= 0);
 
     variableValue += firstChange;
-    assert(CurrentValue == std::max(variableValue, 0));
-    assert(CurrentValue == std::max(0, invar->getCurrentValue()));
-    assert(variableValue <= CurrentValue);
+//    test();
+//    assert(CurrentValue == std::max(variableValue, 0));
+//    assert(CurrentValue == std::max(0, invar->getCurrentValue()));
+//    assert(variableValue <= CurrentValue);
+//    assert(variableValue == invar->getCurrentValue());
+
     //    firstChange = 0;
     //    DeltaValue = 0;
 }

@@ -12,8 +12,12 @@ Neighborhood::~Neighborhood() {
 
 /// return 1 if first move is best, 2 if second move is best, returns 0 if they are equal. (Use numberOfEqualMoves to determine which move to keep as "best" and remember to reset it when better move is found)
 int Neighborhood::compareMoves(Move* mv1, Move* mv2) {
+//    std::vector<int>& mv1Delta = mv1->getDeltaVector();
+//    std::vector<int>& mv2Delta = mv2->getDeltaVector();
     std::vector<int>& mv1Delta = mv1->getDeltaVector();
     std::vector<int>& mv2Delta = mv2->getDeltaVector();
+//    std::cout << "mv1delta " << mv1Delta.at(0) << " " << mv1Delta.at(1) << std::endl;
+//    std::cout << "mv2delta " << mv2Delta.at(0) << " " << mv2Delta.at(1) << std::endl;
     for (unsigned j = 1; j < mv1Delta.size(); j++) { // No ties in favor of newest move
 
         if (mv1Delta[j] < mv2Delta[j]) {

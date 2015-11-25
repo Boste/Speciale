@@ -334,7 +334,24 @@ void Model::cleanUp() {
 
     }
     Invariants.swap(tmp);
-    std::cout << "broken size " << brokenInvars.size() << " Invariants size " << Invariants.size() << std::endl;
+    std::sort(Invariants.begin(),Invariants.end(),compare_invariant());
+//    unsigned id = Invariants.size()*2;
+//    unsigned timstamp = 600000000;
+//    for(invariant inv : Invariants){
+//        if(inv->timestamp > timstamp){
+//            std::cout <<"timestamp " << inv->timestamp << std::endl;
+//            debug;
+//        }
+//        if(inv->getID() > id ){
+//            std::cout << "id " << inv->getID() << " prev id " << id << std::endl;
+//            debug;
+//        }
+//        timstamp = inv->timestamp;
+//        id = inv->getID();
+//        std::cout << "timestamp, id " << inv->timestamp << ", " << inv->getID() << std::endl;
+//        debug;
+//    }
+//    std::cout << "broken size " << brokenInvars.size() << " Invariants size " << Invariants.size() << std::endl;
 }
 
 //void Model::initializeObjective() {

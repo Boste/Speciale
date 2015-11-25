@@ -34,8 +34,8 @@ LD=g++
 #CXX=clang
 
 #CXXFLAGS = -std=c++11 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
-CXXFLAGS = -std=c++14 -g -Wextra -Wall  -Wfatal-errors #-fopenmp  # -DNDEBUG
-#CXXFLAGS = -std=c++14 -O3 -Wextra -Wall  -Wfatal-errors # -DNDEBUG
+#CXXFLAGS = -std=c++14 -g -Wextra -Wall  -Wfatal-errors #-fopenmp  # -DNDEBUG
+CXXFLAGS = -std=c++14 -O3 -Wextra -Wall  -Wfatal-errors # -DNDEBUG
 #CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 CPPFLAGS = -I../include -I$(COIN)/include -I${GECODE_HOME} 
 #CPPFLAGS = -I$(EASYLOCAL)/include -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 

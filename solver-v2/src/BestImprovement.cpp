@@ -11,66 +11,136 @@ BestImprovement::~BestImprovement() {
 }
 
 bool BestImprovement::Start() {
-    Move* bestMove = new Move();
+    bool legal = false;
+    Move* bestMove;
+    Move* mv; // = new Move();
+    
+    while (!legal) {
+        if (NE->hasNext()) {
+            bestMove = NE->next();
+            legal = NE->calculateDelta(bestMove);
+        } else {
+            //            delete bestMove;
+            //            delete mv;
+            return false;
+        }
+    }
+
+
+    //    Move* bestMove = NE->next();
+    //    NE->calculateDelta(bestMove);
+
     //    std::vector<int>& delta = bestMove->getDeltaVector();
     //    for (int& d : delta) {
     //        d = 0;
     //    }
-    Move* mv; // = new Move();
-    if (NE->hasNext()) {
+    //    if (NE->hasNext()) {
+    //        mv = NE->next();
+    //    } else {
+    //        delete bestMove;
+    //        return false;
+    //    }
+    //    NE->calculateDelta(mv);
+    //
+    //    bestMove->copy(mv);
+    //    delete mv;
+    bool improvement = false;
+    //    while (improvement) {
+    //    unsigned illegal = 0;
+    //    unsigned legalmoves = 0;
+    while (NE->hasNext()) {
         mv = NE->next();
-    } else {
-        return false;
-    }
-    NE->calculateDelta(mv);
-
-    bestMove->copy(mv);
-    delete mv;
-    bool improvement = true;
-    while (improvement) {
-        while (NE->hasNext()) {
-            mv = NE->next();
-            NE->calculateDelta(mv);
-            int compare = NE->compareMoves(mv, bestMove);
-            switch (compare) {
-                case 1:
+        legal = NE->calculateDelta(mv);
+        if (!legal) {
+            //            illegal++;
+            continue;
+        }
+        //        legalmoves++;
+        int compare = NE->compareMoves(mv, bestMove);
+        //        std::cout << "compare chose " << compare << std::endl;
+        switch (compare) {
+            case 1:
+                //                std::cout << "case 1 " << std::endl;
+                bestMove->copy(mv);
+                //                bestMove.copy(mv);
+                improvement = true;
+                NE->numberOfEqualMoves = 0;
+                break;
+            case 2:
+                //                std::cout << "case 2 " << std::endl;
+                break;
+                //                NE->numberOfEqualMoves = 0;
+            default:
+                //                std::cout << "case default " << std::endl;
+                //                std::cout << "number of equal moves " << NE->numberOfEqualMoves << std::endl;
+                int choose = Random::Integer(NE->numberOfEqualMoves);
+                if (choose == 0) {
                     bestMove->copy(mv);
-                    NE->numberOfEqualMoves = 0;
-                case 2:
-                    NE->numberOfEqualMoves = 0;
-                default:
-                    int choose = Random::Integer(NE->numberOfEqualMoves);
-                    if (choose == 0) {
-                        bestMove->copy(mv);
-                    }
-
-            }
-            delete mv;
-
+                    //                    bestMove->copy(mv);
+                }
 
         }
-        for (unsigned i = 1; i < bestMove->deltaVector.size(); i++) {
-            if (bestMove->getDeltaVector().at(i) < 0) {
-                //                improvement = true;
-                break;
-            } else if (bestMove->getDeltaVector().at(i) > 0) {
+        //        std::cout << "best move " << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << std::endl;
+        //        debug;
+        //        std::cout << std::endl;
+        delete mv;
+
+
+    }
+    //    std::cout << "improvement " << improvement << std::endl;
+    //    for (unsigned i = 0; i < bestMove->deltaVector.size(); i++) {
+    //        std::cout << bestMove->deltaVector.at(i) << " ";
+    //    }
+    //    std::cout << std::endl;
+    for (unsigned i = 1; i < bestMove->deltaVector.size(); i++) {
+        //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
+        if (bestMove->getDeltaVector().at(i) < 0) {
+            //        if (bestMove.getDeltaVector().at(i) < 0) {
+            improvement = true;
+            break;
+        } else if (bestMove->getDeltaVector().at(i) > 0) {
+            //        } else if (bestMove.getDeltaVector().at(i) > 0) {
+            improvement = false;
+            break;
+        }
+        if (i == bestMove->deltaVector.size() - 1) {
+            if (bestMove->getDeltaVector().at(0) >= 0) {
                 improvement = false;
                 break;
+                //            }  else {
+                //                improvement = true;
+                //                break;
             }
-            if (i == bestMove->deltaVector.size() - 1) {
-                if (bestMove->getDeltaVector().at(0) >= 0) {
-                    improvement = false;
-                }
-            }
-        }
-        if (improvement) {
-            NE->commitMove(bestMove);
 
         }
-
-
+        //        if(i == 1 ){
+        //            std::cout << "how did i get here? " << improvement<< std::endl;
+        //        }
     }
-    delete bestMove;
+    //    std::cout << "legal moves " << legalmoves << " illegal moves " << illegal << " total " << illegal + legalmoves << " improvement " << improvement << std::endl;
+    //    debug;
+    if (improvement) {
+        /// Returns if it is a legal move or not
+        //        Move* move = &bestMove;
+        bool legal = NE->commitMove(bestMove);
+        //        bool legal = NE->commitMove(&bestMove);
+        if (legal) {
+            //            if (NE->commitMove(bestMove)) {
+            delete bestMove;
+
+            return true;
+        } else {
+            delete bestMove;
+            std::cout << "Illegal move suggested as best move" << std::endl;
+            debug;
+            exit(1);
+        }
+        //            return true;
+    }
+
+
+    //    }
+    //    delete bestMove;
 
     //    bool improvement = false;
     //    //    std::cout <<model->getMask().size() << std::endl;
@@ -166,6 +236,6 @@ bool BestImprovement::Start() {
     //        std::exit(1);
 
 
-    //    delete bestMove;
+    delete bestMove;
     return false;
 }

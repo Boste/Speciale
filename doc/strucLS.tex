@@ -1,12 +1,25 @@
 Once an initial solution to the problem has been found by Gecode the model is transformed to create a model better 
-suited for local search. \boste{talk briefly about DDG and propagation queue (what are they used for)} procedure can 
-be split in several steps before the local search can begin. 
+suited for local search. Two new structures \boste{concepts, objects? Not sure what to call them} are introduced in 
+this section, dependency directed graph \boste{directed dependency graph?} in subsection \ref{sec_ddg} and propagation 
+queue in subsection \ref{sec_propaqueue}.  \\ 
+When a variable $x$ changes value other variables dependent on the value of $x$ will need to be updated. To 
+update those variables and invariants a directed graph $G=(V,A)$ is made, called dependency directed graph, \emph{DDG}. 
+The vertices $V$ either represent a variable, an invariant or a constraint. 
+ 
+When one or more variables change value they propagate their change to the invariants pointed in $G$ that might point 
+to other invariants and propagate their changes to them. We only want to visit each vertex in the graph $G$ at most one 
+time when making changes to on or more variables to increase performance. For each variable used in 
+the local search a \emph{propagation queue} $q$ is made. A propagation queue is the order of which invariant to update 
+when the associated variable changes value. \boste{Not quite happy about the description here} \medskip \\
+The following changes to the model are made before the local search can begin. 
 \begin{itemize}
-  \item Define variables by one-way constraints
- \item Create invariants for the remaining constraints
- \item Create a dependency directed graph for variables and invariants
- \item Create propagation queue for all non fixed variables
+ \item Define integer variables by oneway constraints
+ \item Define binary variables by oneway constraints 
+ \item Create auxiliary variables for the remaining constraints
+ \item Create a dependency directed graph
+ \item Create propagation queue for all non-fixed and non-defined variables
 %\item Initialize the invariants
 % \item Initialize the constraints
 % \item Initialize the objective function
 \end{itemize}
+

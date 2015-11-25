@@ -16,7 +16,7 @@ public:
 
     /// Used to create the original (given by user) constraints
 
-    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority) : Constraint() {
+    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority) { //: Constraint() {
         //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
         //        domainSize = lhs->getVariables().size();
@@ -26,7 +26,8 @@ public:
         this->variables = variables;
         for (unsigned i = 0; i < variables.size(); i++) {
             int id = variables.at(i)->getID();
-            std::pair<int, coefType> coef(id, coefficients.at(i));
+//            this->coefficients[id] = coefficients.at(i);
+            std::pair<int, coefType> coef(variables.at(i)->getID(), coefficients.at(i));
             this->coefficients.insert(coef);
         }
         rhs = ub;
@@ -70,6 +71,7 @@ public:
 
     ~Linear() {
         //        delete lhs;
+
     }
 
 
@@ -135,22 +137,23 @@ public:
         return 0;
     }
 
-//    int setDeltaViolationDegree() {
-//        int deltaValue = 0;
-//        std::shared_ptr<Invariant> invar = getInvariant();
-//        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
-//        deltaValue += invar->getDeltaValue();
-//        //        }
-//
-//        //        std::cout << "obj func: " << invar->getID() << " violation degree " << deltaValue << std::endl;
-//
-//
-//        DeltaViolationDegree = deltaValue;
-////        std::cout << "DeltaViolation Degree " << DeltaViolationDegree << std::endl;
-//        return DeltaViolationDegree;
-//    }
+    //    int setDeltaViolationDegree() {
+    //        int deltaValue = 0;
+    //        std::shared_ptr<Invariant> invar = getInvariant();
+    //        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+    //        deltaValue += invar->getDeltaValue();
+    //        //        }
+    //
+    //        //        std::cout << "obj func: " << invar->getID() << " violation degree " << deltaValue << std::endl;
+    //
+    //
+    //        DeltaViolationDegree = deltaValue;
+    ////        std::cout << "DeltaViolation Degree " << DeltaViolationDegree << std::endl;
+    //        return DeltaViolationDegree;
+    //    }
 
     // return the change in violation. Should be using delta i think (and should be void)
+
     int updateViolation() {
         int currentValue = 0;
         std::shared_ptr<Invariant> invar = getInvariant();
@@ -180,16 +183,16 @@ public:
         return change;
     }
 
-//    int updateViolationDegree() {
-//        assert(getInvariant()->isUsedByConstraint());
-////        std::cout << getInvariant()->getID() << std::endl;
-////        std::cout << ViolationDegree << " + " << DeltaViolationDegree << " = " << getInvariant()->getCurrentValue() << std::endl;
-//
-//        ViolationDegree = getInvariant()->getCurrentValue();
-//        //        ViolationDegree += DeltaViolationDegree;
-////        std::cout <<  "update Violation Degree " << std::endl;
-//        return ViolationDegree;
-//    }
+    //    int updateViolationDegree() {
+    //        assert(getInvariant()->isUsedByConstraint());
+    ////        std::cout << getInvariant()->getID() << std::endl;
+    ////        std::cout << ViolationDegree << " + " << DeltaViolationDegree << " = " << getInvariant()->getCurrentValue() << std::endl;
+    //
+    //        ViolationDegree = getInvariant()->getCurrentValue();
+    //        //        ViolationDegree += DeltaViolationDegree;
+    ////        std::cout <<  "update Violation Degree " << std::endl;
+    //        return ViolationDegree;
+    //    }
     //    int updateViolationDegree() {
     //        int change = 0;
     //        if (relation == LQ) {
@@ -235,22 +238,22 @@ public:
         return true;
     }
 
-//    bool testObj() {
-//
-//        int currentValue = 0;
-//        std::shared_ptr<Invariant> invar = getInvariant();
-//
-//        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
-//        currentValue += invar->getCurrentValue();
-//        //        }
-//        if (ViolationDegree != currentValue - rhs) {
-//            std::cout << "failed test Linear obj" << std::endl;
-//            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << invar->getCurrentValue() << " rhs " << rhs << std::endl;
-//            return false;
-//
-//        }
-//        return true;
-//    }
+    //    bool testObj() {
+    //
+    //        int currentValue = 0;
+    //        std::shared_ptr<Invariant> invar = getInvariant();
+    //
+    //        //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
+    //        currentValue += invar->getCurrentValue();
+    //        //        }
+    //        if (ViolationDegree != currentValue - rhs) {
+    //            std::cout << "failed test Linear obj" << std::endl;
+    //            std::cout << "ViolationDegree " << ViolationDegree << " lhs " << invar->getCurrentValue() << " rhs " << rhs << std::endl;
+    //            return false;
+    //
+    //        }
+    //        return true;
+    //    }
 
 };
 

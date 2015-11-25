@@ -31,6 +31,7 @@ State::State(const State& orig) {
     this->model = orig.model;
 }
 
+/// Only copies LSVariables 
 void State::copy(std::shared_ptr<State> st) {
     this->saveSolution();
     //    for(unsigned i = 0; i< solution.size();i++){
@@ -57,7 +58,7 @@ void State::saveSolution() {
 //    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
 //        solution.at(iv->getID()) = iv->getCurrentValue();
 //    }
-    for (IntegerVariable* iv : model->getAllVariables()) {
+    for (IntegerVariable* iv : model->getLSVariables()) {
         solution.at(iv->getID()) = iv->getCurrentValue();
     }
 

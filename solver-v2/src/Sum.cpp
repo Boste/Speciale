@@ -68,8 +68,9 @@ Sum::~Sum() {
 //    return *this;
 //}
 
-int Sum::calculateDeltaValue() {
-    int valueChange = 0;
+bool Sum::calculateDeltaValue() {
+//    int valueChange = 0;
+    DeltaValue  = 0;
     //    std::cout << "Change added " << changeAdd << std::endl;
     //    std::cout << "calc delta val. Size " << VariableChange.size() << std::endl;
 
@@ -94,7 +95,8 @@ int Sum::calculateDeltaValue() {
     //    } else {
     while (!VariableChange.empty()) {
         //        std::cout << " + " << VariableChange.back();
-        valueChange += VariableChange.back();
+//        valueChange += VariableChange.back();
+        DeltaValue += VariableChange.back();
         //        std::pair<int, int> currentPair = VariableChange.back();
         //        valueChange += coefficients.at(currentPair.first) * currentPair.second;
         //        std::cout << "value change " << valueChange << std::endl;
@@ -111,26 +113,53 @@ int Sum::calculateDeltaValue() {
     //        std::cout <<"changed delta of obj func " << valueChange << std::endl;
     //    }
     //        std::cout << valueChange << " ";
-    DeltaValue = valueChange;
+    //    std::cout << "Delta Value " << DeltaValue << " " << "Current value " << CurrentValue << std::endl;
+    //    std::cout << "lowerbound " << lowerbound << " variable id  "<< variableID << std::endl;
+    //    std::cout << "is used by constraint " << usedByConstraint << " ";
+    //    if(variableID != -1){
+    //        if(lowerbound < 0){
+    //            std::cout << "forgot to define lowerbound" << std::endl;
+    //        }
+    //        assert(lowerbound >= 0);
+
+    if (DeltaValue + CurrentValue < lowerbound) {
+//        DeltaValue = 0;
+        return false;
+        //            std::cout << "should not be a legal move" << std::endl;
+        //            std::cout << "delta + currentvalue = " << DeltaValue + CurrentValue << std::endl; 
+        //            std::cout << "variable id " << variableID << std::endl;
+        //            
+    }
+    if (DeltaValue + CurrentValue > upperbound) {
+//        DeltaValue = 0;
+        return false;
+    }
+//    DeltaValue = valueChange;
+
+
+    //        assert(DeltaValue+CurrentValue >= lowerbound);
+    //    }
+
 
     //    if (CurrentValue + valueChange < lowerbound) {
     //        
     //        return lowerbound - CurrentValue;
     //    }
-    return valueChange;
+    return true;
 }
 
 /// What if coef* change is double?
+
 void Sum::addChange(int variableNumber, int changeInValue) {
     //    std::cout << variableNumber << " ";
 
     int deltaChange = coefficients.at(variableNumber) * changeInValue;
-    
-//    if (deltaChange < -9 || deltaChange > 10) {
-//        std::cout << "Delta change in addChange " << deltaChange << std::endl;
-//        std::cout <<  coefficients.at(variableNumber) << "*" << changeInValue << std::endl;
-//        debug;
-//    }
+
+    //    if (deltaChange < -9 || deltaChange > 10) {
+    //        std::cout << "Delta change in addChange " << deltaChange << std::endl;
+    //        std::cout <<  coefficients.at(variableNumber) << "*" << changeInValue << std::endl;
+    //        debug;
+    //    }
 
 
     VariableChange.push_back(deltaChange);
@@ -145,15 +174,15 @@ void Sum::addChange(int variableNumber, int changeInValue) {
 
 void Sum::updateValue() {
 
-//    if (DeltaValue < -9 || DeltaValue > 10) {
-//        std::cout << "DeltaValue " << DeltaValue << std::endl;
-//    }
+    //    if (DeltaValue < -9 || DeltaValue > 10) {
+    //        std::cout << "DeltaValue " << DeltaValue << std::endl;
+    //    }
     CurrentValue += DeltaValue;
     assert(CurrentValue >= lowerbound);
     assert(CurrentValue <= upperbound);
-    
+
     //    std::cout << "made move" << std::endl;
-    test();
+//    test();
 
     //    DeltaValue = 0;
 }
@@ -194,6 +223,7 @@ bool Sum::test() {
     //    if (variableID == 256) {
     //        test = true;
     //    }
+    
     for (IntegerVariable* iv : VariablePointers) {
         unsigned id = iv->getID();
         double coef = coefficients.at(id);
@@ -208,7 +238,7 @@ bool Sum::test() {
                 std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
                 std::cout << "value of variable " << varValue << std::endl;
                 debug;
-                
+
             }
             if (iv->getCurrentValue() != varValue) {
                 //                std::cout << "should update the variable value according to the oneway defining it" << std::endl;
@@ -229,8 +259,25 @@ bool Sum::test() {
     if (CurrentValue != realValue) {
         std::cout << "ID: " << getID() << " real value " << realValue << " current value " << CurrentValue << " variableID = "
                 << variableID << " start value " << startValue << " is used by constriant " << isUsedByConstraint() << std::endl;
+        bool gotInt = false;
+        for(auto iv : VariablePointers){
+//            if(iv->isDef()){
+//                std::cout << coefficients.at(iv->getID()) << "*" << iv->getOneway()->getCurrentValue() << " ";
+//            } else {
+//                std::cout << coefficients.at(iv->getID()) << "*" << iv->getCurrentValue() << " ";
+//            }
+            
+            if(iv->isIntegerVariable()){
+                gotInt = true;
+            }
+        }
+//        std::cout << startValue << " = " << realValue << " current " << CurrentValue << std::endl; 
+        if(gotInt){
+            std::cout << "Got integer variable" << std::endl;
+        }
+        std::cout << coefficients.size() << std::endl;
         debug;
-
+        
     }
 
     if (realValue < 0 && this->getVariableID() != -1) {

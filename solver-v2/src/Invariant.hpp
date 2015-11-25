@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <iostream>
 #include "Constants.hpp"
+#include <limits>
+#include <cassert>
 //class Constraint;
 
 //class Invariant;
@@ -71,10 +73,7 @@ public:
 
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
 
-    virtual int calculateDeltaValue() {
-        std::cout << "CalculateDeltaValue in  invariant" << std::endl;
-        return -12000;
-    }
+    virtual bool calculateDeltaValue() =0;
     /// Not used but should maybe be used.
 
     virtual void initialize() {

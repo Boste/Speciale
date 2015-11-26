@@ -24,11 +24,12 @@
 \contentsline {subsection}{\numberline {4.2}Finding an Initial Solution}{7}
 \contentsline {section}{\numberline {5}Structuring Local Search Model}{7}
 \contentsline {subsection}{\numberline {5.1}Simplification and Dependency Digraph}{8}
-\contentsline {subsection}{\numberline {5.2}Propagation Queue}{16}
-\contentsline {section}{\numberline {6}Local Search Engine}{16}
-\contentsline {subsection}{\numberline {6.1}Neighborhoods}{16}
-\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{16}
-\contentsline {section}{\numberline {7}Metaheuristics}{16}
-\contentsline {section}{\numberline {8}Tests}{16}
-\contentsline {section}{\numberline {9}Results}{16}
-\contentsline {section}{\numberline {10}Conclusion}{16}
+\contentsline {subsection}{\numberline {5.2}Propagation Queue}{8}
+\contentsline {section}{\numberline {6}Local Search Engine}{8}
+\contentsline {subsection}{\numberline {6.1}Neighborhoods}{8}
+\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{8}
+\contentsline {section}{\numberline {7}Metaheuristics}{8}
+\contentsline {section}{\numberline {8}Tests}{8}
+\contentsline {section}{\numberline {9}Results}{8}
+\contentsline {section}{\numberline {10}Future Work}{8}
+\contentsline {section}{\numberline {11}Conclusion}{9}

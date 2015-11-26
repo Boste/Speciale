@@ -235,7 +235,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     Multistop* ms = new Multistop(0, 0, TimeForGecode * 1000);
     Gecode::Search::Options* so = new Gecode::Search::Options();
     so->stop = ms;
-
+    
     //    this->print(std::cout);
     printSpaceStatus();
     //    for(IntVar iv : IntVars){

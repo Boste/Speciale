@@ -4,8 +4,7 @@ this section, dependency directed graph \boste{directed dependency graph?} in su
 queue in subsection \ref{sec_propaqueue}.  \\ 
 When a variable $x$ changes value other variables dependent on the value of $x$ will need to be updated. To 
 update those variables and invariants a directed graph $G=(V,A)$ is made, called dependency directed graph, \emph{DDG}. 
-The vertices $V$ either represent a variable, an invariant or a constraint. 
- 
+The vertices $V$ either represent a variable, an invariant or a constraint. \\  
 When one or more variables change value they propagate their change to the invariants pointed in $G$ that might point 
 to other invariants and propagate their changes to them. We only want to visit each vertex in the graph $G$ at most one 
 time when making changes to on or more variables to increase performance. For each variable used in 

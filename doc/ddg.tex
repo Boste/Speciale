@@ -1,15 +1,17 @@
 \boste{What is the DDG? } \\ 
 \boste{Why do we want a DDG?} \\
 \boste{What properties should it have and why?} \\
-The vertices $V$ in the dependecy directed graph (DDG) $G=(V,A)$ initially only represent the variables and the 
-constraints where the varible vertices only have outgoing arcs to the constraints they participate in. We want to 
-change the CSOP model to a model more suited for local search, a CBLS model. The initial model wil be modified by 
-introducing invariants defined by oneway constriants and vertices representing invarints will be added to the graph 
+The vertices $V$ in the dependency directed graph (DDG) $G=(V,A)$ initially only represent the variables and the 
+constraints where the variable vertices only have outgoing arcs to the constraints they participate in. We want to 
+change the CSOP model to a model more suited for local search, a CBLS model. The initial model will be modified by 
+introducing invariants defined by oneway constraints and vertices representing invarints will be added to the graph 
 $G$.  \\
 The graph can be illustrated with all the variable vertices to the left and all constraint vertices to the right. 
-Then the invariants vertices will be added in the middel. \\  
+Then the invariants vertices will be added in the middle. \\  
 The invariants represents variables that are defined by oneway constraints or they can represent 
-auxiliary variables used in the local search.
+auxiliary variables used in the local search. If a variable is defined by a oneway constraint the variable vertex is 
+removed from $G$ since we no longer changes the value of that variable directly. \boste{is it clear what that means? 
+(directly)} \\ 
 From now on when talking about vertices in $G$ it refers to the variable, invariant or constraint it represents unless 
 other stated. \\
 %The variables are non-fixed and non-defined and only have outgoing arcs. 
@@ -17,12 +19,17 @@ The vertex $v \in V$ has an outgoing arc to vertex $u \in V$ if and only if the 
 the value of $v$.
 %Variables and invariants has an outgoing arc to the invariants that 
 %depends on their value. \\ 
-The DDG is needed in order to evaluate and update values of variables and invariants during local search. Local search 
-is only performed on the variables 
-
-
-
-Let us consider the following example with three variables and a two constraint.
+The DDG is needed in order to evaluate and update values of variables and invariants during local search. The graph 
+$G$ is used to build the propagation queues described in subsection \ref{sec_propaqueue}. \\ 
+It gets complicated to compute the propagation queues if there exist a strongly connected component in $G$. A 
+\emph{strongly connected component} (scc) is a maximal set of vertices $V^{SCC}$ such that for each pair of vertices 
+$(u,v) \in V^{SCC}$ there exist both a path from $u$ to $v$ and a path from $v$ to $u$ \cite[p. 1170]{cormen}. \\ 
+Only invariant vertices can be part of a strongly connected component of size at least two, since variables vertices 
+only have outgoing arcs and constraint vertices only have ingoing arcs. This indicates that there could be circular 
+definition of variables. Because of this we want to avoid ending up with strongly connected components in the graph 
+$G$. \medskip \\ 
+This small example with three variables and a two constraint illustrates a possible graph $G$ and how invariants are 
+introduced. 
 \begin{center}
 \begin{tabular}{rlr}
 $ c_1: $&$2x_1 + x_2 - x_3 $&$= 2$ \\
@@ -78,12 +85,12 @@ an outgoing arc to $i_2$ and $i_2$ have an outgoing arc to $c_2$.
 %\end{minipage}
  
 \boste{start on algorithms}
-The DDG $G$ is initially a bipartite graph where all the decision variables $X$ are vertices in one set and all the 
-constraints $C$ are vertices in the other set. If constraint $c$ applies to a variable $x$ then there is an arc from 
-the vertex representing $x$ to the vertex representing $c$. \\    
+%The DDG $G$ is initially a bipartite graph where all the decision variables $X$ are vertices in one set and all the 
+%constraints $C$ are vertices in the other set. If constraint $c$ applies to a variable $x$ then there is an arc from 
+%the vertex representing $x$ to the vertex representing $c$. \\    
 First all integer variables $Y$ in the CSOP $\mathbb{P}$ \boste{Should I call the models CSOP or just model?} get 
-defined by oneway constraints by algorithm 
-\ref{algo_makeints}. If some of the integer varibles cannot be defined \boste{Currently report fail and exit}. 
+defined by oneway constraints by algorithm \ref{algo_makeints}. If some of the integer variables cannot be defined 
+\boste{Currently report fail and exit}. 
 \\
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -195,17 +202,17 @@ set $U$ \tcp*[r]{new variable set}
 double $b' = \frac{B(c_j)}{c_{ij}}$ \;
 \boste{coefficients can now be doubles (non integer)} \;
 \If{$c_j$ \upshape is linear equality}{
-  \textbf{oneway} $c' = $ new oneway($U$,$Q$,$b'$)\;
-  $G$ = $G \cup \{c'\}$\; 
+  \textbf{invariant} $inv = $ new \Sum($U$,$Q$,$b'$)\;
+  $G$ = $G \cup \{inv\}$\; 
   $G$ = $G \setminus \{c_j\}$\; 
   %\boste{Maybe remove $c$ from $G$}
   %\Return{\Sum{$V(c)$,$A(c)$,b}}
 } \Else {
     \boste{Remember to say all constraints are either LQ or EQ} \;
-    \textbf{oneway} $c' = $ new oneway($U$,$Q$,$b'$)\;
-    Invariant $c'' = $ new \Max{$c'$,lowerbound($y_i$)}\;
-    $G$ = $G \cup c'$\; 
-    $G$ = $G \cup c''$\; 
+    \textbf{invariant} $ inv= $ new \Sum($U$,$Q$,$b'$)\;
+    \textbf{Invariant} $ inv' = $ new \Max{$inv$,lowerbound($y_i$)}\;
+    $G$ = $G \cup inv$\; 
+    $G$ = $G \cup inv'$\; 
     $G$ = $G \setminus \{c_j\}$\; 
 % \boste{Maybe remove $c$ from $G$}
   %\Return{\Max{inv,b}}
@@ -213,12 +220,14 @@ double $b' = \frac{B(c_j)}{c_{ij}}$ \;
 
  \caption{makeIntVarOneway(\textsf{Variable} $y_i$, \textsf{Constraint} $c_j$)} \label{algo_makeintoneway}
  %\caption{Make one-way constraint from $c$ defining variable $x$ } \label{algo_makeoneway}
- \end{algorithm}\DecMargin{1em}
-If the constraint $c_j$ is a linear equality constraint a new oneway constraint $c'$ is made by isolating $y_i$ on 
-the right side. Then $c'$ is added to $G$ and $c_j$ is removed from $G$. If $c_j$ is not a linear equality constraint 
-then it is a linear constraint with an upper bound $B(c_j)$. Since $c_ij$, the coefficient of $y_i$ in $c_j$, is 
-negative $y_i$ can be isolated on the right hand side so $y_i$ is the upper bound for the left hand side. The 
-coefficients of $y_i$ in the objective functions are non-negative   
+ \end{algorithm}\DecMargin{1em} \noindent 
+If the constraint $c_j$ is a linear equality constraint, an invariant $inv$ is defined by a new oneway constraint. The 
+oneway constraint is made by isolating $y_i$ on the right side in $c_j$. Then $inv$ is added to $G$ and $c_j$ is 
+removed from $G$. \\ 
+If $c_j$ is not a linear equality constraint then it is a linear constraint with an upper bound $B(c_j)$. Since $c_ij$, 
+the coefficient of $y_i$, in $c_j$ is negative $y_i$ can be isolated on the right hand side as an upper bound. The 
+coefficients of $y_i$ in the objective functions are non-negative, know from algorithm \ref{algo_checkintoneway} line 
+\ref{objectivecoef}. Variable    
 
 
 Once all integer variables 

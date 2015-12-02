@@ -25,7 +25,7 @@ public:
         //        invariant = lhs;
         this->variables = variables;
         for (unsigned i = 0; i < variables.size(); i++) {
-            int id = variables.at(i)->getID();
+//            int id = variables.at(i)->getID();
 //            this->coefficients[id] = coefficients.at(i);
             std::pair<int, coefType> coef(variables.at(i)->getID(), coefficients.at(i));
             this->coefficients.insert(coef);

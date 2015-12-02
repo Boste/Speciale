@@ -74,48 +74,50 @@ void LSSpace::initializeLS() {
     // ################################################################################################
     // Make oneway for integer vars
     // ################################################################################################
-    std::vector<IntegerVariable*> queue = model->getIntegerVariables();
-    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
-    
-    bool change = true;
-    while (queue.size() != 0 && change) {
-        //        std::cout << queue.size() << std::endl;
-        //        debug;
-        //            iter++;
-        //            std::cout << "iterations in while " << iter << std::endl;
-        //            std::cout << " queue size " << queue.size() << std::endl;
-        change = false;
-        for (auto it = queue.begin(); it != queue.end(); ++it) {
-            IntegerVariable* iv = *it;
-            if (iv->isFixed()) {
-                continue;
-            }
-            VariableInConstraints constraints = iv->usedInConstraints();
-//            std::sort(constraints.begin(),constraints.end(), Constraint::Sortlower());
-            for (constraint cons : constraints) {
-                //                iv->usedInConstraints()
-                if (intVarCanBeMadeOneway(iv, cons)) {
-                    makeIntVarOneway(iv, cons);
-                    //                    numberOfOneway++;
-                    queue.erase(it);
-                    it--;
-                    change = true;
-                    //                        model->getIntegerVariables().erase(it);
-                    //                    madeOneway = true;
-                    break;
-                }
-            }
-        }
-        //            layer++;
-    }
-    unsigned numberOfIntegerVariableNotDefined = queue.size();
-    if (numberOfIntegerVariableNotDefined == 0) {
-        std::cout << "All integer variables could be defined by a oneway" << std::endl;
-    } else {
-        std::cout << "All integer variables could NOT be defined by a oneway. Still " << numberOfIntegerVariableNotDefined << " left out of " << model->getIntegerVariables().size() << std::endl;
-        debug;
-        exit(1);
-    }
+    //    std::vector<IntegerVariable*> queue = model->getIntegerVariables();
+    //    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
+    //    
+    //    bool change = true;
+    //    while (queue.size() != 0 && change) {
+    //        
+    //                std::cout << queue.size() << std::endl;
+    //        //        debug;
+    //        //            iter++;
+    //        //            std::cout << "iterations in while " << iter << std::endl;
+    //        //            std::cout << " queue size " << queue.size() << std::endl;
+    //        change = false;
+    //        for (auto it = queue.begin(); it != queue.end(); ++it) {
+    //            IntegerVariable* iv = *it;
+    //            if (iv->isFixed()) {
+    //                continue;
+    //            }
+    //            VariableInConstraints constraints = iv->usedInConstraints();
+    ////            std::sort(constraints.begin(),constraints.end(), Constraint::Sortlower());
+    //            for (constraint cons : constraints) {
+    //                //                iv->usedInConstraints()
+    //                if (intVarCanBeMadeOneway(cons)) {
+    ////                    makeIntVarOneway(iv, cons);
+    //                    makeOneway(iv, cons);
+    //                    //                    numberOfOneway++;
+    //                    queue.erase(it);
+    //                    it--;
+    //                    change = true;
+    //                    //                        model->getIntegerVariables().erase(it);
+    //                    //                    madeOneway = true;
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //        //            layer++;
+    //    }
+    //    unsigned numberOfIntegerVariableNotDefined = queue.size();
+    //    if (numberOfIntegerVariableNotDefined == 0) {
+    //        std::cout << "All integer variables could be defined by a oneway" << std::endl;
+    //    } else {
+    //        std::cout << "All integer variables could NOT be defined by a oneway. Still " << numberOfIntegerVariableNotDefined << " left out of " << model->getIntegerVariables().size() << std::endl;
+    //        debug;
+    ////        exit(1);
+    //    }
     //    std::cout << queue.size() << std::endl;
     //    debug;
 
@@ -176,13 +178,7 @@ void LSSpace::initializeLS() {
     //    std::cout << "sum " << sum << std::endl;
     //    std::cout << "Number " << number << std::endl;
     //    DDG->cleanUpGraph(model->getAllVariables());
-    DDG->checkForCycles(model->getInvariants());
-    std::cout << "Check for cycles should be done until no cycle is found" << std::endl;
-    std::cout << "Only finds biggest SCC, can be made of smaller SCC" << std::endl;
-    model->cleanUp();
-    for (constraint cons : *model->getObjectives()) {
-        assert(!cons->isOneway());
-    }
+
     for (unsigned i = 0; i < model->getConstraints().size(); i++) {
         for (constraint cons : *model->getConstraintsWithPriority(i)) {
             if (!cons->isOneway()) {
@@ -222,6 +218,14 @@ void LSSpace::initializeLS() {
         }
 
     }
+    DDG->checkForCycles(model->getInvariants());
+    std::cout << "Check for cycles should be done until no cycle is found" << std::endl;
+    std::cout << "Only finds biggest SCC, can be made of smaller SCC" << std::endl;
+    model->cleanUp();
+    for (constraint cons : *model->getObjectives()) {
+        assert(!cons->isOneway());
+    }
+
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     std::cout << "Create propagator queues" << std::endl;
     DDG->createPropagationQueue(model->getAllVariables(), model->getInvariants());
@@ -267,9 +271,9 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
     if (cons->isOneway()) {
         return false;
     }
-    if (cons->getPriority() == OBJ) {
-        return false;
-    }
+    //    if (cons->getPriority() == OBJ) {
+    //        return false;
+    //    }
     if (cons->getArgument(0) == LQ) {
         return false;
     }
@@ -280,7 +284,7 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
     unsigned prio = 0;
     unsigned equalCounter = 0;
     unsigned defined = std::numeric_limits<unsigned int>::max();
-    unsigned constraintsApllyingToiv = std::numeric_limits<unsigned>::max();
+    unsigned constraintsApplyingToiv = std::numeric_limits<unsigned>::max();
     for (IntegerVariable* iv : cons->getVariables()) {
         if (iv->isFixed()) {
             continue;
@@ -296,19 +300,29 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
         if (defined > defining.at(iv->getID())) {
             bestVar = iv;
             canBeMadeOneway = true;
-            constraintsApllyingToiv = iv->usedIn;
+            constraintsApplyingToiv = iv->usedIn;
             prio = iv->getSerachPriority();
             prevEqual = 1;
             defined = defining.at(iv->getID());
             continue;
-
         } else if (defined < defining.at(iv->getID())) {
+            continue;
+        }
+        if (iv->isIntegerVariable() < bestVar->isIntegerVariable()) {
+            continue;
+        } else if (iv->isIntegerVariable() > bestVar->isIntegerVariable()) {
+            bestVar = iv;
+            canBeMadeOneway = true;
+            constraintsApplyingToiv = iv->usedIn;
+            prio = iv->getSerachPriority();
+            prevEqual = 1;
+            defined = defining.at(iv->getID());
             continue;
         }
         if (iv->getSerachPriority() > prio) {
             bestVar = iv;
             canBeMadeOneway = true;
-            constraintsApllyingToiv = iv->usedIn;
+            constraintsApplyingToiv = iv->usedIn;
             prio = iv->getSerachPriority();
             prevEqual = 1;
             defined = defining.at(iv->getID());
@@ -316,23 +330,22 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
         } else if (iv->getSerachPriority() < prio) {
             continue;
         }
-        if (iv->usedIn < constraintsApllyingToiv) {
+        if (iv->usedIn < constraintsApplyingToiv) {
             bestVar = iv;
             canBeMadeOneway = true;
-            constraintsApllyingToiv = iv->usedIn;
+            constraintsApplyingToiv = iv->usedIn;
             prio = iv->getSerachPriority();
             prevEqual = 1;
             defined = defining.at(iv->getID());
-        } else if (iv->usedIn == constraintsApllyingToiv) {
+        } else if (iv->usedIn == constraintsApplyingToiv) {
             int choose = Random::Integer(prevEqual);
             prevEqual++;
-            //            ties++;
-
+            //            ties++
             equalCounter++;
             if (choose == 0) {
                 bestVar = iv;
                 canBeMadeOneway = true;
-                constraintsApllyingToiv = iv->usedIn;
+                constraintsApplyingToiv = iv->usedIn;
                 prio = iv->getSerachPriority();
                 defined = defining.at(iv->getID());
             }
@@ -350,13 +363,16 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
     return false;
 }
 
-bool LSSpace::intVarCanBeMadeOneway(IntegerVariable* iv, constraint cons) {
+bool LSSpace::intVarCanBeMadeOneway(constraint cons) {
     if (cons->isOneway()) {
         return false;
     }
-//    if (cons->getPriority() == OBJ) {
-//        return false;
-//    }
+    //    if (cons->getPriority() == OBJ) {
+    //        return false;
+    //    }
+    if (cons->getArgument(0) == LQ) {
+        return false;
+    }
     unsigned notDefined = 0;
     for (IntegerVariable* iv : cons->getVariables()) {
         if (iv->isIntegerVariable()) {
@@ -369,128 +385,128 @@ bool LSSpace::intVarCanBeMadeOneway(IntegerVariable* iv, constraint cons) {
     if (notDefined > 1) {
         return false;
     }
-    if (cons->getArgument(0) == LQ) {
-        double coeff = cons->getCoefficients().at(iv->getID());
-        for (constraint cons : *model->getObjectives().get()) {
-            int objCoef = cons->getCoefficients().at(iv->getID());
-            if ((objCoef < 0 || coeff > 0)) {
-                std::cout << "Coefficient fail" << std::endl;
-                return false;
-            }
-        }
-    } else {
-        //        std::cout << "equal constraint" << std::endl;
-        return true;
-    }
+    //    if (cons->getArgument(0) == LQ) {
+    //        double coeff = cons->getCoefficients().at(iv->getID());
+    //        for (constraint cons : *model->getObjectives().get()) {
+    //            int objCoef = cons->getCoefficients().at(iv->getID());
+    //            if ((objCoef < 0 || coeff > 0)) {
+    //                std::cout << "Coefficient fail" << std::endl;
+    //                return false;
+    //            }
+    //        }
+    //    } else {
+    //        //        std::cout << "equal constraint" << std::endl;
+    //        return true;
+    //    }
     ////                makeOneway(iv, cons, coeff);
     return true;
     //            }
 
 }
 
-void LSSpace::makeIntVarOneway(IntegerVariable* iv, constraint cons) {
-    variableContainer& oldVars = cons->getVariables();
-    std::unordered_map<int, coefType> coefficients = cons->getCoefficients();
-    std::unordered_map<int, coefType> newCoefficients;
-    double coeff = coefficients.at(iv->getID());
-    //    std::cout << cons->getArgument(1) << "  "<< coeff<< std::endl;
-    double value = -cons->getArgument(1);
-    if (coeff == -1) {
-        for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
-            std::pair<int, coefType> coef(it->first, it->second);
-            newCoefficients.insert(coef); //[it->first] = it->second;
-        }
-    } else {
-        for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
-            std::pair<int, coefType> coef(it->first, it->second / (-coeff));
-            newCoefficients.insert(coef);
-        }
-        value = value / (-coeff);
-    }
-    newCoefficients.erase(iv->getID());
-    std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(newCoefficients);
-    variableContainer vars;
-    InvariantContainer invars;
-    variableContainer varsAndInvars;
-    sumInvariant->setStartValue(value);
-    for (IntegerVariable* oldiv : oldVars) {
-        if (oldiv != iv) {
-            varsAndInvars.push_back(oldiv);
-            unsigned id = oldiv->getID();
-            value += newCoefficients.at(id) * (oldiv->getCurrentValue()*1.0);
-            //                std::cout << newCoefficients.at(id) << oldiv->getCurrentValue() << " + ";
-            defining.at(oldiv->getID())++;
-            if (oldiv->isDef()) {
-                invars.push_back(oldiv->getOneway());
-            } else {
-                vars.push_back(oldiv);
-            }
-
-        }
-    }
-
-    sumInvariant->setVariablePointers(varsAndInvars);
-
-    //        sumInvariant->invariantID = model->getInvariants().size();
-    model->addInvariant(sumInvariant);
-    //        model->addInvariantToDDG(sumInvariant, vars, invars);
-    //    model->addInvariantToDDG(sumInvariant, vars);
-    //    DDG->addInvariant(sumInvariant, vars);
-    if (cons->getArgument(0) == LQ) {
-        DDG->addInvariant(sumInvariant, vars, invars);
-        assert(value == (int) value);
-        assert(iv->getCurrentValue() >= 0);
-        sumInvariant->setValue(value);
-
-        //    if(iv->getID() == 256 ){
-        //        std::cout << value << std::endl;
-        //    }
-
-
-        //        std::shared_ptr<Max> maxInvariant = std::make_shared<Max>(sumInvariant, iv->getLowerBound(), iv->getID(), model->getDDG());
-        std::shared_ptr<Max> maxInvariant = std::make_shared<Max>(sumInvariant, iv->getLowerBound(), iv->getID());
-        InvariantContainer invars;
-        invars.push_back(sumInvariant);
-        model->addInvariant(maxInvariant);
-        maxInvariant->setVariableID(iv->getID());
-
-        DDG->addInvariant(maxInvariant, invars);
-
-        //            sumInvariant->addToUpdate(maxInvariant.get());
-        //            sumInvariant->addToUpdate(maxInvariant);
-        iv->setDefinedBy(maxInvariant, cons);
-        maxInvariant->setBounds(iv->getLowerBound(), iv->getUpperBound());
-        cons->setInvariant(maxInvariant);
-        //            iv->getLowerBound(), 
-        if (value < iv->getLowerBound()) {
-            maxInvariant->setValue(iv->getLowerBound());
-        } else {
-            maxInvariant->setValue(value);
-        }
-
-        if (iv->getCurrentValue() != maxInvariant->getCurrentValue()) {
-            std::cout << iv->getCurrentValue() << " vs " << maxInvariant->getCurrentValue() << std::endl;
-        }
-        maxInvariant->test();
-    } else {
-        if (value != iv->getCurrentValue()) {
-            std::cout << value << " vs " << iv->getCurrentValue() << " ";
-        }
-        iv->setDefinedBy(sumInvariant, cons);
-        cons->setInvariant(sumInvariant);
-        sumInvariant->setVariableID(iv->getID());
-        DDG->addInvariant(sumInvariant, vars, invars);
-        assert(value == (int) value);
-        assert(iv->getCurrentValue() >= 0);
-        sumInvariant->setValue(value);
-        sumInvariant->setBounds(iv->getLowerBound(), iv->getUpperBound());
-        if (!sumInvariant->test()) {
-            std::cout << "failed sumInvariant in creation" << std::endl;
-            debug;
-        }
-    }
-    cons->isOneway(true);
-}
+//void LSSpace::makeIntVarOneway(IntegerVariable* iv, constraint cons) {
+//    variableContainer& oldVars = cons->getVariables();
+//    std::unordered_map<int, coefType> coefficients = cons->getCoefficients();
+//    std::unordered_map<int, coefType> newCoefficients;
+//    double coeff = coefficients.at(iv->getID());
+//    //    std::cout << cons->getArgument(1) << "  "<< coeff<< std::endl;
+//    double value = -cons->getArgument(1);
+//    if (coeff == -1) {
+//        for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
+//            std::pair<int, coefType> coef(it->first, it->second);
+//            newCoefficients.insert(coef); //[it->first] = it->second;
+//        }
+//    } else {
+//        for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
+//            std::pair<int, coefType> coef(it->first, it->second / (-coeff));
+//            newCoefficients.insert(coef);
+//        }
+//        value = value / (-coeff);
+//    }
+//    newCoefficients.erase(iv->getID());
+//    std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(newCoefficients);
+//    variableContainer vars;
+//    InvariantContainer invars;
+//    variableContainer varsAndInvars;
+//    sumInvariant->setStartValue(value);
+//    for (IntegerVariable* oldiv : oldVars) {
+//        if (oldiv != iv) {
+//            varsAndInvars.push_back(oldiv);
+//            unsigned id = oldiv->getID();
+//            value += newCoefficients.at(id) * (oldiv->getCurrentValue()*1.0);
+//            //                std::cout << newCoefficients.at(id) << oldiv->getCurrentValue() << " + ";
+//            defining.at(oldiv->getID())++;
+//            if (oldiv->isDef()) {
+//                invars.push_back(oldiv->getOneway());
+//            } else {
+//                vars.push_back(oldiv);
+//            }
+//
+//        }
+//    }
+//
+//    sumInvariant->setVariablePointers(varsAndInvars);
+//
+//    //        sumInvariant->invariantID = model->getInvariants().size();
+//    model->addInvariant(sumInvariant);
+//    //        model->addInvariantToDDG(sumInvariant, vars, invars);
+//    //    model->addInvariantToDDG(sumInvariant, vars);
+//    //    DDG->addInvariant(sumInvariant, vars);
+////    if (cons->getArgument(0) == LQ) {
+////        DDG->addInvariant(sumInvariant, vars, invars);
+////        assert(value == (int) value);
+////        assert(iv->getCurrentValue() >= 0);
+////        sumInvariant->setValue(value);
+////
+////        //    if(iv->getID() == 256 ){
+////        //        std::cout << value << std::endl;
+////        //    }
+////
+////
+////        //        std::shared_ptr<Max> maxInvariant = std::make_shared<Max>(sumInvariant, iv->getLowerBound(), iv->getID(), model->getDDG());
+////        std::shared_ptr<Max> maxInvariant = std::make_shared<Max>(sumInvariant, iv->getLowerBound(), iv->getID());
+////        InvariantContainer invars;
+////        invars.push_back(sumInvariant);
+////        model->addInvariant(maxInvariant);
+////        maxInvariant->setVariableID(iv->getID());
+////
+////        DDG->addInvariant(maxInvariant, invars);
+////
+////        //            sumInvariant->addToUpdate(maxInvariant.get());
+////        //            sumInvariant->addToUpdate(maxInvariant);
+////        iv->setDefinedBy(maxInvariant, cons);
+////        maxInvariant->setBounds(iv->getLowerBound(), iv->getUpperBound());
+////        cons->setInvariant(maxInvariant);
+////        //            iv->getLowerBound(), 
+////        if (value < iv->getLowerBound()) {
+////            maxInvariant->setValue(iv->getLowerBound());
+////        } else {
+////            maxInvariant->setValue(value);
+////        }
+////
+////        if (iv->getCurrentValue() != maxInvariant->getCurrentValue()) {
+////            std::cout << iv->getCurrentValue() << " vs " << maxInvariant->getCurrentValue() << std::endl;
+////        }
+////        maxInvariant->test();
+////    } else {
+//        if (value != iv->getCurrentValue()) {
+//            std::cout << value << " vs " << iv->getCurrentValue() << " ";
+//        }
+//        iv->setDefinedBy(sumInvariant, cons);
+//        cons->setInvariant(sumInvariant);
+//        sumInvariant->setVariableID(iv->getID());
+//        DDG->addInvariant(sumInvariant, vars, invars);
+//        assert(value == (int) value);
+//        assert(iv->getCurrentValue() >= 0);
+//        sumInvariant->setValue(value);
+//        sumInvariant->setBounds(iv->getLowerBound(), iv->getUpperBound());
+//        if (!sumInvariant->test()) {
+//            std::cout << "failed sumInvariant in creation" << std::endl;
+//            debug;
+//        }
+////    }
+//    cons->isOneway(true);
+//}
 
 //void LSSpace::makeOneway(IntegerVariable* iv, constraint cons, double coeff) {
 

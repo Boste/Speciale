@@ -14,22 +14,20 @@
 \contentsline {subsection}{\numberline {2.3}Objective Functions}{5}
 \contentsline {section}{\numberline {3}Previous Work}{5}
 \contentsline {subsection}{\numberline {3.1}Comet}{5}
-\contentsline {subsubsection}{\numberline {3.1.1}Invariants}{6}
-\contentsline {subsubsection}{\numberline {3.1.2}Differentiable Objects}{6}
-\contentsline {subsection}{\numberline {3.2}Gecode}{7}
-\contentsline {subsection}{\numberline {3.3}LocalSolver}{7}
-\contentsline {subsection}{\numberline {3.4}OscaR}{7}
-\contentsline {section}{\numberline {4}Preprocessing and Initial Solution}{7}
-\contentsline {subsection}{\numberline {4.1}Domain Reduction}{7}
-\contentsline {subsection}{\numberline {4.2}Finding an Initial Solution}{7}
-\contentsline {section}{\numberline {5}Structuring Local Search Model}{7}
-\contentsline {subsection}{\numberline {5.1}Simplification and Dependency Digraph}{8}
-\contentsline {subsection}{\numberline {5.2}Propagation Queue}{8}
-\contentsline {section}{\numberline {6}Local Search Engine}{8}
-\contentsline {subsection}{\numberline {6.1}Neighborhoods}{8}
-\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{8}
-\contentsline {section}{\numberline {7}Metaheuristics}{8}
-\contentsline {section}{\numberline {8}Tests}{8}
-\contentsline {section}{\numberline {9}Results}{8}
-\contentsline {section}{\numberline {10}Future Work}{8}
-\contentsline {section}{\numberline {11}Conclusion}{9}
+\contentsline {subsection}{\numberline {3.2}Gecode}{5}
+\contentsline {subsection}{\numberline {3.3}LocalSolver}{5}
+\contentsline {subsection}{\numberline {3.4}OscaR}{5}
+\contentsline {section}{\numberline {4}Preprocessing and Initial Solution}{5}
+\contentsline {subsection}{\numberline {4.1}Domain Reduction}{5}
+\contentsline {subsection}{\numberline {4.2}Finding an Initial Solution}{5}
+\contentsline {section}{\numberline {5}Structuring Local Search Model}{5}
+\contentsline {subsection}{\numberline {5.1}Simplification and Dependency Digraph}{6}
+\contentsline {subsection}{\numberline {5.2}Propagation Queue}{10}
+\contentsline {section}{\numberline {6}Local Search Engine}{12}
+\contentsline {subsection}{\numberline {6.1}Neighborhoods}{12}
+\contentsline {subsubsection}{\numberline {6.1.1}Neighborhood Operations}{12}
+\contentsline {section}{\numberline {7}Metaheuristics}{12}
+\contentsline {section}{\numberline {8}Tests}{12}
+\contentsline {section}{\numberline {9}Results}{12}
+\contentsline {section}{\numberline {10}Future Work}{12}
+\contentsline {section}{\numberline {11}Conclusion}{12}

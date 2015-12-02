@@ -596,16 +596,16 @@ void DependencyDigraph::createPropagationQueue(variableContainer & vars, Invaria
 
 
     //    std::cout << "Do something here" << std::endl;
-    for (invariant inv : invars) {
-        //        if (brokenInvariants.at(inv->getID())) {
-        //            continue;
-        //        }
-        std::shared_ptr<invariantNode> in = invariant_nodes.at(inv->getID());
-        if (in->timestamp == 0) {
-            DFS(in);
-        }
-        assert(inv->getTimestamp() != 0);
-    }
+//    for (invariant inv : invars) {
+//        //        if (brokenInvariants.at(inv->getID())) {
+//        //            continue;
+//        //        }
+//        std::shared_ptr<invariantNode> in = invariant_nodes.at(inv->getID());
+//        if (in->timestamp == 0) {
+//            DFS(in);
+//        }
+//        assert(inv->getTimestamp() != 0);
+//    }
     assert(cycleCounter == 0);
     //    int counter = 0;
     //    int totalQueueSize = 0;

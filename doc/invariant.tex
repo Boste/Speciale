@@ -1,11 +1,12 @@
-\emph{Invariants} are variables, whose value are functionally defined by other variables. Invariants are introduced by 
-the solver and neither the variable defined nor the variables defining the variable need not to be decision variables 
-in the CSP or CSOP but can be auxiliary variables whose value are of interest. \\ 
-\emph{One-way constraints} are constraints that defines the value of an invariant. 
+\emph{Invariants} are variables, whose value are functionally defined by other variables and/or invariants. 
+In this solver invariants cannot be defined by the user but are introduced by the solver, to define variables in the 
+CSOP or auxiliary variables whose value are of interest. \\ 
+\emph{One-way constraints} are constraints that functionally defines the value of an invariant.
 \begin{equation}
  x = f(\mathbf{z}) 
 \end{equation}
 $f(\mathbf{z})$ is a \oneway with a set of input variables $z$ that functionally defines the \invar $x$. \\ \medskip
+
 
 
 

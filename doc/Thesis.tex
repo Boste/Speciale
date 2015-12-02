@@ -6,7 +6,7 @@
 \usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{tkz-graph}
-
+\usepackage{caption}
 
 \usepackage{algorithmic}
 %\usepackage{algorithm}
@@ -28,6 +28,7 @@
 %\end{abstract}
 %\newpage
 \tableofcontents
+\listoffigures
 \newpage
 \section{Introduction}
   \subsection{Discrete Optimization}
@@ -56,7 +57,7 @@
 
 \section{Previous Work}
   \subsection{Comet}
-  \input{comet}
+  %\input{comet}
   \subsection{Gecode}
   \subsection{LocalSolver}
   \subsection{OscaR}
@@ -70,13 +71,13 @@
 \section{Structuring Local Search Model}
 \input{strucLS}
   \subsection{Simplification and Dependency Digraph}
-%    \input{ddg} \label{sec_ddg}
+    \input{ddg} \label{sec_ddg}
   \subsection{Propagation Queue}  
     \input{propaqueue}\label{sec_propaqueue}
     
   
   
-\section{Local Search Engine}
+\section{Local Search Engine} \label{sec_local}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}
 \section{Metaheuristics}

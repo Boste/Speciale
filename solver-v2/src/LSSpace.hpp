@@ -41,8 +41,8 @@ public:
     //        bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
     bool canBeMadeOneway(constraint cons);
     void makeOneway(IntegerVariable* iv, constraint cons);
-    bool intVarCanBeMadeOneway(IntegerVariable* iv, constraint cons);
-    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
+    bool intVarCanBeMadeOneway(constraint cons);
+//    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
     void optimizeSolution(int time);
     //    void simpleMove(int variabelNr);
     //    bool bestImprovement();

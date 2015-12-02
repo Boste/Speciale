@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  26 NOV 2015 16:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  2 DEC 2015 11:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -681,18 +681,35 @@ File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
 \c@tkz@gr@ta=\count141
 \c@tkz@gr@tb=\count142
 )
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen171
+\captionmargin@=\dimen172
+\captionwidth=\dimen173
+\caption@tempdima=\dimen174
+\caption@indent=\dimen175
+\caption@parindent=\dimen176
+\caption@hangindent=\dimen177
+)
+\c@ContinuedFloat=\count143
+Package caption Info: listings package is loaded.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count143
-\c@ALC@line=\count144
-\c@ALC@rem=\count145
-\c@ALC@depth=\count146
+\c@ALC@unique=\count144
+\c@ALC@line=\count145
+\c@ALC@rem=\count146
+\c@ALC@depth=\count147
 \ALC@tlm=\skip50
 \algorithmicindent=\skip51
 )
 (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count147
+\c@AlgoLine=\count148
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -715,12 +732,12 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \skiplength=\skip57
 \algomargin=\skip58
 \skipalgocfslide=\skip59
-\algowidth=\dimen171
-\inoutsize=\dimen172
-\inoutindent=\dimen173
-\interspacetitleruled=\dimen174
-\interspacealgoruled=\dimen175
-\interspacetitleboxruled=\dimen176
+\algowidth=\dimen178
+\inoutsize=\dimen179
+\inoutindent=\dimen180
+\interspacetitleruled=\dimen181
+\interspacealgoruled=\dimen182
+\interspacetitleboxruled=\dimen183
 \algocf@inoutbox=\box39
 \algocf@inputbox=\box40
 \AlCapSkip=\skip60
@@ -735,9 +752,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip65
 \algotitleheightruledefault=\skip66
 \algotitleheightrule=\skip67
-\c@algocfline=\count148
-\c@algocfproc=\count149
-\c@algocf=\count150
+\c@algocfline=\count149
+\c@algocfproc=\count150
+\c@algocf=\count151
 \algocf@algoframe=\box45
 \algocf@algobox=\box46
 )
@@ -759,22 +776,24 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
-\c@lstlisting=\count151
+\c@lstlisting=\count152
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count152
-\scratchdimen=\dimen177
+\scratchcounter=\count153
+\scratchdimen=\dimen184
 \scratchbox=\box47
-\nofMPsegments=\count153
-\nofMParguments=\count154
+\nofMPsegments=\count154
+\nofMParguments=\count155
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count155
-\MPscratchDim=\dimen178
-\MPnumerator=\count156
-\makeMPintoPDFobject=\count157
+\MPscratchCnt=\count156
+\MPscratchDim=\dimen185
+\MPnumerator=\count157
+\makeMPintoPDFobject=\count158
 \everyMPtoPDFconversion=\toks35
 ) ABD: EveryShipout initializing macros
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -796,61 +815,67 @@ LaTeX Warning: No \author given.
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [2]
-(./vars.tex) (./cons.tex [3]) (./implicitCons.tex) (./invariant.tex)
-(./softCons.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--54
+
+(./Thesis.lof)
+\tf@lof=\write5
+\openout5 = `Thesis.lof'.
+
+ [2] (./vars.tex) (./cons.tex [3]) (./implicitCons.tex)
+(./invariant.tex) (./softCons.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--55
 
  []
 
-(./objFunc.tex) (./comet.tex [4]) [5] (./dom.tex) (./inisol.tex) (./strucLS.tex
+(./objFunc.tex) (./dom.tex) (./inisol.tex) (./strucLS.tex [4]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
 
-LaTeX Warning: Reference `sec_ddg' on page 6 undefined on input line 3.
-
-[6]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 15.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
-) (./propaqueue.tex [7]) (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--87
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
+) (./ddg.tex [5]
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 76--119
 
  []
 
-[8] (./Thesis.bbl
+[7]
+Overfull \vbox (33.60535pt too high) has occurred while \output is active []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [9] (./Thesis.aux)
+[8] [9]) (./propaqueue.tex [10]) (./future.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--88
 
-LaTeX Warning: There were undefined references.
+ []
 
- ) 
+[11] (./Thesis.bbl) [12] (./Thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 15168 strings out of 495032
- 260000 string characters out of 6181718
- 339963 words of memory out of 5000000
- 18061 multiletter control sequences out of 15000+600000
- 13678 words of font info for 52 fonts, out of 8000000 for 9000
+ 16009 strings out of 495032
+ 277515 string characters out of 6181718
+ 362638 words of memory out of 5000000
+ 18892 multiletter control sequences out of 15000+600000
+ 13847 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,6n,60p,418b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (9 pages, 163536 bytes).
+ 56i,15n,92p,418b,673s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (12 pages, 197527 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

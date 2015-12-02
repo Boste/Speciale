@@ -174,7 +174,7 @@ void GecodeSolver::branch() {
         }
         //        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
         Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-//        Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+        //        Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -225,6 +225,8 @@ bool GecodeSolver::initialize(int TimeForGecode, bool fix) {
 
 bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    postCovSol();
+    //    this->print(std::cout);
+
     branch();
     //    std::cout << "TimeForGecode " << TimeForGecode << std::endl;
     //    std::cout << IntVars->size() << std::endl;
@@ -235,9 +237,27 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     Multistop* ms = new Multistop(0, 0, TimeForGecode * 1000);
     Gecode::Search::Options* so = new Gecode::Search::Options();
     so->stop = ms;
-    
+
     //    this->print(std::cout);
     printSpaceStatus();
+    unsigned ub = 0;
+    unsigned lb = 0;
+    for (IntVar iv : AllVars) {
+        if (iv.max() != 1) {
+            if (iv.max() != 2147483646) {
+                ub++;
+                //                std::cout << iv->getUpperBound() << std::endl;
+            }
+        }
+        if (iv.min() != 0) {
+            lb++;
+            std::cout << iv.min() << std::endl;
+        }
+    }
+    std::cout << "lb " << lb << " ub " << ub << std::endl;
+
+
+    //    this->print(std::cout);
     //    for(IntVar iv : IntVars){
     //        if(iv.assigned()){
     //            std::cout << "assigned" << std::endl;
@@ -246,6 +266,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     if (fix) {
         fixVariables();
     }
+    sleep(4);
+
 
     so->a_d = AllVars.size() - 1;
     so->c_d = AllVars.size() - 1;

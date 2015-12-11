@@ -1,7 +1,9 @@
 #include "BestImprovement.hpp"
 
-BestImprovement::BestImprovement(std::shared_ptr<Model> model, Neighborhood* neighborhood) : SearchEngine(neighborhood) {
+BestImprovement::BestImprovement(std::shared_ptr<Model> model, Neighborhood* neighborhood) {
     this->model = model;
+    NE = neighborhood;
+
 }
 
 //BestImprovement::BestImprovement(const BestImprovement& orig) {
@@ -14,7 +16,7 @@ bool BestImprovement::Start() {
     bool legal = false;
     Move* bestMove;
     Move* mv; // = new Move();
-    
+
     while (!legal) {
         if (NE->hasNext()) {
             bestMove = NE->next();
@@ -122,6 +124,12 @@ bool BestImprovement::Start() {
     if (improvement) {
         /// Returns if it is a legal move or not
         //        Move* move = &bestMove;
+//        for (int d : bestMove->getDeltaVector()) {
+//            std::cout << d << " ";
+//        }
+//        std::cout << std::endl;
+
+
         bool legal = NE->commitMove(bestMove);
         //        bool legal = NE->commitMove(&bestMove);
         if (legal) {

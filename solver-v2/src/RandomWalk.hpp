@@ -8,8 +8,8 @@
 
 class RandomWalk : public SearchEngine {
 public:
-    RandomWalk(std::shared_ptr<Model> model, Neighborhood* NE);
-    bool Start(unsigned  iterations);
+    RandomWalk(std::shared_ptr<Model> model, Neighborhood* NE, unsigned numberOfRandomMoves);
+    bool Start();
 //    RandomWalk(const RandomWalk& orig);
     virtual ~RandomWalk();
 private:

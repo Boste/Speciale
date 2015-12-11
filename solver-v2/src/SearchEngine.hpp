@@ -9,8 +9,8 @@ protected:
 
 public:
 
-    SearchEngine(Neighborhood* neighborhood) {
-        NE = neighborhood;
+    SearchEngine() {
+//        NE = neighborhood;
     }
 
 

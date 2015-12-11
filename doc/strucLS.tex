@@ -1,9 +1,10 @@
 Once an initial solution to the constraint satisfaction problem (CSP) has been found by Gecode the model is transformed 
-to create a model better suited for local search, a CBLS model. Two new structures \boste{concepts, objects? Not sure 
-what to call them} are introduced in this section, dependency directed graph \boste{directed dependency graph?} in 
-subsection \ref{sec_ddg} and propagation queue in subsection \ref{sec_propaqueue}.  The dependency directed graph is 
-used to update invariants dependent when a variable or invariant changes value. A propagation queue $q_i$ is created 
-for each variable $x_i$ and it gives an ordering of the invariants directly or indirectly dependent on $x_i$. \\
+to create a model suited for local search, a CBLS model. Two new datastructures structures are introduced in this 
+section, dependency directed graph in subsection \ref{sec_ddg} and propagation queue in subsection \ref{sec_propaqueue}. 
+\\
+The dependency directed graph is used to update invariants when a variable changes value. A 
+propagation queue $q_i$ is created for each variable $x_i$ that gives an ordering of the invariants reachable from 
+$x_i$ in the dependency directed graph. \\
 %When a variable $x$ changes value other variables dependent on the value of $x$ will need to be updated. To 
 %update those variables and invariants a directed graph $G=(V,A)$ is made, called dependency directed graph, 
 %\emph{DDG}. 
@@ -14,16 +15,7 @@ for each variable $x_i$ and it gives an ordering of the invariants directly or i
 %time when making changes to on or more variables to increase performance. For each variable used in 
 %the local search a \emph{propagation queue} $q$ is made. A propagation queue is the order of which invariant to update 
 %when the associated variable changes value. \boste{Not quite happy about the description here} \medskip \\
-The following changes to the model are made before the local search can begin. 
-\begin{itemize}
- \item Define integer variables by oneway constraints
- \item Define binary variables by oneway constraints 
- \item Create auxiliary invariants for the remaining constraints
- \item Create a dependency directed graph
- \item Create propagation queue for all non-fixed and non-defined variables
-%\item Initialize the invariants
-% \item Initialize the constraints
-% \item Initialize the objective function
-\end{itemize}
-When a variable is defined by a oneway constraint it is transformed into an invariant since its value is dependent on 
-other variables and invariants. 
+
+The model is simplified by defining some of the variables by transforming the functional constraints into oneway 
+constraints using two algorithms described in subsection \ref{sec_ddg}. When a variable is defined by a oneway 
+constraint it is transformed into an invariant since its value is dependent on other variables and invariants. 

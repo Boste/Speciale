@@ -1,0 +1,61 @@
+
+\begin{center}
+\begin{tikzpicture}
+    
+    \node[draw, fit={(0,0)(3,1)}] (Gen)          at (2,0)    {\gensol};
+    \node[draw,fit={(0,0)(2,1)}, align=center]          (Local)         at (6,0)   {Model};
+
+
+    \node[draw,fit={(0,0)(2.5,1)}]          (Gecode)   at (0,-2.3)   {\gecodesol};
+    \node[draw,fit={(0,0)(2.5,1)}]          (LS)  at (4,-2.3)   {\lssol};
+
+    \node (toDestruction)   at (0,-.6){};
+    %  \node (toLocal)         at (3,0){};
+
+    \node (topGecode)      at (-.5,-2.8){};
+    \node (bottomGecode)   at (-.5,-4.68){};
+    \node (topLS)     at (3.5,-2.8){};
+    \node (bottomLS)  at (3.5,-5.22){};
+   % \node (topLocal)            at (5.5,-2.315){};
+   % \node (bottomLocal)         at (5.5,-4.32){};
+
+    \path[->, >=triangle 45, auto, semithick]
+        (Gen) edge (Gecode)
+        (Gen)          edge (LS);
+       % (toLocal)       edge (Local);
+       
+
+    \path
+        (topGecode)    edge (bottomGecode)
+        (topLS)   edge (bottomLS);
+        %(topLocal)          edge (bottomLocal);
+    
+    \node[label=right:Remove K] (RemoveK)   at (-.3,-4){};
+    \node[align=left] (RemoveKSR)   at (1.0,-4.8){Remove K\\same route};
+    \node[align=left] (MakeK)       at (1.15,-5.78){Make K\\feasible gaps};
+
+    %\node[label=right:Fill the gap] (FTG)   at (3.7,-3){};
+   % \node[label=right:K-regret]     (Kreg)  at (3.8,-3.6){K-regret};
+  \node[align=left]     (Kreg)  at (4.8,-3.6){K-regret};
+   \node[align=left] (Solomon) at (4.8,-4.3){Solomon\\insertion};
+    \node[align=left] (GNN)     at (5.1,-5.6){Generalized\\nearest\\neighbour};
+
+    %\node[label=right:2-exchange] (2ex)     at (5.7,-3){};
+    %\node[label=right:2-interchange] (2in)  at (5.7,-3.6){};
+    %\node[label=right:Resequence]   (res)   at (5.7,-4.2){};
+
+    \path[->]
+        (-.5,-4)    edge (-.1,-4)
+        (-.5,-4.6)  edge (-.1,-4.6)
+        (-.5,-5.55) edge (-.1,-5.55)
+       % (3.5,-3)    edge (3.9,-3)
+        (3.5,-3.6)  edge (3.9,-3.6)
+        (3.5,-4.1)  edge (3.9,-4.1)
+        (3.5,-5.1)  edge (3.9,-5.1);
+       % (5.5,-3)    edge (5.9,-3)
+       % (5.5,-3.6)  edge (5.9,-3.6)
+       % (5.5,-4.2)  edge (5.9,-4.2);
+       
+
+    \end{tikzpicture}
+    \end{center}

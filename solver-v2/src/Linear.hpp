@@ -16,13 +16,16 @@ public:
 
     /// Used to create the original (given by user) constraints
 
-    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority) { //: Constraint() {
+    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority)  {
         //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
         //        domainSize = lhs->getVariables().size();
         //        this->lhs = lhs;
         //        invariant = std::move(lhs);
         //        invariant = lhs;
+//        for(IntegerVariable* iv : variables){
+//            this->variables.push_back(iv);
+//        }
         this->variables = variables;
         for (unsigned i = 0; i < variables.size(); i++) {
 //            int id = variables.at(i)->getID();
@@ -71,7 +74,7 @@ public:
 
     ~Linear() {
         //        delete lhs;
-
+        coefficients.clear();
     }
 
 
@@ -81,7 +84,7 @@ public:
     int setDeltaViolation() {
         int deltaValue = 0;
         int currentValue = 0;
-        std::shared_ptr<Invariant> invar = getInvariant();
+        invariant invar = getInvariant();
         //        std::shared_ptr<Invariant> invar = invariant;
         //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
         deltaValue += invar->getDeltaValue();
@@ -156,7 +159,7 @@ public:
 
     int updateViolation() {
         int currentValue = 0;
-        std::shared_ptr<Invariant> invar = getInvariant();
+        invariant invar = getInvariant();
         //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
         currentValue += invar->getCurrentValue();
         //        }
@@ -217,7 +220,7 @@ public:
 
     bool testCons() {
         int currentValue = 0;
-        std::shared_ptr<Invariant> invar = getInvariant();
+        invariant invar = getInvariant();
 
         //        for (std::shared_ptr<Invariant> invar : getInvariant()) {
         currentValue += invar->getCurrentValue();

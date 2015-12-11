@@ -186,6 +186,24 @@ public:
             return (var1->upperBound-var1->lowerBound  > var2->upperBound-var2->lowerBound);
         }
     };
+    struct compare_variable : public std::binary_function<IntegerVariable*, IntegerVariable*, bool> {
+
+//    bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
+//        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+//        //                sleep(1);
+//        return (var1->getID() > var2->getID());
+//    }
+
+    bool operator()(IntegerVariable* var1,IntegerVariable* var2) {
+
+        //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+        //                sleep(1);
+//        unsigned t1 = invariant_nodes.at(invar1->getID())->timestamp; 
+        return (var1->getID() >  var2->getID());
+    }
+   
+};
+    
     
     /// Just for testing
     unsigned numberOfConstraints(){

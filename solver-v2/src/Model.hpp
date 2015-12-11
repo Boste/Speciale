@@ -24,8 +24,12 @@ private:
     std::vector<IntegerVariable*> IntegerVariables;
     /// All constraints posted
     allConstraints Constraints;
+    std::vector<std::set<IntegerVariable*,IntegerVariable::compare_variable>> inConstraintWith;
+//    std::vector<std::vector<constraint>> constraintsWithIntegerVarsRelated;
+    allConstraints constraintsWithIntegerVarsRelated;
+//    std::vector<std::shared_ptr<std::vector<std::pair<IntegerVariable*,int>>>> IntegerVariablesAndChange;
     /// Variables for LS
-    variableContainer LSVariables;
+//    variableContainer LSVariables;
     InvariantContainer objectiveInvariant;
     std::vector<IntegerVariable*> mask;
     std::shared_ptr<DependencyDigraph> DDG = std::make_shared<DependencyDigraph>();
@@ -38,6 +42,7 @@ private:
 public:
     /// Should be moved to state
     std::vector<int> initialEvaluation;
+    bool containsIntegerVariables = false;
 //    int initialValue;
     /// Test if it improves bestImprovement
 //    unsigned highestPriority = 0;
@@ -62,6 +67,7 @@ public:
     std::vector<IntegerVariable*>& getMask();
     void shuffleMask();
     std::shared_ptr<DependencyDigraph>& getDDG();
+    std::set<IntegerVariable*,IntegerVariable::compare_variable>& getInConstraintWithAt(unsigned id);
 
     // Was used aroung line 382 GS. Creating non oneway invariants
 //    void addInvariantToDDG(invariant invar, variableContainer& variables);
@@ -86,7 +92,7 @@ public:
     void setNonFixedVariables(std::vector<IntegerVariable*>& nonFixed);
     variableContainer& getLSVariables();
     InvariantContainer& getInvariants();
-    void addInvariant(std::shared_ptr<Invariant> invar);
+    void addInvariant(invariant invar);
     //    InvariantContainer& getOrgInvariants();
     //    std::vector<Invariant*>* getInvariants();
     void cleanUp();

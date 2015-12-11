@@ -1,0 +1,17 @@
+There exisist several solver for discrete optimization problems such as Cplex, Gurobi, GLPK. These solver can solver 
+various other problems aswell. Binary- and integer linear programming can be used to model a wide 
+range of problems by posting linear constraints and using and a linear objective function. A linear integer program 
+can be writting on the form: 
+\begin{align}
+ \text{Minimize } & \mathbf{c}^T\mathbf{x} \\ 
+ \text{subject to } & A\mathbf{x} \leq \mathbf{b} \\ 
+ & \mathbf{x} \in \mathbb{Z}^n
+\end{align}
+Here $A$ is a $n \times m$ matrix of coefficients, $\mathbf{b} \in \mathbb{R}^m$ and $\mathbf{c} \in 
+\mathbb{R}^n$ . \\ 
+A solution is an assignment of values to all variables $\mathbf{x}$ and a solution is said to be feasible if all 
+constraints are satisfied. The set of feasible solutions consist of integer point in a $n$ dimensional space and the 
+point that minimize the objective function is said to be the optimal solution. \\ 
+Solving a general integer program or binary program is a NP-hard problem and several techniques are developed for 
+solving them. The techniques can be i.e. branch and bound, cutting plane and branch and cut and usually solving an 
+auxiliary linear problem as well. \cite[p. 30]{ilp} \\

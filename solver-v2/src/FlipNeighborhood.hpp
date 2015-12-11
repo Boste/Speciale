@@ -31,10 +31,15 @@ public:
     Move* next();
     bool commitMove(Move* mv);
     bool calculateDelta(Move* mv);
+    Move* nextRandom();
+    bool hasNextRandom();
+    void setRandomCounter(unsigned numberOfRandomMoves);
 
 
 private:
     unsigned moveCounter = 0;
+    unsigned randomCounter = 0;
+    unsigned randomMovesWanted = 0;
     //    template<typename returnType>
     //    std::pair<int, int> calculateDeltaChange(Move* mv, std::shared_ptr<State> st);
 

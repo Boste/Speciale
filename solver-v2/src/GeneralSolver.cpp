@@ -31,6 +31,7 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVa
             iv->addToUsedInConstraints(LinearConstraint);
         }
         if (iv->isInteger) {
+            LinearConstraint->addIntegerVariable(iv);
             numberOfIntegerVariables++;
         }
     }

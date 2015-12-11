@@ -1,0 +1,205 @@
+For each functional constraint $c_j$ two algorithm steps are used to create invariants, one checks if the constraint 
+$c_j$ can be transformed into a oneway constraint and the other transforms $c_j$ into a one-way constraint defining 
+$x_i$.  \\
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+\SetKwFunction{makeOneway}{makeOneway}
+\SetKwFunction{defi}{defines}
+\algdata
+\Input{\funccon $c_j$}
+%\Output{Boolean}
+\BlankLine
+%\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
+%$O(\alpha(c_j))$}}
+% \If{\upshape Number of integer variables not defined $> 1$}{\Return{} \false\; \boste{Needed in order to create the 
+% right update queue}}
+%\If{$|Y(c)| > 1$}{\Return{} \false}
+%\If{\relation{c} \upshape is (==) }{\Return{} \true}
+%\If{$c_j$ \upshape is not a linear equality}{
+%  \Return{} \false}
+%\int coeff = \coeff{c,v}\;
+%\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{	
+%\tcp{Find the best variable to define}
+\var $bestVariable$ = NULL\;
+numberOfTies = 0 \;
+\ForEach{$x_i$ \upshape in $X(c_j)$ }{
+  \If{$x_i$ \upshape is fixed or defined}{
+    \continue
+  }
+  \tcp{Break ties}
+ % bestVariable = \decideBest{$x_i$,bestVariable} \;
+  \If{\defi{$x_i$} $<$ \defi{$bestVariable$}}{
+  \tcp{Choose the variable that helps define fewest invariants}
+    $bestVariable$ = $x_i$ \;
+    numberOfTies = 0 \;
+%    \continue
+  }
+  \ElseIf{\defi{$x_i$} $==$ \defi{$bestVariable$}}{  
+    \If{$|D(x_i)|$ $>$ $|D(bestVariable)|$}{
+      \tcp{Choose the variable with largest domain size}
+      $bestVariable$ = $x_i$ \;
+      numberOfTies = 0 \;
+ %     \continue
+    } 
+    \ElseIf{$|D(x_i)|$ $==$ $|D(bestVariable)|$}{  
+      \If{$|deg(x_i)|$ $<$ $|deg(bestVariable)|$}{
+	\tcp{Choose the variable with lowest degree} \boste{remember to define degree}
+	$bestVariable$ = $x_i$ \;
+	numberOfTies = 0 \;
+%	\continue
+      } 
+      \ElseIf{$|deg(x_i)|$ $==$ $|deg(bestVariable)|$}{
+	\tcp{Fair random} %\boste{Should this be further explained? (after alg)} 
+	numberOfTies++ \;
+	\If{Random(0,numberOfTies) == 0}{
+	  $bestVariable$ = $x_i$ \;
+	}
+      }
+    }
+  }
+}
+
+\If{ bestVariable $\neq $ \upshape NULL}{
+  \makeOneway{\Con $c_j$, \Var bestVariable} \;
+ % \Return{} \true
+}
+
+%\Return{} \false \;
+%\Return{} \true\;
+
+\caption{canBeMadeOneway(\textsf{Constraint} $c_j$)} \label{algo_checkoneway} 
+% \caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
+For each functional constraint a non-fixed and non-defined variable is found if possible. If there is more than one 
+eligible variable the best variable among those is found. The first tiebreaker is the number of oneway constraints the 
+variable participate in (helps define other variables). The next tiebreaker is on the domain of the variables, the 
+third is the number of constraints the variables participate in. If none of the tiebreakers can be used a fair random 
+is used such that the probability is equal for all variables whose ties could not be broken. \\ 
+Once a the best variable is found, if any, the algorithm \ref{algo_makeoneway}  \makeOneway is called.
+%\begin{itemize}
+% \item Highest search priority or highest domain size
+% \item Lowest size of $C(x_i)$
+% \item Fair random 
+%\end{itemize}
+
+
+
+
+
+
+
+%The variables that a constraint $c$ applies to is the scope $V(c)$. The constraints are of the type \class{Linear} and 
+%a constraint $c$ have a right hand side $B(c)$. \\ 
+\IncMargin{1em}
+\begin{algorithm}[H]
+\algdata
+\Input{\Con $c_j$ and \Var $x_i$}
+\Output{Updated $G$}
+\BlankLine
+set $Q$ \tcp*[r]{new coefficient set}
+set $U$ \tcp*[r]{new variable set}
+\tcp{Move $x_i$ to right hand side and set coefficient to 1}
+\ForEach{$x_k$ \upshape in $X(c_j)\setminus {x_i}$}{
+  $c'_{kj} = -\frac{c_{kj}}{c_{ij}}$ \;   
+  $Q = Q\cup c'_{kj}$ \;
+  $U = Q\cup x_k$ \;
+}
+\tcp{Move right hand side to left hand side and update coefficient}
+double $b' = \frac{b(c_j)}{c_{ij}}$ \; \boste{Remember to define $b(c_j)$ before this}
+\boste{coefficients can now be doubles (non integer)} \;
+\textbf{invariant} $inv = $ new \Sum($U$,$Q$,$b'$)\; \tcp{Invariant that has the value (the sum of) the left hand 
+side}
+%$G$ = $G \cup \{inv\}$\; 
+%$G$ = $G \setminus \{c_j\}$\; 
+%$G$ = $G \setminus \{x_i\}$\;
+  %\boste{Maybe remove $c$ from $G$}
+  %\Return{\Sum{$V(c)$,$A(c)$,b}}
+
+%\int $coef = A_{c,x}$\;
+%$Q = A_c \backslash \{A_{c,x}\}$\;
+%$U = V(c) \backslash \{x\}$\;
+%\ForEach{$A_{c,x}$ \upshape in $Q$}{
+%  $Q_{c,x} = A(c,x) \cdot \frac{-1}{coef}$
+%}
+%\int $b = B(c)$ \;
+%\If{relation{c} \upshape is (==) }{
+%  Invariant $c' = $ \Sum{$U$,$Q$,b}\;
+%  $G$ = $G \cup c'$\; 
+%  \boste{Maybe remove $c$ from $G$}
+%  %\Return{\Sum{$V(c)$,$A(c)$,b}}
+%}
+%\Else{
+%  Invariant $c' = $ \Sum{$U$,$Q$,b}\;
+%  Invariant $c'' = $ \Max{c',lb(x)}\;
+%  $G$ = $G \cup c'$\; 
+%  $G$ = $G \cup c''$\; 
+%  \boste{Maybe remove $c$ from $G$}
+%  %\Return{\Max{inv,b}}
+%}
+ \caption{makeOneway(\textsf{Constraint} $c_j$, \textsf{Variable} $x_i$)} \label{algo_makeoneway}
+\end{algorithm}\DecMargin{1em} \noindent
+The algorithm transforms the constraint $c_j$ into a oneway constraint defining an invariant. The dependency directed 
+graph $G$ is updated by adding the new invariant $inv$ and removing the constraint $c_j$ and variable $x_i$. \medskip 
+\\ 
+For each of the remaining constraints in $G$ auxiliary variables are introduced as invariants. In figure 
+\ref{fig_smallG2} the invariant $i_2$ is an example of an auxiliary variable. The value of the invariant is the value 
+of the left hand side of the corresponding constraint. These invariants are used to speed up local search, that is 
+described in section \ref{sec_local}. \\
+
+
+%\IncMargin{1em}
+%\begin{algorithm}[H]
+%\SetKwData{Oneway}{oneway}
+%\SetKwFunction{makeOneway}{makeOneway}
+%\SetKwFunction{Next}{next}\SetKwFunction{Constraints}{Constraints}\SetKwFunction{Remove}{remove}
+%\SetKwFunction{canBeMadeOneway}{canBeMadeOneway}
+%\algdata 
+%\Input{A set $C$ of functional constraints sorted by increasing arity}
+%\Output{A model better suited for local search}
+%\BlankLine
+%%\emph{special treatment of the first line}\;
+%\Bool $change = $ \true\;
+%\While{$C \neq \emptyset$ \textbf{and} $change$}{
+%  $change = $\false \;
+%  %\ForEach{$x \in X$}{
+%  %  \upshape select \Var $x$ \upshape from $X$\;
+%    \ForEach{\Con $c$ \upshape in $C$}{
+%      \Bool $flag = $ \canBeMadeOneway{c}\;  
+%      \If{$flag$}{
+%	\makeOneway{c,x}\;
+%	Remove $x$ from $X$\;
+%	$change = \true$\;
+%	\bre\;
+%      }
+%    }
+%  }
+%}
+%\caption{Defining integer variables by one-way constraints}\label{makefunc}
+%\end{algorithm}\DecMargin{1em}
+%\noindent
+%The following Two algorithms checks if the \cons $c$ can be transformed into a oneway constraint 
+%and transforms $c_j$ into a one-way constraint defining $x$. 
+
+
+
+%The algorithm creates invariants that defines variables $x_i \in X$ by one-way constraints. It uses two other 
+%algorithms \canBeMadeOneway{$c_j$} and \makeOneway{$c_j$,$x_i$}. The first algorithm \\ 
+%The complexity of algorithm \ref{algo_defintvar} depends on the complexity of the two other algorithms but for 
+%simplicity let us assume they do not contribute for now. \\ 
+%Let $\alpha_{max}$ be the largest arity among all constraints in $C$ and $n$ be the number of decision variables in 
+%the 
+%input set. The size of $X$ has decrease by at least one each time we pass line 3 except for the first time. Hence line 
+%3 
+%is passed at most $n$ times. Then the complexity of algorithm \ref{algo_defintvar} is $O(\alpha_{max} n^2)$. \\ 
+%\medskip
+%The coefficient of a variable $x_i$ in constraint $c_j$ is denoted $a_{ij}$. Let $\mathcal{F} = \{f_1,f_2,\dots 
+%,f_k\}$ 
+%be the family of objective functions \boste{Think we should discuss this Tuesday} and the coefficient of variable 
+%$x_j$ in $f_k$ be $a_{kj}$. \boste{Maybe call it 
+%evaluation functions. Does not make sense since $a_{34}$ refers both to constraint and obj. func} \\  
+
+

@@ -63,28 +63,32 @@ public:
             if (leftside.size() == 1) {
                 counter++;
             }
-            //                        vector<IntegerVariable*> x(leftside.size());
-            vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
+            vector<IntegerVariable*> x(leftside.size());
+//                        vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
                 c.at(j) = static_cast<int> (e.coeff);
+                assert(e.coeff == (double) c.at(j));
                 //                x->push_back(varInt.at(e.index));
-                x->at(j) = varInt.at(e.index);
+//                x->at(j) = varInt.at(e.index);
+                x.at(j) = varInt.at(e.index);
                 //                x.at(j) = varInt->at(e.index);
             }
             int upperbound = static_cast<int> (b.ub);
+//            int upperbound2 = upperbound;
             //            std::cout << "posting" << std::endl;
             //            std::cout << "constraint nr " << i << std::endl;
-            if (x->size() != 0) {
+//            if (x->size() != 0) {
+            if (x.size() != 0) {
                 if (b.type == 5) {
                     //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
-                    GeneralSolver::linear(c, *x, EQ, upperbound, HARD);
+                    GeneralSolver::linear(c, x, EQ, upperbound, HARD);
                 } else {
                     //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
-                    GeneralSolver::linear(c, *x, LQ, upperbound, HARD);
+                    GeneralSolver::linear(c, x, LQ, upperbound, HARD);
                 }
             }
-            delete x;
+//            delete x;
             // deleter den også pointer inden i vector?
             //            delete x;
             //            delete c;
@@ -96,16 +100,18 @@ public:
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
         std::vector<int> c(varInt.size());
-        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
+//        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
+        std::vector<IntegerVariable*> x (varInt.size());
 
         for (unsigned i = 0; i < varInt.size(); i++) {
-
+            
             c.at(i) = static_cast<int> (in->getVar(i).objcoeff);
-            x->at(i) = varInt.at(i);
+//            x->at(i) = varInt.at(i);
+            x.at(i) = varInt.at(i);
         }
 
-        GeneralSolver::linear(c, *x, LQ, 0, OBJ);
-        delete x;
+        GeneralSolver::linear(c, x, LQ, 0, OBJ);
+//        delete x;
 
         //        Search(getAllVariables());
         Search(binaryVariables);

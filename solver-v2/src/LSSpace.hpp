@@ -13,11 +13,14 @@
 #include "Model.hpp"
 #include "Neighborhood.hpp"
 #include "FlipNeighborhood.hpp"
+#include "Flip2Neighborhood.hpp"
+#include "SwapNeighborhood.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Clock.hpp"
 #include "SearchEngine.hpp"
 #include "BestImprovement.hpp"
+#include "FirstImprovement.hpp"
 #include "RandomWalk.hpp"
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP

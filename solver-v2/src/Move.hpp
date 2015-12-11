@@ -169,8 +169,8 @@ public:
         if (this != mv) {
             this->var = mv->var;
             this->variableChange = mv->variableChange;
-//            this->variableChanges = mv->variableChanges;
-//            this->variables = mv->variables;
+            this->variableChanges = mv->variableChanges;
+            this->variables = mv->variables;
             this->deltaVector = mv->deltaVector;
 //    void copy(Move* mv) {
 //        if (this != mv) {

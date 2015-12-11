@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  2 DEC 2015 11:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  9 DEC 2015 14:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -698,18 +698,60 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \c@ContinuedFloat=\count143
 Package caption Info: listings package is loaded.
 )
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.c
+ode.tex
+File: tikzlibraryfit.code.tex 2008/06/21 v2.10 (rcs-revision 1.3)
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen178
+\lightrulewidth=\dimen179
+\cmidrulewidth=\dimen180
+\belowrulesep=\dimen181
+\belowbottomsep=\dimen182
+\aboverulesep=\dimen183
+\abovetopsep=\dimen184
+\cmidrulesep=\dimen185
+\cmidrulekern=\dimen186
+\defaultaddspace=\dimen187
+\@cmidla=\count144
+\@cmidlb=\count145
+\@aboverulesep=\dimen188
+\@belowrulesep=\dimen189
+\@thisruleclass=\count146
+\@lastruleclass=\count147
+\@thisrulewidth=\dimen190
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen191
+\extrarowheight=\dimen192
+\NC@list=\toks34
+\extratabsurround=\skip50
+\backup@length=\skip51
+)
+\TX@col@width=\dimen193
+\TX@old@table=\dimen194
+\TX@old@col=\dimen195
+\TX@target=\dimen196
+\TX@delta=\dimen197
+\TX@cols=\count148
+\TX@ftn=\toks35
+)
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count144
-\c@ALC@line=\count145
-\c@ALC@rem=\count146
-\c@ALC@depth=\count147
-\ALC@tlm=\skip50
-\algorithmicindent=\skip51
+\c@ALC@unique=\count149
+\c@ALC@line=\count150
+\c@ALC@rem=\count151
+\c@ALC@depth=\count152
+\ALC@tlm=\skip52
+\algorithmicindent=\skip53
 )
 (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count148
+\c@AlgoLine=\count153
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -724,82 +766,85 @@ Package `algorithm2e' Release 5.0 -- january 06 2013 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (cfiorio@um2.fr)
 ********************************************************
-\skiptotal=\skip52
-\skiplinenumber=\skip53
-\skiprule=\skip54
-\skiphlne=\skip55
-\skiptext=\skip56
-\skiplength=\skip57
-\algomargin=\skip58
-\skipalgocfslide=\skip59
-\algowidth=\dimen178
-\inoutsize=\dimen179
-\inoutindent=\dimen180
-\interspacetitleruled=\dimen181
-\interspacealgoruled=\dimen182
-\interspacetitleboxruled=\dimen183
+\skiptotal=\skip54
+\skiplinenumber=\skip55
+\skiprule=\skip56
+\skiphlne=\skip57
+\skiptext=\skip58
+\skiplength=\skip59
+\algomargin=\skip60
+\skipalgocfslide=\skip61
+\algowidth=\dimen198
+\inoutsize=\dimen199
+\inoutindent=\dimen200
+\interspacetitleruled=\dimen201
+\interspacealgoruled=\dimen202
+\interspacetitleboxruled=\dimen203
 \algocf@inoutbox=\box39
 \algocf@inputbox=\box40
-\AlCapSkip=\skip60
-\AlCapHSkip=\skip61
-\algoskipindent=\skip62
+\AlCapSkip=\skip62
+\AlCapHSkip=\skip63
+\algoskipindent=\skip64
 \algocf@nlbox=\box41
 \algocf@hangingbox=\box42
 \algocf@untilbox=\box43
-\algocf@skipuntil=\skip63
+\algocf@skipuntil=\skip65
 \algocf@capbox=\box44
-\algoheightruledefault=\skip64
-\algoheightrule=\skip65
-\algotitleheightruledefault=\skip66
-\algotitleheightrule=\skip67
-\c@algocfline=\count149
-\c@algocfproc=\count150
-\c@algocf=\count151
+\algoheightruledefault=\skip66
+\algoheightrule=\skip67
+\algotitleheightruledefault=\skip68
+\algotitleheightrule=\skip69
+\c@algocfline=\count154
+\c@algocfproc=\count155
+\c@algocf=\count156
 \algocf@algoframe=\box45
 \algocf@algobox=\box46
 )
 \@input{style.aux}
 \openout2 = `style.aux'.
 
-(./style.tex) (./Thesis.aux)
+(./style.tex) (./Thesis.aux
+
+LaTeX Warning: Label `fig_smallG' multiply defined.
+
+)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-\c@lstlisting=\count152
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+\c@lstlisting=\count157
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count153
-\scratchdimen=\dimen184
+\scratchcounter=\count158
+\scratchdimen=\dimen204
 \scratchbox=\box47
-\nofMPsegments=\count154
-\nofMParguments=\count155
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count156
-\MPscratchDim=\dimen185
-\MPnumerator=\count157
-\makeMPintoPDFobject=\count158
-\everyMPtoPDFconversion=\toks35
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen205
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks37
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+LaTeX Font Info:    Try loading font information for U+msa on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -820,62 +865,99 @@ LaTeX Warning: No \author given.
 \tf@lof=\write5
 \openout5 = `Thesis.lof'.
 
- [2] (./vars.tex) (./cons.tex [3]) (./implicitCons.tex)
-(./invariant.tex) (./softCons.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--55
+ (./Thesis.lot)
+\tf@lot=\write6
+\openout6 = `Thesis.lot'.
+
+ [2] (./intro.tex) (./vars.tex) (./cons.tex)
+(./discOpt.tex)
+Overfull \hbox (12.25645pt too wide) in paragraph at lines 1--51
+\OT1/cmr/m/n/10.95 The Con-straint Sat-is-fac-tion Prob-lem (CSP) is de-fined a
+s a triple $\U/msb/m/n/10.95 P \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 h\OML/c
+mm/m/it/10.95 X; D; C\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/n/10.95 .
+ []
+
+
+Overfull \hbox (24.89247pt too wide) in paragraph at lines 1--51
+\OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 so-lu-tion \OT1/cmr/m/n/10.95 to the C
+SP $\U/msb/m/n/10.95 P$ \OT1/cmr/m/n/10.95 is a A vec-tor of n el-e-ments $\OML
+/cmm/m/it/10.95 ^^\ \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 V\OT1/cmr/m/n/10.
+95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; V\OT1/cmr/
+m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; [] 
+; V\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 ))$.
+ []
+
+(./bpip.tex
+Overfull \hbox (6.63283pt too wide) in paragraph at lines 1--5
+\OT1/cmr/m/n/10.95 Gurobi, GLPK. These solver can solver var-i-ous other prob-l
+ems aswell. Binary-
+ []
+
+[3])
+Underfull \hbox (badness 10000) in paragraph at lines 9--53
 
  []
 
-(./objFunc.tex) (./dom.tex) (./inisol.tex) (./strucLS.tex [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
-) (./ddg.tex [5]
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 76--119
+(./implicitCons.tex) (./invariant.tex [4]) (./softCons.tex) (./objFunc.tex)
+[5] (./architec.tex
+Underfull \hbox (badness 10000) in paragraph at lines 20--35
 
  []
 
-[7]
-Overfull \vbox (33.60535pt too high) has occurred while \output is active []
-
-
-[8] [9]) (./propaqueue.tex [10]) (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--88
+) [6] (./archCons.tex) (./archInv.tex) (./prepros.tex) (./dom.tex)
+(./inisol.tex) [7] (./strucLS.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--18
 
  []
 
-[11] (./Thesis.bbl) [12] (./Thesis.aux) ) 
+) (./simplification.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--4
+
+ []
+
+[8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 144--152
+
+ []
+
+) (./ddg.tex [10]
+Underfull \hbox (badness 10000) in paragraph at lines 27--114
+
+ []
+
+[11] [12]) (./propaqueue.tex) [13] (./future.tex) (./Thesis.bbl [14]) [15]
+(./Thesis.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 16009 strings out of 495032
- 277515 string characters out of 6181718
- 362638 words of memory out of 5000000
- 18892 multiletter control sequences out of 15000+600000
- 13847 words of font info for 53 fonts, out of 8000000 for 9000
+ 16201 strings out of 495032
+ 280015 string characters out of 6181718
+ 367822 words of memory out of 5000000
+ 19046 multiletter control sequences out of 15000+600000
+ 15711 words of font info for 60 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,15n,92p,418b,673s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (12 pages, 197527 bytes).
+ 56i,24n,92p,418b,790s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (15 pages, 250965 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,16 +1,14 @@
-\boste{What is the DDG? } \\ 
-\boste{Why do we want a DDG?} \\
-\boste{What properties should it have and why?} \\
-The vertices $V$ in the dependency directed graph (\emph{DDG}) $G=(V,A)$ initially only represent the non-fixed 
-variables and the constraints. The vertex $v \in V$ has an outgoing arc to vertex $u \in V$ if and only if the value of 
-$u$ is directly dependent on the value of $v$. The variable vertices only have outgoing arcs and the constraints can 
-only have ingoing arcs. The initial model will be modified by introducing invariants defined by oneway constraints and 
-vertices representing invariants will be added to the graph $G$. \\
-The graph can be illustrated with all the variable vertices to the left, all constraint vertices to the right and the 
-invariants vertices are added between variables and constraint vertices.  \\  
+The dependency directed graph (\emph{DDG}) $G=(V,A)$ is made of a set of vertices $V$ representing the non-fixed 
+variables, invariants and the non transformed constraints. The vertex $v \in V$ has an outgoing arc to vertex $u \in V$ 
+if and only if the value of the variable corresponding to $u$ is directly dependent on the value of variable 
+corresponding to $v$. The variable vertices only have outgoing arcs and the constraints can only have ingoing arcs. 
+\boste{Skal det stå her efter omstrukturering} The initial model will be modified by introducing invariants defined by 
+oneway constraints and vertices representing invariants will be added to the graph $G$. \\
+The graph can be illustrated with all the variable vertices to the left with outgoing arcs going right to vertices 
+representing invariants and constraints.  \\  
 The invariants are variables that are defined by oneway constraints or they can be auxiliary variables used in the local 
 search. If a variable is defined by a oneway constraint the variable vertex is removed from $G$ since the value of that 
-variable is no longer changed directly. \boste{is it clear what that means? (directly)} \\  
+variable is given by the invariant representing it. \\  
 %From now on when talking about vertices in $G$ it refers to the variable, invariant or constraint it represents unless 
 %other stated. \\
 %The variables are non-fixed and non-defined and only have outgoing arcs. 
@@ -18,24 +16,25 @@ variable is no longer changed directly. \boste{is it clear what that means? (dir
 %depends on their value. \\ 
 The DDG is used to update values of variables and invariants during local search. The graph $G$ is used to build the 
 propagation queues described in subsection \ref{sec_propaqueue}. \\
-The algorithms that creates invariants are described after this example. The example is a model with three variables 
-and a two constraint and will illustrate how a possible dependency directed graph $G$ is made. 
+The example is a model with three variables and a two constraint and will illustrate how a possible dependency directed 
+graph $G$ is made. 
 \begin{center}
 \begin{tabular}{rlr}
 $ c_1: $&$2x_1 + x_2 - x_3 $&$= 2$ \\
 $ c_2: $&$x_2 + x_3 $&$\leq 1$ \\
 \end{tabular} 
 \end{center}
-Initially $G$ would consist of the three variables $x_1$, $x_2$, and $x_3$ and the constraints $c_1$ and $c_2$. The 
-variable $x_3$ can be defined as an invariant $i_1$ by transforming $c_1$ to a oneway constraint. Once 
-variable $x_3$ is defined by a oneway constraint it$c_1$ and $x_3$ are removed from the graph and replaced by invariant 
-$i_1$. The variables $x_1$ and $x_2$ defines $i_1$ hence they have outgoing arcs to $i_1$. Invariant $i_1$ has an 
-outgoing arc to $c_2$ since Variable $x_3$ participates in $c_2$.
+$G$ consist of the three variables $x_1$, $x_2$, and $x_3$ and the constraints $c_1$ and $c_2$. The 
+variable $x_3$ can be defined as an invariant $inv_1$ by transforming $c_1$ to a oneway constraint. Once 
+variable $x_3$ is defined by a oneway constraint $c_1$ and $x_3$ are removed from the graph and replaced by invariant 
+$inv_1$. The variables $x_1$ and $x_2$ defines $inv_1$ hence they have outgoing arcs to $inv_1$. Invariant $inv_1$ has 
+an outgoing arc to $c_2$ since Variable $x_3$ participates in $c_2$. \\
+\begin{figure}[b]
 \begin{center}
     \begin{tikzpicture}[scale=1]
         \vertex[label=$x_1$](x1) at (0,2) {};
         \vertex[label=$x_2$](x2) at (0,0) {};
-        \vertex[label=$i_1$](i1) at (2,1) {};
+        \vertex[label=$inv_1$](i1) at (2,1) {};
         \vertex[label=$c_2$](c2) at (4,0) {};
 
     \tikzset{EdgeStyle/.style={->}}
@@ -49,17 +48,18 @@ outgoing arc to $c_2$ since Variable $x_3$ participates in $c_2$.
         \captionof{figure}{Small example of DDG}
     \label{fig_smallG}
 \end{center}
-Auxiliary variable can be useful to speed up local search and in this example we could create an auxiliary 
-variable $a_1$ which value is the sum of the left hand side of $c_2$. The auxiliary variable $a_1$ will be introduced 
-by an invariant $i_2$ which will be added to $G$. The invariant $i_1$, representing $x_3$, and variable $x_2$ have 
-an outgoing arc to $i_2$ and $i_2$ have an outgoing arc to $c_2$.
+\end{figure} \noindent
+Auxiliary variable can be useful to update constraint violations and in this example we could create an auxiliary 
+variable where value is the sum of the left hand side of $c_2$. The auxiliary variable will be represented 
+by an invariant $inv_2$ which will be added to $G$. The invariant $inv_1$, representing $x_3$, and variable $x_2$ have 
+an outgoing arc to $inv_2$ that has an outgoing arc to $c_2$.
+\begin{figure}[b]
 \begin{center}
-%\begin{figure}[H]
     \begin{tikzpicture}[scale=1]
         \vertex[label=$x_1$](x1) at (0,2) {};
         \vertex[label=$x_2$](x2) at (0,0) {};
-        \vertex[label=$i_1$](i1) at (2,1) {};
-        \vertex[label=$i_2$](i2) at (4,0) {};
+        \vertex[label=$inv_1$](i1) at (2,1) {};
+        \vertex[label=$inv_2$](i2) at (4,0) {};
         \vertex[label=$c_2$](c2) at (6,0) {};
 
     \tikzset{EdgeStyle/.style={->}}
@@ -71,243 +71,47 @@ an outgoing arc to $i_2$ and $i_2$ have an outgoing arc to $c_2$.
     \end{tikzpicture} 
     \captionof{figure}{Small example of DDG continued}
     \label{fig_smallG2}
- %   \end{figure}   \label{fig_smallG} 
 \end{center}
+\end{figure}   \label{fig_smallG} 
 When changing the value of $x_2$ both invariants need to be updated since they are dependent on the value of $x_2$. 
-Invariant $i_2$ is dependent on the value of $i_1$ therefore to avoid updating $i_2$ twice, it is beneficial to update 
-$i_1$ before updating $i_2$. This is the ordering the propagation queue gives which is discussed in the next 
-subsection. \medskip \\ 
+Invariant $inv_2$ is dependent on the value of $inv_1$ therefore to avoid updating $inv_2$ twice, it is beneficial to 
+update 
+$inv_1$ before updating $inv_2$. This is the ordering given the propagation queue that is discussed in the next 
+subsection. \medskip \\
 %\end{minipage}
 %\boste{start on algorithms}
 %The DDG $G$ is initially a bipartite graph where all the decision variables $X$ are vertices in one set and all the 
 %constraints $C$ are vertices in the other set. If constraint $c$ applies to a variable $x$ then there is an arc from 
-%the vertex representing $x$ to the vertex representing $c$. \\    
-For each functional constraints $c_j$ two algorithms are used to create invariants, one checks if the constraint $c_j$ 
-can be transformed into a oneway constraint and the other transforms $c_j$ into a one-way constraint defining $x_i$.  \\
-%\IncMargin{1em}
-%\begin{algorithm}[H]
-%\SetKwData{Oneway}{oneway}
-%\SetKwFunction{makeOneway}{makeOneway}
-%\SetKwFunction{Next}{next}\SetKwFunction{Constraints}{Constraints}\SetKwFunction{Remove}{remove}
-%\SetKwFunction{canBeMadeOneway}{canBeMadeOneway}
-%\algdata 
-%\Input{A set $C$ of functional constraints sorted by increasing arity}
-%\Output{A model better suited for local search}
-%\BlankLine
-%%\emph{special treatment of the first line}\;
-%\Bool $change = $ \true\;
-%\While{$C \neq \emptyset$ \textbf{and} $change$}{
-%  $change = $\false \;
-%  %\ForEach{$x \in X$}{
-%  %  \upshape select \Var $x$ \upshape from $X$\;
-%    \ForEach{\Con $c$ \upshape in $C$}{
-%      \Bool $flag = $ \canBeMadeOneway{c}\;  
-%      \If{$flag$}{
-%	\makeOneway{c,x}\;
-%	Remove $x$ from $X$\;
-%	$change = \true$\;
-%	\bre\;
-%      }
-%    }
-%  }
-%}
-%\caption{Defining integer variables by one-way constraints}\label{makefunc}
-%\end{algorithm}\DecMargin{1em}
-%\noindent
-%The following Two algorithms checks if the \cons $c$ can be transformed into a oneway constraint 
-%and transforms $c_j$ into a one-way constraint defining $x$. 
-
-
-
-%The algorithm creates invariants that defines variables $x_i \in X$ by one-way constraints. It uses two other 
-%algorithms \canBeMadeOneway{$c_j$} and \makeOneway{$c_j$,$x_i$}. The first algorithm \\ 
-%The complexity of algorithm \ref{algo_defintvar} depends on the complexity of the two other algorithms but for 
-%simplicity let us assume they do not contribute for now. \\ 
-%Let $\alpha_{max}$ be the largest arity among all constraints in $C$ and $n$ be the number of decision variables in 
-%the 
-%input set. The size of $X$ has decrease by at least one each time we pass line 3 except for the first time. Hence line 
-%3 
-%is passed at most $n$ times. Then the complexity of algorithm \ref{algo_defintvar} is $O(\alpha_{max} n^2)$. \\ 
-%\medskip
-%The coefficient of a variable $x_i$ in constraint $c_j$ is denoted $a_{ij}$. Let $\mathcal{F} = \{f_1,f_2,\dots 
-%,f_k\}$ 
-%be the family of objective functions \boste{Think we should discuss this Tuesday} and the coefficient of variable 
-%$x_j$ in $f_k$ be $a_{kj}$. \boste{Maybe call it 
-%evaluation functions. Does not make sense since $a_{34}$ refers both to constraint and obj. func} \\  
-
-\IncMargin{1em}
-\begin{algorithm}[H]
-
-%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
-\SetKwFunction{makeOneway}{makeOneway}
-\SetKwFunction{defi}{defines}
-\algdata
-\Input{\funccon $c_j$}
-\Output{Boolean}
-\BlankLine
-%\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
-%$O(\alpha(c_j))$}}
-% \If{\upshape Number of integer variables not defined $> 1$}{\Return{} \false\; \boste{Needed in order to create the 
-% right update queue}}
-%\If{$|Y(c)| > 1$}{\Return{} \false}
-%\If{\relation{c} \upshape is (==) }{\Return{} \true}
-%\If{$c_j$ \upshape is not a linear equality}{
-%  \Return{} \false}
-%\int coeff = \coeff{c,v}\;
-%\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{	
-
-\tcp{Find the best variable to define}
-\var bestVariable \;
-numberOfTies = 0 \;
-\ForEach{$x_i$ \upshape in $X(c_j)$ }{
-  \If{$x_i$ \upshape is fixed or defined}{
-    \continue
-  }
-  \tcp{Break ties}
- % bestVariable = \decideBest{$x_i$,bestVariable} \;
-  \uIf{\defi{$x_i$} $<$ \defi{$bestVariable$}}{
-  \tcp{Choose the variable that helps define fewest invariants}
-    bestVariable = $x_i$ \;
-    numberOfTies = 0 \;
-    \continue
-  }
-  \uElseIf{\defi{$x_i$} $>$ \defi{$bestVariable$}}{
-    \continue
-  }
-  
-  \uIf{$D(x_i)$ $>$ $D(bestVariable)$}{
-    bestVariable = $x_i$ \;
-    numberOfTies = 0 \;
-    \continue
-  } 
-  \uElseIf{$D(x_i)$ $<$ $D(bestVariable)$}{
-    \continue
-  }
-  
-  \uIf{$|C(x_i)|$ $<$ $|C(bestVariable)|$}{
-    bestVariable = $x_i$ \;
-    numberOfTies = 0 \;
-    \continue
-  } 
-  \uElseIf{$|C(x_i)|$ $>$ $|C(bestVariable)|$}{
-    \continue
-  }
-  \tcp{Fair random}
-  numberOfTies++ \;
-  \If{Random(0,numberOfTies) == 0}{
-    bestVariable = $x_i$ \;
-  }
-}
-\If{bestVariable \upshape found}{
-  \makeOneway{\Con $c_j$, \Var bestVariable} \;
-  \Return{} \true
-}
-
-\Return{} \false \;
-%\Return{} \true\;
-
-\caption{canBeMadeOneway(\textsf{Constraint} $c_j$)} \label{algo_checkoneway} 
-% \caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
-\end{algorithm} \noindent
-\DecMargin{1em}
-For each functional constraint a non-fixed and non-defined variable is found if possible. If there is more than one 
-eligible variable the best variable among those is found. The first tiebreaker is the number of oneway constraints the 
-variable participate in (helps define other variables). The next tiebreaker is on the domain of the variables, the 
-third is the number of constraints the variables participate in. If none of the tiebreakers can be used a fair random 
-is used such that the probability is equal for all variables which ties could not be broken. \\ 
-Once a the best variable is found, if any, the algorithm \ref{algo_makeoneway}  \makeOneway is called.
-%\begin{itemize}
-% \item Highest search priority or highest domain size
-% \item Lowest size of $C(x_i)$
-% \item Fair random 
-%\end{itemize}
-
-
-
-
-
-
-
-%The variables that a constraint $c$ applies to is the scope $V(c)$. The constraints are of the type \class{Linear} and 
-%a constraint $c$ have a right hand side $B(c)$. \\ 
-\IncMargin{1em}
-\begin{algorithm}[H]
-\algdata
-\Input{\Con $c_j$ and \Var $x_i$}
-\Output{Updated $G$}
-\BlankLine
-set $Q$ \tcp*[r]{new coefficient set}
-set $U$ \tcp*[r]{new variable set}
-\tcp{Move $x_i$ to right hand side and set coefficient to 1}
-\ForEach{$x_k$ \upshape in $X(c_j)\setminus {x_i}$}{
-  $c'_{kj} = -\frac{c_{kj}}{c_{ij}}$ \;   
-  $Q = Q\cup c'_{kj}$ \;
-  $U = Q\cup x_k$ \;
-}
-\tcp{Move right hand side to left hand side and update coefficient}
-double $b' = \frac{B(c_j)}{c_{ij}}$ \;
-\boste{coefficients can now be doubles (non integer)} \;
-\textbf{invariant} $inv = $ new \Sum($U$,$Q$,$b'$)\; \tcp{Invariant which value is (the sum of) the left hand side}
-$G$ = $G \cup \{inv\}$\; 
-$G$ = $G \setminus \{c_j\}$\; 
-$G$ = $G \setminus \{x_i\}$\;
-  %\boste{Maybe remove $c$ from $G$}
-  %\Return{\Sum{$V(c)$,$A(c)$,b}}
-
-%\int $coef = A_{c,x}$\;
-%$Q = A_c \backslash \{A_{c,x}\}$\;
-%$U = V(c) \backslash \{x\}$\;
-%\ForEach{$A_{c,x}$ \upshape in $Q$}{
-%  $Q_{c,x} = A(c,x) \cdot \frac{-1}{coef}$
-%}
-%\int $b = B(c)$ \;
-%\If{relation{c} \upshape is (==) }{
-%  Invariant $c' = $ \Sum{$U$,$Q$,b}\;
-%  $G$ = $G \cup c'$\; 
-%  \boste{Maybe remove $c$ from $G$}
-%  %\Return{\Sum{$V(c)$,$A(c)$,b}}
-%}
-%\Else{
-%  Invariant $c' = $ \Sum{$U$,$Q$,b}\;
-%  Invariant $c'' = $ \Max{c',lb(x)}\;
-%  $G$ = $G \cup c'$\; 
-%  $G$ = $G \cup c''$\; 
-%  \boste{Maybe remove $c$ from $G$}
-%  %\Return{\Max{inv,b}}
-%}
- \caption{makeOneway(\textsf{Constraint} $c_j$, \textsf{Variable} $x_i$)} \label{algo_makeoneway}
-\end{algorithm}\DecMargin{1em} \noindent
-The algorithm transforms the constraint $c_j$ into a oneway constraint defining an invariant. The dependency directed 
-graph $G$ is updated by adding the new invariant $inv$ and removing the constraint $c_j$ and variable $x_i$. \medskip 
-\\ 
-For each of the remaining constraints in $G$ auxiliary variables are introduced as invariants. In figure 
-\ref{fig_smallG2} the invariant $i_2$ is an example of an auxiliary variable. The value of the invariant is the value 
-of the left hand side of the corresponding constraint. These invariants are used to speed up local search, that is 
-described in section \ref{sec_local}. \\
+%the vertex representing $x$ to the vertex representing $c$. \\   
 In order to avoid circular definitions of invariants dependency directed graph $G$ should be acyclic. A circular 
-definition could be if $x_i$ is used define $x_j$ and conversely \boste{vise versa?}. Then a change in value 
+definition could be if $x_i$ is used to define $x_j$ and vise versa. Then a change in value 
 of $x_i$ would lead to a change in value of $x_j$ that again changes the value of $x_i$ and so on. \\ 
-Once all invariants are introduced, $G$ is searched for strongly connected components of size two or more. A 
-\emph{strongly connected component} (scc) is a maximal set of vertices $V^{SCC}$ such that for each pair of vertices 
+Once all invariants are introduced, all strongly connected components of size two or more in $G$ is found. A 
+\emph{strongly connected component} (SCC) is a maximal set of vertices $V^{SCC}$ such that for each pair of vertices 
 $(u,v) \in V^{SCC}$ there exist both a path from $u$ to $v$ and a path from $v$ to $u$ \cite[p. 1170]{cormen}. 
-To find all scc of size two or more Tarjan's algorithm \boste{cite SIAM J. Comput., 1(2), 146–160. Should I write the 
-algorithm down as well?} that finds strongly connected components (\emph{scc}) is used. Each of these strongly 
-connected components must be removed in order to keep $G$ acyclic, since a scc consist of at least one cycle. A scc can 
-be removed \boste{made unstrongly connected?} by removing arcs and/or removing vertices. The arcs $A$ represents 
-relations between variables, invariants and constraints and should not be changed. The vertices $V^{SCC}$ can only be 
-vertices representing invariant since variable only have outgoing arcs and constraint only have ingoing arcs. In order 
-to remove the strongly connected components one of the vertices could be removed that corresponds to undefine an 
-invariant and reintroduce the transformed constraint and variable. Once these strongly connected components are removed 
-there is still no guarantee that $G$ is a directed acyclic graph (DAG). A strongly connected component can be made of 
-several cycles and there it might not be sufficient to remove a single vertex. using Tarjans algorithm and removal of 
-strongly connected components is repeated until no strongly connected components of size two or more is found. \medskip 
-\\ 
+To find all SCC of size two or more Tarjan's algorithm \boste{cite SIAM J. Comput., 1(2), 146–160.} that finds strongly 
+connected components (\emph{SCC}) is used. \boste{Description of Tarjan and timestamps} \\ 
+Each of these strongly connected components must be broken in order to keep $G$ acyclic, since a SCC consist of at 
+least one cycle. A SCC can be broken by removing arcs and/or removing vertices. The arcs $A$ represent relations 
+between variables, invariants and constraints and should not be changed. The vertices $V^{SCC}$ can only be vertices 
+representing invariant since variable only have outgoing arcs and constraint only have ingoing arcs. Undefining one of 
+those invariants corresponds to removing one of the vertices, hence breaking the SCC. An invariant can be undefined by 
+reintroducing the variable it represents and removing the invariant from the model. The oneway constraint used to 
+define the invariant is transformed back into a functional constraint again and is reintroduced in the model. \\
+For each SCC one of the vertices is chosen and the invariant it represents is undefined. The invariant is chosen in the 
+order of lowest domain then highest arity of oneway constraint defining it \boste{Search priority?}. If there is ties 
+they are broken at random.  \\  
+Once these strongly connected components are broken there is still no guarantee that $G$ is a directed acyclic graph 
+(DAG). A strongly connected component can be made of several cycles and it might not be sufficient just to break all 
+SCC found by Tarjans algorithm initially. The process of finding SCC with Tarjans algorithm and then 
+breaking these strongly connected components is repeated until no strongly connected components (of size two or more) 
+is found by Tarjans algorithm. \medskip \\  
 The first tiebreaker in algorithm \ref{algo_makeoneway} is used as a heuristic to reduce the number of cycles 
 generated. If invariants are not used to define other invariants no cycles can occur, since cycles can only be made of 
-invariant vertices. \\ 
+invariant vertices. \\
 Tarjans algorithm also gives each vertex representing invariants a time stamp that is used to create the propagation 
-queues described in the next subsection. \\ 
-\boste{Jeg føler det er meget rodet. Jeg ved ikke hvordan jeg skal dele det op}
+queues described in the next subsection.  \boste{This should be described earlier} \\
+
 
 
 

@@ -4,12 +4,19 @@
 \usepackage{mathtools}
 \usepackage{color}
 \usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{caption}
+\usetikzlibrary{fit,arrows}
+ \usepackage{booktabs}
+ \usepackage{tabularx}
 
 
 \usepackage{algorithmic}
 %\usepackage{algorithm}
 %\usepackage{algorithm2e}
-\usepackage[linesnumbered, ruled]{algorithm2e}
+\usepackage[linesnumbered, ruled,lined,boxed,commentsnumbered]{algorithm2e}
+
 %opening
 
 \include{style}
@@ -25,55 +32,94 @@
 %\end{abstract}
 %\newpage
 \tableofcontents
+\listoffigures
+\listoftables
 \newpage
 \section{Introduction}
-  \subsection{Mixed Integer Programming \boste{real and integer variables, or integer and binary variables}}
-  \subsection{Constraint Programming}
-  \subsection{Heuristics and Local Search}
-  \subsubsection{Construction Heuristics}
-  \subsubsection{Local Search and Neighborhoods}
-  \subsubsection{Metaheuristics}
-
-\section{Modeling in CBLS}
-  \boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
-  %\subsection{Types of Modeling \boste{not sure this should be here}}
-  %\input{modeling}
+ \input{intro}
+ 
+ 
+\section{Defenitions} 
   \subsection{Variables} 
   \input{vars}
   \subsection{Constraints}
-  \input{cons}
-
-  \subsubsection{Soft Constraints}
-  \subsubsection{Invariants and One-way Constraints}
-  \input{invariant}
+  \input{cons} % split it into constriants and CSP
+  
+\section{Solution Approach}  
+  \subsection{Discrete Optimization} % CSP -> CSOP
+  
+  \subsection{Mathematical Programming} % In general, talk about Gorubi, Scip, Cplex after
+  \input{bpip}
+  
+  \subsection{Constraint Programming}
     \subsubsection{Implicit Constraints}
-  \input{ImplicitCons}
-  
+    \input{implicitCons}
+    \subsubsection{Gecode}
+  \subsection{Heuristics and Local Search}
+    \subsubsection{Construction Heuristics}
+    \subsubsection{Local Search and Neighborhoods}
+    \subsubsection{Metaheuristics}
+  \subsection{Constraint Based Local Search}
+    \subsubsection{Invariants and One-way Constraints}
+    \input{invariant}
+    \subsubsection{Soft Constraints}
+    \input{softCons}
+  \subsection{Evaluation Function}
+  \input{objFunc}
+    \subsubsection{Comet}
+    \subsubsection{OscaR}
 
-\section{Previous Work}
-  \subsection{Comet}
-%  \input{comet}
-  \subsection{Gecode}
-  \subsection{LocalSolver}
-  \subsection{OscaR}
-\section{Structure of this CBLS \boste{Differences from oscar and comet.}}
-  
-\section{Preprocessing and Simplification}
+%\section{Modeling Constraint Based Local Search}
+  %\boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
+  %\subsection{Types of Modeling \boste{not sure this should be here}}
+  %\input{modeling}
+
+    
+ 
+%\section{Local Search}
+%  \input{local}
+%\section{Previous Work}
+ % \subsection{Comet}
+  %\input{comet}
+  %\subsection{Gecode}
+  %\subsection{LocalSolver}
+%\subsection{Structure of this CBLS \boste{Differences from oscar and comet.}}
+\newpage
+\section{Architectural Overview}  
+  \input{architec}
+  \newpage
+  \subsection{Constraints}
+  \input{archCons}
+  \subsection{Invariants}
+  \input{archInv}
+\section{Preprocessing and Initial Solution} \label{sec_gecode}
+  \input{prepros}
   \subsection{Domain Reduction}
-  \subsection{Initial Solution}
-\section{Structuring Local Search Model}
+  \input{dom}
+  \subsection{Finding an Initial Solution}
+  \input{inisol}
+  \newpage
+\section{Structuring Local Search Model} \label{sec_ls}
 \input{strucLS}
-  \subsection{Simplification}
-    \input{updateCons}
-  \subsection{Dependency Digraph}
+  \subsection{Simplification and Dependency Digraph}
+    \input{ddg} \label{sec_ddg}
+  \subsection{Propagation Queue}  
+    \input{propaqueue}\label{sec_propaqueue}
+    
   
-\section{Local Search Engine}
+  
+\section{Local Search Engine} \label{sec_local}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}
-  \subsection{Metaheuristics}
+\section{Metaheuristics}
 \section{Tests}
 \section{Results}
+\section{Future Work}
+  \input{future}
 \section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{main}
 %\newpage
 %\newpage
 %\section{Defenitions of structures in a solver}

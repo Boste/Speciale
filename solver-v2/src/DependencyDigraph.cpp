@@ -560,7 +560,8 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
             //            std::iterator<invariant> it = update.begin();
             for (updateVector::iterator it = update.begin(); it != update.end(); ++it) {
 
-                if (it.base()->get() == bestInvariant.get()) {
+//                if (it.base()->get() == bestInvariant.get()) {
+                if ((*it) == bestInvariant) {
                     update.erase(it);
                     break;
                 }
@@ -576,7 +577,8 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
             for (updateVector::iterator it = update.begin(); it != update.end(); it++) {
                 //                std::cout << it.base()->get() << std::endl;
                 //                it.base()->
-                if (it.base()->get() == bestInvariant.get()) {
+//                if (it.base()->get() == bestInvariant.get()) {
+                if (*it == bestInvariant) {
                     update.erase(it);
                     break;
                 }
@@ -655,10 +657,10 @@ void DependencyDigraph::createPropagationQueue(variableContainer & vars, Invaria
             //            }
             //            
             assert(vn->update.size() > 0);
-            for (invariant invar : vn->update) {
+//            for (invariant invar : vn->update) {
                 //                std::cout << "id " << invar->getID() << " timestamp " << invar->getTimestamp() << std::endl;
-
-            }
+//
+//            }
             //            std::cout << std::endl;
             addToQueue(vn->propagationQueue, vn->update);
 

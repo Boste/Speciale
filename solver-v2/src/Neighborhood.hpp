@@ -15,9 +15,16 @@ public:
     virtual int compareMoves(Move* mv1, Move* mv2);
     int numberOfEqualMoves = 0;
 
+   virtual void setRandomCounter(unsigned numberOfRandomMoves) =0;
+//        randomMovesWanted = numberOfRandomMoves;
+//    }
+    virtual bool hasNextRandom() = 0;
+    virtual Move* nextRandom() = 0;
+
 
 private:
 protected:
+
 };
 
 #endif	/* NEIGHBORHOOD_HPP */

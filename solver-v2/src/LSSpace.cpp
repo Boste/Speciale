@@ -81,7 +81,7 @@ void LSSpace::initializeLS() {
     //    while (queue.size() != 0 && change) {
     //        
     //                std::cout << queue.size() << std::endl;
-    //        //        debug;
+    //        //        
     //        //            iter++;
     //        //            std::cout << "iterations in while " << iter << std::endl;
     //        //            std::cout << " queue size " << queue.size() << std::endl;
@@ -115,11 +115,11 @@ void LSSpace::initializeLS() {
     //        std::cout << "All integer variables could be defined by a oneway" << std::endl;
     //    } else {
     //        std::cout << "All integer variables could NOT be defined by a oneway. Still " << numberOfIntegerVariableNotDefined << " left out of " << model->getIntegerVariables().size() << std::endl;
-    //        debug;
+    //        
     ////        exit(1);
     //    }
     //    std::cout << queue.size() << std::endl;
-    //    debug;
+
 
 
     //    std::vector<IntegerVariable*>& queue = model->getPriorityVectorNr(0);
@@ -133,6 +133,7 @@ void LSSpace::initializeLS() {
     //    unsigned lastsize = 0;
     for (constraint con : func) {
         if (canBeMadeOneway(con)) {
+
             numberOfOneway++;
 
         }
@@ -185,7 +186,8 @@ void LSSpace::initializeLS() {
                 int value = 0;
                 std::unordered_map<int, coefType>& coef = cons->getCoefficients();
                 //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
-                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
+                //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
+                Sum* sumInvariant = new Sum(cons->getVariables(), coef);
                 //                    sumInvariant->invariantID = model->getInvariants().size();
                 variableContainer variables;
                 InvariantContainer invars;
@@ -199,6 +201,7 @@ void LSSpace::initializeLS() {
                         value += coef.at(id) * iv->getOneway()->getCurrentValue();
                         invars.push_back(iv->getOneway());
                     }
+
                 }
                 sumInvariant->setValue(value);
                 model->addInvariant(sumInvariant);
@@ -234,6 +237,7 @@ void LSSpace::initializeLS() {
 
 
     model->initialize();
+
     currentState = std::make_shared<State>(model);
     bestState = std::make_shared<State>(model);
     //    for (invariant invar : model->getInvariants()) {
@@ -244,23 +248,23 @@ void LSSpace::initializeLS() {
     //            }
     //        }
     //    }
-    bool failed = false;
-    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraintsWithPriority(i);
-        //        for (unsigned j = 0; j < prio->size(); j++) {
-
-        for (std::shared_ptr<Constraint> cons : *prio) {
-            if (!cons->isOneway()) {
-                if (!cons->testCons()) {
-                    failed = true;
-                }
-            }
-        }
-    }
-    if (failed) {
-        std::cout << "constraints are violated? " << std::endl;
-        exit(1);
-    }
+    //    bool failed = false;
+    //    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
+    //        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraintsWithPriority(i);
+    //        //        for (unsigned j = 0; j < prio->size(); j++) {
+    //
+    //        for (std::shared_ptr<Constraint> cons : *prio) {
+    //            if (!cons->isOneway()) {
+    //                if (!cons->testCons()) {
+    //                    failed = true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (failed) {
+    //        std::cout << "constraints are violated? " << std::endl;
+    //        exit(1);
+    //    }
 }
 
 // Not taking into account if the coefficient in objective function is negative
@@ -285,6 +289,7 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
     unsigned equalCounter = 0;
     unsigned defined = std::numeric_limits<unsigned int>::max();
     unsigned constraintsApplyingToiv = std::numeric_limits<unsigned>::max();
+
     for (IntegerVariable* iv : cons->getVariables()) {
         if (iv->isFixed()) {
             continue;
@@ -355,6 +360,7 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
         //            return false;
         //        }
     }
+
     if (canBeMadeOneway) {
         makeOneway(bestVar, cons);
         return true;
@@ -502,7 +508,7 @@ bool LSSpace::intVarCanBeMadeOneway(constraint cons) {
 //        sumInvariant->setBounds(iv->getLowerBound(), iv->getUpperBound());
 //        if (!sumInvariant->test()) {
 //            std::cout << "failed sumInvariant in creation" << std::endl;
-//            debug;
+//            
 //        }
 ////    }
 //    cons->isOneway(true);
@@ -512,6 +518,7 @@ bool LSSpace::intVarCanBeMadeOneway(constraint cons) {
 
 void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
     // prob not from invariant 
+
     variableContainer& oldVars = cons->getVariables();
     std::unordered_map<int, coefType> coefficients = cons->getCoefficients();
     std::unordered_map<int, coefType> newCoefficients;
@@ -527,7 +534,7 @@ void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
     } else {
         if (coeff != 1) {
             std::cout << "coefficient " << coeff << std::endl;
-            debug;
+
         }
         for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
             std::pair<int, coefType> coef(it->first, it->second / (-coeff));
@@ -540,12 +547,14 @@ void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
         std::cout << coeff << std::endl;
     }
     newCoefficients.erase(iv->getID());
-    std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(newCoefficients);
+    //    std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(newCoefficients);
+    Sum* sumInvariant = new Sum(newCoefficients);
     InvariantContainer invars;
     variableContainer vars;
     variableContainer varsAndInvars;
     sumInvariant->setStartValue(value);
     //    std::cout << value << " ";
+
     for (IntegerVariable* oldiv : oldVars) {
         if (oldiv != iv) {
             unsigned id = oldiv->getID();
@@ -590,70 +599,76 @@ void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
 
 void LSSpace::optimizeSolution(int time) {
 
+
+
+
+
+
+
     //#####################################################################################
     //    should test all invariants
     //#####################################################################################
-    for (invariant inv : model->getInvariants()) {
-        if (!inv->test()) {
-            std::cout << "Wrong before optimization " << std::endl;
-            debug;
-            exit(1);
-        }
-
-    }
-    for (IntegerVariable* iv : model->getNonFixedVariables()) {
-        if (iv->isDef()) {
-            assert(iv->getOneway()->getCurrentValue() == iv->getCurrentValue());
-        } else {
-            //            unsigned prev = 0;
-            //            for (invariant invar : model->getPropagationQueue(iv)) {
-            //                if (invar->getTimestamp() > prev) {
-            //                    std::cout << "pointing to higher timestamp" << std::endl;
-            //                    debug;
-            //                } else {
-            //                    prev = invar->getTimestamp();
-            //                }
-            //            }
-            for (unsigned i = 0; i < model->getUpdate(iv).size(); i++) {
-                bool found = false;
-                for (auto inva : model->getPropagationQueue(iv)) {
-                    if (model->getUpdate(iv).at(i) == inva) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    std::cout << "one from update is not in propagation queue" << std::endl;
-                    debug;
-                }
-            }
-            for (auto inva : model->getPropagationQueue(iv)) {
-                unsigned times = inva->getTimestamp();
-                bool found = false;
-                for (auto invas : model->getUpdate(inva)) {
-                    if (invas->getTimestamp() > times) {
-                        std::cout << "wrong order of timestamp " << std::endl;
-                        debug;
-                    }
-                    for (auto inva2 : model->getPropagationQueue(iv)) {
-
-                        if (invas == inva2) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        std::cout << "one from update is not in propagation queue" << std::endl;
-                        debug;
-                    }
-
-                }
-
-
-
-            }
-        }
-    }
+    //    for (invariant inv : model->getInvariants()) {
+    //        if (!inv->test()) {
+    //            std::cout << "Wrong before optimization " << std::endl;
+    //            
+    //            exit(1);
+    //        }
+    //
+    //    }
+    //    for (IntegerVariable* iv : model->getNonFixedVariables()) {
+    //        if (iv->isDef()) {
+    //            assert(iv->getOneway()->getCurrentValue() == iv->getCurrentValue());
+    //        } else {
+    //            //            unsigned prev = 0;
+    //            //            for (invariant invar : model->getPropagationQueue(iv)) {
+    //            //                if (invar->getTimestamp() > prev) {
+    //            //                    std::cout << "pointing to higher timestamp" << std::endl;
+    //            //                    
+    //            //                } else {
+    //            //                    prev = invar->getTimestamp();
+    //            //                }
+    //            //            }
+    //            for (unsigned i = 0; i < model->getUpdate(iv).size(); i++) {
+    //                bool found = false;
+    //                for (auto inva : model->getPropagationQueue(iv)) {
+    //                    if (model->getUpdate(iv).at(i) == inva) {
+    //                        found = true;
+    //                        break;
+    //                    }
+    //                }
+    //                if (!found) {
+    //                    std::cout << "one from update is not in propagation queue" << std::endl;
+    //                    
+    //                }
+    //            }
+    //            for (auto inva : model->getPropagationQueue(iv)) {
+    //                unsigned times = inva->getTimestamp();
+    //                bool found = false;
+    //                for (auto invas : model->getUpdate(inva)) {
+    //                    if (invas->getTimestamp() > times) {
+    //                        std::cout << "wrong order of timestamp " << std::endl;
+    //                        
+    //                    }
+    //                    for (auto inva2 : model->getPropagationQueue(iv)) {
+    //
+    //                        if (invas == inva2) {
+    //                            found = true;
+    //                            break;
+    //                        }
+    //                    }
+    //                    if (!found) {
+    //                        std::cout << "one from update is not in propagation queue" << std::endl;
+    //                        
+    //                    }
+    //
+    //                }
+    //
+    //
+    //
+    //            }
+    //        }
+    //    }
 
     double timelimit = (double) time;
     double usedTime = 0;
@@ -662,7 +677,7 @@ void LSSpace::optimizeSolution(int time) {
     //    std::cout << "ini obj val " << currentState->getEvaluation().at(0) << std::endl;
     //    std::cout << "ini sol val " << st->getSolutionValue() << std::endl;
     //    unsigned fourPercent = model->getNonFixedVariables().size() / 25;
-    unsigned twoPercent = model->getLSVariables().size() / 50;
+    unsigned twoPercent = model->getMask().size() / 50;
     //    std::cout << "two % " << twoPercent << " " << model->getNonFixedVariables().size() << "/"<< 25 << std::endl;
     unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
     //    randomMoves = 6;
@@ -671,22 +686,36 @@ void LSSpace::optimizeSolution(int time) {
     }
     //    setSolution(bestState);
     //    std::cout << "solution set" << std::endl;
+    std::vector<IntegerVariable*> swapVars;
+    if (model->containsIntegerVariables) {
 
+        for (IntegerVariable* iv : model->getMask()) {
+            if (model->getInConstraintWithAt(iv->getID()).size() > 0) {
+                swapVars.push_back(iv);
+            }
+        }
+    }
     std::cout << "Number of randomMoves " << randomMoves << std::endl;
-    std::cout << "Number of variables used in local search " << model->getLSVariables().size() << std::endl;
-    FlipNeighborhood* NE = new FlipNeighborhood(model, currentState);
-    RandomWalk RW(model, NE);
-    BestImprovement BI(model, NE);
+    std::cout << "Number of variables used in local search " << model->getMask().size() << std::endl;
+    FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
+    Flip2Neighborhood* F2N = new Flip2Neighborhood(model, currentState);
+    SwapNeighborhood* SN = new SwapNeighborhood(model, currentState);
+    RandomWalk RW(model, FN, randomMoves);
+    BestImprovement BI(model, FN);
+    FirstImprovement FI(model, SN);
     unsigned loopCounter = 0;
     while (usedTime < timelimit) {
         loopCounter++;
         while (BI.Start()) {
-            //        std::cout << __LINE__ << std::endl;
+//            iterations++;
+//        }
+//        while (FI.Start()) {
+            //                    std::cout << __LINE__ << std::endl;
             //        
             //            for (invariant inv : model->getInvariants()) {
             //                if (!inv->test()) {
             //                    std::cout << "Wrong BI " << std::endl;
-            //                    debug;
+            //                    
             //                    exit(1);
             //                }
             //
@@ -704,17 +733,18 @@ void LSSpace::optimizeSolution(int time) {
             //            }
             //            std::cout << std::endl;
         }
+        //        std::cout << "Bi or FI cycle done iterations "<< iterations  << std::endl;
         if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
             bestState->copy(currentState);
             //            setSolution(bestState);
             usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
             std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds" << std::endl;
-            if (testInvariant()) {
-                std::cout << "Something is wrong with invariants" << std::endl;
-                exit(1);
-            }
+            //            if (testInvariant()) {
+            //                std::cout << "Something is wrong with invariants" << std::endl;
+            //                exit(1);
+            //            }
         }
-        RW.Start(randomMoves);
+        RW.Start();
         //        for (int i = 0; i < randomMoves; i++) {
         //            NE->randomWalk(currentState);
         iterations += randomMoves;
@@ -726,6 +756,7 @@ void LSSpace::optimizeSolution(int time) {
         //        }
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
+    //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;
     std::cout << "number of loops " << loopCounter << std::endl;
     std::cout << "Time used " << usedTime << std::endl;
     std::cout << "obj val " << currentState->getEvaluation().at(0) << " violations ";
@@ -758,7 +789,9 @@ void LSSpace::optimizeSolution(int time) {
     std::cout << "Number of moves " << iterations << std::endl;
     //    delete mv;
     //    delete bestMove;
-    delete NE;
+    delete SN;
+    delete F2N;
+    delete FN;
     std::cout << "O " << bestState->getEvaluation().at(0) << " ";
     //
     //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
@@ -782,7 +815,7 @@ void LSSpace::setSolution(std::shared_ptr<State> st) {
 
     int change;
     //    for (unsigned i = 0; i < solution->size(); i++) {
-    for (IntegerVariable* iv : model->getLSVariables()) {
+    for (IntegerVariable* iv : model->getMask()) {
 
         //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
         //            for (unsigned j = 0; j < model->getUpdate(iv); j++) {
@@ -826,7 +859,7 @@ void LSSpace::setSolution(std::shared_ptr<State> st) {
     }
     //    std::cout << "value of 20340 " << solution.at(20340) << std::endl;
     //    for (unsigned i = 0; i < model->getInvariants()->size(); i++) {
-    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+    for (invariant invar : model->getInvariants()) {
         invar->calculateDeltaValue();
         //        bool legal = invar->calculateDeltaValue();
         //        if (!legal) {

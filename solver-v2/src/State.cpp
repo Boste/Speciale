@@ -58,7 +58,7 @@ void State::saveSolution() {
 //    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
 //        solution.at(iv->getID()) = iv->getCurrentValue();
 //    }
-    for (IntegerVariable* iv : model->getLSVariables()) {
+    for (IntegerVariable* iv : model->getMask()) {
         solution.at(iv->getID()) = iv->getCurrentValue();
     }
 
@@ -208,7 +208,7 @@ bool State::recalculateAll() {
     //    std::cout << std::endl;
     bool success = true;
     //    for (unsigned i = 0; i < Invariants->size(); i++) {
-    for (std::shared_ptr<Invariant> invar : model->getInvariants()) {
+    for (invariant invar : model->getInvariants()) {
         //        std::shared_ptr<Invariant> invar = Invariants->at(i);
         //        Invariant* invar = Invariants->at(i);
         if (!invar->test()) {

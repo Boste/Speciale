@@ -10,9 +10,11 @@
 class Constraint {
 protected:
     int Violation = 0;
-//    int ViolationDegree = 0;
+    //    int Violation;
+
     int DeltaViolation = 0;
-//    int DeltaViolationDegree = 0;
+    //    int DeltaViolation;
+
     int priority;
     int type;
     bool oneway = false;
@@ -21,9 +23,11 @@ protected:
     unsigned scopeSize;
     std::vector<int> arguments;
     std::vector<IntegerVariable*> variables;
+    std::vector<IntegerVariable*> IntegerVariables;
     std::unordered_map<int, coefType> coefficients;
     //    std::vector<std::shared_ptr<Invariant>> invariants;
-    std::shared_ptr<Invariant> invariant;
+    //    std::shared_ptr<Invariant> invariant;
+    Invariant* invar;
     //    std::shared_ptr<Invariant> orgInvariant;
     //    Invariant* invariant;
     //    Invariant* invariant;
@@ -36,7 +40,10 @@ public:
     }
 
     ~Constraint() {
+        coefficients.clear();
+        variables.clear();
 
+        variables.shrink_to_fit();
     }
 
     void setNumberOfIntegerVariables(int number) {
@@ -55,9 +62,9 @@ public:
         return DeltaViolation;
     }
 
-//    int getDeltaViolationDegree() {
-//        return DeltaViolationDegree;
-//    }
+    //    int getDeltaViolationDegree() {
+    //        return DeltaViolationDegree;
+    //    }
 
     int getViolation() {
         return Violation;
@@ -71,7 +78,8 @@ public:
         //        containsOneway = set;
         oneway = set;
     }
-    int getPriority(){
+
+    int getPriority() {
         return priority;
     }
 
@@ -83,6 +91,14 @@ public:
         return variables;
     }
 
+    std::vector<IntegerVariable*>& getIntegerVariables() {
+        return IntegerVariables;
+    }
+
+    void addIntegerVariable(IntegerVariable* iv) {
+        IntegerVariables.push_back(iv);
+    }
+
     int getArgument(int i) {
         return arguments[i];
     }
@@ -91,13 +107,13 @@ public:
     //        return orgInvariant;
     //    }
 
-    void setInvariant(std::shared_ptr<Invariant> invar){
-        invariant = invar;
+    void setInvariant(Invariant* invar) {
+        this->invar = invar;
     }
-    
-    std::shared_ptr<Invariant>& getInvariant() {
 
-        return invariant;
+    invariant getInvariant() {
+
+        return invar;
     }
 
     unsigned getScopeSize() {
@@ -115,6 +131,7 @@ public:
             return (cons1->getScopeSize() > cons2->getScopeSize());
         }
     };
+
     struct Sortlower {
 
         bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
@@ -132,28 +149,29 @@ public:
     //        }
     //    };
 
-//    bool operator<(Constraint& cons) const {
-//        std::cout << "used to sort <" << std::endl;
-//        return (invariant->getVariables().size() < cons.getInvariant()->getVariables().size());
-//    }
-//
-//    bool operator>(Constraint& cons) const {
-//        std::cout << "used to sort >" << std::endl;
-//        return (invariant->getVariables().size() > cons.getInvariant()->getVariables().size());
-//    }
+    //    bool operator<(Constraint& cons) const {
+    //        std::cout << "used to sort <" << std::endl;
+    //        return (invariant->getVariables().size() < cons.getInvariant()->getVariables().size());
+    //    }
+    //
+    //    bool operator>(Constraint& cons) const {
+    //        std::cout << "used to sort >" << std::endl;
+    //        return (invariant->getVariables().size() > cons.getInvariant()->getVariables().size());
+    //    }
 
-//    virtual int setDeltaViolation();
+    //    virtual int setDeltaViolation();
+
     virtual int setDeltaViolation() {
         std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
         sleep(1);
         return 0;
     }
 
-//    virtual int setDeltaViolationDegree() {
-//        std::cout << "setDeltaViolationDegree() called in Constraint.hpp" << std::endl;
-//        sleep(1);
-//        return 0;
-//    }
+    //    virtual int setDeltaViolationDegree() {
+    //        std::cout << "setDeltaViolationDegree() called in Constraint.hpp" << std::endl;
+    //        sleep(1);
+    //        return 0;
+    //    }
     //   void updateViolation(int violation){
     //       Violation = violation;
     //   }
@@ -168,11 +186,11 @@ public:
         return 0;
     }
 
-//    virtual int updateViolationDegree() {
-//        std::cout << "Update Violation Degree called in Constraint.hpp" << std::endl;
-//        sleep(1);
-//        return 0;
-//    }
+    //    virtual int updateViolationDegree() {
+    //        std::cout << "Update Violation Degree called in Constraint.hpp" << std::endl;
+    //        sleep(1);
+    //        return 0;
+    //    }
 
     virtual bool testCons() {
         std::cout << "TestCons called in Constraint.hpp" << std::endl;
@@ -180,11 +198,11 @@ public:
         return false;
     }
 
-//    virtual bool testObj() {
-//        std::cout << "TestObj called in Constraint.hpp" << std::endl;
-//        sleep(1);
-//        return false;
-//    }
+    //    virtual bool testObj() {
+    //        std::cout << "TestObj called in Constraint.hpp" << std::endl;
+    //        sleep(1);
+    //        return false;
+    //    }
 
 
 

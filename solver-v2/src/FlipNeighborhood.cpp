@@ -162,7 +162,7 @@ Move* FlipNeighborhood::next() {
 //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
 //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size());
+    mv->deltaVector.resize(model->getPriorityVectors().size(),0);
     return mv;
 }
 
@@ -174,6 +174,29 @@ bool FlipNeighborhood::hasNext() {
         return false;
     }
 }
+Move* FlipNeighborhood::nextRandom() {
+    IntegerVariable* iv = model->getMaskAt(Random::Integer(0,(int) model->getMask().size()-1));
+    randomCounter++;
+//    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+//    mv->deltaVector.resize(model->getPriorityVectors().size());
+    mv->deltaVector.resize(model->getPriorityVectors().size(),0);
+    return mv;
+}
+
+bool FlipNeighborhood::hasNextRandom() {
+    if (randomCounter < randomMovesWanted) {
+        return true;
+    } else {
+        randomCounter = 0;
+        return false;
+    }
+}
+void FlipNeighborhood::setRandomCounter(unsigned numberOfRandomMoves){
+        randomMovesWanted = numberOfRandomMoves;
+    }
+
+
 
 bool FlipNeighborhood::calculateDelta(Move* mv) {
     //    auto iv = model->getAllVariables().at(7881);
@@ -188,9 +211,9 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
     //    std::cout << " = (" << val << ")  " << inv->getCurrentValue() << std::endl;
     //    debug;
     std::vector<int>& change = mv->getDeltaVector();
-    for (unsigned i = 0; i < change.size(); i++) {
-        change[i] = 0;
-    }
+//    for (unsigned i = 0; i < change.size(); i++) {
+//        change[i] = 0;
+//    }
     //    std::cout << "size of change " << change.size() << std::endl;
     //    if (mv->moveType == FLIP) {
     IntegerVariable* variable = mv->var;

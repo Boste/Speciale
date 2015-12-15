@@ -10,6 +10,8 @@
 \usetikzlibrary{fit,arrows}
  \usepackage{booktabs}
  \usepackage{tabularx}
+ \usepackage{mathtools}
+
 
 
 \usepackage{algorithmic}
@@ -92,13 +94,16 @@
   \input{archCons}
   \subsection{Invariants}
   \input{archInv}
+
+\newpage
 \section{Preprocessing and Initial Solution} \label{sec_gecode}
   \input{prepros}
   \subsection{Domain Reduction}
   \input{dom}
   \subsection{Finding an Initial Solution}
   \input{inisol}
-  \newpage
+
+\newpage
 \section{Structuring Local Search Model} \label{sec_ls}
 \input{strucLS}
   \subsection{Simplification}
@@ -109,7 +114,7 @@
     \input{propaqueue}\label{sec_propaqueue}
     
   
-  
+\newpage  
 \section{Local Search Engine} \label{sec_local}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}

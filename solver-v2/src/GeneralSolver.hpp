@@ -22,6 +22,7 @@
 //#include "Invariant.hpp"
 //#include "Constraint.hpp"
 #include "Clock.hpp"
+#include <math.h>
 //#include "getRSS.hpp"
 //#include "Random.hpp"
 //using namespace Gecode;
@@ -31,7 +32,7 @@
 class GeneralSolver {
 //    friend class Test;
 private:
-
+    std::vector<int> maxCoef;
     const std::shared_ptr<Model> model =  std::make_shared<Model> ();
     const std::unique_ptr<LSSpace> LS = std::unique_ptr<LSSpace> (new LSSpace(model));
     std::unique_ptr<GecodeSolver> GS = std::unique_ptr<GecodeSolver> (new GecodeSolver(model));
@@ -47,7 +48,7 @@ public:
     // Skal Gecode::IntConLevel icl være et argument?
     // ingen shared i det her kald
 
-    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority);
+    void linear(std::vector<double>& coefficients, std::vector<IntegerVariable*>& variables, int relation, double ub, unsigned priority);
     /// Returns a vector of the variables created (copying the vector)
 
     std::vector<IntegerVariable*> createIntVars(unsigned numberOfVariables, int lb, int ub);
@@ -84,7 +85,7 @@ public:
     void optimizeSolution(int time);
 
     void printCurrent();
-
+    unsigned getNumberOfDigits(double number);
 
 private:
 

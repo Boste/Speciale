@@ -1,0 +1,6 @@
+Every time a constraint is posted in the Gecode Solver, Gecode does cheap propagation to reduce the domain 
+of the variables in the constriant posted \cite[p. 19.]{MPG:M}. \\ 
+When the user request an initial solution to the model, Gecode {\sffamily{Branch}} method is called that 
+specify which varialbes to branch on and what values \boste{Default or by the user?}. Then Gecodes \method{status} is 
+called that does further propagation on the model before searching for a solution. If the domain of a variable is 
+reduced to a single value, the variable is said to be fixed and is assigned that value. 

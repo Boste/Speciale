@@ -88,10 +88,10 @@ public:
         return direction;
     }
 
-    unsigned getScale() const {
-        return scale;
-    }
-    void setDigits(double number);
+//    unsigned getScale() const {
+//        return scale;
+//    }
+//    void setDigits(double number);
     
     ~BP_Input(){
 //        for( vector<elem> vec : matcoeff){

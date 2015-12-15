@@ -59,7 +59,7 @@ public:
             //            std::cout << "creating linear " << i << std::endl;
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
-            vector<int> c(leftside.size());
+            vector<double> c(leftside.size());
             if (leftside.size() == 1) {
                 counter++;
             }
@@ -67,14 +67,14 @@ public:
 //                        vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
-                c.at(j) = static_cast<int> (e.coeff);
-                assert(e.coeff == (double) c.at(j));
+                c.at(j) =  (e.coeff);
+//                assert(e.coeff == (double) c.at(j));
                 //                x->push_back(varInt.at(e.index));
 //                x->at(j) = varInt.at(e.index);
                 x.at(j) = varInt.at(e.index);
                 //                x.at(j) = varInt->at(e.index);
             }
-            int upperbound = static_cast<int> (b.ub);
+            double upperbound = (b.ub);
 //            int upperbound2 = upperbound;
             //            std::cout << "posting" << std::endl;
             //            std::cout << "constraint nr " << i << std::endl;
@@ -99,13 +99,13 @@ public:
         std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
-        std::vector<int> c(varInt.size());
+        std::vector<double> c(varInt.size());
 //        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
         std::vector<IntegerVariable*> x (varInt.size());
 
         for (unsigned i = 0; i < varInt.size(); i++) {
             
-            c.at(i) = static_cast<int> (in->getVar(i).objcoeff);
+            c.at(i) =  (in->getVar(i).objcoeff);
 //            x->at(i) = varInt.at(i);
             x.at(i) = varInt.at(i);
         }

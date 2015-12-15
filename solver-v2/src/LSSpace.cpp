@@ -706,54 +706,35 @@ void LSSpace::optimizeSolution(int time) {
     unsigned loopCounter = 0;
     while (usedTime < timelimit) {
         loopCounter++;
-        while (BI.Start()) {
+        
+        
+//        while (FI.Start()) {
 //            iterations++;
 //        }
-//        while (FI.Start()) {
-            //                    std::cout << __LINE__ << std::endl;
-            //        
-            //            for (invariant inv : model->getInvariants()) {
-            //                if (!inv->test()) {
-            //                    std::cout << "Wrong BI " << std::endl;
-            //                    
-            //                    exit(1);
-            //                }
-            //
-            //            }
+//        if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
+//            bestState->copy(currentState);
+//            //            setSolution(bestState);
+//            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+//            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
+//
+//        }
+//        RW.Start();
+//        iterations += randomMoves;
+//        
+        
+        while (BI.Start()) {
             iterations++;
-            //        if (!st->recalculateAll()) {
-            //            std::cout << "Line " << __LINE__ << std::endl;
-            //            sleep(5);
-            //        }
-
-            //        break;
-            //            std::cout << "Iter " << iterations << " ";
-            //            for (int val : currentState->getEvaluation()) {
-            //                std::cout << val << " ";
-            //            }
-            //            std::cout << std::endl;
         }
-        //        std::cout << "Bi or FI cycle done iterations "<< iterations  << std::endl;
         if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
             bestState->copy(currentState);
-            //            setSolution(bestState);
+            
             usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds" << std::endl;
-            //            if (testInvariant()) {
-            //                std::cout << "Something is wrong with invariants" << std::endl;
-            //                exit(1);
-            //            }
+            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI"  << std::endl;
+
         }
         RW.Start();
-        //        for (int i = 0; i < randomMoves; i++) {
-        //            NE->randomWalk(currentState);
         iterations += randomMoves;
 
-        //            if (!st->recalculateAll()) {
-        //                std::cout << "Line " << __LINE__ << std::endl;
-        //                sleep(5);
-        //            }
-        //        }
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
     //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;

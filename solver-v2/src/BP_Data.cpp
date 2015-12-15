@@ -16,7 +16,7 @@ BP_Input::BP_Input(string file_name) {
 
 
     CoinMpsIO t;
-
+    std::cout.precision(10);
     //    std::cout << "Can coin read?" << std::endl;
     t.readMps(file_name.c_str());
     //        std::cout << "Coin have read" << std::endl;
@@ -64,6 +64,7 @@ BP_Input::BP_Input(string file_name) {
 
         tmp.lb = t.getColLower()[j];
         tmp.ub = t.getColUpper()[j];
+
 
         if (tmp.ub > std::numeric_limits<int>::max() - 1) {
             tmp.ub = std::numeric_limits<int>::max() - 1;
@@ -159,6 +160,9 @@ BP_Input::BP_Input(string file_name) {
                 tmp.index = indices[j];
                 tmp.coeff = val[j];
                 matcoeff[i][j] = tmp;
+//                if (tmp.coeff > 75 && tmp.coeff < 76) {
+//                    std::cout << tmp.coeff << " " << tmp.coeff * 1000000.0 << std::endl;
+//                }
 
             }
 

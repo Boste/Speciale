@@ -16,7 +16,7 @@ public:
 
     /// Used to create the original (given by user) constraints
 
-    Linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority)  {
+    Linear(std::vector<int> coefficients, std::vector<IntegerVariable*>& variables, int ub, int relation, unsigned priority)  {
         //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
         //        domainSize = lhs->getVariables().size();

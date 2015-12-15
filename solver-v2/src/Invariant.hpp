@@ -66,19 +66,14 @@ public:
     // should be pointers instead of integers
     /// Tells this Invariant that deltavalue of invariant or variable with ID is changed by change
 
-    virtual void addChange(int ID, int change) {
-        std::cout << "addChange in invariant" << std::endl;
-        std::cout << ID << " " << change << std::endl;
-    }
+    virtual void addChange(int ID, int change) = 0;
 
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
 
     virtual bool calculateDeltaValue() =0;
     /// Not used but should maybe be used.
 
-    virtual void initialize() {
-
-    }
+//    virtual void initialize() =0;
     /// Return the posible change of value. Never resets but gets recomputed by CalculateDeltaValue() based on new changes and current value.
 
     int getDeltaValue() {

@@ -1,7 +1,7 @@
-This section gives an overview of the key components of the solver. The following table gives an overview of the most 
+This section gives an overview of the key components of the solver. The table \ref{archi} gives an overview of the most 
 basic classes and their ordering. \\ 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
-\begin{table}[h]
+\begin{table}[b]
 \Large
 \def\arraystretch{1.5}
 \centering
@@ -14,11 +14,11 @@ basic classes and their ordering. \\
 \multicolumn{2}{|c|}{Model}    \\ \hline
 Constraint      & Invariant    \\ \hline
 \multicolumn{2}{|c|}{Variable} \\ \hline
-\end{tabularx}\caption{Ordering of key classes}
+\end{tabularx}\caption{Ordering of key classes} \label{archi}
 \end{table}
-
 \noindent
-The main part of the solver is the \gensol class that functions like a distribution center. The \gensol class contains 
+The main part of the solver is the \gensol class that functions like a distribution center, distributing tasks given 
+by the user to the right part of the solver. The \gensol class contains 
 the methods public to the user, such as creating variables and constraints, finding initial solution and optimizing the 
 solution. \\ 
 The two engines for solving are the \gecodesol and \lssol that find the initial solution and optimize the solution 

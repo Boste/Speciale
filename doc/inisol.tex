@@ -1,0 +1,29 @@
+Once domain reduction preprocessing has been done a Gecode DFS search engine is started. The user can by an option 
+class specify when Gecode search stop searching for a solution. A Gecode search engine takes a space and search option 
+as arguments and the search option contains a stop object. The stop object can either be timestop, nodestop or 
+failstop. Each time Gecode branches on a variable two new nodes is created and nodestop set a upper bound on the number 
+of nodes to explorer. If Gecode reaches a node that gives an infeasible assignment to a variable then that space is 
+failed and failstop set an upper bound on the number of fails that can occur before stopping. Timestop stops the search 
+if the timelimit is reach. \\ 
+Instead of having only one of these stop object a multistop object has been created that combines all three stop 
+objects if the user wants to having multiple stop criteria. \\ 
+The two following questions will be answered in this subsection. Why stop the search for a solution? What happens if the 
+search is stopped? \\ 
+Combinatorial problems can be formulated with Gecode and these problems can be very difficult to solve. In these cases 
+Gecode keeps searching for a solution until it finds one (or runs out of available memory). Instead the search can be 
+stopped using stop object and the problem can be relaxed such that Gecode can find a feasible solution to the relaxed 
+problem. If one of the stop criteria is reached we relax the problem by removing some of the constraint. To remove 
+constraints we need to create a new Gecode Solver and repost all the constraints, except those remove, again. In order 
+to choose which constraint that should be removed the priority of the constraints, given by the user, is used. 
+Different techniques can be applied for choosing which constraints with the same priority to remove. \boste{Article 
+Marco talked about propose some method, but says a greedy approach is good as well? }. The number of constraints that 
+are relaxed/removed is based on the number of constraints $|C|$ and the number of restarts made $r$. The number of 
+relaxed constraints is given by equation \ref{nRelaxed}. 
+\begin{equation}
+ |Relaxed| = \ceil[\bigg]{\frac{2^{r-1}}{100}\cdot |C|}
+ \label{nRelaxed}
+\end{equation} 
+After seven relaxations 64 \% of the constraints have been relaxed and if no solution can be found within the search 
+limits, we report the problem is to difficult to solve within the search limit. 
+The constraints 
+removed are not removed entirely from the model, they are still applied when doing local search.   

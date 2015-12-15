@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  9 DEC 2015 14:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  15 DEC 2015 12:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -810,18 +810,18 @@ LaTeX Warning: Label `fig_smallG' multiply defined.
 )
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 \c@lstlisting=\count157
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -839,12 +839,12 @@ LaTeX Font Info:    ... okay on input line 26.
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+LaTeX Font Info:    Try loading font information for U+msb on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -871,14 +871,14 @@ LaTeX Warning: No \author given.
 
  [2] (./intro.tex) (./vars.tex) (./cons.tex)
 (./discOpt.tex)
-Overfull \hbox (12.25645pt too wide) in paragraph at lines 1--51
+Overfull \hbox (12.25645pt too wide) in paragraph at lines 1--53
 \OT1/cmr/m/n/10.95 The Con-straint Sat-is-fac-tion Prob-lem (CSP) is de-fined a
 s a triple $\U/msb/m/n/10.95 P \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 h\OML/c
 mm/m/it/10.95 X; D; C\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/n/10.95 .
  []
 
 
-Overfull \hbox (24.89247pt too wide) in paragraph at lines 1--51
+Overfull \hbox (24.89247pt too wide) in paragraph at lines 1--53
 \OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 so-lu-tion \OT1/cmr/m/n/10.95 to the C
 SP $\U/msb/m/n/10.95 P$ \OT1/cmr/m/n/10.95 is a A vec-tor of n el-e-ments $\OML
 /cmm/m/it/10.95 ^^\ \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 V\OT1/cmr/m/n/10.
@@ -894,18 +894,27 @@ ems aswell. Binary-
  []
 
 [3])
-Underfull \hbox (badness 10000) in paragraph at lines 9--53
+Underfull \hbox (badness 10000) in paragraph at lines 9--55
 
  []
 
 (./implicitCons.tex) (./invariant.tex [4]) (./softCons.tex) (./objFunc.tex)
 [5] (./architec.tex
-Underfull \hbox (badness 10000) in paragraph at lines 20--35
+Underfull \hbox (badness 10000) in paragraph at lines 1--35
 
  []
 
-) [6] (./archCons.tex) (./archInv.tex) (./prepros.tex) (./dom.tex)
-(./inisol.tex) [7] (./strucLS.tex
+) [6] (./archCons.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--95
+
+ []
+
+(./archInv.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--13
+
+ []
+
+[7]) [8] (./prepros.tex) (./dom.tex) (./inisol.tex [9]) [10] (./strucLS.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--18
 
  []
@@ -915,49 +924,54 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--4
 
  []
 
-[8] [9]
+[11] [12]
 Underfull \hbox (badness 10000) in paragraph at lines 144--152
 
  []
 
-) (./ddg.tex [10]
+) (./ddg.tex [13]
 Underfull \hbox (badness 10000) in paragraph at lines 27--114
 
  []
 
-[11] [12]) (./propaqueue.tex) [13] (./future.tex) (./Thesis.bbl [14]) [15]
-(./Thesis.aux)
+[14] [15]) (./propaqueue.tex) [16] [17] (./future.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--126
+
+ []
+
+(./Thesis.bbl [18]) [19] (./Thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16201 strings out of 495032
- 280015 string characters out of 6181718
- 367822 words of memory out of 5000000
- 19046 multiletter control sequences out of 15000+600000
+ 16469 strings out of 495032
+ 282120 string characters out of 6181718
+ 368073 words of memory out of 5000000
+ 19314 multiletter control sequences out of 15000+600000
  15711 words of font info for 60 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,24n,92p,418b,790s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,24n,92p,418b,1033s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (15 pages, 250965 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (19 pages, 268742 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

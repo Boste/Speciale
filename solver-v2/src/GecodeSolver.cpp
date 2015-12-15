@@ -1,4 +1,6 @@
 
+#include <gecode/int.hh>
+
 #include "GecodeSolver.hpp"
 
 GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
@@ -12,7 +14,7 @@ GecodeSolver::~GecodeSolver() {
 
 }
 
-void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound) {
+void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound, IntConLevel icl=ICL_DEF) {
     //    IntVars = IntVarArray(*this, tmpVars);
 
     if (variables.size() == 1 && coefficients[0] == 1) {
@@ -40,7 +42,7 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Inte
         }
 
     } else {
-
+        
         Gecode::IntArgs c(coefficients.size());
         Gecode::IntVarArgs x(coefficients.size());
         assert(coefficients.size() == variables.size());
@@ -53,6 +55,7 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Inte
             //        x[j] = *(variables->at(j)->getVariablePointer());
             x[j] = tmpVars[variables.at(j)->getID()];
         }
+       
         //    std::cout << tmpVars << std::endl;
         //    sleep(1);
         // ICL_VAL is cheapest ICL_DOM is most expensive
@@ -165,18 +168,18 @@ void GecodeSolver::createArray() {
 
 void GecodeSolver::branch() {
 
-    for (std::vector<IntegerVariable*>& vector : model->getPriorityVectors()) {
-        Gecode::IntVarArgs priority;
-
-        for (IntegerVariable* iv : vector) {
-            //    for(int i = 0; i< model->getPriorityVectorNr(0).size();i++){
-            priority << *iv->getVariablePointer();
-        }
+//    for (std::vector<IntegerVariable*>& vector : model->getPriorityVectors()) {
+//        Gecode::IntVarArgs priority;
+//
+//        for (IntegerVariable* iv : vector) {
+//            //    for(int i = 0; i< model->getPriorityVectorNr(0).size();i++){
+//            priority << *iv->getVariablePointer();
+//        }
         //        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
         Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
         //        Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
-    }
+//    }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //    std::cout << "branched" << std::endl;
@@ -266,7 +269,6 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     if (fix) {
         fixVariables();
     }
-    sleep(4);
 
 
     so->a_d = AllVars.size() - 1;

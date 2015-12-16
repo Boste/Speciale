@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{mathtools}
@@ -10,6 +10,8 @@
 \usetikzlibrary{fit,arrows}
  \usepackage{booktabs}
  \usepackage{tabularx}
+ \usepackage{mathtools}
+
 
 
 \usepackage{algorithmic}
@@ -39,15 +41,15 @@
  \input{intro}
  
  
-\section{Defenitions} 
+\section{Definitions} 
   \subsection{Variables} 
   \input{vars}
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
   
 \section{Solution Approach}  
-  \subsection{Discrete Optimization} % CSP -> CSOP
-  
+  \subsection{Discrete Optimization} % CSP-> CSOP
+  \input{discOpt}
   \subsection{Mathematical Programming} % In general, talk about Gorubi, Scip, Cplex after
   \input{bpip}
   
@@ -63,7 +65,7 @@
     \subsubsection{Invariants and One-way Constraints}
     \input{invariant}
     \subsubsection{Soft Constraints}
-    \input{softCons}
+    \input{softCons}	
   \subsection{Evaluation Function}
   \input{objFunc}
     \subsubsection{Comet}
@@ -92,22 +94,27 @@
   \input{archCons}
   \subsection{Invariants}
   \input{archInv}
+
+\newpage
 \section{Preprocessing and Initial Solution} \label{sec_gecode}
   \input{prepros}
   \subsection{Domain Reduction}
   \input{dom}
   \subsection{Finding an Initial Solution}
   \input{inisol}
-  \newpage
+
+\newpage
 \section{Structuring Local Search Model} \label{sec_ls}
 \input{strucLS}
-  \subsection{Simplification and Dependency Digraph}
+  \subsection{Simplification}
+  \input{simplification}
+  \subsection{Dependency Digraph}
     \input{ddg} \label{sec_ddg}
   \subsection{Propagation Queue}  
     \input{propaqueue}\label{sec_propaqueue}
     
   
-  
+\newpage  
 \section{Local Search Engine} \label{sec_local}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}

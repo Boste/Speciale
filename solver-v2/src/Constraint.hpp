@@ -32,7 +32,6 @@ protected:
     //    Invariant* invariant;
     //    Invariant* invariant;
 
-
 public:
 
     Constraint() {
@@ -53,7 +52,6 @@ public:
     int& getNumberOfIntegerVariables() {
         return numberOfIntegerVariables;
     }
-
     int getType() {
         return type;
     }

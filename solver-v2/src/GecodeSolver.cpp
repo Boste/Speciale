@@ -14,11 +14,11 @@ GecodeSolver::~GecodeSolver() {
 
 }
 
-void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound, IntConLevel icl=ICL_DEF) {
+void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound) {
     //    IntVars = IntVarArray(*this, tmpVars);
 
     if (variables.size() == 1 && coefficients[0] == 1) {
-        IntConLevel icl = Gecode::ICL_DOM;
+       IntConLevel icl = Gecode::ICL_DOM;
         IntVar x = tmpVars[variables[0]->getID()];
         //        IntVarArgs x(1)
         //        x[0] = tmpVars[variables[0]->getID()];

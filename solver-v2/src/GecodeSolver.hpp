@@ -32,7 +32,7 @@ public:
     void branch();
     bool initialize(int TimeForGecode,bool fix);
     bool FindSolution(int TimeForGecode, bool fix);
-    void linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound, Gecode::IntConLevel icl );
+    void linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound);
 //    void createGecodeVariables(std::shared_ptr<Model> model);
     void createGecodeVariable(int lb,int ub);
     void SetValues(Gecode::IntVarArray vars);

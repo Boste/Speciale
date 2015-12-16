@@ -59,7 +59,7 @@ public:
             //            std::cout << "creating linear " << i << std::endl;
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
-            vector<double> c(leftside.size());
+            vector<int> c(leftside.size());
             if (leftside.size() == 1) {
                 counter++;
             }
@@ -99,7 +99,7 @@ public:
         std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
-        std::vector<double> c(varInt.size());
+        std::vector<int> c(varInt.size());
 //        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
         std::vector<IntegerVariable*> x (varInt.size());
 

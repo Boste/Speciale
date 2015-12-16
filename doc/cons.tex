@@ -7,7 +7,11 @@ constraint $c_j$ is a subset of the Cartesian product of the domains of the vari
 i.e, $c_j \subseteq D(x_{j,i_1}) \times D(x_{j,i_2}) \times \dots \times D(x_{j,i_{\alpha_j}})$. \\ 
 If all variables of a constraint $c_j$ has a finite domain then the constraint can be written in extensional form. The 
 extensional form of $c_j$ is a subset of $\mathbb{Z}^{|X(c_j)|}$ of all combinations of 
-tuples that satisfies $c_j$.    
+tuples that satisfies $c_j$. \\ 
+We call a constraint $c_j$ a \emph{functional constraint} if given an assignment of values to all variables except 
+$x_i$ in $c_j$ then only one value of $x_i$ satisfy $c_j$ for all $x_i \in X(c_j)$. In other words the value of a 
+variable in a functional constraint can be determined from the values of the other variables in the functional 
+constraint. \boste{Equational constraint?}
 
 \iffalse
 \subsubsection{Considered Constriants \boste{Not sure about the title and not finished yet. Maybe move to ``Structure 

@@ -1,17 +1,22 @@
-There exisist several solver for discrete optimization problems such as Cplex, Gurobi, GLPK. These solver can solver 
-various other problems aswell. Binary- and integer linear programming can be used to model a wide 
-range of problems by posting linear constraints and using and a linear objective function. A linear integer program 
-can be writting on the form: 
+Binary- and integer linear programming can be used to model a wide range of problems by posting linear constraints and 
+using and a linear objective function. A linear integer program can be writing on the form: 
 \begin{align}
- \text{Minimize } & \mathbf{c}^T\mathbf{x} \\ 
- \text{subject to } & A\mathbf{x} \leq \mathbf{b} \\ 
+ \text{Minimize }\; &z =  \mathbf{c}^T\mathbf{x} \\ 
+ \text{subject to } \; & A\mathbf{x} \leq \mathbf{b} \\ 
  & \mathbf{x} \in \mathbb{Z}^n
 \end{align}
-Here $A$ is a $n \times m$ matrix of coefficients, $\mathbf{b} \in \mathbb{R}^m$ and $\mathbf{c} \in 
-\mathbb{R}^n$ . \\ 
+Here $A$ is a $n \times m$ matrix of coefficients, $\mathbf{b} \in \mathbb{R}^m$, $z$ is the value of the objective 
+function and $\mathbf{c} \in \mathbb{R}^n$. The first line is the objective function and can easily be transformed to a 
+maximization problem by multiplying by $-1$. The relation in line 2 can be a mix of $\{\leq,=,\geq\}$ but $\geq$ can 
+be transformed to $\leq$ by multiplying both side of the constraint by $-1$.  \\ 
 A solution is an assignment of values to all variables $\mathbf{x}$ and a solution is said to be feasible if all 
 constraints are satisfied. The set of feasible solutions consist of integer point in a $n$ dimensional space and the 
-point that minimize the objective function is said to be the optimal solution. \\ 
+point that minimize the objective function is said to be the optimal solution. \\
 Solving a general integer program or binary program is a NP-hard problem and several techniques are developed for 
-solving them. The techniques can be i.e. branch and bound, cutting plane and branch and cut and usually solving an 
-auxiliary linear problem as well. \cite[p. 30]{ilp} \\
+solving them. The techniques can be i.e. branch and bound, cutting plane and branch and cut and usually by
+relaxing the integer constraint to solve an auxiliary linear problem \cite[p. 30]{ilp}. The linear problem can be 
+formulated as the integer linear problem where variables can take real values. The linear formulation can be 
+transformed to standard form by introducing auxiliary variables and then solved using the simplex method. The relaxed 
+problem can be used as a lower- or upper bound depending on whether the problem is a minimization or maximization 
+problem. \boste{Jeg ved ikke om jeg skal uddybe det mere, når jeg kun beskæftiger mig med BP/IP} \\ 
+There exist several solver for (integer) linear programming problems such as Cplex, Gurobi, GLPK and Scip. 

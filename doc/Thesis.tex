@@ -43,17 +43,20 @@
  
 \section{Definitions} 
   \subsection{Variables} 
-  \input{vars}
+  \input{vars} % Written
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
-  
-\section{Solution Approach}  
-  \subsection{Discrete Optimization} % CSP-> CSOP
+    \subsection{Problem formulation} % CSP-> CSOP
   \input{discOpt}
-  \subsection{Mathematical Programming} % In general, talk about Gorubi, Scip, Cplex after
+  
+\newpage  
+\section{Discrete Optimization}  
+  
+  \subsection{Binary- and Integer Linear Programming} % In general, talk about Gorubi, Scip, Cplex after
   \input{bpip}
   
   \subsection{Constraint Programming}
+  \input{CP}
     \subsubsection{Implicit Constraints}
     \input{implicitCons}
     \subsubsection{Gecode}

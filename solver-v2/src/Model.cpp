@@ -355,7 +355,7 @@ void Model::initialize() {
                 //                    continue;
                 //                }
                 if (con->getNumberOfIntegerVariables() > 0) {
-                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
+//                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
                     std::vector<IntegerVariable*>& intVars = con->getIntegerVariables();
                     for (IntegerVariable* iv : con->getVariables()) {
                         if (!(iv->isFixed() || iv->isDef() || iv->isIntegerVariable())) {

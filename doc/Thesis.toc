@@ -2,37 +2,37 @@
 \contentsline {section}{\numberline {2}Definitions}{3}
 \contentsline {subsection}{\numberline {2.1}Variables}{3}
 \contentsline {subsection}{\numberline {2.2}Constraints}{3}
-\contentsline {section}{\numberline {3}Solution Approach}{3}
-\contentsline {subsection}{\numberline {3.1}Discrete Optimization}{3}
-\contentsline {subsection}{\numberline {3.2}Mathematical Programming}{4}
-\contentsline {subsection}{\numberline {3.3}Constraint Programming}{4}
-\contentsline {subsubsection}{\numberline {3.3.1}Implicit Constraints}{4}
-\contentsline {subsubsection}{\numberline {3.3.2}Gecode}{4}
-\contentsline {subsection}{\numberline {3.4}Heuristics and Local Search}{4}
-\contentsline {subsubsection}{\numberline {3.4.1}Construction Heuristics}{4}
-\contentsline {subsubsection}{\numberline {3.4.2}Local Search and Neighborhoods}{4}
-\contentsline {subsubsection}{\numberline {3.4.3}Metaheuristics}{4}
-\contentsline {subsection}{\numberline {3.5}Constraint Based Local Search}{4}
-\contentsline {subsubsection}{\numberline {3.5.1}Invariants and One-way Constraints}{4}
-\contentsline {subsubsection}{\numberline {3.5.2}Soft Constraints}{5}
-\contentsline {subsection}{\numberline {3.6}Evaluation Function}{5}
-\contentsline {subsubsection}{\numberline {3.6.1}Comet}{5}
-\contentsline {subsubsection}{\numberline {3.6.2}OscaR}{5}
-\contentsline {section}{\numberline {4}Architectural Overview}{6}
-\contentsline {subsection}{\numberline {4.1}Constraints}{7}
-\contentsline {subsection}{\numberline {4.2}Invariants}{7}
-\contentsline {section}{\numberline {5}Preprocessing and Initial Solution}{9}
-\contentsline {subsection}{\numberline {5.1}Domain Reduction}{9}
-\contentsline {subsection}{\numberline {5.2}Finding an Initial Solution}{9}
-\contentsline {section}{\numberline {6}Structuring Local Search Model}{11}
-\contentsline {subsection}{\numberline {6.1}Simplification}{11}
-\contentsline {subsection}{\numberline {6.2}Dependency Digraph}{14}
-\contentsline {subsection}{\numberline {6.3}Propagation Queue}{16}
-\contentsline {section}{\numberline {7}Local Search Engine}{18}
-\contentsline {subsection}{\numberline {7.1}Neighborhoods}{18}
-\contentsline {subsubsection}{\numberline {7.1.1}Neighborhood Operations}{18}
-\contentsline {section}{\numberline {8}Metaheuristics}{18}
-\contentsline {section}{\numberline {9}Tests}{18}
-\contentsline {section}{\numberline {10}Results}{18}
-\contentsline {section}{\numberline {11}Future Work}{18}
-\contentsline {section}{\numberline {12}Conclusion}{18}
+\contentsline {subsection}{\numberline {2.3}Problem formulation}{3}
+\contentsline {section}{\numberline {3}Discrete Optimization}{5}
+\contentsline {subsection}{\numberline {3.1}Binary- and Integer Linear Programming}{5}
+\contentsline {subsection}{\numberline {3.2}Constraint Programming}{5}
+\contentsline {subsubsection}{\numberline {3.2.1}Implicit Constraints}{6}
+\contentsline {subsubsection}{\numberline {3.2.2}Gecode}{6}
+\contentsline {subsection}{\numberline {3.3}Heuristics and Local Search}{6}
+\contentsline {subsubsection}{\numberline {3.3.1}Construction Heuristics}{6}
+\contentsline {subsubsection}{\numberline {3.3.2}Local Search and Neighborhoods}{6}
+\contentsline {subsubsection}{\numberline {3.3.3}Metaheuristics}{6}
+\contentsline {subsection}{\numberline {3.4}Constraint Based Local Search}{6}
+\contentsline {subsubsection}{\numberline {3.4.1}Invariants and One-way Constraints}{6}
+\contentsline {subsubsection}{\numberline {3.4.2}Soft Constraints}{6}
+\contentsline {subsection}{\numberline {3.5}Evaluation Function}{6}
+\contentsline {subsubsection}{\numberline {3.5.1}Comet}{6}
+\contentsline {subsubsection}{\numberline {3.5.2}OscaR}{6}
+\contentsline {section}{\numberline {4}Architectural Overview}{7}
+\contentsline {subsection}{\numberline {4.1}Constraints}{8}
+\contentsline {subsection}{\numberline {4.2}Invariants}{8}
+\contentsline {section}{\numberline {5}Preprocessing and Initial Solution}{10}
+\contentsline {subsection}{\numberline {5.1}Domain Reduction}{10}
+\contentsline {subsection}{\numberline {5.2}Finding an Initial Solution}{10}
+\contentsline {section}{\numberline {6}Structuring Local Search Model}{12}
+\contentsline {subsection}{\numberline {6.1}Simplification}{12}
+\contentsline {subsection}{\numberline {6.2}Dependency Digraph}{15}
+\contentsline {subsection}{\numberline {6.3}Propagation Queue}{17}
+\contentsline {section}{\numberline {7}Local Search Engine}{19}
+\contentsline {subsection}{\numberline {7.1}Neighborhoods}{19}
+\contentsline {subsubsection}{\numberline {7.1.1}Neighborhood Operations}{19}
+\contentsline {section}{\numberline {8}Metaheuristics}{19}
+\contentsline {section}{\numberline {9}Tests}{19}
+\contentsline {section}{\numberline {10}Results}{19}
+\contentsline {section}{\numberline {11}Future Work}{19}
+\contentsline {section}{\numberline {12}Conclusion}{19}

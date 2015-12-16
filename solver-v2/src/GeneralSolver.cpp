@@ -1,11 +1,11 @@
 #include "GeneralSolver.hpp"
 
 GeneralSolver::GeneralSolver() {
-    for (int i = 0; i < 10; i++) {
-        int max = std::numeric_limits<int>::max() / std::pow(10, i);
-        //            std::cout << max << std::endl;
-        maxCoef.push_back(max);
-    }
+//    for (int i = 0; i < 10; i++) {
+//        int max = std::numeric_limits<int>::max() / std::pow(10, i);
+//        //            std::cout << max << std::endl;
+//        maxCoef.push_back(max);
+//    }
 }
 
 GeneralSolver::~GeneralSolver() {
@@ -27,103 +27,112 @@ GeneralSolver::~GeneralSolver() {
 // Skal Gecode::IntConLevel icl være et argument?
 // ingen shared i det her kald
 
-unsigned GeneralSolver::getNumberOfDigits(double number) {
-    //    std::cout << "Number " << number << std::endl;
-    //    double dig = number - static_cast<int> (number);
-    //    std::cout << dig << std::endl;
-    //    std::cout << number - (int) number << std::endl;
-    //    std::string asString = std::to_string(dig);
-    //    
-    //    sstream << dig ;
-    //    sstream << " ";
-    //    sstream << number - (int) number;
-    //    std::string varAsString = sstream.str();
-    //    std::cout << " hest " <<  varAsString << std::endl;
-    //    
-    double intpart;
-    std::ostringstream sstream;
-    double fractpart = modf(number, &intpart);
-    sstream << fractpart;
-    std::string varAsString = sstream.str();
-    //    std::cout << varAsString << std::endl;
+//unsigned GeneralSolver::getNumberOfDigits(double number) {
+//    //    std::cout << "Number " << number << std::endl;
+//    //    double dig = number - static_cast<int> (number);
+//    //    std::cout << dig << std::endl;
+//    //    std::cout << number - (int) number << std::endl;
+//    //    std::string asString = std::to_string(dig);
+//    //    
+//    //    sstream << dig ;
+//    //    sstream << " ";
+//    //    sstream << number - (int) number;
+//    //    std::string varAsString = sstream.str();
+//    //    std::cout << " hest " <<  varAsString << std::endl;
+//    //    
+//    std::cout.precision(6);
+//
+//    double intpart;
+//    std::cout << "Number " << number << std::endl;
+//    std::ostringstream sstream;
+//    sstream.precision(6);
+//    double fractpart = modf(number, &intpart);
+//    sstream << fractpart;
+//    std::cout << fractpart << std::endl;
+//    std::string varAsString = sstream.str();
+//    std::cout << varAsString << std::endl;
+//    sleep(1);
+//    int digits = varAsString.length() - 2;
+//    std::cout << fractpart * 10000000 << std::endl;
+//    std::cout << "Length - 2 = " << varAsString.length() << " - 2 " << digits << std::endl;
+//
+//    if (fractpart < 0) {
+//        digits--;
+//        std::cout << fractpart << std::endl;
+//    }
+//    assert(digits < 10);
+//    //    std::cout << "Digits " << digits << std::endl;
+//    //    std::cout << sstream.width() << std::endl;
+//    //    int digits = sstream.width();
+//    //    std::cout << sstream << std::endl;
+//    //    std::cout << asString << std::endl;
+//    //    unsigned digits = asString.length() - 2;
+//    //    std::cout << "Digits " << digits << std::endl;
+//    return digits;
+//}
 
-    int digits = varAsString.length() - 2;
-    if (fractpart < 0) {
-        digits--;
-        std::cout << fractpart << std::endl;
-    }
-    assert(digits < 10);
-    //    std::cout << "Digits " << digits << std::endl;
-    //    std::cout << sstream.width() << std::endl;
-    //    int digits = sstream.width();
-    //    std::cout << sstream << std::endl;
-    //    std::cout << asString << std::endl;
-    //    unsigned digits = asString.length() - 2;
-    //    std::cout << "Digits " << digits << std::endl;
-    return digits;
-}
+void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority) {
+//    bool hasDouble = false;
+//    int digits = 0;
+//    int ub = std::round(upperbound);
+//    //    getNumberOfDigits(1.1);
+//    if (upperbound != ub) {
+//        std::cout << upperbound << " vs " << ub << " diff " << ub-upperbound<< std::endl;
+//
+//        //        std::cout << "Do something ub" << std::endl;
+//        digits = getNumberOfDigits(upperbound);
+//        //        std::cout << upperbound << std::endl;
+//
+//
+//        hasDouble = true;
+//    }
+//    if (!hasDouble) {
+//        for (double coef : coeff) {
+//            if (coef != std::round(coef)) {
+//                //                std::cout << "Do something" << std::endl;
+//                int newDigit = getNumberOfDigits(coef);
+//                if (newDigit > digits) {
+//                    digits = newDigit;
+//                }
+//                //                std::cout << coef << std::endl;
+//                hasDouble = true;
+//                //                break;
+//            }
+//        }
+//    }
 
-void GeneralSolver::linear(std::vector<double>& coeff, std::vector<IntegerVariable*>& variables, int relation, double upperbound, unsigned priority) {
-    bool hasDouble = false;
-    int digits = 0;
-    int ub = std::round(upperbound);
-    //    getNumberOfDigits(1.1);
-    if (upperbound != ub) {
-
-        //        std::cout << "Do something ub" << std::endl;
-        digits = getNumberOfDigits(upperbound);
-        //        std::cout << upperbound << std::endl;
-
-
-        hasDouble = true;
-    }
-    if (!hasDouble) {
-        for (double coef : coeff) {
-            if (coef != std::round(coef)) {
-                //                std::cout << "Do something" << std::endl;
-                int newDigit = getNumberOfDigits(coef);
-                if (newDigit > digits) {
-                    digits = newDigit;
-                }
-                //                std::cout << coef << std::endl;
-                hasDouble = true;
-                //                break;
-            }
-        }
-    }
-
-    std::vector<int> coefficients;
-    if (hasDouble) {
-        std::cout << "Digits " << digits << " Max coeff " << maxCoef[digits] << std::endl;
-
-
-        for (double coef : coeff) {
-            //            std::cout << coef << " vs " << coef*pow(10,digits) << "     "; 
-            coefficients.push_back(std::round(coef * std::pow(10, digits)));
-            //            std::cout << coef << " " << std::endl;
-            if (std::abs(coef) > maxCoef[digits]) {
-                std::cout << "Cannot convert to integer " << std::endl;
-                std::cout << "exit" << std::endl;
-                exit(1);
-            }
-        }
-        if (std::abs(upperbound) > maxCoef[digits]) {
-            std::cout << "Cannot convert to integer " << std::endl;
-            std::cout << "exit" << std::endl;
-
-            exit(1);
-        }
-        ub = std::round(upperbound * std::pow(10, digits));
-        //        sleep(1);
-
-    } else {
-        for (double coef : coeff) {
-            coefficients.push_back(std::round(coef));
-
-        }
-
-        //        ub = std::round(upperbound * std::pow(10, digits));
-    }
+//    std::vector<int> coefficients;
+//    if (hasDouble) {
+//        std::cout << "Digits " << digits << " Max coeff " << maxCoef[digits] << std::endl;
+//
+//
+//        for (double coef : coeff) {
+//            //            std::cout << coef << " vs " << coef*pow(10,digits) << "     "; 
+//            coefficients.push_back(std::round(coef * std::pow(10, digits)));
+//            //            std::cout << coef << " " << std::endl;
+//            if (std::abs(coef) > maxCoef[digits]) {
+//                std::cout << "Cannot convert to integer " << std::endl;
+//                std::cout << "exit" << std::endl;
+//                exit(1);
+//            }
+//        }
+//        if (std::abs(upperbound) > maxCoef[digits]) {
+//            std::cout << "Cannot convert to integer " << std::endl;
+//            std::cout << "exit" << std::endl;
+//
+//            exit(1);
+//        }
+//        ub = std::round(upperbound * std::pow(10, digits));
+//        //        sleep(1);
+//
+//    } else {
+//        for (double coef : coeff) {
+//            coefficients.push_back(std::round(coef));
+//
+//        }
+//
+//        //        ub = std::round(upperbound * std::pow(10, digits));
+//    }
     //    debug;
     std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, ub, relation, priority);
 
@@ -346,7 +355,7 @@ void GeneralSolver::simpleRelax(int timesRelaxed) {
                     c[j] = cons->getCoefficients().at(j); //                    std::cout << __LINE__ << std::endl;
 
                 }
-
+                //                IntConLevel icl = cons->getICL();
                 int relation = cons->getArgument(0);
                 int ub = cons->getArgument(1);
                 GS->linear(c, variables, relation, ub);

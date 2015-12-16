@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  15 DEC 2015 12:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  16 DEC 2015 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -871,14 +871,14 @@ LaTeX Warning: No \author given.
 
  [2] (./intro.tex) (./vars.tex) (./cons.tex)
 (./discOpt.tex)
-Overfull \hbox (12.25645pt too wide) in paragraph at lines 1--53
+Overfull \hbox (12.25645pt too wide) in paragraph at lines 1--51
 \OT1/cmr/m/n/10.95 The Con-straint Sat-is-fac-tion Prob-lem (CSP) is de-fined a
 s a triple $\U/msb/m/n/10.95 P \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 h\OML/c
 mm/m/it/10.95 X; D; C\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/n/10.95 .
  []
 
 
-Overfull \hbox (24.89247pt too wide) in paragraph at lines 1--53
+Overfull \hbox (24.89247pt too wide) in paragraph at lines 1--51
 \OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 so-lu-tion \OT1/cmr/m/n/10.95 to the C
 SP $\U/msb/m/n/10.95 P$ \OT1/cmr/m/n/10.95 is a A vec-tor of n el-e-ments $\OML
 /cmm/m/it/10.95 ^^\ \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 V\OT1/cmr/m/n/10.
@@ -887,25 +887,14 @@ m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; []
 ; V\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 ))$.
  []
 
-(./bpip.tex
-Overfull \hbox (6.63283pt too wide) in paragraph at lines 1--5
-\OT1/cmr/m/n/10.95 Gurobi, GLPK. These solver can solver var-i-ous other prob-l
-ems aswell. Binary-
- []
-
-[3])
-Underfull \hbox (badness 10000) in paragraph at lines 9--55
-
- []
-
-(./implicitCons.tex) (./invariant.tex [4]) (./softCons.tex) (./objFunc.tex)
-[5] (./architec.tex
+[3] [4] (./bpip.tex) (./CP.tex) (./implicitCons.tex) [5] (./invariant.tex)
+(./softCons.tex) (./objFunc.tex) [6] (./architec.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--35
 
  []
 
-) [6] (./archCons.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--95
+) [7] (./archCons.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--98
 
  []
 
@@ -914,7 +903,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--13
 
  []
 
-[7]) [8] (./prepros.tex) (./dom.tex) (./inisol.tex [9]) [10] (./strucLS.tex
+[8]) [9] (./prepros.tex) (./dom.tex) (./inisol.tex [10]) [11] (./strucLS.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--18
 
  []
@@ -924,30 +913,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--4
 
  []
 
-[11] [12]
+[12] [13]
 Underfull \hbox (badness 10000) in paragraph at lines 144--152
 
  []
 
-) (./ddg.tex [13]
+) (./ddg.tex [14]
 Underfull \hbox (badness 10000) in paragraph at lines 27--114
 
  []
 
-[14] [15]) (./propaqueue.tex) [16] [17] (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--126
+[15] [16]) (./propaqueue.tex) [17] [18] (./future.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--129
 
  []
 
-(./Thesis.bbl [18]) [19] (./Thesis.aux)
+(./Thesis.bbl [19]) [20] (./Thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16469 strings out of 495032
- 282120 string characters out of 6181718
- 368073 words of memory out of 5000000
+ 16472 strings out of 495032
+ 282136 string characters out of 6181718
+ 368074 words of memory out of 5000000
  19314 multiletter control sequences out of 15000+600000
  15711 words of font info for 60 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -969,9 +958,9 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (19 pages, 268742 bytes).
+Output written on Thesis.pdf (20 pages, 272958 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
+ 142 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

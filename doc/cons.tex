@@ -1,15 +1,19 @@
 % \in C$ is a pair $\langle R_{X(c_j)}, X(c_j) \rangle $ where $ R_{X(c_j)}$  also 
 %called the relation on $c_j$. \\ 
-The values of variables will be restricted by a set of $m$ constraints $C= \{ c_1,c_2, \dots , c_m \} $. The set of 
-variables to which the constraint $c_j$ applies is called its \emph{scope} and is denoted $X(c_j) = \{x_{j,{i_1}}, 
-x_{j,i_2} , \dots , x_{j,\alpha_j}\}$. The size of a scope $|X(c_j)|$ is called the \emph{arity} $\alpha_j$. The 
-constraint $c_j$ is a subset of the Cartesian product of the domains of the variables in the scope $X(c_j)$ of $c_j$, 
-i.e, $c_j \subseteq D(x_{j,i_1}) \times D(x_{j,i_2}) \times \dots \times D(x_{j,i_{\alpha_j}})$. \\ 
+The values of variables will be restricted by a set of $m$ constraints $C= \{ c_1,c_2, \dots , c_m \} $ and let $J = 
+\{1,2,\dots,j,\dots , m\}$. The set of 
+variables to which the constraint $c_j$ applies is called its \emph{scope} and is denoted 
+%$X(c_j) = \{x_{j,{i_1}}, x_{j,i_2} , \dots , x_{j,\alpha_j}\}$. 
+$X(c_j) = \{x_{1j}, x_{2j} , \dots , x_{\alpha_jj}\}$. The variable $x_ij$ is the i'th variable in constriant $c_j$ 
+and corresponds to a variable $x_k\in X$.  
+The size of a scope $|X(c_j)|$ is called the \emph{arity} $\alpha_j$. The constraint $c_j$ can be expressed as a 
+subset of the Cartesian product of the domains of the variables in the scope $X(c_j)$, i.e, $c_j \subseteq 
+D(x_{j,i_1}) \times D(x_{j,i_2}) \times \dots \times D(x_{j,i_{\alpha_j}})$. \\ 
 If all variables of a constraint $c_j$ has a finite domain then the constraint can be written in extensional form. The 
-extensional form of $c_j$ is a subset of $\mathbb{Z}^{|X(c_j)|}$ of all combinations of 
-tuples that satisfies $c_j$. \\ 
+\emph{extensional form} of $c_j$ is a subset of $\mathbb{Z}^{|X(c_j)|}$ of all combinations of tuples that satisfies 
+$c_j$. \boste{Same som cartesian product?} \\ 
 We call a constraint $c_j$ a \emph{functional constraint} if given an assignment of values to all variables except 
-$x_i$ in $c_j$ then only one value of $x_i$ satisfy $c_j$ for all $x_i \in X(c_j)$. In other words the value of a 
+$x_i$ in $c_j$, then at most one value of $x_i$ satisfy $c_j$ for all $x_i \in X(c_j)$. In other words the value of a 
 variable in a functional constraint can be determined from the values of the other variables in the functional 
 constraint. \boste{Equational constraint?}
 

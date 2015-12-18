@@ -1,1 +1,25 @@
-
+Gecode (generic constraint development environment) is a constraint programming solver implemented in C++ and 
+offer a wide range of modeling features. Gecode offers more than 70 constraints from the ``Global Constraint Catalog'' 
+\cite{url_globalCons} that can be applied to boolean, integer, set and float variables. \boste{Muligvis Gecode 
+architecture billed} \\ 
+A model created for Gecode is created by inheriting the space class. space is is a basic layer in Gecode that a user 
+can build the model on. To Create variables or post constraints the user need to specify the space they should be 
+created in. When variables are created in a Gecode space views are created accordingly. Views are not used in modeling 
+but are used to know when propagation should be made on a constraint.  When posting constraints in a space, Gecode 
+creates propagators and these propagators can subscribe to the views of the variables. When variables changes domain 
+the corresponding view tell its subscribes that the variables domain has changed. For some constraint the 
+user has the option to choose the propagator based on consistency level choice. The cost of different consistency level 
+varies from linear in the number of variables to exponential \cite[p.57]{MPG:M}. \\
+Once a problem has been formulated, the user must define on which variables and how branching is done. Just like 
+variables and constraints are posted in a space the branch order is also posted on the space. The choice in branching 
+involves choosing a set of variables, which of those variables to branch on first and what values to branch on. One can 
+post several branch methods and they are treated in the order they are posted. If no branch strategy is chosen for a 
+variable then branching is not done on that variable. \\ 
+To start the search a search engine must be chosen and Gecode offers two, a depth first search engine and a Branch and 
+Bound engine. Search engines have an option class in which several options can be set \cite[p.157]{MPG:M}. \\ 
+When searching for a solution in a space, the search can be illustrated as a binary tree where the edges are 
+branch choices for a variable and the vertices are the space created because of those choices. If it reaches a point 
+where no solution is possible it stop branches from that vertex and the space is said to be failed. While searching for 
+solution sometimes, based on a search parameter from the option given, Gecode clones the spaces. When Gecode 
+reaches a failed space, instead of starting from scratch and recompute all way to down to the previous vertex, it 
+uses the closest clone to backtrack to that space. \\

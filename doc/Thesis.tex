@@ -11,6 +11,7 @@
  \usepackage{booktabs}
  \usepackage{tabularx}
  \usepackage{mathtools}
+ \usepackage{glossaries}
 
 
 
@@ -36,6 +37,8 @@
 \tableofcontents
 \listoffigures
 \listoftables
+%\printglossary
+%\makeglossary
 \newpage
 \section{Introduction}
  \input{intro}
@@ -60,7 +63,9 @@
     \subsubsection{Implicit Constraints}
     \input{implicitCons}
     \subsubsection{Gecode}
+    \input{gecode}
   \subsection{Heuristics and Local Search}
+  \input{heurLS}
     \subsubsection{Construction Heuristics}
     \subsubsection{Local Search and Neighborhoods}
     \subsubsection{Metaheuristics}

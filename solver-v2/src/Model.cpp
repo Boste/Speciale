@@ -382,7 +382,7 @@ void Model::initialize() {
                                                                 inConstraintWith[iv->getID()].insert(intvar);
                                                                 
                                                             }
-                                                        }
+                                                        }   
                         }
                     }
                 }

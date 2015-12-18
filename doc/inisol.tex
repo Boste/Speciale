@@ -19,10 +19,10 @@ Different techniques can be applied for choosing which constraints with the same
 one chosen here is a stepwise backward algorithm, that is a greedy approach. \boste{Article Marco talked about propose 
 some method, but says a greedy approach is good as well? }. The number of constraints that are relaxed/removed is based 
 on the number of constraints $|C|$ and the number of restarts made $r$. The number of relaxed constraints is given by 
-equation \ref{nRelaxed}. 
+equation \ref{eq_relaxed}. 
 \begin{equation}
  |Relaxed| = \ceil[\bigg]{\frac{2^{r-1}}{100}\cdot |C|}
- \label{nRelaxed}
+ \label{eq_relaxed}
 \end{equation} 
 After seven relaxations 64 \% of the constraints have been relaxed and if no solution can be found within the search 
 limits, we report the problem is to difficult to solve within the search limit. \\ 

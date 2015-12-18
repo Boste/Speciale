@@ -1,4 +1,21 @@
 Constraint programming involves defining variables and constraints like ILP but often a wide range of constraints can 
-be used. Constraint programming is declarative programming, that is the program  describe how the desire result 
-should be and not the commands or steps to reach it. Constraint programming uses a programming language or framework 
-that have procedures implement to solve the problem according to the constraints posted.  
+be used. Constraint programming is declarative programming that is the program describe the desired result 
+and not the commands or steps to reach it, just like ILP. Constraint programming uses some interface either a 
+programming language or a framework that have procedures implement to solve the problem according to the constraints 
+posted. The language or framework may provides global constraint that can be used to formulate the problem. An example 
+of a global constraint is the {\sffamily{alldifferent(\textbf{x})}} constraint that specify the variables \textbf{x} 
+must have pairwise distinct values.  \\ 
+Two important aspects of solving a CSP are inference and search. \emph{Inference} is adding constraints to the CSP that 
+does not eliminate any feasible solution but might make it easier to solve the CSP \cite[p.301]{CPbog}. 
+Interference when dealing with variables with finite domain can local constraint propagation that is often used to 
+eliminate large subspaces of the search space \boste{Search space not defined yet}. Propagation can be restricting 
+domains of variables, called filtering, or combinations of values to variabels, based on the constraint doing 
+propagation \cite[p. 169]{CPbog}. Propagation can be done when a constraint is created by eliminating possible 
+assignments of the variables. I.e. by doing propagation on the constraint $x_1 + x_2 \leq 2$ where $x_1,x_2 \in 
+\mathbf{Z}^+$ we can reduce the domain of the variables to $\{0,1,2\}$. If we set $x_1 =1$ we can again do propagation 
+and reduce the domain of $x_2$ to $\{0,1\}$. \\ \boste{Tror jeg vil forklare om search space tidligere og introducere 
+hvordan det bliver søgt her} \\ 
+Search strategies explores possible assignments of variables and an exhaustive search would be a combination of all 
+possible assignments of values to the variables. When combining propagation and search strategies the search space can 
+be examined exhaustively and large subspaces can be pruned by propagation. \\ 
+\boste{Rettet hertil}

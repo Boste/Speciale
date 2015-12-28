@@ -1,0 +1,27 @@
+There are several important aspects of local search and the most basic will be covered here. \\The evaluation function 
+$f(\tau)$ evaluate the quality of the candidate solution. 
+The \emph{step function} that defines the candidate solutions close to a given candidate solution $\tau$. By using the 
+step function once and a candidate solution $\tau$ a new candidate solution $\tau'$ is obtained. Going from one to 
+solution to another with the step function is called a \emph{move}. A move is the set of variables transformed 
+and their difference in value. Several solution might be explored before committing a move and committing 
+a move is called an iteration of the local search algorithm.  Local search uses a neighborhood function $N(\tau)$ that 
+for each solution $\tau \in \S$ specify a subset of solutions $N(\tau) = \Tau$. The solutions $N(\tau)$ is called the 
+neighborhood of $\tau$ and are the set of solution that can obtained by making one move. The cardinality of $N(\tau)$ is 
+called the neighborhood size of $\tau$ and depends on the step function. The neighborhood function $N$ is symmetric if, 
+$\tau' \subseteq N(\tau)$ if and only if $\tau \subseteq N(\tau')$ for all pairs of $\tau$ and $\tau'$. In a problem 
+with $n$ binary variables the step function could be to change the value of a single variable, doing a flip. This can be 
+done on all variable hence the neighborhood size of a candidate solution would be $n$. \\ 
+It might be expensive to use the evaluation function to evaluate each solutions, instead a \emph{delta evaluation 
+function} $\delta(\tau)$ can be used. The evaluation function recomputes the quality of a solution even if only a few 
+variables changes value. The delta evaluation function only computes how much the evaluation function will change by 
+going from one solution $\tau$ to another solution $\tau'$, hence $\delta(\tau) = f(\tau')-f(\tau)$. \\
+The search space combined with the neighborhood function can be illustrated as a graph $G= (V,E)$. The set $V$ is a set 
+of vertices each representing a candidate solutions of $S$ and $E$ is a set of edges connecting a vertex v, representing 
+the solution $\tau$, with the vertices representing $N(\tau)$. The graph is called the neighborhood graph and one can 
+think of it in three dimensions where one of the dimensions is $f(\tau)$. \cite[p. 3-5]{lsbog} \\ 
+Local search needs a \emph{termination criteria} that determines when the search should stop. Sometimes we know what 
+an optimal is, i.e. the SAT problem, once we find a feasible solution we can stop. In other cases an optimal solution 
+may not be know, several combinatorial problems are not solved to optimality. The termination function can i.e. be based 
+on time doing search, number of steps made or when a locally optimal solution is found. A locally optimal solution for 
+a minimization problem is a solution $\hat{\tau}$, such that for each feasible solution $\tau \in N(\hat{\tau})$ 
+$f(\hat{\tau}) \leq f(\tau)$. \\

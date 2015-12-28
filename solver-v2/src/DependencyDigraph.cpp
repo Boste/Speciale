@@ -15,7 +15,7 @@ DependencyDigraph::DependencyDigraph(const DependencyDigraph& orig) {
 
 void DependencyDigraph::addVariables(variableContainer& vars) {
     variable_nodes.resize(vars.size());
-    for (IntegerVariable* iv : vars) {
+    for (Variable* iv : vars) {
         if (iv->isFixed()) {
             continue;
         }
@@ -108,7 +108,7 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
         //        variable_nodes.erase(it);
     }
 
-    for (IntegerVariable* iv : vars) {
+    for (Variable* iv : vars) {
         if (iv->isFixed()) {
             continue;
         }
@@ -143,7 +143,7 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
         //        variable_nodes.erase(it);
     }
     //    
-    for (IntegerVariable* iv : vars) {
+    for (Variable* iv : vars) {
         //        
         if (iv->isFixed()) {
             //            
@@ -186,7 +186,7 @@ updateVector& DependencyDigraph::getVariableUpdate(unsigned varID) {
     return variable_nodes.at(varID)->update;
 }
 
-propagation_queue& DependencyDigraph::getPropagationQueue(IntegerVariable* iv) {
+propagation_queue& DependencyDigraph::getPropagationQueue(Variable* iv) {
     //    std::cout << variable_nodes.at(iv->getID())->propagationQueue.size() << std::endl;
     assert(!iv->isDef());
     assert(!iv->isFixed());
@@ -198,10 +198,10 @@ bool DependencyDigraph::propagationQueueHasBeenMade() {
     return madePropagationQueues;
 }
 
-void DependencyDigraph::cleanUpGraph(std::vector<IntegerVariable*>& vars) {
+void DependencyDigraph::cleanUpGraph(std::vector<Variable*>& vars) {
 
     //    for (std::shared_ptr<variableNode> vn : variable_nodes) {
-    for (IntegerVariable* iv : vars) {
+    for (Variable* iv : vars) {
 
 
         //        
@@ -548,8 +548,8 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
         debug;
         exit(1);
     }
-    std::vector<IntegerVariable*>& vars = bestInvariant->getVariablePointers();
-    for (IntegerVariable* iv : vars) {
+    std::vector<Variable*>& vars = bestInvariant->getVariablePointers();
+    for (Variable* iv : vars) {
         assert(iv->getID() != invar->id);
         if (iv->isFixed()) {
             continue;
@@ -621,7 +621,7 @@ void DependencyDigraph::createPropagationQueue(variableContainer & vars, Invaria
     //        in->invar->setTimestamp(in->time);
     //    }
     //            std::shared_ptr<variableNode> vn = it->second;
-    for (IntegerVariable* iv : vars) {
+    for (Variable* iv : vars) {
         //    for (std::shared_ptr<variableNode> vn : variable_nodes) {
         if (!iv->isFixed() && !iv->isDef()) {
 

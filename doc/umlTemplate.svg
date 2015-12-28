@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.88543689"
+     inkscape:cx="121.54285"
+     inkscape:cy="555.6017"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:snap-page="false"
+     inkscape:window-width="1863"
+     inkscape:window-height="1059"
+     inkscape:window-x="57"
+     inkscape:window-y="21"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#0064ff;fill-opacity:1"
+       id="rect2985"
+       width="717.14282"
+       height="1030"
+       x="17.142849"
+       y="8.0764561"
+       ry="93.400002" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="tekst">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3760"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3762"><rect
+           id="rect3764"
+           width="297.14285"
+           height="68.571434"
+           x="130"
+           y="88.076469" /></flowRegion><flowPara
+         id="flowPara3766"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3768"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
+         id="flowRegion3770"><rect
+           id="rect3772"
+           width="585.71429"
+           height="100"
+           x="67.14286"
+           y="58.076469" /></flowRegion><flowPara
+         id="flowPara3774"
+         style="font-size:72px">General Solver</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3776"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
+         id="flowRegion3778"><rect
+           id="rect3780"
+           width="320"
+           height="67.14286"
+           x="151.42857"
+           y="208.07646" /></flowRegion><flowPara
+         id="flowPara3784">Some text</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 87.142857,153.79075 0,817.14286"
+       id="path3807"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3827"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
+         id="flowRegion3829"><rect
+           id="rect3831"
+           width="230.39473"
+           height="56.469299"
+           x="158.11403"
+           y="295.67358" /></flowRegion><flowPara
+         id="flowPara3833">Other text</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3835"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
+         id="flowRegion3837"><rect
+           id="rect3839"
+           width="272.18201"
+           height="56.469299"
+           x="163.76097"
+           y="402.96524" /></flowRegion><flowPara
+         id="flowPara3841">Third text</flowPara></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Lines">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.96819043;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 135.37634,233.11257 -49.153794,1.04195"
+       id="path3811"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path3811"
+       id="use3813"
+       transform="matrix(0.69401781,0,0,1,51.261893,141.75087)"
+       width="744.09448"
+       height="1052.3622" />
+  </g>
+</svg>

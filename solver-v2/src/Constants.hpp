@@ -13,7 +13,7 @@
 //#include <boost/heap/binomial_heap.hpp>
 class Constraint;
 class Invariant;
-class IntegerVariable;
+class Variable;
 //struct compare_invariant;
 //#include "Invariant.hpp"
 // Old stuff not needed
@@ -68,7 +68,7 @@ class IntegerVariable;
 // Return types
 typedef double coefType;
 typedef std::shared_ptr<Constraint> constraint;
-typedef std::vector<IntegerVariable*> variableContainer;
+typedef std::vector<Variable*> variableContainer;
 typedef std::vector<constraint> VariableInConstraints;
 //typedef std::shared_ptr<Invariant> invariant;
 typedef Invariant* invariant;

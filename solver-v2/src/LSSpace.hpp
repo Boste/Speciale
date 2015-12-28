@@ -2,14 +2,14 @@
 //#include <gecode/int.hh>
 //#include "../include/Constraints.hpp"
 #include "State.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include "Invariant.hpp"
 #include "Constraint.hpp"
 #include "Sum.hpp"
 #include"Max.hpp"
 //#include "Linear.hpp"
 #include "Constraint.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include "Model.hpp"
 #include "Neighborhood.hpp"
 #include "FlipNeighborhood.hpp"
@@ -43,7 +43,7 @@ public:
     void initializeLS();
     //        bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
     bool canBeMadeOneway(constraint cons);
-    void makeOneway(IntegerVariable* iv, constraint cons);
+    void makeOneway(Variable* iv, constraint cons);
     bool intVarCanBeMadeOneway(constraint cons);
 //    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
     void optimizeSolution(int time);

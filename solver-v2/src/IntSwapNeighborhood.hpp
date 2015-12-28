@@ -19,7 +19,7 @@ public:
     unsigned testCounter = 0;
     std::shared_ptr<Model> model;
     std::shared_ptr<State> state;
-    IntSwapNeighborhood(std::shared_ptr<Model>& model, std::shared_ptr<State>& st, std::vector<IntegerVariable*>& binarySwapVars);
+    IntSwapNeighborhood(std::shared_ptr<Model>& model, std::shared_ptr<State>& st, std::vector<Variable*>& binarySwapVars);
     IntSwapNeighborhood(const IntSwapNeighborhood& orig);
     ~IntSwapNeighborhood();
 
@@ -42,7 +42,7 @@ public:
 
 
 private:
-    std::vector<IntegerVariable*> swapVars;
+    std::vector<Variable*> swapVars;
     unsigned moveCounter = 0;
     unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;

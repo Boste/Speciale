@@ -1,7 +1,7 @@
 #include <memory>
 #include <gecode/driver.hh>
 #include <gecode/int.hh>
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include "Clock.hpp"
 #include "Constants.hpp"
 #include "Model.hpp"
@@ -32,7 +32,7 @@ public:
     void branch();
     bool initialize(int TimeForGecode,bool fix);
     bool FindSolution(int TimeForGecode, bool fix);
-    void linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound);
+    void linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound);
 //    void createGecodeVariables(std::shared_ptr<Model> model);
     void createGecodeVariable(int lb,int ub);
     void SetValues(Gecode::IntVarArray vars);

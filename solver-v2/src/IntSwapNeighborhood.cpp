@@ -1,6 +1,6 @@
 #include "IntSwapNeighborhood.hpp"
 
-IntSwapNeighborhood::IntSwapNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st, std::vector<IntegerVariable*>& binarySwapVars) {
+IntSwapNeighborhood::IntSwapNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st, std::vector<Variable*>& binarySwapVars) {
     this->model = model;
     this->state = st;
     swapVars = binarySwapVars;
@@ -10,8 +10,8 @@ IntSwapNeighborhood::~IntSwapNeighborhood() {
 }
 
 Move* IntSwapNeighborhood::next() {
-    IntegerVariable* iv;
-    IntegerVariable* iv2;
+    Variable* iv;
+    Variable* iv2;
     if (moveCounter2 == model->getMask().size() - 1) {
         iv2 = model->getMaskAt(moveCounter2);
         moveCounter2 = 0;
@@ -34,7 +34,7 @@ Move* IntSwapNeighborhood::next() {
             moveCounter2++;
         }
     }
-    std::vector<IntegerVariable*> vars;
+    std::vector<Variable*> vars;
     vars.push_back(iv);
     vars.push_back(iv2);
 
@@ -62,15 +62,15 @@ bool IntSwapNeighborhood::hasNext() {
 }
 
 Move* IntSwapNeighborhood::nextRandom() {
-    IntegerVariable* iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
-    IntegerVariable* iv2 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
+    Variable* iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
+    Variable* iv2 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     while (iv1->getCurrentValue() == iv2->getCurrentValue() && model->getMask().size() > 1) {
         iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
         iv2 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     }
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    std::vector<IntegerVariable*> vars;
+    std::vector<Variable*> vars;
     vars.push_back(iv1);
     vars.push_back(iv2);
     std::vector<int> delta;
@@ -103,7 +103,7 @@ bool IntSwapNeighborhood::calculateDelta(Move* mv) {
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;
     //    }
-    std::vector<IntegerVariable*>& variables = mv->getVars();
+    std::vector<Variable*>& variables = mv->getVars();
     propagation_queue& queue1 = model->getPropagationQueue(variables.at(0));
     propagation_queue& queue2 = model->getPropagationQueue(variables.at(1));
     testCounter++;
@@ -246,8 +246,8 @@ bool IntSwapNeighborhood::calculateDelta(Move* mv) {
 bool IntSwapNeighborhood::commitMove(Move* mv) {
     moveCounter = 0;
     moveCounter2 = 0;
-    IntegerVariable* var1 = mv->getVars().at(0);
-    IntegerVariable* var2 = mv->getVars().at(1);
+    Variable* var1 = mv->getVars().at(0);
+    Variable* var2 = mv->getVars().at(1);
     std::vector<int>& evaluation = state->getEvaluation();
     // Skal genberegne!!!!!
     bool legal = calculateDelta(mv);

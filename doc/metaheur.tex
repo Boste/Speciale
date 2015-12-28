@@ -1,0 +1,21 @@
+Metaheuristics defines how the search space should be explored in where as local search algorithms that focus more on 
+the neighborhood of the solution. Iterative improvement is often fast to find a local optimum depending on the size of 
+the neighborhood. Usually only a small fraction of local optima are close to optimality and they can be a poor quality 
+solution \cite[p.135]{lsbog}. Metaheuristics are used to get out of local optima to search different parts of the 
+search space. \\
+One of the simple Metaheuristics is \emph{iterative local search} that remembers the best solution 
+found so far and uses two local search algorithms, random walk and iterative improvement. It uses iterative improvement 
+to find a local optima and compare it to the best solution so far. Then uses random walk for some iterations to escape 
+the local optima. These two algorithms are repeated until the termination criteria is reached. \\ 
+Another metaheuristics is \emph{tabu search} that implements an iterative improvement with a modified best improvement 
+pivoting rule. It chooses the solution leading to the best solution but not necessarily an improving move. In addition 
+to the modification of the pivot rule it implements a tabu list $T$ that remembers the last $m$ solution. The solution 
+in the tabu list are not consider when looking for the next solution. It might be very memory expensive to keep track 
+of the last $m$ solutions. An alternative way of implementing the tabu list is to remember the last $m$ moves and 
+forbid the reverse move. This is more restrictive since the reverse moves might not lead to a solution visited within 
+the last $m$ iterations. To compensate for this a \emph{aspiration criteria} can be implemented. Aspiration criteria is 
+a set of rules that can overrule the tabu list \cite[p.139-140]{lsbog}. \\
+Several other metaheuristics exist such as variable neighborhood search and very large scale neighborhood search. 
+Variable neighborhood search uses different step function, hence different neighborhoods. Very large scale neighborhood 
+search changes many variable in each move which give a very large neighborhood but might need fewer iteration to find a 
+good quality solution.  

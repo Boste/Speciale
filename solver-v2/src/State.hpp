@@ -21,6 +21,7 @@ public:
 
     State(std::shared_ptr<Model> model);
     State(const State& orig);
+    bool compare(std::shared_ptr<State>& st);
     virtual ~State();
     void copy(std::shared_ptr<State> st); 
     void updateEvaluation(std::vector<int>& changes);

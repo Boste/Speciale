@@ -7,7 +7,7 @@
 #include <iostream>
 #include "BP_Data.hpp"
 #include "GeneralSolver.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 //#include "boost/make_shared.hpp"
 //#include "boost/shared_ptr.hpp"
 //using namespace Gecode;
@@ -31,14 +31,14 @@ public:
     BPSolver(BP_Input *in) {
         //        std::vector<IntegerVariable*>* varInt;
         int counter = 0;
-        std::vector<IntegerVariable*> integerVariables;
-        std::vector<IntegerVariable*> binaryVariables;
-        for (var intVar : in->getVars()) {
+        std::vector<Variable*> integerVariables;
+        std::vector<Variable*> binaryVariables;
+        for (var variable : in->getVars()) {
             //            counter++;
             //            std::cout << "adding variable number " << counter << std::endl;
-            IntegerVariable* iv = createIntVar(intVar.lb, intVar.ub);
+            Variable* iv = createVariable(variable.lb, variable.ub);
 
-            if (intVar.ub == 1) {
+            if (variable.ub == 1) {
                 counter++;
                 binaryVariables.push_back(iv);
             } else {
@@ -49,7 +49,7 @@ public:
         std::cout << "Number of binary variables " << counter << std::endl;
 
         //        std::cout << "Variables created" << std::endl;
-        vector<IntegerVariable*>& varInt = getAllVariables();
+        vector<Variable*>& varInt = getAllVariables();
         //        for (unsigned i = 0; i < varInt->size(); i++) {
         //            assert(varInt->at(i)->getID() == i);
         //        }
@@ -63,22 +63,22 @@ public:
             if (leftside.size() == 1) {
                 counter++;
             }
-            vector<IntegerVariable*> x(leftside.size());
-//                        vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
+            vector<Variable*> x(leftside.size());
+            //                        vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
             for (unsigned j = 0; j < leftside.size(); j++) {
                 elem e = leftside[j];
-                c.at(j) =  (e.coeff);
-//                assert(e.coeff == (double) c.at(j));
+                c.at(j) = (e.coeff);
+                assert(e.coeff == (double) c.at(j));
                 //                x->push_back(varInt.at(e.index));
-//                x->at(j) = varInt.at(e.index);
+                //                x->at(j) = varInt.at(e.index);
                 x.at(j) = varInt.at(e.index);
                 //                x.at(j) = varInt->at(e.index);
             }
             double upperbound = (b.ub);
-//            int upperbound2 = upperbound;
+            //            int upperbound2 = upperbound;
             //            std::cout << "posting" << std::endl;
             //            std::cout << "constraint nr " << i << std::endl;
-//            if (x->size() != 0) {
+            //            if (x->size() != 0) {
             if (x.size() != 0) {
                 if (b.type == 5) {
                     //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
@@ -88,7 +88,7 @@ public:
                     GeneralSolver::linear(c, x, LQ, upperbound, HARD);
                 }
             }
-//            delete x;
+            //            delete x;
             // deleter den også pointer inden i vector?
             //            delete x;
             //            delete c;
@@ -100,18 +100,20 @@ public:
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
         std::vector<int> c(varInt.size());
-//        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
-        std::vector<IntegerVariable*> x (varInt.size());
+        //        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
+        std::vector<Variable*> x(varInt.size());
 
         for (unsigned i = 0; i < varInt.size(); i++) {
-            
-            c.at(i) =  (in->getVar(i).objcoeff);
-//            x->at(i) = varInt.at(i);
+
+            c.at(i) = (in->getVar(i).objcoeff);
+            //            x->at(i) = varInt.at(i);
+            assert(in->getVar(i).objcoeff == (double) c.at(i));
+
             x.at(i) = varInt.at(i);
         }
 
         GeneralSolver::linear(c, x, LQ, 0, OBJ);
-//        delete x;
+        //        delete x;
 
         //        Search(getAllVariables());
         Search(binaryVariables);

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  18 DEC 2015 13:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  28 DEC 2015 15:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -740,174 +740,18 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \TX@cols=\count148
 \TX@ftn=\toks35
 )
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries.sty
-Package: glossaries 2014/01/20 v4.03 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/mfirstuc.sty
-Package: mfirstuc 2013/11/04 v1.08 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
-\etb@tempcnta=\count149
-)
-\@glsmfirst=\toks36
-\@glsmrest=\toks37
-)
-(/usr/share/texlive/texmf-dist/tex/latex/textcase/textcase.sty
-Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/xfor/xfor.sty
-Package: xfor 2009/02/05 v1.05 (NLCT)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/datatool/datatool-base.sty
-Package: datatool-base 2013/09/06 v2.18 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/substr/substr.sty
-Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count150
-)
-(/usr/share/texlive/texmf-dist/tex/latex/datatool/datatool-fp.sty
-Package: datatool-fp 2013/08/29 v2.17 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp.sty
-Package: fp 1995/04/02
-
-`Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
-(/usr/share/texlive/texmf-dist/tex/latex/fp/defpattern.sty
-Package: defpattern 1994/10/12
-\actioncount=\count151
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-basic.sty
-Package: fp-basic 1996/05/13
-\FP@xs=\count152
-\FP@xia=\count153
-\FP@xib=\count154
-\FP@xfa=\count155
-\FP@xfb=\count156
-\FP@rega=\count157
-\FP@regb=\count158
-\FP@regs=\count159
-\FP@times=\count160
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-addons.sty
-Package: fp-addons 1995/03/15
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-snap.sty
-Package: fp-snap 1995/04/05
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-exp.sty
-Package: fp-exp 1995/04/03
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-trigo.sty
-Package: fp-trigo 1995/04/14
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-pas.sty
-Package: fp-pas 1994/08/29
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-random.sty
-Package: fp-random 1995/02/23
-\FPseed=\count161
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eqn.sty
-Package: fp-eqn 1995/04/03
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-upn.sty
-Package: fp-upn 1996/10/21
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eval.sty
-Package: fp-eval 1995/04/03
-)))
-\@dtl@toks=\toks38
-\@dtl@tmpcount=\count162
-\dtl@tmplength=\skip52
-\dtl@sortresult=\count163
-\@dtl@numgrpsepcount=\count164
-\@dtl@datatype=\count165
-\dtl@codeA=\count166
-\dtl@codeB=\count167
-\@dtl@foreach@level=\count168
-)
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries-compatible-
-307.sty
-Package: glossaries-compatible-307 2013/11/14 v4.0 (NLCT)
-)
-\gls@level=\count169
-\@gls@tmpb=\toks39
-\gls@tmplen=\skip53
-\glswrite=\write4
-\glskeylisttok=\toks40
-\glslabeltok=\toks41
-\glsshorttok=\toks42
-\glslongtok=\toks43
-
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.st
-y
-Package: glossary-hypernav 2013/11/14 v4.0 (NLCT)
-) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
-Package: glossary-list 2013/11/14 v4.0 (NLCT)
-\glslistdottedwidth=\skip54
-) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
-Package: glossary-long 2013/11/14 v4.0 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
-\LTchunksize=\count170
-\LTcapwidth=\dimen198
-\LT@head=\box39
-\LT@firsthead=\box40
-\LT@foot=\box41
-\LT@lastfoot=\box42
-\LT@cols=\count171
-\LT@rows=\count172
-\c@LT@tables=\count173
-\c@LT@chunks=\count174
-\LT@p@ftn=\toks44
-)
-\glsdescwidth=\skip59
-\glspagelistwidth=\skip60
-)
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty
-Package: glossary-super 2013/11/14 v4.0 (NLCT)
-
-(/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
-Package: supertabular 2004/02/20 v4.1e the supertabular environment
-\c@tracingst=\count175
-\ST@wd=\dimen199
-\ST@rightskip=\skip61
-\ST@leftskip=\skip62
-\ST@parfillskip=\skip63
-\ST@pageleft=\dimen200
-\ST@headht=\dimen201
-\ST@tailht=\dimen202
-\ST@pagesofar=\dimen203
-\ST@pboxht=\dimen204
-\ST@lineht=\dimen205
-\ST@stretchht=\dimen206
-\ST@prevht=\dimen207
-\ST@toadd=\dimen208
-\ST@dimen=\dimen209
-\ST@pbox=\box43
-))
-(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
-Package: glossary-tree 2013/11/14 v4.0 (NLCT)
-\glstreeindent=\skip64
-))
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count176
-\c@ALC@line=\count177
-\c@ALC@rem=\count178
-\c@ALC@depth=\count179
-\ALC@tlm=\skip65
-\algorithmicindent=\skip66
+\c@ALC@unique=\count149
+\c@ALC@line=\count150
+\c@ALC@rem=\count151
+\c@ALC@depth=\count152
+\ALC@tlm=\skip52
+\algorithmicindent=\skip53
 )
 (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count180
+\c@AlgoLine=\count153
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -922,39 +766,39 @@ Package `algorithm2e' Release 5.0 -- january 06 2013 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (cfiorio@um2.fr)
 ********************************************************
-\skiptotal=\skip67
-\skiplinenumber=\skip68
-\skiprule=\skip69
-\skiphlne=\skip70
-\skiptext=\skip71
-\skiplength=\skip72
-\algomargin=\skip73
-\skipalgocfslide=\skip74
-\algowidth=\dimen210
-\inoutsize=\dimen211
-\inoutindent=\dimen212
-\interspacetitleruled=\dimen213
-\interspacealgoruled=\dimen214
-\interspacetitleboxruled=\dimen215
-\algocf@inoutbox=\box44
-\algocf@inputbox=\box45
-\AlCapSkip=\skip75
-\AlCapHSkip=\skip76
-\algoskipindent=\skip77
-\algocf@nlbox=\box46
-\algocf@hangingbox=\box47
-\algocf@untilbox=\box48
-\algocf@skipuntil=\skip78
-\algocf@capbox=\box49
-\algoheightruledefault=\skip79
-\algoheightrule=\skip80
-\algotitleheightruledefault=\skip81
-\algotitleheightrule=\skip82
-\c@algocfline=\count181
-\c@algocfproc=\count182
-\c@algocf=\count183
-\algocf@algoframe=\box50
-\algocf@algobox=\box51
+\skiptotal=\skip54
+\skiplinenumber=\skip55
+\skiprule=\skip56
+\skiphlne=\skip57
+\skiptext=\skip58
+\skiplength=\skip59
+\algomargin=\skip60
+\skipalgocfslide=\skip61
+\algowidth=\dimen198
+\inoutsize=\dimen199
+\inoutindent=\dimen200
+\interspacetitleruled=\dimen201
+\interspacealgoruled=\dimen202
+\interspacetitleboxruled=\dimen203
+\algocf@inoutbox=\box39
+\algocf@inputbox=\box40
+\AlCapSkip=\skip62
+\AlCapHSkip=\skip63
+\algoskipindent=\skip64
+\algocf@nlbox=\box41
+\algocf@hangingbox=\box42
+\algocf@untilbox=\box43
+\algocf@skipuntil=\skip65
+\algocf@capbox=\box44
+\algoheightruledefault=\skip66
+\algoheightrule=\skip67
+\algotitleheightruledefault=\skip68
+\algotitleheightrule=\skip69
+\c@algocfline=\count154
+\c@algocfproc=\count155
+\c@algocf=\count156
+\algocf@algoframe=\box45
+\algocf@algobox=\box46
 )
 \@input{style.aux}
 \openout2 = `style.aux'.
@@ -978,28 +822,22 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
-\c@lstlisting=\count184
+\c@lstlisting=\count157
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count185
-\scratchdimen=\dimen216
-\scratchbox=\box52
-\nofMPsegments=\count186
-\nofMParguments=\count187
-\everyMPshowfont=\toks45
-\MPscratchCnt=\count188
-\MPscratchDim=\dimen217
-\MPnumerator=\count189
-\makeMPintoPDFobject=\count190
-\everyMPtoPDFconversion=\toks46
+\scratchcounter=\count158
+\scratchdimen=\dimen204
+\scratchbox=\box47
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen205
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks37
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: longtable package is loaded.
-
-(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
-Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
-)
-Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 31.
 
@@ -1019,21 +857,12 @@ LaTeX Warning: No \author given.
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
-\tf@toc=\write5
-\openout5 = `Thesis.toc'.
+\tf@toc=\write4
+\openout4 = `Thesis.toc'.
 
-
-(./Thesis.lof)
-\tf@lof=\write6
-\openout6 = `Thesis.lof'.
-
- (./Thesis.lot)
-\tf@lot=\write7
-\openout7 = `Thesis.lot'.
-
- [2] (./intro.tex) (./vars.tex) (./cons.tex)
-(./discOpt.tex)
-Overfull \hbox (1.62082pt too wide) in paragraph at lines 1--54
+ [2]
+(./intro.tex) (./vars.tex) (./cons.tex) (./discOpt.tex
+Overfull \hbox (1.62082pt too wide) in paragraph at lines 1--10
 \OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 Con-straint Sat-is-fac-tion Prob-lem \
 OT1/cmr/m/n/10.95 (CSP) is de-fined as a triple $\U/msb/m/n/10.95 P \OT1/cmr/m/
 n/10.95 = \OMS/cmsy/m/n/10.95 h\OML/cmm/m/it/10.95 X; D; C\OMS/cmsy/m/n/10.95 i
@@ -1041,33 +870,61 @@ $\OT1/cmr/m/n/10.95 .
  []
 
 
-Overfull \hbox (52.36563pt too wide) in paragraph at lines 1--54
+Overfull \hbox (49.32396pt too wide) in paragraph at lines 1--10
 \OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 can-di-date so-lu-tion \OT1/cmr/m/n/10
 .95 to a CSP $\U/msb/m/n/10.95 P$ \OT1/cmr/m/n/10.95 is a vec-tor of n el-e-men
 ts $\OML/cmm/m/it/10.95 ^^\ \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 V\OT1/cmr
 /m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; V\
 OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.
-95 ; [] ; V\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 ))$.
+95 ; [] ; V\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 ))$
  []
 
-[3] [4] (./bpip.tex) (./CP.tex) [5] (./implicitCons.tex) (./gecode.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--67
+
+Underfull \hbox (badness 10000) in paragraph at lines 1--10
+
+ []
+
+[3]) (./solutions.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--8
+
+ []
+
+) [4] (./bpip.tex) (./CP.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--65
+
+ []
+
+[5] (./implicitCons.tex) (./gecode.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--69
 
  []
 
 [6] (./heurLS.tex)
-Overfull \hbox (1.41125pt too wide) in paragraph at lines 1--69
+Overfull \hbox (1.41125pt too wide) in paragraph at lines 1--71
 \OT1/cmr/m/n/10.95 In con-trast to in-te-ger pro-gram-ming and con-straint pro-
 gram-ming, lo-cal search
  []
 
-[7] (./invariant.tex) (./softCons.tex) (./objFunc.tex) [8] (./architec.tex
-Underfull \hbox (badness 10000) in paragraph at lines 1--36
+(./lsneig.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--73
 
  []
 
-) [9] (./archCons.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--103
+[7] (./lsalg.tex) [8] (./construcHeur.tex) [9] (./metaheur.tex) (./lsmodel.tex)
+[10] (./CBLS.tex) (./invariant.tex) (./softCons.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--7
+
+ []
+
+[11]) (./cblssol.tex) [12] (./architec.tex
+<architectureTest.pdf, id=58, 844.86331pt x 499.89206pt>
+File: architectureTest.pdf Graphic file (type pdf)
+
+<use architectureTest.pdf>
+Package pdftex.def Info: architectureTest.pdf used on input line 4.
+(pdftex.def)             Requested size: 360.0pt x 213.00432pt.
+) [13 <./architectureTest.pdf>] [14] (./archCons.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--116
 
  []
 
@@ -1076,7 +933,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--13
 
  []
 
-[10]) [11] (./prepros.tex) (./dom.tex) (./inisol.tex [12]) [13] (./strucLS.tex
+[15]) [16] (./prepros.tex) (./dom.tex) (./inisol.tex [17]) [18] (./strucLS.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--18
 
  []
@@ -1086,43 +943,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--4
 
  []
 
-[14] [15]
+[19] [20]
 Underfull \hbox (badness 10000) in paragraph at lines 144--152
 
  []
 
-) (./ddg.tex [16]
+) (./ddg.tex [21]
 Underfull \hbox (badness 10000) in paragraph at lines 27--114
 
  []
 
-[17] [18]) (./propaqueue.tex) [19] [20] (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--134
+[22] [23]) (./propaqueue.tex) [24] [25] (./future.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--148
 
  []
 
-(./Thesis.bbl [21])
-
-Package glossaries Warning: \makeglossaries hasn't been used,
-the glossaries will not be updated.
-
-
-Package glossaries Warning: No \printglossary or \printglossaries found.
-This document will not have a glossary.
-
-[22] (./Thesis.aux)
+(./Thesis.bbl [26]) [27] (./Thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19849 strings out of 495032
- 332481 string characters out of 6181718
- 465751 words of memory out of 5000000
- 22589 multiletter control sequences out of 15000+600000
- 16005 words of font info for 61 fonts, out of 8000000 for 9000
+ 16486 strings out of 495032
+ 282328 string characters out of 6181718
+ 368048 words of memory out of 5000000
+ 19305 multiletter control sequences out of 15000+600000
+ 13086 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,24n,92p,1691b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,24n,92p,418b,1033s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
@@ -1141,9 +989,9 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (22 pages, 289376 bytes).
+Output written on Thesis.pdf (27 pages, 473102 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
+ 217 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

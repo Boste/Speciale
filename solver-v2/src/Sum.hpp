@@ -29,7 +29,7 @@ public:
     
 //    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id);
     /// Purely used for testing
-    Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int,coefType> map);
+    Sum(std::vector<Variable*> vars, std::unordered_map<int,coefType> map);
 //    Sum(std::unordered_map<int,coefType> map, unsigned id);
 //    Sum(std::unordered_map<int,coefType> map,  std::shared_ptr<DependencyDigraph> DDG);
     Sum(std::unordered_map<int,coefType> map);

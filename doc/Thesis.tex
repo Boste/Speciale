@@ -11,7 +11,7 @@
  \usepackage{booktabs}
  \usepackage{tabularx}
  \usepackage{mathtools}
- \usepackage{glossaries}
+% \usepackage{glossaries}
 
 
 
@@ -35,8 +35,8 @@
 %\end{abstract}
 %\newpage
 \tableofcontents
-\listoffigures
-\listoftables
+%\listoffigures
+%\listoftables
 %\printglossary
 %\makeglossary
 \newpage
@@ -49,13 +49,15 @@
   \input{vars} % Written
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
-    \subsection{Problem formulation} % CSP-> CSOP
+  \subsection{Problem formulation} % CSP-> CSOP
   \input{discOpt}
+  \subsection{Solutions}
+  \input{solutions}
   
 \newpage  
 \section{Discrete Optimization}  
   
-  \subsection{Binary- and Integer Linear Programming} % In general, talk about Gorubi, Scip, Cplex after
+  \subsection{Binary- and Integer Linear Programming} % In general, talk about Gurobi, Scip, Cplex after
   \input{bpip}
   
   \subsection{Constraint Programming}
@@ -66,19 +68,30 @@
     \input{gecode}
   \subsection{Heuristics and Local Search}
   \input{heurLS}
+     \subsubsection{Basic Aspects of Local Search}
+    \input{lsneig}
+    \subsubsection{Local Search Algorithms}
+    \input{lsalg}
     \subsubsection{Construction Heuristics}
-    \subsubsection{Local Search and Neighborhoods}
+    \input{construcHeur}
     \subsubsection{Metaheuristics}
+    \input{metaheur}
+    \subsubsection{Creating a Model for Local Search}
+    \input{lsmodel}
   \subsection{Constraint Based Local Search}
-    \subsubsection{Invariants and One-way Constraints}
+  \input{CBLS}
+    \subsubsection{Invariants and Oneway Constraints}
     \input{invariant}
     \subsubsection{Soft Constraints}
-    \input{softCons}	
-  \subsection{Evaluation Function}
-  \input{objFunc}
+    \input{softCons}
+    \subsubsection{Evaluating solutions}
+    \input{cblssol}
+  %\subsection{Evaluation Function}
+  %\input{objFunc}
     \subsubsection{Comet}
+    %\input{comet}
     \subsubsection{OscaR}
-
+  
 %\section{Modeling Constraint Based Local Search}
   %\boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
   %\subsection{Types of Modeling \boste{not sure this should be here}}
@@ -104,6 +117,7 @@
   \input{archInv}
 
 \newpage
+\section{From Modeling to Solution}
 \section{Preprocessing and Initial Solution} \label{sec_gecode}
   \input{prepros}
   \subsection{Domain Reduction}

@@ -1,4 +1,7 @@
-\emph{Soft constraints} are constraints that the CBLS should try to satisfy when making neighborhood operations. If a 
-soft constraint is not satisfied we say it is violated and it contributes an amount of violation to the problem. The 
-amount of violation contributed depends on the type of constraint and how much it is violated. \\ 
-\boste{Need rewrite, Van henteryck + relaxations}
+\emph{Soft constraints} are constraints that the CBLS should try to satisfy when making moves. If a 
+soft constraint is not satisfied we say it is violated and it contributes to the evaluation function. There are 
+different ways of measuring violation in a constraint. One way is a boolean value, zero for not violated and one for 
+violated. Another way is measure how much a constraint is violated, \emph{violation degree}, by a function depending on 
+the constraint. I.e. for the \textbf{alldifferent(X)} constraint, that is all variables \textbf{X} must have pairwise 
+distinct values, it can be the number of variables with the same value as another variable. \\ 
+

@@ -12,7 +12,7 @@
 //#include <gecode/minimodel.hh>
 #include "Linear.hpp"
 #include <limits>
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include "Multistop.hpp"
 //#include "Sum.hpp"
 //#include"Max.hpp"
@@ -48,20 +48,20 @@ public:
     // Skal Gecode::IntConLevel icl være et argument?
     // ingen shared i det her kald
 
-    void linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority);
+    void linear(std::vector<int>& coefficients, std::vector<Variable*>& variables, int relation, int ub, unsigned priority);
     /// Returns a vector of the variables created (copying the vector)
 
-    std::vector<IntegerVariable*> createIntVars(unsigned numberOfVariables, int lb, int ub);
+    std::vector<Variable*> createVariables(unsigned numberOfVariables, int lb, int ub);
 
 //    ///Create a single variable with given lower and upper bound
-    IntegerVariable* createIntVar(int lb, int ub);
+    Variable* createVariable(int lb, int ub);
 
-    std::vector<IntegerVariable*>& getAllVariables();
+    std::vector<Variable*>& getAllVariables();
 
     /// Only for testing, should be removed 
-    void print(std::vector<IntegerVariable>& IntegerVariables);
+    void print(std::vector<Variable>& IntegerVariables);
 
-    void Search(std::vector<IntegerVariable*> variables);
+    void Search(std::vector<Variable*> variables);
     
     
     /// Uses Gecode to find initial solution

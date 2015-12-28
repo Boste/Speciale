@@ -16,17 +16,14 @@ These method is defined as invariants hence they are always updated when a chang
 This is especially useful when combining multiple constraints in a constraint system, that also implements the 
 constraint interface. The constraints can be combined in a constraint system that then uses the method from the 
 individual constraints to calculated its own methods. Just like the \interface{constraint} interface there exist a 
-\interface{objective} interface. Both will be described further in section \ref{difObj}. \medskip \\ 
+\interface{objective} interface. \medskip \\ 
 The next layer is where the user models their problem and use the objects mentioned above. Several search method are 
 implemented that can be used. The benefit of this architecture is the user can focus on modeling the problem 
 efficiently on a high level and thereby avoid small implementation mistakes. Using constraint programming inspired 
 structure gives the benefit of brief but very descriptive code.
 
-\subsubsection{Invariants}
 
 
-
-\subsubsection{Differentiable Objects} \label{difObj}
 Comets core modeling object is the differentiable objects that are used to model constraints and objective functions. \\
 All constraints in Comet implement the %\il{Constraint} interface (Hvad er et interface?) that makes it 
 possible to combine the constraints and reuse them easily. A constraint has at least an array $a$ of 

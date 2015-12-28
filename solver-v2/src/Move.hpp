@@ -1,5 +1,5 @@
 //#include "Model.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 
 #ifndef MOVE_HPP
 #define	MOVE_HPP
@@ -19,9 +19,9 @@ protected:
 public:
     std::vector<int> deltaVector;
 
-    IntegerVariable* var;
+    Variable* var;
     int variableChange;
-    std::vector<IntegerVariable*> variables;
+    std::vector<Variable*> variables;
     std::vector<int> variableChanges;
     //    IntegerVariable* second;
     //    int deltaValueSecond;
@@ -55,21 +55,21 @@ public:
 
     }
 
-    Move(IntegerVariable* iv, int change) {
+    Move(Variable* iv, int change) {
         var = iv;
         this->variableChange = change;
     }
 
-    Move(std::vector<IntegerVariable*> vars, std::vector<int> changes) {
+    Move(std::vector<Variable*> vars, std::vector<int> changes) {
         variables = vars;
         this->variableChanges = changes;
     }
 
-    IntegerVariable* getVar() {
+    Variable* getVar() {
         return var;
     }
 
-    std::vector<IntegerVariable*>& getVars() {
+    std::vector<Variable*>& getVars() {
         return variables;
     }
 

@@ -22,8 +22,8 @@ protected:
     int numberOfIntegerVariables = 0;
     unsigned scopeSize;
     std::vector<int> arguments;
-    std::vector<IntegerVariable*> variables;
-    std::vector<IntegerVariable*> IntegerVariables;
+    std::vector<Variable*> variables;
+    std::vector<Variable*> IntegerVariables;
     std::unordered_map<int, coefType> coefficients;
     //    std::vector<std::shared_ptr<Invariant>> invariants;
     //    std::shared_ptr<Invariant> invariant;
@@ -85,15 +85,15 @@ public:
         return coefficients;
     }
 
-    std::vector<IntegerVariable*>& getVariables() {
+    std::vector<Variable*>& getVariables() {
         return variables;
     }
 
-    std::vector<IntegerVariable*>& getIntegerVariables() {
+    std::vector<Variable*>& getIntegerVariables() {
         return IntegerVariables;
     }
 
-    void addIntegerVariable(IntegerVariable* iv) {
+    void addIntegerVariable(Variable* iv) {
         IntegerVariables.push_back(iv);
     }
 

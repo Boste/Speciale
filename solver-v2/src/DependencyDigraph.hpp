@@ -2,7 +2,7 @@
 #define	DEPENDENCYDIGRAPH_HPP
 #include "Constants.hpp"
 #include "Invariant.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include <list>
 #include <memory>
 #include "Random.hpp"
@@ -39,12 +39,12 @@ public:
     void addInvariant(invariant invar, variableContainer& vars);
     updateVector& getInvariantUpdate(unsigned invarID);
     updateVector& getVariableUpdate(unsigned varID);
-    propagation_queue& getPropagationQueue(IntegerVariable* iv);
+    propagation_queue& getPropagationQueue(Variable* iv);
     bool propagationQueueHasBeenMade();
     /// Create propagation queue for each variable used in local search
     void createPropagationQueue(variableContainer& vars, InvariantContainer& invars);
     /// Merges variable nodes with the oneway constraints defining them
-    void cleanUpGraph(std::vector<IntegerVariable*>& vars);
+    void cleanUpGraph(std::vector<Variable*>& vars);
     /// merges variable node and invariant node into the invariant node. 
     void mergeNodes(std::shared_ptr<variableNode>& vn, std::shared_ptr<invariantNode>& in);
     /// Used to find cycles and give timestamps 
@@ -94,7 +94,7 @@ struct invariantNode {
     unsigned timestamp = 0;
     unsigned lowestLink;
     bool inCurrentSSC = false;
-    IntegerVariable* iv; 
+    Variable* iv; 
 //    std::vector<std::shared_ptr<invariantNode>> myInvariants;
     //    std::vector<std::shared_ptr<invariantNode>> myInvariants;
     //    std::vector<std::shared_ptr<variableNode>> myVariables;
@@ -123,7 +123,7 @@ struct variableNode {
     propagation_queue propagationQueue;
     unsigned id;
     //    invariant invar;
-    IntegerVariable* iv;
+    Variable* iv;
 };
 
 #endif	/* DEPENDENCYDIGRAPH_HPP */

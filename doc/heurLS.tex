@@ -1,10 +1,6 @@
 In contrast to integer programming and constraint programming, local search does not do an exhaustive 
-search for a solution hence it cannot guaranty to find an optimal solution. Where as integer programming and constraint 
-programming does a systematic search to eliminate solution candidates, local search is based on looking at close area 
-of the search space and look for improvements there. Local search algorithms sacrifices the optimality guaranty for 
-performance. On many problems local search finds high quality solution within a relative search time limit. \\ 
-NP-hard problems are very hard to solve optimally if the search space gets large. Integer programming usually works on 
-the problem in different ways and can sometimes give bounds on the problem solution. Constraint programming works by 
-eliminating some candidate solution and reducing domain of variables. Local search finds a solution and keeps searching 
-close by for a better solution. \\ 
-Construction heuristics
+search for a solution. Local search is based on making small changes to the current solution and 
+see if it can improve and sacrifices the optimality guaranty for performance. \\ 
+To create a model for local search a set of variables and a set constraints for the variables needs to be defined. The 
+constraints are implicit constraints and some might need to be relaxed to soft constraints. The variables and implicit 
+constraints define the candidate solution and hence the search space $S$.

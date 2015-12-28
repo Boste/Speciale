@@ -1,5 +1,5 @@
 #include "GeneralSolver.hpp"
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include "Invariant.hpp"
 #include "Sum.hpp"
 #include "Linear.hpp"
@@ -19,7 +19,7 @@ public:
     virtual ~Test();
 protected:
     GeneralSolver* GS;
-    vector<IntegerVariable*>* varInt;
+    vector<Variable*>* varInt;
     std::clock_t start;
     std::clock_t testStart;
     int failedTests = 0;

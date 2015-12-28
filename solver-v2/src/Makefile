@@ -45,7 +45,7 @@ LIBS += ${GECODE_LINKS} -lCoinUtils -lz -llapack -lblas -lm -lbz2  #-lgomp
 #SOURCE_FILES = main.cpp BP_Data.cpp LSSpace.cpp GeneralSolver.cpp ../include/constraints/linear.cpp Sum.cpp #../include/constraints/invariant.cpp #IntegerVariable.cpp
 # BP_Basics.cpp BP_Helpers.cpp 
 # ../include/constraints/Equal.cpp ../include/constraints/LinearComb.cpp ../include/constraints/Constraint.cpp ../include/constraints/ConstraintSystem.cpp
-OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  IntegerVariable.o Sum.o Model.o State.o Neighborhood.o FlipNeighborhood.o \
+OBJECT_FILES = main.o BP_Data.o LSSpace.o GeneralSolver.o  Variable.o Sum.o Model.o State.o Neighborhood.o FlipNeighborhood.o \
 Random.o Clock.o Multistop.o GecodeSolver.o Max.o DependencyDigraph.o BestImprovement.o FirstImprovement.o RandomWalk.o Flip2Neighborhood.o SwapNeighborhood.o # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o
 # BP_Basics.o BP_Helpers.o 
 #../include/constraints/Equal.o ../include/constraints/LinearComb.o ../include/constraints/Constraint.o ../include/constraints/ConstraintSystem.o

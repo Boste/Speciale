@@ -17,7 +17,7 @@
 
 /// Construct that copies a Coefficient map. Size can be different when this sum contains invariants
 
-Sum::Sum(std::vector<IntegerVariable*> vars, std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
+Sum::Sum(std::vector<Variable*> vars, std::unordered_map<int, coefType> map) {//:IntVariables(vars),coefficients(c) {
     type = SUM;
     //    invariantID = id;
     //    assert(map.size() == vars.size());
@@ -224,7 +224,7 @@ bool Sum::test() {
     //        test = true;
     //    }
     
-    for (IntegerVariable* iv : VariablePointers) {
+    for (Variable* iv : VariablePointers) {
         unsigned id = iv->getID();
         double coef = coefficients.at(id);
         int varValue;

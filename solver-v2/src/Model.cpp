@@ -37,7 +37,7 @@ Model::~Model() {
     //        delete iv;
     //    }
 
-    for (IntegerVariable* iv : original) {
+    for (Variable* iv : original) {
         delete iv;
     }
     for (invariant invar : Invariants) {
@@ -59,35 +59,35 @@ Model::~Model() {
 
 }
 
-std::vector<std::vector<IntegerVariable*>>&Model::getPriorityVectors() {
+std::vector<std::vector<Variable*>>&Model::getPriorityVectors() {
     return priorityVectorsOfVariables;
 }
 
-std::vector<IntegerVariable*>& Model::getPriorityVectorNr(unsigned i) {
+std::vector<Variable*>& Model::getPriorityVectorNr(unsigned i) {
     assert(i < priorityVectorsOfVariables.size());
     return priorityVectorsOfVariables.at(i);
 }
 
-std::vector<IntegerVariable*>& Model::getIntegerVariables() {
+std::vector<Variable*>& Model::getIntegerVariables() {
     return IntegerVariables;
 }
 //IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
 
-IntegerVariable* Model::addBinaryVariable(int lb, int ub) {
+Variable* Model::addBinaryVariable(int lb, int ub) {
     //    for (int i = 0; i < numberOfVariables; i++) {
     int id = original.size();
-    IntegerVariable* v = new IntegerVariable(lb, ub, id);
+    Variable* v = new Variable(lb, ub, id);
     original.push_back(v);
     return v;
     //    binaryVariables.push_back(v);
 
 }
 
-IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
+Variable* Model::addIntegerVariable(int lb, int ub) {
     //    std::cout << lb << " " << ub << std::endl;
     //    sleep(1);
     int id = original.size();
-    IntegerVariable* v = new IntegerVariable(lb, ub, id);
+    Variable* v = new Variable(lb, ub, id);
     original.push_back(v);
     IntegerVariables.push_back(v);
     return v;
@@ -97,7 +97,7 @@ IntegerVariable* Model::addIntegerVariable(int lb, int ub) {
 //    return numberOfVariables;
 //}
 
-void Model::setNonFixedVariables(std::vector<IntegerVariable*>& nonFixed) {
+void Model::setNonFixedVariables(std::vector<Variable*>& nonFixed) {
     nonFixedVariables = nonFixed;
     //    mask = nonFixed;
     //    shuffleMask();
@@ -134,7 +134,7 @@ std::shared_ptr<DependencyDigraph>& Model::getDDG() {
     return DDG;
 }
 
-propagation_queue& Model::getPropagationQueue(IntegerVariable* iv) {
+propagation_queue& Model::getPropagationQueue(Variable* iv) {
     assert(DDG->propagationQueueHasBeenMade());
     return DDG->getPropagationQueue(iv);
 
@@ -144,7 +144,7 @@ updateVector& Model::getUpdate(invariant invar) {
     return DDG->getInvariantUpdate(invar->getID());
 }
 
-updateVector& Model::getUpdate(IntegerVariable* iv) {
+updateVector& Model::getUpdate(Variable* iv) {
     return DDG->getVariableUpdate(iv->getID());
 }
 
@@ -157,11 +157,11 @@ std::vector<constraint>& Model::getFunctionalConstraints() {
     return functionalConstraints;
 }
 
-IntegerVariable* Model::getMaskAt(int i) {
+Variable* Model::getMaskAt(int i) {
     return mask.at(i);
 }
 
-std::vector<IntegerVariable*>& Model::getMask() {
+std::vector<Variable*>& Model::getMask() {
     return mask;
 }
 
@@ -184,11 +184,11 @@ variableContainer& Model::getNonFixedVariables() {
 //    return LSVariables;
 //}
 
-IntegerVariable* Model::getNonFixedVariable(int i) {
+Variable* Model::getNonFixedVariable(int i) {
     return nonFixedVariables.at(i);
 }
 
-IntegerVariable* Model::getVariable(unsigned id) {
+Variable* Model::getVariable(unsigned id) {
     return original.at(id);
 }
 
@@ -304,9 +304,12 @@ void Model::initialize() {
     for (invariant invar : getObjectiveInvariant()) {
         initialEvaluation.at(0) += invar->getCurrentValue();
     }
-    for (IntegerVariable* iv : getNonFixedVariables()) {
+    //    debug;
+    for (Variable* iv : getNonFixedVariables()) {
         if (iv->isDef() || iv->isFixed() || iv->isIntegerVariable()) {
+            //            std::cout << iv->isDef() << " " <<  iv->isFixed() << " "<< iv->isIntegerVariable() << std::endl;
             continue;
+
         } else {
             //            LSVariables.push_back(iv);
             mask.push_back(iv);
@@ -320,34 +323,34 @@ void Model::initialize() {
         containsIntegerVariables = true;
         auto start = std::clock();
         std::cout << "Do stuff for binary <-> integer swap" << std::endl;
-                std::set<IntegerVariable*, IntegerVariable::compare_variable> newSet;
-                for (unsigned i = 0; i < original.size(); i++) {
-                    inConstraintWith.push_back(newSet);
-                }
+        std::set<Variable*, Variable::compare_variable> newSet;
+        for (unsigned i = 0; i < original.size(); i++) {
+            inConstraintWith.push_back(newSet);
+        }
         std::shared_ptr<std::vector < constraint>> newVector = std::make_shared<std::vector < constraint >> ();
         for (unsigned i = 0; i < original.size(); i++) {
             constraintsWithIntegerVarsRelated.push_back(newVector);
         }
-//        std::shared_ptr<std::vector<std::pair < IntegerVariable*, int>>> newVectorPair = std::make_shared<std::vector<std::pair < IntegerVariable*, int>>>();
-//        for (unsigned i = 0; i < original.size(); i++) {
-//            IntegerVariablesAndChange->push_back(newVectorPair);
-            //            constraintsWithIntegerVarsRelated.push_back(newVector);
-//        }
+        //        std::shared_ptr<std::vector<std::pair < IntegerVariable*, int>>> newVectorPair = std::make_shared<std::vector<std::pair < IntegerVariable*, int>>>();
+        //        for (unsigned i = 0; i < original.size(); i++) {
+        //            IntegerVariablesAndChange->push_back(newVectorPair);
+        //            constraintsWithIntegerVarsRelated.push_back(newVector);
+        //        }
         //        inConstraintWith.reserve(original.size());
 
-                for (IntegerVariable* intvar : IntegerVariables) {
-                    if (!(intvar->isFixed() || intvar->isDef())) {
-                        for (constraint con : intvar->usedInConstraints()) {
-                            if (con->getPriority() != OBJ) {
-                                for (IntegerVariable* iv : con->getVariables()) {
-                                    if (!(iv->isFixed() || iv->isDef() || iv->isIntegerVariable())) {
-                                        inConstraintWith[iv->getID()].insert(intvar);
-                                    }
-                                }
+        for (Variable* intvar : IntegerVariables) {
+            if (!(intvar->isFixed() || intvar->isDef())) {
+                for (constraint con : intvar->usedInConstraints()) {
+                    if (con->getPriority() != OBJ) {
+                        for (Variable* iv : con->getVariables()) {
+                            if (!(iv->isFixed() || iv->isDef() || iv->isIntegerVariable())) {
+                                inConstraintWith[iv->getID()].insert(intvar);
                             }
                         }
                     }
                 }
+            }
+        }
         for (unsigned i = 1; i < Constraints.size(); i++) {
             constraintContainer cons = Constraints.at(i);
             for (constraint con : *cons) {
@@ -355,34 +358,34 @@ void Model::initialize() {
                 //                    continue;
                 //                }
                 if (con->getNumberOfIntegerVariables() > 0) {
-//                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
-                    std::vector<IntegerVariable*>& intVars = con->getIntegerVariables();
-                    for (IntegerVariable* iv : con->getVariables()) {
+                    //                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
+                    std::vector<Variable*>& intVars = con->getIntegerVariables();
+                    for (Variable* iv : con->getVariables()) {
                         if (!(iv->isFixed() || iv->isDef() || iv->isIntegerVariable())) {
                             //                            std::vector<IntegerVariable*> newVector;
                             //                            inConstraintWith[iv->getID()] = newVector;
-//                            int coef = coefficients.at(iv->getID());
-//                            for(IntegerVariable* intvar : intVars){
-//                                int intcoef = coefficients.at(intvar->getID());
-//                                int change = ++ 
-//                                std::pair<IntegerVariable*, int> intvarAndChange(intvar,) ;
-//                                IntegerVariablesAndChange->at(iv->getID())->push_back(intvarAndChange);
-//                            }
-//                            constraintsWithIntegerVarsRelated.at(iv->getID())->push_back(con);
+                            //                            int coef = coefficients.at(iv->getID());
+                            //                            for(IntegerVariable* intvar : intVars){
+                            //                                int intcoef = coefficients.at(intvar->getID());
+                            //                                int change = ++ 
+                            //                                std::pair<IntegerVariable*, int> intvarAndChange(intvar,) ;
+                            //                                IntegerVariablesAndChange->at(iv->getID())->push_back(intvarAndChange);
+                            //                            }
+                            //                            constraintsWithIntegerVarsRelated.at(iv->getID())->push_back(con);
                             //                            std::cout << "Behøver ikke det efterfølgende, bare spørg con hvor mange int der skal ledes efter" << std::endl;
                             //                            std::cout << "Check om de er fixed (integer variablene) " << std::endl;
-                                                        for (IntegerVariable* intvar : intVars) {
-                                                            if (intVars.size() > 1) {
-                                                                std::cout << intVars.size() << std::endl;
-                                                            }
-                                                            assert(intvar->isIntegerVariable());
-                                                            if (intvar->isFixed() || intvar->isDef()) {
-                            
-                                                            } else {
-                                                                inConstraintWith[iv->getID()].insert(intvar);
-                                                                
-                                                            }
-                                                        }   
+                            for (Variable* intvar : intVars) {
+                                if (intVars.size() > 1) {
+                                    std::cout << intVars.size() << std::endl;
+                                }
+                                assert(intvar->isIntegerVariable());
+                                if (intvar->isFixed() || intvar->isDef()) {
+
+                                } else {
+                                    inConstraintWith[iv->getID()].insert(intvar);
+
+                                }
+                            }
                         }
                     }
                 }
@@ -394,7 +397,7 @@ void Model::initialize() {
         unsigned lolhest = 0;
         std::cout << "Is this even working?" << std::endl;
         std::vector<int> differentSizes(200, 0);
-        for (IntegerVariable* iv : getMask()) {
+        for (Variable* iv : getMask()) {
             //            if (inConstraintWith.at(iv->getID()).size() > 0) {
             differentSizes.at(inConstraintWith.at(iv->getID()).size())++;
             if (inConstraintWith.at(iv->getID()).size() != 0) {
@@ -448,7 +451,7 @@ void Model::initialize() {
 
 }
 
-std::set<IntegerVariable*, IntegerVariable::compare_variable>& Model::getInConstraintWithAt(unsigned id) {
+std::set<Variable*, Variable::compare_variable>& Model::getInConstraintWithAt(unsigned id) {
     return inConstraintWith.at(id);
 }
 //    for (IntegerVariable* iv : getAllVariables()) {

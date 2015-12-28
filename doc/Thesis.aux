@@ -1,11 +1,10 @@
 \relax 
-\providecommand\@newglossary[4]{}
-\@newglossary{main}{glg}{gls}{glo}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Definitions}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Variables}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Constraints}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Problem formulation}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Solutions}{4}}
 \citation{ilpbog}
 \citation{ilpbog}
 \citation{ilpbog}
@@ -19,62 +18,68 @@
 \citation{MPG:M}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Implicit Constraints}{6}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Gecode}{6}}
+\citation{lsbog}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Heuristics and Local Search}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Construction Heuristics}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Local Search and Neighborhoods}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Metaheuristics}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Constraint Based Local Search}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Invariants and One-way Constraints}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Soft Constraints}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Evaluation Function}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Comet}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}OscaR}{8}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Architectural Overview}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Basic Aspects of Local Search}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Local Search Algorithms}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Construction Heuristics}{9}}
+\citation{lsbog}
+\citation{lsbog}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Metaheuristics}{10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}Creating a Model for Local Search}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Constraint Based Local Search}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Invariants and Oneway Constraints}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Soft Constraints}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Evaluating solutions}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}Comet}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.5}OscaR}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Architectural Overview}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of what the classes contains pointers to\relax }}{13}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{keyStruc}{{\caption@xref {keyStruc}{ on input line 9}}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Ordering of key classes\relax }}{9}}
-\newlabel{tab_architec}{{1}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Constraints}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Invariants}{10}}
+\newlabel{fig_architec}{{1}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Constraints}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Invariants}{15}}
 \citation{MPG:M}
 \citation{MPG:M}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Preprocessing and Initial Solution}{12}}
-\newlabel{sec_gecode}{{5}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Domain Reduction}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Finding an Initial Solution}{12}}
-\newlabel{eq_relaxed}{{5}{13}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Structuring Local Search Model}{14}}
-\newlabel{sec_ls}{{6}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Simplification}{14}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces canBeMadeOneway(\textsf  {Constraint} $c_j$)\relax }}{15}}
-\newlabel{algo_checkoneway}{{1}{15}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces makeOneway(\textsf  {Constraint} $c_j$, \textsf  {Variable} $x_i$)\relax }}{16}}
-\newlabel{algo_makeoneway}{{2}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}From Modeling to Solution}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Preprocessing and Initial Solution}{17}}
+\newlabel{sec_gecode}{{6}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Domain Reduction}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Finding an Initial Solution}{17}}
+\newlabel{eq_relaxed}{{5}{18}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Structuring Local Search Model}{19}}
+\newlabel{sec_ls}{{7}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Simplification}{19}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces canBeMadeOneway(\textsf  {Constraint} $c_j$)\relax }}{20}}
+\newlabel{algo_checkoneway}{{1}{20}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces makeOneway(\textsf  {Constraint} $c_j$, \textsf  {Variable} $x_i$)\relax }}{21}}
+\newlabel{algo_makeoneway}{{2}{21}}
 \citation{cormen}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Dependency Digraph}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Small example of DDG\relax }}{17}}
-\newlabel{fig_smallG}{{1}{17}}
-\newlabel{fig_smallG}{{6.2}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Small example of DDG continued\relax }}{18}}
-\newlabel{fig_smallG2}{{2}{18}}
-\newlabel{sec_ddg}{{6.2}{19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Propagation Queue}{19}}
-\newlabel{fig_propqueue}{{6.3}{19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Importance of propagation queue\relax }}{19}}
-\newlabel{sec_propaqueue}{{6.3}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Dependency Digraph}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Small example of DDG\relax }}{22}}
+\newlabel{fig_smallG}{{2}{22}}
+\newlabel{fig_smallG}{{7.2}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Small example of DDG continued\relax }}{23}}
+\newlabel{fig_smallG2}{{3}{23}}
+\newlabel{sec_ddg}{{7.2}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Propagation Queue}{24}}
+\newlabel{fig_propqueue}{{7.3}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Importance of propagation queue\relax }}{24}}
+\newlabel{sec_propaqueue}{{7.3}{25}}
 \bibstyle{plain}
 \bibdata{main}
 \bibcite{CPbog}{1}
 \bibcite{cormen}{2}
 \bibcite{ilpbog}{3}
-\bibcite{url_globalCons}{4}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Local Search Engine}{21}}
-\newlabel{sec_local}{{7}{21}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Neighborhoods}{21}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.1}Neighborhood Operations}{21}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Metaheuristics}{21}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Tests}{21}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Results}{21}}
-\@writefile{toc}{\contentsline {section}{\numberline {11}Future Work}{21}}
-\@writefile{toc}{\contentsline {section}{\numberline {12}Conclusion}{21}}
-\bibcite{MPG:M}{5}
+\bibcite{lsbog}{4}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Local Search Engine}{26}}
+\newlabel{sec_local}{{8}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Neighborhoods}{26}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Metaheuristics}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Tests}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Results}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Future Work}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusion}{26}}
+\bibcite{url_globalCons}{5}
+\bibcite{MPG:M}{6}

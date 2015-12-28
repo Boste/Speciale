@@ -1,16 +1,10 @@
 A \emph{Constraint Satisfaction Problem} (CSP) is defined as a triple $\mathbb{P} = \langle X,D,C \rangle$. A 
 \emph{candidate solution} to a CSP $\mathbb{P}$ is a vector of n elements 
 %$\tau = (\tau_1,\tau_2,\dots,\tau_n) $ where $\tau_i \in D_i$. 
-$\tau = (V(x_1), V(x_2), \dots , V(x_n))$.  % D_1 \times D_2 \times \dots , D_n) $ where $\tau_i \in 
-%D_i$. 
+$\tau = (V(x_1), V(x_2), \dots , V(x_n))$ from the set of all candidate solutions $S$ called the \emph{search space}.  
+% D_1 \times D_2 \times %\dots , D_n) $ where $\tau_i \in D_i$. 
 Given a sequence $X' \subseteq X$ of variables $\tau[X']$ is called a restriction on $\tau$, ordered according to 
 $X$. If the restriction $\tau[X(c_j)]$ matches a tuble of the constraint $c_j$ in extensional form the solution $\tau$ 
 satisfies constriant $c_j$. If each constraint $c_j \in C$ is satisfied then the solution $\tau$ is a \emph{feasible 
 solution} to the CSP $\mathbb{P}$. \\
-\boste{Har tænkt på et flytte nedenstående til en ny section (Solutions) og introducere search space} \\ 
-For a CSP the questions of interest could be to report all feasible solutions $sol(P)$, any feasible solution 
-$\mathbf{\tau}\in sol(\mathbb{P})$ or if there exists a solution $\mathbf{\tau}$ or not. \\
-The CSP $\mathbb{P}$ can be expanded to a \emph{Constraint Optimization Problem} (COP) $\mathbb{P'}$ 
-with an objective function $f(\mathbf{\tau})$ that evaluates the quality of the solution $\mathbf{\tau}$, $\mathbb{P'} 
-= \langle X,D,C,f(\mathbf{\tau}) \rangle$. The task is then to find a feasible solution $\hat{\mathbf{\tau}}$ that 
-gives minimum or maximum value of $f(\hat{\mathbf{\tau}})$ depending on the requirements of the problem. 
+

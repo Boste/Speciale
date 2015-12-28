@@ -1,0 +1,14 @@
+A construction heuristics is used to find an initial candidate solution to a given instance. One of the main things to 
+consider when creating a construction heuristic algorithm is the balance between quality of the solution and time 
+complexity of the algorithm. The extreme case would be to solve the given instance with a construction heuristic but 
+then the main point of local search is lost, that is finding a high quality solution fast. \\ 
+The first thing to consider when creating a construction heuristic is whether it has to find a feasible solution or it 
+is allowed to find an infeasible solution. The choice depends on how the local search is designed, whether it can reach 
+infeasible solution or not. \\ 
+An example of a simple construction heuristic is creating a random candidate solution. For each variable a value 
+between its lower and upper bound is chosen uniformly at random. This is a fast construction heuristic $O(n)$ but 
+cannot give any guarantee of the quality. Examples of other construction heuristics can be greedy heuristics like first 
+fit or best fit. \\ 
+Construction heuristics can be tailor made to a specific problem type to find a good initial solution depending on the 
+problem. It might be beneficial to introduce randomness in the algorithm and rerun it a couple of times and to get a 
+better initial solution at the cost of time. 

@@ -1,5 +1,5 @@
-#ifndef INTEGERVARIABLE_HPP
-#define	INTEGERVARIABLE_HPP
+#ifndef VARIABLE_HPP
+#define	VARIABLE_HPP
 //#include <gecode/driver.hh>
 #include <gecode/int.hh>
 
@@ -13,7 +13,7 @@
 //class Constraint;
 class Invariant;
 
-class IntegerVariable {
+class Variable {
     friend class GeneralSolver;
 protected:
     //    Gecode::IntVar* VariablePointer;
@@ -98,7 +98,7 @@ public:
         isFix = true;
     }
 
-    IntegerVariable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
+    Variable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {
         //        VariablePointer = vp;
         //        ArrayPointer = ap;
         lowerBound = lowerbound;
@@ -167,7 +167,7 @@ public:
     //       
     //    }
 
-    ~IntegerVariable() {
+    ~Variable() {
         //        delete VariablePointer;
 
     }
@@ -176,7 +176,7 @@ public:
     /// Sort in order of decreasing domain
     struct SortGreater {
 
-        bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
+        bool operator()(const Variable* var1, const Variable* var2) const {
                 //            std::cout << "sorter" << std::endl;
             int ds1 = var1->upperBound-var1->lowerBound;
             int ds2 = var2->upperBound-var2->lowerBound;
@@ -186,7 +186,7 @@ public:
             return (var1->upperBound-var1->lowerBound  > var2->upperBound-var2->lowerBound);
         }
     };
-    struct compare_variable : public std::binary_function<IntegerVariable*, IntegerVariable*, bool> {
+    struct compare_variable : public std::binary_function<Variable*, Variable*, bool> {
 
 //    bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
 //        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
@@ -194,7 +194,7 @@ public:
 //        return (var1->getID() > var2->getID());
 //    }
 
-    bool operator()(IntegerVariable* var1,IntegerVariable* var2) {
+    bool operator()(Variable* var1,Variable* var2) {
 
         //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
         //                sleep(1);
@@ -222,5 +222,5 @@ private:
 
 };
 
-#endif	/* INTEGERVARIABLE_HPP */
+#endif	/* VARIABLE_HPP */
 

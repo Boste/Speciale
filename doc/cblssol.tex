@@ -1,0 +1,12 @@
+There are different ways of measuring the quality of an solution. For a CSP a feasible solution needs to be found but 
+there is not distinguished between feasible solutions.  \\
+In a COP the feasible solutions are compared by an objective function that gives the feasible solution a measurement 
+of quality. \\ 
+There are different ways of differentiating infeasible solution from other solutions, feasible or infeasible. The 
+evaluation function is a combination of the objective function and the violated constraints. Each constraint can be 
+given a weight and together with the violation degree it contribute to the evaluation function. I.e. a constraint has 
+weight ten and a violation degree of three it then contribute 30 to the evaluation function. In this way the search 
+priorities to satisfy certain constraints more than other. This method can have the negative effect that it might 
+priorities to have all constraint with violation degree over one constraint with very high violation degree. \\ 
+Another way it to use a priority for each constraint as a lexicographic ordering, rather satisfy a constraint with high 
+priority than any number of constraints with lower priority. 

@@ -1,11 +1,11 @@
 #include "GeneralSolver.hpp"
 
 GeneralSolver::GeneralSolver() {
-//    for (int i = 0; i < 10; i++) {
-//        int max = std::numeric_limits<int>::max() / std::pow(10, i);
-//        //            std::cout << max << std::endl;
-//        maxCoef.push_back(max);
-//    }
+    //    for (int i = 0; i < 10; i++) {
+    //        int max = std::numeric_limits<int>::max() / std::pow(10, i);
+    //        //            std::cout << max << std::endl;
+    //        maxCoef.push_back(max);
+    //    }
 }
 
 GeneralSolver::~GeneralSolver() {
@@ -71,74 +71,74 @@ GeneralSolver::~GeneralSolver() {
 //    return digits;
 //}
 
-void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVariable*>& variables, int relation, int ub, unsigned priority) {
-//    bool hasDouble = false;
-//    int digits = 0;
-//    int ub = std::round(upperbound);
-//    //    getNumberOfDigits(1.1);
-//    if (upperbound != ub) {
-//        std::cout << upperbound << " vs " << ub << " diff " << ub-upperbound<< std::endl;
-//
-//        //        std::cout << "Do something ub" << std::endl;
-//        digits = getNumberOfDigits(upperbound);
-//        //        std::cout << upperbound << std::endl;
-//
-//
-//        hasDouble = true;
-//    }
-//    if (!hasDouble) {
-//        for (double coef : coeff) {
-//            if (coef != std::round(coef)) {
-//                //                std::cout << "Do something" << std::endl;
-//                int newDigit = getNumberOfDigits(coef);
-//                if (newDigit > digits) {
-//                    digits = newDigit;
-//                }
-//                //                std::cout << coef << std::endl;
-//                hasDouble = true;
-//                //                break;
-//            }
-//        }
-//    }
+void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*>& variables, int relation, int ub, unsigned priority) {
+    //    bool hasDouble = false;
+    //    int digits = 0;
+    //    int ub = std::round(upperbound);
+    //    //    getNumberOfDigits(1.1);
+    //    if (upperbound != ub) {
+    //        std::cout << upperbound << " vs " << ub << " diff " << ub-upperbound<< std::endl;
+    //
+    //        //        std::cout << "Do something ub" << std::endl;
+    //        digits = getNumberOfDigits(upperbound);
+    //        //        std::cout << upperbound << std::endl;
+    //
+    //
+    //        hasDouble = true;
+    //    }
+    //    if (!hasDouble) {
+    //        for (double coef : coeff) {
+    //            if (coef != std::round(coef)) {
+    //                //                std::cout << "Do something" << std::endl;
+    //                int newDigit = getNumberOfDigits(coef);
+    //                if (newDigit > digits) {
+    //                    digits = newDigit;
+    //                }
+    //                //                std::cout << coef << std::endl;
+    //                hasDouble = true;
+    //                //                break;
+    //            }
+    //        }
+    //    }
 
-//    std::vector<int> coefficients;
-//    if (hasDouble) {
-//        std::cout << "Digits " << digits << " Max coeff " << maxCoef[digits] << std::endl;
-//
-//
-//        for (double coef : coeff) {
-//            //            std::cout << coef << " vs " << coef*pow(10,digits) << "     "; 
-//            coefficients.push_back(std::round(coef * std::pow(10, digits)));
-//            //            std::cout << coef << " " << std::endl;
-//            if (std::abs(coef) > maxCoef[digits]) {
-//                std::cout << "Cannot convert to integer " << std::endl;
-//                std::cout << "exit" << std::endl;
-//                exit(1);
-//            }
-//        }
-//        if (std::abs(upperbound) > maxCoef[digits]) {
-//            std::cout << "Cannot convert to integer " << std::endl;
-//            std::cout << "exit" << std::endl;
-//
-//            exit(1);
-//        }
-//        ub = std::round(upperbound * std::pow(10, digits));
-//        //        sleep(1);
-//
-//    } else {
-//        for (double coef : coeff) {
-//            coefficients.push_back(std::round(coef));
-//
-//        }
-//
-//        //        ub = std::round(upperbound * std::pow(10, digits));
-//    }
+    //    std::vector<int> coefficients;
+    //    if (hasDouble) {
+    //        std::cout << "Digits " << digits << " Max coeff " << maxCoef[digits] << std::endl;
+    //
+    //
+    //        for (double coef : coeff) {
+    //            //            std::cout << coef << " vs " << coef*pow(10,digits) << "     "; 
+    //            coefficients.push_back(std::round(coef * std::pow(10, digits)));
+    //            //            std::cout << coef << " " << std::endl;
+    //            if (std::abs(coef) > maxCoef[digits]) {
+    //                std::cout << "Cannot convert to integer " << std::endl;
+    //                std::cout << "exit" << std::endl;
+    //                exit(1);
+    //            }
+    //        }
+    //        if (std::abs(upperbound) > maxCoef[digits]) {
+    //            std::cout << "Cannot convert to integer " << std::endl;
+    //            std::cout << "exit" << std::endl;
+    //
+    //            exit(1);
+    //        }
+    //        ub = std::round(upperbound * std::pow(10, digits));
+    //        //        sleep(1);
+    //
+    //    } else {
+    //        for (double coef : coeff) {
+    //            coefficients.push_back(std::round(coef));
+    //
+    //        }
+    //
+    //        //        ub = std::round(upperbound * std::pow(10, digits));
+    //    }
     //    debug;
     std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, ub, relation, priority);
 
     //        bool haveInt = false;
     int numberOfIntegerVariables = 0;
-    for (IntegerVariable* iv : variables) {
+    for (Variable* iv : variables) {
         if (priority != 0) {
             iv->addToUsedInConstraints(LinearConstraint);
         }
@@ -188,14 +188,14 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<IntegerVa
 
 ///Create a single variable with given lower and upper bound
 
-IntegerVariable* GeneralSolver::createIntVar(int lb, int ub) {
+Variable* GeneralSolver::createVariable(int lb, int ub) {
     if (ub == 1 && lb == 0) {
-        IntegerVariable* iv = model->addBinaryVariable(lb, ub);
+        Variable* iv = model->addBinaryVariable(lb, ub);
         GS->createGecodeVariable(lb, ub);
         return iv;
 
     } else {
-        IntegerVariable* iv = model->addIntegerVariable(lb, ub);
+        Variable* iv = model->addIntegerVariable(lb, ub);
         GS->createGecodeVariable(lb, ub);
         return iv;
     }
@@ -206,12 +206,12 @@ IntegerVariable* GeneralSolver::createIntVar(int lb, int ub) {
 }
 /// Returns a vector of the variables created (copying the vector)
 
-std::vector<IntegerVariable*> GeneralSolver::createIntVars(unsigned numberOfVariables, int lb, int ub) {
+std::vector<Variable*> GeneralSolver::createVariables(unsigned numberOfVariables, int lb, int ub) {
     // Given to gecode space
     //        Gecode::IntVarArray vars(*this, numberOfVariables, lb, ub);
-    std::vector<IntegerVariable*> variableVector;
+    std::vector<Variable*> variableVector;
     for (unsigned i = 0; i < numberOfVariables; i++) {
-        IntegerVariable* iv = createIntVar(lb, ub);
+        Variable* iv = createVariable(lb, ub);
         variableVector.push_back(iv);
 
     }
@@ -219,15 +219,15 @@ std::vector<IntegerVariable*> GeneralSolver::createIntVars(unsigned numberOfVari
 
 }
 
-std::vector<IntegerVariable*>& GeneralSolver::getAllVariables() {
+std::vector<Variable*>& GeneralSolver::getAllVariables() {
     return model->getAllVariables();
 }
 /// Takes a vector of IntegerVariable* that will be made search on. Should be 
 /// called multiple times in order of variable importance. (First call most important
 /// variables)
 
-void GeneralSolver::Search(std::vector<IntegerVariable*> variables) {
-    for (IntegerVariable* iv : variables) {
+void GeneralSolver::Search(std::vector<Variable*> variables) {
+    for (Variable* iv : variables) {
         iv->searchPrio = model->priorityVectorsOfVariables.size();
     }
     model->priorityVectorsOfVariables.push_back(variables);
@@ -236,7 +236,7 @@ void GeneralSolver::Search(std::vector<IntegerVariable*> variables) {
 
 /// Only for testing, should be removed 
 
-void GeneralSolver::print(std::vector<IntegerVariable>& IntegerVariables) {
+void GeneralSolver::print(std::vector<Variable>& IntegerVariables) {
     std::cout << "{";
     for (unsigned i = 0; i < IntegerVariables.size() - 1; i++) {
         std::cout << *(IntegerVariables[i].getVariablePointer()) << ", ";
@@ -258,20 +258,27 @@ void GeneralSolver::InitialSolution(int TimeForGecode) {
 
     //        GS->branch(true);
     if (GS->initialize(TimeForGecode, true)) {
+//    if (false) {
 
     } else {
         std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
         int timesRelaxed = 0;
+//        int timesRelaxed = 7;
         bool solutionFound = false;
-        while (!solutionFound && timesRelaxed != 5) {
+        for (unsigned i = 0; i < model->getConstraints().size(); i++) {
+            std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
+        }
+        while (!solutionFound && timesRelaxed != 7) {
             relax(timesRelaxed);
             timesRelaxed++;
             //                GS->branch(false);
             solutionFound = GS->initialize(TimeForGecode, false);
         }
         if (!solutionFound) {
-            std::cout << "Relaxation failed" << std::endl;
-            exit(1);
+            std::cout << "Relaxation failed, trying with initial assignment of variables to minimum value" << std::endl;
+            //            exit(1);
+            relax(timesRelaxed);
+            GS->initialize(TimeForGecode, false);
         }
         //        assert(s != NULL);
         //        assert(!s->failed());
@@ -289,7 +296,7 @@ void GeneralSolver::InitialSolution(int TimeForGecode) {
     int initialValue = 0;
     constraint obj = model->getObjectives()->at(0);
     auto coef = obj->getCoefficients();
-    for (IntegerVariable* iv : obj->getVariables()) {
+    for (Variable* iv : obj->getVariables()) {
         double coeff = coef.at(iv->getID());
         if (coeff != 0) {
             //                std::cout << "id " << iv->getID() << " value " << iv->getCurrentValue() << " coeff " << coeff << std::endl;
@@ -317,7 +324,7 @@ void GeneralSolver::relax(int timesRelaxed) {
 
     GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
 
-    for (IntegerVariable* iv : model->getAllVariables()) {
+    for (Variable* iv : model->getAllVariables()) {
         int lb = iv->getLowerBound();
         int ub = iv->getUpperBound();
 
@@ -335,35 +342,51 @@ void GeneralSolver::relax(int timesRelaxed) {
 
 void GeneralSolver::simpleRelax(int timesRelaxed) {
     std::cout << "SimpleRelax" << std::endl;
+    double numberOfConstraints = 0;
+    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
+        numberOfConstraints += model->getConstraintsWithPriority(i)->size();
+    }
+
+    int relax = std::ceil(std::pow(2, timesRelaxed) / 100.0 * numberOfConstraints);
+    int keep = std::max(numberOfConstraints - relax,0.0);
+    int posted = 0;
+
     //        std::cout << "do nothing" << std::endl;
     //        std::cout << model->getObjectives()->at(0)->getInvariant()->VariablePointers->size() << std::endl;
     for (unsigned i = 1; i < model->getConstraints().size()/*-((timesRelaxed+1)*100)*/; i++) {
+
         //        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
         constraintContainer prio = model->getConstraintsWithPriority(i);
         //            for (unsigned j = 0; j < prio->size(); j++) {
         for (constraint cons : *prio) {
+            if (posted == keep) {
+                break;
+            }
             //                std::shared_ptr<Invariant> invar = cons->getInvariant();
             //                Invariant* invar = cons->getInvariant();
-            std::vector<IntegerVariable*> variables = cons->getVariables();
+            std::vector<Variable*> variables = cons->getVariables();
             if (cons->getType() == LINEAR) { // otherwise it is in objective function atm.
                 //                    Gecode::IntArgs c(integerVariables->size());
                 std::vector<int> c(variables.size());
 
                 //                    Gecode::IntVarArgs x(integerVariables->size());
                 for (unsigned j = 0; j < variables.size(); j++) {
-
-                    c[j] = cons->getCoefficients().at(j); //                    std::cout << __LINE__ << std::endl;
+                    //                    debug;
+                    c[j] = cons->getCoefficients().at(variables.at(j)->getID()); //                    std::cout << __LINE__ << std::endl;
 
                 }
                 //                IntConLevel icl = cons->getICL();
                 int relation = cons->getArgument(0);
                 int ub = cons->getArgument(1);
                 GS->linear(c, variables, relation, ub);
+                posted++;
             } else {
                 std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
             }
         }
     }
+    std::cout << posted << std::endl;
+    std::cout << keep << std::endl;
 
     std::cout << "SimpleRelax made " << timesRelaxed + 1 << " times" << std::endl;
 }

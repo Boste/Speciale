@@ -1,22 +1,24 @@
 Gecode (generic constraint development environment) is a constraint programming solver implemented in C++ and 
 offer a wide range of modeling features. Gecode offers more than 70 constraints from the ``Global Constraint Catalog'' 
 \cite{url_globalCons} that can be applied to boolean, integer, set and float variables. \boste{Muligvis Gecode 
-architecture billed} \\ 
-A model created for Gecode is created by inheriting the space class. space is is a basic layer in Gecode that a user 
+architecture billede} \\ 
+A model created for Gecode is created by inheriting the space class. Space is is a basic layer in Gecode that a user 
 can build the model on. To Create variables or post constraints the user need to specify the space they should be 
-created in. When variables are created in a Gecode space views are created accordingly. Views are not used in modeling 
-but are used to know when propagation should be made on a constraint.  When posting constraints in a space, Gecode 
-creates propagators and these propagators can subscribe to the views of the variables. When variables changes domain 
-the corresponding view tell its subscribes that the variables domain has changed. For some constraint the 
-user has the option to choose the propagator based on consistency level choice. The cost of different consistency level 
-varies from linear in the number of variables to exponential \cite[p.57]{MPG:M}. \\
-Once a problem has been formulated, the user must define on which variables and how branching is done. Just like 
-variables and constraints are posted in a space the branch order is also posted on the space. The choice in branching 
-involves choosing a set of variables, which of those variables to branch on first and what values to branch on. One can 
-post several branch methods and they are treated in the order they are posted. If no branch strategy is chosen for a 
-variable then branching is not done on that variable. \\ 
-To start the search a search engine must be chosen and Gecode offers two, a depth first search engine and a Branch and 
-Bound engine. Search engines have an option class in which several options can be set \cite[p.157]{MPG:M}. \\ 
+created in. When variables are created in a space, views are created and associated with the variables. 
+Views are not used in modeling but are used to know when propagation should be made on a constraint.  When posting 
+constraints in a space, Gecode creates propagators and these propagators can subscribe to the views of the variables 
+in the constraint. When variables changes domain the corresponding view tell its subscribes that the variables domain 
+has changed. For some constraint the user has the option to choose the propagator based on a consistency level. 
+The cost of different consistency level varies from linear in the number of variables to exponential \cite[p.57]{MPG:M}. 
+\\
+To solve a problem Gecode needs guidance when searching and that is done by a branch function. Once a problem has been 
+formulated, the user must define on which variables and how branching is done. Just like variables and constraints are 
+posted in a space the branch order is also posted on the space. The choices in branching for a set of variables are 
+which of those variables to branch on first and what values to branch on. One can post several branch methods and they 
+are treated in the order they are posted. Once all variables have been branched in one branch function it continues 
+with the  If no branch strategy is chosen for a variable then branching is not done on that variable. \\ 
+To start the search a search engine must be chosen and Gecode offers two, a depth first search engine and a branch and 
+bound engine. Search engines have an option class in which several options can be set \cite[p.157]{MPG:M}. \\ 
 When searching for a solution in a space, the search can be illustrated as a binary tree where the edges are 
 branch choices for a variable and the vertices are the space created because of those choices. If it reaches a point 
 where no solution is possible it stop branches from that vertex and the space is said to be failed. While searching for 

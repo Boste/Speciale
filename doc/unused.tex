@@ -59,3 +59,21 @@
 
     \end{tikzpicture}
     \end{center}
+    
+    \newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[b]
+\Large
+\def\arraystretch{1.5}
+\centering
+\label{keyStruc}
+\begin{tabularx}{0.8\textwidth}{|Y|Y|}%{|c *{2}{|Y}|}%{|c|c|}
+
+\hline
+\multicolumn{2}{|c|}{\gensol}  \\ \hline
+\gecodesol      & \lssol       \\ \hline
+\multicolumn{2}{|c|}{Model}    \\ \hline
+Constraint      & Invariant    \\ \hline
+\multicolumn{2}{|c|}{Variable} \\ \hline
+\end{tabularx}\caption{Ordering of key classes} \label{tab_architec}
+\end{table}
+\noindent

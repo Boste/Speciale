@@ -14,7 +14,7 @@ GecodeSolver::~GecodeSolver() {
 
 }
 
-void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<IntegerVariable*>& variables, int relation, int upperbound) {
+void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound) {
     //    IntVars = IntVarArray(*this, tmpVars);
 
     if (variables.size() == 1 && coefficients[0] == 1) {
@@ -61,7 +61,7 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Inte
         // ICL_VAL is cheapest ICL_DOM is most expensive
         //    std::cout << "Giv noget til gecode" << std::endl;
         bool integer = false;
-        for (IntegerVariable* iv : variables) {
+        for (Variable* iv : variables) {
             if (tmpVars[iv->getID()].max() > 1) {
                 integer = true;
                 break;
@@ -149,7 +149,7 @@ void GecodeSolver::print(std::ostream & os) const {
 void GecodeSolver::createArray() {
     //    std::cout << "CreateArray" << std::endl;
     AllVars = IntVarArray(*this, tmpVars);
-    std::vector<IntegerVariable*>& m = model->getAllVariables();
+    std::vector<Variable*>& m = model->getAllVariables();
     for (int i = 0; i < AllVars.size(); i++) {
         //        assert(m->size() == IntVars.size());
         m.at(i)->setVariablePointer(AllVars[i]);
@@ -176,13 +176,13 @@ void GecodeSolver::branch() {
     //            priority << *iv->getVariablePointer();
     //        }
     //        Gecode::branch(*this, priority, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::IntVarArgs fisk;
-    for (int i = 0; i < binVars.size()-1 ; i++) {
-        fisk << binVars[i];
-    }
-    Gecode::branch(*this, fisk, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-//            Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-//            Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+    //    Gecode::IntVarArgs fisk;
+    //    for (int i = 0; i < binVars.size()-1 ; i++) {
+    //        fisk << binVars[i];
+    //    }
+    //    Gecode::branch(*this, fisk, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+    //            Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     //    }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -193,10 +193,10 @@ void GecodeSolver::branch() {
 
 void GecodeSolver::fixVariables() {
     //    std::cout << "In fix" << std::endl;
-    std::vector<IntegerVariable*> preprocessed; // = new std::vector<IntegerVariable*>();
+    std::vector<Variable*> preprocessed; // = new std::vector<IntegerVariable*>();
 
     int numberOfFixedVariables = 0;
-    for (IntegerVariable* iv : model->getAllVariables()) {
+    for (Variable* iv : model->getAllVariables()) {
         //        std::cout << iv << std::endl;
         //        std::cout << "Gecode Var pointer " << iv->getVariablePointer() << " assigned? " << std::endl;
         //        std::cout << iv->getVariablePointer()->assigned() << std::endl;
@@ -259,7 +259,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
         }
         if (iv.min() != 0) {
             lb++;
-            std::cout << iv.min() << std::endl;
+            //            std::cout << iv.min() << std::endl;
         }
     }
     std::cout << "lb " << lb << " ub " << ub << std::endl;
@@ -315,14 +315,13 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
 
             //            }
-            s->print(std::cout); //            this->print(std::cout);
+            //            s->print(std::cout); //            this->print(std::cout);
             SetValues(s->AllVars);
             solutionFound = true;
             std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
             std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             Gecode::Search::Statistics stat = e.statistics();
             print_stats(stat);
-            delete s;
 
         }
         //        delete s; Skal det være her jeg deleter s?
@@ -331,6 +330,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
         std::cerr << "Gecode exception: " << e.what() << std::endl;
         //        return 1;
     }
+    delete s;
+
     //    std::cout << "########################################################################################" << std::endl;
     //    std::cout << "solutionFound  "<< solutionFound << std::endl;
     delete ms;
@@ -340,11 +341,11 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
 void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     //    for (int i = 0; i < model->getAllIntegerVariables()->size(); i++) {
-    for (IntegerVariable* iv : model->getAllVariables()) {
+    for (Variable* iv : model->getAllVariables()) {
         if (vars[iv->getID()].assigned()) {
             iv->setCurrentValue(vars[iv->getID() ].val());
         } else {
-            std::cout << "Value not found for variable " <<iv->getID() <<" , consider adding it to branch" << std::endl;
+            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
             iv->setCurrentValue(vars[iv->getID()].min());
 
         }

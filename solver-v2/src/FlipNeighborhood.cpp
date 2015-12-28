@@ -157,7 +157,7 @@ FlipNeighborhood::~FlipNeighborhood() {
 //template<typename returnType>
 
 Move* FlipNeighborhood::next() {
-    IntegerVariable* iv = model->getMaskAt(moveCounter);
+    Variable* iv = model->getMaskAt(moveCounter);
     moveCounter++;
 //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -175,7 +175,7 @@ bool FlipNeighborhood::hasNext() {
     }
 }
 Move* FlipNeighborhood::nextRandom() {
-    IntegerVariable* iv = model->getMaskAt(Random::Integer(0,(int) model->getMask().size()-1));
+    Variable* iv = model->getMaskAt(Random::Integer(0,(int) model->getMask().size()-1));
     randomCounter++;
 //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -216,7 +216,7 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
 //    }
     //    std::cout << "size of change " << change.size() << std::endl;
     //    if (mv->moveType == FLIP) {
-    IntegerVariable* variable = mv->var;
+    Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
     //        int violationChange = 0;
@@ -327,7 +327,7 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
 bool FlipNeighborhood::commitMove(Move* mv) {
     //    if (mv->moveType == FLIP) {
     moveCounter = 0;
-    IntegerVariable* var = mv->getVar();
+    Variable* var = mv->getVar();
     //        std::vector<int> evaluation(mv->getDeltaVector().size());
     std::vector<int>& evaluation = state->getEvaluation();
 

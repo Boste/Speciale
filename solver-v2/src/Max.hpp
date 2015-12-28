@@ -10,7 +10,7 @@ public:
 
     //    Max(T1 first, T2 sec, unsigned id);
     //    Max(IntegerVariable* first, int sec, unsigned variableID, std::shared_ptr<DependencyDigraph> DDG);
-    Max(IntegerVariable* first, int sec, unsigned variableID);
+    Max(Variable* first, int sec, unsigned variableID);
     //    Max(invariant first, int sec, unsigned id, std::shared_ptr<DependencyDigraph> DDG);
 //    Max(invariant first, int sec, unsigned variableID);
     Max(invariant first, int sec, unsigned variableID);

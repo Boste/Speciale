@@ -11,6 +11,7 @@
  \usepackage{booktabs}
  \usepackage{tabularx}
  \usepackage{mathtools}
+ \usepackage{glossaries}
 
 
 
@@ -36,6 +37,8 @@
 \tableofcontents
 \listoffigures
 \listoftables
+%\printglossary
+%\makeglossary
 \newpage
 \section{Introduction}
  \input{intro}
@@ -43,23 +46,31 @@
  
 \section{Definitions} 
   \subsection{Variables} 
-  \input{vars}
+  \input{vars} % Written
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
-  
-\section{Solution Approach}  
-  \subsection{Discrete Optimization} % CSP-> CSOP
+  \subsection{Problem formulation} % CSP-> CSOP
   \input{discOpt}
-  \subsection{Mathematical Programming} % In general, talk about Gorubi, Scip, Cplex after
+  \subsection{Solutions}
+  \input{solutions}
+  
+\newpage  
+\section{Discrete Optimization}  
+  
+  \subsection{Binary- and Integer Linear Programming} % In general, talk about Gorubi, Scip, Cplex after
   \input{bpip}
   
   \subsection{Constraint Programming}
+  \input{CP}
     \subsubsection{Implicit Constraints}
     \input{implicitCons}
     \subsubsection{Gecode}
+    \input{gecode}
   \subsection{Heuristics and Local Search}
+  \input{heurLS}
+     \subsubsection{Local Search and Neighborhoods}
+    \input{lsneig}
     \subsubsection{Construction Heuristics}
-    \subsubsection{Local Search and Neighborhoods}
     \subsubsection{Metaheuristics}
   \subsection{Constraint Based Local Search}
     \subsubsection{Invariants and One-way Constraints}

@@ -66,7 +66,7 @@ Test::~Test() {
 void Test::testConstraints() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(10, 0, 1);
+    varInt = GS->createVariables(10, 0, 1);
 
 
 
@@ -82,10 +82,10 @@ void Test::testInvariants() {
 void Test::testBig(int vars, int cons) {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(vars, 0, 1);
+    varInt = GS->createVariables(vars, 0, 1);
     for (int i = 0; i < cons; i++) {
         vector<int>* c = new vector<int>(vars);
-        vector<IntegerVariable*>* x = new vector<IntegerVariable*>();
+        vector<Variable*>* x = new vector<Variable*>();
         for (int j = 0; j < vars; j++) {
             c->at(j) = i + 1;
             x->push_back(varInt->at(i));
@@ -122,10 +122,10 @@ void Test::testBig(int vars, int cons) {
 void Test::testObjectiveFunction() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(100, 0, 1);
+    varInt = GS->createVariables(100, 0, 1);
     //    createLinearEQConst();
     createLinearLQConst();
-    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+    std::vector<Variable*>* x = new std::vector<Variable*>();
 
     std::vector<int>* coef = new vector<int>();
     for (unsigned i = 0; i < varInt->size(); i++) {
@@ -165,7 +165,7 @@ void Test::testObjectiveFunction() {
 void Test::testLinear() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(100, 0, 1);
+    varInt = GS->createVariables(100, 0, 1);
     createLinearEQConst();
     createLinearLQConst();
     GS->branch(*GS, varInt, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
@@ -208,7 +208,7 @@ void Test::testLinear() {
 void Test::testSum() {
     startTest(string(__FUNCTION__));
     GS = new GeneralSolver();
-    varInt = GS->createIntVars(100, 0, 1);
+    varInt = GS->createVariables(100, 0, 1);
     createLinearEQConst();
 
     //    Invariant inv = Invariants.at(0);
@@ -218,7 +218,7 @@ void Test::createLinearEQConst() {
     startTest(string(__FUNCTION__));
     unsigned invarSize = GS->st->getInvariants()->size();
     unsigned constSize = GS->st->getHardConstraints()->size();
-    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+    std::vector<Variable*>* x = new std::vector<Variable*>();
 
     std::vector<int>* coef = new vector<int>();
     for (unsigned i = 0; i < varInt->size(); i++) {
@@ -242,7 +242,7 @@ void Test::createLinearLQConst() {
     startTest(string(__FUNCTION__));
     unsigned invarSize = GS->st->getInvariants()->size();
     unsigned constSize = GS->st->getHardConstraints()->size();
-    std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>();
+    std::vector<Variable*>* x = new std::vector<Variable*>();
 
     std::vector<int>* coef = new vector<int>();
     for (unsigned i = 0; i < varInt->size(); i++) {

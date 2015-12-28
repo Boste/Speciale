@@ -1,11 +1,11 @@
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 
 #ifndef VALUECHANGEMOVE_HPP
 #define	VALUECHANGEMOVE_HPP
 
 class ValueChangeMove : public Move {
 public:
-    ValueChangeMove(IntegerVariable* iv, int newValue);
+    ValueChangeMove(Variable* iv, int newValue);
     ValueChangeMove(const ValueChangeMove& orig);
     ~ValueChangeMove();
     ValueChangeMove& operator=(const ValueChangeMove &a);

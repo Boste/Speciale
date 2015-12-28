@@ -141,7 +141,7 @@ void LSSpace::initializeLS() {
 
         if (!con->isOneway()) {
             bool gotNonfixed = false;
-            for (IntegerVariable* iv : con->getVariables()) {
+            for (Variable* iv : con->getVariables()) {
                 if (!iv->isFixed()) {
                     gotNonfixed = true;
                 }
@@ -191,7 +191,7 @@ void LSSpace::initializeLS() {
                 //                    sumInvariant->invariantID = model->getInvariants().size();
                 variableContainer variables;
                 InvariantContainer invars;
-                for (IntegerVariable* iv : cons->getVariables()) {
+                for (Variable* iv : cons->getVariables()) {
                     unsigned id = iv->getID();
                     if (!iv->isDef()) {
 
@@ -283,14 +283,14 @@ bool LSSpace::canBeMadeOneway(constraint cons) {
     }
     // Find best iv to define (currently the one not defining other variables)
     bool canBeMadeOneway = false;
-    IntegerVariable* bestVar;
+    Variable* bestVar;
     unsigned prevEqual = 0;
     unsigned prio = 0;
     unsigned equalCounter = 0;
     unsigned defined = std::numeric_limits<unsigned int>::max();
     unsigned constraintsApplyingToiv = std::numeric_limits<unsigned>::max();
 
-    for (IntegerVariable* iv : cons->getVariables()) {
+    for (Variable* iv : cons->getVariables()) {
         if (iv->isFixed()) {
             continue;
         }
@@ -380,7 +380,7 @@ bool LSSpace::intVarCanBeMadeOneway(constraint cons) {
         return false;
     }
     unsigned notDefined = 0;
-    for (IntegerVariable* iv : cons->getVariables()) {
+    for (Variable* iv : cons->getVariables()) {
         if (iv->isIntegerVariable()) {
             if (!iv->isDef()) {
                 notDefined++;
@@ -516,7 +516,7 @@ bool LSSpace::intVarCanBeMadeOneway(constraint cons) {
 
 //void LSSpace::makeOneway(IntegerVariable* iv, constraint cons, double coeff) {
 
-void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
+void LSSpace::makeOneway(Variable* iv, constraint cons) {
     // prob not from invariant 
 
     variableContainer& oldVars = cons->getVariables();
@@ -555,7 +555,7 @@ void LSSpace::makeOneway(IntegerVariable* iv, constraint cons) {
     sumInvariant->setStartValue(value);
     //    std::cout << value << " ";
 
-    for (IntegerVariable* oldiv : oldVars) {
+    for (Variable* oldiv : oldVars) {
         if (oldiv != iv) {
             unsigned id = oldiv->getID();
             value += newCoefficients.at(id) * (oldiv->getCurrentValue()*1.0);
@@ -678,18 +678,18 @@ void LSSpace::optimizeSolution(int time) {
     //    std::cout << "ini sol val " << st->getSolutionValue() << std::endl;
     //    unsigned fourPercent = model->getNonFixedVariables().size() / 25;
     unsigned twoPercent = model->getMask().size() / 50;
-    //    std::cout << "two % " << twoPercent << " " << model->getNonFixedVariables().size() << "/"<< 25 << std::endl;
+//    std::cout << "two % " << twoPercent << " " << model->getNonFixedVariables().size() << "/" << 50 << std::endl;
     unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
     //    randomMoves = 6;
     for (unsigned i = 0; i < currentState->getSolution().size(); i++) {
         assert(currentState->getSolution().at(i) == bestState->getSolution().at(i));
     }
-    //    setSolution(bestState);
+//        setSolution(bestState);
     //    std::cout << "solution set" << std::endl;
-    std::vector<IntegerVariable*> swapVars;
+    std::vector<Variable*> swapVars;
     if (model->containsIntegerVariables) {
 
-        for (IntegerVariable* iv : model->getMask()) {
+        for (Variable* iv : model->getMask()) {
             if (model->getInConstraintWithAt(iv->getID()).size() > 0) {
                 swapVars.push_back(iv);
             }
@@ -706,30 +706,31 @@ void LSSpace::optimizeSolution(int time) {
     unsigned loopCounter = 0;
     while (usedTime < timelimit) {
         loopCounter++;
-        
-        
-//        while (FI.Start()) {
-//            iterations++;
-//        }
-//        if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
-//            bestState->copy(currentState);
-//            //            setSolution(bestState);
-//            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-//            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
-//
-//        }
-//        RW.Start();
-//        iterations += randomMoves;
-//        
-        
+
+
+        //        while (FI.Start()) {
+        //            iterations++;
+        //        }
+        //        if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
+        //            bestState->copy(currentState);
+        //            //            setSolution(bestState);
+        //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+        //            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
+        //
+        //        }
+        //        RW.Start();
+        //        iterations += randomMoves;
+        //        
+
         while (BI.Start()) {
             iterations++;
         }
-        if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
+        if(currentState->compare(bestState)){
+//        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
             bestState->copy(currentState);
-            
+//            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
             usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI"  << std::endl;
+            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
 
         }
         RW.Start();
@@ -796,7 +797,7 @@ void LSSpace::setSolution(std::shared_ptr<State> st) {
 
     int change;
     //    for (unsigned i = 0; i < solution->size(); i++) {
-    for (IntegerVariable* iv : model->getMask()) {
+    for (Variable* iv : model->getMask()) {
 
         //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
         //            for (unsigned j = 0; j < model->getUpdate(iv); j++) {
@@ -856,7 +857,7 @@ void LSSpace::setSolution(std::shared_ptr<State> st) {
         }
         invar->updateValue();
         if (invar->getVariableID() != -1) {
-            IntegerVariable* iv = model->getVariable(invar->getVariableID());
+            Variable* iv = model->getVariable(invar->getVariableID());
             assert(iv->getOneway() == invar);
             if (invar->getCurrentValue() < iv->getLowerBound()) {
                 std::cout << "FML!!!!!!!!!!!" << std::endl;

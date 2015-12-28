@@ -1,6 +1,6 @@
 #ifndef INVARIANT_HPP
 #define	INVARIANT_HPP
-#include "IntegerVariable.hpp"
+#include "Variable.hpp"
 #include <unordered_map>
 #include <iostream>
 #include "Constants.hpp"
@@ -215,11 +215,11 @@ public:
 
     /// Only used for testing
 
-    void setVariablePointers(std::vector<IntegerVariable*>& vars) {
+    void setVariablePointers(std::vector<Variable*>& vars) {
         VariablePointers = vars;
     }
 
-    std::vector<IntegerVariable*>& getVariablePointers() {
+    std::vector<Variable*>& getVariablePointers() {
         return VariablePointers;
     }
 
@@ -233,7 +233,7 @@ public:
 
 
 protected:
-    std::vector<IntegerVariable*> VariablePointers;
+    std::vector<Variable*> VariablePointers;
     //    int value = 0;
     unsigned invariantID;
     int DeltaValue = 0;

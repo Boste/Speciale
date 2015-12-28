@@ -19,7 +19,7 @@
 
 //Max::Max(IntegerVariable* var, int second, unsigned id, std::shared_ptr<DependencyDigraph> DDG) {
 
-Max::Max(IntegerVariable* var, int second, unsigned id) {
+Max::Max(Variable* var, int second, unsigned id) {
     type = MAX;
     variableID = id;
     variableValue = var->getCurrentValue();

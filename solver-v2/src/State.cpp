@@ -7,7 +7,7 @@ State::State(std::shared_ptr<Model> model) {
     //    std::cout << "create state" << std::endl;
     this->model = model;
 
-    for (IntegerVariable* iv : model->getAllVariables()) {
+    for (Variable* iv : model->getAllVariables()) {
         solution.push_back(iv->getCurrentValue());
     }
     for (unsigned i = 0; i < model->getInitialEvaluation().size(); i++) {
@@ -32,6 +32,7 @@ State::State(const State& orig) {
 }
 
 /// Only copies LSVariables 
+
 void State::copy(std::shared_ptr<State> st) {
     this->saveSolution();
     //    for(unsigned i = 0; i< solution.size();i++){
@@ -55,10 +56,10 @@ State::~State() {
 
 void State::saveSolution() {
 
-//    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
-//        solution.at(iv->getID()) = iv->getCurrentValue();
-//    }
-    for (IntegerVariable* iv : model->getMask()) {
+    //    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
+    //        solution.at(iv->getID()) = iv->getCurrentValue();
+    //    }
+    for (Variable* iv : model->getMask()) {
         solution.at(iv->getID()) = iv->getCurrentValue();
     }
 
@@ -94,6 +95,21 @@ bool State::isFeasible() {
     }
     return feasible;
 }
+
+bool State::compare(std::shared_ptr<State>& st) {
+
+//    if (!this->isFeasible() || !st->isFeasible()) {
+        for (unsigned i = 1; i<this->evaluation.size(); i++) {
+            if (this->evaluation.at(i) == st->getEvaluation().at(i)) {
+                continue;
+            }
+            return this->evaluation.at(i) < st->getEvaluation().at(i);
+        }
+//    }
+
+    return this->evaluation.at(0) < st->getEvaluation().at(0);
+}
+
 
 
 /// Recomputes all invariant, constraints and obj func, from the last saved solution (expensive)

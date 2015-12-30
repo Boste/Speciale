@@ -22,8 +22,9 @@
 \contentsline {subsubsection}{\numberline {3.4.4}Comet}{12}
 \contentsline {subsubsection}{\numberline {3.4.5}OscaR}{12}
 \contentsline {section}{\numberline {4}Architectural Overview}{13}
-\contentsline {subsection}{\numberline {4.1}Constraints}{15}
-\contentsline {subsection}{\numberline {4.2}Invariants}{16}
+\contentsline {subsection}{\numberline {4.1}Constraints}{14}
+\contentsline {subsection}{\numberline {4.2}Invariants}{15}
+\contentsline {subsection}{\numberline {4.3}General Solver}{16}
 \contentsline {section}{\numberline {5}From Modeling to Solution}{17}
 \contentsline {section}{\numberline {6}Preprocessing and Initial Solution}{17}
 \contentsline {subsection}{\numberline {6.1}Domain Reduction}{17}

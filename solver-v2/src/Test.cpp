@@ -111,7 +111,7 @@ void Test::testBig(int vars, int cons) {
     Gecode::Support::Timer t;
     t.start();
 
-    GeneralSolver* General = GS->InitialSolution(so);
+    GeneralSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     GS->optimizeSolution(10);
     testDone(string(__FUNCTION__));
@@ -145,7 +145,7 @@ void Test::testObjectiveFunction() {
     so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
-    GeneralSolver* General = GS->InitialSolution(so);
+    GeneralSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     int objfnc = 0;
     for (unsigned i = 0; i < varInt->size(); i++) {
@@ -174,7 +174,7 @@ void Test::testLinear() {
     so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
-    GeneralSolver* General = GS->InitialSolution(so);
+    GeneralSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     string error = "Constraints not satisfied";
     for (unsigned i = 0; i < GS->st->getHardConstraints()->size(); i++) {

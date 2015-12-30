@@ -254,7 +254,7 @@ void GeneralSolver::print(std::vector<Variable>& IntegerVariables) {
 
 //    GeneralSolver* InitialSolution(Gecode::Search::Options* so) {
 
-void GeneralSolver::InitialSolution(int TimeForGecode) {
+void GeneralSolver::initialSolution(int TimeForGecode) {
 
     GS->createArray();
 
@@ -406,7 +406,7 @@ void GeneralSolver::optimizeSolution(int time) {
 //        return &IntVars;
 //    }
 
-void GeneralSolver::printCurrent() {
+void GeneralSolver::printVariableValues() {
     if (model->getNonFixedVariables().size() > 0) {
         std::cout << "Integer Variables:" << std::endl;
     }

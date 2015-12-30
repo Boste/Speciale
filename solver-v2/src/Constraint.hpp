@@ -30,7 +30,7 @@ protected:
     Invariant* onewayInvariant;
     Variable* defining;
     bool functional = false;
-    InvariantContainer invars;
+//    InvariantContainer invars;
     //    std::shared_ptr<Invariant> orgInvariant;
     //    Invariant* invariant;
     //    Invariant* invariant;
@@ -114,7 +114,7 @@ public:
     /// Create a oneway constraint defining a variable found in canBeMadeOneway() (or find it here)
     virtual invariant makeOneway() = 0;
 
-
+/// The invariants can be used to speed up local search. The last invariant created is expected to be the one measuring violation.
     virtual InvariantContainer& createInvariants() = 0;
 
     //    std::shared_ptr<Invariant>& getOrgInvariant() {
@@ -127,10 +127,10 @@ public:
 
     /// Creates the invariants for this constraint used during local search (auxiliary variables, like Sum, and auxiliary variables for violation and/or violationDegree)
 
-    InvariantContainer& getInvariants() {
-
-        return invars;
-    }
+//    InvariantContainer& getInvariants() {
+//
+//        return invars;
+//    }
     //    invariant getInvariant() {
     //
     //        return invar;

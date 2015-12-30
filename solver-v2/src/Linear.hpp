@@ -46,6 +46,7 @@ public:
 
     InvariantContainer& createInvariants() {
         int value = 0;
+        InvariantContainer invars;
         std::unordered_map<int, coefType>& coef = this->getCoefficients();
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);

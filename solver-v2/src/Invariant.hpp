@@ -72,6 +72,7 @@ public:
 
     virtual bool calculateDeltaValue() =0;
     /// Not used but should maybe be used.
+    virtual void updateValue() =0;
 
 //    virtual void initialize() =0;
     /// Return the posible change of value. Never resets but gets recomputed by CalculateDeltaValue() based on new changes and current value.
@@ -102,7 +103,6 @@ public:
     }
     /// Set Current value = Current Value + Delta value (should only be called after recomputing the delta value)
 
-    virtual void updateValue() =0;
 
     // should be pointer instead of integers
 
@@ -141,7 +141,7 @@ public:
     //    int getUsedInObjective() {
     //        return usedInObjectiveNr;
     //    }
-    /// The priority of the constraint this invariant is used by (if any otherwise fails assert)
+    /// The priority of the constraint this invariant is used by (if any otherwise fails assert) Not used
 
     unsigned getPriority() {
         if (!usedByConstraint) {

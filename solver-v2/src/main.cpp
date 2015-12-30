@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     //    GeneralSolver* GS = m->InitialSolution(so);
-    userModel.InitialSolution(TimeForGecode);
+    userModel.initialSolution(TimeForGecode);
 
     //    assert(!GS.stopped());
     double iniTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;

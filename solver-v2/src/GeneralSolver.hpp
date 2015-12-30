@@ -63,7 +63,7 @@ public:
     /// Uses Gecode to find initial solution
     /// returns a new GeneralSolver with the initial solution the old (the one this method is called from) is not updated with new solution. 
 
-    void InitialSolution(int TimeForGecode);
+    void initialSolution(int TimeForGecode);
 
     /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
     /// Only works for binary
@@ -79,7 +79,7 @@ public:
 
     void optimizeSolution(int time);
 
-    void printCurrent();
+    void printVariableValues();
 //    unsigned getNumberOfDigits(double number);
 
 private:

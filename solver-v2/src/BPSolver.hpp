@@ -166,7 +166,7 @@ public:
     //    }
 
     void printCurrent() {
-        GeneralSolver::printCurrent();
+        GeneralSolver::printVariableValues();
     }
 
     //void print_stats(Search::Statistics &stat) {

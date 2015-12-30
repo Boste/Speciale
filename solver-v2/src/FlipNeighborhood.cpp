@@ -159,10 +159,10 @@ FlipNeighborhood::~FlipNeighborhood() {
 Move* FlipNeighborhood::next() {
     Variable* iv = model->getMaskAt(moveCounter);
     moveCounter++;
-//    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-//    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(),0);
+    //    mv->deltaVector.resize(model->getPriorityVectors().size());
+    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
     return mv;
 }
 
@@ -174,13 +174,14 @@ bool FlipNeighborhood::hasNext() {
         return false;
     }
 }
+
 Move* FlipNeighborhood::nextRandom() {
-    Variable* iv = model->getMaskAt(Random::Integer(0,(int) model->getMask().size()-1));
+    Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     randomCounter++;
-//    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-//    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(),0);
+    //    mv->deltaVector.resize(model->getPriorityVectors().size());
+    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
     return mv;
 }
 
@@ -192,184 +193,71 @@ bool FlipNeighborhood::hasNextRandom() {
         return false;
     }
 }
-void FlipNeighborhood::setRandomCounter(unsigned numberOfRandomMoves){
-        randomMovesWanted = numberOfRandomMoves;
-    }
 
-
+void FlipNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
+    randomMovesWanted = numberOfRandomMoves;
+}
 
 bool FlipNeighborhood::calculateDelta(Move* mv) {
-    //    auto iv = model->getAllVariables().at(7881);
-    //    std::cout << iv->isDef() << "  " << iv->isIntegerVariable()  << "  " << iv->getID() << std::endl;
-    //    auto inv = iv->getOneway();
-    //    int val = 0;
-    //    for (auto var : inv->getVariablePointers()) {
-    //        std::cout << inv->getCoefficients().at(var->getID()) <<"*"<< var->getCurrentValue() << " ";
-    //        val += inv->getCoefficients().at(var->getID()) * var->getCurrentValue();
-    //    }
-    //    val +=inv->getStartValue();
-    //    std::cout << " = (" << val << ")  " << inv->getCurrentValue() << std::endl;
-    //    debug;
+
     std::vector<int>& change = mv->getDeltaVector();
-//    for (unsigned i = 0; i < change.size(); i++) {
-//        change[i] = 0;
-//    }
-    //    std::cout << "size of change " << change.size() << std::endl;
-    //    if (mv->moveType == FLIP) {
+
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
-    //        int violationChange = 0;
-    //        int objectiveChange = 0;
-    //    std::cout << "Variable " << variableNumber << std::endl;
-    //        std::cout << update.size() << std::endl;
-    //        std::cout << queue.size() << std::endl;
-    //        std::cout << "Sizes of update and queue " << std::endl;
-    //#pragma omp parallel for
-    //        for(unsigned i = 0; i< update.size(); i++){
-    //            updateType& invar = update.at(i);
-    //            invar->addChange(variable->getID(), mv->deltaValueFirst);
-    //        }
-    //    for(int i = 0; i < update.size() ; i++){
-    //        for(int j = i+1; j < update.size()-1;j++){
-    //            assert(update.at(i)->getID() != update.at(j)->getID());
-    //        }
-    //    }
 
     for (updateType& invar : update) {
         invar->addChange(variable->getID(), mv->getVariableChange());
     }
     bool legal = true;
-
     for (updateType invar : queue) {
-        //        for (unsigned i = 0; i < update.size(); i++) {
-        //            std::cout << i << std::endl;
-        //            std::shared_ptr<Invariant> invar = update.at(i);
-        //            Invariant* invar = st->getInvariants()->at(updateVector->at(i));
-        //            invar->addChange(variable->getID(), mv->deltaValueFirst);
-        //            if (invar->getID() == 253122) {
-        //                std::cout << "should change objective" << std::endl;
-        //            }
-        //        debug;
 
         legal = invar->calculateDeltaValue();
         if (!legal) {
             break;
         }
-        //        if (!legal) {
-        //            //            std::cout << "not a legal move" << std::endl;
-        //            return false;
-        //        }
         if (invar->getDeltaValue() != 0) {
             for (updateType inv : model->getUpdate(invar)) {
                 inv->addChange(invar->getVariableID(), invar->getDeltaValue());
             }
         }
-        //            std::cout << "Is used by constraint " << invar->isUsedByConstraint() << " delta value " << invar->getDeltaValue() << std::endl;
-        if (invar->isUsedByConstraint() && legal) {
-            //            if (invar->getPriority() == 0) {
-            //                change[0] += model->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
-            std::shared_ptr<Constraint>& cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
-
-            //            } else {
-            int priority = invar->getPriority();
-            //                    change[priority] += cons->setDeltaViolationDegree();
-            if (invar->getPriority() == 0) {
-                //                    std::cout << "change in obj " << invar->getDeltaValue() << std::endl;
-                change[0] += invar->getDeltaValue();
-            } else {
-
-                change[priority] += cons->setDeltaViolation();
-                //                    std::cout << "change in violation " << cons->getDeltaViolation() << std::endl;
-
-            }
-            //                for(int i : change){
-            //                    std::cout << i << " ";
-            //                }
-            //                std::cout << std::endl;
-            //                violationChange += st->getHardConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
-
-
-        }
-
     }
     if (!legal) {
         for (updateType invar : queue) {
             invar->calculateDeltaValue();
         }
+    } else {
+        for (unsigned i = 0; i < change.size(); i++) {
+            change[i] += model->getEvaluationInvariantNr(i)->getDeltaValue();
+        }
     }
-    //        for (int i : mv->getDeltaChanges()) {
-    //            std::cout << i << " ";
-    //        }
-    //        std::cout << std::endl;
-    //        std::cout << "in delta" << std::endl;
-    //    std::cout << std::endl;
-    //        std::pair<int, int> change(violationChange, objectiveChange);
-    //        return change;
-    //    } else if (mv->moveType == SWAP) {
-    //        std::cout << "Supposed to do swap" << std::endl;
-    //        //        std::pair<int, int> change(0, 0);
-    //        //        return change;
-    //    } else {
-    //        assert(mv->moveType == VALUECHANGE);
-    //        std::cout << "Supposed to do value change of 1 to 3 variables" << std::endl;
-    //        //        std::pair<int, int> change(0, 0);
-    //        //        return change;
-    //    }
-    //    return std::pair<int,int> change = new pair<int,int>(violationChange,objectiveChange);
-    //        variable->setCurrentValue(newValue);
-    //    std::cout << "Should never reach this" << std::endl;
-    //    exit(1);
-    //    return change;    
+
+
     return legal;
 }
 
 bool FlipNeighborhood::commitMove(Move* mv) {
-    //    if (mv->moveType == FLIP) {
     moveCounter = 0;
     Variable* var = mv->getVar();
-    //        std::vector<int> evaluation(mv->getDeltaVector().size());
     std::vector<int>& evaluation = state->getEvaluation();
 
     // Skal genberegne!!!!!
     bool legal = calculateDelta(mv);
     if (!legal) {
-        //        std::cout << "tried to commit illegal move" << std::endl;
-        //        debug;
         return false;
-        //        debug;
-        //        exit(1);
     }
     var->setCurrentValue(1 - var->getCurrentValue());
 
     propagation_queue queue = model->getPropagationQueue(var);
     for (updateType invar : queue) {
-        //        for (unsigned i = 0; i < update->size(); i++) {
 
-        //            std::shared_ptr<Invariant> invar = update->at(i);
-        //            Invariant* invar = st->getInvariants()->at(update->at(i));
         invar->updateValue();
 
-        if (invar->isUsedByConstraint()) {
-
-            if (invar->getPriority() > 0) {
-                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
-                evaluation.at(cons->getPriority()) += cons->updateViolation();
-
-
-            } else {
-                evaluation.at(0) += invar->getDeltaValue();
-            }
-        }
     }
-    //        st->updateEvaluation(evaluation);
-    //    } else if (mv->moveType == SWAP) {
-    //        std::cout << "Supposed to do swap" << std::endl;
-    //    } else {
-    //
-    //        assert(mv->moveType == VALUECHANGE);
-    //        std::cout << "Supposed to do value change of 1 to 3 variables" << std::endl;
-    //    }
+    for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
+        evaluation[i] = model->getEvaluationInvariantNr(i)->getCurrentValue();
+    }
+
     return true;
 }
 

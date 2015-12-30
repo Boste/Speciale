@@ -42,9 +42,9 @@ public:
     }
     void initializeLS();
     //        bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
-    bool canBeMadeOneway(constraint cons);
-    void makeOneway(Variable* iv, constraint cons);
-    bool intVarCanBeMadeOneway(constraint cons);
+//    bool canBeMadeOneway(constraint cons);
+//    void makeOneway(Variable* iv, constraint cons);
+//    bool intVarCanBeMadeOneway(constraint cons);
 //    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
     void optimizeSolution(int time);
     //    void simpleMove(int variabelNr);

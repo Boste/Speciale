@@ -1,17 +1,13 @@
-Constraints have some properties in common which is implemented in the parent class. All constraints have some 
-measurement of violation. The violation can either be a zero-one measurement or it can be a measurement of how far 
-from satisfied it is \boste{or how ``oversatisfied'' it is}. All constraints implement must overload the methods 
-``setDeltaViolation'' and ``updateViolation'' from the parent class. These methods are only used during local search but 
-are need in order to evaluate a move. \boste{Define Move before this?}. The method ``setDeltaViolation'' calculates how 
-much a constraint would change in violation if the move proposed is made. The method ``updateViolation`` is used to 
-update the current violation of a constraint. \\
-A user can give the constraints a priority when posting the model. This priority is used as a measurement to which of 
-the constraints should be satisfied first. \\ 
-\boste{This section feels rather redundant since it could be done by invariants as well} \\ \\ 
-Constraints are all derived from the same class that force some method and parameters to be implemented. All 
-constraints needs a priority according to how important the constraint is. The priority do not need to be different for 
-the constriants but it will help the local search to differentaite between solution. 
-\boste{which? Maybe a UML like box that shows the method and most important parameters} \\ 
+\begin{figure}[!b]
+\begin{center}
+ \includegraphics[width=\linewidth/2]{constraint.pdf} \caption{Important methods in Constraint 
+class}\label{fig_constraint}
+\end{center} 
+\end{figure}
+Constraints are all derived from the same class (\class{Constraint} figure \ref{fig_constraint}) that force some method 
+to be implemented. All constraints needs a priority according to how important the constraint is. The priority do not 
+need to be different for the constraints but it will help the local search to differentiate between infeasible  
+solutions. \\ The method \method{getType} is only used if Gecode does not find an initial solution.   \\ 
 A constraint is posted in the constraint programming environment and later handled by local search environment. The 
 constraints are treated differently in the environments and need different parameters and methods for that. For the 
 CP environment few special parameters are need such as the integer consistency level (ICL) \boste{What more?}. The LS 

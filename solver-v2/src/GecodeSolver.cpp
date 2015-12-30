@@ -345,7 +345,8 @@ void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
         if (vars[iv->getID()].assigned()) {
             iv->setCurrentValue(vars[iv->getID() ].val());
         } else {
-            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
+//            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
+//            std::cout << vars[iv->getID()] << " ";
             iv->setCurrentValue(vars[iv->getID()].min());
 
         }

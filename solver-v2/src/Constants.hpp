@@ -54,6 +54,9 @@ class Variable;
 // Invariants
 #define SUM 1
 #define MAX 2
+#define LEQVIO 3
+#define EQVIO 4
+
 
 
 //  Variables 

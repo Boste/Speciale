@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  28 DEC 2015 15:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  30 DEC 2015 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -923,17 +923,19 @@ File: architectureTest.pdf Graphic file (type pdf)
 <use architectureTest.pdf>
 Package pdftex.def Info: architectureTest.pdf used on input line 4.
 (pdftex.def)             Requested size: 360.0pt x 213.00432pt.
-) [13 <./architectureTest.pdf>] [14] (./archCons.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--116
-
- []
-
-(./archInv.tex
+) [13 <./architectureTest.pdf>] [14] (./archCons.tex
+<constraint.pdf, id=114, 579.8664pt x 852.88638pt>
+File: constraint.pdf Graphic file (type pdf)
+ <use constraint.pdf>
+Package pdftex.def Info: constraint.pdf used on input line 3.
+(pdftex.def)             Requested size: 180.0pt x 264.74342pt.
+)
+[15 <./constraint.pdf>] (./archInv.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--13
 
  []
 
-[15]) [16] (./prepros.tex) (./dom.tex) (./inisol.tex [17]) [18] (./strucLS.tex
+) [16] (./prepros.tex) (./dom.tex) (./inisol.tex [17]) [18] (./strucLS.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--18
 
  []
@@ -964,10 +966,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16486 strings out of 495032
- 282328 string characters out of 6181718
- 368048 words of memory out of 5000000
- 19305 multiletter control sequences out of 15000+600000
+ 16492 strings out of 495032
+ 282433 string characters out of 6181718
+ 368057 words of memory out of 5000000
+ 19310 multiletter control sequences out of 15000+600000
  13086 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  56i,24n,92p,418b,1033s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -989,9 +991,9 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (27 pages, 473102 bytes).
+Output written on Thesis.pdf (27 pages, 484227 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
+ 233 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

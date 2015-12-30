@@ -27,7 +27,10 @@ protected:
     std::unordered_map<int, coefType> coefficients;
     //    std::vector<std::shared_ptr<Invariant>> invariants;
     //    std::shared_ptr<Invariant> invariant;
-    Invariant* invar;
+    Invariant* onewayInvariant;
+    Variable* defining;
+    bool functional = false;
+    InvariantContainer invars;
     //    std::shared_ptr<Invariant> orgInvariant;
     //    Invariant* invariant;
     //    Invariant* invariant;
@@ -52,21 +55,22 @@ public:
     int& getNumberOfIntegerVariables() {
         return numberOfIntegerVariables;
     }
+
     int getType() {
         return type;
     }
 
-    int getDeltaViolation() {
-        return DeltaViolation;
-    }
+    //    int getDeltaViolation() {
+    //        return DeltaViolation;
+    //    }
 
     //    int getDeltaViolationDegree() {
     //        return DeltaViolationDegree;
     //    }
 
-    int getViolation() {
-        return Violation;
-    }
+    //    int getViolation() {
+    //        return Violation;
+    //    }
 
     bool isOneway() {
         return oneway;
@@ -101,20 +105,38 @@ public:
         return arguments[i];
     }
 
+    bool isFunctional() {
+        return functional;
+    }
+    /// Returns if this constraint can be used to define one of its variables and the method should set which variable (Variable* defining) that should be defined (since it found now, but it is optional)
+    virtual bool canBeMadeOneway() = 0;
+
+    /// Create a oneway constraint defining a variable found in canBeMadeOneway() (or find it here)
+    virtual invariant makeOneway() = 0;
+
+
+    virtual InvariantContainer& createInvariants() = 0;
+
     //    std::shared_ptr<Invariant>& getOrgInvariant() {
     //        return orgInvariant;
     //    }
 
-    void setInvariant(Invariant* invar) {
-        this->invar = invar;
+    //    void setInvariant(Invariant* invar) {
+    //        this->invar = invar;
+    //    }
+
+    /// Creates the invariants for this constraint used during local search (auxiliary variables, like Sum, and auxiliary variables for violation and/or violationDegree)
+
+    InvariantContainer& getInvariants() {
+
+        return invars;
     }
+    //    invariant getInvariant() {
+    //
+    //        return invar;
+    //    }
 
-    invariant getInvariant() {
-
-        return invar;
-    }
-
-    unsigned getScopeSize() {
+    unsigned getScope() {
         return variables.size();
     }
     //    std::shared_ptr<Invariant> getInvariant(int i){
@@ -126,7 +148,7 @@ public:
         bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
             //            std::cout << "sorter" << std::endl;
 
-            return (cons1->getScopeSize() > cons2->getScopeSize());
+            return (cons1->getScope() > cons2->getScope());
         }
     };
 
@@ -135,7 +157,7 @@ public:
         bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
             //            std::cout << "sorter" << std::endl;
 
-            return (cons1->getScopeSize() < cons2->getScopeSize());
+            return (cons1->getScope() < cons2->getScope());
         }
     };
     //    struct SortGreater {
@@ -159,11 +181,11 @@ public:
 
     //    virtual int setDeltaViolation();
 
-    virtual int setDeltaViolation() {
-        std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
-        sleep(1);
-        return 0;
-    }
+    //    virtual int setDeltaViolation() {
+    //        std::cout << "setDeltaViolation called in Constraint.hpp" << std::endl;
+    //        sleep(1);
+    //        return 0;
+    //    }
 
     //    virtual int setDeltaViolationDegree() {
     //        std::cout << "setDeltaViolationDegree() called in Constraint.hpp" << std::endl;
@@ -178,11 +200,11 @@ public:
     //   }
     // Return change 
 
-    virtual int updateViolation() {
-        std::cout << "Update Violation called in Constraint.hpp" << std::endl;
-        sleep(1);
-        return 0;
-    }
+    //    virtual int updateViolation() {
+    //        std::cout << "Update Violation called in Constraint.hpp" << std::endl;
+    //        sleep(1);
+    //        return 0;
+    //    }
 
     //    virtual int updateViolationDegree() {
     //        std::cout << "Update Violation Degree called in Constraint.hpp" << std::endl;

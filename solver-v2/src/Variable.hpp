@@ -22,14 +22,17 @@ protected:
     int lowerBound;
     int upperBound;
     int vectorID;
+    unsigned defining = 0;
     int CurrentValue = 0;
     bool isInteger = false;
     bool isDefined = false;
     bool isFix = false;
     VariableInConstraints constraints;
     invariant oneway;
-    constraint definedByCons;
+//    constraint definedByCons;
+    Constraint* definedByCons;
     unsigned searchPrio = 0;
+    
     //    propagation_queue propagationQueue;
     //    invariant definedByInvar; 
 
@@ -62,7 +65,15 @@ protected:
 public:
     /// Only used for testing instances
     unsigned usedIn = 0;
-
+    unsigned getDefining(){
+        return defining;
+    }
+    void increaseDefining(){
+        defining++;
+    }
+    void decreaseDefining(){
+        defining--;
+    }
     VariableInConstraints& usedInConstraints() {
         usedIn++;
         return constraints;
@@ -80,7 +91,7 @@ public:
         return oneway;
     }
 
-    void setDefinedBy(invariant invar, constraint cons) {
+    void setDefinedBy(invariant invar, Constraint* cons) {
         definedByCons = cons;
         oneway = invar;
         isDefined = true;

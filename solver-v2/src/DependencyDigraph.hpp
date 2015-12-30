@@ -37,6 +37,7 @@ public:
     void addInvariant(invariant invar, variableContainer& vars, InvariantContainer& invars);
     void addInvariant(invariant invar, InvariantContainer& invars);
     void addInvariant(invariant invar, variableContainer& vars);
+    void addInvariant(invariant invar);
     updateVector& getInvariantUpdate(unsigned invarID);
     updateVector& getVariableUpdate(unsigned varID);
     propagation_queue& getPropagationQueue(Variable* iv);
@@ -87,14 +88,14 @@ struct invariantNode {
     //    std::vector<std::shared_ptr<invariantNode>> update;
     updateVector update;
     unsigned id;
-    invariant SumUsedInMax;
+//    invariant SumUsedInMax;
     //    invariant invar;
     invariant invar;
     
     unsigned timestamp = 0;
     unsigned lowestLink;
     bool inCurrentSSC = false;
-    Variable* iv; 
+    Variable* var; 
 //    std::vector<std::shared_ptr<invariantNode>> myInvariants;
     //    std::vector<std::shared_ptr<invariantNode>> myInvariants;
     //    std::vector<std::shared_ptr<variableNode>> myVariables;

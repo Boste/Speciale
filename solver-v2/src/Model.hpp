@@ -30,14 +30,16 @@ private:
 //    std::vector<std::shared_ptr<std::vector<std::pair<IntegerVariable*,int>>>> IntegerVariablesAndChange;
     /// Variables for LS
 //    variableContainer LSVariables;
-    InvariantContainer objectiveInvariant;
+//    InvariantContainer objectiveInvariant;
+    InvariantContainer evaluationInvariants;
+    
     std::vector<Variable*> mask;
     std::shared_ptr<DependencyDigraph> DDG = std::make_shared<DependencyDigraph>();
     /// The search priority vectors given by user when calling search(std::vector<IntegerVarible*> variables)
     std::vector<std::vector<Variable*>> priorityVectorsOfVariables;
     /// Only used to give invariants id
     unsigned id = 0;
-    std::vector<constraint> functionalConstraints;
+//    std::vector<constraint> functionalConstraints;
     
 public:
     /// Should be moved to state
@@ -54,12 +56,11 @@ public:
     Model();
     Model(const Model& orig);
     ~Model();
-    std::vector<constraint>& getFunctionalConstraints();
+//    std::vector<constraint>& getFunctionalConstraints();
     std::vector<std::vector<Variable*>>& getPriorityVectors();
     std::vector<Variable*>& getPriorityVectorNr(unsigned i);
 
     //    IntegerVariable* addIntegerVariable( int lb, int ub);
-    void startUp();
     Variable* addBinaryVariable(int lb, int ub);
     Variable* addIntegerVariable(int lb, int ub);
     //    void initializeInvariants();
@@ -90,7 +91,7 @@ public:
     Variable* getVariable(unsigned id);
     variableContainer& getAllVariables();
     void setNonFixedVariables(std::vector<Variable*>& nonFixed);
-    variableContainer& getLSVariables();
+//    variableContainer& getLSVariables();
     InvariantContainer& getInvariants();
     void addInvariant(invariant invar);
     //    InvariantContainer& getOrgInvariants();
@@ -103,14 +104,17 @@ public:
     //    allConstraints& getConstraints();
     //    std::vector<Constraint*>* getSoftConstraints();
     //    constraintContainer& getObjectives();
-    constraintContainer getObjectives();
+//    constraintContainer getObjectives();
     Variable* getNonFixedVariable(int i);
     //    int getObjectiveValue();
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
     void updateIntegerVariable(int index, Gecode::IntVar& variable);
     std::vector<int>& getInitialEvaluation();
-    InvariantContainer& getObjectiveInvariant();
-    void addToObjectiveInvariant(invariant invar);
+//    InvariantContainer& getObjectiveInvariant();
+    InvariantContainer& getEvaluationInvariants();
+    invariant getEvaluationInvariantNr(unsigned nr);
+//    void addToObjectiveInvariant(invariant invar);
+    void addToEvaluationInvariants(invariant invar);
     void initialize();
     
 

@@ -153,9 +153,9 @@ updateVector& Model::getUpdate(Variable* iv) {
 ////    highestPriority = getConstraints().size();
 //}
 
-std::vector<constraint>& Model::getFunctionalConstraints() {
-    return functionalConstraints;
-}
+//std::vector<constraint>& Model::getFunctionalConstraints() {
+//    return functionalConstraints;
+//}
 
 Variable* Model::getMaskAt(int i) {
     return mask.at(i);
@@ -235,19 +235,30 @@ constraintContainer Model::getConstraintsWithPriority(int prio) {
 //    return SoftConstraints;
 //}
 
-constraintContainer Model::getObjectives() {
-    return Constraints.at(0);
-}
+//constraintContainer Model::getObjectives() {
+//    return Constraints.at(0);
+//}
 //constraintContainer& Model::getObjectives() {
 //    return Constraints.at(0);
 //}
 
-InvariantContainer& Model::getObjectiveInvariant() {
-    return objectiveInvariant;
+//InvariantContainer& Model::getObjectiveInvariant() {
+//    return objectiveInvariant;
+//}
+
+InvariantContainer& Model::getEvaluationInvariants() {
+    return evaluationInvariants;
+}
+invariant Model::getEvaluationInvariantNr(unsigned nr) {
+    return evaluationInvariants.at(nr);
 }
 
-void Model::addToObjectiveInvariant(invariant invar) {
-    objectiveInvariant.push_back(invar);
+//void Model::addToObjectiveInvariant(invariant invar) {
+//    objectiveInvariant.push_back(invar);
+//}
+
+void Model::addToEvaluationInvariants(invariant invar) {
+    evaluationInvariants.push_back(invar);
 }
 
 std::vector<int>& Model::getInitialEvaluation() {
@@ -256,55 +267,68 @@ std::vector<int>& Model::getInitialEvaluation() {
 
 void Model::initialize() {
     //    std::cout << "ini cons" << std::endl;
-    std::vector<int> violations(Constraints.size());
-    for (unsigned i = 1; i < getConstraints().size(); i++) {
-        constraintContainer prio = getConstraints().at(i);
-        //        for (unsigned j = 0; j < prio->size(); j++) {
-        //        std::cout << i << std::endl;
-        for (std::shared_ptr<Constraint> cons : *prio) {
-            if (!cons->isOneway()) {
-                int change = cons->updateViolation();
-                if (change != 0) {
-                    //                    auto vars = cons->getVariables();
-                    //                    auto coeff = cons->getCoefficients();
-                    //                    assert(vars.size() == coeff.size());
-                    //                    
-                    //                    for (unsigned j = 0; j < vars.size(); j++) {
-                    //
-                    //                        if (vars.at(j)->isDef()) {
-                    //                            invariant invar = vars.at(j)->getOneway();
-                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"("<<invar->getCurrentValue()<<")" << " + ";
-                    //                        } else {
-                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"["<<vars.at(j)->getID()<<"]" << " + ";
-                    //                        }
-                    //                    }
-                    //                    std::cout << " = 1" << std::endl;
-                    //                    sleep(1);   
-                    //                    std::cout << "change " << change << " invariant id " << cons->getInvariant()->getID() << " type " << cons->getInvariant()->getType() << " " << "     ";
-                    //                    if(cons->getArgument(0) == EQ){
-                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " = " << cons->getArgument(1) << std::endl;
-                    //                    } else {
-                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " <= " << cons->getArgument(1) << std::endl;
-                    //                    }
-                }
-                violations.at(cons->getPriority()) += change;
-            }
+    //    std::vector<int> violations(Constraints.size());
+    //    for (unsigned i = 1; i < getConstraints().size(); i++) {
+    //        constraintContainer prio = getConstraints().at(i);
+    //        //        for (unsigned j = 0; j < prio->size(); j++) {
+    //        //        std::cout << i << std::endl;
+    //        for (std::shared_ptr<Constraint> cons : *prio) {
+    //            if (!cons->isOneway()) {
+    //                int change = cons->updateViolation();
+    //                if (change != 0) {
+    //                    //                    auto vars = cons->getVariables();
+    //                    //                    auto coeff = cons->getCoefficients();
+    //                    //                    assert(vars.size() == coeff.size());
+    //                    //                    
+    //                    //                    for (unsigned j = 0; j < vars.size(); j++) {
+    //                    //
+    //                    //                        if (vars.at(j)->isDef()) {
+    //                    //                            invariant invar = vars.at(j)->getOneway();
+    //                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"("<<invar->getCurrentValue()<<")" << " + ";
+    //                    //                        } else {
+    //                    //                            std::cout << coeff.at(vars.at(j)->getID()) << "*" << vars.at(j)->getCurrentValue()<<"["<<vars.at(j)->getID()<<"]" << " + ";
+    //                    //                        }
+    //                    //                    }
+    //                    //                    std::cout << " = 1" << std::endl;
+    //                    //                    sleep(1);   
+    //                    //                    std::cout << "change " << change << " invariant id " << cons->getInvariant()->getID() << " type " << cons->getInvariant()->getType() << " " << "     ";
+    //                    //                    if(cons->getArgument(0) == EQ){
+    //                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " = " << cons->getArgument(1) << std::endl;
+    //                    //                    } else {
+    //                    //                        std::cout << cons->getInvariant()->getCurrentValue() << " <= " << cons->getArgument(1) << std::endl;
+    //                    //                    }
+    //                }
+    //                violations.at(cons->getPriority()) += change;
+    //            }
+    //        }
+    //    }
+    //
+    //    if (violations.at(1) != 0) {
+    //        std::cout << "Initial solution not feasible? violations: " << violations.at(1) << std::endl;
+    //        initialEvaluation = violations;
+    //        //        sleep(2);
+    //    } else {
+    //        assert(violations.at(1) == 0);
+    //        initialEvaluation = violations;
+    //    }
+    //
+    //    for (invariant invar : getObjectiveInvariant()) {
+    //        initialEvaluation.at(0) += invar->getCurrentValue();
+    //    }
+    for(invariant inv : Invariants){
+        if(!inv->test()){
+            debug;
         }
     }
-
-    if (violations.at(1) != 0) {
-        std::cout << "Initial solution not feasible? violations: " << violations.at(1) << std::endl;
-        initialEvaluation = violations;
-        //        sleep(2);
-    } else {
-        assert(violations.at(1) == 0);
-        initialEvaluation = violations;
+    
+    
+    
+    for (unsigned int i = 0; i < getEvaluationInvariants().size(); i++) {
+        initialEvaluation.push_back(getEvaluationInvariants().at(i)->CurrentValue);
     }
-
-    for (invariant invar : getObjectiveInvariant()) {
-        initialEvaluation.at(0) += invar->getCurrentValue();
-    }
-    //    debug;
+//    for(int i : initialEvaluation){
+//        std::cout << i << std::endl;
+//    }
     for (Variable* iv : getNonFixedVariables()) {
         if (iv->isDef() || iv->isFixed() || iv->isIntegerVariable()) {
             //            std::cout << iv->isDef() << " " <<  iv->isFixed() << " "<< iv->isIntegerVariable() << std::endl;
@@ -467,11 +491,10 @@ std::set<Variable*, Variable::compare_variable>& Model::getInConstraintWithAt(un
 
 void Model::cleanUp() {
     std::vector<bool>& brokenInvars = getDDG()->getBrokenInvariants();
-
-    assert(Invariants.size() == brokenInvars.size());
+//    assert(Invariants.size() == brokenInvars.size());
     InvariantContainer tmp;
     for (unsigned i = 0; i < Invariants.size(); i++) {
-        if (!brokenInvars.at(i)) {
+        if (brokenInvars.size() <= i || !brokenInvars.at(i)) {
             tmp.push_back(Invariants.at(i));
         }
 

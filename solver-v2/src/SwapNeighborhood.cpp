@@ -221,22 +221,28 @@ bool SwapNeighborhood::calculateDelta(Move* mv) {
             }
         }
 
-        if (invar->isUsedByConstraint() && legal) {
-            std::shared_ptr<Constraint>& cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
-
-            int priority = invar->getPriority();
-            if (invar->getPriority() == 0) {
-                change[0] += invar->getDeltaValue();
-            } else {
-
-                change[priority] += cons->setDeltaViolation();
-            }
-        }
+        //        if (invar->isUsedByConstraint() && legal) {
+        //            std::shared_ptr<Constraint>& cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
+        //
+        //            int priority = invar->getPriority();
+        //            if (invar->getPriority() == 0) {
+        //                change[0] += invar->getDeltaValue();
+        //            } else {
+        //                debug;
+        ////                change[priority] += cons->setDeltaViolation();
+        //            }
+        //        }
 
     }
+
+    //    change = model->get
     if (!legal) {
         for (updateType invar : queue) {
             invar->calculateDeltaValue();
+        }
+    } else {
+        for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
+            change[i] = model->getEvaluationInvariants().at(i)->getDeltaValue();
         }
     }
     return legal;
@@ -291,17 +297,21 @@ bool SwapNeighborhood::commitMove(Move* mv) {
     for (updateType invar : queue) {
         invar->updateValue();
 
-        if (invar->isUsedByConstraint()) {
-
-            if (invar->getPriority() > 0) {
-                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
-                evaluation.at(cons->getPriority()) += cons->updateViolation();
-
-
-            } else {
-                evaluation.at(0) += invar->getDeltaValue();
-            }
-        }
+        //        if (invar->isUsedByConstraint()) {
+        //
+        //            if (invar->getPriority() > 0) {
+        //                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+        //                debug;
+        //                //                evaluation.at(cons->getPriority()) += cons->updateViolation();
+        //
+        //
+        //            } else {
+        //                evaluation.at(0) += invar->getDeltaValue();
+        //            }
+        //        }
+    }
+    for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
+        evaluation[i] = model->getEvaluationInvariants().at(i)->getCurrentValue();
     }
     //    testCounter++;
 

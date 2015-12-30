@@ -1,6 +1,6 @@
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
+//#include <gecode/driver.hh>
+//#include <gecode/int.hh>
 //#include <gecode/minimodel.hh>
 //#include <gecode/float.hh>
 #include "BP_Data.hpp"
@@ -12,9 +12,9 @@
 #include "Clock.hpp"
 #include "getRSS.hpp"
 #include "GeneralSolver.hpp"
-#include "GecodeSolver.hpp"
-#include "Test.hpp"
-#include "Multistop.hpp"
+//#include "GecodeSolver.hpp"
+//#include "Test.hpp"
+//#include "Multistop.hpp"
 //#include <boost/algorithm/string.hpp>
 //#include "GecodeLinear.hpp"
 

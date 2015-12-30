@@ -212,8 +212,8 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
             if (invar->getPriority() == 0) {
                 change[0] += invar->getDeltaValue();
             } else {
-
-                change[priority] += cons->setDeltaViolation();
+                debug;
+//                change[priority] += cons->setDeltaViolation();
             }
         }
 
@@ -280,7 +280,8 @@ bool Flip2Neighborhood::commitMove(Move* mv) {
 
             if (invar->getPriority() > 0) {
                 std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
-                evaluation.at(cons->getPriority()) += cons->updateViolation();
+                debug;
+//                evaluation.at(cons->getPriority()) += cons->updateViolation();
 
 
             } else {

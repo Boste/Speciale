@@ -152,38 +152,40 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
     }
     LinearConstraint->setNumberOfIntegerVariables(numberOfIntegerVariables);
 
-    if (priority == OBJ) {
-        if (model->getConstraints().size() == 0) {
-            constraintContainer prioVector = std::make_shared<std::vector < constraint >> ();
+    //    if (priority == OBJ) {
+    //        if (model->getConstraints().size() == 0) {
+    //            constraintContainer prioVector = std::make_shared<std::vector < constraint >> ();
+    //            model->getConstraints().push_back(prioVector);
+    //}
+    //            for (IntegerVariable* iv : variables) {
+    //                if (iv->isInteger && LinearConstraint->getCoefficients().at(iv->getID()) != 0) {
+    //                    std::cout << iv->getID() << std::endl;
+    //                }
+    //            }
+
+    //        model->getConstraintsWithPriority(0)->push_back(LinearConstraint);
+    //    } else {
+    //            GS->linear(coefficients, &variables, relation, ub);
+    //            std::cout << "Skal Gecode have constraints? " << std::endl;
+    if (priority != OBJ) {
+        GS->linear(coefficients, variables, relation, ub);
+    }
+    //                        GS->print(std::cout );
+    //                        sleep(1);
+    //             What should be given to LSSpace
+    if (model->getConstraints().size() <= priority) {
+        for (unsigned i = model->getConstraints().size(); i <= priority; i++) {
+            std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prioVector = std::make_shared<std::vector<std::shared_ptr < Constraint >>> ();
             model->getConstraints().push_back(prioVector);
         }
-        //            for (IntegerVariable* iv : variables) {
-        //                if (iv->isInteger && LinearConstraint->getCoefficients().at(iv->getID()) != 0) {
-        //                    std::cout << iv->getID() << std::endl;
-        //                }
-        //            }
-
-        model->getObjectives()->push_back(LinearConstraint);
-    } else {
-        //            GS->linear(coefficients, &variables, relation, ub);
-        //            std::cout << "Skal Gecode have constraints? " << std::endl;
-        GS->linear(coefficients, variables, relation, ub);
-        //                        GS->print(std::cout );
-        //                        sleep(1);
-        //             What should be given to LSSpace
-        if (model->getConstraints().size() <= priority) {
-            for (unsigned i = model->getConstraints().size(); i <= priority; i++) {
-                std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prioVector = std::make_shared<std::vector<std::shared_ptr < Constraint >>> ();
-                model->getConstraints().push_back(prioVector);
-            }
-        }
-        constraintContainer prio = model->getConstraintsWithPriority(priority);
-        if (relation == EQ) {
-            model->functionalConstraints.push_back(LinearConstraint);
-        }
-        prio->push_back(LinearConstraint);
-
     }
+    constraintContainer prio = model->getConstraintsWithPriority(priority);
+    //        if (relation == EQ) {
+    //            model->functionalConstraints.push_back(LinearConstraint);
+    //        }
+    prio->push_back(LinearConstraint);
+
+    //    }
 }
 
 ///Create a single variable with given lower and upper bound
@@ -258,12 +260,12 @@ void GeneralSolver::InitialSolution(int TimeForGecode) {
 
     //        GS->branch(true);
     if (GS->initialize(TimeForGecode, true)) {
-//    if (false) {
+        //    if (false) {
 
     } else {
         std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
         int timesRelaxed = 0;
-//        int timesRelaxed = 7;
+        //        int timesRelaxed = 7;
         bool solutionFound = false;
         for (unsigned i = 0; i < model->getConstraints().size(); i++) {
             std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
@@ -294,7 +296,7 @@ void GeneralSolver::InitialSolution(int TimeForGecode) {
     // Obj value after gecode
     // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
     int initialValue = 0;
-    constraint obj = model->getObjectives()->at(0);
+    constraint obj = model->getConstraintsWithPriority(0)->at(0);
     auto coef = obj->getCoefficients();
     for (Variable* iv : obj->getVariables()) {
         double coeff = coef.at(iv->getID());
@@ -348,7 +350,7 @@ void GeneralSolver::simpleRelax(int timesRelaxed) {
     }
 
     int relax = std::ceil(std::pow(2, timesRelaxed) / 100.0 * numberOfConstraints);
-    int keep = std::max(numberOfConstraints - relax,0.0);
+    int keep = std::max(numberOfConstraints - relax, 0.0);
     int posted = 0;
 
     //        std::cout << "do nothing" << std::endl;

@@ -222,6 +222,13 @@ public:
     std::vector<Variable*>& getVariablePointers() {
         return VariablePointers;
     }
+    void setInvariantPointers(std::vector<invariant>& invars) {
+        InvariantPointers = invars;
+    }
+
+    std::vector<invariant>& getInvariantPointers() {
+        return InvariantPointers;
+    }
 
     unsigned getTimestamp() {
         return timestamp;
@@ -234,6 +241,7 @@ public:
 
 protected:
     std::vector<Variable*> VariablePointers;
+    std::vector<invariant> InvariantPointers;
     //    int value = 0;
     unsigned invariantID;
     int DeltaValue = 0;

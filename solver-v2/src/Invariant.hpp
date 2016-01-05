@@ -66,7 +66,7 @@ public:
     // should be pointers instead of integers
     /// Tells this Invariant that deltavalue of invariant or variable with ID is changed by change
 
-    virtual void addChange(int ID, int change) = 0;
+    virtual void proposeChange(int ID, int change) = 0;
 
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
 
@@ -110,31 +110,37 @@ public:
 
     void setObjective() {
         constraintPriority = 0;
-        usedByConstraint = true;
+//        usedByConstraint = true;
 
 
     }
     /// Set which constraints this Invariant is used by. Currently only possible to be used by one constraint
-
-    void setUsedByConstraint(constraint cons, int priority) {
-        //        std::cout << "ehhh?" << std::endl;
-        usedInConstraint = cons;
-        //        std::cout << "constraint" << std::endl;
-        constraintPriority = priority;
-        usedByConstraint = true;
-    }
+    /// Delete this
+//    void setUsedByConstraint(constraint cons, int priority) {
+//        //        std::cout << "ehhh?" << std::endl;
+//        usedInConstraint = cons;
+//        //        std::cout << "constraint" << std::endl;
+//        constraintPriority = priority;
+//        usedByConstraint = true;
+//    }
     /// Return wether this invariant is used by a constraint
+    /// Delete this
+//    bool isUsedByConstraint() {
+//        return usedByConstraint;
+//    }
 
-    bool isUsedByConstraint() {
-        return usedByConstraint;
+    bool inViolatedConstraints(){
+        return inViolated;
     }
-
-
+    bool representConstraint(){
+        return representCons;
+    }
+    
     /// Return the constraint this invariant is used by
-
-    constraint& getConstraint() {
-        return usedInConstraint;
-    }
+/// Delete this
+//    Constraint* getConstraint() {
+//        return usedInConstraint;
+//    }
 
     // should be pointer instead of integers
 
@@ -144,11 +150,11 @@ public:
     /// The priority of the constraint this invariant is used by (if any otherwise fails assert) Not used
 
     unsigned getPriority() {
-        if (!usedByConstraint) {
-            std::cout << invariantID << " " << constraintPriority << std::endl;
-            debug;
-        }
-        assert(usedByConstraint || constraintPriority == 0);
+//        if (!usedByConstraint) {
+//            std::cout << invariantID << " " << constraintPriority << std::endl;
+//            debug;
+//        }
+//        assert(usedByConstraint || constraintPriority == 0);
         return constraintPriority;
     }
 
@@ -249,8 +255,8 @@ protected:
     //    int usedInConstraintNr;
     //    int usedInObjectiveNr;
     //    int usedInConstraint;
-    constraint usedInConstraint;
-    bool usedByConstraint = false;
+//    Constraint* usedInConstraint;
+//    bool usedByConstraint = false;
     std::unordered_map<int, coefType> coefficients;
     int type;
     /// Should be defined when creating oneway constraints that define (integer)variables 
@@ -259,7 +265,8 @@ protected:
     int upperbound = std::numeric_limits<int>::max() - 1;
     int CurrentValue = 0;
     unsigned timestamp;
-
+    bool inViolated= false;
+    bool representCons = false;
     int variableID = -1;
     //    InvariantContainer invariants;
     //    updateVector update;

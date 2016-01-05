@@ -19,7 +19,7 @@ public:
     //    Max(const Max& orig);
 
     virtual ~Max();
-    void addChange(int id, int change);
+    void proposeChange(int id, int change);
     bool calculateDeltaValue();
     bool test();
     void updateValue();

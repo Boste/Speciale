@@ -7,6 +7,8 @@ LEQviolation::LEQviolation(invariant invar, int RHS) {
     this->RHS = RHS;
     InvariantPointers.push_back(invar);
     type = LEQVIO;
+    representCons = true;
+    
 
 }
 
@@ -26,7 +28,7 @@ bool LEQviolation::calculateDeltaValue() {
     return true;
 }
 
-void LEQviolation::addChange(int variableNumber, int changeInValue) {
+void LEQviolation::proposeChange(int variableNumber, int changeInValue) {
     VariableChange.push_back(changeInValue);
 }
 

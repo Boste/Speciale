@@ -55,7 +55,7 @@ public:
 //    void usedByConstraint(int constraint, int priority);
 //    void usedByObjective(int constraint, int priority);
 
-    void addChange(int variableNumber, int changeInValue);
+    void proposeChange(int variableNumber, int changeInValue);
     void updateValue();
 
 

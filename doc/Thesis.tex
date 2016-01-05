@@ -44,18 +44,19 @@
  \input{intro}
  
  
-\section{Definitions} 
+\section{Discrete Optimization}
+
   \subsection{Variables} 
   \input{vars} % Written
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
-  \subsection{Problem formulation} % CSP-> CSOP
+  \subsection{Problem Formulation} % CSP-> CSOP
   \input{discOpt}
   \subsection{Solutions}
   \input{solutions}
   
 \newpage  
-\section{Discrete Optimization}  
+\section{General Purpose Solution Methods}  
   
   \subsection{Binary- and Integer Linear Programming} % In general, talk about Gurobi, Scip, Cplex after
   \input{bpip}
@@ -84,13 +85,14 @@
     \input{invariant}
     \subsubsection{Soft Constraints}
     \input{softCons}
-    \subsubsection{Evaluating solutions}
+    \subsubsection{Evaluating Solutions}
     \input{cblssol}
   %\subsection{Evaluation Function}
   %\input{objFunc}
     \subsubsection{Comet}
     %\input{comet}
     \subsubsection{OscaR}
+    
   
 %\section{Modeling Constraint Based Local Search}
   %\boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
@@ -110,20 +112,21 @@
 \newpage
 \section{Architectural Overview}  
   \input{architec}
+  \subsection{Variables}
   \subsection{Constraints}
   \input{archCons} \label{sub_cons}
   \subsection{Invariants}
   \input{archInv}\label{sub_inv}
   \subsection{General Solver}
-  \input{generalsolver}
+  \input{generalsolver}\label{sub_gen}
+  
 \newpage
-\section{From Modeling to Solution}
 \section{Preprocessing and Initial Solution} \label{sec_gecode}
   \input{prepros}
   \subsection{Domain Reduction}
   \input{dom}
   \subsection{Finding an Initial Solution}
-  \input{inisol}
+  \input{inisol} \label{sub_inisol}
 
 \newpage
 \section{Structuring Local Search Model} \label{sec_ls}
@@ -137,6 +140,8 @@
     
   
 \newpage  
+\section{From Modeling to Local Search}
+\input{modelsol}
 \section{Local Search Engine} \label{sec_local}
   \subsection{Neighborhoods}
     \subsubsection{Neighborhood Operations}

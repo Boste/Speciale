@@ -1,17 +1,17 @@
 
-#include "FlipNeighborhood.hpp"
+#include "MinConflictFlipNE.hpp"
 //#include "State.hpp"
 
-FlipNeighborhood::FlipNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+MinConflictFlipNE::MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
 
-//FlipNeighborhood::FlipNeighborhood(const FlipNeighborhood& orig) {
+//MinConflictFlipNE::MinConflictFlipNE(const MinConflictFlipNE& orig) {
 //}
 
-FlipNeighborhood::~FlipNeighborhood() {
-    //    std::cout << "Destructing FlipNeighborhood" << std::endl;
+MinConflictFlipNE::~MinConflictFlipNE() {
+    //    std::cout << "Destructing MinConflictFlipNE" << std::endl;
 }
 
 //template<typename returnType>
@@ -19,7 +19,7 @@ FlipNeighborhood::~FlipNeighborhood() {
 
 /// make something to break ties 
 
-//bool FlipNeighborhood::bestImprovement(std::shared_ptr<State> st) {
+//bool MinConflictFlipNE::bestImprovement(std::shared_ptr<State> st) {
 //    //    model->shuffleMask();
 //    std::vector<int>& delta = bestMove->getDeltaVector();
 //    for (int& d : delta) {
@@ -134,7 +134,7 @@ FlipNeighborhood::~FlipNeighborhood() {
 //    //    return true;
 //}
 /// Wrong name
-//void FlipNeighborhood::randomWalk(std::shared_ptr<State> st) {
+//void MinConflictFlipNE::randomWalk(std::shared_ptr<State> st) {
 ////    if (mv->moveType == FLIP) {
 //        unsigned var = Random::Integer(0, model->getNonFixedBinaryVariables().size() - 1);
 //        //        if (var < 0 || model->getIntegerVariables()->size() <= var) {
@@ -150,13 +150,13 @@ FlipNeighborhood::~FlipNeighborhood() {
 ////    }
 //}
 
-//bool FlipNeighborhood::firstImprovement(Move* mv, Model * st) {
+//bool MinConflictFlipNE::firstImprovement(Move* mv, Model * st) {
 //
 //}
 
 //template<typename returnType>
 
-Move* FlipNeighborhood::next() {
+Move* MinConflictFlipNE::next() {
     Variable* iv = model->getMaskAt(moveCounter);
     moveCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -166,16 +166,22 @@ Move* FlipNeighborhood::next() {
     return mv;
 }
 
-bool FlipNeighborhood::hasNext() {
-    if (moveCounter < model->getMask().size()) {
-        return true;
-    } else {
-        moveCounter = 0;
-        return false;
+bool MinConflictFlipNE::hasNext() {
+    
+    if(firstMove){
+        firstMove = false;
+        moveIterator& = model->getViolatedConstraints().begin();
     }
+    if(moveIterator != model->getViolatedConstraints().end()){
+        return true;
+    }
+    
+    moveCounter = 0;
+    firstMove = true;
+    return false;
 }
 
-Move* FlipNeighborhood::nextRandom() {
+Move* MinConflictFlipNE::nextRandom() {
     Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -185,7 +191,7 @@ Move* FlipNeighborhood::nextRandom() {
     return mv;
 }
 
-bool FlipNeighborhood::hasNextRandom() {
+bool MinConflictFlipNE::hasNextRandom() {
     if (randomCounter < randomMovesWanted) {
         return true;
     } else {
@@ -194,11 +200,11 @@ bool FlipNeighborhood::hasNextRandom() {
     }
 }
 
-void FlipNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
+void MinConflictFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
 }
 
-bool FlipNeighborhood::calculateDelta(Move* mv) {
+bool MinConflictFlipNE::calculateDelta(Move* mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
 
@@ -236,7 +242,7 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool FlipNeighborhood::commitMove(Move* mv) {
+bool MinConflictFlipNE::commitMove(Move* mv) {
     moveCounter = 0;
     Variable* var = mv->getVar();
     std::vector<int>& evaluation = state->getEvaluation();
@@ -252,19 +258,19 @@ bool FlipNeighborhood::commitMove(Move* mv) {
     for (updateType invar : queue) {
 
         invar->updateValue();
-//        if (invar->representConstraint()) {
-//            if (invar->getCurrentValue() == 0) {
-//                if (invar->inViolatedConstraints()) {
-//                    std::set<invariant, compare_invariant>& vioCons = model->getViolatedConstraints();
-//                    vioCons.erase(vioCons.find(invar));
-//                }
-//            } else {
-//                if (!invar->inViolatedConstraints()) {
-//                    std::set<invariant, compare_invariant>& vioCons = model->getViolatedConstraints();
-//                    vioCons.insert(invar);
-//                }
-//            }
-//        }
+        if (invar->representConstraint()) {
+            if (invar->getCurrentValue() == 0) {
+                if (invar->inViolatedConstraints()) {
+                    std::set<invariant, compare_invariant>& vioCons = model->getViolatedConstraints();
+                    vioCons.erase(vioCons.find(invar));
+                }
+            } else {
+                if (!invar->inViolatedConstraints()) {
+                    std::set<invariant, compare_invariant>& vioCons = model->getViolatedConstraints();
+                    vioCons.insert(invar->getInvariantPointers().back());
+                }
+            }
+        }
     }
     for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
         evaluation[i] = model->getEvaluationInvariantNr(i)->getCurrentValue();
@@ -273,6 +279,6 @@ bool FlipNeighborhood::commitMove(Move* mv) {
     return true;
 }
 
-//void FlipNeighborhood::makeMove(Move* mv, std::shared_ptr<State> st) {
+//void MinConflictFlipNE::makeMove(Move* mv, std::shared_ptr<State> st) {
 //    commitMove(mv, st);
 //}

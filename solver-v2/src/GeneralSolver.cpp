@@ -264,21 +264,23 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
 
     } else {
         std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
-        int timesRelaxed = 0;
+        int timesRelaxed = 1;
         //        int timesRelaxed = 7;
         bool solutionFound = false;
         for (unsigned i = 0; i < model->getConstraints().size(); i++) {
             std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
         }
-        while (!solutionFound && timesRelaxed != 7) {
+        while (!solutionFound && timesRelaxed != 6) {
             relax(timesRelaxed);
             timesRelaxed++;
             //                GS->branch(false);
             solutionFound = GS->initialize(TimeForGecode, false);
         }
         if (!solutionFound) {
+            std::cout << "Relaxation failed" << std::endl;
+            exit(1);
             std::cout << "Relaxation failed, trying with initial assignment of variables to minimum value" << std::endl;
-            //            exit(1);
+//                        exit(1);
             relax(timesRelaxed);
             GS->initialize(TimeForGecode, false);
         }
@@ -289,7 +291,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //                this->print(cout);
     }
 
-    //        fixVariables();
+    //            fixVariables();
 
 
     //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
@@ -390,7 +392,7 @@ void GeneralSolver::simpleRelax(int timesRelaxed) {
     std::cout << posted << std::endl;
     std::cout << keep << std::endl;
 
-    std::cout << "SimpleRelax made " << timesRelaxed + 1 << " times" << std::endl;
+    std::cout << "SimpleRelax made " << timesRelaxed << " times" << std::endl;
 }
 
 std::vector<int>& GeneralSolver::getInitialValue() {
@@ -407,12 +409,12 @@ void GeneralSolver::optimizeSolution(int time) {
 //    }
 
 void GeneralSolver::printVariableValues() {
-    if (model->getNonFixedVariables().size() > 0) {
+    if (model->getAllVariables().size() > 0) {
         std::cout << "Integer Variables:" << std::endl;
     }
 
-    for (unsigned i = 0; i < model->getNonFixedVariables().size(); i++) {
-        std::cout << model->getNonFixedVariables().at(i)->getCurrentValue() << " ";
+    for (unsigned i = 0; i < model->getAllVariables().size(); i++) {
+        std::cout << model->getAllVariables().at(i)->getCurrentValue() << " ";
         //        std::cout << IntVarVector[i].VariablePointer << " ";
 
     }

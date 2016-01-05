@@ -1,30 +1,31 @@
-Once domain reduction preprocessing has been done a Gecode DFS search engine is started. The user can by an option 
-class specify when Gecode search stop searching for a solution. A Gecode search engine takes a space and search option 
+Once domain reduction preprocessing has been done a Gecode DFS search engine is started. The stop criteria for Gecodes 
+search can be specified by an option class. A Gecode search engine takes a space and search option 
 as arguments and the search option contains a stop object. The stop object can either be timestop, nodestop or 
-failstop. Each time Gecode branches on a variable two new nodes is created and nodestop set a upper bound on the number 
-of nodes to explorer. If Gecode reaches a node that gives an infeasible assignment to a variable then that space is 
-failed and failstop set an upper bound on the number of fails that can occur before stopping. Timestop stops the search 
-if the timelimit is reach. \\ 
+failstop. Each time Gecode branches on a variable two new nodes are created and nodestop set a upper bound on the 
+number of nodes to explorer. If Gecode reaches a node that gives an infeasible assignment to a variable then that space 
+is failed and failstop sets an upper bound on the number of failed spaces that can occur before stopping. Timestop 
+stops the search if the time limit is reach. \\ 
 Instead of having only one of these stop object a multistop object has been created that combines all three stop 
 objects if the user wants to having multiple stop criteria. \\ 
-The two following questions will be answered in this subsection. Why stop the search for a solution? What happens if the 
-search is stopped? \\ 
 Combinatorial problems can be formulated with Gecode and these problems can be very difficult to solve. In these cases 
-Gecode keeps searching for a solution until it finds one (or runs out of available memory). Instead the search can be 
-stopped using stop object and the problem can be relaxed such that Gecode can find a feasible solution to the relaxed 
-problem. If one of the stop criteria is reached we relax the problem by removing some of the constraint. To remove 
-constraints we need to create a new Gecode Solver and repost all the constraints, except those remove, again. In order 
-to choose which constraint that should be removed the priority of the constraints, given by the user, is used. 
-Different techniques can be applied for choosing which constraints with the same priority to remove. The 
-one chosen here is a stepwise backward algorithm, that is a greedy approach. \boste{Article Marco talked about propose 
-some method, but says a greedy approach is good as well? }. The number of constraints that are relaxed/removed is based 
-on the number of constraints $|C|$ and the number of restarts made $r$. The number of relaxed constraints is given by 
-equation \ref{eq_relaxed}. 
+Gecode keeps searching for a solution until it finds one (or runs out of available memory). Instead, the search can be 
+stopped using stop object and the constraints can be relaxed such that Gecode can find a initial solution to the 
+instance. If one of the stop criteria is reached the \method{relax} is called and some of the constraint are relaxed. To 
+relax some constraints a new Gecode Engine is created and all variables and constraints, except those relaxed, 
+are created and added to the new space. In order to choose which constraint that should be removed the priority of the 
+constraints, given by the user, is used. Different techniques can be applied for choosing which constraints with the 
+same priority to remove. The one chosen here is a stepwise backward algorithm, that is a greedy approach. \boste{Article 
+Marco talked about propose some method, but says a greedy approach is good as well? }. The number of constraints that 
+are relaxed/removed is based on the number of constraints $|C|$ and the number of restarts made $r$. The number of 
+relaxed constraints is given by equation (\ref{eq_relaxed}). 
 \begin{equation}
- |Relaxed| = \ceil[\bigg]{\frac{2^{r-1}}{100}\cdot |C|}
+ Relaxed = \ceil[\bigg]{\frac{2^{r}}{100}\cdot |C|}
  \label{eq_relaxed}
 \end{equation} 
-After seven relaxations 64 \% of the constraints have been relaxed and if no solution can be found within the search 
-limits, we report the problem is to difficult to solve within the search limit. \\ 
-The constraints are chosen by priority and ties are broken at random. The constraints removed are not removed entirely 
-from the model, they are still applied when doing local search \boste{Keep them with same priority as the others?}. 
+After six relaxations 64 \% of the constraints have been relaxed and if no solution can be found within the search 
+limits, the search is stopped and finding a solution to the instance has failed.  \\ 
+The constraints are chosen by their priority and ties are broken at random. I.e. a model with 100 constraint of 
+priority 1, 40 of priority 2, and 15 of priority 3 and there are 20 constraints that should be relaxed. The 15 
+constraints with priority 3 and 5 of the 40 constraints with priority 2 are chosen at random would not be posted. The 
+constraints that are not posted in the Gecode space are still applied when doing local search, hence the initial 
+solution might start with some violations.  

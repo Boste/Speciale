@@ -47,7 +47,7 @@ Max::Max(invariant invar, int bound, unsigned id) {
 Max::~Max() {
 }
 
-void Max::addChange(int id, int change) {
+void Max::proposeChange(int id, int change) {
     VariableChange.push_back(change);
 //    assert(id == -1);
     //    if (id != -1) {

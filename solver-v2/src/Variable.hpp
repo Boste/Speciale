@@ -107,6 +107,9 @@ public:
 
     void setAsFixed() {
         isFix = true;
+        lowerBound = VariablePointer->val();
+        upperBound = VariablePointer->val();
+        CurrentValue = VariablePointer->val();
     }
 
     Variable(int lowerbound, int upperbound, int id) { //: lb(lowerbound), ub(upperbound),vectorID(id),value(0) {

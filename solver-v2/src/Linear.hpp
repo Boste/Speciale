@@ -12,6 +12,7 @@ protected:
     //    Sum* lhs;
     int rhs;
     int relation; // 0 is equal, 1 is LQ
+    InvariantContainer invars;
 
 public:
 
@@ -41,12 +42,13 @@ public:
 
     ~Linear() {
         //        delete lhs;
+        
         coefficients.clear();
     }
 
     InvariantContainer& createInvariants() {
         int value = 0;
-        InvariantContainer invars;
+//        InvariantContainer invars;
         std::unordered_map<int, coefType>& coef = this->getCoefficients();
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
@@ -112,7 +114,7 @@ public:
 
 
 
-
+//        assert(invars.size()>0);
         return invars;
     }
 

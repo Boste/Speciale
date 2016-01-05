@@ -159,7 +159,7 @@ bool Sum::calculateDeltaValue() {
 
 /// What if coef* change is double?
 
-void Sum::addChange(int variableNumber, int changeInValue) {
+void Sum::proposeChange(int variableNumber, int changeInValue) {
     //    std::cout << variableNumber << " ";
 
     int deltaChange = coefficients.at(variableNumber) * changeInValue;
@@ -274,7 +274,7 @@ bool Sum::test() {
     realValue += startValue;
     if (CurrentValue != realValue) {
         std::cout << "ID: " << getID() << " real value " << realValue << " current value " << CurrentValue << " variableID = "
-                << variableID << " start value " << startValue << " is used by constriant " << isUsedByConstraint() << std::endl;
+                << variableID << " start value " << startValue << std::endl;
         bool gotInt = false;
         for (auto iv : VariablePointers) {
             //            if(iv->isDef()){

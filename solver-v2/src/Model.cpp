@@ -3,33 +3,9 @@
 //#include "Random.hpp"
 
 Model::Model() {
-    //    std::cout << "Create model " << std::endl;
-    //    IntVarVector = new std::vector<IntegerVariable*>();
-    //    original = new std::vector<IntegerVariable*>();
-    //    BoolVarVector = new std::vector<Gecode::BoolVar>();
-    //    Invariants = new std::vector<std::shared_ptr < Invariant >> ();
-    //    Invariants = new std::vector<Invariant*>();
-    //    Constraints = new std::vector<std::vector < std::shared_ptr < Constraint>>*>();
-    //    SoftConstraints = new std::vector<Constraint*>();
-    //    ObjectiveFunction = new std::vector<Constraint*>();
-    //    solution = new std::vector<int>();
-    //    solutionValue = std::numeric_limits<int>::max();
-    //    mask = new std::vector<int>();
-}
 
-//Model::Model(const Model& orig) {
-//    this->IntVarVector = orig.IntVarVector;
-//    this->original = orig.original;
-//    this->BoolVarVector = orig.BoolVarVector;
-//    this->Invariants = orig.Invariants;
-//    this->Constraints = orig.Constraints;
-//    //    this->numberOfVariables = orig.numberOfVariables;
-//    //    this->SoftConstraints = orig.SoftConstraints;
-//    //    this->ObjectiveFunction = orig.ObjectiveFunction;
-//    //    this->solution = orig.solution;
-//    //    this->solutionValue = orig.solutionValue;
-//    //    this->mask = orig.mask;
-//}
+
+}
 
 Model::~Model() {
     //        std::cout << "Destructing Model" << std::endl;
@@ -43,19 +19,6 @@ Model::~Model() {
     for (invariant invar : Invariants) {
         delete invar;
     }
-    //    delete original;
-    //    delete IntVarVector;
-
-
-    //    for (std::shared_ptr<std::vector<std::shared_ptr < Constraint>>cons : Constraints) {
-    //        delete cons;
-    //    }
-    //    delete Constraints;
-    //    delete Invariants;
-
-    //    delete mask;
-    //    delete solution;
-    //    delete BoolVarVector;
 
 }
 
@@ -103,7 +66,14 @@ void Model::setNonFixedVariables(std::vector<Variable*>& nonFixed) {
     //    shuffleMask();
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
-
+void Model::addViolatedConstraint(invariant inv){
+    violatedConstraints.insert(inv);
+    
+}
+std::set<invariant,compare_invariant>& Model::getViolatedConstraints(){
+    return violatedConstraints;
+            
+}
 //void Model::addInvariantToDDG(invariant invar, variableContainer& variables) {
 //    DDG->addInvariant(invar, variables);
 //}
@@ -249,6 +219,7 @@ constraintContainer Model::getConstraintsWithPriority(int prio) {
 InvariantContainer& Model::getEvaluationInvariants() {
     return evaluationInvariants;
 }
+
 invariant Model::getEvaluationInvariantNr(unsigned nr) {
     return evaluationInvariants.at(nr);
 }
@@ -315,20 +286,20 @@ void Model::initialize() {
     //    for (invariant invar : getObjectiveInvariant()) {
     //        initialEvaluation.at(0) += invar->getCurrentValue();
     //    }
-    for(invariant inv : Invariants){
-        if(!inv->test()){
+    for (invariant inv : Invariants) {
+        if (!inv->test()) {
             debug;
         }
     }
-    
-    
-    
+
+
+
     for (unsigned int i = 0; i < getEvaluationInvariants().size(); i++) {
         initialEvaluation.push_back(getEvaluationInvariants().at(i)->CurrentValue);
     }
-//    for(int i : initialEvaluation){
-//        std::cout << i << std::endl;
-//    }
+    //    for(int i : initialEvaluation){
+    //        std::cout << i << std::endl;
+    //    }
     for (Variable* iv : getNonFixedVariables()) {
         if (iv->isDef() || iv->isFixed() || iv->isIntegerVariable()) {
             //            std::cout << iv->isDef() << " " <<  iv->isFixed() << " "<< iv->isIntegerVariable() << std::endl;
@@ -340,6 +311,8 @@ void Model::initialize() {
         }
     }
     shuffleMask();
+
+
 
     if (getIntegerVariables().size() == 0) {
         std::cout << "Do stuff for binary swapping" << std::endl;
@@ -418,7 +391,7 @@ void Model::initialize() {
         auto usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
         std::cout << usedTime << std::endl;
 
-        unsigned lolhest = 0;
+                unsigned count = 0;
         std::cout << "Is this even working?" << std::endl;
         std::vector<int> differentSizes(200, 0);
         for (Variable* iv : getMask()) {
@@ -427,7 +400,7 @@ void Model::initialize() {
             if (inConstraintWith.at(iv->getID()).size() != 0) {
                 if (inConstraintWith.at(iv->getID()).size() != iv->usedInConstraints().size()) {
                     //                    std::cout << inConstraintWith.at(iv->getID()).size() << "  vs  "<< iv->usedInConstraints().size() << std::endl;
-                    lolhest++;
+                                        count++;
                 }
             }
             //                std::cout << inConstraintWith.at(iv->getID()).size() << " ";
@@ -436,7 +409,7 @@ void Model::initialize() {
             //                lolhest++;
             //            }
         }
-        std::cout << lolhest << std::endl;
+        std::cout << count << std::endl;
         //        std::cout << std::endl;
         debug;
         unsigned total = 0;
@@ -491,7 +464,7 @@ std::set<Variable*, Variable::compare_variable>& Model::getInConstraintWithAt(un
 
 void Model::cleanUp() {
     std::vector<bool>& brokenInvars = getDDG()->getBrokenInvariants();
-//    assert(Invariants.size() == brokenInvars.size());
+    //    assert(Invariants.size() == brokenInvars.size());
     InvariantContainer tmp;
     for (unsigned i = 0; i < Invariants.size(); i++) {
         if (brokenInvars.size() <= i || !brokenInvars.at(i)) {
@@ -500,7 +473,9 @@ void Model::cleanUp() {
 
     }
     Invariants.swap(tmp);
+    
     std::sort(Invariants.begin(), Invariants.end(), compare_invariant());
+    std::cout << "Clean up pointers, only oneway pointers should be messy" << std::endl; 
     //    unsigned id = Invariants.size()*2;
     //    unsigned timstamp = 600000000;
     //    for(invariant inv : Invariants){

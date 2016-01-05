@@ -4,6 +4,9 @@ IntSwapNeighborhood::IntSwapNeighborhood(std::shared_ptr<Model> model, std::shar
     this->model = model;
     this->state = st;
     swapVars = binarySwapVars;
+    std::cout << "Still uses constraints, not invariants" << std::endl;
+    debug;
+    exit(1)
 }
 
 IntSwapNeighborhood::~IntSwapNeighborhood() {
@@ -202,10 +205,10 @@ bool IntSwapNeighborhood::calculateDelta(Move* mv) {
     updateVector& update1 = model->getUpdate(variables.at(0));
     updateVector& update2 = model->getUpdate(variables.at(1));
     for (updateType& invar : update1) {
-        invar->addChange(variables.at(0)->getID(), mv->getVariableChanges().at(0));
+        invar->proposeChange(variables.at(0)->getID(), mv->getVariableChanges().at(0));
     }
     for (updateType& invar : update2) {
-        invar->addChange(variables.at(1)->getID(), mv->getVariableChanges().at(1));
+        invar->proposeChange(variables.at(1)->getID(), mv->getVariableChanges().at(1));
     }
     bool legal = true;
 
@@ -218,7 +221,7 @@ bool IntSwapNeighborhood::calculateDelta(Move* mv) {
         }
         if (invar->getDeltaValue() != 0) {
             for (updateType inv : model->getUpdate(invar)) {
-                inv->addChange(invar->getVariableID(), invar->getDeltaValue());
+                inv->proposeChange(invar->getVariableID(), invar->getDeltaValue());
             }
         }
 

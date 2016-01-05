@@ -1,6 +1,7 @@
 //#include <c++/4.8/bits/stl_vector.h>
 
 #include "LSSpace.hpp"
+#include "TabuSearch.hpp"
 //#include "RowEcholonTransformer.hpp"
 
 
@@ -177,12 +178,10 @@ void LSSpace::initializeLS() {
             << " (" << func.size() - totallyfixed << ") " << std::endl;
 
     DDG->cleanUpGraph(model->getNonFixedVariables());
-
     DDG->checkForCycles(model->getInvariants());
     model->cleanUp();
     //        DDG->checkForCycles(model->getInvariants());
     //    DDG->checkForCycles(model->getInvariants());
-
 
 
     for (unsigned i = 0; i < model->getConstraints().size(); i++) {
@@ -195,9 +194,16 @@ void LSSpace::initializeLS() {
                     model->addInvariant(inv);
                     //                    model->addToObjectiveInvariant(inv);
                     DDG->addInvariant(inv);
+
                 }
                 collector.push_back(invars.back());
                 value += invars.back()->getCurrentValue();
+                if (invars.back()->representConstraint()) {
+                    if (invars.back()->getCurrentValue() > 0) {
+
+                        model->addViolatedConstraint(invars.back()->getInvariantPointers().back());
+                    }
+                }
 
 
             }
@@ -589,7 +595,7 @@ void LSSpace::initializeLS() {
 
 void LSSpace::optimizeSolution(int time) {
 
-    
+
 
 
 
@@ -598,17 +604,16 @@ void LSSpace::optimizeSolution(int time) {
     //#####################################################################################
     //    should test all invariants
     //#####################################################################################
-    for (invariant inv : model->getInvariants()) {
-        if (!inv->test()) {
-            std::cout << "Wrong before optimization " << std::endl;
+    //    for (invariant inv : model->getInvariants()) {
+    //        if (!inv->test()) {
+    //            std::cout << "Wrong before optimization " << std::endl;
+    //
+    //            exit(1);
+    //        }
+    //
+    //    }
 
-            exit(1);
-        }
 
-    }
-    debug;
-    exit(1);
-    
 
     //    for (IntegerVariable* iv : model->getNonFixedVariables()) {
     //        if (iv->isDef()) {
@@ -689,31 +694,41 @@ void LSSpace::optimizeSolution(int time) {
             }
         }
     }
+    unsigned tabulistsize = 0;
+    for (Variable* var : model->getMask()) {
+        if (var->getID() > tabulistsize) {
+            tabulistsize = var->getID();
+        }
+    }
+    tabulistsize++;
+    std::vector<int> tabulist(tabulistsize, -tabulistsize);
     std::cout << "Number of randomMoves " << randomMoves << std::endl;
     std::cout << "Number of variables used in local search " << model->getMask().size() << std::endl;
     FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
-    Flip2Neighborhood* F2N = new Flip2Neighborhood(model, currentState);
-    SwapNeighborhood* SN = new SwapNeighborhood(model, currentState);
+    //    Flip2Neighborhood* F2N = new Flip2Neighborhood(model, currentState);
+    //    SwapNeighborhood* SN = new SwapNeighborhood(model, currentState);
+    TabuSearch TS(model, FN);
     RandomWalk RW(model, FN, randomMoves);
     BestImprovement BI(model, FN);
-    FirstImprovement FI(model, SN);
+    FirstImprovement FI(model, FN);
     unsigned loopCounter = 0;
+    bool imp;
     while (usedTime < timelimit) {
         loopCounter++;
 
 
-        //        while (FI.Start()) {
-        //            iterations++;
-        //        }
-        //        if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
-        //            bestState->copy(currentState);
-        //            //            setSolution(bestState);
-        //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-        //            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
-        //
-        //        }
-        //        RW.Start();
-        //        iterations += randomMoves;
+//                while (FI.Start()) {
+//                    iterations++;
+//                }
+//                if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
+//                    bestState->copy(currentState);
+//                    //            setSolution(bestState);
+//                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+//                    std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
+//        
+//                }
+//                RW.Start();
+//                iterations += randomMoves;
         //        
         //         for (invariant inv : model->getInvariants()) {
         //            if (!inv->test()) {
@@ -723,20 +738,37 @@ void LSSpace::optimizeSolution(int time) {
         //            }
         //    
         //        }
+                
 
-        while (BI.Start()) {
-            iterations++;
-        }
-        if (currentState->compare(bestState)) {
-            //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-            bestState->copy(currentState);
-            //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
+        imp = TS.Start(iterations, bestState, currentState, tabulist);
+        //        while (TS.Start()) {
+        iterations++;
+        if (imp) {
+            if (currentState->compare(bestState)) {
+                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
+                bestState->copy(currentState);
+                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
+                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
 
+            }
         }
-        RW.Start();
-        iterations += randomMoves;
+
+
+
+//                        while (BI.Start()) {
+//                            iterations++;
+//                        }
+//                        if (currentState->compare(bestState)) {
+//                            //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
+//                            bestState->copy(currentState);
+//                            //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
+//                            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+//                            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
+//                
+//                        }
+//                        RW.Start();
+//                        iterations += randomMoves;
 
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
@@ -773,8 +805,8 @@ void LSSpace::optimizeSolution(int time) {
     std::cout << "Number of moves " << iterations << std::endl;
     //    delete mv;
     //    delete bestMove;
-    delete SN;
-    delete F2N;
+    //    delete SN;
+    //    delete F2N;
     delete FN;
     std::cout << "O " << bestState->getEvaluation().at(0) << " ";
     //
@@ -785,9 +817,9 @@ void LSSpace::optimizeSolution(int time) {
 bool LSSpace::testInvariant() {
     bool failed = false;
     for (invariant invar : model->getInvariants()) {
-        if (invar->isUsedByConstraint()) {
-            continue;
-        }
+        //        if (invar->isUsedByConstraint()) {
+        //            continue;
+        //        }
         if (!invar->test()) {
             failed = true;
         }

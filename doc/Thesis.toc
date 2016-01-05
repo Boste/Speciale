@@ -1,10 +1,10 @@
 \contentsline {section}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {2}Definitions}{3}
+\contentsline {section}{\numberline {2}Discrete Optimization}{3}
 \contentsline {subsection}{\numberline {2.1}Variables}{3}
 \contentsline {subsection}{\numberline {2.2}Constraints}{3}
-\contentsline {subsection}{\numberline {2.3}Problem formulation}{3}
+\contentsline {subsection}{\numberline {2.3}Problem Formulation}{3}
 \contentsline {subsection}{\numberline {2.4}Solutions}{4}
-\contentsline {section}{\numberline {3}Discrete Optimization}{5}
+\contentsline {section}{\numberline {3}General Purpose Solution Methods}{5}
 \contentsline {subsection}{\numberline {3.1}Binary- and Integer Linear Programming}{5}
 \contentsline {subsection}{\numberline {3.2}Constraint Programming}{5}
 \contentsline {subsubsection}{\numberline {3.2.1}Implicit Constraints}{6}
@@ -18,26 +18,27 @@
 \contentsline {subsection}{\numberline {3.4}Constraint Based Local Search}{11}
 \contentsline {subsubsection}{\numberline {3.4.1}Invariants and Oneway Constraints}{11}
 \contentsline {subsubsection}{\numberline {3.4.2}Soft Constraints}{11}
-\contentsline {subsubsection}{\numberline {3.4.3}Evaluating solutions}{12}
+\contentsline {subsubsection}{\numberline {3.4.3}Evaluating Solutions}{12}
 \contentsline {subsubsection}{\numberline {3.4.4}Comet}{12}
 \contentsline {subsubsection}{\numberline {3.4.5}OscaR}{12}
 \contentsline {section}{\numberline {4}Architectural Overview}{13}
-\contentsline {subsection}{\numberline {4.1}Constraints}{14}
-\contentsline {subsection}{\numberline {4.2}Invariants}{15}
-\contentsline {subsection}{\numberline {4.3}General Solver}{16}
-\contentsline {section}{\numberline {5}From Modeling to Solution}{17}
-\contentsline {section}{\numberline {6}Preprocessing and Initial Solution}{17}
-\contentsline {subsection}{\numberline {6.1}Domain Reduction}{17}
-\contentsline {subsection}{\numberline {6.2}Finding an Initial Solution}{17}
-\contentsline {section}{\numberline {7}Structuring Local Search Model}{19}
-\contentsline {subsection}{\numberline {7.1}Simplification}{19}
-\contentsline {subsection}{\numberline {7.2}Dependency Digraph}{22}
-\contentsline {subsection}{\numberline {7.3}Propagation Queue}{24}
-\contentsline {section}{\numberline {8}Local Search Engine}{26}
-\contentsline {subsection}{\numberline {8.1}Neighborhoods}{26}
-\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{26}
-\contentsline {section}{\numberline {9}Metaheuristics}{26}
-\contentsline {section}{\numberline {10}Tests}{26}
-\contentsline {section}{\numberline {11}Results}{26}
-\contentsline {section}{\numberline {12}Future Work}{26}
-\contentsline {section}{\numberline {13}Conclusion}{26}
+\contentsline {subsection}{\numberline {4.1}Variables}{14}
+\contentsline {subsection}{\numberline {4.2}Constraints}{14}
+\contentsline {subsection}{\numberline {4.3}Invariants}{15}
+\contentsline {subsection}{\numberline {4.4}General Solver}{16}
+\contentsline {section}{\numberline {5}Preprocessing and Initial Solution}{18}
+\contentsline {subsection}{\numberline {5.1}Domain Reduction}{18}
+\contentsline {subsection}{\numberline {5.2}Finding an Initial Solution}{18}
+\contentsline {section}{\numberline {6}Structuring Local Search Model}{20}
+\contentsline {subsection}{\numberline {6.1}Simplification}{20}
+\contentsline {subsection}{\numberline {6.2}Dependency Digraph}{23}
+\contentsline {subsection}{\numberline {6.3}Propagation Queue}{25}
+\contentsline {section}{\numberline {7}From Modeling to Solution}{27}
+\contentsline {section}{\numberline {8}Local Search Engine}{27}
+\contentsline {subsection}{\numberline {8.1}Neighborhoods}{27}
+\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{27}
+\contentsline {section}{\numberline {9}Metaheuristics}{27}
+\contentsline {section}{\numberline {10}Tests}{27}
+\contentsline {section}{\numberline {11}Results}{27}
+\contentsline {section}{\numberline {12}Future Work}{27}
+\contentsline {section}{\numberline {13}Conclusion}{28}

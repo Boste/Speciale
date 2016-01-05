@@ -4,9 +4,10 @@
 class}\label{fig_constraint}
 \end{center} 
 \end{figure}
-Constraints are all derived from the same class (\class{Constraint} figure \ref{fig_constraint}) that force some method 
-to be implemented. All constraints needs a priority according to how important the constraint is. The priority do not 
-need to be different for the constraints but it will help the local search to differentiate between infeasible  
+Constraints are all derived from the same class (\class{Constraint} figure \ref{fig_constraint}) that forces some 
+methods to be implemented. All constraints need a priority according to how important the constraint is, that is an 
+integer. The priority do not need to be different for the constraints but it will help the local search to 
+differentiate between infeasible  
 solutions. \\ 
 The method \method{getType} is only used if Gecode does not find an initial solution. How Gecode is used is discussed 
 in section \ref{sec_gecode}.   \\ 

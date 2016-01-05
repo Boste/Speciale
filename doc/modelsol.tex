@@ -1,0 +1,28 @@
+Simple problem will be modeled in this section and the different parts of this constraint based local search solver 
+will be illustrated. \\
+\boste{New subsection- The problem} \\ 
+A city have budget of 50 million kr. for a festival and have some suggested activities. The activities have 
+an individual cost and have been given a score based on how successful the activity is expected to be. The duration of 
+the festival is three weeks and the activities have individual requirement to which week the can be planned. Exactly 
+two must be planned the first week, at most two the second week and at most one the third week. The job is to 
+plan activities with in the budget and schedule maximizing the score. Table \ref{tab_activity} shows the data given. \\
+\begin{table}[b]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Activity No. & Cost & Score & Week 1 & Week 2 & Week 3 \\ \hline
+1            & 20   & 3     & yes    & yes    & no     \\ \hline
+2            & 10   & 2     & yes    & no     & no     \\ \hline
+3            & 35   & 4     & no     & no     & yes    \\ \hline
+4            & 42   & 5     & yes    & yes    & yes    \\ \hline
+5            & 13   & 2     & no     & yes    & no     \\ \hline
+6            & 37   & 4     & yes    & no     & yes    \\ \hline
+\end{tabular}
+\caption{Suggested activities}
+\label{tab_activity}
+\end{table}
+If an activity is chosen it is chosen for all the weeks with yes. \\ 
+\boste{Section - Model}
+Each of the activities can be represented by a binary variable whether the activity is chosen or not. The constraint of 
+each week can be modeled with the \class{Linear} constraint \boste{Somewhere I should describe the constraints and 
+invariants implemented}. 

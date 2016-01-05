@@ -40,6 +40,7 @@ private:
     /// Only used to give invariants id
     unsigned id = 0;
 //    std::vector<constraint> functionalConstraints;
+    std::set<invariant, compare_invariant> violatedConstraints;
     
 public:
     /// Should be moved to state
@@ -69,7 +70,8 @@ public:
     void shuffleMask();
     std::shared_ptr<DependencyDigraph>& getDDG();
     std::set<Variable*,Variable::compare_variable>& getInConstraintWithAt(unsigned id);
-
+    void addViolatedConstraint(invariant inv);
+    std::set<invariant, compare_invariant>& getViolatedConstraints();
     // Was used aroung line 382 GS. Creating non oneway invariants
 //    void addInvariantToDDG(invariant invar, variableContainer& variables);
 //    void addInvariantToDDG(invariant invar, InvariantContainer& invariants);
@@ -117,8 +119,9 @@ public:
     void addToEvaluationInvariants(invariant invar);
     void initialize();
     
+    
 
-
+    
 };
 struct compare_invariant;
 //: public std::binary_function<invariant, invariant, bool> {

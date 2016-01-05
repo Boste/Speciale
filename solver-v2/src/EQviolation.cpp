@@ -6,8 +6,9 @@ EQviolation::EQviolation(invariant invar, int RHS) {
     this->RHS = RHS;
     InvariantPointers.push_back(invar);
     type = EQVIO;
-
+    representCons = true;
 }
+
 
 EQviolation::~EQviolation() {
 }
@@ -23,7 +24,7 @@ bool EQviolation::calculateDeltaValue() {
     return true;
 }
 
-void EQviolation::addChange(int variableNumber, int changeInValue) {
+void EQviolation::proposeChange(int variableNumber, int changeInValue) {
     VariableChange.push_back(changeInValue);
 }
 

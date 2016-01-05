@@ -3,6 +3,9 @@
 Flip2Neighborhood::Flip2Neighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
+    std::cout << "Still uses constraints, not invariants" << std::endl;
+    debug;
+    exit(1);
 }
 
 Flip2Neighborhood::~Flip2Neighborhood() {
@@ -185,10 +188,10 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
     updateVector& update1 = model->getUpdate(variables.at(0));
     updateVector& update2 = model->getUpdate(variables.at(1));
     for (updateType& invar : update1) {
-        invar->addChange(variables.at(0)->getID(), mv->getVariableChanges().at(0));
+        invar->proposeChange(variables.at(0)->getID(), mv->getVariableChanges().at(0));
     }
     for (updateType& invar : update2) {
-        invar->addChange(variables.at(1)->getID(), mv->getVariableChanges().at(1));
+        invar->proposeChange(variables.at(1)->getID(), mv->getVariableChanges().at(1));
     }
     bool legal = true;
 
@@ -201,13 +204,13 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
         }
         if (invar->getDeltaValue() != 0) {
             for (updateType inv : model->getUpdate(invar)) {
-                inv->addChange(invar->getVariableID(), invar->getDeltaValue());
+                inv->proposeChange(invar->getVariableID(), invar->getDeltaValue());
             }
         }
 
-        if (invar->isUsedByConstraint() && legal) {
-            std::shared_ptr<Constraint>& cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
-
+        if ( legal) {
+//            std::shared_ptr<Constraint>& cons = invar->getConstraint(); //model->getConstraintsWithPriority(priority)->at(invar->getConstraintNumber());
+            std::cout << "Use invariant" << std::endl;
             int priority = invar->getPriority();
             if (invar->getPriority() == 0) {
                 change[0] += invar->getDeltaValue();
@@ -276,10 +279,10 @@ bool Flip2Neighborhood::commitMove(Move* mv) {
     for (updateType invar : queue) {
         invar->updateValue();
 
-        if (invar->isUsedByConstraint()) {
-
+//        if (invar->isUsedByConstraint()) {
+            std::cout << "use invariant" << std::endl;
             if (invar->getPriority() > 0) {
-                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
+//                std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
                 debug;
 //                evaluation.at(cons->getPriority()) += cons->updateViolation();
 
@@ -287,7 +290,7 @@ bool Flip2Neighborhood::commitMove(Move* mv) {
             } else {
                 evaluation.at(0) += invar->getDeltaValue();
             }
-        }
+//        }
     }
 
     return true;

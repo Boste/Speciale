@@ -1,93 +1,40 @@
 
-#include "MinConflictFlipNE.hpp"
+#include "FlipObjNE.hpp"
 //#include "State.hpp"
 
-MinConflictFlipNE::MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+FlipObjNE::FlipObjNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
 
-//MinConflictFlipNE::MinConflictFlipNE(const MinConflictFlipNE& orig) {
+//FlipObjNE::FlipObjNE(const FlipObjNE& orig) {
 //}
 
-MinConflictFlipNE::~MinConflictFlipNE() {
-    //    std::cout << "Destructing MinConflictFlipNE" << std::endl;
+FlipObjNE::~FlipObjNE() {
+    //    std::cout << "Destructing FlipObjNE" << std::endl;
 }
-
-Move* MinConflictFlipNE::next() {
-//    std::cout << "Use iterator and variable pointers, remember to fix the pointers" << std::endl;
-    Variable* var;
-    //    debug;'    std::cout << moveCounter << std::endl;
-//    std::cout << moveCounter << std::endl;
-
-    if (moveCounter < moveIterator->second->getVariablePointers().size()) {
-//        debug;
-        var = moveIterator->second->getVariablePointers().at(moveCounter);
-
-    } else {
-//        debug;
-        moveIterator++;
-        moveCounter = 0;
-        if (moveIterator == model->getViolatedConstraints().end()) {
-//            debug;
-
-            var = moveIterator->second->getVariablePointers().at(moveCounter);
-            //            moveIterator++;
-        } else {
-//            debug;
-//            std::cout << moveIterator->second->getVariablePointers().size() << std::endl;
-            var = moveIterator->second->getVariablePointers().at(moveCounter);
-        }
-    }
-//    debug;
-    //    Variable* iv = model->getMaskAt(moveCounter);
+Move* FlipObjNE::next() {
+    Variable* iv = model->getEvaluationVariableNr(moveCounter);
     moveCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
+    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     //    mv->deltaVector.resize(model->getPriorityVectors().size());
     mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
     return mv;
 }
 
-bool MinConflictFlipNE::hasNext() {
-
-    if (firstMove) {
-        if (model->getViolatedConstraints().empty()) {
-            return false;
-        }
-        firstMove = false;
-        moveIterator = model->getViolatedConstraints().begin();
-
-    }
-    //    debug;
-//    std::cout << "Constriants in conflict " << model->getViolatedConstraints().size() << std::endl;
-//    for (std::pair<unsigned, invariant> inv : model->getViolatedConstraints()) {
-//        std::cout << inv.second->getVariablePointers().size() << std::endl;
-//        std::cout << inv.second->getInvariantPointers().size() << std::endl;
-//    }
-    //    debug;
-
-    //    moveIterator++;
-    while (moveIterator != model->getViolatedConstraints().end()) {
-//        std::cout <<  moveIterator->first<< " violations " << state->getEvaluation().at(1) << std::endl;
-        if (moveCounter >= moveIterator->second->getVariablePointers().size()) {
-            moveCounter = 0;
-            moveIterator++;
-            continue;
-        }
-
-//        debug;
+bool FlipObjNE::hasNext() {
+    if (moveCounter < model->getEvaluationVariables().size()) {
         return true;
+    } else {
+        moveCounter = 0;
+        
+        return false;
     }
-//    debug;
-    
-    moveCounter = 0;
-    firstMove = true;
-    return false;
 }
 
-Move* MinConflictFlipNE::nextRandom() {
-    Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
+Move* FlipObjNE::nextRandom() {
+    Variable* iv = model->getEvaluationVariableNr(Random::Integer(0, (int) model->getEvaluationVariables().size() - 1));
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -96,8 +43,7 @@ Move* MinConflictFlipNE::nextRandom() {
     return mv;
 }
 
-bool MinConflictFlipNE::hasNextRandom() {
-    return false;
+bool FlipObjNE::hasNextRandom() {
     if (randomCounter < randomMovesWanted) {
         return true;
     } else {
@@ -106,11 +52,12 @@ bool MinConflictFlipNE::hasNextRandom() {
     }
 }
 
-void MinConflictFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
+void FlipObjNE::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
 }
 
-bool MinConflictFlipNE::calculateDelta(Move* mv) {
+bool FlipObjNE::calculateDelta(Move* mv) {
+
     std::vector<int>& change = mv->getDeltaVector();
 
     Variable* variable = mv->var;
@@ -147,9 +94,8 @@ bool MinConflictFlipNE::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool MinConflictFlipNE::commitMove(Move* mv) {
+bool FlipObjNE::commitMove(Move* mv) {
     moveCounter = 0;
-    firstMove = true;
     Variable* var = mv->getVar();
     std::vector<int>& evaluation = state->getEvaluation();
 
@@ -169,13 +115,13 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
+
                 }
             } else {
                 if (!invar->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
-//                    vioCons[invar->getInvariantPointers().back()->getID()] = invar->getInvariantPointers().back();
-//                    invar->getInvariantPointers().back()->setInViolatedConstraints(true);
+
 
                 }
             }
@@ -184,10 +130,10 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
     for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
         evaluation[i] = model->getEvaluationInvariantNr(i)->getCurrentValue();
     }
-    
+
     return true;
 }
 
-//void MinConflictFlipNE::makeMove(Move* mv, std::shared_ptr<State> st) {
+//void FlipObjNE::makeMove(Move* mv, std::shared_ptr<State> st) {
 //    commitMove(mv, st);
 //}

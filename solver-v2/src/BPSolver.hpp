@@ -99,18 +99,26 @@ public:
         std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
-        std::vector<int> c(varInt.size());
+//        std::vector<int> c(varInt.size());
+        std::vector<int> c(0);
         //        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
-        std::vector<Variable*> x(varInt.size());
+        std::vector<Variable*> x(0);
+//        std::vector<Variable*> x(varInt.size());
 
         for (unsigned i = 0; i < varInt.size(); i++) {
-
-            c.at(i) = (in->getVar(i).objcoeff);
+            if(in->getVar(i).objcoeff == 0){
+//                std::cout <<  in->getVar(i).objcoeff << std::endl;
+                continue;
+            }
+            
+            c.push_back(in->getVar(i).objcoeff);
             //            x->at(i) = varInt.at(i);
             assert(in->getVar(i).objcoeff == (double) c.at(i));
-
-            x.at(i) = varInt.at(i);
+            
+            x.push_back(varInt.at(i));
         }
+//        c.shrink_to_fit();
+//        x.shrink_to_fit();
 
         GeneralSolver::linear(c, x, LQ, 0, OBJ);
         //        delete x;

@@ -13,20 +13,25 @@ BestImprovement::~BestImprovement() {
 }
 
 bool BestImprovement::Start() {
+//    debug;
     bool legal = false;
     Move* bestMove;
     Move* mv; // = new Move();
 
     while (!legal) {
+//        debug;
         if (NE->hasNext()) {
+//            debug;
             bestMove = NE->next();
             legal = NE->calculateDelta(bestMove);
         } else {
+//            debug;
             //            delete bestMove;
             //            delete mv;
             return false;
         }
     }
+//    debug;
 
 
     //    Move* bestMove = NE->next();

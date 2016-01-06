@@ -132,6 +132,9 @@ public:
     bool inViolatedConstraints(){
         return inViolated;
     }
+    void setInViolatedConstraints(bool flag){
+        inViolated = flag;
+    }
     bool representConstraint(){
         return representCons;
     }

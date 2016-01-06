@@ -1,7 +1,7 @@
 //#include <c++/4.8/bits/stl_vector.h>
 
 #include "LSSpace.hpp"
-#include "TabuSearch.hpp"
+
 //#include "RowEcholonTransformer.hpp"
 
 
@@ -15,6 +15,7 @@ LSSpace::LSSpace(std::shared_ptr<Model> model) {
 }
 
 void LSSpace::initializeLS() {
+
     /// Sort constraints a variable is part of in decreasing order according to domain
 
     /// Sort integer variables decreasing order according to number of constraints they are involved
@@ -200,8 +201,10 @@ void LSSpace::initializeLS() {
                 value += invars.back()->getCurrentValue();
                 if (invars.back()->representConstraint()) {
                     if (invars.back()->getCurrentValue() > 0) {
-
+                        std::cout << invars.back()->getCurrentValue() << std::endl;
+                        std::cout << "violated constraint " << std::endl;
                         model->addViolatedConstraint(invars.back()->getInvariantPointers().back());
+                        debug;
                     }
                 }
 
@@ -216,6 +219,11 @@ void LSSpace::initializeLS() {
         model->addToEvaluationInvariants(priorityResult);
 
 
+    }
+    if (model->getViolatedConstraints().size() != 0) {
+        model->getViolatedConstraints().size();
+        std::cout << "violation " << std::endl;
+        exit(1);
     }
     for (invariant invar : model->getInvariants()) {
         if (invar->getType() == LEQVIO || invar->getType() == EQVIO) {
@@ -234,6 +242,11 @@ void LSSpace::initializeLS() {
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
 
     model->initialize();
+    if (model->getViolatedConstraints().size() != 0) {
+        model->getViolatedConstraints().size();
+        std::cout << "violation " << std::endl;
+        exit(1);
+    }
     currentState = std::make_shared<State>(model);
     bestState = std::make_shared<State>(model);
     //    for (invariant invar : model->getInvariants()) {
@@ -669,6 +682,13 @@ void LSSpace::optimizeSolution(int time) {
     //        }
     //    }
 
+
+    if (model->getViolatedConstraints().size() != 0) {
+        model->getViolatedConstraints().size();
+        std::cout << "violation " << std::endl;
+        exit(1);
+    }
+
     double timelimit = (double) time;
     double usedTime = 0;
     std::clock_t start = std::clock();
@@ -705,30 +725,42 @@ void LSSpace::optimizeSolution(int time) {
     std::cout << "Number of randomMoves " << randomMoves << std::endl;
     std::cout << "Number of variables used in local search " << model->getMask().size() << std::endl;
     FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
+    FlipObjNE* FON = new FlipObjNE(model, currentState);
+    MinConflictFlipNE* MCN = new MinConflictFlipNE(model, currentState);
     //    Flip2Neighborhood* F2N = new Flip2Neighborhood(model, currentState);
     //    SwapNeighborhood* SN = new SwapNeighborhood(model, currentState);
-    TabuSearch TS(model, FN);
+//        TabuSearch TS(model, FN);
+    TabuSearch TS(model, FON);
+    TabuSearch TS2(model, MCN);
+    TabuSearchFI TSF(model, FON);
+    TabuSearchFI TSF2(model, MCN);
     RandomWalk RW(model, FN, randomMoves);
-    BestImprovement BI(model, FN);
+    //    BestImprovement BI(model, FN);
+    BestImprovement BI(model, MCN);
+    BestImprovement BI2(model, FN);
     FirstImprovement FI(model, FN);
     unsigned loopCounter = 0;
     bool imp;
+    unsigned impCounter = 0;
+    std::cout << model->getMask().size() << std::endl;
+    std::cout << model->getEvaluationVariables().size() << std::endl;
+    debug;
     while (usedTime < timelimit) {
         loopCounter++;
 
 
-//                while (FI.Start()) {
-//                    iterations++;
-//                }
-//                if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
-//                    bestState->copy(currentState);
-//                    //            setSolution(bestState);
-//                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-//                    std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
-//        
-//                }
-//                RW.Start();
-//                iterations += randomMoves;
+        //                while (FI.Start()) {
+        //                    iterations++;
+        //                }
+        //                if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
+        //                    bestState->copy(currentState);
+        //                    //            setSolution(bestState);
+        //                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+        //                    std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
+        //        
+        //                }
+        //                RW.Start();
+        //                iterations += randomMoves;
         //        
         //         for (invariant inv : model->getInvariants()) {
         //            if (!inv->test()) {
@@ -738,37 +770,129 @@ void LSSpace::optimizeSolution(int time) {
         //            }
         //    
         //        }
-                
+        //        for (auto it = model->getViolatedConstraints().begin(); it != model->getViolatedConstraints().end(); it++) {
+        //
+        //            std::cout << model->getViolatedConstraints().size() << std::endl;
+        //            unsigned id = it->first;
+        //            std::cout << "id " << id << std::endl;
+        //            std::cout << "Size of pointing to " << DDG->getInvariantUpdate(id).size() << std::endl;
+        //            std::cout << DDG->getInvariantUpdate(id).at(0)->getCurrentValue() << std::endl;
+        //            std::cout << "is in violated constraints " << model->getViolatedConstraints().begin()->second->inViolatedConstraints() << std::endl;
+        //            std::cout << "Number of variables " << model->getViolatedConstraints().at(id)->getVariablePointers().size() << std::endl;
+        //        }
 
-        imp = TS.Start(iterations, bestState, currentState, tabulist);
-        //        while (TS.Start()) {
-        iterations++;
-        if (imp) {
+
+        while (!currentState->isFeasible()) {
+
+            imp = TS2.Start(iterations, bestState, currentState, tabulist);
+            iterations++;
+            imp ? impCounter = 0 : impCounter++;
+
+
+            //            std::cout << "infes" << std::endl;
+            //            std::cout << "Feasible? " << currentState->isFeasible() << std::endl;
             if (currentState->compare(bestState)) {
                 //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
                 bestState->copy(currentState);
                 //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
                 usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-                std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
+                std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI with MCN" << std::endl;
 
             }
+            if (impCounter > 20) {
+                std::cout << "break" << std::endl;
+                break;
+            }
+            //            std::cout << "in 1" << std::endl;
+//            std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI with MCN" << std::endl;
+            //            std::cout << model->getViolatedConstraints().size() << std::endl;
+
+
+            //            std::cout << "used time " << (std::clock() - start) / (double) CLOCKS_PER_SEC << std::endl;
+            //                                for (auto it = model->getViolatedConstraints().begin(); it != model->getViolatedConstraints().end(); it++) {
+            //                    
+            //                                    std::cout << "Size of violated cons  " << model->getViolatedConstraints().size() << std::endl;
+            //                                    unsigned id = it->first;
+            //                                    std::cout << "id " << id << std::endl;
+            //                                    std::cout << "Size of pointing to " << DDG->getInvariantUpdate(id).size() << std::endl;
+            //                                    std::cout << "Value " << DDG->getInvariantUpdate(id).at(0)->getCurrentValue() << std::endl;
+            //                                    std::cout << "is in violated constraints " << model->getViolatedConstraints().begin()->second->inViolatedConstraints() << std::endl;
+            //                                    std::cout << "Number of variables " << it->second->getVariablePointers().size() << std::endl;
+            //                                    std::cout <<  currentState->getEvaluation().at(1) << std::endl;
+            //                                }
         }
 
+        imp = true;
+//        while (currentState->isFeasible()) {
+//            while (imp) {
 
+                //            assert(model->getViolatedConstraints().size() == 0);
+                //                if (model->getViolatedConstraints().size() != 0 && impCounter < 20) {
+                //                    std::cout << model->getViolatedConstraints().size() << std::endl;
+                //                    unsigned id = model->getViolatedConstraints().begin()->first;
+                //                    std::cout << "id " << id << std::endl;
+                //                    std::cout << "Size of pointing to " << DDG->getInvariantUpdate(id).size() << std::endl;
+                //                    std::cout << DDG->getInvariantUpdate(id).at(0)->getCurrentValue() << std::endl;
+                //                    std::cout << "is in violated constraints " << model->getViolatedConstraints().begin()->second->inViolatedConstraints() << std::endl;
+                //                    debug;
+                //                    debug;
+                //                    debug;
+                //                    debug;
+                //                    debug;
+                //                            }
+                imp = TS.Start(iterations, bestState, currentState, tabulist);
+                iterations++;
+//                std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI " << std::endl;
 
-//                        while (BI.Start()) {
-//                            iterations++;
-//                        }
-//                        if (currentState->compare(bestState)) {
-//                            //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-//                            bestState->copy(currentState);
-//                            //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-//                            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-//                            std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
-//                
-//                        }
-//                        RW.Start();
-//                        iterations += randomMoves;
+                //                            std::cout << tabulist.at(708) << " " << tabulist.at(2086) << " "<< tabulist.at(698) << " "<< tabulist.at(2066) << " "<< tabulist.at(1619) << " "<< tabulist.at(1613) << " "<< tabulist.at(1204) << " " << std::endl;
+                //                            imp ? impCounter = 0 : impCounter++;
+//            }s
+
+            //            std::cout << "feas" << std::endl;
+            //        while (TS.Start()) {
+            //        if (imp) {
+            if (currentState->compare(bestState)) {
+                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
+                bestState->copy(currentState);
+                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
+                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI" << std::endl;
+
+            }
+//        }
+        //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
+        //                    std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI " << std::endl;
+        //    }
+
+        //        std::cout << "feas -> infeas" <<   std::endl;
+
+        //                while (!currentState->isFeasible()) {
+        //        
+        //                    //            if(model->getViolatedConstraints().size() != currentState->getEvaluation().at(1)){
+        //                    //                std::cout <<model->getViolatedConstraints().size() << " vs "  << currentState->getEvaluation().at(1) << std::endl;
+        //                    //            }
+        //                    BI.Start();
+        //                    iterations++;
+        //        
+        //                    //            std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using BI with MCN" << std::endl;
+        //        
+        //                }
+        //                while (BI2.Start()) {
+        //                    iterations++;
+        //                }
+        //                if (currentState->compare(bestState)) {
+        //                    //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
+        //                    bestState->copy(currentState);
+        //                    //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
+        //                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+        //                    std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
+        //        
+        //                }
+        //                //        std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
+        //        
+        //                RW.Start();
+        //                iterations += randomMoves;
 
         usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
     }
@@ -808,6 +932,8 @@ void LSSpace::optimizeSolution(int time) {
     //    delete SN;
     //    delete F2N;
     delete FN;
+    delete FON;
+    delete MCN;
     std::cout << "O " << bestState->getEvaluation().at(0) << " ";
     //
     //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;

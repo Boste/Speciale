@@ -8,16 +8,16 @@
 //#include "boost/random/uniform_int_distribution.hpp"
 #include "Random.hpp"
 #include "State.hpp"
-#ifndef MINCONFLICTFLIPNE_HPP
-#define	MINCONFLICTFLIPNE_HPP
+#ifndef FLIPOBJNE_HPP
+#define	FLIPOBJNE_HPP
 
-class MinConflictFlipNE : public Neighborhood {
+class FlipObjNE : public Neighborhood {
 public:
     std::shared_ptr<Model> model;
     std::shared_ptr<State> state;
-    MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
-    MinConflictFlipNE(const MinConflictFlipNE& orig);
-    ~MinConflictFlipNE();
+    FlipObjNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    FlipObjNE(const FlipObjNE& orig);
+    ~FlipObjNE();
 
     //    template<typename returnType>
     //    void randomWalk(std::shared_ptr<State> st);
@@ -38,9 +38,6 @@ public:
 
 private:
     unsigned moveCounter = 0;
-    std::unordered_map<unsigned, invariant>::iterator moveIterator;
-    bool firstMove = true;
-//    unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;
     unsigned randomMovesWanted = 0;
     //    template<typename returnType>
@@ -48,5 +45,5 @@ private:
 
 };
 
-#endif	/* MINCONFLICTFLIPNE_HPP */
+#endif	/* FLIPOBJNE_HPP */
 

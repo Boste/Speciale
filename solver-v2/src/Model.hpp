@@ -33,6 +33,7 @@ private:
 //    InvariantContainer objectiveInvariant;
     InvariantContainer evaluationInvariants;
     
+    std::vector<Variable*> evalVariables;
     std::vector<Variable*> mask;
     std::shared_ptr<DependencyDigraph> DDG = std::make_shared<DependencyDigraph>();
     /// The search priority vectors given by user when calling search(std::vector<IntegerVarible*> variables)
@@ -40,7 +41,7 @@ private:
     /// Only used to give invariants id
     unsigned id = 0;
 //    std::vector<constraint> functionalConstraints;
-    std::set<invariant, compare_invariant> violatedConstraints;
+    std::unordered_map<unsigned, invariant>  violatedConstraints;
     
 public:
     /// Should be moved to state
@@ -71,7 +72,8 @@ public:
     std::shared_ptr<DependencyDigraph>& getDDG();
     std::set<Variable*,Variable::compare_variable>& getInConstraintWithAt(unsigned id);
     void addViolatedConstraint(invariant inv);
-    std::set<invariant, compare_invariant>& getViolatedConstraints();
+    void removeViolatedConstraint(invariant inv);
+    std::unordered_map<unsigned, invariant>& getViolatedConstraints();
     // Was used aroung line 382 GS. Creating non oneway invariants
 //    void addInvariantToDDG(invariant invar, variableContainer& variables);
 //    void addInvariantToDDG(invariant invar, InvariantContainer& invariants);
@@ -115,6 +117,8 @@ public:
 //    InvariantContainer& getObjectiveInvariant();
     InvariantContainer& getEvaluationInvariants();
     invariant getEvaluationInvariantNr(unsigned nr);
+    std::vector<Variable*>& getEvaluationVariables();
+    Variable* getEvaluationVariableNr(unsigned nr);
 //    void addToObjectiveInvariant(invariant invar);
     void addToEvaluationInvariants(invariant invar);
     void initialize();

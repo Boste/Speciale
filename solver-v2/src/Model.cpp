@@ -3,7 +3,7 @@
 //#include "Random.hpp"
 
 Model::Model() {
-
+    
 
 }
 
@@ -19,7 +19,7 @@ Model::~Model() {
     for (invariant invar : Invariants) {
         delete invar;
     }
-
+    
 }
 
 std::vector<std::vector<Variable*>>&Model::getPriorityVectors() {
@@ -67,10 +67,21 @@ void Model::setNonFixedVariables(std::vector<Variable*>& nonFixed) {
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
 void Model::addViolatedConstraint(invariant inv){
-    violatedConstraints.insert(inv);
+//    assert(DDG->getInvariantUpdate(inv->getID()).size() == 1);
+//    assert(DDG->getInvariantUpdate(inv->getID()).at(0)->type == LEQVIO || DDG->getInvariantUpdate(inv->getID()).at(0)->type == EQVIO);
+    violatedConstraints[inv->getID()] = inv;
+    inv->setInViolatedConstraints(true);
     
 }
-std::set<invariant,compare_invariant>& Model::getViolatedConstraints(){
+void Model::removeViolatedConstraint(invariant inv){
+//    unsigned  size  = violatedConstraints.size();
+    violatedConstraints.erase(inv->getID());
+//    assert(size-1 == violatedConstraints.size());
+//    debug;
+    inv->setInViolatedConstraints(false);
+    
+}
+std::unordered_map<unsigned, invariant>& Model::getViolatedConstraints(){
     return violatedConstraints;
             
 }
@@ -235,6 +246,12 @@ void Model::addToEvaluationInvariants(invariant invar) {
 std::vector<int>& Model::getInitialEvaluation() {
     return initialEvaluation;
 }
+std::vector<Variable*>& Model::getEvaluationVariables(){
+    return evalVariables;
+}
+Variable* Model::getEvaluationVariableNr(unsigned nr){
+    return evalVariables.at(nr);
+}
 
 void Model::initialize() {
     //    std::cout << "ini cons" << std::endl;
@@ -293,10 +310,17 @@ void Model::initialize() {
     }
 
 
-
+    
     for (unsigned int i = 0; i < getEvaluationInvariants().size(); i++) {
         initialEvaluation.push_back(getEvaluationInvariants().at(i)->CurrentValue);
+        
     }
+    for(constraint cons : *getConstraintsWithPriority(0)){
+        for(Variable* var : cons->getVariables()){
+            evalVariables.push_back(var);
+        }
+    }
+    std::cout << "EvalVariables size " << evalVariables.size() << std::endl;
     //    for(int i : initialEvaluation){
     //        std::cout << i << std::endl;
     //    }

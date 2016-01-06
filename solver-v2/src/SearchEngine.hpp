@@ -21,11 +21,11 @@ public:
 //        debug;
 //        return false;
 //    }
-    virtual bool Start() {
+    bool Start() {
         std::cout <<  "Not implemented for this neighborhood " << std::endl;
         return false;
     }
-    virtual bool Start(unsigned iterations){
+     bool Start(unsigned iterations){
         std::cout <<  "Not implemented for this neighborhood. Iterations " << iterations << std::endl;
         return false;
     }

@@ -9,7 +9,6 @@ EQviolation::EQviolation(invariant invar, int RHS) {
     representCons = true;
 }
 
-
 EQviolation::~EQviolation() {
 }
 
@@ -30,7 +29,7 @@ void EQviolation::proposeChange(int variableNumber, int changeInValue) {
 
 void EQviolation::updateValue() {
     CurrentValue += DeltaValue;
-
+    DeltaValue = 0;
 }
 
 bool EQviolation::test() {

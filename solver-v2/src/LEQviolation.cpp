@@ -34,7 +34,7 @@ void LEQviolation::proposeChange(int variableNumber, int changeInValue) {
 
 void LEQviolation::updateValue() {
     CurrentValue += DeltaValue;
-    
+    DeltaValue = 0;
 }
 bool LEQviolation::test(){
     int value = 0;

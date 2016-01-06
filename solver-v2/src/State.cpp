@@ -44,7 +44,7 @@ void State::copy(std::shared_ptr<State> st) {
     //    this->mask = orig.mask;
     this->evaluation = st->evaluation;
     //    std::cout << &evaluation[0] << " vs " << &st->evaluation[0] << std::endl;
-    this->model = st->model;
+//    this->model = st->model;
 }
 
 State::~State() {
@@ -99,15 +99,15 @@ bool State::isFeasible() {
 bool State::compare(std::shared_ptr<State>& st) {
 
 //    if (!this->isFeasible() || !st->isFeasible()) {
-        for (unsigned i = 1; i<this->evaluation.size(); i++) {
-            if (this->evaluation.at(i) == st->getEvaluation().at(i)) {
-                continue;
+        for (int i = this->evaluation.size()-1; i>=0; i--) {
+            if (this->evaluation.at(i) > st->getEvaluation().at(i)) {
+                return false;
             }
-            return this->evaluation.at(i) < st->getEvaluation().at(i);
+//            return this->evaluation.at(i) < st->getEvaluation().at(i);
         }
 //    }
 
-    return this->evaluation.at(0) < st->getEvaluation().at(0);
+    return (this->evaluation.at(0) < st->getEvaluation().at(0));
 }
 
 

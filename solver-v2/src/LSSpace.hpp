@@ -22,6 +22,10 @@
 #include "BestImprovement.hpp"
 #include "FirstImprovement.hpp"
 #include "RandomWalk.hpp"
+#include "TabuSearch.hpp"
+#include "TabuSearchFI.hpp"
+#include "MinConflictFlipNE.hpp"
+#include "FlipObjNE.hpp"
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 

@@ -39,9 +39,11 @@ void DependencyDigraph::addVariables(variableContainer& vars) {
     }
 
 }
-/// 
+///  Used to create invariant for collecting violation
 
 void DependencyDigraph::addInvariant(invariant newInvariant, InvariantContainer& invars) {
+
+
     std::shared_ptr<invariantNode> invar = std::make_shared<invariantNode>();
     //    invariants.push_back(invar);
 
@@ -117,10 +119,8 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
 
 }
 
-/// Should not be used for changing constraints to be one-way constraints, hence only invariants that are defining auxiliary variables
-/// Now it should, skipping cleanUp
 
-//void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& vars, InvariantContainer& invars) {
+/// Used for posting oneway constraints. Start by making variable nodes point to it, variable node and invariant nodes will be merged later.
 
 void DependencyDigraph::addInvariant(invariant newInvariant) {
     //
@@ -136,34 +136,96 @@ void DependencyDigraph::addInvariant(invariant newInvariant) {
     assert(invar->id == invariant_nodes.size());
     invariant_nodes.push_back(invar);
     brokenInvariants.push_back(false);
-    int varID = newInvariant->getVariableID();
-    if (varID != -1) {
-
-        auto var = variable_nodes.at(varID);
-        for (invariant inv : var->update) {
-            invar->update.push_back(inv);
-        }
-        //        variable_nodes.erase(it);
-    }
+    //    int varID = newInvariant->getVariableID();
+    //    if (varID != -1) {
+    //
+    //        auto var = variable_nodes.at(varID);
+    //        for (invariant inv : var->update) {
+    //            invar->update.push_back(inv);
+    //        }
+    //        //        variable_nodes.erase(it);
+    //    }
     //    
     std::vector<Variable*>& vars = newInvariant->getVariablePointers();
-    std::vector<invariant>& invars = newInvariant->getInvariantPointers();
+    //    std::vector<invariant>& invars = newInvariant->getInvariantPointers();
     for (Variable* iv : vars) {
         //        
         if (iv->isFixed()) {
             //            
             continue;
         }
-        if (iv->isDef()) {
-            invariant_nodes.at(iv->getOneway()->getID())->update.push_back(newInvariant);
-        } else {
-            //        assert(variable_nodes.find(iv->getID()) != variable_nodes.end());
+        //        if (iv->isDef()) {
+        //            invariant_nodes.at(iv->getOneway()->getID())->update.push_back(newInvariant);
+        //        } else {
+        //        assert(variable_nodes.find(iv->getID()) != variable_nodes.end());
 
-            std::shared_ptr<variableNode> vn = variable_nodes.at(iv->getID());
+        std::shared_ptr<variableNode> vn = variable_nodes.at(iv->getID());
 
-            //        
-            vn->update.push_back(newInvariant);
+        //        
+        vn->update.push_back(newInvariant);
+        //        }
+        //        
+    }
+    //    
+    //    std::cout << "size " << invars.size() << std::endl;
+    //    
+    //    for (invariant inv : invars) {
+    //        //        invariant_nodes.at(inv->getID()).update.insert(newInvariant);
+    //        //        std::cout << inv->getID() << " inv" << std::endl;
+    //        //        assert(invariant_nodes.find(inv->getID()) != invariant_nodes.end());
+    //
+    //        invariant_nodes.at(inv->getID())->update.push_back(newInvariant);
+    //        //        invariant_nodes.at(inv->getID())->update.push_back(invar);
+    //    }
+    //    std::cout << "-1" << std::endl;
+}
+
+/// Used to add invariants created by constraints, auxiliary variables and violations. At this point cannot make cycles hence the pointers never change from here. 
+
+void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& vars, InvariantContainer& invars) {
+
+    //void DependencyDigraph::addInvariant(invariant newInvariant) {
+    //
+    std::shared_ptr<invariantNode> invar = std::make_shared<invariantNode>();
+    invar->invar = newInvariant;
+    //    newInvariant->setTimestamp(timestampCounter);
+    //    timestampCounter++;
+    invar->id = newInvariant->getID();
+    if (invar->id != invariant_nodes.size()) {
+
+        std::cout << "id " << invar->id << " size " << invariant_nodes.size() << std::endl;
+    }
+    assert(invar->id == invariant_nodes.size());
+    invariant_nodes.push_back(invar);
+    brokenInvariants.push_back(false);
+    //    int varID = newInvariant->getVariableID();
+    //    if (varID != -1) {
+    //
+    //        auto var = variable_nodes.at(varID);
+    //        for (invariant inv : var->update) {
+    //            invar->update.push_back(inv);
+    //        }
+    //        //        variable_nodes.erase(it);
+    //    }
+    //    
+    //    std::vector<Variable*>& vars = newInvariant->getVariablePointers();
+    //    std::vector<invariant>& invars = newInvariant->getInvariantPointers();
+    for (Variable* iv : vars) {
+        //        
+        if (iv->isFixed()) {
+            //            
+            continue;
         }
+        //        if (iv->isDef()) {
+        //            invariant_nodes.at(iv->getOneway()->getID())->update.push_back(newInvariant);
+        //        } else {
+        //        assert(variable_nodes.find(iv->getID()) != variable_nodes.end());
+
+        std::shared_ptr<variableNode> vn = variable_nodes.at(iv->getID());
+
+        //        
+        vn->update.push_back(newInvariant);
+        //        }
         //        
     }
     //    
@@ -179,6 +241,9 @@ void DependencyDigraph::addInvariant(invariant newInvariant) {
     }
     //    std::cout << "-1" << std::endl;
 }
+
+
+
 /// Return the invariants that this invar defines
 
 updateVector& DependencyDigraph::getInvariantUpdate(unsigned invarID) {
@@ -237,74 +302,31 @@ void DependencyDigraph::cleanUpGraph(std::vector<Variable*>& vars) {
 }
 
 void DependencyDigraph::mergeNodes(std::shared_ptr<variableNode>& vn, std::shared_ptr<invariantNode>& in) {
-
+    //    std::cout << "Dublicates?" << std::endl;
     for (invariant invar : vn->update) {
         in->update.push_back(invar);
-        std::shared_ptr<invariantNode> inv = invariant_nodes.at(invar->getID());
-        //        inv->myInvariants.push_back(in);
+        //        invar->getInvariantPointers().push_back(in->invar);
+        //        std::shared_ptr<invariantNode> inv = invariant_nodes.at(invar->getID());
+        //                inv->myInvariants.push_back(in);
 
     }
     in->var = vn->iv;
+    //    std::cout << vn->update.size() << std::endl;
+    //    std::cout << in->update.size() << std::endl;
+    assert(vn->update.size() == in->update.size());
     //    
     //    vn->update.clear();
 
 }
 
 void DependencyDigraph::checkForCycles(InvariantContainer& invars) {
-    //    std::cout << "number of invariants " << invars.size() << std::endl;
-    //    unsigned id = 5565;
-    //    invariant test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    ////    5565->5811->5812->5964->5810->5564
-    //    id = 5811;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    ////    exit(1);
-    //    id = 5812;
-    //    invariant test2 = invars.at(id);
-    //    assert(test2->getID() == id);
-    //    std::cout << "id " << test2->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    //    //    exit(1);
-    //    id = 5964;
-    //    test2 = invars.at(id);
-    //    assert(test2->getID() == id);
-    //    std::cout << "id " << test2->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    //    id = 5810;
-    //    test2 = invars.at(id);
-    //    assert(test2->getID() == id);
-    //    std::cout << "id " << test2->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    //    id = 5564;
-    //    test2 = invars.at(id);
-    //    assert(test2->getID() == id);
-    //    std::cout << "id " << test2->getID() << " " << std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " timestamps " << invariant_nodes.at(inv->getID())->timestamp << std::endl;
-    //    }
-    //    exit(1);
 
     cycleCounter = 1;
     timestampCounter = 0;
     while (cycleCounter != 0) {
         cycleCounter = 0;
         invariantsCycles.clear();
-        brokenCycles.clear();
+        //        brokenCycles.clear();
         //        brokenInvariants.clear();
         for (unsigned i = 0; i < invars.size(); i++) {
             std::vector<unsigned > cycles; // = new std::vector<unsigned >();
@@ -328,7 +350,7 @@ void DependencyDigraph::checkForCycles(InvariantContainer& invars) {
         if (cycleCounter != 0) {
             breakCycles();
         }
-//        std::cout << "invars size " << invars.size() << " broken invariants size " << brokenInvariants.size() << std::endl;
+        //        std::cout << "invars size " << invars.size() << " broken invariants size " << brokenInvariants.size() << std::endl;
         for (invariant inv : invars) {
             if (brokenInvariants.at(inv->getID())) {
                 continue;
@@ -337,105 +359,15 @@ void DependencyDigraph::checkForCycles(InvariantContainer& invars) {
             in->timestamp = 0;
             in->lowestLink = 0;
             assert(!invariant_nodes.at(inv->getID())->inCurrentSSC);
+
+
+
         }
         //        debug;
-        //        for (InvariantContainer::iterator it = invars.begin(); it != invars.end(); it++) {
-        //            if (brokenInvariants.at((*it)->getID())) {
-        //                delete *it;
-        //                it--;
-        //            }
-        //        }
 
     }
-    //    for (invariant inv : invars) {
-    //        if (brokenInvariants.at(inv->getID())) {
-    //            continue;
-    //        }
-    //        std::shared_ptr<invariantNode> in = invariant_nodes.at(inv->getID());
-    //        if (in->timestamp == 0) {
-    //            DFS(in);
-    //        }
-    //        assert(inv->getTimestamp() != 0);
-    //    }
+    
 
-    //    auto in = invariant_nodes.at(10150);
-    //    std::cout << "10150" << std::endl;
-    //    for (auto inv : in->update) {
-    //        std::cout << "\t" << inv->getID() << std::endl;
-    //        for (auto invar : invariant_nodes.at(inv->getID())->update) {
-    //            std::cout << "\t \t" << invar->getID() << std::endl;
-    //            for (auto invar2 : invariant_nodes.at(invar->getID())->update) {
-    //                std::cout << "\t \t \t" << invar2->getID() << std::endl;
-    //
-    //            }
-    //        }
-    //    }
-
-    //    exit(1);
-
-    //    
-    //    
-    //    std::cout << "number of invariants " << invars.size() << std::endl;
-    //    unsigned id = 5565;
-    //    invariant test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    ////    5565->5811->5812->5964->5810->5564
-    //    id = 5811;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    ////    exit(1);
-    //    id = 5812;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    //    //    exit(1);
-    //    id = 5964;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    //    id = 5810;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    //    id = 5564;
-    //    test = invars.at(id);
-    //    assert(test->getID() == id);
-    //    std::cout << "id " << test->getID() << " lowestLink " << invariant_nodes.at(test->getID())->lowestLink<< std::endl;
-    //    for (invariant inv : invariant_nodes.at(id)->update) {
-    //        std::cout << "\t invariant ids " << inv->getID() << " lowestLink " << invariant_nodes.at(inv->getID())->lowestLink << std::endl;
-    //    }
-    //    exit(1);
-
-    //    for (invariant inv : invars) {
-    //        std::shared_ptr<invariantNode> in = invariant_nodes.at(inv->getID());
-    //        assert(in->timestamp > 0);
-    //        unsigned myTime = in->lowestLink;
-    //        for (invariant invar : in->update) {
-    //            auto invarNode = invariant_nodes.at(invar->getID());
-    //            if (myTime > invarNode->lowestLink) {
-    //                //                std::cout << "think there is cycles" << std::endl;
-    //                cycleCounter++;
-    //            }
-    //        }
-    //    }
-    //    std::cout << "expected number of cycles " << cycleCounter << std::endl;
 }
 
 // Tarjan's Algorithm
@@ -524,6 +456,7 @@ void DependencyDigraph::breakCycles() {
     //    int broken = 0;
     //    std::cout << cycles.size() << std::endl;
     //    debug;
+    std::vector<std::shared_ptr<invariantNode>> Broken;
     for (unsigned cycle = 0; cycle < cycles.size(); cycle++) {
 
         if (brokenCycles[cycle]) {
@@ -532,6 +465,7 @@ void DependencyDigraph::breakCycles() {
         }
         //        broken++;
         std::shared_ptr<invariantNode> best = breakTie(cycle);
+        Broken.push_back(best);
         brokenInvariants.at(best->id) = true;
         for (int cyc : invariantsCycles.at(best->id)) {
             brokenCycles.at(cyc) = true;
@@ -540,7 +474,9 @@ void DependencyDigraph::breakCycles() {
 
         undefineVariable(best);
     }
-
+//    for(std::shared_ptr<invariantNode> in : Broken ){
+//        in->invar->getVariable()->undefine();
+//    }
     //    std::cout << broken << std::endl;
 
 
@@ -587,8 +523,10 @@ std::shared_ptr<invariantNode> DependencyDigraph::breakTie(unsigned cycleNumber)
 }
 
 void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
-    invar->var->undefine();
 
+    //    std::cout << "old value "<< oldVal << std::endl;
+    invar->var->undefine();
+    //    std::cout <<  "new value " << invar->var->getCurrentValue() << std::endl;
     brokenInvariants.at(invar->id) = true;
 
     invariant& bestInvariant = invar->invar;
@@ -599,7 +537,6 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
     //    }
     std::vector<Variable*>& vars = bestInvariant->getVariablePointers();
     for (Variable* iv : vars) {
-        assert(iv->getID() != invar->id);
         if (iv->isFixed()) {
             continue;
         }
@@ -623,7 +560,7 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
             updateVector& update = varNode->update;
             //            std::cout << varNode->update.size() << std::endl;
             //            std::iterator<invariant> it = update.begin();
-            for (updateVector::iterator it = update.begin(); it != update.end(); it++) {
+            for (updateVector::iterator it = update.begin(); it != update.end(); ++it) {
                 //                std::cout << it.base()->get() << std::endl;
                 //                it.base()->
                 //                if (it.base()->get() == bestInvariant.get()) {
@@ -634,6 +571,10 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
             }
         }
     }
+    //    delete invar->invar;
+    //    delete invar.get();
+
+
 }
 
 std::vector<bool>& DependencyDigraph::getBrokenInvariants() {
@@ -710,17 +651,18 @@ void DependencyDigraph::createPropagationQueue(variableContainer & vars, Invaria
             //
             //            }
             //            std::cout << std::endl;
-            addToQueue(vn->propagationQueue, vn->update);
-
-            for (invariant invar : vn->propagationQueue) {
-                //                std::cout << "id " << invar->getID() << " timestamp " << invariant_nodes.at(invar->getID())->timestamp << std::endl;
-
-                for (invariant inv : invariant_nodes.at(invar->getID())->update) {
-                    if (inv->getTimestamp() > invar->getTimestamp()) {
-                        //                        std::cout << "id " << inv->getID() << "  " << inv->getTimestamp() << " " << invar->getTimestamp() << " id " << invar->getID() << std::endl;
-                    }
-                }
-            }
+            addToQueue(vn->propagationQueue, vn->update, 1);
+            //            debug;
+            //            exit(1);
+            //            for (invariant invar : vn->propagationQueue) {
+            //                //                std::cout << "id " << invar->getID() << " timestamp " << invariant_nodes.at(invar->getID())->timestamp << std::endl;
+            //
+            //                for (invariant inv : invariant_nodes.at(invar->getID())->update) {
+            //                    if (inv->getTimestamp() > invar->getTimestamp()) {
+            //                        //                        std::cout << "id " << inv->getID() << "  " << inv->getTimestamp() << " " << invar->getTimestamp() << " id " << invar->getID() << std::endl;
+            //                    }
+            //                }
+            //            }
 
             //            std::cout << std::endl;
 
@@ -750,22 +692,22 @@ void DependencyDigraph::createPropagationQueue(variableContainer & vars, Invaria
 /// Not optimal, it adds vertices from outgoing arcs for each ingoing arc. (If a vertex is visited twice it adds the vertices it points to twice) 
 /// With a DFS you can set vertices to visited but you need to unvisit them again. 
 
-void DependencyDigraph::addToQueue(propagation_queue& orgQueue, updateVector & queue) {
+void DependencyDigraph::addToQueue(propagation_queue& orgQueue, updateVector & queue, int depth) {
     for (updateType invar : queue) {
         //        orgQueue.insert(orgQueue.end(),invar);
         //        orgQueue.push(invar);
         //        counter++;
-
+        //        std::cout <<  invar->getTimestamp() << std::endl;
         //                iv->addToPropagationQueue(invar);
         //        unsigned id = invar->getID();
 
-        addToQueue(orgQueue, invariant_nodes.at(invar->getID())->update);
+        addToQueue(orgQueue, invariant_nodes.at(invar->getID())->update, depth + 1);
         //        orgQueue.push_front(invar);
         orgQueue.insert(invar);
 
 
     }
-
+    //    std::cout << depth << std::endl;
 
 }
 

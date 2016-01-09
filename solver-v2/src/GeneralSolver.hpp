@@ -30,16 +30,16 @@
 //class GeneralSolver : public Gecode::Space, private LSSpace {
 
 class GeneralSolver {
-//    friend class Test;
+    //    friend class Test;
 private:
-//    std::vector<int> maxCoef;
-    const std::shared_ptr<Model> model =  std::make_shared<Model> ();
+    //    std::vector<int> maxCoef;
+    const std::shared_ptr<Model> model = std::make_shared<Model> ();
     const std::unique_ptr<LSSpace> LS = std::unique_ptr<LSSpace> (new LSSpace(model));
     std::unique_ptr<GecodeSolver> GS = std::unique_ptr<GecodeSolver> (new GecodeSolver(model));
-    
+
 public:
 
-    GeneralSolver() ;
+    GeneralSolver();
 
     ~GeneralSolver();
     GeneralSolver& operator=(const GeneralSolver &a);
@@ -52,14 +52,14 @@ public:
 
     std::vector<Variable*> createVariables(unsigned numberOfVariables, int lb, int ub);
 
-//    ///Create a single variable with given lower and upper bound
+    //    ///Create a single variable with given lower and upper bound
     Variable* createVariable(int lb, int ub);
     std::vector<Variable*>& getAllVariables();
 
     /// Only for testing, should be removed 
     void print(std::vector<Variable>& IntegerVariables);
 
-    void Search(std::vector<Variable*> variables);    
+    void Search(std::vector<Variable*> variables);
     /// Uses Gecode to find initial solution
     /// returns a new GeneralSolver with the initial solution the old (the one this method is called from) is not updated with new solution. 
 
@@ -74,13 +74,16 @@ public:
     void relax(int timesRelaxed);
 
     void simpleRelax(int timesRelaxed);
-    
+
+    bool relaxAllNonFunctionel(int TimeForGecode);
+    std::vector<constraint> furtherRelax(std::vector<constraint> cons, unsigned  repeated);
+
     std::vector<int>& getInitialValue();
 
     void optimizeSolution(int time);
 
     void printVariableValues();
-//    unsigned getNumberOfDigits(double number);
+    //    unsigned getNumberOfDigits(double number);
 
 private:
 

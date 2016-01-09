@@ -71,7 +71,12 @@ public:
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
 
     virtual bool calculateDeltaValue() =0;
-    /// Not used but should maybe be used.
+    /// used for initialize value after DDG is made, hence only oneway constraints need it.
+//    virtual bool calculateValue() {
+//        std::cout << "Forgot to implement this method for an invariant used as oneway constraint" << std::endl;
+//        debug;
+//        exit(1);
+//    }
     virtual void updateValue() =0;
 
 //    virtual void initialize() =0;
@@ -182,6 +187,13 @@ public:
     int getVariableID() {
         return variableID;
     }
+    Variable* getVariable() {
+        return variable;
+    }
+    void setVariable(Variable* var) {
+        variable = var;
+    }
+    
 
     /// Correspond to the priority the invariant should be updated. 
     //    unsigned getLayer() {
@@ -220,6 +232,10 @@ public:
     void setBounds(double lb, double ub) {
         lowerbound = lb;
         upperbound = ub;
+    }
+    std::pair<double,double> getBounds() {
+        std::pair<double,double> bounds(lowerbound,upperbound);
+        return bounds;
     }
 
     /// Only used for testing
@@ -271,6 +287,7 @@ protected:
     bool inViolated= false;
     bool representCons = false;
     int variableID = -1;
+    Variable* variable;
     //    InvariantContainer invariants;
     //    updateVector update;
     //    std::set<Invariant*, compare_invariant> update;

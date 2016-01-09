@@ -248,21 +248,21 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
     //    this->print(std::cout);
     printSpaceStatus();
-    unsigned ub = 0;
-    unsigned lb = 0;
-    for (IntVar iv : AllVars) {
-        if (iv.max() != 1) {
-            if (iv.max() != 2147483646) {
-                ub++;
-                //                std::cout << iv->getUpperBound() << std::endl;
-            }
-        }
-        if (iv.min() != 0) {
-            lb++;
-            //            std::cout << iv.min() << std::endl;
-        }
-    }
-    std::cout << "lb " << lb << " ub " << ub << std::endl;
+    //    unsigned ub = 0;
+    //    unsigned lb = 0;
+    //    for (IntVar iv : AllVars) {
+    //        if (iv.max() != 1) {
+    //            if (iv.max() != 2147483646) {
+    //                ub++;
+    //                //                std::cout << iv->getUpperBound() << std::endl;
+    //            }
+    //        }
+    //        if (iv.min() != 0) {
+    //            lb++;
+    //            //            std::cout << iv.min() << std::endl;
+    //        }
+    //    }
+    //    std::cout << "lb " << lb << " ub " << ub << std::endl;
 
 
     //    this->print(std::cout);
@@ -294,14 +294,26 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
             if (so->stop->stop(e.statistics(), *so)) {
                 //                    cout << "\t Solver stopped because of TIME LIMIT!\n";
-                //                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
-                std::cout << "\t Number of nodes expanded: " << e.statistics().node << std::endl;
-                std::cout << "\t Number of failed nodes: " << e.statistics().fail << std::endl;
-                std::cout << "\t Number of restarts: " << e.statistics().restart << std::endl;
+                //                //                    cout << "\t Solver stopped because of  NODE LIMIT!\n";
+                //                std::cout << "\t Number of nodes expanded: " << e.statistics().node << std::endl;
+                //                std::cout << "\t Number of failed nodes: " << e.statistics().fail << std::endl;
+                //                std::cout << "\t Number of restarts: " << e.statistics().restart << std::endl;
+                //                double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
+                //                std::cout << "\t Time spend searching for solution: " << time << " seconds" << std::endl;
+                //
+
+                //                SetValues(AllVars);
+                solutionFound = false;
+                //                std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
+                //                std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+                Gecode::Search::Statistics stat = e.statistics();
+                print_stats(stat);
                 double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
                 std::cout << "\t Time spend searching for solution: " << time << " seconds" << std::endl;
+
             }
         } else {
+            //        } 
             //            s->print(std::cout);
             //            for (int i = 0; i < s->IntVars.size(); i++) {
             //                if(s->IntVars[i].val() != 0){
@@ -330,8 +342,9 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
         std::cerr << "Gecode exception: " << e.what() << std::endl;
         //        return 1;
     }
-    delete s;
-
+    if (solutionFound) {
+        delete s;
+    }
     //    std::cout << "########################################################################################" << std::endl;
     //    std::cout << "solutionFound  "<< solutionFound << std::endl;
     delete ms;
@@ -344,10 +357,14 @@ void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     for (Variable* iv : model->getAllVariables()) {
         if (vars[iv->getID()].assigned()) {
             iv->setCurrentValue(vars[iv->getID() ].val());
+
+            //            std::cout << std::endl;
         } else {
-//            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
-//            std::cout << vars[iv->getID()] << " ";
-            iv->setCurrentValue(vars[iv->getID()].min());
+            //            std::cout << iv->getID() << " ";
+            //            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
+            //                        std::cout << vars[iv->getID()] << " ";
+            iv->setCurrentValue(Random::Integer(vars[iv->getID()].min(), vars[iv->getID()].max()));
+            //            iv->setCurrentValue(vars[iv->getID()].min());
 
         }
     }

@@ -3,7 +3,7 @@
 //#include "Random.hpp"
 
 Model::Model() {
-    
+
 
 }
 
@@ -19,7 +19,7 @@ Model::~Model() {
     for (invariant invar : Invariants) {
         delete invar;
     }
-    
+
 }
 
 std::vector<std::vector<Variable*>>&Model::getPriorityVectors() {
@@ -66,24 +66,27 @@ void Model::setNonFixedVariables(std::vector<Variable*>& nonFixed) {
     //    shuffleMask();
     //    std::cout << &IntVarVector << " vs " << nonFixed << std::endl;
 }
-void Model::addViolatedConstraint(invariant inv){
-//    assert(DDG->getInvariantUpdate(inv->getID()).size() == 1);
-//    assert(DDG->getInvariantUpdate(inv->getID()).at(0)->type == LEQVIO || DDG->getInvariantUpdate(inv->getID()).at(0)->type == EQVIO);
+
+void Model::addViolatedConstraint(invariant inv) {
+    //    assert(DDG->getInvariantUpdate(inv->getID()).size() == 1);
+    //    assert(DDG->getInvariantUpdate(inv->getID()).at(0)->type == LEQVIO || DDG->getInvariantUpdate(inv->getID()).at(0)->type == EQVIO);
     violatedConstraints[inv->getID()] = inv;
     inv->setInViolatedConstraints(true);
-    
+
 }
-void Model::removeViolatedConstraint(invariant inv){
-//    unsigned  size  = violatedConstraints.size();
+
+void Model::removeViolatedConstraint(invariant inv) {
+    //    unsigned  size  = violatedConstraints.size();
     violatedConstraints.erase(inv->getID());
-//    assert(size-1 == violatedConstraints.size());
-//    debug;
+    //    assert(size-1 == violatedConstraints.size());
+    //    debug;
     inv->setInViolatedConstraints(false);
-    
+
 }
-std::unordered_map<unsigned, invariant>& Model::getViolatedConstraints(){
+
+std::unordered_map<unsigned, invariant>& Model::getViolatedConstraints() {
     return violatedConstraints;
-            
+
 }
 //void Model::addInvariantToDDG(invariant invar, variableContainer& variables) {
 //    DDG->addInvariant(invar, variables);
@@ -117,6 +120,7 @@ std::shared_ptr<DependencyDigraph>& Model::getDDG() {
 
 propagation_queue& Model::getPropagationQueue(Variable* iv) {
     assert(DDG->propagationQueueHasBeenMade());
+    assert(!iv->isDef());
     return DDG->getPropagationQueue(iv);
 
 }
@@ -246,10 +250,12 @@ void Model::addToEvaluationInvariants(invariant invar) {
 std::vector<int>& Model::getInitialEvaluation() {
     return initialEvaluation;
 }
-std::vector<Variable*>& Model::getEvaluationVariables(){
+
+std::vector<Variable*>& Model::getEvaluationVariables() {
     return evalVariables;
 }
-Variable* Model::getEvaluationVariableNr(unsigned nr){
+
+Variable* Model::getEvaluationVariableNr(unsigned nr) {
     return evalVariables.at(nr);
 }
 
@@ -310,14 +316,16 @@ void Model::initialize() {
     }
 
 
-    
+
     for (unsigned int i = 0; i < getEvaluationInvariants().size(); i++) {
         initialEvaluation.push_back(getEvaluationInvariants().at(i)->CurrentValue);
-        
+
     }
-    for(constraint cons : *getConstraintsWithPriority(0)){
-        for(Variable* var : cons->getVariables()){
-            evalVariables.push_back(var);
+    for (constraint cons : *getConstraintsWithPriority(0)) {
+        for (Variable* var : cons->getVariables()) {
+            if (!var->isDef() && !var->isFixed()) {
+                evalVariables.push_back(var);
+            }
         }
     }
     std::cout << "EvalVariables size " << evalVariables.size() << std::endl;
@@ -415,7 +423,7 @@ void Model::initialize() {
         auto usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
         std::cout << usedTime << std::endl;
 
-                unsigned count = 0;
+        unsigned count = 0;
         std::cout << "Is this even working?" << std::endl;
         std::vector<int> differentSizes(200, 0);
         for (Variable* iv : getMask()) {
@@ -424,7 +432,7 @@ void Model::initialize() {
             if (inConstraintWith.at(iv->getID()).size() != 0) {
                 if (inConstraintWith.at(iv->getID()).size() != iv->usedInConstraints().size()) {
                     //                    std::cout << inConstraintWith.at(iv->getID()).size() << "  vs  "<< iv->usedInConstraints().size() << std::endl;
-                                        count++;
+                    count++;
                 }
             }
             //                std::cout << inConstraintWith.at(iv->getID()).size() << " ";
@@ -475,6 +483,14 @@ void Model::initialize() {
 std::set<Variable*, Variable::compare_variable>& Model::getInConstraintWithAt(unsigned id) {
     return inConstraintWith.at(id);
 }
+
+std::vector<constraint>& Model::getFeasibleFunctionalConstraints() {
+    return feasibleFunctionalConstriants;
+}
+
+void Model::setFeasibleFunctionalConstraints(std::vector<constraint> funcCons) {
+    feasibleFunctionalConstriants = funcCons;
+}
 //    for (IntegerVariable* iv : getAllVariables()) {
 //        //        if (iv->isDef()) {
 //
@@ -490,16 +506,59 @@ void Model::cleanUp() {
     std::vector<bool>& brokenInvars = getDDG()->getBrokenInvariants();
     //    assert(Invariants.size() == brokenInvars.size());
     InvariantContainer tmp;
+    //    InvariantContainer tmp2;
     for (unsigned i = 0; i < Invariants.size(); i++) {
-        if (brokenInvars.size() <= i || !brokenInvars.at(i)) {
+
+        if (brokenInvars.size() <= i) {
             tmp.push_back(Invariants.at(i));
+        } else if (!brokenInvars.at(i)) {
+            tmp.push_back(Invariants.at(i));
+        } else {
+            brokenInvars.at(i) = false;
+            delete Invariants.at(i);
+
         }
 
     }
     Invariants.swap(tmp);
-    
+
+
+
     std::sort(Invariants.begin(), Invariants.end(), compare_invariant());
-    std::cout << "Clean up pointers, only oneway pointers should be messy" << std::endl; 
+    for (invariant inv : Invariants) {
+        //        std::cout << "vp " << inv->getVariablePointers().size() << " coef " << inv->getCoefficients().size()<< " ip " << inv->getInvariantPointers().size() << std::endl;
+
+        for (invariant invar : inv->getInvariantPointers()) {
+
+            assert(original[invar->getVariableID()]->isDef());
+        }
+
+        for (auto it = inv->getVariablePointers().begin(); it != inv->getVariablePointers().end(); ++it) {
+            //            debug;
+            //            std::cout << (*it)->getID() << std::endl;
+            if ((*it)->isDef()) {
+                inv->getInvariantPointers().push_back((*it)->getOneway());
+                inv->VariablePointers.erase(it);
+                --it;
+
+
+                //                debug;
+            }
+
+
+        }
+        //        std::cout << inv->getVariablePointers().size() << std::endl;
+        //        debug;
+
+
+        if (inv->getInvariantPointers().size() + inv->getVariablePointers().size() != inv->getCoefficients().size()) {
+            std::cout << inv->getInvariantPointers().size() << " + " << inv->getVariablePointers().size() << " != " << inv->getCoefficients().size();
+            debug;
+
+        }
+    }
+
+    //    std::cout << "Clean up pointers, only oneway pointers should be messy" << std::endl; 
     //    unsigned id = Invariants.size()*2;
     //    unsigned timstamp = 600000000;
     //    for(invariant inv : Invariants){
@@ -518,156 +577,3 @@ void Model::cleanUp() {
     //    }
     //    std::cout << "broken size " << brokenInvars.size() << " Invariants size " << Invariants.size() << std::endl;
 }
-
-//void Model::initializeObjective() {
-//    for (invariant invar : getObjectiveInvariant()) {
-//        solutionValue = invar->getCurrentValue();
-//    }
-//    for (IntegerVariable* iv : getAllVariables()) {
-////        if (iv->isDef()) {
-//            
-////            iv->setCurrentValue(iv->getOneway()->getCurrentValue());
-//            solution[iv->getID()] = iv->getCurrentValue();
-////        } else {
-////            solution.at(iv->getID()) = iv->getCurrentValue();
-////        }
-//
-//    }
-//
-//    for (constraint con : *getConstraintsWithPriority(0).get()) {
-//        if (con->isOneway()) {
-//            continue;
-//        }
-//        auto coefficients = con->getCoefficients();
-//        auto variables = con->getVariables();
-//        int lhs = 0;
-//        for (IntegerVariable* iv : variables) {
-//            if (coefficients.at(iv->getID()) != 0) {
-//                std::cout << coefficients.at(iv->getID()) << "*" << iv->getCurrentValue() << " + ";
-//            }
-//            lhs += iv->getCurrentValue() * coefficients.at(iv->getID());
-//        }
-//        std::cout << " = " << lhs << std::endl;
-////        std::cout << "obj val " << con->getViolationDegree() << std::endl;
-//        invariant invar = getObjectiveInvariant().at(0);
-//        int invarVal = invar->getCurrentValue();
-//        auto rhs = con->getArgument(1);
-//        auto rel = con->getArgument(0);
-//        std::string all = std::to_string(lhs) + " " + std::to_string(rel) + " " + std::to_string(rhs) + "\n" + std::to_string(invarVal);
-//        //            if (invarVal != lhs) {
-//        std::cout << all << std::endl;
-//        std::cout << invar->getType() << " " << invar->getID() << std::endl;
-//    }
-//
-//
-//
-//    int violations = 0;
-//    //    for (unsigned i = 0; i < Constraints->at(0)->size(); i++) {
-//    for (std::shared_ptr < Constraint> obj : *getConstraints().at(0)) {
-//
-//        //        violations += obj->getViolationDegree();
-//        obj->updateViolationDegree();
-//        violations += obj->getViolationDegree();
-//    }
-//    solutionValue = violations;
-//    std::cout << "Initial solution value: " << violations << std::endl;
-//        return violations;
-//
-//}
-
-
-//std::vector<std::shared_ptr<std::pair<int,int>>>& Model::getConstraintsWithIntegerVariables(){
-//    return ConstraintsWithIntegerVariables;
-//}
-//void Model::saveSolution() {
-//    solutionValue = getObjectiveValue();
-//    for (int i = 0; i < getNumberOfVariables(); i++) {
-//        solution->at(i) = IntVarVector->at(i)->getCurrentValue();
-//    }
-//}
-//
-//std::vector<int>* Model::getSolution() {
-//    return solution;
-//}
-//
-//int Model::getSolutionValue() {
-//    return solutionValue;
-//}
-//
-//void Model::setSolution() {
-//
-//    // setting invariants
-//
-//    for (unsigned i = 0; i < solution->size(); i++) {
-//
-//        IntegerVariable* current = IntVarVector->at(solution->at(i));
-//        for (unsigned j = 0; j < current->getUpdateVector()->size(); j++) {
-//            int invariantNumber = current->getUpdateVector()->at(j);
-//            Invariants->at(invariantNumber)->addChange(current->getID(), solution->at(i) - current->getCurrentValue());
-//        }
-//    }
-//    for (unsigned i = 0; i < Invariants->size(); i++) {
-//        Invariants->at(i)->calculateDeltaValue();
-//        Invariants->at(i)->updateValue();
-//    }
-//    // Setting constraints
-//    int violations = 0;
-//    for (unsigned i = 1; i < Constraints->size(); i++) {
-//        std::vector<std::shared_ptr < Constraint>>*prio = getConstraintsWithPriority(i);
-//        //        for (unsigned j = 0; j < prio->size(); j++) {
-//        for (std::shared_ptr<Constraint> cons : *prio) {
-//            violations += cons->updateViolation();
-//        }
-//    }
-//    if (violations != 0) {
-//        std::cout << "Final solution not feasible? violations: " << violations << std::endl;
-//        sleep(2);
-//    }
-//    // setting objective value
-//    violations = 0;
-//    //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
-//    for (std::shared_ptr<Constraint> obj : *Constraints->at(0)) {
-//        violations += obj->updateViolationDegree();
-//        //        violations += getConstraintsWithPriority(0)->at(i)->updateViolationDegree();
-//    }
-//    std::cout << "Final solution " << violations << " (" << solutionValue << ")" << std::endl;
-//    solutionValue = violations;
-//
-//}
-//
-//bool Model::recalculateAll() {
-//    //    std::cout << Invariants->at(0)->getUsedInConstraint() << std::endl;
-//    //    std::cout << "lhs " << Invariants->at(0)->getCurrentValue() << std::endl;
-//    //    for(int i = 0; i < numberOfVariables; i++ ){
-//    //        std::cout << IntVarVector->at(i)->getCurrentValue() << " ";
-//    //    }
-//    //    std::cout << std::endl;
-//    bool success = true;
-//    //    for (unsigned i = 0; i < Invariants->size(); i++) {
-//    for (std::shared_ptr<Invariant> invar : *Invariants) {
-//        //        std::shared_ptr<Invariant> invar = Invariants->at(i);
-//        //        Invariant* invar = Invariants->at(i);
-//        if (!invar->test()) {
-//            success = false;
-//        }
-//    }
-//    for (unsigned i = 1; i < Constraints->size(); i++) {
-//        std::vector<std::shared_ptr < Constraint>>*prio = getConstraintsWithPriority(i);
-//        for (unsigned j = 0; j < prio->size(); j++) {
-//            std::shared_ptr<Constraint> cons = prio->at(i);
-//
-//            if (!cons->testCons()) {
-//                success = false;
-//            }
-//        }
-//    }
-//    //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
-//    for (std::shared_ptr<Constraint> obj : *getConstraintsWithPriority(0)) {
-//
-//        //        std::shared_ptr<Constraint> obj = getConstraintsWithPriority(0)->at(i);
-//        if (!obj->testObj()) {
-//            success = false;
-//        }
-//    }
-//    return success;
-//}

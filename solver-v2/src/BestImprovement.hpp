@@ -13,6 +13,7 @@ public:
     ~BestImprovement();
 private:
     std::shared_ptr<Model> model;
+//    unsigned sidewalk = 0;
 };
 
 #endif	/* BESTIMPROVEMENT_HPP */

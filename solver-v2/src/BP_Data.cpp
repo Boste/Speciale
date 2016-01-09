@@ -51,7 +51,7 @@ BP_Input::BP_Input(string file_name) {
     for (int j = 0; j < nvars; j++) {
         var tmp;
         tmp.objcoeff = t.getObjCoefficients()[j];
-
+        
         // Hvad var det var type blev brugt til? Kun til udskrift?
         //        char* t = solver;
         //        if(t=='G'){
@@ -79,6 +79,9 @@ BP_Input::BP_Input(string file_name) {
         //        }
         //        assert(tmp.lb >=0 && tmp.ub <=1);
         vars[j] = tmp;
+        if(tmp.objcoeff != 0.0){
+            objVars.push_back(j);
+        }
     }
 
 

@@ -1,4 +1,5 @@
 #include "Sum.hpp"
+#include "BPSolver.hpp"
 
 //Sum::Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id)  {
 //    type = SUM;
@@ -133,7 +134,9 @@ bool Sum::calculateDeltaValue() {
 
     if (DeltaValue + CurrentValue < lowerbound) {
         //        DeltaValue = 0;
+        //        if (DeltaValue < 0) {
         return false;
+        //        }
         //            std::cout << "should not be a legal move" << std::endl;
         //            std::cout << "delta + currentvalue = " << DeltaValue + CurrentValue << std::endl; 
         //            std::cout << "variable id " << variableID << std::endl;
@@ -141,7 +144,9 @@ bool Sum::calculateDeltaValue() {
     }
     if (DeltaValue + CurrentValue > upperbound) {
         //        DeltaValue = 0;
+        //        if (DeltaValue > 0) {
         return false;
+        //        }
     }
     //    DeltaValue = valueChange;
 
@@ -195,6 +200,56 @@ void Sum::updateValue() {
 
     //    DeltaValue = 0;
 }
+
+//bool Sum::calculateValue() {
+//    double realValue = 0;
+//    //    bool test = false;
+//    //    if (variableID == 256) {
+//    //        test = true;
+//    //    }
+//    for (Variable* iv : VariablePointers) {
+//        unsigned id = iv->getID();
+//        double coef = coefficients.at(id);
+//        int varValue;
+//
+//
+//        if (iv->isDef()) {
+//            varValue = iv->getOneway()->getCurrentValue();
+//            //            if(varValue <0){
+//            if (varValue < iv->getLowerBound()) {
+//                std::cout << "this should never happen, prob defined by wrong invariant (sum instead of max)" << std::endl;
+//                std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
+//                std::cout << "value of variable " << varValue << std::endl;
+//                debug;
+//
+//            }
+//            if (iv->getCurrentValue() != varValue) {
+//                //                std::cout << "should update the variable value according to the oneway defining it" << std::endl;
+//            }
+//        } else {
+//            varValue = iv->getCurrentValue();
+//        }
+//        //        if (test && varValue!=0) {
+//        //            std::cout << coef << "*"<< varValue  << " + ";
+//        //        }
+//        realValue += varValue*coef;
+//    }
+//    for (invariant inv : InvariantPointers) {
+//        unsigned id = inv->getVariableID();
+//
+//        double coef = coefficients.at(id);
+//
+//        realValue += inv->getCurrentValue() * coef;
+//        //        std::cout << inv->getCurrentValue() << std::endl;
+//    }
+//    //    if (test) {
+//    //        std::cout << startValue << std::endl;
+//    //        std::cout << "total value " << realValue << std::endl;
+//    //    }
+//    realValue += startValue;
+//    return true;
+//
+//}
 /// update currentValue by adding currentValue*coeff of all variables and invariants 
 
 //void Sum::initialize() {
@@ -275,6 +330,7 @@ bool Sum::test() {
     if (CurrentValue != realValue) {
         std::cout << "ID: " << getID() << " real value " << realValue << " current value " << CurrentValue << " variableID = "
                 << variableID << " start value " << startValue << std::endl;
+        
         bool gotInt = false;
         for (auto iv : VariablePointers) {
             //            if(iv->isDef()){

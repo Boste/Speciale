@@ -15,31 +15,32 @@ MinConflictFlipNE::~MinConflictFlipNE() {
 }
 
 Move* MinConflictFlipNE::next() {
-//    std::cout << "Use iterator and variable pointers, remember to fix the pointers" << std::endl;
-    Variable* var;
+    //    std::cout << "Use iterator and variable pointers, remember to fix the pointers" << std::endl;
+    //    Variable* var;
     //    debug;'    std::cout << moveCounter << std::endl;
-//    std::cout << moveCounter << std::endl;
+    //    std::cout << moveCounter << std::endl;
 
-    if (moveCounter < moveIterator->second->getVariablePointers().size()) {
-//        debug;
-        var = moveIterator->second->getVariablePointers().at(moveCounter);
-
-    } else {
-//        debug;
-        moveIterator++;
-        moveCounter = 0;
-        if (moveIterator == model->getViolatedConstraints().end()) {
-//            debug;
-
-            var = moveIterator->second->getVariablePointers().at(moveCounter);
-            //            moveIterator++;
-        } else {
-//            debug;
-//            std::cout << moveIterator->second->getVariablePointers().size() << std::endl;
-            var = moveIterator->second->getVariablePointers().at(moveCounter);
-        }
-    }
-//    debug;
+    //    if (moveCounter < moveIterator->second->getVariablePointers().size()) {
+    //        debug;
+    Variable* var = varsInNeighborhood.at(moveCounter);
+//    assert(!var->isDef() && !var->isFixed());
+    //    } else {
+    //        //        debug;
+    //     
+    //    moveIterator++;
+    //        moveCounter = 0;
+    //        if (moveIterator == model->getViolatedConstraints().end()) {
+    //            //            debug;
+    //
+    //            var = moveIterator->second->getVariablePointers().at(moveCounter);
+    //            //            moveIterator++;
+    //        } else {
+    //            //            debug;
+    //            //            std::cout << moveIterator->second->getVariablePointers().size() << std::endl;
+    //            var = moveIterator->second->getVariablePointers().at(moveCounter);
+    //        }
+    //    }
+    //    //    debug;
     //    Variable* iv = model->getMaskAt(moveCounter);
     moveCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -56,34 +57,57 @@ bool MinConflictFlipNE::hasNext() {
             return false;
         }
         firstMove = false;
-        moveIterator = model->getViolatedConstraints().begin();
+        int rand = Random::Integer(model->getViolatedConstraints().size() - 1);
+        std::unordered_map<unsigned, invariant>::iterator moveIterator = model->getViolatedConstraints().begin();
+
+        for (int i = 0; i < rand; i++) {
+            moveIterator++;
+        }
+        InvariantContainer invariantQueue;
+        invariantQueue.push_back(moveIterator->second);
+        while (!invariantQueue.empty()) {
+            invariant inv = invariantQueue.back();
+            invariantQueue.pop_back();
+            for (invariant invar : inv->getInvariantPointers()) {
+                invariantQueue.push_back(invar);
+            }
+            for (Variable* var : inv->getVariablePointers()) {
+//                assert(!var->isDef());
+                if (!var->isFixed()) {
+                    varsInNeighborhood.push_back(var);
+                }
+            }
+        }
 
     }
     //    debug;
-//    std::cout << "Constriants in conflict " << model->getViolatedConstraints().size() << std::endl;
-//    for (std::pair<unsigned, invariant> inv : model->getViolatedConstraints()) {
-//        std::cout << inv.second->getVariablePointers().size() << std::endl;
-//        std::cout << inv.second->getInvariantPointers().size() << std::endl;
-//    }
+    //    std::cout << "Constriants in conflict " << model->getViolatedConstraints().size() << std::endl;
+    //    for (std::pair<unsigned, invariant> inv : model->getViolatedConstraints()) {
+    //        std::cout << inv.second->getVariablePointers().size() << std::endl;
+    //        std::cout << inv.second->getInvariantPointers().size() << std::endl;
+    //    }
     //    debug;
 
     //    moveIterator++;
-    while (moveIterator != model->getViolatedConstraints().end()) {
-//        std::cout <<  moveIterator->first<< " violations " << state->getEvaluation().at(1) << std::endl;
-        if (moveCounter >= moveIterator->second->getVariablePointers().size()) {
-            moveCounter = 0;
-            moveIterator++;
-            continue;
-        }
-
-//        debug;
-        return true;
+    //    while (moveIterator != model->getViolatedConstraints().end()) {
+    //        std::cout <<  moveIterator->first<< " violations " << state->getEvaluation().at(1) << std::endl;
+    if (moveCounter >= varsInNeighborhood.size()) {
+        moveCounter = 0;
+        firstMove = true;
+        varsInNeighborhood.clear();
+        return false;
+        //            moveIterator++;
+        //            continue;
     }
-//    debug;
-    
-    moveCounter = 0;
-    firstMove = true;
-    return false;
+
+    //        debug;
+    return true;
+    //    }
+    //    debug;
+
+    //    moveCounter = 0;
+    //    firstMove = true;
+    //    return false;
 }
 
 Move* MinConflictFlipNE::nextRandom() {
@@ -114,6 +138,7 @@ bool MinConflictFlipNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
 
     Variable* variable = mv->var;
+//    assert(!variable->isDef());
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
 
@@ -151,6 +176,8 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
     moveCounter = 0;
     firstMove = true;
     Variable* var = mv->getVar();
+//    assert(!var->isDef());
+
     std::vector<int>& evaluation = state->getEvaluation();
 
     // Skal genberegne!!!!!
@@ -167,15 +194,15 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
         if (invar->representConstraint()) {
             if (invar->getCurrentValue() == 0) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
-//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
                 }
             } else {
                 if (!invar->inViolatedConstraints()) {
-//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
-//                    vioCons[invar->getInvariantPointers().back()->getID()] = invar->getInvariantPointers().back();
-//                    invar->getInvariantPointers().back()->setInViolatedConstraints(true);
+                    //                    vioCons[invar->getInvariantPointers().back()->getID()] = invar->getInvariantPointers().back();
+                    //                    invar->getInvariantPointers().back()->setInViolatedConstraints(true);
 
                 }
             }
@@ -184,7 +211,7 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
     for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
         evaluation[i] = model->getEvaluationInvariantNr(i)->getCurrentValue();
     }
-    
+
     return true;
 }
 

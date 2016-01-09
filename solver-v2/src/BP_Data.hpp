@@ -84,6 +84,9 @@ public:
     vector<var> getVars() const {
         return vars;
     }
+    vector<unsigned> getObjVars() const {  
+        return objVars;
+    }
     int getDirection() const {
         return direction;
     }
@@ -126,6 +129,7 @@ protected:
 
     vector<bounds> bterms;
     vector<var> vars;
+    vector<unsigned> objVars;
 };
 
 class BP_Output {

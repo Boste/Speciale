@@ -42,6 +42,7 @@ private:
     unsigned id = 0;
 //    std::vector<constraint> functionalConstraints;
     std::unordered_map<unsigned, invariant>  violatedConstraints;
+    std::vector<constraint> feasibleFunctionalConstriants;
     
 public:
     /// Should be moved to state
@@ -119,6 +120,8 @@ public:
     invariant getEvaluationInvariantNr(unsigned nr);
     std::vector<Variable*>& getEvaluationVariables();
     Variable* getEvaluationVariableNr(unsigned nr);
+    std::vector<constraint>& getFeasibleFunctionalConstraints();
+    void setFeasibleFunctionalConstraints(std::vector<constraint> funcCons);
 //    void addToObjectiveInvariant(invariant invar);
     void addToEvaluationInvariants(invariant invar);
     void initialize();

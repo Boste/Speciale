@@ -28,7 +28,7 @@ class Variable;
 // General/Random things
 #define RANDOMSEED 1337
 #define PRINT TRUE
-#define debug std::cout << __FILE__ << " " << __FUNCTION__ << " " << __LINE__ << std::endl; sleep(1);
+#define debug std::cout << __FILE__ << " " << __FUNCTION__ << " " << __LINE__ << std::endl; // sleep(1);
 
 // Relations
 #define EQ 0

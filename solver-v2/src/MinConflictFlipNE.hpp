@@ -3,6 +3,7 @@
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
+#include "Variable.hpp"
 //#include "Random.hpp"
 //#include "boost/random/mersenne_twister.hpp"
 //#include "boost/random/uniform_int_distribution.hpp"
@@ -38,9 +39,10 @@ public:
 
 private:
     unsigned moveCounter = 0;
-    std::unordered_map<unsigned, invariant>::iterator moveIterator;
+    //    std::unordered_map<unsigned, invariant>::iterator moveIterator;
+    std::vector<Variable*> varsInNeighborhood;
     bool firstMove = true;
-//    unsigned moveCounter2 = 0;
+    //    unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;
     unsigned randomMovesWanted = 0;
     //    template<typename returnType>

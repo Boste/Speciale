@@ -24,6 +24,7 @@ Move* FlipObjNE::next() {
 }
 
 bool FlipObjNE::hasNext() {
+    
     if (moveCounter < model->getEvaluationVariables().size()) {
         return true;
     } else {

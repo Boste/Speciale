@@ -44,7 +44,8 @@ public:
     ~LSSpace() {
 
     }
-    void initializeLS();
+    void initializeLS(bool feasible);
+    void createDDG(bool all);
     //        bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
 //    bool canBeMadeOneway(constraint cons);
 //    void makeOneway(Variable* iv, constraint cons);

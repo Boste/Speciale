@@ -88,6 +88,7 @@ public:
                     GeneralSolver::linear(c, x, LQ, upperbound, HARD);
                 }
             }
+         
             //            delete x;
             // deleter den også pointer inden i vector?
             //            delete x;
@@ -99,26 +100,32 @@ public:
         std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
-//        std::vector<int> c(varInt.size());
-        std::vector<int> c(0);
+        //        std::vector<int> c(varInt.size());
+        std::vector<int> c;
         //        std::vector<IntegerVariable*>* x = new std::vector<IntegerVariable*>(varInt.size());
-        std::vector<Variable*> x(0);
-//        std::vector<Variable*> x(varInt.size());
-
-        for (unsigned i = 0; i < varInt.size(); i++) {
-            if(in->getVar(i).objcoeff == 0){
-//                std::cout <<  in->getVar(i).objcoeff << std::endl;
-                continue;
-            }
-            
-            c.push_back(in->getVar(i).objcoeff);
+        std::vector<Variable*> x;
+        //        std::vector<Variable*> x(varInt.size());
+//        std::cout << varInt.size() << std::endl;
+        std::vector<unsigned> obj = in->getObjVars();
+//        std::cout << obj.size() << std::endl;
+//        std::cout << in->getObjVars().size() << std::endl;
+        for (unsigned i : obj) {
+//            std::cout << i << " ";
+//            debug;
+//            if (in->getVar(i).objcoeff == 0) {
+                //                std::cout <<  in->getVar(i).objcoeff << std::endl;
+//                continue;
+//          
+//            std::cout << i << " ";
+            c.push_back((int) in->getVar(i).objcoeff);
             //            x->at(i) = varInt.at(i);
-            assert(in->getVar(i).objcoeff == (double) c.at(i));
-            
+            assert(in->getVar(i).objcoeff == (double) c.back());
+
             x.push_back(varInt.at(i));
         }
-//        c.shrink_to_fit();
-//        x.shrink_to_fit();
+        
+        //        c.shrink_to_fit();
+        //        x.shrink_to_fit();
 
         GeneralSolver::linear(c, x, LQ, 0, OBJ);
         //        delete x;

@@ -42,13 +42,13 @@ public:
 
     ~Linear() {
         //        delete lhs;
-        
+
         coefficients.clear();
     }
 
     InvariantContainer& createInvariants() {
         int value = 0;
-//        InvariantContainer invars;
+        //        InvariantContainer invars;
         std::unordered_map<int, coefType>& coef = this->getCoefficients();
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
         //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
@@ -89,7 +89,8 @@ public:
                 if (value == rhs) {
                     eq->setValue(0);
                 } else {
-                    eq->setValue(1);
+                    eq->setValue(std::abs(value - rhs));
+                    //                    eq->setValue(1);
                 }
                 invars.push_back(eq);
             } else {
@@ -114,7 +115,7 @@ public:
 
 
 
-//        assert(invars.size()>0);
+        //        assert(invars.size()>0);
         return invars;
     }
 
@@ -127,6 +128,18 @@ public:
         //    }
         if (this->getArgument(0) == LQ) {
             return false;
+        }
+        //        std::cout <<  this->getArgument(1) << " ";
+        for (auto it = coefficients.begin(); it != coefficients.end(); it++) {
+            double coef = it->second;
+            if (coef == 1 || coef == -1) {
+                //                debug;
+                //                return false; 
+                //                return false; 
+            } else {
+                debug;
+                return false;
+            }
         }
         // Find best iv to define (currently the one not defining other variables)
         bool canBeMadeOneway = false;
@@ -146,9 +159,9 @@ public:
             }
 
             // Will not make cycles 
-            //        if(defining.at(iv->getID())>0){
-            //            continue;
-            //        }
+            //                    if(iv->getDefining()>0){
+            //                        continue;
+            //                    }
             if (defined > iv->getDefining()) {
                 bestVar = iv;
                 canBeMadeOneway = true;
@@ -209,6 +222,7 @@ public:
         }
         if (canBeMadeOneway) {
             defining = bestVar;
+            bestVar->increaseDefining();
         }
         return canBeMadeOneway;
         //        if (canBeMadeOneway) {
@@ -221,12 +235,14 @@ public:
 
     invariant makeOneway() {
         Variable* var = defining;
+        assert(priority != OBJ);
         variableContainer& oldVars = this->getVariables();
         std::unordered_map<int, coefType> coefficients = this->getCoefficients();
         std::unordered_map<int, coefType> newCoefficients;
         double coeff = coefficients.at(var->getID());
         //    std::cout << cons->getArgument(1) << "  "<< coeff<< std::endl;
-        double value = -this->getArgument(1);
+
+        int value = -this->getArgument(1);
         assert(coeff != 0);
         if (coeff == -1) {
             for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {
@@ -244,13 +260,15 @@ public:
         }
         if (coeff < -1 || 1 < coeff) {
             std::cout << coeff << std::endl;
+            debug;
         }
         newCoefficients.erase(var->getID());
         //    std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(newCoefficients);
         Sum* sumInvariant = new Sum(newCoefficients);
-        InvariantContainer invariants;
-        variableContainer vars;
-        //        variableContainer varsAndInvars;
+        //        InvariantContainer invariants;
+        //        variableContainer vars;
+        variableContainer varsAndInvars;
+
         sumInvariant->setStartValue(value);
         //    std::cout << value << " ";
 
@@ -259,19 +277,19 @@ public:
                 unsigned id = oldiv->getID();
                 value += newCoefficients.at(id) * (oldiv->getCurrentValue()*1.0);
                 oldiv->increaseDefining();
-                //                varsAndInvars.push_back(oldiv);
-                if (var->isDef()) {
-                    invariants.push_back(oldiv->getOneway());
-                } else {
-                    vars.push_back(oldiv);
-                }
+                varsAndInvars.push_back(oldiv);
+                //                if (var->isDef()) {
+                //                    invariants.push_back(oldiv->getOneway());
+                //                } else {
+                //                    vars.push_back(oldiv);
+                //                }
             }
         }
 
-        //        sumInvariant->setVariablePointers(varsAndInvars);
-        sumInvariant->setVariablePointers(vars);
-        sumInvariant->setInvariantPointers(invariants);
-        assert(vars.size() + invariants.size() == newCoefficients.size());
+        sumInvariant->setVariablePointers(varsAndInvars);
+        //        sumInvariant->setVariablePointers(vars);
+        //        sumInvariant->setInvariantPointers(invariants);
+        //        assert(vars.size() + invariants.size() == newCoefficients.size());
         //        sumInvariant->invariantID = model->getInvariants().size();
         //        model->addInvariant(sumInvariant);
         sumInvariant->setVariableID(var->getID());
@@ -282,20 +300,20 @@ public:
         assert(value == (int) value);
         assert(var->getCurrentValue() >= var->getLowerBound());
         sumInvariant->setValue(value);
-
+        sumInvariant->setVariable(var);
+        assert(var == defining);
         if (value != var->getCurrentValue()) {
             std::cout << value << " vs " << var->getCurrentValue() << " ";
 
         }
-
         var->setDefinedBy(sumInvariant, this);
-        //        this->setInvariant(sumInvariant);
+        //                this->setInvariant(sumInvariant);
         onewayInvariant = sumInvariant;
         //            sumInvariant->variableID = iv->getID();
         sumInvariant->setBounds(var->getLowerBound(), var->getUpperBound());
-        if (!sumInvariant->test()) {
-
-        }
+        //        if (!sumInvariant->test()) {
+        //
+        //        }
         this->isOneway(true);
 
         return sumInvariant;

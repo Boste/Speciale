@@ -57,7 +57,7 @@ public:
     void breakCycles();
     std::shared_ptr<invariantNode> breakTie(unsigned cycleNumber);
     void undefineVariable(std::shared_ptr<invariantNode> invar);
-    void addToQueue(propagation_queue& orgQueue, updateVector& queue);
+    void addToQueue(propagation_queue& orgQueue, updateVector& queue, int depth);
     void printSizes();
     std::vector<bool>& getBrokenInvariants();
 
@@ -72,7 +72,9 @@ private:
 //    invariantNodeContainer invariant_nodes = invariantNodeContainer();
     /// Vector of all invariants (probably sorted by id but maybe id != index)
     //    invariantNodeContainer invariants;
+    /// Vector of invariants that should be deleted if true. 
     std::vector<bool> brokenInvariants;
+    /// If a cycle id has been broken 
     std::vector<bool> brokenCycles;
     bool madePropagationQueues = false;
     unsigned timestampCounter = 0;
@@ -80,7 +82,9 @@ private:
     std::vector<std::shared_ptr<invariantNode>> SCC;
 //    std::vector<std::shared_ptr<invariantNode>> SCC = invariantNodeContainer();
     int cycleCounter = 0;
+    /// A vector of cycles. Each cycle has the id of the invariants
     std::vector<std::vector<unsigned >> cycles;
+    /// The cycle ids an invariant is in
     std::vector<std::vector<unsigned >> invariantsCycles;
 
 };

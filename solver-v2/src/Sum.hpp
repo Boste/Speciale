@@ -37,6 +37,8 @@ public:
     Sum();
     Sum(const Sum &a);
 
+    bool calculateValue();
+
     ~Sum();
 
 //    Sum& operator=(const Sum &a);

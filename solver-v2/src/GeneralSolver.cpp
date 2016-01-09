@@ -262,53 +262,67 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
     if (GS->initialize(TimeForGecode, true)) {
         //    if (false) {
 
+
+        //    else {
+        //        std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
+        //        int timesRelaxed = 1;
+        //        //        int timesRelaxed = 7;
+        //        bool solutionFound = false;
+        //        for (unsigned i = 0; i < model->getConstraints().size(); i++) {
+        //            std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
+        //        }
+        //        while (!solutionFound && timesRelaxed != 6) {
+        //            relax(timesRelaxed);
+        //            timesRelaxed++;
+        //            //                GS->branch(false);
+        //            solutionFound = GS->initialize(TimeForGecode, false);
+        //        }
+        //        if (!solutionFound) {
+        //            std::cout << "Relaxation failed" << std::endl;
+        ////            exit(1);
+        //            std::cout << "Relaxation failed, trying with random initial assignment of variables value" << std::endl;
+        ////                        exit(1);
+        //            relax(timesRelaxed);
+        //            GS->initialize(TimeForGecode, false);
+        //        }
+        //        //        assert(s != NULL);
+        //        //        assert(!s->failed());
+        //        //        return s;
+        //        //
+        //        //                this->print(cout);
+        //    }
+
+        //            fixVariables();
+
+
+        //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Obj value after gecode
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        int initialValue = 0;
+        constraint obj = model->getConstraintsWithPriority(0)->at(0);
+        auto coef = obj->getCoefficients();
+        for (Variable* iv : obj->getVariables()) {
+            double coeff = coef.at(iv->getID());
+            if (coeff != 0) {
+                //                std::cout << "id " << iv->getID() << " value " << iv->getCurrentValue() << " coeff " << coeff << std::endl;
+                initialValue += coeff * iv->getCurrentValue();
+            }
+        }
+        std::cout << "This should be initial value " << initialValue << std::endl;
+
+
+
+        LS->createDDG(true);
+        LS->initializeLS(true);
     } else {
-        std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
-        int timesRelaxed = 1;
-        //        int timesRelaxed = 7;
-        bool solutionFound = false;
-        for (unsigned i = 0; i < model->getConstraints().size(); i++) {
-            std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
-        }
-        while (!solutionFound && timesRelaxed != 6) {
-            relax(timesRelaxed);
-            timesRelaxed++;
-            //                GS->branch(false);
-            solutionFound = GS->initialize(TimeForGecode, false);
-        }
-        if (!solutionFound) {
-            std::cout << "Relaxation failed" << std::endl;
-            exit(1);
-            std::cout << "Relaxation failed, trying with initial assignment of variables to minimum value" << std::endl;
-//                        exit(1);
-            relax(timesRelaxed);
-            GS->initialize(TimeForGecode, false);
-        }
-        //        assert(s != NULL);
-        //        assert(!s->failed());
-        //        return s;
-        //
-        //                this->print(cout);
+        relaxAllNonFunctionel(TimeForGecode);
+        
+        LS->createDDG(false);
+        LS->initializeLS(false);
+
     }
 
-    //            fixVariables();
 
-
-    //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-    // Obj value after gecode
-    // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-    int initialValue = 0;
-    constraint obj = model->getConstraintsWithPriority(0)->at(0);
-    auto coef = obj->getCoefficients();
-    for (Variable* iv : obj->getVariables()) {
-        double coeff = coef.at(iv->getID());
-        if (coeff != 0) {
-            //                std::cout << "id " << iv->getID() << " value " << iv->getCurrentValue() << " coeff " << coeff << std::endl;
-            initialValue += coeff * iv->getCurrentValue();
-        }
-    }
-    std::cout << "This should be initial value " << initialValue << std::endl;
-    LS->initializeLS();
     //        st = std::make_shared<State>(model);
 
 
@@ -316,9 +330,118 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
     //        delete so;
 }
 
+bool GeneralSolver::relaxAllNonFunctionel(int TimeForGecode) {
+    int numberOfConstraints = 0;
+    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+
+    for (Variable* iv : model->getAllVariables()) {
+        int lb = iv->getLowerBound();
+        int ub = iv->getUpperBound();
+
+
+        GS->createGecodeVariable(lb, ub);
+    }
+    GS->createArray();
+    std::vector<constraint> funcCons;
+    for (int i = model->getConstraints().size() - 1; i > 0; i--) {
+        numberOfConstraints += model->getConstraintsWithPriority(i)->size();
+        constraintContainer prio = model->getConstraintsWithPriority(i);
+
+        for (constraint cons : *prio) {
+            if (cons->isFunctional()) {
+                funcCons.push_back(cons);
+            }
+        }
+    }
+    if (funcCons.size() == 0) {
+        return false;
+    }
+    for (constraint cons : funcCons) {
+        std::vector<Variable*> variables = cons->getVariables();
+
+        if (cons->getType() == LINEAR) { // otherwise it is in objective function atm.
+            //                    Gecode::IntArgs c(integerVariables->size());
+            std::vector<int> c(variables.size());
+
+            //                    Gecode::IntVarArgs x(integerVariables->size());
+            for (unsigned j = 0; j < variables.size(); j++) {
+                //                    debug;
+                c[j] = cons->getCoefficients().at(variables.at(j)->getID()); //                    std::cout << __LINE__ << std::endl;
+
+            }
+            //                IntConLevel icl = cons->getICL();
+            int relation = cons->getArgument(0);
+            int ub = cons->getArgument(1);
+            GS->linear(c, variables, relation, ub);
+            //            posted++;
+        } else {
+            std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
+        }
+    }
+    bool solution = GS->initialize(TimeForGecode, false);
+    //    std::vector<constraint> ;
+    unsigned repeated = 0;
+    while (!solution) {
+        repeated++;
+//        std::cout << "Number of constraints " << funcCons.size() << std::endl;
+
+        funcCons = furtherRelax(funcCons, repeated);
+        solution = GS->initialize(TimeForGecode, false);
+
+    }
+    model->setFeasibleFunctionalConstraints(funcCons);
+
+    return solution;
+}
+/// Half the constraints posted every time
+
+std::vector<constraint> GeneralSolver::furtherRelax(std::vector<constraint> cons, unsigned  reapted) {
+    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+
+    for (Variable* iv : model->getAllVariables()) {
+        int lb = iv->getLowerBound();
+        int ub = iv->getUpperBound();
+
+
+        GS->createGecodeVariable(lb, ub);
+    }
+    GS->createArray();
+
+    std::vector<constraint> constraintsPosted;
+//    for (unsigned i = 0; i < cons.size() / 2; i++) {
+    
+    for (unsigned i = 0; i < cons.size(); i++) {
+        if(Random::Integer(reapted)==0){
+            continue;
+        }
+        constraint con = cons.at(i);
+        std::vector<Variable*> variables = con->getVariables();
+
+        if (con->getType() == LINEAR) { // otherwise it is in objective function atm.
+            //                    Gecode::IntArgs c(integerVariables->size());
+            std::vector<int> c(variables.size());
+
+            //                    Gecode::IntVarArgs x(integerVariables->size());
+            for (unsigned j = 0; j < variables.size(); j++) {
+                //                    debug;
+                c[j] = con->getCoefficients().at(variables.at(j)->getID()); //                    std::cout << __LINE__ << std::endl;
+
+            }
+            //                IntConLevel icl = cons->getICL();
+            int relation = con->getArgument(0);
+            int ub = con->getArgument(1);
+            GS->linear(c, variables, relation, ub);
+            //            posted++;
+        } else {
+            std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << con->getType() << std::endl;
+        }
+        constraintsPosted.push_back(con);
+    }
+    return constraintsPosted;
+}
+
 /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
 /// Only works for binary
-
 
 /// Different relaxation can be chosen (not atm) needs to create a new GecodeSolver (Space) and recreate some 
 /// of the calls the user made (those that should not be relaxed).

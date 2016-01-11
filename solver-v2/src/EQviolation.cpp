@@ -13,23 +13,23 @@ EQviolation::~EQviolation() {
 }
 
 bool EQviolation::calculateDeltaValue() {
-    if(VariableChange.size() == 0){
-        debug;
+    if (VariableChange.size() == 0) {
+        DeltaValue = 0;
+
         return true;
-    } 
-//    if(VariableChange.size() > 1){
-//        debug;
-//    } 
-    
+    }
+    //    if(VariableChange.size() > 1){
+    //        debug;
+    //    } 
+
     if (LHS->getCurrentValue() + VariableChange.back() == RHS) {
 
         DeltaValue = -CurrentValue;
     } else {
-        //        DeltaValue = 
         int old = std::abs(LHS->getCurrentValue() - RHS);
         int ne = std::abs(LHS->getCurrentValue() + VariableChange.back() - RHS);
-        DeltaValue = ne-old;
-//                DeltaValue = 1 - CurrentValue;
+        DeltaValue = ne - old;
+        //        DeltaValue = 1 - CurrentValue;
     }
     VariableChange.pop_back();
 
@@ -42,7 +42,6 @@ void EQviolation::proposeChange(int variableNumber, int changeInValue) {
 
 void EQviolation::updateValue() {
     CurrentValue += DeltaValue;
-    //    DeltaValue = 0;
 }
 
 bool EQviolation::test() {

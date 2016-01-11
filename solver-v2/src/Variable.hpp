@@ -49,7 +49,8 @@ protected:
     //    }
     //    updateVector update;
     //    Gecode::IntVarArray* ArrayPointer;
-    Gecode::IntVar* VariablePointer;
+    Gecode::BoolVar* VariablePointer;
+//    Gecode::IntVar* VariablePointer;
 
     //    void clearUpdateVector() {
     ////        for(InvariantContainer invars : update){
@@ -153,11 +154,13 @@ public:
         definedByCons->isOneway(false);
     }
 
-    Gecode::IntVar* getVariablePointer() {
+    Gecode::BoolVar* getVariablePointer() {
+//    Gecode::IntVar* getVariablePointer() {
         return VariablePointer;
     }
 
-    void setVariablePointer(Gecode::IntVar& gecodeVar) {
+    void setVariablePointer(Gecode::BoolVar& gecodeVar) {
+//    void setVariablePointer(Gecode::IntVar& gecodeVar) {
         VariablePointer = &gecodeVar;
     }
 

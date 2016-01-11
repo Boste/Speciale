@@ -1,5 +1,6 @@
 
 #include "FlipNeighborhood.hpp"
+#include "Flip2Neighborhood.hpp"
 //#include "State.hpp"
 
 FlipNeighborhood::FlipNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
@@ -30,6 +31,9 @@ bool FlipNeighborhood::hasNext() {
         moveCounter = 0;
         return false;
     }
+}
+unsigned FlipNeighborhood::getSize(){
+    return model->getMask().size();
 }
 
 Move* FlipNeighborhood::nextRandom() {
@@ -117,7 +121,7 @@ bool FlipNeighborhood::commitMove(Move* mv) {
 
                 }
             } else {
-                if (!invar->inViolatedConstraints()) {
+                if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
 

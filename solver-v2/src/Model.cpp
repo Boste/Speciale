@@ -46,16 +46,16 @@ Variable* Model::addBinaryVariable(int lb, int ub) {
 
 }
 
-Variable* Model::addIntegerVariable(int lb, int ub) {
-    //    std::cout << lb << " " << ub << std::endl;
-    //    sleep(1);
-    int id = original.size();
-    Variable* v = new Variable(lb, ub, id);
-    original.push_back(v);
-    IntegerVariables.push_back(v);
-    return v;
-
-}
+//Variable* Model::addIntegerVariable(int lb, int ub) {
+//    //    std::cout << lb << " " << ub << std::endl;
+//    //    sleep(1);
+//    int id = original.size();
+//    Variable* v = new Variable(lb, ub, id);
+//    original.push_back(v);
+//    IntegerVariables.push_back(v);
+//    return v;
+//
+//}
 //int Model::getNumberOfVariables(){
 //    return numberOfVariables;
 //}
@@ -155,9 +155,10 @@ void Model::shuffleMask() {
 
 }
 
-void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
-    getNonFixedVariable(index)->setVariablePointer(variable);
-}
+//void Model::updateIntegerVariable(int index, Gecode::BoolVar& variable) {
+////void Model::updateIntegerVariable(int index, Gecode::IntVar& variable) {
+//    getNonFixedVariable(index)->setVariablePointer(variable);
+//}
 /// Should only be used before propagation queue is made
 
 variableContainer& Model::getNonFixedVariables() {

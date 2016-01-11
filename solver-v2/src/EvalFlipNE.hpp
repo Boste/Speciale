@@ -8,16 +8,16 @@
 //#include "boost/random/uniform_int_distribution.hpp"
 #include "Random.hpp"
 #include "State.hpp"
-#ifndef FLIPOBJNE_HPP
-#define	FLIPOBJNE_HPP
+#ifndef EVALFLIPNE_HPP
+#define	EVALFLIPNE_HPP
 
-class FlipObjNE : public Neighborhood {
+class EvalFlipNE : public Neighborhood {
 public:
     std::shared_ptr<Model> model;
     std::shared_ptr<State> state;
-    FlipObjNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
-    FlipObjNE(const FlipObjNE& orig);
-    ~FlipObjNE();
+    EvalFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    EvalFlipNE(const EvalFlipNE& orig);
+    ~EvalFlipNE();
 
     //    template<typename returnType>
     //    void randomWalk(std::shared_ptr<State> st);
@@ -34,7 +34,7 @@ public:
     Move* nextRandom();
     bool hasNextRandom();
     void setRandomCounter(unsigned numberOfRandomMoves);
-
+unsigned getSize();
 
 private:
     unsigned moveCounter = 0;

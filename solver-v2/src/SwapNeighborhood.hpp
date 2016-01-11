@@ -38,7 +38,7 @@ public:
     Move* nextRandom();
     bool hasNextRandom();
     void setRandomCounter(unsigned numberOfRandomMoves);
-
+    unsigned getSize();
 
 
 private:

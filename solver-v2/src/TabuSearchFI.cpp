@@ -15,7 +15,7 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
     bool legal = false;
     Move* bestMove;
     Move* mv; // = new Move();
-    unsigned tabuTenure = Random::Integer(tabulist.size() / 200, tabulist.size() / 100);
+    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize() / 5, tabulist.size() / 100);
     //        std::cout << tabuTenure << std::endl;
     //        debug;
     //    unsigned tabuTenure = 3;
@@ -35,6 +35,7 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
             if (isTabu) {
                 if (betterThanBest(currentState->getEvaluation(), bestMove->deltaVector, bestState->getEvaluation())) {
                     if (legal) {
+
                         break;
                     }
                 } else {
@@ -62,11 +63,13 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
     if (improvement) {
         legal = NE->commitMove(bestMove);
         tabulist.at(bestMove->getVar()->getID()) = iteration;
+//        std::cout << "mv \t" << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << "before while" << std::endl;
+
         delete bestMove;
         return improvement;
     }
     //    delete mv;
-    int suggestedMove = 0;
+    //    int suggestedMove = 0;
     while (NE->hasNext()) {
         mv = NE->next();
         legal = NE->calculateDelta(mv);
@@ -82,25 +85,44 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
                 continue;
             }
         }
-        suggestedMove++;
-        bool improvement = betterThanBest(compareVector, mv->deltaVector, compareVector);
+        //        suggestedMove++;
+        for (int i = mv->deltaVector.size() - 1; i >= 0; i--) {
+            //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
+            if (mv->getDeltaVector().at(i) < 0) {
+                //        if (bestMove.getDeltaVector().at(i) < 0) {
+                improvement = true;
+                break;
+            } else if (mv->getDeltaVector().at(i) > 0) {
+                //        } else if (bestMove.getDeltaVector().at(i) > 0) {
+                improvement = false;
+                break;
+            }
+
+            //        if(i == 1 ){
+            //            std::cout << "how did i get here? " << improvement<< std::endl;
+            //        }
+        }
         if (improvement) {
             legal = NE->commitMove(mv);
             tabulist.at(mv->getVar()->getID()) = iteration;
+//            std::cout << "mv \t" << mv->deltaVector.at(0) << " " << mv->deltaVector.at(1) << " improvement " << std::endl;
+//            std::cout << mv->var->getID() << std::endl;
+
             delete bestMove;
             delete mv;
-            std::cout << "Number of suggested moves1 " << suggestedMove << std::endl;
+            //            std::cout << "Number of suggested moves1 " << suggestedMove << std::endl;
 
             return improvement;
         }
         //        legalmoves++;
         //        if (mv->deltaVector.at(1) < 0) {
-        //            std::cout << "mv \t" << mv->deltaVector.at(0) << " " << mv->deltaVector.at(1) << std::endl;
         //        }
         int compare = NE->compareMoves(mv, bestMove);
         //                std::cout << "compare chose " << compare << std::endl;
         switch (compare) {
             case 1:
+//                std::cout << "mv \t" << mv->deltaVector.at(0) << " " << mv->deltaVector.at(1) << " new best move" << std::endl;
+
                 bestMove->copy(mv);
                 NE->numberOfEqualMoves = 0;
                 break;
@@ -138,7 +160,7 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
 
 
     legal = NE->commitMove(bestMove);
-    std::cout << "Number of suggested moves2 " << suggestedMove << std::endl;
+    //    std::cout << "Number of suggested moves2 " << suggestedMove << std::endl;
     //    std::cout << "Commited move " << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << std::endl;
     //    std::cout << improvement << std::endl;
 
@@ -153,7 +175,7 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
         return improvement;
     } else {
         delete bestMove;
-        std::cout << "Illegal move suggested as best move" << std::endl;
+        //        std::cout << "Illegal move suggested as best move" << std::endl;
         debug;
         exit(1);
     }

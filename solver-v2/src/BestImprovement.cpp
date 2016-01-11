@@ -24,8 +24,17 @@ bool BestImprovement::Start() {
             //            debug;
             bestMove = NE->next();
             legal = NE->calculateDelta(bestMove);
+            if(!legal){
+                delete bestMove;
+            }
         } else {
-            //            debug;
+                        debug;
+                        debug;
+                        debug;
+                        debug;
+                        debug;
+                        debug;
+                        debug;
             //            delete bestMove;
             //            delete mv;
             return false;
@@ -68,6 +77,7 @@ bool BestImprovement::Start() {
         mv = NE->next();
         legal = NE->calculateDelta(mv);
         if (!legal) {
+            delete mv;
             //                        illegal++;
             continue;
         }

@@ -23,7 +23,7 @@ Move* MinConflictFlipNE::next() {
     //    if (moveCounter < moveIterator->second->getVariablePointers().size()) {
     //        debug;
     Variable* var = varsInNeighborhood.at(moveCounter);
-//    assert(!var->isDef() && !var->isFixed());
+    //    assert(!var->isDef() && !var->isFixed());
     //    } else {
     //        //        debug;
     //     
@@ -47,6 +47,7 @@ Move* MinConflictFlipNE::next() {
     Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
     //    mv->deltaVector.resize(model->getPriorityVectors().size());
     mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    std::cout << var->getID() << std::endl;
     return mv;
 }
 
@@ -72,7 +73,7 @@ bool MinConflictFlipNE::hasNext() {
                 invariantQueue.push_back(invar);
             }
             for (Variable* var : inv->getVariablePointers()) {
-//                assert(!var->isDef());
+                //                assert(!var->isDef());
                 if (!var->isFixed()) {
                     varsInNeighborhood.push_back(var);
                 }
@@ -94,7 +95,8 @@ bool MinConflictFlipNE::hasNext() {
     if (moveCounter >= varsInNeighborhood.size()) {
         moveCounter = 0;
         firstMove = true;
-        varsInNeighborhood.clear();
+//        std::vector<Variable*> tmp;
+        varsInNeighborhood.clear(); // .swap(tmp); //resize(0); //.clear();
         return false;
         //            moveIterator++;
         //            continue;
@@ -108,6 +110,10 @@ bool MinConflictFlipNE::hasNext() {
     //    moveCounter = 0;
     //    firstMove = true;
     //    return false;
+}
+
+unsigned MinConflictFlipNE::getSize() {
+    return varsInNeighborhood.size();
 }
 
 Move* MinConflictFlipNE::nextRandom() {
@@ -138,7 +144,6 @@ bool MinConflictFlipNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
 
     Variable* variable = mv->var;
-//    assert(!variable->isDef());
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
 
@@ -176,7 +181,6 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
     moveCounter = 0;
     firstMove = true;
     Variable* var = mv->getVar();
-//    assert(!var->isDef());
 
     std::vector<int>& evaluation = state->getEvaluation();
 
@@ -198,7 +202,7 @@ bool MinConflictFlipNE::commitMove(Move* mv) {
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
                 }
             } else {
-                if (!invar->inViolatedConstraints()) {
+                if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
                     //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
                     //                    vioCons[invar->getInvariantPointers().back()->getID()] = invar->getInvariantPointers().back();

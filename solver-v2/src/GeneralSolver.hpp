@@ -71,12 +71,13 @@ public:
     /// Different relaxation can be chosen (not atm) needs to create a new GecodeSolver (Space) and recreate some 
     /// of the calls the user made (those that should not be relaxed).
 
-    void relax(int timesRelaxed);
+    bool relax(int TimeForGecode);
 
     void simpleRelax(int timesRelaxed);
 
     bool relaxAllNonFunctionel(int TimeForGecode);
-    std::vector<constraint> furtherRelax(std::vector<constraint> cons, unsigned  repeated);
+//    std::vector<constraint> furtherRelax(std::vector<constraint> cons);
+    void furtherRelax(std::vector<constraint> cons);
 
     std::vector<int>& getInitialValue();
 

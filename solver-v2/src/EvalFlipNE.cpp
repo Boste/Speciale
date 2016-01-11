@@ -1,8 +1,8 @@
 
-#include "FlipObjNE.hpp"
+#include "EvalFlipNE.hpp"
 //#include "State.hpp"
 
-FlipObjNE::FlipObjNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+EvalFlipNE::EvalFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
@@ -10,10 +10,10 @@ FlipObjNE::FlipObjNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
 //FlipObjNE::FlipObjNE(const FlipObjNE& orig) {
 //}
 
-FlipObjNE::~FlipObjNE() {
+EvalFlipNE::~EvalFlipNE() {
     //    std::cout << "Destructing FlipObjNE" << std::endl;
 }
-Move* FlipObjNE::next() {
+Move* EvalFlipNE::next() {
     Variable* iv = model->getEvaluationVariableNr(moveCounter);
     moveCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -23,7 +23,7 @@ Move* FlipObjNE::next() {
     return mv;
 }
 
-bool FlipObjNE::hasNext() {
+bool EvalFlipNE::hasNext() {
     
     if (moveCounter < model->getEvaluationVariables().size()) {
         return true;
@@ -33,8 +33,11 @@ bool FlipObjNE::hasNext() {
         return false;
     }
 }
+unsigned EvalFlipNE::getSize(){
+    return model->getEvaluationVariables().size();
+}
 
-Move* FlipObjNE::nextRandom() {
+Move* EvalFlipNE::nextRandom() {
     Variable* iv = model->getEvaluationVariableNr(Random::Integer(0, (int) model->getEvaluationVariables().size() - 1));
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -44,7 +47,7 @@ Move* FlipObjNE::nextRandom() {
     return mv;
 }
 
-bool FlipObjNE::hasNextRandom() {
+bool EvalFlipNE::hasNextRandom() {
     if (randomCounter < randomMovesWanted) {
         return true;
     } else {
@@ -53,11 +56,11 @@ bool FlipObjNE::hasNextRandom() {
     }
 }
 
-void FlipObjNE::setRandomCounter(unsigned numberOfRandomMoves) {
+void EvalFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
 }
 
-bool FlipObjNE::calculateDelta(Move* mv) {
+bool EvalFlipNE::calculateDelta(Move* mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
 
@@ -95,7 +98,7 @@ bool FlipObjNE::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool FlipObjNE::commitMove(Move* mv) {
+bool EvalFlipNE::commitMove(Move* mv) {
     moveCounter = 0;
     Variable* var = mv->getVar();
     std::vector<int>& evaluation = state->getEvaluation();
@@ -119,7 +122,7 @@ bool FlipObjNE::commitMove(Move* mv) {
 
                 }
             } else {
-                if (!invar->inViolatedConstraints()) {
+                if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
 

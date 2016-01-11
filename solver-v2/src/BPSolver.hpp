@@ -30,7 +30,7 @@ public:
 
     BPSolver(BP_Input *in) {
         //        std::vector<IntegerVariable*>* varInt;
-        int counter = 0;
+//        int counter = 0;
         std::vector<Variable*> integerVariables;
         std::vector<Variable*> binaryVariables;
         for (var variable : in->getVars()) {
@@ -39,14 +39,14 @@ public:
             Variable* iv = createVariable(variable.lb, variable.ub);
 
             if (variable.ub == 1) {
-                counter++;
+//                counter++;
                 binaryVariables.push_back(iv);
             } else {
                 integerVariables.push_back(iv);
             }
 
         }
-        std::cout << "Number of binary variables " << counter << std::endl;
+//        std::cout << "Number of binary variables " << counter << std::endl;
 
         //        std::cout << "Variables created" << std::endl;
         vector<Variable*>& varInt = getAllVariables();
@@ -54,15 +54,15 @@ public:
         //            assert(varInt->at(i)->getID() == i);
         //        }
         //        std::vector<IntegerVariable*>* varInt = GeneralSolver::createIntVars(in->getNvars(), 0, 1);
-        counter = 0;
+//        counter = 0;
         for (unsigned i = 0; i < in->getNcons(); i++) {
             //            std::cout << "creating linear " << i << std::endl;
             const std::vector<elem> leftside = in->getMatcoeff(i);
             bounds b = in->getBterms(i);
             vector<int> c(leftside.size());
-            if (leftside.size() == 1) {
-                counter++;
-            }
+//            if (leftside.size() == 1) {
+//                counter++;
+//            }
             vector<Variable*> x(leftside.size());
             //                        vector<IntegerVariable*>* x = new vector<IntegerVariable*>(leftside.size());
             for (unsigned j = 0; j < leftside.size(); j++) {
@@ -97,7 +97,7 @@ public:
             //            std::cout << std::endl;
             //            sleep(1);
         }
-        std::cout << "Number of Singleton constraints " << counter << std::endl;
+//        std::cout << "Number of Singleton constraints " << counter << std::endl;
         //        std::cout << "Constraints posted" << std::endl;
         // Add objective function
         //        std::vector<int> c(varInt.size());

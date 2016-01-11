@@ -137,20 +137,20 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
     std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, ub, relation, priority);
 
     //        bool haveInt = false;
-    int numberOfIntegerVariables = 0;
+//    int numberOfIntegerVariables = 0;
     for (Variable* iv : variables) {
         if (priority != 0) {
             iv->addToUsedInConstraints(LinearConstraint);
         }
-        if (iv->isInteger) {
-            LinearConstraint->addIntegerVariable(iv);
-            numberOfIntegerVariables++;
-        }
+//        if (iv->isInteger) {
+//            LinearConstraint->addIntegerVariable(iv);
+//            numberOfIntegerVariables++;
+//        }
     }
-    if (priority == 0) {
-        std::cout << "objective has " << numberOfIntegerVariables << " integer variables " << std::endl;
-    }
-    LinearConstraint->setNumberOfIntegerVariables(numberOfIntegerVariables);
+//    if (priority == 0) {
+//        std::cout << "objective has " << numberOfIntegerVariables << " integer variables " << std::endl;
+//    }
+//    LinearConstraint->setNumberOfIntegerVariables(numberOfIntegerVariables);
 
     //    if (priority == OBJ) {
     //        if (model->getConstraints().size() == 0) {
@@ -191,16 +191,16 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
 ///Create a single variable with given lower and upper bound
 
 Variable* GeneralSolver::createVariable(int lb, int ub) {
-    if (ub == 1 && lb == 0) {
+//    if (ub == 1 && lb == 0) {
         Variable* iv = model->addBinaryVariable(lb, ub);
         GS->createGecodeVariable(lb, ub);
         return iv;
 
-    } else {
-        Variable* iv = model->addIntegerVariable(lb, ub);
-        GS->createGecodeVariable(lb, ub);
-        return iv;
-    }
+//    } else {
+//        Variable* iv = model->addIntegerVariable(lb, ub);
+//        GS->createGecodeVariable(lb, ub);
+//        return iv;
+//    }
     //        GS->createGecodeVariable(lb, ub);
     //        std::cout <<  "integer var pointer " << newVar << std::endl;
     //        std::cout << lb << " " << ub << std::endl;
@@ -238,13 +238,13 @@ void GeneralSolver::Search(std::vector<Variable*> variables) {
 
 /// Only for testing, should be removed 
 
-void GeneralSolver::print(std::vector<Variable>& IntegerVariables) {
-    std::cout << "{";
-    for (unsigned i = 0; i < IntegerVariables.size() - 1; i++) {
-        std::cout << *(IntegerVariables[i].getVariablePointer()) << ", ";
-    }
-    std::cout << IntegerVariables.back().getVariablePointer() << "}" << std::endl;
-}
+//void GeneralSolver::print(std::vector<Variable>& IntegerVariables) {
+//    std::cout << "{";
+//    for (unsigned i = 0; i < IntegerVariables.size() - 1; i++) {
+//        std::cout << *(IntegerVariables[i].getVariablePointer()) << ", ";
+//    }
+//    std::cout << IntegerVariables.back().getVariablePointer() << "}" << std::endl;
+//}
 
 
 //    void InitialSolution(Gecode::InstanceOptions opt) {
@@ -257,7 +257,7 @@ void GeneralSolver::print(std::vector<Variable>& IntegerVariables) {
 void GeneralSolver::initialSolution(int TimeForGecode) {
 
     GS->createArray();
-
+    debug;
     //        GS->branch(true);
     if (GS->initialize(TimeForGecode, true)) {
         //    if (false) {
@@ -315,8 +315,8 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         LS->createDDG(true);
         LS->initializeLS(true);
     } else {
-        relaxAllNonFunctionel(TimeForGecode);
-        
+        relax(TimeForGecode);
+
         LS->createDDG(false);
         LS->initializeLS(false);
 
@@ -330,8 +330,8 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
     //        delete so;
 }
 
-bool GeneralSolver::relaxAllNonFunctionel(int TimeForGecode) {
-    int numberOfConstraints = 0;
+bool GeneralSolver::relax(int TimeForGecode) {
+    unsigned numberOfConstraints = 0;
     GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
 
     for (Variable* iv : model->getAllVariables()) {
@@ -343,20 +343,63 @@ bool GeneralSolver::relaxAllNonFunctionel(int TimeForGecode) {
     }
     GS->createArray();
     std::vector<constraint> funcCons;
+    std::vector<constraint> nonFuncCons;
+
+
     for (int i = model->getConstraints().size() - 1; i > 0; i--) {
         numberOfConstraints += model->getConstraintsWithPriority(i)->size();
         constraintContainer prio = model->getConstraintsWithPriority(i);
-
+        std::vector<constraint> tmp1;
+        std::vector<constraint> tmp2;
         for (constraint cons : *prio) {
+            assert(cons->getPriority() == i);
             if (cons->isFunctional()) {
-                funcCons.push_back(cons);
+                tmp1.push_back(cons);
+            } else {
+                tmp2.push_back(cons);
             }
         }
+        std::random_shuffle(tmp1.begin(), tmp1.end());
+        std::random_shuffle(tmp2.begin(), tmp2.end());
+        for (constraint cons : tmp1) {
+            funcCons.push_back(cons);
+        }
+        for (constraint cons : tmp2) {
+            nonFuncCons.push_back(cons);
+        }
     }
-    if (funcCons.size() == 0) {
-        return false;
-    }
+    assert(funcCons.size() + nonFuncCons.size() == numberOfConstraints);
+    //    debug;
+    //    std::sort(funcCons.begin(), funcCons.end(), Constraint::prioritySort());
+    //    debug;
+    //    std::sort(nonFuncCons.begin(), nonFuncCons.end(), Constraint::prioritySort());
+    //    debug;
+    std::vector<constraint> keepOrder;
+    unsigned keept = 0;
+
+    unsigned keep = (numberOfConstraints) / 2;
+
     for (constraint cons : funcCons) {
+        if (keept < keep) {
+            keepOrder.push_back(cons);
+            keept++;
+        } else {
+            break;
+        }
+
+    }
+    for (constraint cons : nonFuncCons) {
+        if (keept < keep) {
+            keepOrder.push_back(cons);
+            keept++;
+        } else {
+            break;
+        }
+    }
+    std::cout << "Posting " << keept << " constriants " << std::endl;
+    debug;
+    for (constraint cons : keepOrder) {
+
         std::vector<Variable*> variables = cons->getVariables();
 
         if (cons->getType() == LINEAR) { // otherwise it is in objective function atm.
@@ -380,24 +423,48 @@ bool GeneralSolver::relaxAllNonFunctionel(int TimeForGecode) {
     }
     bool solution = GS->initialize(TimeForGecode, false);
     //    std::vector<constraint> ;
-    unsigned repeated = 0;
     while (!solution) {
-        repeated++;
-//        std::cout << "Number of constraints " << funcCons.size() << std::endl;
+        debug;
+        //        std::vector<constraint> newKeep;
+        //        std::cout << "Number of constraints " << funcCons.size() << std::endl;
 
-        funcCons = furtherRelax(funcCons, repeated);
+        //        for (unsigned i = 0; i < keepOrder.size() / 2; i++) {
+        //        for (unsigned i = 0; i < keepOrder.size() / 2; i++) {
+        //            newKeep.push_back(keepOrder.at(i));
+        //            newKeep.push_back(keepOrder.at(i));
+        //        }
+        unsigned remove = keepOrder.size() / 2;
+        for (unsigned
+                i = 0; i < remove; i++) {
+            keepOrder.pop_back();
+        }
+        //        unsigned counter = keepOrder.size() / 2;
+        //        for(auto it = keepOrder.end(); counter != 0; --it ){
+        //            keepOrder.erase(it);
+        //            counter--;
+        //        }
+        std::cout << "Number of constriants " << keepOrder.size() << std::endl;
+        debug;
+        furtherRelax(keepOrder);
         solution = GS->initialize(TimeForGecode, false);
-
+        //        keepOrder = newKeep;
     }
-    model->setFeasibleFunctionalConstraints(funcCons);
-
+    std::vector<constraint> feasibleFunc;
+    for (constraint con : keepOrder) {
+        if (con->isFunctional()) {
+            feasibleFunc.push_back(con);
+        }
+    }
+    model->setFeasibleFunctionalConstraints(feasibleFunc);
+    //    exit(1);
     return solution;
 }
 /// Half the constraints posted every time
 
-std::vector<constraint> GeneralSolver::furtherRelax(std::vector<constraint> cons, unsigned  reapted) {
-    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+void GeneralSolver::furtherRelax(std::vector<constraint> cons) {
 
+    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+    
     for (Variable* iv : model->getAllVariables()) {
         int lb = iv->getLowerBound();
         int ub = iv->getUpperBound();
@@ -407,13 +474,13 @@ std::vector<constraint> GeneralSolver::furtherRelax(std::vector<constraint> cons
     }
     GS->createArray();
 
-    std::vector<constraint> constraintsPosted;
-//    for (unsigned i = 0; i < cons.size() / 2; i++) {
-    
+    //            std::vector<constraint> constraintsPosted;
+    //    for (unsigned i = 0; i < cons.size() / 2; i++) {
+
     for (unsigned i = 0; i < cons.size(); i++) {
-        if(Random::Integer(reapted)==0){
-            continue;
-        }
+        //        if (Random::Integer(reapted) == 0) {
+        //            continue;
+        //        }
         constraint con = cons.at(i);
         std::vector<Variable*> variables = con->getVariables();
 
@@ -433,12 +500,14 @@ std::vector<constraint> GeneralSolver::furtherRelax(std::vector<constraint> cons
             GS->linear(c, variables, relation, ub);
             //            posted++;
         } else {
+
             std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << con->getType() << std::endl;
         }
-        constraintsPosted.push_back(con);
+        //        constraintsPosted.push_back(con);
     }
-    return constraintsPosted;
 }
+//    return cons;
+
 
 /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
 /// Only works for binary
@@ -446,26 +515,26 @@ std::vector<constraint> GeneralSolver::furtherRelax(std::vector<constraint> cons
 /// Different relaxation can be chosen (not atm) needs to create a new GecodeSolver (Space) and recreate some 
 /// of the calls the user made (those that should not be relaxed).
 
-void GeneralSolver::relax(int timesRelaxed) {
-    //        std::cout << "relax" << std::endl;
-
-    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
-
-    for (Variable* iv : model->getAllVariables()) {
-        int lb = iv->getLowerBound();
-        int ub = iv->getUpperBound();
-
-
-        GS->createGecodeVariable(lb, ub);
-    }
-    GS->createArray();
-    simpleRelax(timesRelaxed);
-    //        IntVars = relaxed->IntVars;
-    // Brug operator = til at lave det gamle space til det nye? Ellers skal det hele løses med det nye og gamle pointer skal opdateres. 
-    // Hvordan fungere det så med at slette? 
-
-
-}
+//void GeneralSolver::relax(int timesRelaxed) {
+//    //        std::cout << "relax" << std::endl;
+//
+//    GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
+//
+//    for (Variable* iv : model->getAllVariables()) {
+//        int lb = iv->getLowerBound();
+//        int ub = iv->getUpperBound();
+//
+//
+//        GS->createGecodeVariable(lb, ub);
+//    }
+//    GS->createArray();
+//    simpleRelax(timesRelaxed);
+//    //        IntVars = relaxed->IntVars;
+//    // Brug operator = til at lave det gamle space til det nye? Ellers skal det hele løses med det nye og gamle pointer skal opdateres. 
+//    // Hvordan fungere det så med at slette? 
+//
+//
+//}
 
 void GeneralSolver::simpleRelax(int timesRelaxed) {
     std::cout << "SimpleRelax" << std::endl;
@@ -508,6 +577,7 @@ void GeneralSolver::simpleRelax(int timesRelaxed) {
                 GS->linear(c, variables, relation, ub);
                 posted++;
             } else {
+
                 std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
             }
         }
@@ -519,10 +589,12 @@ void GeneralSolver::simpleRelax(int timesRelaxed) {
 }
 
 std::vector<int>& GeneralSolver::getInitialValue() {
+
     return model->getInitialEvaluation();
 }
 
 void GeneralSolver::optimizeSolution(int time) {
+
     LS->optimizeSolution(time);
 }
 // Only for testing

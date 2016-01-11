@@ -4,6 +4,7 @@
 #include <memory>
 #include <functional>
 #include "Constants.hpp"
+#include "Random.hpp"
 #include <unordered_map>
 //#include "IntegerVariable.hpp"
 
@@ -143,6 +144,18 @@ public:
     //        return invariants[i];
     //    }
 
+    struct prioritySort {
+
+        bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {
+                        std::cout << "sorter" << std::endl;
+            if(cons1->priority == cons2->priority){
+                std::cout <<  cons1->getScope()<<  std::endl;
+                int rand = Random::Integer(0,1);
+                return (rand==1);
+            }
+            return (cons1->priority > cons2->getPriority());
+        }
+    };
     struct SortGreater {
 
         bool operator()(const std::shared_ptr<Constraint>& cons1, const std::shared_ptr<Constraint>& cons2) const {

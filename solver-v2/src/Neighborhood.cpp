@@ -55,6 +55,7 @@ int Neighborhood::compareMoves(Move* mv1, Move* mv2) {
     //    }
     //
 }
+
 //bool Neighborhood::hasNext() {
 //    debug;
 //    return false;

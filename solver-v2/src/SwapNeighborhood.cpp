@@ -62,6 +62,10 @@ bool SwapNeighborhood::hasNext() {
         return false;
     }
 }
+unsigned SwapNeighborhood::getSize(){
+//    unsigned mask = 
+    return model->getMask().size() *  (model->getMask().size()-1)/2;
+}
 
 Move* SwapNeighborhood::nextRandom() {
     Variable* iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));

@@ -36,7 +36,20 @@ public:
         arguments.push_back(ub);
         this->priority = priority;
         if (relation == EQ) {
-            functional = true;
+            bool allUnit = true;
+            for(int c : coefficients){
+//            for (std::unordered_map<int, coefType>::iterator it = this->coefficients.begin(); it != this->coefficients.end(); ++it) {
+
+                if (c != 1) {
+                    if (c != -1) {
+                        allUnit = false;
+                        break;
+                    }
+                }
+            }
+            if (allUnit) {
+                functional = true;
+            }
         }
     }
 
@@ -315,7 +328,7 @@ public:
         //
         //        }
         this->isOneway(true);
-
+        assert(this->isOneway());
         return sumInvariant;
 
 

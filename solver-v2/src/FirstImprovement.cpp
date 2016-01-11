@@ -58,12 +58,13 @@ bool FirstImprovement::Start() {
         Move* firstMove = NE->next();
         legal = NE->calculateDelta(firstMove);
         if (!legal) {
+            delete firstMove;
             //            illegal++;
             continue;
         }
         //        legalmoves++;
         //        int compare = NE->compareMoves(mv, firstMove);
-        for (unsigned i = 1; i < firstMove->deltaVector.size(); i++) {
+        for (int i = firstMove->deltaVector.size()-1; i >=0 ; i--) {
             //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
             if (firstMove->getDeltaVector().at(i) < 0) {
                 //        if (bestMove.getDeltaVector().at(i) < 0) {
@@ -79,17 +80,7 @@ bool FirstImprovement::Start() {
 
                 break;
             }
-            if (i == firstMove->deltaVector.size() - 1) {
-                if (firstMove->getDeltaVector().at(0) < 0) {
-                    //                    improvement = false;
-//                    improvement = true;
-                    NE->commitMove(firstMove);
-                    //                    delete firstMove;
-                    delete firstMove;
-                    return true;
-                    //                    break;
-                }
-            }
+
         }
         delete firstMove;
 

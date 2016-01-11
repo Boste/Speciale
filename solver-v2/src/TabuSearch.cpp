@@ -153,8 +153,10 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     bool legal = false;
     Move* bestMove;
     Move* mv; // = new Move();
-            unsigned tabuTenure = Random::Integer(tabulist.size() / 200, tabulist.size() / 100);
-//    unsigned tabuTenure = 0;
+    
+    
+    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize()/5 , tabulist.size() / 100);
+    //    unsigned tabuTenure = 0;
     //        std::cout << tabuTenure << std::endl;
     //        debug;
     //    unsigned tabuTenure = 3;
@@ -188,15 +190,15 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     //    std::cout << "best " << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << std::endl;
 
     bool improvement = true;
-//        for (int i = bestMove->deltaVector.size() - 1; i >= 0; i--) {
-//            if (bestMove->deltaVector.at(i) < 0) {
-//                //            improvement = true; 
-//                break;
-//            } else if (bestMove->deltaVector.at(i) > 0) {
-//                improvement = false;
-//                break;
-//            }
-//        }
+    //        for (int i = bestMove->deltaVector.size() - 1; i >= 0; i--) {
+    //            if (bestMove->deltaVector.at(i) < 0) {
+    //                //            improvement = true; 
+    //                break;
+    //            } else if (bestMove->deltaVector.at(i) > 0) {
+    //                improvement = false;
+    //                break;
+    //            }
+    //        }
     //    delete mv;
     int suggestedMove = 0;
     while (NE->hasNext()) {
@@ -254,11 +256,12 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
 
 
     }
-    //    std::cout << "improvement " << improvement << std::endl;
-    //    for (unsigned i = 0; i < bestMove->deltaVector.size(); i++) {
-    //        std::cout << bestMove->deltaVector.at(i) << " ";
-    //    }
-    //    std::cout << std::endl;
+//    std::cout << "improvement " << improvement << " id of var " << bestMove->var->getID() << " tabu tenure " << tabuTenure << std::endl;
+//    for (unsigned i = 0; i < bestMove->deltaVector.size(); i++) {
+//        std::cout << bestMove->deltaVector.at(i) << " ";
+//    }
+//    std::cout << std::endl;
+//    debug;
     //    bool oldImp = improvement;
     for (int i = bestMove->deltaVector.size() - 1; i >= 0; i--) {
         //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {

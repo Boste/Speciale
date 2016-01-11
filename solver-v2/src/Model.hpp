@@ -65,7 +65,7 @@ public:
 
     //    IntegerVariable* addIntegerVariable( int lb, int ub);
     Variable* addBinaryVariable(int lb, int ub);
-    Variable* addIntegerVariable(int lb, int ub);
+//    Variable* addIntegerVariable(int lb, int ub);
     //    void initializeInvariants();
     Variable* getMaskAt(int i);
     std::vector<Variable*>& getMask();
@@ -113,7 +113,7 @@ public:
     Variable* getNonFixedVariable(int i);
     //    int getObjectiveValue();
     //    void updateIntegerVariables(Gecode::IntVarArray& gecodeVars); 
-    void updateIntegerVariable(int index, Gecode::IntVar& variable);
+//    void updateIntegerVariable(int index, Gecode::IntVar& variable);
     std::vector<int>& getInitialEvaluation();
 //    InvariantContainer& getObjectiveInvariant();
     InvariantContainer& getEvaluationInvariants();

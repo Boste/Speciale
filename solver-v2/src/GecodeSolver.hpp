@@ -17,11 +17,14 @@ class GecodeSolver : public Space {
 protected:
     std::shared_ptr<Model> model;
 //    IntVarArray IntVars;
-    Gecode::IntVarArray AllVars;
+    Gecode::BoolVarArray AllVars;
+//    Gecode::IntVarArray AllVars;
     /// allocated in stack space and later moved to heap (AllVars)
-    Gecode::IntVarArgs tmpVars;
+    Gecode::BoolVarArgs tmpVars;
+//    Gecode::IntVarArgs tmpVars;
     /// All binary variables
-    Gecode::IntVarArgs binVars;
+    Gecode::BoolVarArgs binVars;
+//    Gecode::IntVarArgs binVars;
 public:
 
     GecodeSolver(std::shared_ptr<Model> model);
@@ -29,13 +32,14 @@ public:
     virtual ~GecodeSolver();
     
     /// Always branches the same way. 
-    void branch();
+//    void branch();
     bool initialize(int TimeForGecode,bool fix);
     bool FindSolution(int TimeForGecode, bool fix);
     void linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound);
 //    void createGecodeVariables(std::shared_ptr<Model> model);
     void createGecodeVariable(int lb,int ub);
-    void SetValues(Gecode::IntVarArray vars);
+    void SetValues(Gecode::BoolVarArray vars);
+//    void SetValues(Gecode::IntVarArray vars);
     void fixVariables();
     void printSpaceStatus();
     void createArray();

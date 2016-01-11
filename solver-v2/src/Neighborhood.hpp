@@ -13,6 +13,7 @@ public:
     virtual bool calculateDelta(Move* mv) = 0;
     virtual bool commitMove(Move* mv) = 0;
     virtual int compareMoves(Move* mv1, Move* mv2);
+    virtual unsigned getSize() = 0;
     int numberOfEqualMoves = 0;
 
    virtual void setRandomCounter(unsigned numberOfRandomMoves) =0;

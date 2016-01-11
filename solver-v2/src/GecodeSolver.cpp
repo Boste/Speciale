@@ -1,11 +1,13 @@
 
+
 #include <gecode/int.hh>
 
 #include "GecodeSolver.hpp"
 
 GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
     this->model = model;
-    tmpVars = Gecode::IntVarArgs();
+    tmpVars = Gecode::BoolVarArgs();
+//    tmpVars = Gecode::IntVarArgs();
     //    IntVars = new std::vector<Gecode::IntVarArgs*>();
 
 }
@@ -17,34 +19,37 @@ GecodeSolver::~GecodeSolver() {
 void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound) {
     //    IntVars = IntVarArray(*this, tmpVars);
 
-    if (variables.size() == 1 && coefficients[0] == 1) {
-        IntConLevel icl = Gecode::ICL_DOM;
-        IntVar x = tmpVars[variables[0]->getID()];
-        //        IntVarArgs x(1)
-        //        x[0] = tmpVars[variables[0]->getID()];
-        //        std::cout << "Dom constraint " << std::endl;
-        switch (relation) {
-            case EQ:
-                Gecode::dom(*this, x, upperbound, icl); //Gecode::ICL_BND);
-                break;
-            case LQ:
-                Gecode::dom(*this, x, x.min(), upperbound, icl); //Gecode::ICL_BND);
-                break;
-            case LE:
-                Gecode::dom(*this, x, x.min(), upperbound - 1, icl); //Gecode::ICL_BND);
-                break;
-            case GQ:
-                Gecode::dom(*this, x, upperbound, x.max(), icl); //Gecode::ICL_BND);
-                break;
-            case GR:
-                Gecode::dom(*this, x, upperbound - 1, x.max(), icl); //Gecode::ICL_BND);
-                break;
-        }
-
-    } else {
+//    if (variables.size() == 1 && coefficients[0] == 1) {
+//        IntConLevel icl = Gecode::ICL_DOM;
+////        IntVar x = tmpVars[variables[0]->getID()];
+//        BoolVar x = tmpVars[variables[0]->getID()];
+//        //        IntVarArgs x(1)
+//        //        x[0] = tmpVars[variables[0]->getID()];
+//        //        std::cout << "Dom constraint " << std::endl;
+//        switch (relation) {
+//            case EQ:
+//                Gecode::dom(*this, x, upperbound, icl); //Gecode::ICL_BND);
+//                break;
+//            case LQ:
+//                Gecode::dom(*this, x, x.min(), upperbound, icl); //Gecode::ICL_BND);
+//                break;
+//            case LE:
+//                Gecode::dom(*this, x, x.min(), upperbound - 1, icl); //Gecode::ICL_BND);
+//                break;
+//            case GQ:
+//                Gecode::dom(*this, x, upperbound, x.max(), icl); //Gecode::ICL_BND);
+//                break;
+//            case GR:
+//                Gecode::dom(*this, x, upperbound - 1, x.max(), icl); //Gecode::ICL_BND);
+//                break;
+//        }
+//
+//    } else {
 
         Gecode::IntArgs c(coefficients.size());
-        Gecode::IntVarArgs x(coefficients.size());
+        Gecode::BoolVarArgs x(coefficients.size());
+//        Gecode::IntArgs c(coefficients.size());
+//        Gecode::IntVarArgs x(coefficients.size());
         assert(coefficients.size() == variables.size());
         //    if(variables.size() == 0){
 
@@ -60,20 +65,20 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Vari
         //    sleep(1);
         // ICL_VAL is cheapest ICL_DOM is most expensive
         //    std::cout << "Giv noget til gecode" << std::endl;
-        bool integer = false;
-        for (Variable* iv : variables) {
-            if (tmpVars[iv->getID()].max() > 1) {
-                integer = true;
-                break;
-            }
-        }
+//        bool integer = false;
+//        for (Variable* iv : variables) {
+//            if (tmpVars[iv->getID()].max() > 1) {
+//                integer = true;
+//                break;
+//            }
+//        }
 
         IntConLevel icl;
-        if (integer) {
-            icl = Gecode::ICL_VAL;
-        } else {
+//        if (integer) {
+//            icl = Gecode::ICL_VAL;
+//        } else {
             icl = Gecode::ICL_DOM;
-        }
+//        }
         switch (relation) {
             case EQ:
                 Gecode::linear(*this, c, x, Gecode::IRT_EQ, upperbound, icl); //Gecode::ICL_BND);
@@ -92,7 +97,7 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Vari
                 break;
         }
         //    std::cout << "Gecode likes it" << std::endl;
-    }
+//    }
 }
 
 //void GecodeSolver::createGecodeVariables(std::shared_ptr<Model> model) {
@@ -116,12 +121,13 @@ void GecodeSolver::createGecodeVariable(int lb, int ub) {
     //        ub = Gecode::Int::Limits::max;
     //
     //    }
-    std::shared_ptr<IntVar> GecodeVar = std::make_shared<IntVar>(*this, lb, ub);
+    std::shared_ptr<BoolVar> GecodeVar = std::make_shared<BoolVar>(*this, lb, ub);
+//    std::shared_ptr<IntVar> GecodeVar = std::make_shared<IntVar>(*this, lb, ub);
     //    std::cout << Gecode::Int::Limits::max << std::endl;
     //    std::cout << std::numeric_limits<int>::max() << std::endl;
-    if (ub == 1) {
-        binVars << *GecodeVar;
-    }
+//    if (ub == 1) {
+//        binVars << *GecodeVar;
+//    }
     tmpVars << *GecodeVar;
 
 }
@@ -140,7 +146,8 @@ Gecode::Space(share, s) {
 }
 
 void GecodeSolver::print(std::ostream & os) const {
-    for (IntVar iv : AllVars) {
+    for (BoolVar iv : AllVars) {
+//    for (IntVar iv : AllVars) {
         os << iv << ", ";
     }
     os << std::endl;
@@ -148,7 +155,10 @@ void GecodeSolver::print(std::ostream & os) const {
 
 void GecodeSolver::createArray() {
     //    std::cout << "CreateArray" << std::endl;
-    AllVars = IntVarArray(*this, tmpVars);
+    AllVars = BoolVarArray(*this, tmpVars);
+   
+   
+//    AllVars = IntVarArray(*this, tmpVars);
     std::vector<Variable*>& m = model->getAllVariables();
     for (int i = 0; i < AllVars.size(); i++) {
         //        assert(m->size() == IntVars.size());
@@ -166,8 +176,8 @@ void GecodeSolver::createArray() {
 
 }
 
-void GecodeSolver::branch() {
-
+//void GecodeSolver::branch() {
+//
     //    for (std::vector<IntegerVariable*>& vector : model->getPriorityVectors()) {
     //        Gecode::IntVarArgs priority;
     //
@@ -181,15 +191,18 @@ void GecodeSolver::branch() {
     //        fisk << binVars[i];
     //    }
     //    Gecode::branch(*this, fisk, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
-    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
+//    auto* t = new TieBreakVarBranch(INT_VAR_DEGREE_MAX(), INT_VAR_ACTIVITY_MAX());
+//    Gecode::branch(*this, binVars, Gecode::INT_VAR_DEGREE_MAX());
+//    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX());
+//    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //            Gecode::branch(*this, AllVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
 
     //    }
     //    Gecode::branch(*this, IntVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX(), Gecode::INT_VAL_MIN());
     //    std::cout << "branched" << std::endl;
-
-}
+//
+//}
 
 void GecodeSolver::fixVariables() {
     //    std::cout << "In fix" << std::endl;
@@ -206,6 +219,7 @@ void GecodeSolver::fixVariables() {
             preprocessed.push_back(iv);
         } else {
             numberOfFixedVariables++;
+//            iv->setCurrentValue();
             iv->setAsFixed();
         }
         //        } else if (iv->getVariablePointer()->assigned()) {
@@ -229,14 +243,14 @@ bool GecodeSolver::initialize(int TimeForGecode, bool fix) {
     //        std::cout << IntVars->size() << std::endl;
     return FindSolution(TimeForGecode, fix);
 
-}
+}                                                                                                                                                                                                                                                                                                                                           
 
 bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    postCovSol();
     //    this->print(std::cout);
-
-    branch();
-    //    std::cout << "TimeForGecode " << TimeForGecode << std::endl;
+//    std::cout << "No branch posted " << std::endl;
+    Gecode::branch(*this, AllVars, Gecode::INT_VAR_DEGREE_MAX(),INT_VAL_MIN());
+//    Gecode::branch(*this, binVars, Gecode::INT_VAR_ACTIVITY_MAX());    //    std::cout << "TimeForGecode " << TimeForGecode << std::endl;
     //    std::cout << IntVars->size() << std::endl;
     //    sleep(5);
     //    std::shared_ptr<Gecode::Search::Options> so = std::make_shared<Search::Options>();
@@ -245,8 +259,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     Multistop* ms = new Multistop(0, 0, TimeForGecode * 1000);
     Gecode::Search::Options* so = new Gecode::Search::Options();
     so->stop = ms;
-
     //    this->print(std::cout);
+    std::cout << "Stuck in Status? " << std::endl;
     printSpaceStatus();
     //    unsigned ub = 0;
     //    unsigned lb = 0;
@@ -274,18 +288,22 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     if (fix) {
         fixVariables();
     }
+//    std::cout << so->a_d << std::endl;
+//    std::cout << so->c_d << std::endl;
+//    exit(1);    
 
-
-    so->a_d = AllVars.size() - 1;
-    so->c_d = AllVars.size() - 1;
+    so->a_d = std::max(AllVars.size()/320,2); // Default 2 
+    so->c_d = std::max(AllVars.size() /160,8); // Default 8
+//    so->a_d = AllVars.size(); // Default 2 
+//    so->c_d = AllVars.size() ; // Default 8
     //    this->print(std::cout);
     bool solutionFound = false;
     GecodeSolver* s;
     try {
         std::clock_t GecodeClock = std::clock();
         //        std::cout << "Before search engine" << std::endl;
-        Gecode::DFS<GecodeSolver> e(this, *so);
-        std::cout << "Still searching for solution" << std::endl;
+        Gecode::BAB<GecodeSolver> e(this, *so);
+        std::cout << "Searching for solution...." << std::endl;
         s = e.next();
 
         std::cout << "stop called " << ms->called << " times" << std::endl;
@@ -301,6 +319,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
                 //                double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
                 //                std::cout << "\t Time spend searching for solution: " << time << " seconds" << std::endl;
                 //
+                debug;
 
                 //                SetValues(AllVars);
                 solutionFound = false;
@@ -309,7 +328,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
                 Gecode::Search::Statistics stat = e.statistics();
                 print_stats(stat);
                 double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
-                std::cout << "\t Time spend searching for solution: " << time << " seconds" << std::endl;
+                std::cout << "\tTime spend searching for solution: " << time << " seconds" << std::endl;
 
             }
         } else {
@@ -352,7 +371,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     return solutionFound;
 }
 
-void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
+void GecodeSolver::SetValues(Gecode::BoolVarArray vars) {
+//void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     //    for (int i = 0; i < model->getAllIntegerVariables()->size(); i++) {
     for (Variable* iv : model->getAllVariables()) {
         if (vars[iv->getID()].assigned()) {
@@ -363,7 +383,9 @@ void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
             //            std::cout << iv->getID() << " ";
             //            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
             //                        std::cout << vars[iv->getID()] << " ";
-            iv->setCurrentValue(Random::Integer(vars[iv->getID()].min(), vars[iv->getID()].max()));
+//            iv->setCurrentValue(Random::Integer(vars[iv->getID()].min(), vars[iv->getID()].max()));
+            debug;
+            iv->setCurrentValue(Random::Integer(0,1));
             //            iv->setCurrentValue(vars[iv->getID()].min());
 
         }

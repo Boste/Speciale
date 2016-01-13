@@ -49,8 +49,8 @@ Move* IntSwapNeighborhood::next() {
     Move* mv = new Move(vars, delta);
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
@@ -81,8 +81,8 @@ Move* IntSwapNeighborhood::nextRandom() {
     delta.push_back(iv1->getCurrentValue() - iv2->getCurrentValue());
     //    IntegerVariable* iv = model->getMaskAt(moveCounter);
     //    moveCounter++;
-    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
@@ -101,7 +101,9 @@ void IntSwapNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
 }
 
 bool IntSwapNeighborhood::calculateDelta(Move* mv) {
-
+    for (unsigned i = 0; i < change.size(); i++) {
+        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+    }
     std::vector<int>& change = mv->getDeltaVector();
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;

@@ -17,8 +17,10 @@
 #include "Neighborhood.hpp"
 #include "FlipNeighborhood.hpp"
 #include "SwapNeighborhood.hpp"
-#include "MinConflictFlipNE.hpp"
+#include "RandomConflictConNE.hpp"
 #include "EvalFlipNE.hpp"
+#include "RestrictedFlipNE.hpp"
+#include "ConflictOnlyNE.hpp"
 #include "Constants.hpp"
 //#include "SearchEngine.hpp"
 #include "BestImprovement.hpp"
@@ -52,7 +54,7 @@ public:
 //    void makeOneway(Variable* iv, constraint cons);
 //    bool intVarCanBeMadeOneway(constraint cons);
 //    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
-    void optimizeSolution(int time);
+    void optimizeSolution(int time, int test);
     //    void simpleMove(int variabelNr);
     //    bool bestImprovement();
     void setSolution(std::shared_ptr<State> st);

@@ -1,10 +1,17 @@
 Important: Neighborhoods, FLip and swap?. Search methods RW, BI, and FI (sidewalks). Heuristics obj var only and 
 conflicting var only. Meta heuristic, Tabu search (tabu tenure, aspiration, Search procedure FI or BI, Neighborhood 
 limitations for large neighborhoods?). Combining search procedure. \boste{Make overview of classes and methods} \\ \\ 
-The \class{Local Search Engine} class uses the model created for local search described in section \ref{sec_ls} and 
-uses local search to improve the initial solution. The optimization role of \class{Local Search Engine} is to create 
-and manage neighborhoods and search procedure object. Neighborhoods and search procedures are combined to create 
-different local search and \class{Local Search Engine} uses them within the time limit to improve the solution. \\ 
+The \class{LocalSearchEngine} class uses the model created for local search described in section \ref{sec_ls} and 
+uses local search to improve the initial solution. The classes new classes used for optimization are in three different 
+categorize, moves, neighborhoods, and search procedures. A \class{Move} object stores information of how to get to a 
+neighbor solution and the change of the evaluate function.  A \class{Neighborhood} class defines the step function and 
+and the sequence the neighbor solutions are explored. The search procedures can quire a \class{Neighborhood} to 
+evaluate a \class{Move}, the effect on the evaluation function,  and chooses if the solution should be visited. For 
+simplicity committing a \emph{move} will refer to going from the current solution to a neighbors solution. When 
+exploring a move only the changes in the evaluation function are computed. If a move is made, we say a move is 
+committed and variables and invariants that changes value are updated. \\ 
+Neighborhoods and search procedures are combined to create different local search algorithms and 
+\class{LocalSearchEngine} uses them within the time limit to improve the solution. \\ 
 \begin{figure}[!b]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{LSE}\caption{Overview of the class pointers of Local Search Engine. The fields 
@@ -13,9 +20,22 @@ marked with a star (*) are several classes of that type.}
 \boste{Variable og constraint til venstre}
 \end{center}
 \end{figure}
-The neighborhood classes are all subclasses of the super class \class{Neighborhood} such that they easily can be 
-combined with the search procedures. The methods of neighborhoods is illustrated in figure \ref{fig_neighbborhood}. \\
-\boste{Overview of methods of neighborhood} \\ 
+
+
+The neighborhood classes are all subclasses of the super class \class{Neighborhood} such that they can easily be 
+combined with the search procedures. The methods of neighborhoods are illustrated in figure \ref{fig_neighbborhood}. \\
+\begin{figure}[!b]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{neighborhood}\caption{The methods all Neighborhood classes needs to implement.} 
+\label{fig_neighbborhood}
+\end{center}
+\end{figure}
+All \class{Neighborhoods} implemented uses a step functions that changes value of a single independent variable, from 
+0 to 1 or vise versa since all variables are binary. A move is stored in an a \class{Move} that contains a pointer 
+to the variable used in the move, its change in value, and the changes to the evaluation function, once computed. \\ 
+The method \method{next()} creates and return a new \class{Move} object that, if committed, gives a neighbor solution.  
+If all and retu, or \textbf{NULL} if 
+
 Three neighborhoods are implemented, \class{FlipNeighborhood}, \class{MinConflictFlipNE}, and 
 \class{EvalFlipNE}. 
 

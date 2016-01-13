@@ -8,7 +8,7 @@
 class BestImprovement : public SearchEngine {
 public:
     BestImprovement(std::shared_ptr<Model> model, Neighborhood* NE) ;
-    bool Start();
+    bool Start(bool alwaysCommit);
 //    BestImprovement(const BestImprovement& orig);
     ~BestImprovement();
 private:

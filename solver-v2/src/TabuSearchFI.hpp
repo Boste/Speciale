@@ -9,7 +9,7 @@
 class TabuSearchFI : SearchEngine {
 public:
     TabuSearchFI(std::shared_ptr<Model> model, Neighborhood* neighborhood);
-    TabuSearchFI(const TabuSearchFI& orig);
+//    TabuSearchFI(const TabuSearchFI& orig);
     virtual ~TabuSearchFI();
 
     bool Start();

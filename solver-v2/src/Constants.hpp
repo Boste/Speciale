@@ -69,7 +69,7 @@ class Variable;
 
 
 // Return types
-typedef double coefType;
+typedef int coefType;
 typedef std::shared_ptr<Constraint> constraint;
 typedef std::vector<Variable*> variableContainer;
 typedef std::vector<constraint> VariableInConstraints;

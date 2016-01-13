@@ -87,6 +87,8 @@ public:
                     //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
                     GeneralSolver::linear(c, x, LQ, upperbound, HARD);
                 }
+            } else {
+                std::cout <<  "Posting constraint with no variables?" << std::endl;
             }
          
             //            delete x;
@@ -119,7 +121,7 @@ public:
 //            std::cout << i << " ";
             c.push_back((int) in->getVar(i).objcoeff);
             //            x->at(i) = varInt.at(i);
-            assert(in->getVar(i).objcoeff == (double) c.back());
+            assert(in->getVar(i).objcoeff == (coefType) c.back());
 
             x.push_back(varInt.at(i));
         }
@@ -132,7 +134,7 @@ public:
 
         //        Search(getAllVariables());
         Search(binaryVariables);
-        Search(integerVariables);
+//        Search(integerVariables);
 
 
         //        std::cout << "Model posted" << std::endl;

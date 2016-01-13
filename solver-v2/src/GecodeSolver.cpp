@@ -292,8 +292,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 //    std::cout << so->c_d << std::endl;
 //    exit(1);    
 
-    so->a_d = std::max(AllVars.size()/320,2); // Default 2 
-    so->c_d = std::max(AllVars.size() /160,8); // Default 8
+    so->a_d = std::max(AllVars.size()/32,2); // Default 2 
+    so->c_d = std::max(AllVars.size() /16,8); // Default 8
 //    so->a_d = AllVars.size(); // Default 2 
 //    so->c_d = AllVars.size() ; // Default 8
     //    this->print(std::cout);

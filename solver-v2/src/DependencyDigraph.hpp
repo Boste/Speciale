@@ -59,7 +59,7 @@ public:
     void undefineVariable(std::shared_ptr<invariantNode> invar);
     void addToQueue(propagation_queue& orgQueue, updateVector& queue, int depth);
     void printSizes();
-    std::vector<bool>& getBrokenInvariants();
+//    std::vector<bool>& getBrokenInvariants();
 
 private:
     //    std::unordered_map<unsigned, std::shared_ptr<variableNode>> variable_nodes;
@@ -73,7 +73,8 @@ private:
     /// Vector of all invariants (probably sorted by id but maybe id != index)
     //    invariantNodeContainer invariants;
     /// Vector of invariants that should be deleted if true. 
-    std::vector<bool> brokenInvariants;
+//    std::vector<bool> brokenInvariants;
+//    std::vector<invariant> brokenInvariants;
     /// If a cycle id has been broken 
     std::vector<bool> brokenCycles;
     bool madePropagationQueues = false;

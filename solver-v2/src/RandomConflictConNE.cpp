@@ -1,8 +1,8 @@
 
-#include "MinConflictFlipNE.hpp"
+#include "RandomConflictConNE.hpp"
 //#include "State.hpp"
 
-MinConflictFlipNE::MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+RandomConflictConNE::RandomConflictConNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
@@ -10,11 +10,11 @@ MinConflictFlipNE::MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_p
 //MinConflictFlipNE::MinConflictFlipNE(const MinConflictFlipNE& orig) {
 //}
 
-MinConflictFlipNE::~MinConflictFlipNE() {
+RandomConflictConNE::~RandomConflictConNE() {
     //    std::cout << "Destructing MinConflictFlipNE" << std::endl;
 }
 
-Move* MinConflictFlipNE::next() {
+Move* RandomConflictConNE::next() {
     //    std::cout << "Use iterator and variable pointers, remember to fix the pointers" << std::endl;
     //    Variable* var;
     //    debug;'    std::cout << moveCounter << std::endl;
@@ -22,6 +22,11 @@ Move* MinConflictFlipNE::next() {
 
     //    if (moveCounter < moveIterator->second->getVariablePointers().size()) {
     //        debug;
+    if(varsInNeighborhood.size() <= moveCounter){
+        std::cout <<varsInNeighborhood.size() << " " <<  moveCounter << std::endl;
+    }
+    assert(varsInNeighborhood.size() > moveCounter);
+    
     Variable* var = varsInNeighborhood.at(moveCounter);
     //    assert(!var->isDef() && !var->isFixed());
     //    } else {
@@ -45,13 +50,14 @@ Move* MinConflictFlipNE::next() {
     moveCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-    //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
+    assert(mv->deltaVector.size() == 2);
     //    std::cout << var->getID() << std::endl;
     return mv;
 }
 
-bool MinConflictFlipNE::hasNext() {
+bool RandomConflictConNE::hasNext() {
 
     if (firstMove) {
         if (model->getViolatedConstraints().empty()) {
@@ -72,6 +78,7 @@ bool MinConflictFlipNE::hasNext() {
             for (invariant invar : inv->getInvariantPointers()) {
                 invariantQueue.push_back(invar);
             }
+
             for (Variable* var : inv->getVariablePointers()) {
                 //                assert(!var->isDef());
                 if (!var->isFixed()) {
@@ -112,21 +119,21 @@ bool MinConflictFlipNE::hasNext() {
     //    return false;
 }
 
-unsigned MinConflictFlipNE::getSize() {
+unsigned RandomConflictConNE::getSize() {
     return varsInNeighborhood.size();
 }
 
-Move* MinConflictFlipNE::nextRandom() {
+Move* RandomConflictConNE::nextRandom() {
     Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
-bool MinConflictFlipNE::hasNextRandom() {
+bool RandomConflictConNE::hasNextRandom() {
     return false;
     if (randomCounter < randomMovesWanted) {
         return true;
@@ -136,13 +143,15 @@ bool MinConflictFlipNE::hasNextRandom() {
     }
 }
 
-void MinConflictFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
+void RandomConflictConNE::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
 }
 
-bool MinConflictFlipNE::calculateDelta(Move* mv) {
+bool RandomConflictConNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
-
+    for (unsigned i = 0; i < change.size(); i++) {
+        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+    }
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
@@ -177,7 +186,7 @@ bool MinConflictFlipNE::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool MinConflictFlipNE::commitMove(Move* mv) {
+bool RandomConflictConNE::commitMove(Move* mv) {
     moveCounter = 0;
     firstMove = true;
     Variable* var = mv->getVar();

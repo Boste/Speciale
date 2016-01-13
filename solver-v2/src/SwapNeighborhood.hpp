@@ -36,7 +36,7 @@ public:
     bool commitMove(Move* mv);
     bool calculateDelta(Move* mv);
     Move* nextRandom();
-    bool hasNextRandom();
+//    bool hasNextRandom();
     void setRandomCounter(unsigned numberOfRandomMoves);
     unsigned getSize();
 

@@ -20,11 +20,11 @@ protected:
     int type;
     bool oneway = false;
     //    bool containsOneway = false;
-    int numberOfIntegerVariables = 0;
+//    int numberOfIntegerVariables = 0;
     unsigned scopeSize;
     std::vector<int> arguments;
     std::vector<Variable*> variables;
-    std::vector<Variable*> IntegerVariables;
+//    std::vector<Variable*> IntegerVariables;
     std::unordered_map<int, coefType> coefficients;
     //    std::vector<std::shared_ptr<Invariant>> invariants;
     //    std::shared_ptr<Invariant> invariant;
@@ -49,13 +49,13 @@ public:
         variables.shrink_to_fit();
     }
 
-    void setNumberOfIntegerVariables(int number) {
-        numberOfIntegerVariables = number;
-    }
+//    void setNumberOfIntegerVariables(int number) {
+//        numberOfIntegerVariables = number;
+//    }
 
-    int& getNumberOfIntegerVariables() {
-        return numberOfIntegerVariables;
-    }
+//    int& getNumberOfIntegerVariables() {
+//        return numberOfIntegerVariables;
+//    }
 
     int getType() {
         return type;
@@ -94,13 +94,13 @@ public:
         return variables;
     }
 
-    std::vector<Variable*>& getIntegerVariables() {
-        return IntegerVariables;
-    }
+//    std::vector<Variable*>& getIntegerVariables() {
+//        return IntegerVariables;
+//    }
 
-    void addIntegerVariable(Variable* iv) {
-        IntegerVariables.push_back(iv);
-    }
+//    void addIntegerVariable(Variable* iv) {
+//        IntegerVariables.push_back(iv);
+//    }
 
     int getArgument(int i) {
         return arguments[i];

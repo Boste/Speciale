@@ -23,7 +23,7 @@ protected:
     //    double oldValue = 0;
 //    std::vector<std::pair<int, int>> VariableChange;
     std::vector<int> VariableChange;
-    int RHS;
+    coefType RHS;
     invariant LHS;
 //    std::shared_ptr<DependencyDigraph> DDG;
     
@@ -32,7 +32,7 @@ public:
     
 //    Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id);
     /// Purely used for testing
-    LEQviolation(invariant invar, int RHS);
+    LEQviolation(invariant invar, coefType RHS);
 //    Sum(std::unordered_map<int,coefType> map, unsigned id);
 //    Sum(std::unordered_map<int,coefType> map,  std::shared_ptr<DependencyDigraph> DDG);
 //    LEQviolation(std::unordered_map<int,coefType> map);

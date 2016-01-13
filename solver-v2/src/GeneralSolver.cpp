@@ -141,6 +141,8 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
     for (Variable* iv : variables) {
         if (priority != 0) {
             iv->addToUsedInConstraints(LinearConstraint);
+        } else {
+            iv->inObjective = true;
         }
 //        if (iv->isInteger) {
 //            LinearConstraint->addIntegerVariable(iv);
@@ -593,9 +595,9 @@ std::vector<int>& GeneralSolver::getInitialValue() {
     return model->getInitialEvaluation();
 }
 
-void GeneralSolver::optimizeSolution(int time) {
+void GeneralSolver::optimizeSolution(int time, int test) {
 
-    LS->optimizeSolution(time);
+    LS->optimizeSolution(time, test);
 }
 // Only for testing
 

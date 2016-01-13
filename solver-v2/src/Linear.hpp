@@ -10,7 +10,7 @@
 class Linear : public Constraint {
 protected:
     //    Sum* lhs;
-    int rhs;
+    coefType rhs;
     int relation; // 0 is equal, 1 is LQ
     InvariantContainer invars;
 
@@ -19,7 +19,7 @@ public:
 
     /// Used to create the original (given by user) constraints
 
-    Linear(std::vector<int> coefficients, std::vector<Variable*>& variables, int ub, int relation, unsigned priority) {
+    Linear(std::vector<int> coefficients, std::vector<Variable*>& variables, coefType ub, int relation, unsigned priority) {
         //    Linear(Sum* lhs, int ub, int relation) : Constraint() {
         this->relation = relation;
 
@@ -37,8 +37,8 @@ public:
         this->priority = priority;
         if (relation == EQ) {
             bool allUnit = true;
-            for(int c : coefficients){
-//            for (std::unordered_map<int, coefType>::iterator it = this->coefficients.begin(); it != this->coefficients.end(); ++it) {
+            for (int c : coefficients) {
+                //            for (std::unordered_map<int, coefType>::iterator it = this->coefficients.begin(); it != this->coefficients.end(); ++it) {
 
                 if (c != 1) {
                     if (c != -1) {
@@ -172,9 +172,9 @@ public:
             }
 
             // Will not make cycles 
-            //                    if(iv->getDefining()>0){
-            //                        continue;
-            //                    }
+            //                                if(iv->getDefining()>0){
+            //                                    continue;
+            //                                }
             if (defined > iv->getDefining()) {
                 bestVar = iv;
                 canBeMadeOneway = true;
@@ -185,54 +185,56 @@ public:
                 defined = iv->getDefining();
                 continue;
             } else if (defined == iv->getDefining()) {
-                if (iv->isIntegerVariable() > bestVar->isIntegerVariable()) {
-                    bestVar = iv;
-                    canBeMadeOneway = true;
-                    constraintsApplyingToiv = iv->usedIn;
-                    prio = iv->getSerachPriority();
-                    prevEqual = 1;
-                    defined = iv->getDefining();
+                //                if (iv->isIntegerVariable() > bestVar->isIntegerVariable()) {
+                //                    bestVar = iv;
+                //                    canBeMadeOneway = true;
+                //                    constraintsApplyingToiv = iv->usedIn;
+                //                    prio = iv->getSerachPriority();
+                //                    prevEqual = 1;
+                //                    defined = iv->getDefining();
 
-                } else if (iv->isIntegerVariable() == bestVar->isIntegerVariable()) {
+                //                } else 
+                //                    if (iv->isIntegerVariable() == bestVar->isIntegerVariable()) {
+                //
+                //
+                //                    if (iv->getSerachPriority() > prio) {
+                //                        bestVar = iv;
+                //                        canBeMadeOneway = true;
+                //                        constraintsApplyingToiv = iv->usedIn;
+                //                        prio = iv->getSerachPriority();
+                //                        prevEqual = 1;
+                //                        defined = iv->getDefining();
+                //                    } else 
+                if (iv->getSerachPriority() == prio) {
 
 
-                    if (iv->getSerachPriority() > prio) {
+                    if (iv->usedIn < constraintsApplyingToiv) {
                         bestVar = iv;
                         canBeMadeOneway = true;
                         constraintsApplyingToiv = iv->usedIn;
                         prio = iv->getSerachPriority();
                         prevEqual = 1;
                         defined = iv->getDefining();
-                    } else if (iv->getSerachPriority() == prio) {
-
-
-                        if (iv->usedIn < constraintsApplyingToiv) {
+                    } else if (iv->usedIn == constraintsApplyingToiv) {
+                        int choose = Random::Integer(prevEqual);
+                        prevEqual++;
+                        //            ties++
+                        equalCounter++;
+                        if (choose == 0) {
                             bestVar = iv;
                             canBeMadeOneway = true;
                             constraintsApplyingToiv = iv->usedIn;
                             prio = iv->getSerachPriority();
-                            prevEqual = 1;
                             defined = iv->getDefining();
-                        } else if (iv->usedIn == constraintsApplyingToiv) {
-                            int choose = Random::Integer(prevEqual);
-                            prevEqual++;
-                            //            ties++
-                            equalCounter++;
-                            if (choose == 0) {
-                                bestVar = iv;
-                                canBeMadeOneway = true;
-                                constraintsApplyingToiv = iv->usedIn;
-                                prio = iv->getSerachPriority();
-                                defined = iv->getDefining();
-                            }
                         }
                     }
-                    //        if (defining.at(iv->getID()) > 0) {
-                    //            return false;
-                    //        }
                 }
+                //        if (defining.at(iv->getID()) > 0) {
+                //            return false;
+                //        }
             }
         }
+
         if (canBeMadeOneway) {
             defining = bestVar;
             bestVar->increaseDefining();
@@ -255,7 +257,7 @@ public:
         double coeff = coefficients.at(var->getID());
         //    std::cout << cons->getArgument(1) << "  "<< coeff<< std::endl;
 
-        int value = -this->getArgument(1);
+        coefType value = -this->getArgument(1);
         assert(coeff != 0);
         if (coeff == -1) {
             for (auto it = coefficients.begin(); it != coefficients.end(); ++it) {

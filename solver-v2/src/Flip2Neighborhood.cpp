@@ -36,8 +36,8 @@ Move* Flip2Neighborhood::next() {
     Move* mv = new Move(vars, delta);
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
@@ -68,8 +68,8 @@ Move* Flip2Neighborhood::nextRandom() {
     delta.push_back((1 - iv2->getCurrentValue()) - iv2->getCurrentValue());
     //    IntegerVariable* iv = model->getMaskAt(moveCounter);
     //    moveCounter++;
-    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
@@ -90,6 +90,9 @@ void Flip2Neighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
 bool Flip2Neighborhood::calculateDelta(Move* mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
+        for (unsigned i = 0; i < change.size(); i++) {
+        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+    }
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;
     //    }

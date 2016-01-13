@@ -25,7 +25,7 @@ BP_Input::BP_Input(string file_name) {
     vars.resize(nvars);
     matcoeff.resize(ncons);
     bterms.resize(ncons);
-    matcoeff2.resize(nvars);
+//    matcoeff2.resize(nvars);
     assert(ncons > 0);
     assert(nvars > 0);
     //    cons.resize(ncons);
@@ -177,47 +177,47 @@ BP_Input::BP_Input(string file_name) {
 
 
     }
-    const CoinPackedMatrix* matrix2 = t.getMatrixByCol();
-
-    for (int i = 0; i < nvars; i++) {
-
-        const CoinShallowPackedVector vec = matrix2->getVector(i);
-        int non_zeros = vec.getNumElements();
-        const double* val = vec.getElements();
-
-
-        const int* indices = vec.getIndices();
-        matcoeff2[i].resize(non_zeros);
-
-        for (int j = 0; j < non_zeros; j++) {
-
-            char c = t.getRowSense()[indices[j]];
-
-            int type;
-            if (c == 'E') {
-                type = 5;
-            } else if (c == 'L') {
-                type = 3;
-
-            } else {
-                type = 2;
-            }
-
-            elem tmp;
-            tmp.index = indices[j];
-
-            if (type == 3) {
-
-                tmp.coeff = -val[j];
-            } else {
-                tmp.coeff = val[j];
-            }
-
-            matcoeff2[i][j] = tmp;
-
-
-        }
-    }
+//    const CoinPackedMatrix* matrix2 = t.getMatrixByCol();
+//
+//    for (int i = 0; i < nvars; i++) {
+//
+//        const CoinShallowPackedVector vec = matrix2->getVector(i);
+//        int non_zeros = vec.getNumElements();
+//        const double* val = vec.getElements();
+//
+//
+//        const int* indices = vec.getIndices();
+////        matcoeff2[i].resize(non_zeros);
+//
+//        for (int j = 0; j < non_zeros; j++) {
+//
+//            char c = t.getRowSense()[indices[j]];
+//
+//            int type;
+//            if (c == 'E') {
+//                type = 5;
+//            } else if (c == 'L') {
+//                type = 3;
+//
+//            } else {
+//                type = 2;
+//            }
+//
+//            elem tmp;
+//            tmp.index = indices[j];
+//
+//            if (type == 3) {
+//
+//                tmp.coeff = -val[j];
+//            } else {
+//                tmp.coeff = val[j];
+//            }
+//
+//            matcoeff2[i][j] = tmp;
+//
+//
+//        }
+//    }
     std::cout << "G: " << G << "   E: " << E << "    L: " << L << std::endl;
     //    for(int i =0; i< cons.size();i++){
     //        Constraint* c = cons[i];

@@ -16,10 +16,8 @@ public:
     virtual unsigned getSize() = 0;
     int numberOfEqualMoves = 0;
 
-   virtual void setRandomCounter(unsigned numberOfRandomMoves) =0;
-//        randomMovesWanted = numberOfRandomMoves;
-//    }
-    virtual bool hasNextRandom() = 0;
+    virtual void setRandomCounter(unsigned numberOfRandomMoves) = 0;
+//    virtual bool hasNextRandom() = 0;
     virtual Move* nextRandom() = 0;
 
 

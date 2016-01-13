@@ -13,6 +13,7 @@ State::State(std::shared_ptr<Model> model) {
     for (unsigned i = 0; i < model->getInitialEvaluation().size(); i++) {
         evaluation.push_back(model->getInitialEvaluation().at(i));
     }
+    violation = model->getViolatedConstraints().size();
     //    solutionValue = model->initialValue;
     //    numberOfViolations = model->initialViolations;
 
@@ -34,8 +35,10 @@ State::State(const State& orig) {
 /// Only copies LSVariables 
 
 void State::copy(std::shared_ptr<State> st) {
-    this->saveSolution();
-    //    for(unsigned i = 0; i< solution.size();i++){
+
+    for (Variable* iv : model->getMask()) {
+        solution.at(iv->getID()) = iv->getCurrentValue();
+    } //    for(unsigned i = 0; i< solution.size();i++){
     ////        solution[i] = st->getSolution()[i];
     //        std::cout << solution[i] << " ";
     //    }
@@ -43,6 +46,7 @@ void State::copy(std::shared_ptr<State> st) {
     //    this->solutionValue = orig.solutionValue;
     //    this->mask = orig.mask;
     this->evaluation = st->evaluation;
+    violation = st->violation;
     //    std::cout << &evaluation[0] << " vs " << &st->evaluation[0] << std::endl;
     //    this->model = st->model;
 }
@@ -54,16 +58,23 @@ State::~State() {
 
 /// Saves current value of all non-fixed binary variable and set solutionValue to the sum of obj functions. 
 
-void State::saveSolution() {
-
-    //    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
-    //        solution.at(iv->getID()) = iv->getCurrentValue();
-    //    }
-    for (Variable* iv : model->getMask()) {
-        solution.at(iv->getID()) = iv->getCurrentValue();
-    }
-
+void State::setViolation() {
+    violation = model->getViolatedConstraints().size();
 }
+
+unsigned State::getViolations() {
+    return violation;
+}
+//void State::saveSolution() {
+//
+//    //    for (IntegerVariable* iv : model->getNonFixedBinaryVariables()) {
+//    //        solution.at(iv->getID()) = iv->getCurrentValue();
+//    //    }
+//
+//    violation = model->getViolatedConstraints().size();
+//    
+//
+//}
 /// Returns a solution that is saved. 
 
 std::vector<int>& State::getSolution() {
@@ -80,11 +91,11 @@ std::vector<int>& State::getEvaluation() {
 
 }
 
-void State::updateEvaluation(std::vector<int>& changes) {
-    for (unsigned i = 0; i < evaluation.size(); i++) {
-        evaluation[i] += changes[i];
-    }
-}
+//void State::updateEvaluation(std::vector<int>& changes) {
+//    for (unsigned i = 0; i < evaluation.size(); i++) {
+//        evaluation[i] += changes[i];
+//    }
+//}
 
 bool State::isFeasible() {
     feasible = true;
@@ -97,26 +108,26 @@ bool State::isFeasible() {
 }
 
 bool State::compare(std::shared_ptr<State>& st) {
-//    std::cout << "compare " << std::endl;
-//    std::cout << "current " << evaluation.at(0) << " " << evaluation.at(1) << std::endl;
-//    std::cout << "best " << st->evaluation.at(0) << " " << st->evaluation.at(1) << std::endl;
-//    debug;
+    //    std::cout << "compare " << std::endl;
+    //    std::cout << "current " << evaluation.at(0) << " " << evaluation.at(1) << std::endl;
+    //    std::cout << "best " << st->evaluation.at(0) << " " << st->evaluation.at(1) << std::endl;
+    //    debug;
     //    if (!this->isFeasible() || !st->isFeasible()) {
     for (int i = this->evaluation.size() - 1; i >= 0; i--) {
 
         if (this->evaluation.at(i) > st->getEvaluation().at(i)) {
 
-//            std::cout << "return false"
-//                    << std::endl;
+            //            std::cout << "return false"
+            //                    << std::endl;
             return false;
         } else if (this->evaluation.at(i) < st->getEvaluation().at(i)) {
-//            std::cout << "return true" << std::endl;
+            //            std::cout << "return true" << std::endl;
             return true;
         }
         //            return this->evaluation.at(i) < st->getEvaluation().at(i);
     }
     //    }
-//    std::cout << "return " << (this->evaluation.at(0) < st->getEvaluation().at(0)) << std::endl;
+    //    std::cout << "return " << (this->evaluation.at(0) < st->getEvaluation().at(0)) << std::endl;
     return (this->evaluation.at(0) < st->getEvaluation().at(0));
 }
 

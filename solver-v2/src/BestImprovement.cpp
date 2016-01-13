@@ -12,7 +12,7 @@ BestImprovement::BestImprovement(std::shared_ptr<Model> model, Neighborhood* nei
 BestImprovement::~BestImprovement() {
 }
 
-bool BestImprovement::Start() {
+bool BestImprovement::Start(bool alwaysCommit) {
     //    debug;
     bool legal = false;
     Move* bestMove;
@@ -24,22 +24,25 @@ bool BestImprovement::Start() {
             //            debug;
             bestMove = NE->next();
             legal = NE->calculateDelta(bestMove);
-            if(!legal){
+            if (!legal) {
                 delete bestMove;
             }
         } else {
-                        debug;
-                        debug;
-                        debug;
-                        debug;
-                        debug;
-                        debug;
-                        debug;
+            //            debug;
+            //            bestMove = NE->nextRandom();
+            //            legal = NE->calculateDelta(bestMove);
+            //
+            //            if(legal){
+            //                break;
+            //            }
+//            std::cout << "not legal " << std::endl;
+            //            debug;
             //            delete bestMove;
             //            delete mv;
             return false;
         }
     }
+
     //    debug;
 
 
@@ -89,7 +92,7 @@ bool BestImprovement::Start() {
                 //                std::cout << "case 1 " << std::endl;
                 bestMove->copy(mv);
                 //                bestMove.copy(mv);
-//                                improvement = true;
+                //                                improvement = true;
                 NE->numberOfEqualMoves = 0;
                 break;
             case 2:
@@ -120,72 +123,72 @@ bool BestImprovement::Start() {
     //    std::cout << std::endl;
 
 
-        for (int i = bestMove->deltaVector.size() - 1; i >= 0; i--) {
-            //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
-            if (bestMove->getDeltaVector().at(i) < 0) {
-                //        if (bestMove.getDeltaVector().at(i) < 0) {
-    //            sidewalk = 0;
-                improvement = true;
-                break;
-            } else if (bestMove->getDeltaVector().at(i) > 0) {
-    //            if (improvement = true) {
-    //                    std::cout << "bestMove " << bestMove->getDeltaVector().at(0) << " " << bestMove->getDeltaVector().at(1) << std::endl;
-    //
-    //            }
-                //        } else if (bestMove.getDeltaVector().at(i) > 0) {
-    //            sidewalk = 0;
-                improvement = false;
-                break;
-            }
+    for (int i = bestMove->deltaVector.size() - 1; i >= 0; i--) {
+        //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
+        if (bestMove->getDeltaVector().at(i) < 0) {
+            //        if (bestMove.getDeltaVector().at(i) < 0) {
+            //            sidewalk = 0;
+            improvement = true;
+            break;
+        } else if (bestMove->getDeltaVector().at(i) > 0) {
+            //            if (improvement = true) {
+            //                    std::cout << "bestMove " << bestMove->getDeltaVector().at(0) << " " << bestMove->getDeltaVector().at(1) << std::endl;
+            //
+            //            }
+            //        } else if (bestMove.getDeltaVector().at(i) > 0) {
+            //            sidewalk = 0;
+            improvement = false;
+            break;
+        }
 
 
 
-    //        if(sidewalk == 1){
-    //            sidewalk = 0;
-    //            return false;
-    //        } else {
-    //            sidewalk++;
-    //            return improvement;
-    //        }
-    //        if (i == bestMove->deltaVector.size() - 1) {
-    //            if (bestMove->getDeltaVector().at(0) >= 0) {
-    //                improvement = false;
-    //                break;
-    //                //            }  else {
-    //                //                improvement = true;
-    //                //                break;
-    //            }
-    //
-    //        }
-    //        if(i == 1 ){
-//    for (unsigned i = 1; i < bestMove->deltaVector.size(); i++) {
-//        //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
-//        if (bestMove->getDeltaVector().at(i) < 0) {
-//            //        if (bestMove.getDeltaVector().at(i) < 0) {
-//            improvement = true;
-//            break;
-//        } else if (bestMove->getDeltaVector().at(i) > 0) {
-//            //        } else if (bestMove.getDeltaVector().at(i) > 0) {
-//            improvement = false;
-//            break;
-//        }
-//        if (i == bestMove->deltaVector.size() - 1) {
-//            if (bestMove->getDeltaVector().at(0) >= 0) {
-//                improvement = false;
-//                break;
-//                //            }  else {
-//                //                improvement = true;
-//                //                break;
-//            }
-//
-//        }
+        //        if(sidewalk == 1){
+        //            sidewalk = 0;
+        //            return false;
+        //        } else {
+        //            sidewalk++;
+        //            return improvement;
+        //        }
+        //        if (i == bestMove->deltaVector.size() - 1) {
+        //            if (bestMove->getDeltaVector().at(0) >= 0) {
+        //                improvement = false;
+        //                break;
+        //                //            }  else {
+        //                //                improvement = true;
+        //                //                break;
+        //            }
+        //
+        //        }
+        //        if(i == 1 ){
+        //    for (unsigned i = 1; i < bestMove->deltaVector.size(); i++) {
+        //        //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
+        //        if (bestMove->getDeltaVector().at(i) < 0) {
+        //            //        if (bestMove.getDeltaVector().at(i) < 0) {
+        //            improvement = true;
+        //            break;
+        //        } else if (bestMove->getDeltaVector().at(i) > 0) {
+        //            //        } else if (bestMove.getDeltaVector().at(i) > 0) {
+        //            improvement = false;
+        //            break;
+        //        }
+        //        if (i == bestMove->deltaVector.size() - 1) {
+        //            if (bestMove->getDeltaVector().at(0) >= 0) {
+        //                improvement = false;
+        //                break;
+        //                //            }  else {
+        //                //                improvement = true;
+        //                //                break;
+        //            }
+        //
+        //        }
         //        //        if(i == 1 ){
         //            std::cout << "how did i get here? " << improvement<< std::endl;
         //        }
     }
     //        std::cout << "legal moves " << legalmoves << " illegal moves " << illegal << " total " << illegal + legalmoves << " improvement " << improvement << std::endl;
     //    debug;
-//    if (improvement) {
+    if (improvement || alwaysCommit) {
         /// Returns if it is a legal move or not
         //        Move* move = &bestMove;
         //        for (int d : bestMove->getDeltaVector()) {
@@ -203,109 +206,14 @@ bool BestImprovement::Start() {
             return improvement;
         } else {
             delete bestMove;
+//            return false;
             std::cout << "Illegal move suggested as best move" << std::endl;
             debug;
             exit(1);
         }
         //            return true;
-//    }
+    }
 
-
-    //    }
-    //    delete bestMove;
-
-    //    bool improvement = false;
-    //    //    std::cout <<model->getMask().size() << std::endl;
-    //    for (IntegerVariable* iv : model->getMask()) {
-    //        //    for (unsigned i = 0; i < model->getNonFixedBinaryVariables().size(); i++) {
-    //        //        for(IntegerVariable* iv : *model->getIntegerVariables()){
-    //        //        IntegerVariable* iv = model->getMaskAt(i);
-    //        assert(!iv->isDef() && !iv->isFixed());
-    //        mv->var = iv;
-    //        //        mv->deltaValueFirst = 1 - iv->getCurrentValue() - iv->getCurrentValue();
-    //        mv->flip();
-    //        calculateDeltaChange(mv);
-    //
-    //        bool fewerViolations = false;
-    //        bool moreViolations = false;
-    //        //        for (int i : mv->getDeltaChanges()) {
-    //        //            std::cout << i << " ";
-    //        //        }
-    //        //        std::cout << std::endl;
-    //
-    //
-    //        for (unsigned j = 1; j < mv->getDeltaVector().size(); j++) { // No ties in favor of newest move
-    //
-    //            if (mv->getDeltaVector()[j] < bestMove->getDeltaVector()[j]) {
-    //                //                std::cout << "prob never here" << std::endl;
-    //                //                
-    //                //                std::cout << "fewer violations" << std::endl;
-    //                fewerViolations = true;
-    //                break;
-    //            } else if (mv->getDeltaVector()[j] > bestMove->getDeltaVector()[j]) {
-    //                moreViolations = true;
-    //                //                std::cout << "more violations" << std::endl;
-    //                break;
-    //            }
-    //        }
-    //        if (!moreViolations) {
-    //            if (fewerViolations || mv->getDeltaVector()[0] <= bestMove->getDeltaVector()[0]) {
-    //                //                for (int i : delta) {
-    //                //                    std::cout << i << " ";
-    //                //                }
-    //                //                std::cout << std::endl;
-    //                //                bestDelta = delta;
-    //                //                std::cout << "got new best move " << std::endl;
-    //                //            violationChange = delta.first;
-    //                //            objectiveChange = delta.second;
-    //                improvement = true;
-    //                bestMove->copy(mv);
-    //            }
-    //        }
-    //    }
-    //    if (improvement) {
-    //        //    std::cout << "commit delta" << std::endl;
-    //        //        for (int i : bestMove->getDeltaChanges()) {
-    //        //            std::cout << i << " ";
-    //        //        }
-    //        //        std::cout << std::endl;
-    //        //        std::cout << "this was one best iter " << std::endl;
-    //
-    //        unsigned changeAt = 0;
-    //        std::vector<int> bestDelta = bestMove->getDeltaVector();
-    //        for (unsigned i = 1; i < bestDelta.size(); i++) {
-    //            if (bestDelta[i] != 0) {
-    //                changeAt = i;
-    //                break;
-    //            }
-    //        }
-    //        if (changeAt > 0) {
-    //            if (bestDelta[changeAt] > 0) {
-    //                //                delete bestMove;
-    //                return false;
-    //            } else {
-    //                //            std::cout << "commit move" << std::endl;
-    //                commitMove(bestMove, st);
-    //                //                std::cout << "obj val " << st->getObjectiveValue() << std::endl;
-    //                return true;
-    //            }
-    //        } else if (bestDelta[0] < 0) {
-    //            commitMove(bestMove, st);
-    //            //            std::cout << "obj val " << st->getObjectiveValue() << std::endl;
-    //            return true;
-    //
-    //            //        std::cout << "commit move" << std::endl;
-    //        }
-    //    }
-
-    //    return true;
-    //    if (violationChange <= 0 && objectiveChange < 0) {
-    //       commitMove(bestMove, st);
-    //    } else {
-    //    delete bestMove;
-    //        std::cout << "no improving move" << std::endl;
-    //        return false;
-    //        std::exit(1);
 
 
     delete bestMove;

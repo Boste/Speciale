@@ -32,6 +32,7 @@ protected:
 //    constraint definedByCons;
     Constraint* definedByCons;
     unsigned searchPrio = 0;
+    bool inObjective = false;
     
     //    propagation_queue propagationQueue;
     //    invariant definedByInvar; 
@@ -97,6 +98,11 @@ public:
         oneway = invar;
         isDefined = true;
     }
+    
+    /// Only for testing
+    Constraint* getDefinedByCon(){
+        return definedByCons;
+    }
 
     bool isDef() {
         return isDefined;
@@ -129,9 +135,9 @@ public:
 
     }
 
-    bool isIntegerVariable() {
-        return isInteger;
-    }
+//    bool isIntegerVariable() {
+//        return isInteger;
+//    }
 
     int getCurrentValue() {
         return CurrentValue;
@@ -150,6 +156,7 @@ public:
         return vectorID;
     }
     void undefine(){
+
         isDefined = false;
         definedByCons->isOneway(false);
     }
@@ -187,6 +194,9 @@ public:
     ~Variable() {
         //        delete VariablePointer;
 
+    }
+    bool isInObjective(){
+        return inObjective;
     }
 
     

@@ -5,8 +5,8 @@ TabuSearchFI::TabuSearchFI(std::shared_ptr<Model> model, Neighborhood* neighborh
     NE = neighborhood;
 }
 
-TabuSearchFI::TabuSearchFI(const TabuSearchFI& orig) {
-}
+//TabuSearchFI::TabuSearchFI(const TabuSearchFI& orig) {
+//}
 
 TabuSearchFI::~TabuSearchFI() {
 }

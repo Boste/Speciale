@@ -32,7 +32,7 @@ bool FirstImprovement::Start() {
     //        }
     //    }
 
-//    bool improvement = false;
+    //    bool improvement = false;
     //    for (unsigned i = 1; i < firstMove->deltaVector.size(); i++) {
     //        if (firstMove->getDeltaVector().at(i) < 0) {
     //            improvement = true;
@@ -64,11 +64,13 @@ bool FirstImprovement::Start() {
         }
         //        legalmoves++;
         //        int compare = NE->compareMoves(mv, firstMove);
-        for (int i = firstMove->deltaVector.size()-1; i >=0 ; i--) {
+        for (int i = firstMove->deltaVector.size() - 1; i >= 0; i--) {
             //    for (unsigned i = 1; i < bestMove.deltaVector.size(); i++) {
             if (firstMove->getDeltaVector().at(i) < 0) {
                 //        if (bestMove.getDeltaVector().at(i) < 0) {
-//                improvement = true;
+                //                improvement = true;
+//                std::cout << "FirstMove: var " << firstMove->getVar()->getID() << " value " << firstMove->getVar()->getCurrentValue()<< " " <<  firstMove->getDeltaVector().at(0) << " " << firstMove->getDeltaVector().at(1) << std::endl;
+
                 NE->commitMove(firstMove);
                 delete firstMove;
                 return true;

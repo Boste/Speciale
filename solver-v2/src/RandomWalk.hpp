@@ -14,6 +14,7 @@ public:
     virtual ~RandomWalk();
 private:
     std::shared_ptr<Model> model;
+    unsigned numberOfRandomMoves;
 
 };
 

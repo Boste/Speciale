@@ -60,10 +60,10 @@ public:
         return matcoeff[i];
     }
 
-    const vector<elem> & getMatcoeff2(const int j) const {
-        assert(j >= 0 && j < nvars);
-        return matcoeff2[j];
-    }
+//    const vector<elem> & getMatcoeff2(const int j) const {
+//        assert(j >= 0 && j < nvars);
+//        return matcoeff2[j];
+//    }
 
     unsigned getNcons() const {
         return ncons;
@@ -124,7 +124,7 @@ protected:
     //vector<double> objcoeff;
 
     vector<vector<elem> > matcoeff;
-    vector<vector<elem> > matcoeff2;
+//    vector<vector<elem> > matcoeff2;
     //  vector<Constraint*> cons;
 
     vector<bounds> bterms;

@@ -1,7 +1,7 @@
 
 #include "LEQviolation.hpp"
 
-LEQviolation::LEQviolation(invariant invar, int RHS) {
+LEQviolation::LEQviolation(invariant invar, coefType RHS) {
     LHS = invar;
     this->RHS = RHS;
     InvariantPointers.push_back(invar);
@@ -23,11 +23,11 @@ bool LEQviolation::calculateDeltaValue() {
     if (LHS->getCurrentValue() + VariableChange.back() <= RHS) {
         DeltaValue = -CurrentValue;
     } else {
-        int old = std::max(LHS->getCurrentValue() - RHS,0);
-        int ne = std::max(LHS->getCurrentValue() + VariableChange.back() - RHS,0);
+        int old = std::max(LHS->getCurrentValue() - RHS,(coefType) 0);
+        int ne = std::max(LHS->getCurrentValue() + VariableChange.back() - RHS, (coefType) 0);
         DeltaValue =    ne -old;                                           
 
-//        DeltaValue = 1 - CurrentValue;
+        DeltaValue = 1 - CurrentValue;
     }
     VariableChange.pop_back();
 

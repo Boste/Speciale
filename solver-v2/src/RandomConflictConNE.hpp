@@ -3,21 +3,22 @@
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
+#include "Variable.hpp"
 //#include "Random.hpp"
 //#include "boost/random/mersenne_twister.hpp"
 //#include "boost/random/uniform_int_distribution.hpp"
 #include "Random.hpp"
 #include "State.hpp"
-#ifndef FLIPNEIGHBORHOOD_HPP
-#define	FLIPNEIGHBORHOOD_HPP
+#ifndef RANDOMCONFLICTCONNE_HPP
+#define	RANDOMCONFLICTCONNE_HPP
 
-class FlipNeighborhood : public Neighborhood {
+class RandomConflictConNE : public Neighborhood {
 public:
     std::shared_ptr<Model> model;
     std::shared_ptr<State> state;
-    FlipNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st);
-    FlipNeighborhood(const FlipNeighborhood& orig);
-    ~FlipNeighborhood();
+    RandomConflictConNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+//    RandomConflictConNE(const RandomConflictConNE& orig);
+    ~RandomConflictConNE();
 
     //    template<typename returnType>
     //    void randomWalk(std::shared_ptr<State> st);
@@ -32,13 +33,17 @@ public:
     bool commitMove(Move* mv);
     bool calculateDelta(Move* mv);
     Move* nextRandom();
-//    bool hasNextRandom();
+    bool hasNextRandom();
     void setRandomCounter(unsigned numberOfRandomMoves);
     unsigned getSize();
 
 
 private:
     unsigned moveCounter = 0;
+    //    std::unordered_map<unsigned, invariant>::iterator moveIterator;
+    std::vector<Variable*> varsInNeighborhood;
+    bool firstMove = true;
+    //    unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;
     unsigned randomMovesWanted = 0;
     //    template<typename returnType>
@@ -46,5 +51,5 @@ private:
 
 };
 
-#endif	/* FLIPNEIGHBORHOOD_HPP */
+#endif	/* MINCONFLICTFLIPNE_HPP */
 

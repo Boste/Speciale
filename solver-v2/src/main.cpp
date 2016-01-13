@@ -41,14 +41,15 @@ using namespace Gecode;
 int main(int argc, char* argv[]) {
 
 
-    
 
+    //    std::cout << std::numeric_limits<unsigned short>::max() << std::endl;
+    //    exit(1);
     std::vector<std::string> strs;
 
-    //    string str = argv[1];
-//    boost::split(strs, argv[1], boost::is_any_of("/"));
-//    string name = strs.back();
-//    std::cout << name << std::endl;
+    //        string str = argv[1];
+    //        boost::split(strs, argv[1], boost::is_any_of("/"));
+    //        string name = strs.back();
+    //        std::cout << "## name " << name << std::endl;
     int time;
     if (argc >= 3) {
         time = std::atoi(argv[2]);
@@ -63,8 +64,21 @@ int main(int argc, char* argv[]) {
         TimeForGecode = 10;
         std::cout << "Time for Gecode not given (arg 3) time set to 10 sec" << std::endl;
     }
-    Random::Seed(RANDOMSEED);
-    std::cout <<  "Random seed " << Random::seed << std::endl;
+    int test;
+    if (argc >= 5) {
+        test = std::atoi(argv[4]);
+    } else {
+        std::cout << "Test not set, doing nr 1" << std::endl;
+        test = 1;
+    }
+    int seed;
+    if (argc >= 6) {
+        seed = Random::Seed(std::atoi(argv[5]));
+    } else {
+//        std::cout << "Random Seed not set, setting to 1337" << std::endl;
+        seed = Random::Seed(RANDOMSEED);
+    }
+    std::cout << "Random seed " << Random::seed << std::endl;
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();
     //    InstanceOptions opt("BPSolver");
@@ -89,8 +103,8 @@ int main(int argc, char* argv[]) {
     //    std::cout << "Peak memory usage for pure gecode " << (double) peakSize3 / 1024 / 1024 << " mb" << std::endl;
     //    Test* test = new Test();
     //    delete test;  
-    
-//    BPSolver* userModel = new BPSolver(input);
+
+    //    BPSolver* userModel = new BPSolver(input);
     BPSolver userModel(input);
     std::cout << "Initialize solution" << std::endl;
     //Need my own option class
@@ -122,32 +136,39 @@ int main(int argc, char* argv[]) {
     //    m->printCurrent();
 
     //    userModel->initializeLS();
-    userModel.optimizeSolution(time);
-//    std::cout << userModel->getInitial() << " "; // value of solution gecode found
-    std::cout << iniTime << " "; // time for initializing problem 
-    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
+    userModel.optimizeSolution(time, test);
+    //    std::cout << userModel->getInitial() << " "; // value of solution gecode found
+    std::cout << "## initial " << iniTime << std::endl; // time for initializing problem 
+//    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 
 
-    //    string str = argv[1];
-    //    for (int i = 0; i < str.length(); i++) {
-    //        if (str[i] == '/')
-    //            str[i] = ' ';
-    //    }
-    //    std::vector<string> array;
-    //    stringstream ss(str);
-    //    while (ss >> temp)
-    //        array.push_back(temp);
-    std::cout << getPeakRSS() / 1024 / 1024; // peak memory in mb
-//    std::cout << " " << name; // Instance name
-    std::cout << std::endl;
+    string str = argv[1];
+    for (unsigned i = 0; i < str.length(); i++) {
+        if (str[i] == '/'){
+            str[i] = ' ';
+        } else if(str[i]=='.'){
+            str[i] = ' ';
+        }
+    }
+    string temp;
+    std::vector<string> array;
+    stringstream ss(str);
+    while (ss >> temp)
+        array.push_back(temp);
+    string name = array[1];
+    std::cout << "## Total time " << time << std::endl;
+    std::cout << "## Gecode time " << TimeForGecode << std::endl;
+    std::cout << "## seed " << seed << std::endl;
+    std::cout << "## peak mem " << (double) getPeakRSS() / 1024 / 1024 << std::endl; // peak memory in mb
+    std::cout << "## name " << name << std::endl; // Instance name
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
-    std::cout << "solution, time Gecode used, total time, peak memory in mb, " << std::endl;
+//    std::cout << "solution, time Gecode used, total time, peak memory in mb, " << std::endl;
 
 
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Total run time " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
-//    delete userModel;
+    //    delete userModel;
     delete input;
 
     //    m->printCurrent();

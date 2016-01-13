@@ -48,8 +48,8 @@ Move* SwapNeighborhood::next() {
     Move* mv = new Move(vars, delta);
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
@@ -84,20 +84,20 @@ Move* SwapNeighborhood::nextRandom() {
     delta.push_back(iv1->getCurrentValue() - iv2->getCurrentValue());
     //    IntegerVariable* iv = model->getMaskAt(moveCounter);
     //    moveCounter++;
-    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(model->getPriorityVectors().size());
-    mv->deltaVector.resize(model->getPriorityVectors().size(), 0);
+    Move* mv = new Move(vars, delta); //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
 
-bool SwapNeighborhood::hasNextRandom() {
-    //    std::cout << randomCounter << std::endl;
-    if (randomCounter < randomMovesWanted) {
-        return true;
-    } else {
-        randomCounter = 0;
-        return false;
-    }
-}
+//bool SwapNeighborhood::hasNextRandom() {
+//    //    std::cout << randomCounter << std::endl;
+//    if (randomCounter < randomMovesWanted) {
+//        return true;
+//    } else {
+//        randomCounter = 0;
+//        return false;
+//    }
+//}
 
 void SwapNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
@@ -109,6 +109,9 @@ bool SwapNeighborhood::calculateDelta(Move* mv) {
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;
     //    }
+        for (unsigned i = 0; i < change.size(); i++) {
+        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+    }
     std::vector<Variable*>& variables = mv->getVars();
     propagation_queue& queue1 = model->getPropagationQueue(variables.at(0));
     propagation_queue& queue2 = model->getPropagationQueue(variables.at(1));

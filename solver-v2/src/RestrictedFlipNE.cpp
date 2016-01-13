@@ -1,60 +1,61 @@
 
-#include "EvalFlipNE.hpp"
+#include "RestrictedFlipNE.hpp"
 //#include "State.hpp"
 
-EvalFlipNE::EvalFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+RestrictedFlipNE::RestrictedFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
+    small = model->getMask().size() < 10000;
+    probability = 10000.0 / model->getMask().size();
+    assert(probability != 0);
 }
 
-//FlipObjNE::FlipObjNE(const FlipObjNE& orig) {
+//RestrictedFlipNE::RestrictedFlipNE(const RestrictedFlipNE& orig) {
 //}
 
-EvalFlipNE::~EvalFlipNE() {
-    //    std::cout << "Destructing FlipObjNE" << std::endl;
+RestrictedFlipNE::~RestrictedFlipNE() {
+    //    std::cout << "Destructing RestrictedFlipNE" << std::endl;
 }
-Move* EvalFlipNE::next() {
-    if (moveCounter < getSize()) {
-        Variable* iv = model->getEvaluationVariableNr(moveCounter);
-        moveCounter++;
-        //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-        Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-        //    mv->deltaVector.resize(state->getEvaluation().size());
-        mv->deltaVector.resize(state->getEvaluation().size(), 0);
-        return mv;
-    } else {
-        moveCounter = 0;
-//        Move* mv = NULL;
-        return NULL;
-    }
-}
-//Move* EvalFlipNE::next() {
-//    
-//    Variable* iv = model->getEvaluationVariableNr(moveCounter);
-//    moveCounter++;
-//    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-//    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-//    //    mv->deltaVector.resize(state->getEvaluation().size());
-//    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-//    return mv;
-//}
 
-bool EvalFlipNE::hasNext() {
+Move* RestrictedFlipNE::next() {
     
-    if (moveCounter < model->getEvaluationVariables().size()) {
-        return true;
-    } else {
-        moveCounter = 0;
-        
-        return false;
-    }
-}
-unsigned EvalFlipNE::getSize(){
-    return model->getEvaluationVariables().size();
+    
+    Variable* iv = model->getMaskAt(moveCounter);
+    moveCounter++;
+    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+    //    mv->deltaVector.resize(state->getEvaluation().size());
+    mv->deltaVector.resize(state->getEvaluation().size(), 0);
+    return mv;
 }
 
-Move* EvalFlipNE::nextRandom() {
-    Variable* iv = model->getEvaluationVariableNr(Random::Integer(0, (int) model->getEvaluationVariables().size() - 1));
+bool RestrictedFlipNE::hasNext() {
+    if (small) {
+        if (moveCounter < model->getMask().size()) {
+            return true;
+        } else {
+            moveCounter = 0;
+            return false;
+        }
+    } else {
+        while (Random::Double() > probability) {
+            moveCounter++;
+        }
+        if (moveCounter < model->getMask().size()) {
+            return true;
+        } else {
+            moveCounter = 0;
+            return false;
+        }
+    }
+}
+
+unsigned RestrictedFlipNE::getSize() {
+    return model->getMask().size();
+}
+
+Move * RestrictedFlipNE::nextRandom() {
+    Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
@@ -63,20 +64,20 @@ Move* EvalFlipNE::nextRandom() {
     return mv;
 }
 
-bool EvalFlipNE::hasNextRandom() {
-    if (randomCounter < randomMovesWanted) {
-        return true;
-    } else {
-        randomCounter = 0;
-        return false;
-    }
-}
+//bool RestrictedFlipNE::hasNextRandom() {
+//    if (randomCounter < randomMovesWanted) {
+//        return true;
+//    } else {
+//        randomCounter = 0;
+//        return false;
+//    }
+//}
 
-void EvalFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
+void RestrictedFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
     randomMovesWanted = numberOfRandomMoves;
 }
 
-bool EvalFlipNE::calculateDelta(Move* mv) {
+bool RestrictedFlipNE::calculateDelta(Move * mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
@@ -116,7 +117,7 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool EvalFlipNE::commitMove(Move* mv) {
+bool RestrictedFlipNE::commitMove(Move * mv) {
     moveCounter = 0;
     Variable* var = mv->getVar();
     std::vector<int>& evaluation = state->getEvaluation();
@@ -135,13 +136,13 @@ bool EvalFlipNE::commitMove(Move* mv) {
         if (invar->representConstraint()) {
             if (invar->getCurrentValue() == 0) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
-//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
 
                 }
             } else {
                 if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
-//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
 
 
@@ -156,6 +157,6 @@ bool EvalFlipNE::commitMove(Move* mv) {
     return true;
 }
 
-//void FlipObjNE::makeMove(Move* mv, std::shared_ptr<State> st) {
+//void RestrictedFlipNE::makeMove(Move* mv, std::shared_ptr<State> st) {
 //    commitMove(mv, st);
 //}

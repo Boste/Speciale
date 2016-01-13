@@ -1,5 +1,4 @@
 #include "Sum.hpp"
-#include "BPSolver.hpp"
 
 //Sum::Sum(std::vector<IntegerVariable*>& vars, std::vector<int>& c, unsigned id)  {
 //    type = SUM;
@@ -298,7 +297,7 @@ bool Sum::test() {
             //            if(varValue <0){
             if (varValue < iv->getLowerBound()) {
                 std::cout << "this should never happen, prob defined by wrong invariant (sum instead of max)" << std::endl;
-                std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
+//                std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
                 std::cout << "value of variable " << varValue << std::endl;
                 debug;
 
@@ -331,22 +330,22 @@ bool Sum::test() {
         std::cout << "ID: " << getID() << " real value " << realValue << " current value " << CurrentValue << " variableID = "
                 << variableID << " start value " << startValue << std::endl;
         
-        bool gotInt = false;
-        for (auto iv : VariablePointers) {
-            //            if(iv->isDef()){
-            //                std::cout << coefficients.at(iv->getID()) << "*" << iv->getOneway()->getCurrentValue() << " ";
-            //            } else {
-            //                std::cout << coefficients.at(iv->getID()) << "*" << iv->getCurrentValue() << " ";
-            //            }
-
-            if (iv->isIntegerVariable()) {
-                gotInt = true;
-            }
-        }
+//        bool gotInt = false;
+//        for (auto iv : VariablePointers) {
+//            //            if(iv->isDef()){
+//            //                std::cout << coefficients.at(iv->getID()) << "*" << iv->getOneway()->getCurrentValue() << " ";
+//            //            } else {
+//            //                std::cout << coefficients.at(iv->getID()) << "*" << iv->getCurrentValue() << " ";
+//            //            }
+//
+////            if (iv->isIntegerVariable()) {
+////                gotInt = true;
+////            }
+//        }
         //        std::cout << startValue << " = " << realValue << " current " << CurrentValue << std::endl; 
-        if (gotInt) {
-            std::cout << "Got integer variable" << std::endl;
-        }
+//        if (gotInt) {
+//            std::cout << "Got integer variable" << std::endl;
+//        }
         std::cout << "coef size " << coefficients.size() << std::endl;
         std::cout << "variables/invariants " << VariablePointers.size() + InvariantPointers.size() << std::endl;
         debug;

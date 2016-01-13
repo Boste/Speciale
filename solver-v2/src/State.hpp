@@ -13,6 +13,7 @@ private:
 //    unsigned numberOfViolations = 0;
     std::vector<int> evaluation;
     bool feasible;
+    unsigned violation;
 
     //    propagation_queue deltaQueue;
 
@@ -24,7 +25,9 @@ public:
     bool compare(std::shared_ptr<State>& st);
     virtual ~State();
     void copy(std::shared_ptr<State> st); 
-    void updateEvaluation(std::vector<int>& changes);
+    void setViolation();
+    unsigned getViolations();
+//    void updateEvaluation(std::vector<int>& changes);
 
     /// Maybe all the initialize should be moved to model (again).
     //    void initializeInvariants();
@@ -35,7 +38,7 @@ public:
 
     std::vector<int>& getEvaluation();
 //    int getObjectiveValue();
-    void saveSolution();
+//    void saveSolution();
     std::vector<int>& getSolution();
     int getSolutionValue();
 //    void setSolution();

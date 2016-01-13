@@ -9,16 +9,16 @@
 //#include "boost/random/uniform_int_distribution.hpp"
 #include "Random.hpp"
 #include "State.hpp"
-#ifndef MINCONFLICTFLIPNE_HPP
-#define	MINCONFLICTFLIPNE_HPP
+#ifndef CONFLICTONLYNE_HPP
+#define	CONFLICTONLYNE_HPP
 
-class MinConflictFlipNE : public Neighborhood {
+class ConflictOnlyNE : public Neighborhood {
 public:
     std::shared_ptr<Model> model;
     std::shared_ptr<State> state;
-    MinConflictFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
-    MinConflictFlipNE(const MinConflictFlipNE& orig);
-    ~MinConflictFlipNE();
+    ConflictOnlyNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+//    ConflictOnlyNE(const ConflictOnlyNE& orig);
+    ~ConflictOnlyNE();
 
     //    template<typename returnType>
     //    void randomWalk(std::shared_ptr<State> st);
@@ -33,7 +33,7 @@ public:
     bool commitMove(Move* mv);
     bool calculateDelta(Move* mv);
     Move* nextRandom();
-    bool hasNextRandom();
+//    bool hasNextRandom();
     void setRandomCounter(unsigned numberOfRandomMoves);
     unsigned getSize();
 
@@ -41,11 +41,17 @@ public:
 private:
     unsigned moveCounter = 0;
     //    std::unordered_map<unsigned, invariant>::iterator moveIterator;
-    std::vector<Variable*> varsInNeighborhood;
+//    std::vector<Variable*> varsInNeighborhood;
     bool firstMove = true;
     //    unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;
     unsigned randomMovesWanted = 0;
+    unsigned short iter = 0;
+    std::vector<unsigned short> calculated;
+    unsigned var;
+    std::unordered_map<unsigned, invariant>::iterator  moveIterator;
+    unsigned suggested = 0;
+    unsigned  lastSuggested;
     //    template<typename returnType>
     //    std::pair<int, int> calculateDeltaChange(Move* mv, std::shared_ptr<State> st);
 

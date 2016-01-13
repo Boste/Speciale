@@ -35,10 +35,10 @@
 \contentsline {subsection}{\numberline {6.3}Propagation Queue}{25}
 \contentsline {section}{\numberline {7}From Modeling to Local Search}{27}
 \contentsline {section}{\numberline {8}Local Search Engine}{28}
-\contentsline {subsection}{\numberline {8.1}Neighborhoods}{29}
-\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{29}
-\contentsline {section}{\numberline {9}Metaheuristics}{29}
-\contentsline {section}{\numberline {10}Tests}{29}
-\contentsline {section}{\numberline {11}Results}{29}
-\contentsline {section}{\numberline {12}Future Work}{29}
-\contentsline {section}{\numberline {13}Conclusion}{30}
+\contentsline {subsection}{\numberline {8.1}Neighborhoods}{30}
+\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{30}
+\contentsline {section}{\numberline {9}Metaheuristics}{30}
+\contentsline {section}{\numberline {10}Tests}{30}
+\contentsline {section}{\numberline {11}Results}{30}
+\contentsline {section}{\numberline {12}Future Work}{30}
+\contentsline {section}{\numberline {13}Conclusion}{31}

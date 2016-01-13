@@ -262,6 +262,12 @@ public:
     void setTimestamp(unsigned time) {
         timestamp = time;
     }
+    bool isBroken(){
+        return broken;
+    }
+    void setBroken(bool flag){
+        broken = flag;
+    }
 
 
 protected:
@@ -269,7 +275,7 @@ protected:
     std::vector<invariant> InvariantPointers;
     //    int value = 0;
     unsigned invariantID;
-    int DeltaValue = 0;
+    coefType DeltaValue = 0;
     unsigned constraintPriority = 0;
     //    int usedInConstraintNr;
     //    int usedInObjectiveNr;
@@ -288,6 +294,7 @@ protected:
     bool representCons = false;
     int variableID = -1;
     Variable* variable;
+    bool broken = false;
     //    InvariantContainer invariants;
     //    updateVector update;
     //    std::set<Invariant*, compare_invariant> update;

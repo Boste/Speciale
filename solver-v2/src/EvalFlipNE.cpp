@@ -39,16 +39,16 @@ Move* EvalFlipNE::next() {
 //    return mv;
 //}
 
-bool EvalFlipNE::hasNext() {
-    
-    if (moveCounter < model->getEvaluationVariables().size()) {
-        return true;
-    } else {
-        moveCounter = 0;
-        
-        return false;
-    }
-}
+//bool EvalFlipNE::hasNext() {
+//    
+//    if (moveCounter < model->getEvaluationVariables().size()) {
+//        return true;
+//    } else {
+//        moveCounter = 0;
+//        
+//        return false;
+//    }
+//}
 unsigned EvalFlipNE::getSize(){
     return model->getEvaluationVariables().size();
 }
@@ -63,21 +63,20 @@ Move* EvalFlipNE::nextRandom() {
     return mv;
 }
 
-bool EvalFlipNE::hasNextRandom() {
-    if (randomCounter < randomMovesWanted) {
-        return true;
-    } else {
-        randomCounter = 0;
-        return false;
-    }
-}
+//bool EvalFlipNE::hasNextRandom() {
+//    if (randomCounter < randomMovesWanted) {
+//        return true;
+//    } else {
+//        randomCounter = 0;
+//        return false;
+//    }
+//}
 
-void EvalFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
-    randomMovesWanted = numberOfRandomMoves;
-}
+//void EvalFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
+//    randomMovesWanted = numberOfRandomMoves;
+//}
 
 bool EvalFlipNE::calculateDelta(Move* mv) {
-
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
         model->getEvaluationInvariantNr(i)->calculateDeltaValue();
@@ -85,15 +84,14 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
     updateVector& update = model->getUpdate(variable);
-
     for (updateType& invar : update) {
         invar->proposeChange(variable->getID(), mv->getVariableChange());
     }
-    bool legal = true;
+    bool allowed = true;
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
-        if (!legal) {
+        allowed = invar->calculateDeltaValue();
+        if (!allowed) {
             break;
         }
         if (invar->getDeltaValue() != 0) {
@@ -101,8 +99,8 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
                 inv->proposeChange(invar->getVariableID(), invar->getDeltaValue());
             }
         }
-    }
-    if (!legal) {
+    } 
+    if (!allowed) {
         for (updateType invar : queue) {
             invar->calculateDeltaValue();
         }
@@ -113,7 +111,7 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
     }
 
 
-    return legal;
+    return allowed;
 }
 
 bool EvalFlipNE::commitMove(Move* mv) {
@@ -127,7 +125,6 @@ bool EvalFlipNE::commitMove(Move* mv) {
         return false;
     }
     var->setCurrentValue(1 - var->getCurrentValue());
-
     propagation_queue queue = model->getPropagationQueue(var);
     for (updateType invar : queue) {
 
@@ -137,14 +134,11 @@ bool EvalFlipNE::commitMove(Move* mv) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
-
                 }
             } else {
                 if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
 //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
-
-
                 }
             }
         }

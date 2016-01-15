@@ -12,19 +12,9 @@ SwapNeighborhood::~SwapNeighborhood() {
 }
 
 Move* SwapNeighborhood::next() {
-    Variable* iv;
-    Variable* iv2;
-    if (moveCounter2 == model->getMask().size() - 1) {
-        iv2 = model->getMaskAt(moveCounter2);
-        moveCounter2 = 0;
-        iv = model->getMaskAt(moveCounter);
-        moveCounter++;
-    } else {
-        iv = model->getMaskAt(moveCounter);
-        iv2 = model->getMaskAt(moveCounter2);
-        moveCounter2++;
-    }
-    while (iv->getCurrentValue() == iv2->getCurrentValue() && moveCounter != model->getMask().size() - 1) {
+    if (moveCounter < model->getMask().size() - 1) {
+        Variable* iv;
+        Variable* iv2;
         if (moveCounter2 == model->getMask().size() - 1) {
             iv2 = model->getMaskAt(moveCounter2);
             moveCounter2 = 0;
@@ -35,46 +25,63 @@ Move* SwapNeighborhood::next() {
             iv2 = model->getMaskAt(moveCounter2);
             moveCounter2++;
         }
-    }
-    std::vector<Variable*> vars;
-    vars.push_back(iv);
-    vars.push_back(iv2);
+        while (iv->getCurrentValue() == iv2->getCurrentValue() && moveCounter != model->getMask().size() - 1) {
+            if (moveCounter2 == model->getMask().size() - 1) {
+                iv2 = model->getMaskAt(moveCounter2);
+                moveCounter2 = 0;
+                iv = model->getMaskAt(moveCounter);
+                moveCounter++;
+            } else {
+                iv = model->getMaskAt(moveCounter);
+                iv2 = model->getMaskAt(moveCounter2);
+                moveCounter2++;
+            }
+        }
+        std::vector<Variable*> vars;
+        vars.push_back(iv);
+        vars.push_back(iv2);
 
-    std::vector<int> delta;
-    delta.push_back(iv2->getCurrentValue() - iv->getCurrentValue());
-    delta.push_back(iv->getCurrentValue() - iv2->getCurrentValue());
-    //    IntegerVariable* iv = model->getMaskAt(moveCounter);
-    //    moveCounter++;
-    Move* mv = new Move(vars, delta);
-    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(state->getEvaluation().size());
-    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-    return mv;
-}
-
-bool SwapNeighborhood::hasNext() {
-    if (moveCounter < model->getMask().size() - 1) {
-        return true;
+        std::vector<int> delta;
+        delta.push_back(iv2->getCurrentValue() - iv->getCurrentValue());
+        delta.push_back(iv->getCurrentValue() - iv2->getCurrentValue());
+        //    IntegerVariable* iv = model->getMaskAt(moveCounter);
+        //    moveCounter++;
+        Move* mv = new Move(vars, delta);
+        //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+        //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+        //    mv->deltaVector.resize(state->getEvaluation().size());
+        mv->deltaVector.resize(state->getEvaluation().size(), 0);
+        return mv;
     } else {
         moveCounter = 0;
         moveCounter2 = 1;
-        return false;
+        return NULL;
     }
 }
-unsigned SwapNeighborhood::getSize(){
-//    unsigned mask = 
-    return model->getMask().size() *  (model->getMask().size()-1)/2;
+
+//bool SwapNeighborhood::hasNext() {
+//    if (moveCounter < model->getMask().size() - 1) {
+//        return true;
+//    } else {
+//        moveCounter = 0;
+//        moveCounter2 = 1;
+//        return false;
+//    }
+//}
+
+unsigned SwapNeighborhood::getSize() {
+    //    unsigned mask = 
+    return model->getMask().size() * (model->getMask().size() - 1) / 2;
 }
 
-Move* SwapNeighborhood::nextRandom() {
+Move * SwapNeighborhood::nextRandom() {
     Variable* iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     Variable* iv2 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     while (iv1->getCurrentValue() == iv2->getCurrentValue() && model->getMask().size() > 1) {
         iv1 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
         iv2 = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
     }
-    randomCounter++;
+//    randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     std::vector<Variable*> vars;
     vars.push_back(iv1);
@@ -99,23 +106,24 @@ Move* SwapNeighborhood::nextRandom() {
 //    }
 //}
 
-void SwapNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
-    randomMovesWanted = numberOfRandomMoves;
-}
+//void SwapNeighborhood::setRandomCounter(unsigned numberOfRandomMoves) {
+//    randomMovesWanted = numberOfRandomMoves;
+//}
 
-bool SwapNeighborhood::calculateDelta(Move* mv) {
+bool SwapNeighborhood::calculateDelta(Move * mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
+
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;
     //    }
-        for (unsigned i = 0; i < change.size(); i++) {
+    for (unsigned i = 0; i < change.size(); i++) {
         model->getEvaluationInvariantNr(i)->calculateDeltaValue();
     }
     std::vector<Variable*>& variables = mv->getVars();
     propagation_queue& queue1 = model->getPropagationQueue(variables.at(0));
     propagation_queue& queue2 = model->getPropagationQueue(variables.at(1));
-    testCounter++;
+//    testCounter++;
 
 
     // #########################################################
@@ -258,7 +266,7 @@ bool SwapNeighborhood::calculateDelta(Move* mv) {
     return legal;
 }
 
-bool SwapNeighborhood::commitMove(Move* mv) {
+bool SwapNeighborhood::commitMove(Move * mv) {
     moveCounter = 0;
     moveCounter2 = 0;
     Variable* var1 = mv->getVars().at(0);
@@ -306,6 +314,19 @@ bool SwapNeighborhood::commitMove(Move* mv) {
     }
     for (updateType invar : queue) {
         invar->updateValue();
+        if (invar->representConstraint()) {
+            if (invar->getCurrentValue() == 0) {
+                if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
+//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    model->removeViolatedConstraint(invar->getInvariantPointers().back());
+                }
+            } else {
+                if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
+//                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
+                    model->addViolatedConstraint(invar->getInvariantPointers().back());
+                }
+            }
+        }
 
         //        if (invar->isUsedByConstraint()) {
         //

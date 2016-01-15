@@ -34,14 +34,14 @@ public:
     bool calculateDelta(Move* mv);
     Move* nextRandom();
 //    bool hasNextRandom();
-    void setRandomCounter(unsigned numberOfRandomMoves);
+//    void setRandomCounter(unsigned numberOfRandomMoves);
     unsigned getSize();
 
 
 private:
     unsigned moveCounter = 0;
-    unsigned randomCounter = 0;
-    unsigned randomMovesWanted = 0;
+//    unsigned randomCounter = 0;
+//    unsigned randomMovesWanted = 0;
     bool small;
     double probability;
     //    template<typename returnType>

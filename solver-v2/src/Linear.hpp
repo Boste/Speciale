@@ -133,6 +133,9 @@ public:
     }
 
     bool canBeMadeOneway() {
+        if(!functional){
+            return false;
+        }
         if (this->isOneway()) {
             return false;
         }
@@ -317,10 +320,13 @@ public:
         sumInvariant->setValue(value);
         sumInvariant->setVariable(var);
         assert(var == defining);
-        if (value != var->getCurrentValue()) {
-            std::cout << value << " vs " << var->getCurrentValue() << " ";
-
-        }
+            if (value != var->getCurrentValue()) {
+                std::cout << value << " vs " << var->getCurrentValue() << std::endl;
+                for(Variable* var : variables){
+                    std::cout <<  var->getCurrentValue() << " "; 
+                }
+                std::cout <<  " = 1"<<  std::endl; 
+            }
         var->setDefinedBy(sumInvariant, this);
         //                this->setInvariant(sumInvariant);
         onewayInvariant = sumInvariant;

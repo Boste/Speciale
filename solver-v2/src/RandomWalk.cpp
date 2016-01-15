@@ -13,11 +13,11 @@ bool RandomWalk::Start() {
     for (unsigned i = 0; i < numberOfRandomMoves; i++) {
         //    unsigned  counter = 0;
         //    while (NE->hasNextRandom()) {
-        bool legal = false;
-        while (!legal) {
+        bool allowed = false;
+        while (!allowed) {
 
             Move* mv = NE->nextRandom();
-            legal = NE->commitMove(mv);
+            allowed = NE->commitMove(mv);
 
             delete mv;
         }

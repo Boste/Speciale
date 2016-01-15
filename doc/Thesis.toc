@@ -34,11 +34,10 @@
 \contentsline {subsection}{\numberline {6.2}Dependency Digraph}{23}
 \contentsline {subsection}{\numberline {6.3}Propagation Queue}{25}
 \contentsline {section}{\numberline {7}From Modeling to Local Search}{27}
-\contentsline {section}{\numberline {8}Local Search Engine}{28}
-\contentsline {subsection}{\numberline {8.1}Neighborhoods}{30}
-\contentsline {subsubsection}{\numberline {8.1.1}Neighborhood Operations}{30}
-\contentsline {section}{\numberline {9}Metaheuristics}{30}
-\contentsline {section}{\numberline {10}Tests}{30}
-\contentsline {section}{\numberline {11}Results}{30}
-\contentsline {section}{\numberline {12}Future Work}{30}
-\contentsline {section}{\numberline {13}Conclusion}{31}
+\contentsline {section}{\numberline {8}Local Search and Metaheuristics}{28}
+\contentsline {subsection}{\numberline {8.1}Neighborhoods}{29}
+\contentsline {subsection}{\numberline {8.2}Search Procedures}{32}
+\contentsline {section}{\numberline {9}Tests}{32}
+\contentsline {section}{\numberline {10}Results}{32}
+\contentsline {section}{\numberline {11}Future Work}{32}
+\contentsline {section}{\numberline {12}Conclusion}{33}

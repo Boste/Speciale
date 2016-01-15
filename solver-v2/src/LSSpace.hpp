@@ -29,6 +29,11 @@
 #include "TabuSearch.hpp"
 #include "TabuSearchFI.hpp"
 
+
+#include <iostream>
+#include <fstream>
+
+
 #ifndef LSSPACE_HPP
 #define	LSSPACE_HPP
 //#include 

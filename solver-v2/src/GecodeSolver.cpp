@@ -302,7 +302,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     try {
         std::clock_t GecodeClock = std::clock();
         //        std::cout << "Before search engine" << std::endl;
-        Gecode::BAB<GecodeSolver> e(this, *so);
+        Gecode::DFS<GecodeSolver> e(this, *so);
+//        Gecode::BAB<GecodeSolver> e(this, *so);
         std::cout << "Searching for solution...." << std::endl;
         s = e.next();
 
@@ -319,7 +320,6 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
                 //                double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
                 //                std::cout << "\t Time spend searching for solution: " << time << " seconds" << std::endl;
                 //
-                debug;
 
                 //                SetValues(AllVars);
                 solutionFound = false;

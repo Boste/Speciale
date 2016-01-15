@@ -27,7 +27,7 @@ bool LEQviolation::calculateDeltaValue() {
         int ne = std::max(LHS->getCurrentValue() + VariableChange.back() - RHS, (coefType) 0);
         DeltaValue =    ne -old;                                           
 
-        DeltaValue = 1 - CurrentValue;
+//        DeltaValue = 1 - CurrentValue;
     }
     VariableChange.pop_back();
 

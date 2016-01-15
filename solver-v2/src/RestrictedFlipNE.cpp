@@ -18,37 +18,45 @@ RestrictedFlipNE::~RestrictedFlipNE() {
 }
 
 Move* RestrictedFlipNE::next() {
-    
-    
-    Variable* iv = model->getMaskAt(moveCounter);
-    moveCounter++;
-    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-    //    mv->deltaVector.resize(state->getEvaluation().size());
-    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-    return mv;
-}
+    while (Random::Double() > probability) {
+        moveCounter++;
+    }
+    if (moveCounter < model->getMask().size()) {
 
-bool RestrictedFlipNE::hasNext() {
-    if (small) {
-        if (moveCounter < model->getMask().size()) {
-            return true;
-        } else {
-            moveCounter = 0;
-            return false;
-        }
+
+        Variable* iv = model->getMaskAt(moveCounter);
+        moveCounter++;
+        //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+        Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+        //    mv->deltaVector.resize(state->getEvaluation().size());
+        mv->deltaVector.resize(state->getEvaluation().size(), 0);
+        return mv;
     } else {
-        while (Random::Double() > probability) {
-            moveCounter++;
-        }
-        if (moveCounter < model->getMask().size()) {
-            return true;
-        } else {
-            moveCounter = 0;
-            return false;
-        }
+        moveCounter = 0;
+        return NULL;
     }
 }
+
+//bool RestrictedFlipNE::hasNext() {
+//    if (small) {
+//        if (moveCounter < model->getMask().size()) {
+//            return true;
+//        } else {
+//            moveCounter = 0;
+//            return false;
+//        }
+//    } else {
+//        while (Random::Double() > probability) {
+//            moveCounter++;
+//        }
+//        if (moveCounter < model->getMask().size()) {
+//            return true;
+//        } else {
+//            moveCounter = 0;
+//            return false;
+//        }
+//    }
+//}
 
 unsigned RestrictedFlipNE::getSize() {
     return model->getMask().size();
@@ -56,7 +64,7 @@ unsigned RestrictedFlipNE::getSize() {
 
 Move * RestrictedFlipNE::nextRandom() {
     Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
-    randomCounter++;
+//    randomCounter++;
     //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     //    mv->deltaVector.resize(state->getEvaluation().size());
@@ -73,9 +81,9 @@ Move * RestrictedFlipNE::nextRandom() {
 //    }
 //}
 
-void RestrictedFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
-    randomMovesWanted = numberOfRandomMoves;
-}
+//void RestrictedFlipNE::setRandomCounter(unsigned numberOfRandomMoves) {
+//    randomMovesWanted = numberOfRandomMoves;
+//}
 
 bool RestrictedFlipNE::calculateDelta(Move * mv) {
 
@@ -117,35 +125,48 @@ bool RestrictedFlipNE::calculateDelta(Move * mv) {
     return legal;
 }
 
+
 bool RestrictedFlipNE::commitMove(Move * mv) {
     moveCounter = 0;
     Variable* var = mv->getVar();
     std::vector<int>& evaluation = state->getEvaluation();
 
-    // Skal genberegne!!!!!
-    bool legal = calculateDelta(mv);
-    if (!legal) {
-        return false;
+
+    for (unsigned i = 0; i < mv->getDeltaVector().size(); i++) {
+        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
     }
+    //    std::vector<int>& change = mv->getDeltaVector();
+
+    Variable* variable = mv->var;
+    propagation_queue& queue = model->getPropagationQueue(variable);
+    updateVector& update = model->getUpdate(variable);
+
+    for (updateType& invar : update) {
+        invar->proposeChange(variable->getID(), mv->getVariableChange());
+    }
+    //    bool legal = true;
+    for (updateType invar : queue) {
+        invar->calculateDeltaValue();
+        for (updateType inv : model->getUpdate(invar)) {
+            inv->proposeChange(invar->getVariableID(), invar->getDeltaValue());
+        }
+    }
+    //    for (unsigned i = 0; i < change.size(); i++) {
+    //        change[i] = model->getEvaluationInvariantNr(i)->getDeltaValue();
+    //    }
     var->setCurrentValue(1 - var->getCurrentValue());
 
-    propagation_queue queue = model->getPropagationQueue(var);
     for (updateType invar : queue) {
 
         invar->updateValue();
         if (invar->representConstraint()) {
             if (invar->getCurrentValue() == 0) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
-                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
-
                 }
             } else {
                 if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
-                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
-
-
                 }
             }
         }
@@ -153,6 +174,11 @@ bool RestrictedFlipNE::commitMove(Move * mv) {
     for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {
         evaluation[i] = model->getEvaluationInvariantNr(i)->getCurrentValue();
     }
+    //}
+
+
+    //    std::cout << std::endl;
+    //    std::cout << "FirstMove: var " << mv->getVar()->getID() << " value " << mv->getDeltaVector().at(0) << " " << mv->getDeltaVector().at(1) << std::endl;
 
     return true;
 }

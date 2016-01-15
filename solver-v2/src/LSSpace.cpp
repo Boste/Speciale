@@ -47,6 +47,26 @@ void LSSpace::createDDG(bool all) {
     //    model->getDDG()->printSizes();
     //    defining = std::vector<unsigned>(model->getAllVariables().size());
 
+
+//    std::vector<constraint> func2;
+//    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
+//        for (constraint cons : *model->getConstraintsWithPriority(i)) {
+//            if (cons->isFunctional()) {
+//                func2.push_back(cons);
+//            }
+//        }
+//
+//    }
+////    if (func2.size() > 0) {
+//        std::ofstream myfile;
+//        myfile.open("func.txt", std::ios::app);
+//        myfile << " " << func2.size() << "\n";
+//        myfile.close();
+////    }
+//    std::cout << func2.size() << std::endl;
+//    exit(1);
+//    std::cout << "DELETE ABOVE" << std::endl;
+
     //#####################################################################################################################################
     // Making oneway looking at each integer variable. Harder to delete the constraints that have been made one-way
     //#####################################################################################################################################        
@@ -78,6 +98,7 @@ void LSSpace::createDDG(bool all) {
     //    std::vector<IntegerVariable*>& queue = model->getPriorityVectorNr(0);
     //    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
     /// Try to see if it is to expensive to prevent cycles. 
+    
     std::vector<constraint> func;
     if (all) {
 
@@ -99,17 +120,17 @@ void LSSpace::createDDG(bool all) {
     for (constraint con : func) {
         //        if (canBeMadeOneway(con)) {
 
-        //                if (con->canBeMadeOneway()) {
-        //                    invariant invar = con->makeOneway();
-        //                    model->addInvariant(invar);
-        //                    //            std::cout << "Add to DDG aswell " << std::endl;
-        //                    DDG->addInvariant(invar);
-        //        
-        //                    numberOfOneway++;
-        //                    //            std::cout << numberOfOneway << " ";
-        //                    //            DDG->checkForCycles(model->getInvariants());
-        //        
-        //                }
+        if (con->canBeMadeOneway()) {
+            invariant invar = con->makeOneway();
+            model->addInvariant(invar);
+            //            std::cout << "Add to DDG aswell " << std::endl;
+            DDG->addInvariant(invar);
+
+            numberOfOneway++;
+            //            std::cout << numberOfOneway << " ";
+            //            DDG->checkForCycles(model->getInvariants());
+
+        }
 
         //        }
 

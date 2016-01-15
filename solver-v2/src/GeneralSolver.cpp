@@ -16,60 +16,6 @@ GeneralSolver::~GeneralSolver() {
     //        delete st;
 }
 
-//GeneralSolver& GeneralSolver::operator=(const GeneralSolver &a) {
-//    this->model = a.model;
-//
-//    return *this; 
-//
-//}
-
-
-// Skal Gecode::IntConLevel icl være et argument?
-// ingen shared i det her kald
-
-//unsigned GeneralSolver::getNumberOfDigits(double number) {
-//    //    std::cout << "Number " << number << std::endl;
-//    //    double dig = number - static_cast<int> (number);
-//    //    std::cout << dig << std::endl;
-//    //    std::cout << number - (int) number << std::endl;
-//    //    std::string asString = std::to_string(dig);
-//    //    
-//    //    sstream << dig ;
-//    //    sstream << " ";
-//    //    sstream << number - (int) number;
-//    //    std::string varAsString = sstream.str();
-//    //    std::cout << " hest " <<  varAsString << std::endl;
-//    //    
-//    std::cout.precision(6);
-//
-//    double intpart;
-//    std::cout << "Number " << number << std::endl;
-//    std::ostringstream sstream;
-//    sstream.precision(6);
-//    double fractpart = modf(number, &intpart);
-//    sstream << fractpart;
-//    std::cout << fractpart << std::endl;
-//    std::string varAsString = sstream.str();
-//    std::cout << varAsString << std::endl;
-//    sleep(1);
-//    int digits = varAsString.length() - 2;
-//    std::cout << fractpart * 10000000 << std::endl;
-//    std::cout << "Length - 2 = " << varAsString.length() << " - 2 " << digits << std::endl;
-//
-//    if (fractpart < 0) {
-//        digits--;
-//        std::cout << fractpart << std::endl;
-//    }
-//    assert(digits < 10);
-//    //    std::cout << "Digits " << digits << std::endl;
-//    //    std::cout << sstream.width() << std::endl;
-//    //    int digits = sstream.width();
-//    //    std::cout << sstream << std::endl;
-//    //    std::cout << asString << std::endl;
-//    //    unsigned digits = asString.length() - 2;
-//    //    std::cout << "Digits " << digits << std::endl;
-//    return digits;
-//}
 
 void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*>& variables, int relation, int ub, unsigned priority) {
     //    bool hasDouble = false;
@@ -137,22 +83,22 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
     std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, ub, relation, priority);
 
     //        bool haveInt = false;
-//    int numberOfIntegerVariables = 0;
+    //    int numberOfIntegerVariables = 0;
     for (Variable* iv : variables) {
         if (priority != 0) {
             iv->addToUsedInConstraints(LinearConstraint);
         } else {
             iv->inObjective = true;
         }
-//        if (iv->isInteger) {
-//            LinearConstraint->addIntegerVariable(iv);
-//            numberOfIntegerVariables++;
-//        }
+        //        if (iv->isInteger) {
+        //            LinearConstraint->addIntegerVariable(iv);
+        //            numberOfIntegerVariables++;
+        //        }
     }
-//    if (priority == 0) {
-//        std::cout << "objective has " << numberOfIntegerVariables << " integer variables " << std::endl;
-//    }
-//    LinearConstraint->setNumberOfIntegerVariables(numberOfIntegerVariables);
+    //    if (priority == 0) {
+    //        std::cout << "objective has " << numberOfIntegerVariables << " integer variables " << std::endl;
+    //    }
+    //    LinearConstraint->setNumberOfIntegerVariables(numberOfIntegerVariables);
 
     //    if (priority == OBJ) {
     //        if (model->getConstraints().size() == 0) {
@@ -193,16 +139,16 @@ void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*
 ///Create a single variable with given lower and upper bound
 
 Variable* GeneralSolver::createVariable(int lb, int ub) {
-//    if (ub == 1 && lb == 0) {
-        Variable* iv = model->addBinaryVariable(lb, ub);
-        GS->createGecodeVariable(lb, ub);
-        return iv;
+    //    if (ub == 1 && lb == 0) {
+    Variable* iv = model->addBinaryVariable(lb, ub);
+    GS->createGecodeVariable(lb, ub);
+    return iv;
 
-//    } else {
-//        Variable* iv = model->addIntegerVariable(lb, ub);
-//        GS->createGecodeVariable(lb, ub);
-//        return iv;
-//    }
+    //    } else {
+    //        Variable* iv = model->addIntegerVariable(lb, ub);
+    //        GS->createGecodeVariable(lb, ub);
+    //        return iv;
+    //    }
     //        GS->createGecodeVariable(lb, ub);
     //        std::cout <<  "integer var pointer " << newVar << std::endl;
     //        std::cout << lb << " " << ub << std::endl;
@@ -257,9 +203,8 @@ void GeneralSolver::Search(std::vector<Variable*> variables) {
 //    GeneralSolver* InitialSolution(Gecode::Search::Options* so) {
 
 void GeneralSolver::initialSolution(int TimeForGecode) {
-
+    auto tid = std::clock();
     GS->createArray();
-    debug;
     //        GS->branch(true);
     if (GS->initialize(TimeForGecode, true)) {
         //    if (false) {
@@ -311,16 +256,39 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
             }
         }
         std::cout << "This should be initial value " << initialValue << std::endl;
+        auto gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        std::cout << "## gecode " << gecode << std::endl;
 
 
-
+        std::ofstream myfile;
+        myfile.open("func2.txt", std::ios::app);
+        myfile << " 0 " << gecode << "\n";
+        myfile.close();
+        std::cout << "#relax 0" << std::endl;
+        exit(1);
+        tid = std::clock();
         LS->createDDG(true);
         LS->initializeLS(true);
+        auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        std::cout << "## initLS " << inils << std::endl;
+
     } else {
         relax(TimeForGecode);
+        auto gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        std::cout << "## gecode " << gecode << std::endl;
+
+
+        std::ofstream myfile;
+        myfile.open("func2.txt", std::ios::app);
+        myfile << " " << gecode << "\n";
+        myfile.close();
+        exit(1);
+        tid = std::clock();
 
         LS->createDDG(false);
         LS->initializeLS(false);
+        auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        std::cout << "## initLS " << inils << std::endl;
 
     }
 
@@ -371,11 +339,7 @@ bool GeneralSolver::relax(int TimeForGecode) {
         }
     }
     assert(funcCons.size() + nonFuncCons.size() == numberOfConstraints);
-    //    debug;
-    //    std::sort(funcCons.begin(), funcCons.end(), Constraint::prioritySort());
-    //    debug;
-    //    std::sort(nonFuncCons.begin(), nonFuncCons.end(), Constraint::prioritySort());
-    //    debug;
+
     std::vector<constraint> keepOrder;
     unsigned keept = 0;
 
@@ -399,7 +363,6 @@ bool GeneralSolver::relax(int TimeForGecode) {
         }
     }
     std::cout << "Posting " << keept << " constriants " << std::endl;
-    debug;
     for (constraint cons : keepOrder) {
 
         std::vector<Variable*> variables = cons->getVariables();
@@ -425,8 +388,8 @@ bool GeneralSolver::relax(int TimeForGecode) {
     }
     bool solution = GS->initialize(TimeForGecode, false);
     //    std::vector<constraint> ;
-    while (!solution) {
-        debug;
+    unsigned numberOfTimesRelaxed = 1;
+    while (!solution && numberOfTimesRelaxed < 3) {
         //        std::vector<constraint> newKeep;
         //        std::cout << "Number of constraints " << funcCons.size() << std::endl;
 
@@ -446,10 +409,11 @@ bool GeneralSolver::relax(int TimeForGecode) {
         //            counter--;
         //        }
         std::cout << "Number of constriants " << keepOrder.size() << std::endl;
-        debug;
         furtherRelax(keepOrder);
         solution = GS->initialize(TimeForGecode, false);
         //        keepOrder = newKeep;
+        numberOfTimesRelaxed++;
+
     }
     std::vector<constraint> feasibleFunc;
     for (constraint con : keepOrder) {
@@ -457,7 +421,14 @@ bool GeneralSolver::relax(int TimeForGecode) {
             feasibleFunc.push_back(con);
         }
     }
-    model->setFeasibleFunctionalConstraints(feasibleFunc);
+    if (solution) {
+        model->setFeasibleFunctionalConstraints(feasibleFunc);
+    }
+    std::ofstream myfile;
+    myfile.open("func2.txt", std::ios::app);
+    myfile << " " << numberOfTimesRelaxed;
+    myfile.close();
+    std::cout << "#relax " << numberOfTimesRelaxed << std::endl;
     //    exit(1);
     return solution;
 }
@@ -466,7 +437,7 @@ bool GeneralSolver::relax(int TimeForGecode) {
 void GeneralSolver::furtherRelax(std::vector<constraint> cons) {
 
     GS = std::unique_ptr<GecodeSolver>(new GecodeSolver(model));
-    
+
     for (Variable* iv : model->getAllVariables()) {
         int lb = iv->getLowerBound();
         int ub = iv->getUpperBound();
@@ -538,57 +509,57 @@ void GeneralSolver::furtherRelax(std::vector<constraint> cons) {
 //
 //}
 
-void GeneralSolver::simpleRelax(int timesRelaxed) {
-    std::cout << "SimpleRelax" << std::endl;
-    double numberOfConstraints = 0;
-    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-        numberOfConstraints += model->getConstraintsWithPriority(i)->size();
-    }
-
-    int relax = std::ceil(std::pow(2, timesRelaxed) / 100.0 * numberOfConstraints);
-    int keep = std::max(numberOfConstraints - relax, 0.0);
-    int posted = 0;
-
-    //        std::cout << "do nothing" << std::endl;
-    //        std::cout << model->getObjectives()->at(0)->getInvariant()->VariablePointers->size() << std::endl;
-    for (unsigned i = 1; i < model->getConstraints().size()/*-((timesRelaxed+1)*100)*/; i++) {
-
-        //        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
-        constraintContainer prio = model->getConstraintsWithPriority(i);
-        //            for (unsigned j = 0; j < prio->size(); j++) {
-        for (constraint cons : *prio) {
-            if (posted == keep) {
-                break;
-            }
-            //                std::shared_ptr<Invariant> invar = cons->getInvariant();
-            //                Invariant* invar = cons->getInvariant();
-            std::vector<Variable*> variables = cons->getVariables();
-            if (cons->getType() == LINEAR) { // otherwise it is in objective function atm.
-                //                    Gecode::IntArgs c(integerVariables->size());
-                std::vector<int> c(variables.size());
-
-                //                    Gecode::IntVarArgs x(integerVariables->size());
-                for (unsigned j = 0; j < variables.size(); j++) {
-                    //                    debug;
-                    c[j] = cons->getCoefficients().at(variables.at(j)->getID()); //                    std::cout << __LINE__ << std::endl;
-
-                }
-                //                IntConLevel icl = cons->getICL();
-                int relation = cons->getArgument(0);
-                int ub = cons->getArgument(1);
-                GS->linear(c, variables, relation, ub);
-                posted++;
-            } else {
-
-                std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
-            }
-        }
-    }
-    std::cout << posted << std::endl;
-    std::cout << keep << std::endl;
-
-    std::cout << "SimpleRelax made " << timesRelaxed << " times" << std::endl;
-}
+//void GeneralSolver::simpleRelax(int timesRelaxed) {
+//    std::cout << "SimpleRelax" << std::endl;
+//    double numberOfConstraints = 0;
+//    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
+//        numberOfConstraints += model->getConstraintsWithPriority(i)->size();
+//    }
+//
+//    int relax = std::ceil(std::pow(2, timesRelaxed) / 100.0 * numberOfConstraints);
+//    int keep = std::max(numberOfConstraints - relax, 0.0);
+//    int posted = 0;
+//
+//    //        std::cout << "do nothing" << std::endl;
+//    //        std::cout << model->getObjectives()->at(0)->getInvariant()->VariablePointers->size() << std::endl;
+//    for (unsigned i = 1; i < model->getConstraints().size()/*-((timesRelaxed+1)*100)*/; i++) {
+//
+//        //        for ( std::vector<std::shared_ptr < Constraint>>* prio : *st->getConstraints()) {
+//        constraintContainer prio = model->getConstraintsWithPriority(i);
+//        //            for (unsigned j = 0; j < prio->size(); j++) {
+//        for (constraint cons : *prio) {
+//            if (posted == keep) {
+//                break;
+//            }
+//            //                std::shared_ptr<Invariant> invar = cons->getInvariant();
+//            //                Invariant* invar = cons->getInvariant();
+//            std::vector<Variable*> variables = cons->getVariables();
+//            if (cons->getType() == LINEAR) { // otherwise it is in objective function atm.
+//                //                    Gecode::IntArgs c(integerVariables->size());
+//                std::vector<int> c(variables.size());
+//
+//                //                    Gecode::IntVarArgs x(integerVariables->size());
+//                for (unsigned j = 0; j < variables.size(); j++) {
+//                    //                    debug;
+//                    c[j] = cons->getCoefficients().at(variables.at(j)->getID()); //                    std::cout << __LINE__ << std::endl;
+//
+//                }
+//                //                IntConLevel icl = cons->getICL();
+//                int relation = cons->getArgument(0);
+//                int ub = cons->getArgument(1);
+//                GS->linear(c, variables, relation, ub);
+//                posted++;
+//            } else {
+//
+//                std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
+//            }
+//        }
+//    }
+//    std::cout << posted << std::endl;
+//    std::cout << keep << std::endl;
+//
+//    std::cout << "SimpleRelax made " << timesRelaxed << " times" << std::endl;
+//}
 
 std::vector<int>& GeneralSolver::getInitialValue() {
 

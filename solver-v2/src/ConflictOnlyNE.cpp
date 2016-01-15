@@ -29,7 +29,7 @@ Move* ConflictOnlyNE::next() {
     }
 
     if (model->getViolatedConstraints().empty()) {
-        return false;
+        return NULL;
     }
     while (moveIterator != model->getViolatedConstraints().end()) {
         while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
@@ -74,52 +74,52 @@ Move* ConflictOnlyNE::next() {
 //    return mv;
 //}
 
-bool ConflictOnlyNE::hasNext() {
-    if (firstMove) {
-        iter++;
-        firstMove = false;
-        lastSuggested = suggested;
-        moveCounter = 0;
-        suggested = 0;
-        moveIterator = model->getViolatedConstraints().begin();
-
-
-    }
-
-    if (model->getViolatedConstraints().empty()) {
-        return false;
-    }
-    while (moveIterator != model->getViolatedConstraints().end()) {
-        while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
-            if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
-                suggested++;
-                var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
-                calculated.at(var) = iter;
-                return true;
-            } else {
-                moveCounter++;
-            }
-        }
-        moveIterator++;
-        moveCounter = 0;
-    }
-    firstMove = true;
-    return false;
-    //    if (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
-    //
-    //        if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
-    //            var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
-    //
-    //            return true;
-    //        } else {
-    //            
-    //        }
-    //    } else {
-    //        moveIterator++;
-    //    }
-    //    int rand = Random::Integer(model->getViolatedConstraints().size() - 1);
-
-}
+//bool ConflictOnlyNE::hasNext() {
+//    if (firstMove) {
+//        iter++;
+//        firstMove = false;
+//        lastSuggested = suggested;
+//        moveCounter = 0;
+//        suggested = 0;
+//        moveIterator = model->getViolatedConstraints().begin();
+//
+//
+//    }
+//
+//    if (model->getViolatedConstraints().empty()) {
+//        return false;
+//    }
+//    while (moveIterator != model->getViolatedConstraints().end()) {
+//        while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
+//            if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
+//                suggested++;
+//                var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
+//                calculated.at(var) = iter;
+//                return true;
+//            } else {
+//                moveCounter++;
+//            }
+//        }
+//        moveIterator++;
+//        moveCounter = 0;
+//    }
+//    firstMove = true;
+//    return false;
+//    //    if (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
+//    //
+//    //        if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
+//    //            var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
+//    //
+//    //            return true;
+//    //        } else {
+//    //            
+//    //        }
+//    //    } else {
+//    //        moveIterator++;
+//    //    }
+//    //    int rand = Random::Integer(model->getViolatedConstraints().size() - 1);
+//
+//}
 
 unsigned ConflictOnlyNE::getSize() {
     return lastSuggested;
@@ -154,9 +154,9 @@ Move* ConflictOnlyNE::nextRandom() {
 //    }
 //}
 
-void ConflictOnlyNE::setRandomCounter(unsigned numberOfRandomMoves) {
-    randomMovesWanted = numberOfRandomMoves;
-}
+//void ConflictOnlyNE::setRandomCounter(unsigned numberOfRandomMoves) {
+//    randomMovesWanted = numberOfRandomMoves;
+//}
 
 bool ConflictOnlyNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
@@ -197,6 +197,7 @@ bool ConflictOnlyNE::calculateDelta(Move* mv) {
 
     return legal;
 }
+
 
 bool ConflictOnlyNE::commitMove(Move* mv) {
     firstMove = true;

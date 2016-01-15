@@ -13,7 +13,7 @@ TabuSearch::~TabuSearch() {
 }
 
 bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, std::shared_ptr<State>& currentState, std::vector<int>& tabulist) {
-    bool legal = false;
+    bool allowed = false;
     Move* bestMove;
     Move* mv; // = new Move();
 
@@ -25,15 +25,15 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     //        debug;
     //    unsigned tabuTenure = 3;
     bool isTabu = false;
-    while (!legal || isTabu) {
+    while (!allowed || isTabu) {
         bestMove = NE->next();
         if (bestMove != NULL) {
             //        if (NE->hasNext()) {
 
             bestMove = NE->next();
-            legal = NE->calculateDelta(bestMove);
+            allowed = NE->calculateDelta(bestMove);
             //            std::cout << iteration << " - " << tabulist.at(bestMove->var->getID()) << " > " << tabuTenure << std::endl;
-            if (!legal) {
+            if (!allowed) {
                 delete bestMove;
                 bestMove = NE->next();
 
@@ -42,7 +42,7 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
             isTabu = (iteration - tabulist.at(bestMove->var->getID())) <= tabuTenure;
             if (isTabu) {
                 if (betterThanBest(currentState->getEvaluation(), bestMove->deltaVector, bestState->getEvaluation())) {
-                    if (legal) {
+                    if (allowed) {
                         break;
                     }
                 } else {
@@ -74,8 +74,8 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     while (mv != NULL) {
         //    while (NE->hasNext()) {
         //        mv = NE->next();
-        legal = NE->calculateDelta(mv);
-        if (!legal) {
+        allowed = NE->calculateDelta(mv);
+        if (!allowed) {
             //            illegal++;
             delete mv;
             mv = NE->next();
@@ -180,14 +180,14 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     //        std::cout << std::endl;
 
 
-    legal = NE->commitMove(bestMove);
+    allowed = NE->commitMove(bestMove);
     //    std::cout << "Number of suggested moves " << suggestedMove << std::endl;
     //    std::cout << "Commited move " << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << std::endl;
     //    std::cout << improvement << std::endl;
 
     //    debug;
     //        bool legal = NE->commitMove(&bestMove);
-    if (legal) {
+    if (allowed) {
         //            if (NE->commitMove(bestMove)) {
         tabulist.at(bestMove->getVar()->getID()) = iteration;
         //        std::cout <<bestMove->getVar()->getID() << " " << iteration << std::endl;

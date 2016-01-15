@@ -27,13 +27,13 @@ public:
     //    bool firstImprovement(Move* mv, Model* st);
 
     //    void makeMove(Move* mv, std::shared_ptr<State> st);
-    bool hasNext();
+//    bool hasNext();
     Move* next();
     bool commitMove(Move* mv);
     bool calculateDelta(Move* mv);
     Move* nextRandom();
 //    bool hasNextRandom();
-    void setRandomCounter(unsigned numberOfRandomMoves);
+//    void setRandomCounter(unsigned numberOfRandomMoves);
     unsigned getSize();
 
 

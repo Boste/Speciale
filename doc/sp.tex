@@ -1,0 +1,15 @@
+Three different search procedures are implemented; first improvement, best improvement, and random walk. \\ 
+First improvement look at neighbor solutions until a solution better than the current is found \boste{solution better 
+than other?} and then make the move to reach that solution and returns true. When the search reaches a local optima no 
+improving move can be found and first improvement returns false. As an alternative if no 
+improving solution is found a move to solution of same quality could be made, called a sidewalk. It might be an 
+improving solution can be found after a sidewalk. If sidewalks are allowed there must be some restriction to the 
+sidewalks to prevent cycling through the same solution over and over. For instance this could be forbidding a number of 
+consecutive sidewalks. The local optima could be reach very fast hence first improvement need to be complimented with 
+other search procedures to continue the search. \\ 
+Best improvement explores the whole neighborhood of the current solution and commits the move that gives the best 
+improvement. It might take more time to explorer the neighborhood than first improvement but often find a 
+better move than first improvement. If no improving move is found it does not commit a move and returns false. Like 
+first improvement sidewalks could be allowed. \\ 
+The neighborhood of a solution depends on the choice of move and heuristics applied to the neighborhood. The 
+neighborhood implemented is \boste{are} 

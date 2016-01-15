@@ -14,17 +14,18 @@ BestImprovement::~BestImprovement() {
 
 bool BestImprovement::Start(bool alwaysCommit) {
     //    debug;
-    bool legal = false;
+    bool allowed = false;
     Move* bestMove;
     Move* mv; // = new Move();
 
-    while (!legal) {
+    while (!allowed) {
         //        debug;
-        if (NE->hasNext()) {
+        bestMove = NE->next();
+        if (bestMove != NULL) {
             //            debug;
-            bestMove = NE->next();
-            legal = NE->calculateDelta(bestMove);
-            if (!legal) {
+            //            bestMove = NE->next();
+            allowed = NE->calculateDelta(bestMove);
+            if (!allowed) {
                 delete bestMove;
             }
         } else {
@@ -35,7 +36,7 @@ bool BestImprovement::Start(bool alwaysCommit) {
             //            if(legal){
             //                break;
             //            }
-//            std::cout << "not legal " << std::endl;
+            //            std::cout << "not legal " << std::endl;
             //            debug;
             //            delete bestMove;
             //            delete mv;
@@ -76,12 +77,14 @@ bool BestImprovement::Start(bool alwaysCommit) {
     //    while (improvement) {
     //        unsigned illegal = 0;
     //        unsigned legalmoves = 0;
-    while (NE->hasNext()) {
-        mv = NE->next();
-        legal = NE->calculateDelta(mv);
-        if (!legal) {
+    mv = NE->next();
+    while (mv != NULL) {
+        //        mv = NE->next();
+        allowed = NE->calculateDelta(mv);
+        if (!allowed) {
             delete mv;
             //                        illegal++;
+            mv = NE->next();
             continue;
         }
         //                legalmoves++;
@@ -112,8 +115,9 @@ bool BestImprovement::Start(bool alwaysCommit) {
         //                std::cout << "best move " << bestMove->deltaVector.at(0) << " " << bestMove->deltaVector.at(1) << std::endl;
         //        debug;
         //        std::cout << std::endl;
-        delete mv;
 
+        delete mv;
+        mv = NE->next();
 
     }
     //    std::cout << "improvement " << improvement << std::endl;
@@ -197,16 +201,16 @@ bool BestImprovement::Start(bool alwaysCommit) {
         //        std::cout << std::endl;
 
 
-        legal = NE->commitMove(bestMove);
+        allowed = NE->commitMove(bestMove);
         //        bool legal = NE->commitMove(&bestMove);
-        if (legal) {
+        if (allowed) {
             //            if (NE->commitMove(bestMove)) {
             delete bestMove;
 
             return improvement;
         } else {
             delete bestMove;
-//            return false;
+            //            return false;
             std::cout << "Illegal move suggested as best move" << std::endl;
             debug;
             exit(1);

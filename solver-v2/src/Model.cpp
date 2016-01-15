@@ -28,6 +28,7 @@ std::vector<std::vector<Variable*>>&Model::getPriorityVectors() {
 
 std::vector<Variable*>& Model::getPriorityVectorNr(unsigned i) {
     assert(i < priorityVectorsOfVariables.size());
+    
     return priorityVectorsOfVariables.at(i);
 }
 

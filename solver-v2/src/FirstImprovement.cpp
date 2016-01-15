@@ -54,12 +54,14 @@ bool FirstImprovement::Start() {
     //            }
     //        }
     //    }
-    while (NE->hasNext()) {
-        Move* firstMove = NE->next();
+    Move* firstMove = NE->next();
+    while (firstMove != NULL) {
+//        Move* firstMove = NE->next();
         legal = NE->calculateDelta(firstMove);
         if (!legal) {
             delete firstMove;
             //            illegal++;
+            firstMove = NE->next();
             continue;
         }
         //        legalmoves++;
@@ -85,6 +87,7 @@ bool FirstImprovement::Start() {
 
         }
         delete firstMove;
+        firstMove = NE->next();
 
 
 

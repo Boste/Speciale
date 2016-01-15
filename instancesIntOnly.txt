@@ -26,7 +26,7 @@ neos808444
 neos-849702
 neos-941313
 netdiversion
-ns1688347
+ns1688347 
 ns894244
 ns894788
 opm2-z10-s2
@@ -38,7 +38,7 @@ toll-like
 vpphard2
 vpphard
 hanoi5
-ns1663818 *
+ns1663818
 ns1696083
 opm2-z12-s14
 opm2-z12-s7
@@ -51,7 +51,6 @@ circ10-3
 datt256
 ex1010-pi
 f2000
-ivu06-big
 methanosarcina
 ns1853823
 ns894236

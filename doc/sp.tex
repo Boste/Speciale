@@ -1,4 +1,83 @@
-Three different search procedures are implemented; first improvement, best improvement, and random walk. \\ 
+\class{Neighborhood} classes do not implement any strategy of which neighborhood operation that should be chosen. 
+Search procedures are using a neighborhood and define this strategy. The classes implemented 
+are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch} and \class{RandomWalk}. 
+\class{FirstImprovement}, \\ \class{BestImprovement} and \class{RandomWalk} are implementation of local search 
+algorithms of almost same name and can be used together with any of the \class{Neighborhood} classes. 
+\class{TabuSearch} is an implementation of the metaheuristic tabu search using best improvement, a tabu tenure, and 
+an aspiration criteria. \medskip \\
+\boste{Skriv best improvement alg, min conflict, muligvis tabu} 
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+\SetKwFunction{makeOneway}{makeOneway}
+\SetKwFunction{defi}{defines}
+\algdata
+\Input{\funccon $c_j$}
+%\Output{Boolean}
+\BlankLine
+%\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
+%$O(\alpha(c_j))$}}
+% \If{\upshape Number of integer variables not defined $> 1$}{\Return{} \false\; \boste{Needed in order to create the 
+% right update queue}}
+%\If{$|Y(c)| > 1$}{\Return{} \false}
+%\If{\relation{c} \upshape is (==) }{\Return{} \true}
+%\If{$c_j$ \upshape is not a linear equality}{
+%  \Return{} \false}
+%\int coeff = \coeff{c,v}\;
+%\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{	
+%\tcp{Find the best variable to define}
+\var $bestVariable$ = NULL\;
+numberOfTies = 0 \;
+\ForEach{$x_i$ \upshape in $X(c_j)$ }{
+  \If{$x_i$ \upshape is fixed or defined}{
+    \continue
+  }
+  \tcp{Break ties}
+ % bestVariable = \decideBest{$x_i$,bestVariable} \;
+  \If{\defi{$x_i$} $<$ \defi{$bestVariable$}}{
+  \tcp{Choose the variable that helps define fewest invariants}
+    $bestVariable$ = $x_i$ \;
+    numberOfTies = 0 \;
+%    \continue
+  }
+  \ElseIf{\defi{$x_i$} $==$ \defi{$bestVariable$}}{  
+    \If{$|D(x_i)|$ $>$ $|D(bestVariable)|$}{
+      \tcp{Choose the variable with largest domain size}
+      $bestVariable$ = $x_i$ \;
+      numberOfTies = 0 \;
+ %     \continue
+    } 
+    \ElseIf{$|D(x_i)|$ $==$ $|D(bestVariable)|$}{  
+      \If{$|deg(x_i)|$ $<$ $|deg(bestVariable)|$}{
+	\tcp{Choose the variable with lowest degree} \boste{remember to define degree}
+	$bestVariable$ = $x_i$ \;
+	numberOfTies = 0 \;
+%	\continue
+      } 
+      \ElseIf{$|deg(x_i)|$ $==$ $|deg(bestVariable)|$}{
+	\tcp{Fair random} %\boste{Should this be further explained? (after alg)} 
+	numberOfTies++ \;
+	\If{Random(0,numberOfTies) == 0}{
+	  $bestVariable$ = $x_i$ \;
+	}
+      }
+    }
+  }
+}
+
+\If{ bestVariable $\neq $ \upshape NULL}{
+  \makeOneway{\Con $c_j$, \Var bestVariable} \;
+ % \Return{} \true
+}
+
+%\Return{} \false \;
+%\Return{} \true\;
+
+\caption{canBeMadeOneway(\textsf{Constraint} $c_j$)} \label{algo_checkoneway} 
+% \caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
 First improvement look at neighbor solutions until a solution better than the current is found \boste{solution better 
 than other?} and then make the move to reach that solution and returns true. When the search reaches a local optima no 
 improving move can be found and first improvement returns false. As an alternative if no 

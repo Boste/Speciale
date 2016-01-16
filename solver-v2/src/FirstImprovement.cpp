@@ -14,46 +14,7 @@ FirstImprovement::~FirstImprovement() {
 
 bool FirstImprovement::Start() {
     bool legal = false;
-    //    Move* firstMove;
-    //    //    Move* mv; // = new Move();
-    //
-    //    while (!legal) {
-    //        if (NE->hasNext()) {
-    //            firstMove = NE->next();
-    //            std::cout << "fisk" << std::endl;
-    //            legal = NE->calculateDelta(firstMove);
-    //            if(!legal){
-    //                delete firstMove;
-    //            }
-    //        } else {
-    //            //            delete bestMove;
-    //            //            delete mv;
-    //            return false;
-    //        }
-    //    }
-
-    //    bool improvement = false;
-    //    for (unsigned i = 1; i < firstMove->deltaVector.size(); i++) {
-    //        if (firstMove->getDeltaVector().at(i) < 0) {
-    //            improvement = true;
-    //            break;
-    //        } else if (firstMove->getDeltaVector().at(i) > 0) {
-    //            improvement = false;
-    //            delete firstMove;
-    //
-    //            break;
-    //        }
-    //        if (i == firstMove->deltaVector.size() - 1) {
-    //            if (firstMove->getDeltaVector().at(0) < 0) {
-    //                improvement = true;
-    ////                delete firstMove;
-    //
-    //                break;
-    //            } else {
-    //                delete firstMove;
-    //            }
-    //        }
-    //    }
+  
     Move* firstMove = NE->next();
     while (firstMove != NULL) {
 //        Move* firstMove = NE->next();

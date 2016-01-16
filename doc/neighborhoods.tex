@@ -55,9 +55,9 @@ or vise versa, that hash map needs to be updated. The hash map is used by the tw
 and \class{RandomConflictFlipNE} that only can be used when the current solution is infeasible. \\
 A default method \method{compareMoves(move1,move2)} compares the delta vector of two \class{Move} pointers and returns 
 0 if they are the same, 1 if if move1 is best and 2 otherwise. \\ 
-The size of the neighborhood and the restriction applied to it, if any. Method \method{getSize()} returns the size of 
-the current neighborhood, for \class{ConflictOnlyNE} and \class{RandomConflictFlipNE} the neighborhood size can change 
-after each step. \\ 
+The size of the neighborhood and the restriction applied to it, if any, can be requested from the 
+method \method{getSize()}. It returns the size of the current neighborhood, for \class{ConflictOnlyNE} and 
+\class{RandomConflictFlipNE} the neighborhood size can change after each step, for the others it is a constant size. \\ 
 
 
 

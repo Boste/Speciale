@@ -256,7 +256,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    std::shared_ptr<Gecode::Search::Options> so = std::make_shared<Search::Options>();
     //    Gecode::Search::Options* so = new Gecode::Search::Options();
     std::cout << "Gecode time " << TimeForGecode << std::endl;
-    Multistop* ms = new Multistop(0, 1, TimeForGecode * 1000);
+    Multistop* ms = new Multistop(0, 0, TimeForGecode * 1000);
     Gecode::Search::Options* so = new Gecode::Search::Options();
     so->stop = ms;
     //    this->print(std::cout);

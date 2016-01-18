@@ -247,7 +247,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         int initialValue = 0;
         constraint obj = model->getConstraintsWithPriority(0)->at(0);
-        auto coef = obj->getCoefficients();
+        std::unordered_map<int,coefType>&    coef = obj->getCoefficients();
         for (Variable* iv : obj->getVariables()) {
             double coeff = coef.at(iv->getID());
             if (coeff != 0) {
@@ -256,7 +256,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
             }
         }
         std::cout << "This should be initial value " << initialValue << std::endl;
-        auto gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
 
@@ -275,7 +275,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         
     } else {
         relax(TimeForGecode);
-        auto gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
 
@@ -288,7 +288,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
 
         LS->createDDG(false);
         LS->initializeLS(false);
-        auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+        double inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
 
     }

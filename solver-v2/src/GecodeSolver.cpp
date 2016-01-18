@@ -302,8 +302,8 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     try {
         std::clock_t GecodeClock = std::clock();
         //        std::cout << "Before search engine" << std::endl;
-//        Gecode::DFS<GecodeSolver> e(this, *so);
-        Gecode::BAB<GecodeSolver> e(this, *so);
+        Gecode::DFS<GecodeSolver> e(this, *so);
+//        Gecode::BAB<GecodeSolver> e(this, *so);
         std::cout << "Searching for solution...." << std::endl;
         s = e.next();
 

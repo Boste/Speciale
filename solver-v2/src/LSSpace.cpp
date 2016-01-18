@@ -514,14 +514,14 @@ void LSSpace::optimizeSolution(int time, int test) {
     //#####################################################################################
     //    should test all invariants
     //#####################################################################################
-    for (invariant inv : model->getInvariants()) {
-        if (!inv->test()) {
-            std::cout << "Wrong before optimization " << std::endl;
-
-            exit(1);
-        }
-
-    }
+//    for (invariant inv : model->getInvariants()) {
+//        if (!inv->test()) {
+//            std::cout << "Wrong before optimization " << std::endl;
+//
+//            exit(1);
+//        }
+//
+//    }
     //
     //
     //

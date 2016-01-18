@@ -19,7 +19,7 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
 
 
     //    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize()/5 , tabulist.size() / 100);
-    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize()*2, (tabulist.size() / 200));
+    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize()*2, (unsigned) (tabulist.size() / 200));
     //    unsigned tabuTenure = 0;
     //            std::cout << tabuTenure << std::endl;
     //        debug;

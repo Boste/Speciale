@@ -30,7 +30,9 @@ Move* RestrictedFlipNE::next() {
         Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
         //    mv->deltaVector.resize(state->getEvaluation().size());
         mv->deltaVector.resize(state->getEvaluation().size(), 0);
+        
         return mv;
+        
     } else {
         moveCounter = 0;
         return NULL;

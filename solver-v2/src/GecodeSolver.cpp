@@ -328,7 +328,10 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
                 Gecode::Search::Statistics stat = e.statistics();
                 print_stats(stat);
                 double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
-                std::cout << "\tTime spend searching for solution: " << time << " seconds" << std::endl;
+                //                std::cout << "\tTime spend searching for solution: " << time << " seconds" << std::endl;
+                std::cout << "## fail " << e.statistics().fail << std::endl;
+                std::cout << "## stopped " << std::endl;
+
 
             }
         } else {
@@ -349,11 +352,12 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
             //            s->print(std::cout); //            this->print(std::cout);
             SetValues(s->AllVars);
             solutionFound = true;
-            std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
-            std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+//            std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
+//            std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             Gecode::Search::Statistics stat = e.statistics();
             print_stats(stat);
             std::cout << "## fail " << e.statistics().fail << std::endl;
+            
 
 
         }
@@ -371,6 +375,7 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    std::cout << "solutionFound  "<< solutionFound << std::endl;
     delete ms;
     delete so;
+//    exit(1);
     return solutionFound;
 }
 

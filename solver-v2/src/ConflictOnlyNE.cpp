@@ -41,6 +41,7 @@ Move* ConflictOnlyNE::next() {
 
                 moveCounter++;
                 Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
+//                std::cout << mv << std::endl;
                 mv->deltaVector.resize(state->getEvaluation().size(), 0);
 //                mv->setID(mv->var->getID());
                 return mv;

@@ -48,24 +48,24 @@ void LSSpace::createDDG(bool all) {
     //    defining = std::vector<unsigned>(model->getAllVariables().size());
 
 
-//    std::vector<constraint> func2;
-//    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-//        for (constraint cons : *model->getConstraintsWithPriority(i)) {
-//            if (cons->isFunctional()) {
-//                func2.push_back(cons);
-//            }
-//        }
-//
-//    }
-////    if (func2.size() > 0) {
-//        std::ofstream myfile;
-//        myfile.open("func.txt", std::ios::app);
-//        myfile << " " << func2.size() << "\n";
-//        myfile.close();
-////    }
-//    std::cout << func2.size() << std::endl;
-//    exit(1);
-//    std::cout << "DELETE ABOVE" << std::endl;
+    //    std::vector<constraint> func2;
+    //    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
+    //        for (constraint cons : *model->getConstraintsWithPriority(i)) {
+    //            if (cons->isFunctional()) {
+    //                func2.push_back(cons);
+    //            }
+    //        }
+    //
+    //    }
+    ////    if (func2.size() > 0) {
+    //        std::ofstream myfile;
+    //        myfile.open("func.txt", std::ios::app);
+    //        myfile << " " << func2.size() << "\n";
+    //        myfile.close();
+    ////    }
+    //    std::cout << func2.size() << std::endl;
+    //    exit(1);
+    //    std::cout << "DELETE ABOVE" << std::endl;
 
     //#####################################################################################################################################
     // Making oneway looking at each integer variable. Harder to delete the constraints that have been made one-way
@@ -98,7 +98,7 @@ void LSSpace::createDDG(bool all) {
     //    std::vector<IntegerVariable*>& queue = model->getPriorityVectorNr(0);
     //    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
     /// Try to see if it is to expensive to prevent cycles. 
-    
+
     std::vector<constraint> func;
     if (all) {
 
@@ -514,14 +514,14 @@ void LSSpace::optimizeSolution(int time, int test) {
     //#####################################################################################
     //    should test all invariants
     //#####################################################################################
-//    for (invariant inv : model->getInvariants()) {
-//        if (!inv->test()) {
-//            std::cout << "Wrong before optimization " << std::endl;
-//
-//            exit(1);
-//        }
-//
-//    }
+    //    for (invariant inv : model->getInvariants()) {
+    //        if (!inv->test()) {
+    //            std::cout << "Wrong before optimization " << std::endl;
+    //
+    //            exit(1);
+    //        }
+    //
+    //    }
     //
     //
     //
@@ -834,13 +834,13 @@ void LSSpace::optimizeSolution(int time, int test) {
     //    unsigned impCounter = 0;
     //    std::cout << model->getMask().size() << std::endl;
     double timelimit = (double) time - (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-//    std::cout << "time left for local search " << timelimit << std::endl;
+    //    std::cout << "time left for local search " << timelimit << std::endl;
     std::cout << "## LSLimitLeft " << timelimit << std::endl;
     double usedTime = 0;
     std::clock_t start = std::clock();
 
-//    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
-//    debug;
+    //    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
+    //    debug;
 
     //######################################################
     // Test 1 TS conflict only + TS Restricted neighborhood
@@ -849,11 +849,12 @@ void LSSpace::optimizeSolution(int time, int test) {
         std::cout << "# test 1" << std::endl;
 
         ConflictOnlyNE* CON = new ConflictOnlyNE(model, currentState);
-        TabuSearch TSCON( CON);
-        EvalFlipNE* EFN = new EvalFlipNE(model, currentState);
-        
+        TabuSearch TSCON(CON);
+        //        EvalFlipNE* EFN = new EvalFlipNE(model, currentState);
+        FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
+
         RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
-        TabuSearch TSRFN( EFN);
+        TabuSearch TSRFN(RFN);
         while (usedTime < timelimit) {
             while (!currentState->isFeasible() && usedTime < timelimit) {
                 TSCON.Start(iterations, bestState, currentState, tabulist);
@@ -877,11 +878,15 @@ void LSSpace::optimizeSolution(int time, int test) {
             //            unsigned counter = 0;
             //            while (counter < randomMoves&& usedTime < timelimit) {
             while (currentState->isFeasible() && usedTime < timelimit) {
+//                if(iterations > 23){
+//                    break;
+//                }
                 TSRFN.Start(iterations, bestState, currentState, tabulist);
+
                 iterations++;
                 if (currentState->compare(bestState)) {
                     currentState->setViolation();
-                    assert(model->getViolatedConstraints().size() == 0);    
+//                    assert(model->getViolatedConstraints().size() == 0);
                     bestState->copy(currentState);
                     usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
                     std::cout << "# value: ";
@@ -894,11 +899,12 @@ void LSSpace::optimizeSolution(int time, int test) {
 
 
             }
+//                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
 
         }
         delete CON;
         delete RFN;
-
+        delete FN;
     }
     //######################################################
     // Test 2 RW 2 % + FI
@@ -915,8 +921,8 @@ void LSSpace::optimizeSolution(int time, int test) {
         //        unsigned randomMoves = twoPercent;
         std::cout << "Number of randomMoves " << randomMoves << std::endl;
         FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
-        RandomWalk RW( FN, randomMoves);
-        FirstImprovement FIFN( FN);
+        RandomWalk RW(FN, randomMoves);
+        FirstImprovement FIFN(FN);
         bool imp = true;
         while (usedTime < timelimit) {
             imp = true;
@@ -980,11 +986,11 @@ void LSSpace::optimizeSolution(int time, int test) {
 
         std::cout << "# test 3" << std::endl;
         RandomConflictConNE* RCC = new RandomConflictConNE(model, currentState);
-        BestImprovement BIRCC( RCC);
+        BestImprovement BIRCC(RCC);
         bool alwaysCommit = true;
         RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
         //        TabuSearch TSRFN(model, FN);
-        TabuSearch TSRFN( RFN);
+        TabuSearch TSRFN(RFN);
         while (usedTime < timelimit) {
             while (!currentState->isFeasible() && usedTime < timelimit) {
                 BIRCC.Start(alwaysCommit);

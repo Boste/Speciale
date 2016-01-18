@@ -1,11 +1,19 @@
 \class{Neighborhood} classes do not implement any strategy of which neighborhood operation that should be chosen. 
 Search procedures are using a neighborhood and define this strategy. The classes implemented 
-are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch} and \class{RandomWalk}. 
-\class{FirstImprovement}, \\ \class{BestImprovement} and \class{RandomWalk} are implementation of local search 
+are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch}, and \class{RandomWalk}. 
+\class{FirstImprovement}, \\ \class{BestImprovement}, and \class{RandomWalk} are implementation of local search 
 algorithms of almost same name and can be used together with any of the \class{Neighborhood} classes. 
 \class{TabuSearch} is an implementation of the metaheuristic tabu search using best improvement, a tabu tenure, and 
 an aspiration criteria. \medskip \\
-\boste{Skriv best improvement alg, min conflict, muligvis tabu} 
+The class \class{BestImprovement} looks at each \class{Move} a \class{Neighborhood} class $NE$ gives and finds the 
+best \class{Move}. The best \class{Move} is determined from their delta vector after the method \method{claculatDelta} 
+of the \class{Neighborhood} is called on each \class{Move}. It returns a boolean that tells if the current solution was 
+improved. A boolean can be given to \class{BestImprovement} that indicate if it should commit a non improving 
+\class{Move}. How each iteration is done is describe by algorithm \ref{algo_BI} \\ 
+\boste{Skriv best improvement alg, min conflict, muligvis tabu 
+ Søndag} \\
+\boste{Linear, sum, LEQ og EQ start søndag. Færdig mandag + ret}
+
 \IncMargin{1em}
 \begin{algorithm}[H]
 
@@ -13,8 +21,8 @@ an aspiration criteria. \medskip \\
 \SetKwFunction{makeOneway}{makeOneway}
 \SetKwFunction{defi}{defines}
 \algdata
-\Input{\funccon $c_j$}
-%\Output{Boolean}
+\Input{\bool alwaysCommit}
+\Output{\bool improvement}
 \BlankLine
 %\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
 %$O(\alpha(c_j))$}}
@@ -27,68 +35,90 @@ an aspiration criteria. \medskip \\
 %\int coeff = \coeff{c,v}\;
 %\upshape in $\bigcup\limits_{o \in O} f_o(\vec{v})$}{	
 %\tcp{Find the best variable to define}
-\var $bestVariable$ = NULL\;
-numberOfTies = 0 \;
-\ForEach{$x_i$ \upshape in $X(c_j)$ }{
-  \If{$x_i$ \upshape is fixed or defined}{
-    \continue
+\class{Move} bestMove = NE.next() \;
+\class{Move} move = NE.next() \;
+\While{move != NULL}{
+  \bool allowed = NE.calculateDelta(move) \;
+  \If{!allowed}{
+    move = NE.next() \;
+    \continue \;
   }
-  \tcp{Break ties}
- % bestVariable = \decideBest{$x_i$,bestVariable} \;
-  \If{\defi{$x_i$} $<$ \defi{$bestVariable$}}{
-  \tcp{Choose the variable that helps define fewest invariants}
-    $bestVariable$ = $x_i$ \;
-    numberOfTies = 0 \;
-%    \continue
-  }
-  \ElseIf{\defi{$x_i$} $==$ \defi{$bestVariable$}}{  
-    \If{$|D(x_i)|$ $>$ $|D(bestVariable)|$}{
-      \tcp{Choose the variable with largest domain size}
-      $bestVariable$ = $x_i$ \;
-      numberOfTies = 0 \;
- %     \continue
-    } 
-    \ElseIf{$|D(x_i)|$ $==$ $|D(bestVariable)|$}{  
-      \If{$|deg(x_i)|$ $<$ $|deg(bestVariable)|$}{
-	\tcp{Choose the variable with lowest degree} \boste{remember to define degree}
-	$bestVariable$ = $x_i$ \;
-	numberOfTies = 0 \;
-%	\continue
-      } 
-      \ElseIf{$|deg(x_i)|$ $==$ $|deg(bestVariable)|$}{
-	\tcp{Fair random} %\boste{Should this be further explained? (after alg)} 
-	numberOfTies++ \;
-	\If{Random(0,numberOfTies) == 0}{
-	  $bestVariable$ = $x_i$ \;
-	}
-      }
-    }
-  }
+  bestMove = compareMove(move,bestMove) \;  
+  move = NE.next() \;
 }
+\bool improvement = Check if bestMove gives improvement \;
+\tcp{by looking at delta vector} \;
+\If{improvement or alwaysCommit}{
+  NE.commitMove(bestMove)
+ }
+\Return improvement \;
 
-\If{ bestVariable $\neq $ \upshape NULL}{
-  \makeOneway{\Con $c_j$, \Var bestVariable} \;
- % \Return{} \true
-}
-
-%\Return{} \false \;
-%\Return{} \true\;
-
-\caption{canBeMadeOneway(\textsf{Constraint} $c_j$)} \label{algo_checkoneway} 
-% \caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\caption{BestImprovement Start} \label{algo_BI} 
+ %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
 \end{algorithm} \noindent
 \DecMargin{1em} \\
-First improvement look at neighbor solutions until a solution better than the current is found \boste{solution better 
-than other?} and then make the move to reach that solution and returns true. When the search reaches a local optima no 
-improving move can be found and first improvement returns false. As an alternative if no 
-improving solution is found a move to solution of same quality could be made, called a sidewalk. It might be an 
-improving solution can be found after a sidewalk. If sidewalks are allowed there must be some restriction to the 
-sidewalks to prevent cycling through the same solution over and over. For instance this could be forbidding a number of 
-consecutive sidewalks. The local optima could be reach very fast hence first improvement need to be complimented with 
-other search procedures to continue the search. \\ 
-Best improvement explores the whole neighborhood of the current solution and commits the move that gives the best 
-improvement. It might take more time to explorer the neighborhood than first improvement but often find a 
-better move than first improvement. If no improving move is found it does not commit a move and returns false. Like 
-first improvement sidewalks could be allowed. \\ 
-The neighborhood of a solution depends on the choice of move and heuristics applied to the neighborhood. The 
-neighborhood implemented is \boste{are} 
+If \class{BestImprovement} is combined with the neighborhood class \class{RandomConflictConNE} it gives a minimim 
+conflict heuristic that can be useful to reach a feasible solution. \\ 
+\class{FirstImprovement} has a very similar implementation. Instead of calculating each \class{Move} of a 
+\class{Neighborhood} class $NE$ it stops requesting a \class{Move} once an improving \class{Move} is found. If no 
+improving \class{Move} is found when $NE$ returns a \textbf{NULL} pointer it does not commit a \class{Move}. If no 
+improving \class{Move} is found the current solution is in a local optima with the regard to the chosen 
+\class{Neighborhood}. \\ 
+The class \class{RandomWalk} uses the method \method{nextRandom()} from its \class{Neighborhood} $NE$ and if that 
+\class{Move} is allowed it is committed. It takes an integer as argument that indicate the number of times it is 
+repeated. The benefits is create new solution very fast but they are not likely to have a good quality.  
+Though tabu search is a metaheuristic it is implemented the same way as the other search procedures but with some 
+additions. It takes four arguments; the number of steps made(iterations), the best solution found, the current 
+solution, and a tabu list. The implementation is similar to \class{BestImprovement} with additional checks with regard 
+to the tabu list and aspiration criteria. If a neighborhood operation is tabu but leads to a solution better than one 
+found so far, the tabu list is ignored. The algorithm for tabu search for a single flip neighborhood sketched by 
+algorithm \ref{algo_TS}. \\ 
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+  \algdata
+\Input{\int iteration, int[] best, int[] current, vector<int> tabulist }
+%\Output{\bool improvement}
+\BlankLine
+\int tabuTenure = Random(0,10)+ min(NE.getSize()*2, tabulist.size() /200) \;
+\class{Move} bestMove = NE.next() \;
+\class{Move} move = NE.next() \;
+\While{move != NULL}{
+  \bool allowed = NE.calculateDelta(move) \;
+  \If{!allowed}{
+    move = NE.next() \;
+    \continue \;
+  }
+  \bool isTabu = (iteration - tabulist[move.ID]) $<=$ tabutenure \;
+  \If{isTabu}{
+    \If{betterThanBest(current,move.getDeltaVector(), best)}{
+      NE.commitMove(move)
+      tabulist[move.ID] = iteration \;
+      \Return \true \;
+      
+    }{
+      move = NE.next() \;
+      \continue \;
+    }  
+  }
+  bestMove = compareMove(move,bestMove) \;  
+  move = NE.next() \;
+}
+%\bool improvement = Check if bestMove gives improvement to current solution 
+%\tcp{by looking at delta vector} \;
+NE.commitMove(bestMove) \;
+%\Return improvement \;
+
+\caption{TabuSearch Start} \label{algo_TS} 
+ %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
+\class{TabuSearch} needs to be combined with a \class{Neighborhood} class that uses single flip neighborhood operation. 
+This makes it less flexible in combining it with a \class{Neighborhood} class than the other search procedures 
+\class{FirstImprovement}, \class{BestImprovement}, and \class{RandomWalk}. \\ 
+In order to create an efficient local search we need to change search procedure at some point, with the exception of 
+tabu search that can perform well on it own. 
+
+
+

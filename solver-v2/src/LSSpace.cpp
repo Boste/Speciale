@@ -834,12 +834,13 @@ void LSSpace::optimizeSolution(int time, int test) {
     //    unsigned impCounter = 0;
     //    std::cout << model->getMask().size() << std::endl;
     double timelimit = (double) time - (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-    std::cout << "time left for local search " << timelimit << std::endl;
+//    std::cout << "time left for local search " << timelimit << std::endl;
+    std::cout << "## LSLimitLeft " << timelimit << std::endl;
     double usedTime = 0;
     std::clock_t start = std::clock();
 
-    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
-    debug;
+//    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
+//    debug;
 
     //######################################################
     // Test 1 TS conflict only + TS Restricted neighborhood
@@ -848,11 +849,11 @@ void LSSpace::optimizeSolution(int time, int test) {
         std::cout << "# test 1" << std::endl;
 
         ConflictOnlyNE* CON = new ConflictOnlyNE(model, currentState);
-        TabuSearch TSCON(model, CON);
+        TabuSearch TSCON( CON);
         EvalFlipNE* EFN = new EvalFlipNE(model, currentState);
-
+        
         RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
-        TabuSearch TSRFN(model, EFN);
+        TabuSearch TSRFN( EFN);
         while (usedTime < timelimit) {
             while (!currentState->isFeasible() && usedTime < timelimit) {
                 TSCON.Start(iterations, bestState, currentState, tabulist);
@@ -880,7 +881,7 @@ void LSSpace::optimizeSolution(int time, int test) {
                 iterations++;
                 if (currentState->compare(bestState)) {
                     currentState->setViolation();
-                    assert(model->getViolatedConstraints().size() == 0);
+                    assert(model->getViolatedConstraints().size() == 0);    
                     bestState->copy(currentState);
                     usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
                     std::cout << "# value: ";
@@ -910,12 +911,12 @@ void LSSpace::optimizeSolution(int time, int test) {
         unsigned twoPercent = model->getMask().size() / 50;
         unsigned onePercent = model->getMask().size() / 100;
         //        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
-        unsigned randomMoves = std::min(onePercent, (unsigned) 10);
+        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
         //        unsigned randomMoves = twoPercent;
         std::cout << "Number of randomMoves " << randomMoves << std::endl;
         FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
-        RandomWalk RW(model, FN, randomMoves);
-        FirstImprovement FIFN(model, FN);
+        RandomWalk RW( FN, randomMoves);
+        FirstImprovement FIFN( FN);
         bool imp = true;
         while (usedTime < timelimit) {
             imp = true;
@@ -979,11 +980,11 @@ void LSSpace::optimizeSolution(int time, int test) {
 
         std::cout << "# test 3" << std::endl;
         RandomConflictConNE* RCC = new RandomConflictConNE(model, currentState);
-        BestImprovement BIRCC(model, RCC);
+        BestImprovement BIRCC( RCC);
         bool alwaysCommit = true;
         RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
         //        TabuSearch TSRFN(model, FN);
-        TabuSearch TSRFN(model, RFN);
+        TabuSearch TSRFN( RFN);
         while (usedTime < timelimit) {
             while (!currentState->isFeasible() && usedTime < timelimit) {
                 BIRCC.Start(alwaysCommit);
@@ -1253,7 +1254,7 @@ void LSSpace::optimizeSolution(int time, int test) {
 
     //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;
     //    std::cout << "number of loops " << loopCounter << std::endl;
-    std::cout << "## time " << usedTime << std::endl;
+    std::cout << "## LSTimeUsed " << usedTime << std::endl;
     //    std::cout << "obj val " << currentState->getEvaluation().at(0) << " violations ";
     //    for (unsigned i = 1; i < currentState->getEvaluation().size(); i++) {
     //        std::cout << currentState->getEvaluation().at(i) << " ";

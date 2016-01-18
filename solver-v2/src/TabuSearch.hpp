@@ -8,7 +8,7 @@
 
 class TabuSearch {
 public:
-    TabuSearch(std::shared_ptr<Model> model, Neighborhood* neighborhood);
+    TabuSearch( Neighborhood* neighborhood);
 //    TabuSearch(const TabuSearch& orig);
     virtual ~TabuSearch();
 
@@ -17,11 +17,13 @@ public:
 
 
 private:
-    std::shared_ptr<Model> model;
+//    std::shared_ptr<Model> model;
+        Neighborhood* NE;
+
     bool betterThanBest(std::vector<int>& current, std::vector<int>& delta, std::vector<int>& best);
-    Neighborhood* NE;
 //    std::vector<unsigned short> calculated;
 };
 
 #endif	/* TABUSEARCH_HPP */
 
+    

@@ -260,35 +260,36 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         std::cout << "## gecode " << gecode << std::endl;
 
 
-        std::ofstream myfile;
-        myfile.open("func2.txt", std::ios::app);
-        myfile << " 0 " << gecode << "\n";
-        myfile.close();
-        std::cout << "#relax 0" << std::endl;
-        exit(1);
+//        std::ofstream myfile;
+//        myfile.open("func2.txt", std::ios::app);
+//        myfile << " 0 " << gecode << "\n";
+//        myfile.close();
+//        std::cout << "#relax 0" << std::endl;
+//        exit(1);
+        std::cout << "## relax 0" << std::endl;
         tid = std::clock();
         LS->createDDG(true);
         LS->initializeLS(true);
         auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## initLS " << inils << std::endl;
-
+        std::cout << "## initLSModel " << inils << std::endl;
+        
     } else {
         relax(TimeForGecode);
         auto gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
 
-        std::ofstream myfile;
-        myfile.open("func2.txt", std::ios::app);
-        myfile << " " << gecode << "\n";
-        myfile.close();
-        exit(1);
+//        std::ofstream myfile;
+//        myfile.open("func2.txt", std::ios::app);
+//        myfile << " " << gecode << "\n";
+//        myfile.close();
+//        exit(1);
         tid = std::clock();
 
         LS->createDDG(false);
         LS->initializeLS(false);
         auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## initLS " << inils << std::endl;
+        std::cout << "## initLSModel " << inils << std::endl;
 
     }
 
@@ -424,11 +425,11 @@ bool GeneralSolver::relax(int TimeForGecode) {
     if (solution) {
         model->setFeasibleFunctionalConstraints(feasibleFunc);
     }
-    std::ofstream myfile;
-    myfile.open("func2.txt", std::ios::app);
-    myfile << " " << numberOfTimesRelaxed;
-    myfile.close();
-    std::cout << "#relax " << numberOfTimesRelaxed << std::endl;
+//    std::ofstream myfile;
+//    myfile.open("func2.txt", std::ios::app);
+//    myfile << " " << numberOfTimesRelaxed;
+//    myfile.close();
+    std::cout << "## relax " << numberOfTimesRelaxed << std::endl;
     //    exit(1);
     return solution;
 }

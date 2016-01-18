@@ -17,7 +17,7 @@ RandomConflictConNE::~RandomConflictConNE() {
 Move* RandomConflictConNE::next() {
     if (firstMove) {
         if (model->getViolatedConstraints().empty()) {
-            return false;
+            return NULL;
         }
         firstMove = false;
         int rand = Random::Integer(model->getViolatedConstraints().size() - 1);

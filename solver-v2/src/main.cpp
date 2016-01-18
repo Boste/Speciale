@@ -50,27 +50,27 @@ int main(int argc, char* argv[]) {
     //    exit(1);
     //    std::vector<std::string> strs;
 
-    string str2 = argv[1];
-    for (unsigned i = 0; i < str2.length(); i++) {
-        if (str2[i] == '/') {
-            str2[i] = ' ';
-        } else if (str2[i] == '.') {
-            str2[i] = ' ';
-        }
-    }
-    string temp2;
-    std::vector<string> array2;
-    stringstream ss2(str2);
-    while (ss2 >> temp2)
-        array2.push_back(temp2);
-    string name2 = array2[1];
-    std::ofstream myfile;
-    myfile.open("func2.txt", std::ios::app);
-    myfile << name2;
-    myfile.close();
+    //    string str2 = argv[1];
+    //    for (unsigned i = 0; i < str2.length(); i++) {
+    //        if (str2[i] == '/') {
+    //            str2[i] = ' ';
+    //        } else if (str2[i] == '.') {
+    //            str2[i] = ' ';
+    //        }
+    //    }
+    //    string temp2;
+    //    std::vector<string> array2;
+    //    stringstream ss2(str2);
+    //    while (ss2 >> temp2)
+    //        array2.push_back(temp2);
+    //    string name2 = array2[1];
+    //    std::ofstream myfile;
+    //    myfile.open("func2.txt", std::ios::app);
+    //    myfile << name2;
+    //    myfile.close();
 
-  
-    std::cout << "## name " << name2 << std::endl;
+
+    //    std::cout << "## name " << name2 << std::endl;
     int time;
     if (argc >= 3) {
         time = std::atoi(argv[2]);
@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
         //        std::cout << "Random Seed not set, setting to 1337" << std::endl;
         seed = Random::Seed(RANDOMSEED);
     }
-    std::cout << "Random seed " << Random::seed << std::endl;
+    //    std::cout << "Random seed " << Random::seed << std::endl;
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();
     //    InstanceOptions opt("BPSolver");
@@ -116,7 +116,8 @@ int main(int argc, char* argv[]) {
     size_t peakSize4 = getPeakRSS();
     std::cout << "Peak memory usage for reading instance " << (double) peakSize4 / 1024 / 1024 << " mb" << std::endl;
     //    Search::Options* so = new Gecode::Search::Options();
-
+    std::cout << "## cons " << input->getNcons() << std::endl;
+    std::cout << "## vars " << input->getNvars() << std::endl;
     // Let's start the Timer
     Support::Timer t;
     t.start();
@@ -134,13 +135,13 @@ int main(int argc, char* argv[]) {
     //    so->stop = ms;
 
     auto posted = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-//    tid = std::clock();
+    //    tid = std::clock();
     //    so->stop = new Multistop(1, 1, TimeForGecode*1000);
     //    GeneralSolver* GS = m->InitialSolution(so);
     userModel.initialSolution(TimeForGecode);
 
     //    assert(!GS.stopped());
-//    double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+    //    double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for Gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
@@ -160,16 +161,18 @@ int main(int argc, char* argv[]) {
 
     //    userModel->initializeLS();
     userModel.optimizeSolution(time, test);
+    auto totalTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+
     //    std::cout << userModel->getInitial() << " "; // value of solution gecode found
-    std::cout << "## read " << read << std::endl; // time for initializing problem 
-    std::cout << "## posted " << posted << std::endl; // time for initializing problem 
-//    std::cout << "## initial " << gecode << std::endl; // time for initializing problem 
+    std::cout << "## CoinRead " << read << std::endl; // time for reading instance with coin
+    std::cout << "## postingModel " << posted << std::endl; // time for posting model in General Solver
+    //    std::cout << "## initial " << gecode << std::endl; // time for initializing problem 
     //    std::cout << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " "; // total time usage
 
-    std::cout << "## Total time " << time << std::endl;
-    std::cout << "## Gecode time " << TimeForGecode << std::endl;
+    std::cout << "## TotalTime " << totalTime << std::endl;
+    std::cout << "## GecodeTime " << TimeForGecode << std::endl;
     std::cout << "## seed " << seed << std::endl;
-    std::cout << "## peak mem " << (double) getPeakRSS() / 1024 / 1024 << std::endl;
+    std::cout << "## peakMemory " << (double) getPeakRSS() / 1024 / 1024 << std::endl;
 
     string str = argv[1];
     for (unsigned i = 0; i < str.length(); i++) {

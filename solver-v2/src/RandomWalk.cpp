@@ -1,7 +1,7 @@
 #include "RandomWalk.hpp"
 
-RandomWalk::RandomWalk(std::shared_ptr<Model> model, Neighborhood* neighborhood, unsigned numberOfRandomMoves) {
-    this->model = model;
+RandomWalk::RandomWalk(Neighborhood* neighborhood, unsigned numberOfRandomMoves) {
+//    this->model = model;
     NE = neighborhood;
     //    NE->setRandomCounter(numberOfRandomMoves);
     this->numberOfRandomMoves = numberOfRandomMoves;

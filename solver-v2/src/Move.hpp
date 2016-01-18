@@ -23,6 +23,7 @@ public:
     int variableChange;
     std::vector<Variable*> variables;
     std::vector<int> variableChanges;
+    unsigned id;
     //    IntegerVariable* second;
     //    int deltaValueSecond;
     //    IntegerVariable* third;
@@ -37,7 +38,12 @@ public:
     //    }
 
     /// Set size of delta vector;
-
+    void setID(unsigned id){
+        this->id = id;
+    }
+    unsigned getID(){
+        return id;
+    }
     void setDeltaVector(std::vector<int>& evaluationChanges) {
         //        for (unsigned i = deltaVector.size(); i < size; i++) {
         deltaVector = evaluationChanges;

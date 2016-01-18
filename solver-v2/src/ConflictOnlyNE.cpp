@@ -42,6 +42,7 @@ Move* ConflictOnlyNE::next() {
                 moveCounter++;
                 Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
                 mv->deltaVector.resize(state->getEvaluation().size(), 0);
+//                mv->setID(mv->var->getID());
                 return mv;
 
 
@@ -49,7 +50,7 @@ Move* ConflictOnlyNE::next() {
                 moveCounter++;
             }
         }
-        moveIterator++;
+        moveIterator++;        
         moveCounter = 0;
     }
     firstMove = true;
@@ -57,12 +58,12 @@ Move* ConflictOnlyNE::next() {
 
 
 
-//    Variable* var = model->getVariable(this->var);
-//
-//    moveCounter++;
-//    Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-//    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-//    return mv;
+    //    Variable* var = model->getVariable(this->var);
+    //
+    //    moveCounter++;
+    //    Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
+    //    mv->deltaVector.resize(state->getEvaluation().size(), 0);
+    //    return mv;
 }
 //Move* ConflictOnlyNE::next() {
 //    
@@ -197,7 +198,6 @@ bool ConflictOnlyNE::calculateDelta(Move* mv) {
 
     return legal;
 }
-
 
 bool ConflictOnlyNE::commitMove(Move* mv) {
     firstMove = true;

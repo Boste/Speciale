@@ -8,12 +8,12 @@
 
 class RandomWalk : public SearchEngine {
 public:
-    RandomWalk(std::shared_ptr<Model> model, Neighborhood* NE, unsigned numberOfRandomMoves);
+    RandomWalk( Neighborhood* NE, unsigned numberOfRandomMoves);
     bool Start();
 //    RandomWalk(const RandomWalk& orig);
     virtual ~RandomWalk();
 private:
-    std::shared_ptr<Model> model;
+//    std::shared_ptr<Model> model;
     unsigned numberOfRandomMoves;
 
 };

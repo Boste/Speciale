@@ -23,6 +23,7 @@
 //#include "Constraint.hpp"
 #include "Clock.hpp"
 #include <math.h>
+#include "Random.hpp"
 //#include "getRSS.hpp"
 //#include "Random.hpp"
 //using namespace Gecode;

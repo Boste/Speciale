@@ -88,7 +88,7 @@ public:
                     GeneralSolver::linear(c, x, LQ, upperbound, HARD);
                 }
             } else {
-                std::cout <<  "Posting constraint with no variables?" << std::endl;
+//                std::cout <<  "Posting constraint with no variables?" << std::endl;
             }
          
             //            delete x;

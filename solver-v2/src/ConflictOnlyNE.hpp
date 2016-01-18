@@ -45,13 +45,14 @@ private:
     bool firstMove = true;
     //    unsigned moveCounter2 = 0;
     unsigned randomCounter = 0;
-    unsigned randomMovesWanted = 0;
+//    unsigned randomMovesWanted = 0;
     unsigned short iter = 0;
     std::vector<unsigned short> calculated;
     unsigned var;
     std::unordered_map<unsigned, invariant>::iterator  moveIterator;
     unsigned suggested = 0;
-    unsigned  lastSuggested;
+    unsigned  lastSuggested = 0;
+    unsigned idCounter=0;
     //    template<typename returnType>
     //    std::pair<int, int> calculateDeltaChange(Move* mv, std::shared_ptr<State> st);
 

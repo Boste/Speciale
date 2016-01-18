@@ -15,7 +15,7 @@ bool TabuSearchFI::Start(unsigned iteration, std::shared_ptr<State>& bestState, 
     bool legal = false;
     Move* bestMove;
     Move* mv; // = new Move();
-    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize() / 5, (tabulist.size() / 100));
+    unsigned tabuTenure = Random::Integer(0, 10) + std::min(NE->getSize() / 5, (unsigned) (tabulist.size() / 100));
     //        std::cout << tabuTenure << std::endl;
     //        debug;
     //    unsigned tabuTenure = 3;

@@ -241,7 +241,8 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         std::cout << "## initLSModel " << inils << std::endl;
 
     } else {
-        relax(TimeForGecode);
+        std::cout << "not relaxing" << std::endl;
+//        relax(TimeForGecode);
         double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 

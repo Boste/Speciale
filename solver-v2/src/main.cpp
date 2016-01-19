@@ -58,13 +58,13 @@ int main(int argc, char* argv[]) {
             str2[i] = ' ';
         }
     }
-    std::cout << argv[1] << std::endl;
+//    std::cout << argv[1] << std::endl;
     string temp2;
     std::vector<string> array2;
     stringstream ss2(str2);
     while (ss2 >> temp2)
         array2.push_back(temp2);
-    string name2 = array2[1];
+    string name2 = array2[array2.size()-3];
 
     //    std::ofstream myfile;
     //    myfile.open("func2.txt", std::ios::app);
@@ -131,8 +131,7 @@ int main(int argc, char* argv[]) {
     auto tid = std::clock();
     //    BPSolver* userModel = new BPSolver(input);
     BPSolver userModel(input);
-    userModel.getOutput().setName(argv[1]);
-    debug;
+    userModel.getOutput().setName(name2);
     userModel.getOutput().addToTable1(std::to_string(input->getNvars()));
     userModel.getOutput().addToTable1(std::to_string(input->getNcons()));
     std::cout << "Initialize solution" << std::endl;
@@ -156,7 +155,11 @@ int main(int argc, char* argv[]) {
     userModel.getOutput().addToGecodePrint(std::to_string((double) peakSize2 / 1024 / 1024));
     
     std::cout << "##GecodeSol " << userModel.getOutput().getToGecodePrint() << std::endl;
-
+    exit(1);
+    
+    std::cout << "Remember to in comment createDDG and ini LS in general solver both fail and not fail" << std::endl;
+    debug;
+    exit(1);
     
     //    m->printCurrent();
 

@@ -209,38 +209,6 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //    if (false) {
 
 
-        //    else {
-        //        std::cout << "Gecode did not find a solution within limits given (nodes,fail,time). Model will be relaxed according to priorities given to constraints. " << std::endl;
-        //        int timesRelaxed = 1;
-        //        //        int timesRelaxed = 7;
-        //        bool solutionFound = false;
-        //        for (unsigned i = 0; i < model->getConstraints().size(); i++) {
-        //            std::random_shuffle(model->getConstraintsWithPriority(i)->begin(), model->getConstraintsWithPriority(i)->end());
-        //        }
-        //        while (!solutionFound && timesRelaxed != 6) {
-        //            relax(timesRelaxed);
-        //            timesRelaxed++;
-        //            //                GS->branch(false);
-        //            solutionFound = GS->initialize(TimeForGecode, false);
-        //        }
-        //        if (!solutionFound) {
-        //            std::cout << "Relaxation failed" << std::endl;
-        ////            exit(1);
-        //            std::cout << "Relaxation failed, trying with random initial assignment of variables value" << std::endl;
-        ////                        exit(1);
-        //            relax(timesRelaxed);
-        //            GS->initialize(TimeForGecode, false);
-        //        }
-        //        //        assert(s != NULL);
-        //        //        assert(!s->failed());
-        //        //        return s;
-        //        //
-        //        //                this->print(cout);
-        //    }
-
-        //            fixVariables();
-
-
         //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         // Obj value after gecode
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
@@ -267,8 +235,8 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //        exit(1);
         std::cout << "## relax 0" << std::endl;
         tid = std::clock();
-        LS->createDDG(true);
-        LS->initializeLS(true);
+//        LS->createDDG(true);
+//        LS->initializeLS(true);
         auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
 
@@ -285,8 +253,8 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //        exit(1);
         tid = std::clock();
 
-        LS->createDDG(false);
-        LS->initializeLS(false);
+//        LS->createDDG(false);
+//        LS->initializeLS(false);
         double inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
 

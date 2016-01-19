@@ -293,15 +293,15 @@ bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
     //    std::cout << so->c_d << std::endl;
     //    exit(1);    
 
-//    so->a_d = std::max(AllVars.size() / 32, 2); // Default 2 
-//    so->c_d = std::max(AllVars.size() / 16, 8); // Default 8
-        so->a_d = AllVars.size(); // Default 2 
-        so->c_d = AllVars.size() ; // Default 8
+    //    so->a_d = std::max(AllVars.size() / 32, 2); // Default 2 
+    //    so->c_d = std::max(AllVars.size() / 16, 8); // Default 8
+    so->a_d = AllVars.size(); // Default 2 
+    so->c_d = AllVars.size(); // Default 8
     //    this->print(std::cout);
     if (fix) {
-        model->out.relax = 0;
+//        model->out.relax = 0;
 
-        model->out.addToGecodePrint("0");
+//        model->out.addToGecodePrint("0");
     }
     bool solutionFound = false;
     GecodeSolver* s;
@@ -338,6 +338,7 @@ bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
 
                 model->out.addToGecodePrint(std::to_string(e.statistics().fail));
                 model->out.addToGecodePrint(std::to_string(time));
+                model->out.addToGecodePrint("0");
 
                 std::cout << "## fail " << e.statistics().fail << std::endl;
                 //                std::cout << "## stopped " << std::endl;
@@ -371,6 +372,7 @@ bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
             std::cout << "## fail " << e.statistics().fail << std::endl;
             model->out.addToGecodePrint(std::to_string(e.statistics().fail));
             model->out.addToGecodePrint(std::to_string(time));
+            model->out.addToGecodePrint("1");
 
             SetValues(s->AllVars);
 

@@ -628,7 +628,7 @@ void LSSpace::optimizeSolution(int time, int test) {
         if (var->isDef()) {
             Constraint * con = var->getDefinedByCon();
             invariant inv = var->getOneway();
-            assert(con->getVariables().size() - 1 == inv->getVariablePointers().size() + inv->getInvariantPointers().size()+ inv->getFixedVariables().size());
+            assert(con->getVariables().size() - 1 == inv->getVariablePointers().size() + inv->getInvariantPointers().size() + inv->getFixedVariables().size());
             for (Variable* var : inv->getVariablePointers()) {
                 if (var->isDef()) {
                     std::cout << "Defined but in variable pointers" << std::endl;
@@ -646,10 +646,10 @@ void LSSpace::optimizeSolution(int time, int test) {
                         break;
                     }
                 }
-                //                if (!found) {
-                //                    debug;
-                //                    exit(1);
-                //                }
+                if (!found) {
+                    debug;
+                    exit(1);
+                }
                 //
             }
             for (invariant invar : inv->getInvariantPointers()) {

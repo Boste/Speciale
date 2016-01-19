@@ -131,7 +131,8 @@ int main(int argc, char* argv[]) {
     auto tid = std::clock();
     //    BPSolver* userModel = new BPSolver(input);
     BPSolver userModel(input);
-    userModel.getOutput().setName(name2);
+    userModel.getOutput().setName(argv[1]);
+    debug;
     userModel.getOutput().addToTable1(std::to_string(input->getNvars()));
     userModel.getOutput().addToTable1(std::to_string(input->getNcons()));
     std::cout << "Initialize solution" << std::endl;

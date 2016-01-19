@@ -24,6 +24,8 @@
 #include "Clock.hpp"
 #include <math.h>
 #include "Random.hpp"
+#include <stdlib.h>
+
 //#include "getRSS.hpp"
 //#include "Random.hpp"
 //using namespace Gecode;
@@ -86,7 +88,7 @@ public:
 
     void printVariableValues();
     //    unsigned getNumberOfDigits(double number);
-
+    Output& getOutput();
 private:
 
     void print_stats(Gecode::Search::Statistics & stat) {

@@ -30,13 +30,13 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     bestMove = NE->next();
 
     while (!allowed || isTabu) {
-//        if (iteration == 23) {
-//            debug;
-//        }
+        //        if (iteration == 23) {
+        //            debug;
+        //        }
         if (bestMove != NULL) {
-//            if (iteration == 23) {
-//                debug;
-//            }
+            //            if (iteration == 23) {
+            //                debug;
+            //            }
             allowed = NE->calculateDelta(bestMove);
             //            std::cout << iteration << " - " << tabulist.at(bestMove->var->getID()) << " > " << tabuTenure << std::endl;
             if (!allowed) {
@@ -49,22 +49,22 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
             isTabu = (iteration - tabulist.at(bestMove->var->getID())) <= tabuTenure;
             if (isTabu) {
 
-//                if (iteration == 23) {
-//                    debug;
-//                }
+                //                if (iteration == 23) {
+                //                    debug;
+                //                }
                 if (betterThanBest(currentState->getEvaluation(), bestMove->deltaVector, bestState->getEvaluation())) {
-//                    if (iteration == 23) {
-//                        debug;
-//                    }
+                    //                    if (iteration == 23) {
+                    //                        debug;
+                    //                    }
                     NE->commitMove(bestMove);
                     tabulist.at(bestMove->getVar()->getID()) = iteration;
                     delete bestMove;
                     return true;
 
                 } else {
-//                    if (iteration == 23) {
-//                        debug;
-//                    }
+                    //                    if (iteration == 23) {
+                    //                        debug;
+                    //                    }
                     delete bestMove;
 
                     bestMove = NE->next();
@@ -72,18 +72,18 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
                 }
             }
         } else {
-//            debug;
+            //            debug;
             return false;
         }
-//        if (iteration == 23) {
-//            debug;
-//        }
+        //        if (iteration == 23) {
+        //            debug;
+        //        }
     }
-//    if (iteration == 23) {
-//        debug;
-//        delete bestMove;
-//        return false;
-//    }
+    //    if (iteration == 23) {
+    //        debug;
+    //        delete bestMove;
+    //        return false;
+    //    }
 
     //    delete bestMove;
     //    return false;
@@ -93,39 +93,39 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
     //    int suggestedMove = 0;
     Move* mv = NE->next();
     while (mv != NULL) {
-//        if (iteration == 23) {
-//            debug;
-//        }
+        //        if (iteration == 23) {
+        //            debug;
+        //        }
         //    while (NE->hasNext()) {
         //        mv = NE->next();
         allowed = NE->calculateDelta(mv);
-        //        if (!allowed) {
-        //            if (iteration == 23) {
-        //                std::cout << "!allowed" << std::endl;
-        //                debug;
-        //            }
-        //            //            illegal++;
-        //            delete mv;
-        //            mv = NE->next();
-        //
-        //            continue;
-        //        }
-        isTabu = (iteration - tabulist.at(mv->var->getID())) <= tabuTenure;
-        if (isTabu) {
+        if (!allowed) {
 //            if (iteration == 23) {
+//                std::cout << "!allowed" << std::endl;
 //                debug;
 //            }
+            //            illegal++;
+            delete mv;
+            mv = NE->next();
+
+            continue;
+        }
+        isTabu = (iteration - tabulist.at(mv->var->getID())) <= tabuTenure;
+        if (isTabu) {
+            //            if (iteration == 23) {
+            //                debug;
+            //            }
             if (!betterThanBest(currentState->getEvaluation(), mv->deltaVector, bestState->getEvaluation())) {
                 delete mv;
                 mv = NE->next();
-//                if (iteration == 23) {
-//                    debug;
-//                }
+                //                if (iteration == 23) {
+                //                    debug;
+                //                }
                 continue;
             } else {
-//                if (iteration == 23) {
-//                    debug;
-//                }
+                //                if (iteration == 23) {
+                //                    debug;
+                //                }
                 NE->commitMove(bestMove);
                 tabulist.at(bestMove->getVar()->getID()) = iteration;
                 delete bestMove;
@@ -159,9 +159,9 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
                 }
 
         }
-//        if (iteration == 23) {
-//            debug;
-//        }
+        //        if (iteration == 23) {
+        //            debug;
+        //        }
         delete mv;
 
         mv = NE->next();
@@ -185,10 +185,10 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
             break;
         }
     }
-//    if (iteration == 23) {
-//        debug;
-//        return false;
-//    }
+    //    if (iteration == 23) {
+    //        debug;
+    //        return false;
+    //    }
     allowed = NE->commitMove(bestMove);
     if (allowed) {
         //            if (NE->commitMove(bestMove)) {

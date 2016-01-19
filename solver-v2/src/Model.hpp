@@ -6,6 +6,7 @@
 #include <memory>
 #include <list>
 #include "DependencyDigraph.hpp"
+#include "Output.hpp"
 #ifndef MODEL_HPP
 #define	MODEL_HPP
 
@@ -45,6 +46,7 @@ private:
     std::vector<constraint> feasibleFunctionalConstriants;
     
 public:
+    Output out;
     /// Should be moved to state
     std::vector<int> initialEvaluation;
     bool containsIntegerVariables = false;

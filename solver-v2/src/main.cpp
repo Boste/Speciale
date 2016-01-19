@@ -13,7 +13,7 @@
 #include "getRSS.hpp"
 #include "GeneralSolver.hpp"
 
-
+#include "Output.hpp"
 #include <iostream>
 #include <fstream>
 //#include "GecodeSolver.hpp"
@@ -50,20 +50,22 @@ int main(int argc, char* argv[]) {
     //    exit(1);
     //    std::vector<std::string> strs;
 
-    //    string str2 = argv[1];
-    //    for (unsigned i = 0; i < str2.length(); i++) {
-    //        if (str2[i] == '/') {
-    //            str2[i] = ' ';
-    //        } else if (str2[i] == '.') {
-    //            str2[i] = ' ';
-    //        }
-    //    }
-    //    string temp2;
-    //    std::vector<string> array2;
-    //    stringstream ss2(str2);
-    //    while (ss2 >> temp2)
-    //        array2.push_back(temp2);
-    //    string name2 = array2[1];
+    string str2 = argv[1];
+    for (unsigned i = 0; i < str2.length(); i++) {
+        if (str2[i] == '/') {
+            str2[i] = ' ';
+        } else if (str2[i] == '.') {
+            str2[i] = ' ';
+        }
+    }
+    std::cout << argv[1] << std::endl;
+    string temp2;
+    std::vector<string> array2;
+    stringstream ss2(str2);
+    while (ss2 >> temp2)
+        array2.push_back(temp2);
+    string name2 = array2[1];
+
     //    std::ofstream myfile;
     //    myfile.open("func2.txt", std::ios::app);
     //    myfile << name2;
@@ -129,6 +131,9 @@ int main(int argc, char* argv[]) {
     auto tid = std::clock();
     //    BPSolver* userModel = new BPSolver(input);
     BPSolver userModel(input);
+    userModel.getOutput().setName(name2);
+    userModel.getOutput().addToTable1(std::to_string(input->getNvars()));
+    userModel.getOutput().addToTable1(std::to_string(input->getNcons()));
     std::cout << "Initialize solution" << std::endl;
     //Need my own option class
 
@@ -140,15 +145,23 @@ int main(int argc, char* argv[]) {
     //    GeneralSolver* GS = m->InitialSolution(so);
     userModel.initialSolution(TimeForGecode);
 
+
     //    assert(!GS.stopped());
     //    double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
     size_t peakSize2 = getPeakRSS();
     std::cout << "Peak memory usage for Gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
     //    m->initializeLS(GS);
+    userModel.getOutput().addToGecodePrint(std::to_string((double) peakSize2 / 1024 / 1024));
+    
+    std::cout << "##GecodeSol " << userModel.getOutput().getToGecodePrint() << std::endl;
 
+    
     //    m->printCurrent();
 
+    
+    
+    
     std::cout << "LS solver initialized after " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " seconds" << std::endl;
     //    m->printCurrent();
 

@@ -42,6 +42,8 @@ void EQviolation::proposeChange(int variableNumber, int changeInValue) {
 
 void EQviolation::updateValue() {
     CurrentValue += DeltaValue;
+    assert(CurrentValue >= 0);
+
 }
 
 bool EQviolation::test() {

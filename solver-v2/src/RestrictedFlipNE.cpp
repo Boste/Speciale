@@ -6,7 +6,7 @@ RestrictedFlipNE::RestrictedFlipNE(std::shared_ptr<Model> model, std::shared_ptr
     this->model = model;
     this->state = st;
     small = model->getMask().size() < 10000;
-    probability = 10000.0 / model->getMask().size();
+    probability = 5000.0 / model->getMask().size();
     assert(probability != 0);
 }
 
@@ -24,10 +24,11 @@ Move* RestrictedFlipNE::next() {
     if (moveCounter < model->getMask().size()) {
 
 
-        Variable* iv = model->getMaskAt(moveCounter);
+        Variable* var = model->getMaskAt(moveCounter);
+        assert(!var->isFixed());
         moveCounter++;
         //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
-        Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
+        Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
         //    mv->deltaVector.resize(state->getEvaluation().size());
         mv->deltaVector.resize(state->getEvaluation().size(), 0);
         

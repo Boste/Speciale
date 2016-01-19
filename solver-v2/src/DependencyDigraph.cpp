@@ -14,7 +14,7 @@ DependencyDigraph::DependencyDigraph(const DependencyDigraph& orig) {
 }
 
 void DependencyDigraph::addVariables(variableContainer& vars) {
-    variable_nodes.resize(vars.size());
+    variable_nodes.resize(vars.size(),NULL);
     for (Variable* iv : vars) {
         if (iv->isFixed()) {
             continue;
@@ -113,11 +113,16 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
         //        variable_nodes.erase(it);
     }
 
-    for (Variable* iv : vars) {
-        if (iv->isFixed()) {
+    for (auto it = vars.begin(); it != vars.end(); ++it) {
+        //        
+        if ((*it)->isFixed()) {
+            //            //   
+            //            newInvariant->addToFixedVariables((*it));
+            //            vars.erase(it);
+            //            it--;
             continue;
         }
-        variable_nodes.at(iv->getID())->update.push_back(newInvariant);
+        variable_nodes.at((*it)->getID())->update.push_back(newInvariant);
     }
 
 }
@@ -153,10 +158,14 @@ void DependencyDigraph::addInvariant(invariant newInvariant) {
     //    
     std::vector<Variable*>& vars = newInvariant->getVariablePointers();
     //    std::vector<invariant>& invars = newInvariant->getInvariantPointers();
-    for (Variable* iv : vars) {
+    for (auto it = vars.begin(); it != vars.end(); ++it) {
         //        
-        if (iv->isFixed()) {
-            //            
+        if ((*it)->isFixed()) {
+            //   
+            //            debug;
+            //            newInvariant->addToFixedVariables((*it));
+            //            vars.erase(it);
+            //            it--;
             continue;
         }
         //        if (iv->isDef()) {
@@ -164,7 +173,7 @@ void DependencyDigraph::addInvariant(invariant newInvariant) {
         //        } else {
         //        assert(variable_nodes.find(iv->getID()) != variable_nodes.end());
 
-        std::shared_ptr<variableNode> vn = variable_nodes.at(iv->getID());
+        std::shared_ptr<variableNode> vn = variable_nodes.at((*it)->getID());
 
         //        
         vn->update.push_back(newInvariant);
@@ -216,10 +225,14 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
     //    
     //    std::vector<Variable*>& vars = newInvariant->getVariablePointers();
     //    std::vector<invariant>& invars = newInvariant->getInvariantPointers();
-    for (Variable* iv : vars) {
+    //    for (Variable* iv : vars) {
+    for (auto it = vars.begin(); it != vars.end(); ++it) {
         //        
-        if (iv->isFixed()) {
-            //            
+        if ((*it)->isFixed()) {
+            //   
+            //            newInvariant->addToFixedVariables((*it));
+            //            vars.erase(it);
+            //            it--;
             continue;
         }
         //        if (iv->isDef()) {
@@ -227,13 +240,26 @@ void DependencyDigraph::addInvariant(invariant newInvariant, variableContainer& 
         //        } else {
         //        assert(variable_nodes.find(iv->getID()) != variable_nodes.end());
 
-        std::shared_ptr<variableNode> vn = variable_nodes.at(iv->getID());
+        std::shared_ptr<variableNode> vn = variable_nodes.at((*it)->getID());
 
         //        
         vn->update.push_back(newInvariant);
         //        }
         //        
     }
+    //    vars = newInvariant->getVariablePointers();
+    //    for (auto it = vars.begin(); it != vars.end(); ++it) {
+    //        //        
+    //        if ((*it)->isFixed()) {
+    //            //   
+    ////            debug;
+    ////            std::cout << (*it)->getID() << std::endl;
+    ////            newInvariant->addToFixedVariables((*it));
+    ////            vars.erase(it);
+    ////            it--;
+    //            continue;
+    //        }
+    //    }
     //    
     //    std::cout << "size " << invars.size() << std::endl;
     //    
@@ -260,9 +286,12 @@ updateVector& DependencyDigraph::getInvariantUpdate(unsigned invarID) {
 }
 
 updateVector& DependencyDigraph::getVariableUpdate(unsigned varID) {
-    //    assert(variable_nodes.find(varID) != variable_nodes.end());
-
-    //    assert(variable_nodes.at(varID)->update.size() != 0);
+    //        assert(variable_nodes.find(varID) != variable_nodes.end());
+//    if(variable_nodes.at(varID)==NULL){
+//        std::cout << varID << std::endl;
+//    }
+    assert(variable_nodes.at(varID) != NULL );
+//    assert(variable_nodes.at(varID)->update.size() != 0);
 
     return variable_nodes.at(varID)->update;
 }
@@ -550,6 +579,7 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
 
     for (Variable* iv : vars) {
         if (iv->isFixed()) {
+
             continue;
         }
         if (iv->isDef()) {

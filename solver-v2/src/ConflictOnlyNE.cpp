@@ -33,17 +33,23 @@ Move* ConflictOnlyNE::next() {
     }
     while (moveIterator != model->getViolatedConstraints().end()) {
         while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
-            if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
-                suggested++;
-                int id = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
+            int id = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
+            //            if(model->getVariable(id)->isFixed())
+
+            if (calculated.at(id) != iter) {
+                //                int id = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
                 calculated.at(id) = iter;
                 Variable* var = model->getVariable(id);
+                if (var->isFixed()) {
+                    continue;
+                }
+                suggested++;
 
                 moveCounter++;
                 Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-//                std::cout << mv << std::endl;
+                //                std::cout << mv << std::endl;
                 mv->deltaVector.resize(state->getEvaluation().size(), 0);
-//                mv->setID(mv->var->getID());
+                //                mv->setID(mv->var->getID());
                 return mv;
 
 
@@ -51,7 +57,7 @@ Move* ConflictOnlyNE::next() {
                 moveCounter++;
             }
         }
-        moveIterator++;        
+        moveIterator++;
         moveCounter = 0;
     }
     firstMove = true;

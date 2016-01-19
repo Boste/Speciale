@@ -220,6 +220,7 @@ void GecodeSolver::fixVariables() {
         } else {
             numberOfFixedVariables++;
             //            iv->setCurrentValue();
+
             iv->setAsFixed();
         }
         //        } else if (iv->getVariablePointer()->assigned()) {
@@ -235,17 +236,17 @@ void GecodeSolver::fixVariables() {
     //        GS->print(cout);
 }
 
-bool GecodeSolver::initialize(int TimeForGecode, bool fix) {
-    //    std::cout << IntVars << std::endl;
+//bool GecodeSolver::initialize(int TimeForGecode, bool fix) {
+//    //    std::cout << IntVars << std::endl;
+//
+//
+//
+//    //        std::cout << IntVars->size() << std::endl;
+//    return FindSolution(TimeForGecode, fix);
+//
+//}
 
-
-
-    //        std::cout << IntVars->size() << std::endl;
-    return FindSolution(TimeForGecode, fix);
-
-}
-
-bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
+bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
     //    postCovSol();
     //    this->print(std::cout);
     //    std::cout << "No branch posted " << std::endl;
@@ -292,11 +293,16 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    std::cout << so->c_d << std::endl;
     //    exit(1);    
 
-    so->a_d = std::max(AllVars.size() / 32, 2); // Default 2 
-    so->c_d = std::max(AllVars.size() / 16, 8); // Default 8
-    //    so->a_d = AllVars.size(); // Default 2 
-    //    so->c_d = AllVars.size() ; // Default 8
+//    so->a_d = std::max(AllVars.size() / 32, 2); // Default 2 
+//    so->c_d = std::max(AllVars.size() / 16, 8); // Default 8
+        so->a_d = AllVars.size(); // Default 2 
+        so->c_d = AllVars.size() ; // Default 8
     //    this->print(std::cout);
+    if (fix) {
+        model->out.relax = 0;
+
+        model->out.addToGecodePrint("0");
+    }
     bool solutionFound = false;
     GecodeSolver* s;
     try {
@@ -328,9 +334,13 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
                 Gecode::Search::Statistics stat = e.statistics();
                 print_stats(stat);
                 double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
-                //                std::cout << "\tTime spend searching for solution: " << time << " seconds" << std::endl;
+                std::cout << "\tTime spend searching for solution: " << time << " seconds" << std::endl;
+
+                model->out.addToGecodePrint(std::to_string(e.statistics().fail));
+                model->out.addToGecodePrint(std::to_string(time));
+
                 std::cout << "## fail " << e.statistics().fail << std::endl;
-                std::cout << "## stopped " << std::endl;
+                //                std::cout << "## stopped " << std::endl;
 
 
             }
@@ -350,15 +360,19 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
 
             //            }
             //            s->print(std::cout); //            this->print(std::cout);
-            SetValues(s->AllVars);
+
             solutionFound = true;
-//            std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
-//            std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+            double time = (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC;
+
+            std::cout << "Gecode found solution after " << (std::clock() - GecodeClock) / (double) CLOCKS_PER_SEC << std::endl;
+            //            std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
             Gecode::Search::Statistics stat = e.statistics();
             print_stats(stat);
             std::cout << "## fail " << e.statistics().fail << std::endl;
-            
+            model->out.addToGecodePrint(std::to_string(e.statistics().fail));
+            model->out.addToGecodePrint(std::to_string(time));
 
+            SetValues(s->AllVars);
 
         }
         //        std::cout <<  "## fail " << e.statistics().fail << std::endl;
@@ -375,13 +389,14 @@ bool GecodeSolver::FindSolution(int TimeForGecode, bool fix) {
     //    std::cout << "solutionFound  "<< solutionFound << std::endl;
     delete ms;
     delete so;
-//    exit(1);
+    //    exit(1);
     return solutionFound;
 }
 
 void GecodeSolver::SetValues(Gecode::BoolVarArray vars) {
     //void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     //    for (int i = 0; i < model->getAllIntegerVariables()->size(); i++) {
+    //    Gecode::BoolVarArray vars = AllVars;
     for (Variable* iv : model->getAllVariables()) {
         if (vars[iv->getID()].assigned()) {
             iv->setCurrentValue(vars[iv->getID() ].val());
@@ -392,12 +407,25 @@ void GecodeSolver::SetValues(Gecode::BoolVarArray vars) {
             //            std::cout << "Value not found for variable " << iv->getID() << " , consider adding it to branch" << std::endl;
             //                        std::cout << vars[iv->getID()] << " ";
             //            iv->setCurrentValue(Random::Integer(vars[iv->getID()].min(), vars[iv->getID()].max()));
-            debug;
             iv->setCurrentValue(Random::Integer(0, 1));
             //            iv->setCurrentValue(vars[iv->getID()].min());
 
         }
     }
+
+
+}
+
+void GecodeSolver::randomInitialize() {
+    for (Variable* var : model->getAllVariables()) {
+        if (AllVars[var->getID()].assigned()) {
+            var->setCurrentValue(AllVars[var->getID() ].val());
+        } else {
+            var->setCurrentValue(Random::Integer(0, 1));
+
+        }
+    }
+
 }
 
 void GecodeSolver::printSpaceStatus() {

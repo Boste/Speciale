@@ -286,6 +286,36 @@ bool Sum::test() {
     //    if (variableID == 256) {
     //        test = true;
     //    }
+    
+    for (Variable* iv : fixedVariablePointers) {
+        unsigned id = iv->getID();
+        double coef = coefficients.at(id);
+//        int varValue;
+
+
+//        if (iv->isDef()) {
+//            varValue = iv->getOneway()->getCurrentValue();
+//            //            if(varValue <0){
+//            if (varValue < iv->getLowerBound()) {
+//                std::cout << "this should never happen, prob defined by wrong invariant (sum instead of max)" << std::endl;
+////                std::cout << "is integer variable " << iv->isIntegerVariable() << std::endl;
+//                std::cout << "value of variable " << varValue << std::endl;
+//                debug;
+//
+//            }
+//            if (iv->getCurrentValue() != varValue) {
+//                //                std::cout << "should update the variable value according to the oneway defining it" << std::endl;
+//            }
+//        } else {
+           int varValue = iv->getCurrentValue();
+//        }
+        //        if (test && varValue!=0) {
+        //            std::cout << coef << "*"<< varValue  << " + ";
+        //        }
+        realValue += varValue*coef;
+    }
+    
+    
     for (Variable* iv : VariablePointers) {
         unsigned id = iv->getID();
         double coef = coefficients.at(id);
@@ -347,7 +377,7 @@ bool Sum::test() {
 //            std::cout << "Got integer variable" << std::endl;
 //        }
         std::cout << "coef size " << coefficients.size() << std::endl;
-        std::cout << "variables/invariants " << VariablePointers.size() + InvariantPointers.size() << std::endl;
+        std::cout << "variables/invariants " << VariablePointers.size() + InvariantPointers.size() + fixedVariablePointers.size()<< std::endl;
         debug;
 
     }

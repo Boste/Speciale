@@ -94,7 +94,8 @@ public:
                 if (value <= rhs) {
                     leq->setValue(0);
                 } else {
-                    leq->setValue(1);
+//                    leq->setValue(1);
+                    leq->setValue(value -rhs);
                 }
                 invars.push_back(leq);
             } else if (relation == EQ) {

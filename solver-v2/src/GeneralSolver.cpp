@@ -16,7 +16,6 @@ GeneralSolver::~GeneralSolver() {
     //        delete st;
 }
 
-
 void GeneralSolver::linear(std::vector<int>& coefficients, std::vector<Variable*>& variables, int relation, int ub, unsigned priority) {
     //    bool hasDouble = false;
     //    int digits = 0;
@@ -206,7 +205,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
     auto tid = std::clock();
     GS->createArray();
     //        GS->branch(true);
-    if (GS->initialize(TimeForGecode, true)) {
+    if (GS->findSolution(TimeForGecode, true)) {
         //    if (false) {
 
 
@@ -247,7 +246,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         int initialValue = 0;
         constraint obj = model->getConstraintsWithPriority(0)->at(0);
-        std::unordered_map<int,coefType>&    coef = obj->getCoefficients();
+        std::unordered_map<int, coefType>& coef = obj->getCoefficients();
         for (Variable* iv : obj->getVariables()) {
             double coeff = coef.at(iv->getID());
             if (coeff != 0) {
@@ -260,30 +259,30 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         std::cout << "## gecode " << gecode << std::endl;
 
 
-//        std::ofstream myfile;
-//        myfile.open("func2.txt", std::ios::app);
-//        myfile << " 0 " << gecode << "\n";
-//        myfile.close();
-//        std::cout << "#relax 0" << std::endl;
-//        exit(1);
+        //        std::ofstream myfile;
+        //        myfile.open("func2.txt", std::ios::app);
+        //        myfile << " 0 " << gecode << "\n";
+        //        myfile.close();
+        //        std::cout << "#relax 0" << std::endl;
+        //        exit(1);
         std::cout << "## relax 0" << std::endl;
         tid = std::clock();
         LS->createDDG(true);
         LS->initializeLS(true);
         auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
-        
+
     } else {
         relax(TimeForGecode);
         double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
 
-//        std::ofstream myfile;
-//        myfile.open("func2.txt", std::ios::app);
-//        myfile << " " << gecode << "\n";
-//        myfile.close();
-//        exit(1);
+        //        std::ofstream myfile;
+        //        myfile.open("func2.txt", std::ios::app);
+        //        myfile << " " << gecode << "\n";
+        //        myfile.close();
+        //        exit(1);
         tid = std::clock();
 
         LS->createDDG(false);
@@ -387,10 +386,15 @@ bool GeneralSolver::relax(int TimeForGecode) {
             std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
         }
     }
-    bool solution = GS->initialize(TimeForGecode, false);
+    model->out.relax = 1;
+
+    model->out.addToGecodePrint("1");
+    bool solution = GS->findSolution(TimeForGecode, false);
     //    std::vector<constraint> ;
     unsigned numberOfTimesRelaxed = 1;
-    while (!solution && numberOfTimesRelaxed < 3) {
+    if (!solution) {
+
+        //    while (!solution && numberOfTimesRelaxed < 2) {
         //        std::vector<constraint> newKeep;
         //        std::cout << "Number of constraints " << funcCons.size() << std::endl;
 
@@ -411,24 +415,39 @@ bool GeneralSolver::relax(int TimeForGecode) {
         //        }
         std::cout << "Number of constriants " << keepOrder.size() << std::endl;
         furtherRelax(keepOrder);
-        solution = GS->initialize(TimeForGecode, false);
+        model->out.relax = 2;
+
+        model->out.addToGecodePrint("2");
+
+        solution = GS->findSolution(TimeForGecode, false);
         //        keepOrder = newKeep;
         numberOfTimesRelaxed++;
+
+    } else {
 
     }
     std::vector<constraint> feasibleFunc;
     for (constraint con : keepOrder) {
         if (con->isFunctional()) {
             feasibleFunc.push_back(con);
-        }
+        }   
     }
     if (solution) {
         model->setFeasibleFunctionalConstraints(feasibleFunc);
+    } else {
+        model->out.relax = 3;
+        model->out.addToGecodePrint("3");
+
+        GS->randomInitialize();
+
+
     }
-//    std::ofstream myfile;
-//    myfile.open("func2.txt", std::ios::app);
-//    myfile << " " << numberOfTimesRelaxed;
-//    myfile.close();
+
+    //    }
+    //    std::ofstream myfile;
+    //    myfile.open("func2.txt", std::ios::app);
+    //    myfile << " " << numberOfTimesRelaxed;
+    //    myfile.close();
     std::cout << "## relax " << numberOfTimesRelaxed << std::endl;
     //    exit(1);
     return solution;
@@ -595,4 +614,8 @@ void GeneralSolver::printVariableValues() {
     //            //        std::cout << BoolVarVector[i].getCurrentVal() << " ";
     //        }
     //        std::cout << std::endl;
+}
+
+Output& GeneralSolver::getOutput() {
+    return model->out;
 }

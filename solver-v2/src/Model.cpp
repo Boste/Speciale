@@ -28,7 +28,7 @@ std::vector<std::vector<Variable*>>&Model::getPriorityVectors() {
 
 std::vector<Variable*>& Model::getPriorityVectorNr(unsigned i) {
     assert(i < priorityVectorsOfVariables.size());
-    
+
     return priorityVectorsOfVariables.at(i);
 }
 
@@ -122,6 +122,7 @@ std::shared_ptr<DependencyDigraph>& Model::getDDG() {
 propagation_queue& Model::getPropagationQueue(Variable* iv) {
     assert(DDG->propagationQueueHasBeenMade());
     assert(!iv->isDef());
+    assert(!iv->isFixed());
     return DDG->getPropagationQueue(iv);
 
 }
@@ -375,7 +376,7 @@ void Model::initialize() {
                 for (constraint con : intvar->usedInConstraints()) {
                     if (con->getPriority() != OBJ) {
                         for (Variable* iv : con->getVariables()) {
-                            if (!(iv->isFixed() || iv->isDef() )) { // || iv->isIntegerVariable())) {
+                            if (!(iv->isFixed() || iv->isDef())) { // || iv->isIntegerVariable())) {
                                 inConstraintWith[iv->getID()].insert(intvar);
                             }
                         }
@@ -383,46 +384,46 @@ void Model::initialize() {
                 }
             }
         }
-//        for (unsigned i = 1; i < Constraints.size(); i++) {
-//            constraintContainer cons = Constraints.at(i);
-//            for (constraint con : *cons) {
-                //                if (con->isOneway()) {
-                //                    continue;
-                //                }
-//                if (con->getNumberOfIntegerVariables() > 0) {
-//                    //                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
-//                    std::vector<Variable*>& intVars = con->getIntegerVariables();
-//                    for (Variable* iv : con->getVariables()) {
-//                        if (!(iv->isFixed() || iv->isDef() )) {//|| iv->isIntegerVariable())) {
-//                            //                            std::vector<IntegerVariable*> newVector;
-//                            //                            inConstraintWith[iv->getID()] = newVector;
-//                            //                            int coef = coefficients.at(iv->getID());
-//                            //                            for(IntegerVariable* intvar : intVars){
-//                            //                                int intcoef = coefficients.at(intvar->getID());
-//                            //                                int change = ++ 
-//                            //                                std::pair<IntegerVariable*, int> intvarAndChange(intvar,) ;
-//                            //                                IntegerVariablesAndChange->at(iv->getID())->push_back(intvarAndChange);
-//                            //                            }
-//                            //                            constraintsWithIntegerVarsRelated.at(iv->getID())->push_back(con);
-//                            //                            std::cout << "Behøver ikke det efterfølgende, bare spørg con hvor mange int der skal ledes efter" << std::endl;
-//                            //                            std::cout << "Check om de er fixed (integer variablene) " << std::endl;
-//                            for (Variable* intvar : intVars) {
-//                                if (intVars.size() > 1) {
-//                                    std::cout << intVars.size() << std::endl;
-//                                }
-//                                assert(intvar->isIntegerVariable());
-//                                if (intvar->isFixed() || intvar->isDef()) {
-//
-//                                } else {
-//                                    inConstraintWith[iv->getID()].insert(intvar);
-//
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        //        for (unsigned i = 1; i < Constraints.size(); i++) {
+        //            constraintContainer cons = Constraints.at(i);
+        //            for (constraint con : *cons) {
+        //                if (con->isOneway()) {
+        //                    continue;
+        //                }
+        //                if (con->getNumberOfIntegerVariables() > 0) {
+        //                    //                    std::unordered_map<int, coefType>& coefficients = con->getCoefficients();
+        //                    std::vector<Variable*>& intVars = con->getIntegerVariables();
+        //                    for (Variable* iv : con->getVariables()) {
+        //                        if (!(iv->isFixed() || iv->isDef() )) {//|| iv->isIntegerVariable())) {
+        //                            //                            std::vector<IntegerVariable*> newVector;
+        //                            //                            inConstraintWith[iv->getID()] = newVector;
+        //                            //                            int coef = coefficients.at(iv->getID());
+        //                            //                            for(IntegerVariable* intvar : intVars){
+        //                            //                                int intcoef = coefficients.at(intvar->getID());
+        //                            //                                int change = ++ 
+        //                            //                                std::pair<IntegerVariable*, int> intvarAndChange(intvar,) ;
+        //                            //                                IntegerVariablesAndChange->at(iv->getID())->push_back(intvarAndChange);
+        //                            //                            }
+        //                            //                            constraintsWithIntegerVarsRelated.at(iv->getID())->push_back(con);
+        //                            //                            std::cout << "Behøver ikke det efterfølgende, bare spørg con hvor mange int der skal ledes efter" << std::endl;
+        //                            //                            std::cout << "Check om de er fixed (integer variablene) " << std::endl;
+        //                            for (Variable* intvar : intVars) {
+        //                                if (intVars.size() > 1) {
+        //                                    std::cout << intVars.size() << std::endl;
+        //                                }
+        //                                assert(intvar->isIntegerVariable());
+        //                                if (intvar->isFixed() || intvar->isDef()) {
+        //
+        //                                } else {
+        //                                    inConstraintWith[iv->getID()].insert(intvar);
+        //
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
         auto usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
         std::cout << usedTime << std::endl;
 
@@ -457,13 +458,13 @@ void Model::initialize() {
         }
         std::cout << "Total number " << total << std::endl;
         std::cout << "Number of nonfixed " << getMask().size() << std::endl;
-//        for (constraint con : *Constraints.at(1)) {
-//            if (con->getNumberOfIntegerVariables() > 1) {
-//
-//                std::cout << con->getNumberOfIntegerVariables() << " ";
-//                std::cout << con->getVariables().size() << " ";
-//            }
-//        }
+        //        for (constraint con : *Constraints.at(1)) {
+        //            if (con->getNumberOfIntegerVariables() > 1) {
+        //
+        //                std::cout << con->getNumberOfIntegerVariables() << " ";
+        //                std::cout << con->getVariables().size() << " ";
+        //            }
+        //        }
         std::cout << std::endl;
         debug;
         //        for(IntegerVariable* iv : inConstraintWith.at(9779)){
@@ -510,6 +511,9 @@ void Model::setFeasibleFunctionalConstraints(std::vector<constraint> funcCons) {
 //    }
 
 void Model::cleanUp() {
+    
+    
+    
     //    std::vector<bool>& brokenInvars = getDDG()->getBrokenInvariants();
     //        assert(Invariants.size() == brokenInvars.size());
     InvariantContainer tmp;
@@ -561,6 +565,12 @@ void Model::cleanUp() {
 
                 //                debug;
             }
+//            if ((*it)->isFixed()) {
+//                debug;
+//                std::cout << (*it)->getID() << std::endl;
+//                inv->VariablePointers.erase(it);
+//                --it;
+//            }
 
 
         }

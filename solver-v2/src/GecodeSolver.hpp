@@ -6,6 +6,8 @@
 #include "Constants.hpp"
 #include "Model.hpp"
 #include "Multistop.hpp"
+#include <stdlib.h>
+
 #ifndef GECODESOLVER_HPP
 #define	GECODESOLVER_HPP
 
@@ -33,12 +35,13 @@ public:
     
     /// Always branches the same way. 
 //    void branch();
-    bool initialize(int TimeForGecode,bool fix);
-    bool FindSolution(int TimeForGecode, bool fix);
+//    bool initialize(int TimeForGecode,bool fix);
+    bool findSolution(int TimeForGecode, bool fix);
     void linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound);
 //    void createGecodeVariables(std::shared_ptr<Model> model);
     void createGecodeVariable(int lb,int ub);
     void SetValues(Gecode::BoolVarArray vars);
+    void randomInitialize();
 //    void SetValues(Gecode::IntVarArray vars);
     void fixVariables();
     void printSpaceStatus();

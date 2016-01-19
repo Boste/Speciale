@@ -268,9 +268,17 @@ public:
     void setBroken(bool flag){
         broken = flag;
     }
+    void addToFixedVariables(Variable* var){
+        fixedVariablePointers.push_back(var);
+    }
+    std::vector<Variable*>& getFixedVariables(){
+        return fixedVariablePointers;
+    }
 
 
 protected:
+    
+    std::vector<Variable*> fixedVariablePointers;
     std::vector<Variable*> VariablePointers;
     std::vector<invariant> InvariantPointers;
     //    int value = 0;

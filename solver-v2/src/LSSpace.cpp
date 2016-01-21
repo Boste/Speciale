@@ -158,7 +158,7 @@ void LSSpace::createDDG(bool all) {
     DDG->cleanUpGraph(model->getNonFixedVariables());
 
     DDG->checkForCycles(model->getInvariants());
-
+    
     //    exit(1);
     //    std::cout << "BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
     //    std::cout << "BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
@@ -242,8 +242,8 @@ void LSSpace::initializeLS(bool feasible) {
 
     //    if (feasible) {
     model->cleanUp();
-
-
+    std::cout <<"##oneway " << model->getInvariants().size() << std::endl;
+    model->out->oneway = model->getInvariants().size();
 
 
     //    for (invariant inv : model->getInvariants()) {
@@ -453,12 +453,20 @@ void LSSpace::initializeLS(bool feasible) {
         DDG->addInvariant(priorityResult, collector);
         model->addToEvaluationInvariants(priorityResult);
     }
+    if (!model->out->feasible) {
+        if (model->getViolatedConstraints().size() == 0) {
+            model->out->feasible = true;
+            model->out->feasibleTime = model->out->solTime;
+            model->out->feasibleVal = model->getEvaluationInvariantNr(0)->getCurrentValue();
 
-    if (model->getViolatedConstraints().size() != 0) {
-        //        model->getViolatedConstraints().size();
-        std::cout << "Not feasible " << std::endl;
-        //        exit(1);
+        }
     }
+
+    //    if (model->getViolatedConstraints().size() != 0) {
+    //        //        model->getViolatedConstraints().size();
+    //        std::cout << "Not feasible " << std::endl;
+    //        //        exit(1);
+    //    }
 
 
     //    DDG->checkForCycles(model->getInvariants());
@@ -876,12 +884,17 @@ void LSSpace::optimizeSolution(int time, int test) {
         ConflictOnlyNE* CON = new ConflictOnlyNE(model, currentState);
         TabuSearch TSCON(CON);
         //        EvalFlipNE* EFN = new EvalFlipNE(model, currentState);
-        FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
-
-        RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
-        TabuSearch TSRFN(RFN);
+        Neighborhood* NE;
+        if (model->getMask().size() > 5000) {
+            NE = new RestrictedFlipNE(model, currentState);
+        } else {
+            NE = new FlipNeighborhood(model, currentState);
+        }
+        //        RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
+        TabuSearch TSRFN(NE);
         while (usedTime < timelimit) {
-            while (!currentState->isFeasible() && usedTime < timelimit) {
+            //            while (!currentState->isFeasible() && usedTime < timelimit) {
+            if (!currentState->isFeasible()) {
                 TSCON.Start(iterations, bestState, currentState, tabulist);
                 iterations++;
                 if (currentState->compare(bestState)) {
@@ -899,10 +912,11 @@ void LSSpace::optimizeSolution(int time, int test) {
                 usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
 
 
-            }
-            //            unsigned counter = 0;
-            //            while (counter < randomMoves&& usedTime < timelimit) {
-            while (currentState->isFeasible() && usedTime < timelimit) {
+            } else {
+                //            unsigned counter = 0;
+                //            while (counter < randomMoves&& usedTime < timelimit) {
+                //            while (currentState->isFeasible() && usedTime < timelimit) {
+                //            if (currentState->isFeasible()) {
                 //                if(iterations > 23){
                 //                    break;
                 //                }
@@ -928,8 +942,8 @@ void LSSpace::optimizeSolution(int time, int test) {
 
         }
         delete CON;
-        delete RFN;
-        delete FN;
+
+        delete NE;
     }
     //######################################################
     // Test 2 RW 2 % + FI
@@ -949,8 +963,10 @@ void LSSpace::optimizeSolution(int time, int test) {
         RandomWalk RW(FN, randomMoves);
         FirstImprovement FIFN(FN);
         bool imp = true;
+        //        unsigned loopCounter =0;
         while (usedTime < timelimit) {
             imp = true;
+            //            loopCounter++;
             while (imp && usedTime < timelimit) {
                 imp = FIFN.Start();
                 iterations++;
@@ -998,6 +1014,10 @@ void LSSpace::optimizeSolution(int time, int test) {
             //            std::cout << " # iter " << iterations << " # used " << usedTime << " # method RW FN" << std::endl;
             usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
 
+            //            if(loopCounter > 20){
+            //                std::random_shuffle(model->getMask().begin(),model->getMask().end());
+            //                loopCounter = 0;
+            //            }
         }
         delete FN;
 
@@ -1013,11 +1033,16 @@ void LSSpace::optimizeSolution(int time, int test) {
         RandomConflictConNE* RCC = new RandomConflictConNE(model, currentState);
         BestImprovement BIRCC(RCC);
         bool alwaysCommit = true;
-        RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
-        //        TabuSearch TSRFN(model, FN);
-        TabuSearch TSRFN(RFN);
+        Neighborhood* NE;
+        if (model->getMask().size() > 5000) {
+            NE = new RestrictedFlipNE(model, currentState);
+        } else {
+            NE = new FlipNeighborhood(model, currentState);
+        } //        TabuSearch TSRFN(model, FN);
+        TabuSearch TSRFN(NE);
         while (usedTime < timelimit) {
-            while (!currentState->isFeasible() && usedTime < timelimit) {
+            //                        while (!currentState->isFeasible() && usedTime < timelimit) {
+            if (!currentState->isFeasible()) {
                 BIRCC.Start(alwaysCommit);
                 iterations++;
                 if (currentState->compare(bestState)) {
@@ -1036,10 +1061,11 @@ void LSSpace::optimizeSolution(int time, int test) {
 
 
 
-            }
-            //            std::cout << usedTime << std::endl;
-            //            while (usedTime < timelimit) {
-            while (currentState->isFeasible() && usedTime < timelimit) {
+            } else {
+                //            std::cout << usedTime << std::endl;
+                //            while (usedTime < timelimit) {
+                //                        while (currentState->isFeasible() && usedTime < timelimit) {
+                //            if (currentState->isFeasible()) {
                 //                debug;
                 TSRFN.Start(iterations, bestState, currentState, tabulist);
                 iterations++;
@@ -1059,279 +1085,50 @@ void LSSpace::optimizeSolution(int time, int test) {
 
             }
         }
-        delete RFN;
+        delete NE;
         delete RCC;
     }
+    if (bestState->isFeasible()) {
+        model->out->addToTable1(std::to_string(model->out->feasibleVal));
+        model->out->addToTable1(std::to_string(iterations));
+    } else {
+        assert(!model->out->feasible);
+        model->out->addToTable1("NA");
+        model->out->addToTable1("NA");
+        model->out->addToTable1(std::to_string(iterations));
+    }
+    
 
-    //    exit(1);
-    //    timelimit = -1;
-    //    debug;
-    //        while (usedTime < timelimit) {
-    //        loopCounter++;
+    std::cout << "name, oneway, iteration, eval[0], eval[1]" << std::endl;
+    std::cout << "##invar " << model->out->name<< model->out->oneway << " ";
+    std::cout << iterations <<" ";
+    for (int eval : bestState->getEvaluation()) {
 
-
-    //                while (FI.Start()) {
-    //                    iterations++;
-    //                }
-    //                if (currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) {
-    //                    bestState->copy(currentState);
-    //                    //            setSolution(bestState);
-    //                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //                    std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " after " << iterations << " iterations and " << usedTime << " seconds using FI" << std::endl;
-    //        
-    //                }
-    //                RW.Start();
-    //                iterations += randomMoves;
-    //        
-    //         for (invariant inv : model->getInvariants()) {
-    //            if (!inv->test()) {
-    //                std::cout << "Wrong before optimization " << std::endl;
-    //                
-    //                exit(1);
-    //            }
-    //    
-    //        }
-    //        for (auto it = model->getViolatedConstraints().begin(); it != model->getViolatedConstraints().end(); it++) {
-    //
-    //            std::cout << model->getViolatedConstraints().size() << std::endl;
-    //            unsigned id = it->first;
-    //            std::cout << "id " << id << std::endl;
-    //            std::cout << "Size of pointing to " << DDG->getInvariantUpdate(id).size() << std::endl;
-    //            std::cout << DDG->getInvariantUpdate(id).at(0)->getCurrentValue() << std::endl;
-    //            std::cout << "is in violated constraints " << model->getViolatedConstraints().begin()->second->inViolatedConstraints() << std::endl;
-    //            std::cout << "Number of variables " << model->getViolatedConstraints().at(id)->getVariablePointers().size() << std::endl;
-    //        }
-
-
-    //        while (!currentState->isFeasible()) {
-    //
-    //            imp = TS2.Start(iterations, bestState, currentState, tabulist);
-    //            //                    imp = BI.Start();
-    //            iterations++;
-    //            imp ? impCounter = 0 : impCounter++;
-    //
-    //
-    //            //            std::cout << "infes" << std::endl;
-    //            //            std::cout << "Feasible? " << currentState->isFeasible() << std::endl;
-    //            if (currentState->compare(bestState)) {
-    //                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-    //                bestState->copy(currentState);
-    //                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-    //                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //                std::cout << "improved solution value to: " << bestState->getEvaluation().at(0) << " " << bestState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI with MCN" << std::endl;
-    //
-    //            }
-    //            if (impCounter > 100) {
-    //                std::cout << "break" << std::endl;
-    //                break;
-    //            }
-    //            //            std::cout << "in 1" << std::endl;
-    //            std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI with MCN" << std::endl;
-    //            std::cout << "Number of violated constraints " << model->getViolatedConstraints().size() << std::endl;
-    //            //            std::cout << model->getViolatedConstraints().size() << std::endl;
-    //
-    //
-    //            //            std::cout << "used time " << (std::clock() - start) / (double) CLOCKS_PER_SEC << std::endl;
-    //            //                                for (auto it = model->getViolatedConstraints().begin(); it != model->getViolatedConstraints().end(); it++) {
-    //            //                    
-    //            //                                    std::cout << "Size of violated cons  " << model->getViolatedConstraints().size() << std::endl;
-    //            //                                    unsigned id = it->first;
-    //            //                                    std::cout << "id " << id << std::endl;
-    //            //                                    std::cout << "Size of pointing to " << DDG->getInvariantUpdate(id).size() << std::endl;
-    //            //                                    std::cout << "Value " << DDG->getInvariantUpdate(id).at(0)->getCurrentValue() << std::endl;
-    //            //                                    std::cout << "is in violated constraints " << model->getViolatedConstraints().begin()->second->inViolatedConstraints() << std::endl;
-    //            //                                    std::cout << "Number of variables " << it->second->getVariablePointers().size() << std::endl;
-    //            //                                    std::cout <<  currentState->getEvaluation().at(1) << std::endl;
-    //            //                                }
-    //        }
-
-    //        imp = true;
-    //        //        while (imp) {
-    //        while (!currentState->isFeasible() && usedTime < timelimit) {
-    //            //            imp = TSMCN.Start(iterations, bestState, currentState, tabulist);
-    //            //            imp = FIMCN.Start();
-    //            imp = BIMCN.Start();
-    //            //            imp = TSFN.Start(iterations, bestState, currentState, tabulist);
-    //            imp ? impCounter = 0 : impCounter++;
-    //
-    //            iterations++;
-    //            if (currentState->compare(bestState)) {
-    //                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-    //                bestState->copy(currentState);
-    //                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-    //                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //                std::cout << "improved solution value to: ";
-    //                for (int eval : bestState->getEvaluation()) {
-    //                    std::cout << eval << " ";
-    //                }
-    //                std::cout << "after " << iterations << " iterations and " << usedTime << " seconds using BI MCN" << std::endl;
-    //                std::cout << "Number of violated constraints " << model->getViolatedConstraints().size() << std::endl;
-    //
-    //
-    //            }
-    //            //            if (impCounter > model->getViolatedConstraints().size() ) {
-    //            //                std::cout << "RW ";
-    //            //                RW.Start();
-    //            //                iterations += randomMoves;
-    //            //                impCounter = 0;
-    //            //            }
-    //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //
-    //        }
-    //        //        std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using BI " << std::endl;
-    //        //        std::cout << tabulist.at(708) << " " << tabulist.at(2086) << " " << tabulist.at(698) << " " << tabulist.at(2066) << " " << tabulist.at(1619) << " " << tabulist.at(1613) << " " << tabulist.at(1204) << " " << std::endl;
-    //        //        imp ? impCounter = 0 : impCounter++;
-    //
-    //        imp = true;
-    //        //        while (TS.Start()) {
-    //        //            if (imp) {
-    //        unsigned counter = 0;
-    //        //        while (counter < FN->getSize()/10 && usedTime < timelimit) {
-    //        while (imp) {
-    //            //            if(model->getViolatedConstraints().size()>0){
-    //            //                std::cout <<model->getViolatedConstraints().size() << std::endl;
-    //            //                debug;
-    //            //            }
-    //            counter++;
-    //            //            imp = FIFON.Start();
-    //            //            imp = TSFIFON.Start(iterations, bestState, currentState, tabulist);
-    //            imp = TSFON.Start(iterations, bestState, currentState, tabulist);
-    //            //        std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI FN" << std::endl;
-    //
-    //            iterations++;
-    //
-    //            if (currentState->compare(bestState)) {
-    //                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-    //                bestState->copy(currentState);
-    //                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-    //                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //                std::cout << "improved solution value to: ";
-    //                for (int eval : bestState->getEvaluation()) {
-    //                    std::cout << eval << " ";
-    //                }
-    //                std::cout << "after " << iterations << " iterations and " << usedTime << " seconds using TS FI FON" << std::endl;
-    //
-    //            }
-    //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //
-    //            //            for (int eval : bestState->getEvaluation()) {
-    //            //                std::cout << eval << " ";
-    //            //            }
-    //            //            std::cout << "after " << iterations << " iterations and " << usedTime << " seconds using TS" << std::endl;
-    //        }
-    //            }
-    //        }
-
-    //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-
-    //        std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using TS BI FN" << std::endl;
-    //    }
-
-    //        std::cout << "feas -> infeas" <<   std::endl;
-
-    //                        while (!currentState->isFeasible()) {
-    //                
-    //                            //            if(model->getViolatedConstraints().size() != currentState->getEvaluation().at(1)){
-    //                            //                std::cout <<model->getViolatedConstraints().size() << " vs "  << currentState->getEvaluation().at(1) << std::endl;
-    //                            //            }
-    //                            BI.Start();
-    //                            iterations++;
-    //                
-    //                            //            std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using BI with MCN" << std::endl;
-    //                
-    //     
-    //    if (test == 1) {
-    //        unsigned twoPercent = model->getMask().size() / 50;
-    //        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
-    //        FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
-    //        BestImprovement BIFN(model, FN);
-    //        FirstImprovement FIFN(model, FN);
-    //        RandomWalk RW(model, FN, randomMoves);
-    //
-    //        while (usedTime < timelimit) {
-    //
-    //            //            while (FIFN.Start()) {
-    //            while (BIFN.Start()) {
-    //                iterations++;
-    //            }
-    //            if (currentState->compare(bestState)) {
-    //                //        if ((currentState->getEvaluation().at(0) < bestState->getEvaluation().at(0) && currentState->isFeasible()) || !bestState->isFeasible()) {
-    //                bestState->copy(currentState);
-    //                //            std::cout << "Implement state comparison, which infeasible is best?" << std::endl;
-    //                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //                std::cout << "improved solution value to: ";
-    //                for (int eval : bestState->getEvaluation()) {
-    //                    std::cout << eval << " ";
-    //                }
-    //                std::cout << "after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
-    //
-    //            }
-    //            //        std::cout << currentState->getEvaluation().at(0) << " " << currentState->getEvaluation().at(1) << " after " << iterations << " iterations and " << usedTime << " seconds using BI" << std::endl;
-    //            //
-    //            RW.Start();
-    //            iterations += randomMoves;
-    //            //
-    //            usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    //        }
-    //    }
-    //    for (invariant inv : model->getInvariants()) {
-    //        if (!inv->test()) {
-    //            std::cout << "Wrong before optimization " << std::endl;
-    //
-    //            exit(1);
-    //        }
-    //
-    //    }
-
+        std::cout << eval << " ";
+//        model->out->addToTable1(std::to_string(eval));
+    }
+    std::cout << std::endl;
+    
     //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;
     //    std::cout << "number of loops " << loopCounter << std::endl;
     std::cout << "## LSTimeUsed " << usedTime << std::endl;
-    //    std::cout << "obj val " << currentState->getEvaluation().at(0) << " violations ";
-    //    for (unsigned i = 1; i < currentState->getEvaluation().size(); i++) {
-    //        std::cout << currentState->getEvaluation().at(i) << " ";
-    //    }
-    //    std::cout << std::endl;
-    //    std::cout << "obj val " << bestState->getEvaluation().at(0) << std::endl;
-    //    std::cout << "Set soluton " << std::endl;
-    //    setSolution(bestState);
-    //    if (testInvariant()) {
-    //        std::cout << "failed test of invariant after setSolution" << std::endl;
-    //        exit(1);
-    //    }
-    //    sol2 = bestState->getSolution();
-    //    for (unsigned i = 0; i < sol1.size(); i++) {
-    //        if(sol1[i] != sol2[i]){
-    //            std::cout << sol1[i] << "  " << sol2[i] << std::endl;
-    //            auto iv =  model->getAllVariables().at(i);
-    //            std::cout << "id " << iv->getID() << std::endl;
-    //            if( iv->isDef()){
-    //                std::cout << "defined by invariant " << iv->getOneway()->getID() <<" type " <<  iv->getOneway()->getType() << std::endl;
-    //            } else {
-    //                std::cout << "fixed? " << iv->isFixed() << std::endl;
-    //            }
-    //        }
-    ////        assert(sol1[i] == sol2[i]);
-    //    }
+
     std::cout << "## quality ";
     for (int eval : bestState->getEvaluation()) {
 
         std::cout << eval << " ";
+        model->out->addToTable1(std::to_string(eval));
     }
+    model->out->addToTable1(std::to_string(bestState->getViolations()));
     std::cout << std::endl;
     std::cout << "## violations " << bestState->getViolations() << std::endl;
     std::cout << "## iterations " << iterations << std::endl;
     setSolution(bestState);
-    //    delete mv;
-    //    delete bestMove;
-    //    delete SN;
-    //    delete F2N;
-    //    delete FN;
-    //    delete RFN;
-    //    delete RCC;
-    //    std::cout << "O " << bestState->getEvaluation().at(0) << " ";
-    //
-    //    std::cout << "Solution value: " << st->getObjectiveValue() << std::endl;
-    //    std::cout << "Number of moves " << iterations << std::endl;
+    std::cout << "##table1 " << model->out->getToTable1() << std::endl;
+    std::cout << "instance name, variables, constraints, gecode percentage of constraints,"
+            << " time to initial solution, time to feasible solution, value of first feasible,"
+            << " #iterations, final solution val, number of violations" << std::endl;
+
 }
 
 bool LSSpace::testInvariant() {
@@ -1353,411 +1150,6 @@ void LSSpace::setSolution(std::shared_ptr<State> st) {
     for (unsigned i = 0; i < model->getAllVariables().size(); i++) {
         model->getVariable(i)->setCurrentValue(solution.at(i));
     }
-    //    std::cout << "need a remake" << std::endl;
-    //    debug;
-
-
-    //
-    //    int change;
-    //    //    for (unsigned i = 0; i < solution->size(); i++) {
-    //    for (Variable* iv : model->getMask()) {
-    //
-    //        //        IntegerVariable* current = model->->getAllIntegerVariable(solution->at(i));
-    //        //            for (unsigned j = 0; j < model->getUpdate(iv); j++) {
-    //        assert(!iv->isDef() && !iv->isFixed());
-    //        change = st->getSolution().at(iv->getID()) - iv->getCurrentValue();
-    //        if (change != 0) {
-    //            iv->setCurrentValue(st->getSolution().at(iv->getID()));
-    //
-    //            for (updateType invar : model->getUpdate(iv)) {
-    //                //                updateType invariant = iv->getUpdateVector().at(j);
-    //                invar->addChange(iv->getID(), change);
-    //            }
-    //
-    //
-    //            //            // Think this should be right, but expensive
-    //            //            propagation_queue queue = model->getPropagationQueue(iv);
-    //            //            for (updateType invar : queue) {
-    //            //                //        for (unsigned i = 0; i < update->size(); i++) {
-    //            //
-    //            //                //            std::shared_ptr<Invariant> invar = update->at(i);
-    //            //                //            Invariant* invar = st->getInvariants()->at(update->at(i));
-    //            //                invar->calculateDeltaValue();
-    //            //                invar->updateValue();
-    //            //
-    //            ////                if (invar->isUsedByConstraint()) {
-    //            ////
-    //            ////                    if (invar->getPriority() > 0) {
-    //            ////                        std::shared_ptr<Constraint> cons = invar->getConstraint(); // model->getConstraintsWithPriority(invar->getPriority())->at(invar->getConstraintNumber());
-    //            ////                        evaluation.at(cons->getPriority()) += cons->updateViolation();
-    //            ////
-    //            ////
-    //            ////                    } else {
-    //            ////                        evaluation.at(0) += invar->getDeltaValue();
-    //            ////                    }
-    //            ////                }
-    //            //            }
-    //
-    //        }
-    //
-    //
-    //    }
-    //    //    std::cout << "value of 20340 " << solution.at(20340) << std::endl;
-    //    //    for (unsigned i = 0; i < model->getInvariants()->size(); i++) {
-    //    for (invariant invar : model->getInvariants()) {
-    //        invar->calculateDeltaValue();
-    //        //        bool legal = invar->calculateDeltaValue();
-    //        //        if (!legal) {
-    //        //            std::cout << "not a legal move while setting previous solution" << std::endl;
-    //        //            exit(1);
-    //        //        }
-    //        change = invar->getDeltaValue();
-    //        if (change != 0) {
-    //            for (invariant inv : model->getUpdate(invar)) {
-    //                assert(invar != inv);
-    //                inv->addChange(invar->getVariableID(), change);
-    //            }
-    //        }
-    //        invar->updateValue();
-    //        if (invar->getVariableID() != -1) {
-    //            Variable* iv = model->getVariable(invar->getVariableID());
-    //            assert(iv->getOneway() == invar);
-    //            if (invar->getCurrentValue() < iv->getLowerBound()) {
-    //                std::cout << "FML!!!!!!!!!!!" << std::endl;
-    //
-    //                exit(1);
-    //
-    //            }
-    //            assert(invar->getCurrentValue() >= iv->getLowerBound());
-    //            iv->setCurrentValue(invar->getCurrentValue());
-    //            //            assert(solution.at(iv->getID())== iv->getCurrentValue());
-    //            //            if(solution.at(iv->getID())!= iv->getCurrentValue()){
-    //            //                std::cout << solution.at(iv->getID()) << " vs " << iv->getCurrentValue() << " type " << invar->getType() << std::endl;
-    //            //            }
-    //            st->getSolution().at(iv->getID()) = iv->getCurrentValue();
-    //
-    //        }
-    //        //        model->getInvariants()->at(i)->calculateDeltaValue();
-    //        //        model->getInvariants()->at(i)->updateValue();
-    //    }
-    //
-    //    std::cout << std::endl;
-    //    // Setting constraints
-    //    int violations = 0;
-    //    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-    //        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prio = model->getConstraintsWithPriority(i);
-    //        //        for (unsigned j = 0; j < prio->size(); j++) {
-    //
-    //        for (std::shared_ptr<Constraint> cons : *prio) {
-    //            if (!cons->isOneway()) {
-    //                cons->updateViolation();
-    //                violations += cons->getViolation();
-    //                //                int violation = cons->updateViolation();
-    //                //                if(violation != 0){
-    //                //                    std::cout << "Violation " << violation << std::endl;
-    //                //                }
-    //                //                cons->testCons();
-    //                //                if (violation == 1) {
-    //                //                    std::cout << "invar id " << cons->getInvariant()->getID() << " value " << cons->getInvariant()->getCurrentValue() << " rhs " << cons->getArgument(1) << std::endl;
-    //                //                    violations += violation;
-    //                //                }
-    //            }
-    //        }
-    //    }
-    //    st->getEvaluation().at(1) = violations;
-    //    if (violations != 0) {
-    //        std::cout << "Final solution not feasible? violations: " << violations << std::endl;
-    //        sleep(2);
-    //    }
-    //    // setting objective value
-    //    int value = 0;
-    //    for (invariant invar : model->getObjectiveInvariant()) {
-    //        value += invar->getCurrentValue();
-    //
-    //    }
-    //    std::cout << std::endl;
-    //    //    for (unsigned i = 0; i < getConstraintsWithPriority(0)->size(); i++) {
-    //    //    for (std::shared_ptr<Constraint> obj : *model->getConstraints().at(0)) {
-    //    //        value += obj->updateViolationDegree();
-    //    //        //        violations += getConstraintsWithPriority(0)->at(i)->updateViolationDegree();
-    //    //    }
-    //    std::cout << "Final solution " << value << " (" << violations << ")" << std::endl;
-    //    st->getEvaluation().at(0) = value;
 
 }
 
-//    FlipMove mv = FlipMove(st->getIntegerVariables()->at(0));
-//    Move bestMove = mv;
-//    std::pair<int, int> delta = calculateDeltaValueOfMove(mv);
-//    int violationChange = delta.first;
-//    int objectiveChange = delta.second;
-//bool LSSpace::bestImprovement() {
-//    int violationChange = 0;
-//    int objectiveChange = 0;
-//    int bestVariable = -1;
-//    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
-//        IntegerVariable* variable = st->getIntegerVariables()->at(i);
-//        std::pair<int, int> delta = calculateDeltaValueOfVariableChange(i, 1 - variable->getCurrentValue());
-//        if (delta.first <= violationChange) {
-//            if (delta.second <= objectiveChange) {
-//                violationChange = delta.first;
-//                objectiveChange = delta.second;
-//                bestVariable = variable->getID();
-//            }
-//        }
-//    }
-//    if (bestVariable != -1 && objectiveChange !=0) {
-//        commitDeltaOfVariable(bestVariable);
-//    } else {
-//        std::cout << "no improving move" << std::endl;
-//        return false;
-////        sleep(1);
-//
-//    }
-//    std::cout << "changed variable " << bestVariable << std::endl;
-//    std::cout << "violation change " << violationChange << " objective change " << objectiveChange << std::endl;
-//
-//    return true;
-//}
-
-//void LSSpace::commitDeltaOfVariable(int changedVariable) {
-//    IntegerVariable* var = st->getIntegerVariables()->at(changedVariable);
-//    vector<int>* update = var->getUpdateVector();
-//    for (unsigned i = 0; i < update->size(); i++) {
-//        Invariant* invar = st->getInvariants()->at(update->at(i));
-//        invar->updateValue();
-//        if (invar->getUsedInConstraint() != -1) {
-//            st->getConstraints()->at(invar->getUsedInConstraint())->updateViolation();
-//        }
-//
-//        if (invar->getUsedInObjective() != -1) {
-//            st->getObjectives()->at(invar->getUsedInObjective())->updateViolationDegree();
-//        }
-//    }
-//    var->setCurrentValue(1 - var->getCurrentValue());
-//
-//}
-
-//std::pair<int, int> LSSpace::calculateDeltaValueOfVariableChange(int variableNumber, int newValue) {
-//
-//    IntegerVariable* variable = st->getIntegerVariables()->at(variableNumber);
-//    int oldValue = variable->getCurrentValue();
-//    vector<int>* updateVector = variable->getUpdateVector();
-//    int violationChange = 0;
-//    int objectiveChange = 0;
-//    //    std::cout << "Variable " << variableNumber << std::endl;
-//    for (unsigned i = 0; i < updateVector->size(); i++) {
-//        Invariant* invar = st->getInvariants()->at(updateVector->at(i));
-//        invar->addChange(variableNumber, newValue - oldValue);
-//        invar->calculateDeltaValue();
-//        if (invar->getUsedInConstraint() != -1) {
-//            //            std::cout << "Used in Constraint " << std::endl;
-//            violationChange += st->getConstraints()->at(invar->getUsedInConstraint())->setDeltaViolation();
-//        }
-//        if (invar->getUsedInObjective() != -1) {
-//            //            std::cout << "Used in objective " << std::endl;
-//            objectiveChange += st->getObjectives()->at(invar->getUsedInObjective())->setDeltaViolationDegree();
-//        }
-//    }
-//    //    std::cout << std::endl;
-//    std::pair<int, int> change(violationChange, objectiveChange);
-//    return change;
-//    //    return std::pair<int,int> change = new pair<int,int>(violationChange,objectiveChange);
-//    //        variable->setCurrentValue(newValue);
-//}
-
-//void LSSpace::initializeInvariants(shared_ptr<Model> st) {
-//    st->initializeInvariants();
-//}
-//
-//void LSSpace::initializeConstraints(shared_ptr<Model> st) {
-//    st->initializeConstraints();
-//}
-//
-//void LSSpace::initializeObjective(shared_ptr<Model> st) {
-//    initialValue = st->initializeObjective();
-//}
-//int LSSpace::getObjectiveValue(){
-//    return st->getObjectiveValue();
-//}
-
-//void LSSpace::printCurrent() {
-//
-//    if (st->getIntegerVariables()->size() > 0) {
-//        std::cout << "Integer Variables:" << std::endl;
-//    }
-//
-//    for (unsigned i = 0; i < st->getIntegerVariables()->size(); i++) {
-//        std::cout << st->getIntegerVariables()->at(i)->getCurrentValue() << " ";
-//        //        std::cout << IntVarVector[i].VariablePointer << " ";
-//
-//    }
-//    std::cout << std::endl;
-//    if (BoolVarVector.size() > 0) {
-//        std::cout << "Boolean Variables:" << std::endl;
-//    }
-//    for (unsigned i = 0; i < BoolVarVector.size(); i++) {
-////        std::cout << BoolVarVector[i].getCurrentVal() << " ";
-//    }
-//    std::cout << std::endl;
-//
-//
-//}
-
-//LSSpace::~LSSpace() {
-//}
-//template<typename MatrixType> struct matrix_traits
-//{
-//  typedef typename MatrixType::index_type index_type;
-//  typedef typename MatrixType::value_typ value_type;
-//  static index_type min_row(MatrixType const& A)
-//  { return A.min_row(); }
-//  static index_type max_row(MatrixType const& A)
-//  { return A.max_row(); }
-//  static index_type min_column(MatrixType const& A)
-//  { return A.min_column(); }
-//  static index_type max_column(MatrixType const& A)
-//  { return A.max_column(); }
-//  static value_type& element(MatrixType& A, index_type i, index_type k)
-//  { return A(i,k); }
-//  static value_type element(MatrixType const& A, index_type i, index_type k)
-//  { return A(i,k); }
-//};
-// 
-//// specialization of the matrix traits for built-in two-dimensional
-//// arrays
-//template<typename T, std::size_t rows, std::size_t columns>
-// struct matrix_traits<T[rows][columns]>
-//{
-//  typedef std::size_t index_type;
-//  typedef T value_type;
-//  static index_type min_row(T const (&)[rows][columns])
-//  { return 0; }
-//  static index_type max_row(T const (&)[rows][columns])
-//  { return rows-1; }
-//  static index_type min_column(T const (&)[rows][columns])
-//  { return 0; }
-//  static index_type max_column(T const (&)[rows][columns])
-//  { return columns-1; }
-//  static value_type& element(T (&A)[rows][columns],
-//                             index_type i, index_type k)
-//  { return A[i][k]; }
-//  static value_type element(T const (&A)[rows][columns],
-//                            index_type i, index_type k)
-//  { return A[i][k]; }
-//};
-// 
-//// Swap rows i and k of a matrix A
-//// Note that due to the reference, both dimensions are preserved for
-//// built-in arrays
-//template<typename MatrixType>
-// void swap_rows(MatrixType& A,
-//                 typename matrix_traits<MatrixType>::index_type i,
-//                 typename matrix_traits<MatrixType>::index_type k)
-//{
-//  matrix_traits<MatrixType> mt;
-//  typedef typename matrix_traits<MatrixType>::index_type index_type;
-// 
-//  // check indices
-//  assert(mt.min_row(A) <= i);
-//  assert(i <= mt.max_row(A));
-// 
-//  assert(mt.min_row(A) <= k);
-//  assert(k <= mt.max_row(A));
-// 
-//  for (index_type col = mt.min_column(A); col <= mt.max_column(A); ++col)
-//    std::swap(mt.element(A, i, col), mt.element(A, k, col));
-//}
-// 
-//// divide row i of matrix A by v
-//template<typename MatrixType>
-// void divide_row(MatrixType& A,
-//                  typename matrix_traits<MatrixType>::index_type i,
-//                  typename matrix_traits<MatrixType>::value_type v)
-//{
-//  matrix_traits<MatrixType> mt;
-//  typedef typename matrix_traits<MatrixType>::index_type index_type;
-// 
-//  assert(mt.min_row(A) <= i);
-//  assert(i <= mt.max_row(A));
-// 
-//  assert(v != 0);
-// 
-//  for (index_type col = mt.min_column(A); col <= mt.max_column(A); ++col)
-//    mt.element(A, i, col) /= v;
-//}
-// 
-//// in matrix A, add v times row k to row i
-//template<typename MatrixType>
-// void add_multiple_row(MatrixType& A,
-//                  typename matrix_traits<MatrixType>::index_type i,
-//                  typename matrix_traits<MatrixType>::index_type k,
-//                  typename matrix_traits<MatrixType>::value_type v)
-//{
-//  matrix_traits<MatrixType> mt;
-//  typedef typename matrix_traits<MatrixType>::index_type index_type;
-// 
-//  assert(mt.min_row(A) <= i);
-//  assert(i <= mt.max_row(A));
-// 
-//  assert(mt.min_row(A) <= k);
-//  assert(k <= mt.max_row(A));
-// 
-//  for (index_type col = mt.min_column(A); col <= mt.max_column(A); ++col)
-//    mt.element(A, i, col) += v * mt.element(A, k, col);
-//}
-// 
-//// convert A to reduced row echelon form
-//template<typename MatrixType>
-// void to_reduced_row_echelon_form(MatrixType& A)
-//{
-//  matrix_traits<MatrixType> mt;
-//  typedef typename matrix_traits<MatrixType>::index_type index_type;
-// 
-//  index_type lead = mt.min_row(A);
-// 
-//  for (index_type row = mt.min_row(A); row <= mt.max_row(A); ++row)
-//  {
-//    if (lead > mt.max_column(A))
-//      return;
-//    index_type i = row;
-//    while (mt.element(A, i, lead) == 0)
-//    {
-//      ++i;
-//      if (i > mt.max_row(A))
-//      {
-//        i = row;
-//        ++lead;
-//        if (lead > mt.max_column(A))
-//          return;
-//      }
-//    }
-//    swap_rows(A, i, row);
-//    divide_row(A, row, mt.element(A, row, lead));
-//    for (i = mt.min_row(A); i <= mt.max_row(A); ++i)
-//    {
-//      if (i != row)
-//        add_multiple_row(A, i, row, -mt.element(A, i, lead));
-//    }
-//  }
-//}
-
-//// test code
-//#include <iostream>
-// 
-//int main()
-//{
-//  double M[3][4] = { {  1, 2, -1,  -4 },
-//                     {  2, 3, -1, -11 },
-//                     { -2, 0, -3,  22 } };
-// 
-//  to_reduced_row_echelon_form(M);
-//  for (int i = 0; i < 3; ++i)
-//  {
-//    for (int j = 0; j < 4; ++j)
-//      std::cout << M[i][j] << '\t';
-//    std::cout << "\n";
-//  }
-// 
-//  return EXIT_SUCCESS;
-//}

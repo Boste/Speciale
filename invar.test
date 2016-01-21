@@ -1,0 +1,3048 @@
+Coin0001I At line 1 NAME           air04
+Coin0001I At line 2 ROWS
+Coin0001I At line 827 COLUMNS
+Coin0001I At line 44724 RHS
+Coin0001I At line 45137 BOUNDS
+Coin0001I At line 54042 ENDATA
+Coin0002I Problem air04 has 823 rows, 8904 columns and 72965 elements
+G: 0   E: 823    L: 0
+Instance read after 0.050335 seconds
+Peak memory usage for reading instance 5.91406 mb
+## cons 823
+## vars 8904
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 5206 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 5205
+	propagators: 199
+	depth: 5203
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.171328 seconds
+## fail 2
+Posting 411 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 6181 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 6180
+	propagators: 111
+	depth: 6178
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.202725 seconds
+## fail 2
+Number of constriants 206
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8555 times
+Gecode found solution after 0.263211
+	fail: 0
+	nodes: 8555
+	propagators: 206
+	depth: 8554
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.644715
+totally fixed 0
+number of invariants 206 out of 206 (206) 
+number of cycles 10
+number of cycles 0
+##oneway 196
+number of cycles 0
+Total time used so far 0.743353
+Create propagator queues
+Total time used so far 0.843057
+EvalVariables size 8708
+Not feasible 
+## initLSModel 0.129132
+This should be initial value 104582
+air04 25 0.716589 
+Peak memory usage for Gecode 25.7969 mb
+##GecodeSol air04 25.796875 
+LS solver initialized after 0.845926 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 8708
+counter 0 variables 8904
+Number of variables used in local search 8708
+## LSLimitLeft 3.7804
+# test 2
+Number of randomMoves 10
+# value: 105170 703  # iter 1 # used 0.000998 # method FI FN
+# value: 104470 699  # iter 2 # used 0.002365 # method FI FN
+# value: 104930 697  # iter 3 # used 0.00351 # method FI FN
+# value: 104287 693  # iter 4 # used 0.006231 # method FI FN
+# value: 104085 689  # iter 5 # used 0.009125 # method FI FN
+# value: 103643 685  # iter 6 # used 0.01327 # method FI FN
+# value: 103471 682  # iter 7 # used 0.017732 # method FI FN
+# value: 103424 680  # iter 8 # used 0.021526 # method FI FN
+# value: 103226 676  # iter 9 # used 0.026982 # method FI FN
+# value: 102876 676  # iter 10 # used 0.032784 # method FI FN
+# value: 102759 676  # iter 11 # used 0.038469 # method FI FN
+# value: 102808 672  # iter 12 # used 0.039352 # method FI FN
+# value: 102505 668  # iter 13 # used 0.04641 # method FI FN
+# value: 102423 666  # iter 14 # used 0.054227 # method FI FN
+# value: 102918 662  # iter 15 # used 0.063193 # method FI FN
+# value: 101796 660  # iter 16 # used 0.07315 # method FI FN
+# value: 101683 658  # iter 17 # used 0.08485 # method FI FN
+# value: 102204 656  # iter 18 # used 0.086652 # method FI FN
+# value: 101702 647  # iter 19 # used 0.098703 # method FI FN
+# value: 101847 645  # iter 20 # used 0.109461 # method FI FN
+# value: 103056 641  # iter 21 # used 0.12273 # method FI FN
+# value: 102593 641  # iter 22 # used 0.135963 # method FI FN
+# value: 102661 635  # iter 23 # used 0.137199 # method FI FN
+# value: 102561 635  # iter 24 # used 0.15096 # method FI FN
+# value: 102491 628  # iter 25 # used 0.157534 # method FI FN
+# value: 103090 626  # iter 26 # used 0.171737 # method FI FN
+# value: 102962 626  # iter 27 # used 0.186208 # method FI FN
+# value: 103381 624  # iter 28 # used 0.192653 # method FI FN
+# value: 103297 624  # iter 29 # used 0.207064 # method FI FN
+# value: 103054 621  # iter 30 # used 0.221691 # method FI FN
+# value: 103115 620  # iter 31 # used 0.227833 # method FI FN
+# value: 102652 616  # iter 32 # used 0.243015 # method FI FN
+# value: 102115 616  # iter 33 # used 0.255363 # method FI FN
+# value: 101947 614  # iter 34 # used 0.255895 # method FI FN
+# value: 101751 613  # iter 35 # used 0.260588 # method FI FN
+# value: 101152 611  # iter 36 # used 0.274632 # method FI FN
+# value: 100323 610  # iter 37 # used 0.290459 # method FI FN
+# value: 99863 608  # iter 38 # used 0.291773 # method FI FN
+# value: 100361 606  # iter 39 # used 0.293224 # method FI FN
+# value: 100661 600  # iter 40 # used 0.295422 # method FI FN
+# value: 100339 598  # iter 41 # used 0.311642 # method FI FN
+# value: 100562 596  # iter 42 # used 0.312767 # method FI FN
+# value: 100536 592  # iter 43 # used 0.328607 # method FI FN
+# value: 100336 588  # iter 44 # used 0.344215 # method FI FN
+# value: 100226 588  # iter 45 # used 0.344682 # method FI FN
+# value: 100434 587  # iter 46 # used 0.347659 # method FI FN
+# value: 100470 585  # iter 47 # used 0.352656 # method FI FN
+# value: 100820 584  # iter 48 # used 0.368416 # method FI FN
+# value: 100309 582  # iter 49 # used 0.372616 # method FI FN
+# value: 100083 580  # iter 50 # used 0.388778 # method FI FN
+# value: 99517 577  # iter 51 # used 0.389478 # method FI FN
+# value: 99246 577  # iter 52 # used 0.406942 # method FI FN
+# value: 99236 575  # iter 53 # used 0.408023 # method FI FN
+# value: 99423 571  # iter 54 # used 0.426139 # method FI FN
+# value: 99157 571  # iter 55 # used 0.43526 # method FI FN
+# value: 99539 569  # iter 56 # used 0.45468 # method FI FN
+# value: 99222 567  # iter 57 # used 0.457911 # method FI FN
+# value: 99582 565  # iter 58 # used 0.477666 # method FI FN
+# value: 99639 563  # iter 59 # used 0.4982 # method FI FN
+# value: 101091 561  # iter 60 # used 0.518967 # method FI FN
+# value: 101267 559  # iter 61 # used 0.539734 # method FI FN
+# value: 101462 558  # iter 62 # used 0.545157 # method FI FN
+# value: 101141 553  # iter 63 # used 0.567104 # method FI FN
+# value: 101129 553  # iter 64 # used 0.593615 # method FI FN
+# value: 101226 549  # iter 65 # used 0.62211 # method FI FN
+# value: 100944 548  # iter 66 # used 0.627568 # method FI FN
+# value: 99735 546  # iter 67 # used 0.641486 # method FI FN
+# value: 99729 546  # iter 133 # used 1.00577 # method FI FN
+# value: 99245 545  # iter 152 # used 1.15787 # method FI FN
+# value: 99007 545  # iter 170 # used 1.26673 # method FI FN
+# value: 98957 545  # iter 189 # used 1.33748 # method FI FN
+# value: 98834 545  # iter 190 # used 1.35292 # method FI FN
+# value: 99969 543  # iter 191 # used 1.38146 # method FI FN
+# value: 99770 543  # iter 351 # used 2.37394 # method FI FN
+# value: 99420 539  # iter 403 # used 2.66313 # method FI FN
+# value: 99193 539  # iter 404 # used 2.68403 # method FI FN
+# value: 99307 535  # iter 405 # used 2.68482 # method FI FN
+# value: 99369 530  # iter 440 # used 2.87655 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar air04 196 612 99369 530 
+## LSTimeUsed 3.79514
+## quality 99369 530 
+## violations 304
+## iterations 612
+##table1 air04 8904 823 NA NA 612 99369 530 304 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.050335
+## postingModel 0.021527
+## TotalTime 5.01495
+## GecodeTime 20
+## seed 60
+## peakMemory 25.7969
+## name air04
+Coin0001I At line 1 NAME           neos-1337307
+Coin0001I At line 2 ROWS
+Coin0001I At line 5691 COLUMNS
+Coin0001I At line 22931 RHS
+Coin0001I At line 23923 BOUNDS
+Coin0001I At line 26764 ENDATA
+Coin0002I Problem neos-1337307 has 5687 rows, 2840 columns and 30799 elements
+G: 3664   E: 126    L: 1897
+Instance read after 0.020934 seconds
+Peak memory usage for reading instance 4.00781 mb
+## cons 5687
+## vars 2840
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 584 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 583
+	propagators: 24237
+	depth: 581
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.01189 seconds
+## fail 2
+Posting 2843 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1313 times
+Gecode found solution after 0.014801
+	fail: 0
+	nodes: 1313
+	propagators: 11991
+	depth: 1312
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.030356
+totally fixed 0
+number of invariants 126 out of 126 (126) 
+number of cycles 0
+##oneway 126
+number of cycles 0
+Total time used so far 0.078859
+Create propagator queues
+Total time used so far 0.090829
+EvalVariables size 1843
+Not feasible 
+## initLSModel 0.030367
+This should be initial value -4204
+neos-1337307 50 0.061782 
+Peak memory usage for Gecode 13.543 mb
+##GecodeSol neos-1337307 13.542969 
+LS solver initialized after 0.092443 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 1843
+counter 0 variables 2840
+Number of variables used in local search 2714
+## LSLimitLeft 4.85657
+# test 2
+Number of randomMoves 10
+# value: -7063 194341  # iter 1 # used 3.8e-05 # method FI FN
+# value: -9013 192393  # iter 2 # used 6.2e-05 # method FI FN
+# value: -9204 192204  # iter 3 # used 9.2e-05 # method FI FN
+# value: -9240 192170  # iter 4 # used 0.000116 # method FI FN
+# value: -9253 192159  # iter 5 # used 0.000141 # method FI FN
+# value: -12782 188631  # iter 6 # used 0.000176 # method FI FN
+# value: -12782 188608  # iter 7 # used 0.000233 # method FI FN
+# value: -17272 184120  # iter 8 # used 0.000267 # method FI FN
+# value: -17425 183968  # iter 9 # used 0.000303 # method FI FN
+# value: -17529 183866  # iter 10 # used 0.000337 # method FI FN
+# value: -17823 183574  # iter 11 # used 0.000387 # method FI FN
+# value: -18429 182970  # iter 12 # used 0.000429 # method FI FN
+# value: -18584 182817  # iter 13 # used 0.00047 # method FI FN
+# value: -19906 181497  # iter 14 # used 0.000512 # method FI FN
+# value: -28002 173402  # iter 15 # used 0.000554 # method FI FN
+# value: -28015 173391  # iter 16 # used 0.000596 # method FI FN
+# value: -29654 171754  # iter 17 # used 0.00064 # method FI FN
+# value: -29707 171703  # iter 18 # used 0.000689 # method FI FN
+# value: -32238 169174  # iter 19 # used 0.000741 # method FI FN
+# value: -32532 168882  # iter 20 # used 0.000798 # method FI FN
+# value: -33370 168046  # iter 21 # used 0.000851 # method FI FN
+# value: -33418 168000  # iter 22 # used 0.000905 # method FI FN
+# value: -33447 167973  # iter 23 # used 0.000958 # method FI FN
+# value: -33688 167733  # iter 24 # used 0.001026 # method FI FN
+# value: -33736 167687  # iter 25 # used 0.001093 # method FI FN
+# value: -34021 167404  # iter 26 # used 0.001165 # method FI FN
+# value: -34144 167283  # iter 27 # used 0.001232 # method FI FN
+# value: -49869 151560  # iter 28 # used 0.001309 # method FI FN
+# value: -51220 150211  # iter 29 # used 0.00138 # method FI FN
+# value: -51242 150191  # iter 30 # used 0.001474 # method FI FN
+# value: -52320 149115  # iter 31 # used 0.001553 # method FI FN
+# value: -52796 148641  # iter 32 # used 0.001641 # method FI FN
+# value: -53457 147981  # iter 33 # used 0.001725 # method FI FN
+# value: -53471 147969  # iter 34 # used 0.001808 # method FI FN
+# value: -53513 147929  # iter 35 # used 0.001934 # method FI FN
+# value: -53566 147878  # iter 36 # used 0.002031 # method FI FN
+# value: -54572 146874  # iter 37 # used 0.002128 # method FI FN
+# value: -54865 146583  # iter 38 # used 0.002232 # method FI FN
+# value: -54865 146573  # iter 39 # used 0.002353 # method FI FN
+# value: -54907 146533  # iter 40 # used 0.002453 # method FI FN
+# value: -54920 146522  # iter 41 # used 0.002554 # method FI FN
+# value: -54983 146461  # iter 42 # used 0.00266 # method FI FN
+# value: -55009 146436  # iter 43 # used 0.002763 # method FI FN
+# value: -55136 146310  # iter 44 # used 0.002886 # method FI FN
+# value: -55190 146257  # iter 45 # used 0.002992 # method FI FN
+# value: -57108 144341  # iter 46 # used 0.003096 # method FI FN
+# value: -57270 144181  # iter 47 # used 0.003202 # method FI FN
+# value: -57281 144171  # iter 48 # used 0.003307 # method FI FN
+# value: -58228 143225  # iter 49 # used 0.003434 # method FI FN
+# value: -59017 142437  # iter 50 # used 0.003557 # method FI FN
+# value: -59030 142425  # iter 51 # used 0.003685 # method FI FN
+# value: -59043 142413  # iter 52 # used 0.003803 # method FI FN
+# value: -59196 142262  # iter 53 # used 0.003921 # method FI FN
+# value: -59300 142160  # iter 54 # used 0.00405 # method FI FN
+# value: -60651 140811  # iter 55 # used 0.004176 # method FI FN
+# value: -60685 140777  # iter 56 # used 0.004353 # method FI FN
+# value: -63547 137917  # iter 57 # used 0.00449 # method FI FN
+# value: -63629 137837  # iter 58 # used 0.004623 # method FI FN
+# value: -63653 137815  # iter 59 # used 0.004763 # method FI FN
+# value: -63653 137800  # iter 60 # used 0.004915 # method FI FN
+# value: -63687 137767  # iter 61 # used 0.005057 # method FI FN
+# value: -63915 137541  # iter 62 # used 0.005201 # method FI FN
+# value: -65154 136303  # iter 63 # used 0.005343 # method FI FN
+# value: -65167 136292  # iter 64 # used 0.005484 # method FI FN
+# value: -65333 136127  # iter 65 # used 0.005624 # method FI FN
+# value: -65456 136006  # iter 66 # used 0.005767 # method FI FN
+# value: -65467 135997  # iter 67 # used 0.005941 # method FI FN
+# value: -65480 135986  # iter 68 # used 0.006098 # method FI FN
+# value: -65597 135870  # iter 69 # used 0.006249 # method FI FN
+# value: -68147 133321  # iter 70 # used 0.00643 # method FI FN
+# value: -68189 133280  # iter 71 # used 0.0066 # method FI FN
+# value: -68219 133251  # iter 72 # used 0.006768 # method FI FN
+# value: -68240 133232  # iter 73 # used 0.006982 # method FI FN
+# value: -69187 132286  # iter 74 # used 0.007173 # method FI FN
+# value: -69331 132144  # iter 75 # used 0.007361 # method FI FN
+# value: -69331 132143  # iter 76 # used 0.007572 # method FI FN
+# value: -69999 131477  # iter 77 # used 0.007778 # method FI FN
+# value: -71005 130473  # iter 78 # used 0.007973 # method FI FN
+# value: -71130 130349  # iter 79 # used 0.008168 # method FI FN
+# value: -71309 130172  # iter 80 # used 0.008371 # method FI FN
+# value: -71335 130148  # iter 81 # used 0.00861 # method FI FN
+# value: -73648 127837  # iter 82 # used 0.0089 # method FI FN
+# value: -74171 127316  # iter 83 # used 0.009121 # method FI FN
+# value: -74324 127165  # iter 84 # used 0.009326 # method FI FN
+# value: -75876 125615  # iter 85 # used 0.009508 # method FI FN
+# value: -76011 125482  # iter 86 # used 0.009709 # method FI FN
+# value: -76024 125471  # iter 87 # used 0.009917 # method FI FN
+# value: -76072 125425  # iter 88 # used 0.01013 # method FI FN
+# value: -78743 122755  # iter 89 # used 0.010353 # method FI FN
+# value: -79404 122096  # iter 90 # used 0.010543 # method FI FN
+# value: -79452 122047  # iter 91 # used 0.010749 # method FI FN
+# value: -79509 121991  # iter 92 # used 0.01094 # method FI FN
+# value: -79509 121983  # iter 93 # used 0.011145 # method FI FN
+# value: -79509 121981  # iter 94 # used 0.011321 # method FI FN
+# value: -79546 121946  # iter 95 # used 0.011514 # method FI FN
+# value: -82466 119028  # iter 96 # used 0.011707 # method FI FN
+# value: -84561 116935  # iter 97 # used 0.011903 # method FI FN
+# value: -84587 116911  # iter 98 # used 0.012105 # method FI FN
+# value: -84881 116619  # iter 99 # used 0.012304 # method FI FN
+# value: -85102 116399  # iter 100 # used 0.012504 # method FI FN
+# value: -85102 116368  # iter 101 # used 0.012742 # method FI FN
+# value: -85576 115896  # iter 102 # used 0.012973 # method FI FN
+# value: -88351 113122  # iter 103 # used 0.0132 # method FI FN
+# value: -88474 113000  # iter 104 # used 0.013423 # method FI FN
+# value: -89662 111814  # iter 105 # used 0.013653 # method FI FN
+# value: -89710 111768  # iter 106 # used 0.013881 # method FI FN
+# value: -89775 111705  # iter 107 # used 0.014109 # method FI FN
+# value: -90068 111414  # iter 108 # used 0.014349 # method FI FN
+# value: -90130 111354  # iter 109 # used 0.014579 # method FI FN
+# value: -90293 111193  # iter 110 # used 0.014865 # method FI FN
+# value: -90587 110901  # iter 111 # used 0.015117 # method FI FN
+# value: -90650 110840  # iter 112 # used 0.015373 # method FI FN
+# value: -90663 110829  # iter 113 # used 0.015637 # method FI FN
+# value: -90916 110578  # iter 114 # used 0.015902 # method FI FN
+# value: -93778 107718  # iter 115 # used 0.016164 # method FI FN
+# value: -94116 107382  # iter 116 # used 0.016427 # method FI FN
+# value: -94298 107202  # iter 117 # used 0.016691 # method FI FN
+# value: -96944 104558  # iter 118 # used 0.016979 # method FI FN
+# value: -97110 104394  # iter 119 # used 0.017332 # method FI FN
+# value: -97254 104252  # iter 120 # used 0.017607 # method FI FN
+# value: -97267 104241  # iter 121 # used 0.017898 # method FI FN
+# value: -99185 102324  # iter 122 # used 0.018186 # method FI FN
+# value: -99242 102269  # iter 123 # used 0.018509 # method FI FN
+# value: -99440 102073  # iter 124 # used 0.018792 # method FI FN
+# value: -99461 102054  # iter 125 # used 0.019082 # method FI FN
+# value: -99474 102043  # iter 126 # used 0.019365 # method FI FN
+# value: -99546 101973  # iter 127 # used 0.019669 # method FI FN
+# value: -99563 101957  # iter 128 # used 0.019972 # method FI FN
+# value: -99680 101842  # iter 129 # used 0.020278 # method FI FN
+# value: -99921 101603  # iter 130 # used 0.020617 # method FI FN
+# value: -99921 101600  # iter 131 # used 0.020979 # method FI FN
+# value: -100168 101354  # iter 132 # used 0.021293 # method FI FN
+# value: -100314 101210  # iter 133 # used 0.021614 # method FI FN
+# value: -100431 101095  # iter 134 # used 0.021947 # method FI FN
+# value: -101099 100428  # iter 135 # used 0.022271 # method FI FN
+# value: -101662 99867  # iter 136 # used 0.0226 # method FI FN
+# value: -109494 92037  # iter 137 # used 0.022927 # method FI FN
+# value: -109501 92032  # iter 138 # used 0.023257 # method FI FN
+# value: -112360 89175  # iter 139 # used 0.023637 # method FI FN
+# value: -112776 88761  # iter 140 # used 0.023988 # method FI FN
+# value: -112974 88565  # iter 141 # used 0.024329 # method FI FN
+# value: -112987 88554  # iter 142 # used 0.02467 # method FI FN
+# value: -113122 88421  # iter 143 # used 0.02502 # method FI FN
+# value: -113149 88395  # iter 144 # used 0.025373 # method FI FN
+# value: -113284 88261  # iter 145 # used 0.025723 # method FI FN
+# value: -113297 88250  # iter 146 # used 0.026082 # method FI FN
+# value: -113451 88098  # iter 147 # used 0.026451 # method FI FN
+# value: -113649 87899  # iter 148 # used 0.026816 # method FI FN
+# value: -113662 87888  # iter 149 # used 0.027184 # method FI FN
+# value: -113947 87605  # iter 150 # used 0.027573 # method FI FN
+# value: -114155 87398  # iter 151 # used 0.027941 # method FI FN
+# value: -114180 87375  # iter 152 # used 0.028317 # method FI FN
+# value: -114214 87343  # iter 153 # used 0.028689 # method FI FN
+# value: -114611 86948  # iter 154 # used 0.029062 # method FI FN
+# value: -114611 86944  # iter 155 # used 0.029484 # method FI FN
+# value: -115085 86472  # iter 156 # used 0.029904 # method FI FN
+# value: -115691 85868  # iter 157 # used 0.030314 # method FI FN
+# value: -116879 84679  # iter 158 # used 0.030724 # method FI FN
+# value: -116936 84624  # iter 159 # used 0.031177 # method FI FN
+# value: -116950 84612  # iter 160 # used 0.031634 # method FI FN
+# value: -117112 84452  # iter 161 # used 0.032049 # method FI FN
+# value: -117169 84397  # iter 162 # used 0.03247 # method FI FN
+# value: -117224 84344  # iter 163 # used 0.032884 # method FI FN
+# value: -119999 81571  # iter 164 # used 0.033297 # method FI FN
+# value: -120013 81559  # iter 165 # used 0.033724 # method FI FN
+# value: -120786 80788  # iter 166 # used 0.034149 # method FI FN
+# value: -122821 78754  # iter 167 # used 0.034573 # method FI FN
+# value: -123571 78006  # iter 168 # used 0.035003 # method FI FN
+# value: -123818 77761  # iter 169 # used 0.035425 # method FI FN
+# value: -123953 77628  # iter 170 # used 0.035863 # method FI FN
+# value: -123966 77617  # iter 171 # used 0.03631 # method FI FN
+# value: -123973 77612  # iter 172 # used 0.036744 # method FI FN
+# value: -124769 76818  # iter 173 # used 0.03718 # method FI FN
+# value: -124925 76663  # iter 174 # used 0.037619 # method FI FN
+# value: -124973 76617  # iter 175 # used 0.038085 # method FI FN
+# value: -125266 76325  # iter 176 # used 0.038596 # method FI FN
+# value: -125321 76272  # iter 177 # used 0.039086 # method FI FN
+# value: -125334 76261  # iter 178 # used 0.039546 # method FI FN
+# value: -125391 76206  # iter 179 # used 0.039996 # method FI FN
+# value: -126059 75540  # iter 180 # used 0.040446 # method FI FN
+# value: -126259 75342  # iter 181 # used 0.040911 # method FI FN
+# value: -126340 75263  # iter 182 # used 0.041404 # method FI FN
+# value: -126463 75141  # iter 183 # used 0.041962 # method FI FN
+# value: -126470 75136  # iter 184 # used 0.042468 # method FI FN
+# value: -126723 74884  # iter 185 # used 0.042951 # method FI FN
+# value: -126750 74859  # iter 186 # used 0.043425 # method FI FN
+# value: -127237 74374  # iter 187 # used 0.04391 # method FI FN
+# value: -127598 74015  # iter 188 # used 0.04442 # method FI FN
+# value: -128204 73411  # iter 189 # used 0.044904 # method FI FN
+# value: -128248 73368  # iter 190 # used 0.045433 # method FI FN
+# value: -131110 70507  # iter 191 # used 0.045975 # method FI FN
+# value: -132432 69187  # iter 192 # used 0.046491 # method FI FN
+# value: -132432 69185  # iter 193 # used 0.047011 # method FI FN
+# value: -136817 64802  # iter 194 # used 0.047532 # method FI FN
+# value: -136843 64778  # iter 195 # used 0.048051 # method FI FN
+# value: -138395 63228  # iter 196 # used 0.048571 # method FI FN
+# value: -140926 60699  # iter 197 # used 0.049089 # method FI FN
+# value: -140933 60694  # iter 198 # used 0.04961 # method FI FN
+# value: -141040 60589  # iter 199 # used 0.050144 # method FI FN
+# value: -141285 60346  # iter 200 # used 0.050671 # method FI FN
+# value: -141378 60255  # iter 201 # used 0.0512 # method FI FN
+# value: -141728 59907  # iter 202 # used 0.051773 # method FI FN
+# value: -142027 59610  # iter 203 # used 0.052389 # method FI FN
+# value: -143386 58253  # iter 204 # used 0.052955 # method FI FN
+# value: -143453 58188  # iter 205 # used 0.053499 # method FI FN
+# value: -143557 58086  # iter 206 # used 0.054051 # method FI FN
+# value: -143557 58083  # iter 207 # used 0.054653 # method FI FN
+# value: -143670 57972  # iter 208 # used 0.05526 # method FI FN
+# value: -143907 57737  # iter 209 # used 0.055829 # method FI FN
+# value: -144703 56940  # iter 210 # used 0.056395 # method FI FN
+# value: -144903 56742  # iter 211 # used 0.056953 # method FI FN
+# value: -144960 56687  # iter 212 # used 0.05751 # method FI FN
+# value: -149450 52199  # iter 213 # used 0.058093 # method FI FN
+# value: -149463 52188  # iter 214 # used 0.058721 # method FI FN
+# value: -149813 51839  # iter 215 # used 0.059321 # method FI FN
+# value: -150143 51511  # iter 216 # used 0.059899 # method FI FN
+# value: -151149 50507  # iter 217 # used 0.060473 # method FI FN
+# value: -151175 50483  # iter 218 # used 0.061067 # method FI FN
+# value: -152414 49246  # iter 219 # used 0.061656 # method FI FN
+# value: -152506 49156  # iter 220 # used 0.062305 # method FI FN
+# value: -152513 49151  # iter 221 # used 0.062973 # method FI FN
+# value: -152847 48819  # iter 222 # used 0.063572 # method FI FN
+# value: -156807 44861  # iter 223 # used 0.06419 # method FI FN
+# value: -156807 44859  # iter 224 # used 0.064812 # method FI FN
+# value: -156807 44858  # iter 225 # used 0.064862 # method FI FN
+# value: -156877 44790  # iter 226 # used 0.065452 # method FI FN
+# value: -157824 43845  # iter 227 # used 0.066081 # method FI FN
+# value: -157911 43759  # iter 228 # used 0.066687 # method FI FN
+# value: -157918 43754  # iter 229 # used 0.067288 # method FI FN
+# value: -158155 43519  # iter 230 # used 0.067889 # method FI FN
+# value: -158168 43508  # iter 231 # used 0.068505 # method FI FN
+# value: -158415 43263  # iter 232 # used 0.069113 # method FI FN
+# value: -158550 43130  # iter 233 # used 0.06975 # method FI FN
+# value: -158583 43099  # iter 234 # used 0.070383 # method FI FN
+# value: -158736 42948  # iter 235 # used 0.071004 # method FI FN
+# value: -158778 42908  # iter 236 # used 0.071618 # method FI FN
+# value: -158808 42879  # iter 237 # used 0.072239 # method FI FN
+# value: -158808 42878  # iter 238 # used 0.072932 # method FI FN
+# value: -158850 42837  # iter 239 # used 0.073666 # method FI FN
+# value: -158887 42802  # iter 240 # used 0.074345 # method FI FN
+# value: -158927 42764  # iter 241 # used 0.074996 # method FI FN
+# value: -161598 40095  # iter 242 # used 0.075649 # method FI FN
+# value: -161733 39962  # iter 243 # used 0.076292 # method FI FN
+# value: -161888 39808  # iter 244 # used 0.076931 # method FI FN
+# value: -161924 39774  # iter 245 # used 0.077595 # method FI FN
+# value: -162017 39683  # iter 246 # used 0.078262 # method FI FN
+# value: -162030 39671  # iter 247 # used 0.078927 # method FI FN
+# value: -162364 39339  # iter 248 # used 0.079799 # method FI FN
+# value: -162527 39177  # iter 249 # used 0.080692 # method FI FN
+# value: -163323 38383  # iter 250 # used 0.081398 # method FI FN
+# value: -163494 38214  # iter 251 # used 0.082086 # method FI FN
+# value: -163662 38048  # iter 252 # used 0.082773 # method FI FN
+# value: -163689 38022  # iter 253 # used 0.083504 # method FI FN
+# value: -164478 37235  # iter 254 # used 0.084281 # method FI FN
+# value: -165666 36049  # iter 255 # used 0.084973 # method FI FN
+# value: -165720 35997  # iter 256 # used 0.085649 # method FI FN
+# value: -165742 35976  # iter 257 # used 0.086388 # method FI FN
+# value: -169271 32448  # iter 258 # used 0.087083 # method FI FN
+# value: -169296 32425  # iter 259 # used 0.087787 # method FI FN
+# value: -169957 31766  # iter 260 # used 0.088486 # method FI FN
+# value: -169975 31749  # iter 261 # used 0.089223 # method FI FN
+# value: -170098 31627  # iter 262 # used 0.089958 # method FI FN
+# value: -173845 27882  # iter 263 # used 0.090676 # method FI FN
+# value: -173968 27761  # iter 264 # used 0.091397 # method FI FN
+# value: -174636 27094  # iter 265 # used 0.092112 # method FI FN
+# value: -177167 24564  # iter 266 # used 0.092824 # method FI FN
+# value: -184999 16734  # iter 267 # used 0.093545 # method FI FN
+# value: -185091 16644  # iter 268 # used 0.094395 # method FI FN
+# value: -185107 16630  # iter 269 # used 0.095488 # method FI FN
+# value: -185148 16591  # iter 270 # used 0.096377 # method FI FN
+# value: -185525 16216  # iter 271 # used 0.097146 # method FI FN
+# value: -185762 15981  # iter 272 # used 0.097904 # method FI FN
+# value: -188075 13670  # iter 273 # used 0.098671 # method FI FN
+# value: -188137 13609  # iter 274 # used 0.099423 # method FI FN
+# value: -188254 13494  # iter 275 # used 0.100405 # method FI FN
+# value: -188271 13479  # iter 276 # used 0.101284 # method FI FN
+# value: -188565 13187  # iter 277 # used 0.10207 # method FI FN
+# value: -188733 13021  # iter 278 # used 0.102874 # method FI FN
+# value: -188951 12805  # iter 279 # used 0.103698 # method FI FN
+# value: -189119 12639  # iter 280 # used 0.104504 # method FI FN
+# value: -189226 12534  # iter 281 # used 0.10542 # method FI FN
+# value: -191176 10586  # iter 282 # used 0.10633 # method FI FN
+# value: -191782 9982  # iter 283 # used 0.107182 # method FI FN
+# value: -192620 9146  # iter 284 # used 0.108038 # method FI FN
+# value: -192637 9131  # iter 285 # used 0.109001 # method FI FN
+# value: -192865 8905  # iter 286 # used 0.110025 # method FI FN
+# value: -192926 8846  # iter 287 # used 0.11091 # method FI FN
+# value: -193220 8554  # iter 288 # used 0.111817 # method FI FN
+# value: -194571 7205  # iter 289 # used 0.112702 # method FI FN
+# value: -194870 6908  # iter 290 # used 0.113562 # method FI FN
+# value: -195078 6702  # iter 291 # used 0.114466 # method FI FN
+# value: -203350 510  # iter 292 # used 0.115386 # method FI FN
+# value: -201400 508  # iter 293 # used 0.115418 # method FI FN
+# value: -201364 506  # iter 294 # used 0.115443 # method FI FN
+# value: -201351 504  # iter 295 # used 0.115465 # method FI FN
+# value: -201338 502  # iter 296 # used 0.115519 # method FI FN
+# value: -201285 500  # iter 297 # used 0.115577 # method FI FN
+# value: -201271 499  # iter 298 # used 0.115703 # method FI FN
+# value: -208139 499  # iter 299 # used 0.116637 # method FI FN
+# value: -205280 497  # iter 300 # used 0.116668 # method FI FN
+# value: -205089 495  # iter 301 # used 0.116691 # method FI FN
+# value: -201560 494  # iter 302 # used 0.11672 # method FI FN
+# value: -201560 493  # iter 303 # used 0.116761 # method FI FN
+# value: -201407 492  # iter 304 # used 0.116794 # method FI FN
+# value: -201303 490  # iter 305 # used 0.116827 # method FI FN
+# value: -201274 488  # iter 306 # used 0.116891 # method FI FN
+# value: -201274 487  # iter 307 # used 0.117389 # method FI FN
+# value: -201274 486  # iter 308 # used 0.117944 # method FI FN
+# value: -201274 485  # iter 309 # used 0.118134 # method FI FN
+# value: -201274 484  # iter 310 # used 0.118633 # method FI FN
+# value: -203920 483  # iter 311 # used 0.119426 # method FI FN
+# value: -203626 481  # iter 312 # used 0.119482 # method FI FN
+# value: -203020 479  # iter 313 # used 0.119521 # method FI FN
+# value: -202865 477  # iter 314 # used 0.11957 # method FI FN
+# value: -201543 475  # iter 315 # used 0.119621 # method FI FN
+# value: -201495 474  # iter 316 # used 0.119679 # method FI FN
+# value: -201461 473  # iter 317 # used 0.119751 # method FI FN
+# value: -201413 471  # iter 318 # used 0.119815 # method FI FN
+# value: -201290 469  # iter 319 # used 0.119882 # method FI FN
+# value: -201277 467  # iter 320 # used 0.119994 # method FI FN
+# value: -201277 466  # iter 321 # used 0.120858 # method FI FN
+# value: -201277 464  # iter 322 # used 0.121801 # method FI FN
+# value: -201277 463  # iter 323 # used 0.122805 # method FI FN
+# value: -201277 461  # iter 324 # used 0.123673 # method FI FN
+# value: -201277 460  # iter 325 # used 0.124693 # method FI FN
+# value: -201277 459  # iter 326 # used 0.125921 # method FI FN
+# value: -201277 457  # iter 327 # used 0.127282 # method FI FN
+# value: -201277 456  # iter 328 # used 0.128571 # method FI FN
+# value: -201277 454  # iter 329 # used 0.130111 # method FI FN
+# value: -201277 452  # iter 330 # used 0.13207 # method FI FN
+# value: -201277 451  # iter 331 # used 0.134019 # method FI FN
+# value: -201290 450  # iter 332 # used 0.135991 # method FI FN
+# value: -201279 449  # iter 333 # used 0.13624 # method FI FN
+# value: -201272 448  # iter 334 # used 0.13674 # method FI FN
+# value: -201272 447  # iter 335 # used 0.138923 # method FI FN
+# value: -201272 446  # iter 336 # used 0.141462 # method FI FN
+# value: -201272 444  # iter 337 # used 0.143209 # method FI FN
+# value: -201323 443  # iter 338 # used 0.146097 # method FI FN
+# value: -201301 441  # iter 339 # used 0.146273 # method FI FN
+# value: -201275 440  # iter 340 # used 0.14642 # method FI FN
+# value: -201316 439  # iter 341 # used 0.149435 # method FI FN
+# value: -201274 437  # iter 342 # used 0.149624 # method FI FN
+# value: -201274 436  # iter 343 # used 0.152629 # method FI FN
+# value: -201274 435  # iter 344 # used 0.155745 # method FI FN
+# value: -201274 434  # iter 345 # used 0.159376 # method FI FN
+# value: -201274 433  # iter 346 # used 0.163536 # method FI FN
+# value: -201274 429  # iter 347 # used 0.167618 # method FI FN
+# value: -201274 427  # iter 348 # used 0.17209 # method FI FN
+# value: -201274 425  # iter 349 # used 0.176964 # method FI FN
+# value: -201274 424  # iter 350 # used 0.179249 # method FI FN
+# value: -201274 422  # iter 351 # used 0.18411 # method FI FN
+# value: -201274 421  # iter 352 # used 0.185037 # method FI FN
+# value: -201274 420  # iter 353 # used 0.189926 # method FI FN
+# value: -201568 419  # iter 354 # used 0.195349 # method FI FN
+# value: -201274 418  # iter 355 # used 0.195502 # method FI FN
+# value: -201274 417  # iter 356 # used 0.200978 # method FI FN
+# value: -201274 416  # iter 357 # used 0.206993 # method FI FN
+# value: -201274 415  # iter 358 # used 0.214383 # method FI FN
+# value: -201274 414  # iter 359 # used 0.215844 # method FI FN
+# value: -201274 413  # iter 360 # used 0.221555 # method FI FN
+# value: -201274 412  # iter 361 # used 0.227665 # method FI FN
+# value: -201313 412  # iter 362 # used 0.233872 # method FI FN
+# value: -201300 411  # iter 363 # used 0.234191 # method FI FN
+# value: -201287 410  # iter 364 # used 0.23432 # method FI FN
+# value: -201274 408  # iter 365 # used 0.234485 # method FI FN
+# value: -202662 407  # iter 366 # used 0.241099 # method FI FN
+# value: -201824 405  # iter 367 # used 0.241227 # method FI FN
+# value: -201583 404  # iter 368 # used 0.241294 # method FI FN
+# value: -201298 402  # iter 369 # used 0.241371 # method FI FN
+# value: -201274 400  # iter 370 # used 0.241583 # method FI FN
+# value: -201274 399  # iter 371 # used 0.248221 # method FI FN
+# value: -201274 398  # iter 372 # used 0.254982 # method FI FN
+# value: -201274 397  # iter 373 # used 0.258827 # method FI FN
+# value: -201274 396  # iter 374 # used 0.265653 # method FI FN
+# value: -205234 395  # iter 375 # used 0.272514 # method FI FN
+# value: -203595 393  # iter 376 # used 0.272643 # method FI FN
+# value: -202244 391  # iter 377 # used 0.272763 # method FI FN
+# value: -201768 389  # iter 378 # used 0.272863 # method FI FN
+# value: -201715 387  # iter 379 # used 0.272957 # method FI FN
+# value: -201422 385  # iter 380 # used 0.273066 # method FI FN
+# value: -201380 384  # iter 381 # used 0.273169 # method FI FN
+# value: -201317 383  # iter 382 # used 0.273278 # method FI FN
+# value: -201283 381  # iter 383 # used 0.273459 # method FI FN
+# value: -201272 380  # iter 384 # used 0.273617 # method FI FN
+# value: -201272 379  # iter 385 # used 0.28173 # method FI FN
+# value: -201431 379  # iter 399 # used 0.290491 # method FI FN
+# value: -201377 378  # iter 400 # used 0.290658 # method FI FN
+# value: -201273 376  # iter 401 # used 0.290811 # method FI FN
+# value: -201273 375  # iter 402 # used 0.292266 # method FI FN
+# value: -201273 374  # iter 403 # used 0.300177 # method FI FN
+# value: -201276 373  # iter 416 # used 0.309634 # method FI FN
+# value: -201276 371  # iter 417 # used 0.310375 # method FI FN
+# value: -201276 370  # iter 418 # used 0.312225 # method FI FN
+# value: -201276 369  # iter 419 # used 0.313948 # method FI FN
+# value: -202520 369  # iter 432 # used 0.322352 # method FI FN
+# value: -201514 367  # iter 433 # used 0.322511 # method FI FN
+# value: -201352 365  # iter 434 # used 0.322643 # method FI FN
+# value: -201339 363  # iter 435 # used 0.322845 # method FI FN
+# value: -201318 361  # iter 436 # used 0.323015 # method FI FN
+# value: -201292 360  # iter 437 # used 0.32321 # method FI FN
+# value: -201279 358  # iter 438 # used 0.323411 # method FI FN
+# value: -201272 357  # iter 439 # used 0.32404 # method FI FN
+# value: -201419 356  # iter 469 # used 0.346941 # method FI FN
+# value: -201296 354  # iter 470 # used 0.347165 # method FI FN
+# value: -201283 352  # iter 471 # used 0.347531 # method FI FN
+# value: -201283 350  # iter 472 # used 0.348112 # method FI FN
+# value: -201276 348  # iter 473 # used 0.34875 # method FI FN
+# value: -201276 347  # iter 474 # used 0.353958 # method FI FN
+# value: -202691 347  # iter 490 # used 0.365631 # method FI FN
+# value: -201744 345  # iter 491 # used 0.36588 # method FI FN
+# value: -201516 343  # iter 492 # used 0.366056 # method FI FN
+# value: -201350 342  # iter 493 # used 0.366205 # method FI FN
+# value: -201302 341  # iter 494 # used 0.366432 # method FI FN
+# value: -201276 340  # iter 495 # used 0.366643 # method FI FN
+# value: -201276 339  # iter 496 # used 0.366877 # method FI FN
+# value: -201276 338  # iter 497 # used 0.372786 # method FI FN
+# value: -201281 338  # iter 516 # used 0.386312 # method FI FN
+# value: -201281 337  # iter 517 # used 0.389798 # method FI FN
+# value: -201281 336  # iter 518 # used 0.391871 # method FI FN
+# value: -201281 335  # iter 519 # used 0.394655 # method FI FN
+# value: -201281 334  # iter 520 # used 0.395086 # method FI FN
+# value: -201308 333  # iter 521 # used 0.400901 # method FI FN
+# value: -201295 331  # iter 522 # used 0.401524 # method FI FN
+# value: -201278 330  # iter 523 # used 0.40185 # method FI FN
+# value: -201278 327  # iter 524 # used 0.408731 # method FI FN
+# value: -201280 326  # iter 541 # used 0.418858 # method FI FN
+# value: -201280 325  # iter 542 # used 0.422994 # method FI FN
+# value: -201280 324  # iter 543 # used 0.428449 # method FI FN
+# value: -201273 323  # iter 544 # used 0.435654 # method FI FN
+# value: -201537 323  # iter 558 # used 0.44477 # method FI FN
+# value: -201414 322  # iter 559 # used 0.445079 # method FI FN
+# value: -201366 321  # iter 560 # used 0.445341 # method FI FN
+# value: -201301 320  # iter 561 # used 0.445576 # method FI FN
+# value: -201301 319  # iter 562 # used 0.445695 # method FI FN
+# value: -201274 318  # iter 563 # used 0.446167 # method FI FN
+# value: -201274 317  # iter 564 # used 0.450135 # method FI FN
+# value: -201274 316  # iter 565 # used 0.456585 # method FI FN
+# value: -201274 315  # iter 566 # used 0.458539 # method FI FN
+# value: -201274 314  # iter 567 # used 0.46491 # method FI FN
+# value: -201362 314  # iter 586 # used 0.475091 # method FI FN
+# value: -201299 312  # iter 587 # used 0.475431 # method FI FN
+# value: -201274 310  # iter 588 # used 0.475814 # method FI FN
+# value: -201274 309  # iter 589 # used 0.476911 # method FI FN
+# value: -201274 308  # iter 590 # used 0.478496 # method FI FN
+# value: -201274 306  # iter 591 # used 0.480233 # method FI FN
+# value: -201274 305  # iter 592 # used 0.486107 # method FI FN
+# value: -201272 303  # iter 608 # used 0.496301 # method FI FN
+# value: -201287 302  # iter 626 # used 0.50645 # method FI FN
+# value: -201274 301  # iter 627 # used 0.507225 # method FI FN
+# value: -201274 300  # iter 628 # used 0.508732 # method FI FN
+# value: -201297 300  # iter 641 # used 0.517585 # method FI FN
+# value: -201271 299  # iter 642 # used 0.518367 # method FI FN
+# value: -201424 299  # iter 643 # used 0.518418 # method FI FN
+# value: -201280 297  # iter 644 # used 0.518762 # method FI FN
+# value: -201273 295  # iter 645 # used 0.526011 # method FI FN
+# value: -201276 295  # iter 682 # used 0.565839 # method FI FN
+# value: -201280 295  # iter 699 # used 0.575983 # method FI FN
+# value: -201286 294  # iter 715 # used 0.585864 # method FI FN
+# value: -201273 293  # iter 716 # used 0.586731 # method FI FN
+# value: -201502 293  # iter 745 # used 0.61291 # method FI FN
+# value: -201447 292  # iter 746 # used 0.613451 # method FI FN
+# value: -201312 290  # iter 747 # used 0.613907 # method FI FN
+# value: -201285 288  # iter 748 # used 0.61445 # method FI FN
+# value: -201272 287  # iter 749 # used 0.616361 # method FI FN
+# value: -201272 286  # iter 750 # used 0.619319 # method FI FN
+# value: -201272 285  # iter 751 # used 0.624244 # method FI FN
+# value: -201273 285  # iter 775 # used 0.635337 # method FI FN
+# value: -201281 284  # iter 791 # used 0.645243 # method FI FN
+# value: -201479 284  # iter 792 # used 0.649731 # method FI FN
+# value: -201279 283  # iter 793 # used 0.650695 # method FI FN
+# value: -201298 283  # iter 809 # used 0.662111 # method FI FN
+# value: -201272 281  # iter 810 # used 0.663024 # method FI FN
+# value: -201272 280  # iter 811 # used 0.66659 # method FI FN
+# value: -201272 279  # iter 812 # used 0.674684 # method FI FN
+# value: -201309 278  # iter 831 # used 0.694395 # method FI FN
+# value: -201276 277  # iter 832 # used 0.69532 # method FI FN
+# value: -201297 277  # iter 869 # used 0.725471 # method FI FN
+# value: -201272 276  # iter 870 # used 0.726291 # method FI FN
+# value: -201272 275  # iter 871 # used 0.72799 # method FI FN
+# value: -201272 274  # iter 872 # used 0.735436 # method FI FN
+# value: -201380 273  # iter 891 # used 0.747213 # method FI FN
+# value: -201288 271  # iter 892 # used 0.747943 # method FI FN
+# value: -201275 269  # iter 893 # used 0.750098 # method FI FN
+# value: -201275 268  # iter 909 # used 0.763387 # method FI FN
+# value: -201275 267  # iter 910 # used 0.767075 # method FI FN
+# value: -209107 266  # iter 911 # used 0.770877 # method FI FN
+# value: -206248 265  # iter 912 # used 0.770926 # method FI FN
+# value: -203389 263  # iter 913 # used 0.771544 # method FI FN
+# value: -202201 262  # iter 914 # used 0.771991 # method FI FN
+# value: -201451 260  # iter 915 # used 0.772427 # method FI FN
+# value: -201316 258  # iter 916 # used 0.77308 # method FI FN
+# value: -201279 256  # iter 917 # used 0.773799 # method FI FN
+# value: -201279 255  # iter 918 # used 0.779655 # method FI FN
+# value: -201279 254  # iter 919 # used 0.787353 # method FI FN
+# value: -201279 252  # iter 920 # used 0.787598 # method FI FN
+# value: -201275 251  # iter 937 # used 0.804873 # method FI FN
+# value: -202008 251  # iter 951 # used 0.816439 # method FI FN
+# value: -201647 249  # iter 952 # used 0.817038 # method FI FN
+# value: -201297 248  # iter 953 # used 0.817606 # method FI FN
+# value: -201280 247  # iter 954 # used 0.818417 # method FI FN
+# value: -201280 246  # iter 955 # used 0.819499 # method FI FN
+# value: -201280 245  # iter 956 # used 0.82141 # method FI FN
+# value: -201389 244  # iter 957 # used 0.82521 # method FI FN
+# value: -201349 242  # iter 958 # used 0.826231 # method FI FN
+# value: -201313 240  # iter 959 # used 0.827066 # method FI FN
+# value: -201272 238  # iter 960 # used 0.827955 # method FI FN
+# value: -201626 238  # iter 976 # used 0.838936 # method FI FN
+# value: -201276 237  # iter 977 # used 0.83974 # method FI FN
+# value: -201276 236  # iter 978 # used 0.844621 # method FI FN
+# value: -201272 235  # iter 995 # used 0.860509 # method FI FN
+# value: -201369 235  # iter 1010 # used 0.871113 # method FI FN
+# value: -201276 234  # iter 1011 # used 0.871929 # method FI FN
+# value: -201276 233  # iter 1012 # used 0.874859 # method FI FN
+# value: -201875 233  # iter 1013 # used 0.878967 # method FI FN
+# value: -201638 231  # iter 1014 # used 0.87996 # method FI FN
+# value: -201391 229  # iter 1015 # used 0.880697 # method FI FN
+# value: -201337 227  # iter 1016 # used 0.881489 # method FI FN
+# value: -201275 225  # iter 1017 # used 0.882416 # method FI FN
+# value: -201637 225  # iter 1034 # used 0.893295 # method FI FN
+# value: -201466 224  # iter 1035 # used 0.894079 # method FI FN
+# value: -201298 223  # iter 1036 # used 0.894801 # method FI FN
+# value: -201273 221  # iter 1037 # used 0.897064 # method FI FN
+# value: -201273 220  # iter 1038 # used 0.900467 # method FI FN
+# value: -201659 219  # iter 1078 # used 0.928578 # method FI FN
+# value: -201365 218  # iter 1079 # used 0.929486 # method FI FN
+# value: -201304 216  # iter 1080 # used 0.930502 # method FI FN
+# value: -201304 214  # iter 1081 # used 0.932433 # method FI FN
+# value: -201304 213  # iter 1082 # used 0.935616 # method FI FN
+# value: -201283 211  # iter 1083 # used 0.939379 # method FI FN
+# value: -201283 210  # iter 1084 # used 0.94887 # method FI FN
+# value: -201319 210  # iter 1100 # used 0.962559 # method FI FN
+# value: -201285 209  # iter 1101 # used 0.964875 # method FI FN
+# value: -201278 207  # iter 1102 # used 0.971073 # method FI FN
+# value: -201291 207  # iter 1118 # used 0.984402 # method FI FN
+# value: -201278 206  # iter 1119 # used 0.990252 # method FI FN
+# value: -201278 205  # iter 1137 # used 1.00255 # method FI FN
+# value: -201281 205  # iter 1172 # used 1.05682 # method FI FN
+# value: -201591 205  # iter 1239 # used 1.13243 # method FI FN
+# value: -201429 203  # iter 1240 # used 1.13515 # method FI FN
+# value: -201312 201  # iter 1241 # used 1.1381 # method FI FN
+# value: -201275 199  # iter 1242 # used 1.14228 # method FI FN
+# value: -201275 198  # iter 1243 # used 1.15064 # method FI FN
+# value: -201284 197  # iter 1261 # used 1.1723 # method FI FN
+# value: -201282 196  # iter 1293 # used 1.21686 # method FI FN
+# value: -201277 195  # iter 1307 # used 1.23468 # method FI FN
+# value: -201279 194  # iter 1322 # used 1.25315 # method FI FN
+# value: -201418 194  # iter 1338 # used 1.27031 # method FI FN
+# value: -201311 192  # iter 1339 # used 1.27429 # method FI FN
+# value: -201275 191  # iter 1340 # used 1.27869 # method FI FN
+# value: -201308 191  # iter 1387 # used 1.3358 # method FI FN
+# value: -201282 189  # iter 1388 # used 1.34077 # method FI FN
+# value: -201277 188  # iter 1422 # used 1.39588 # method FI FN
+# value: -201340 188  # iter 1441 # used 1.42282 # method FI FN
+# value: -201297 187  # iter 1442 # used 1.42778 # method FI FN
+# value: -201276 186  # iter 1443 # used 1.4337 # method FI FN
+# value: -201278 186  # iter 1460 # used 1.46328 # method FI FN
+# value: -201278 185  # iter 1461 # used 1.46537 # method FI FN
+# value: -201410 185  # iter 1476 # used 1.48324 # method FI FN
+# value: -201316 184  # iter 1477 # used 1.48831 # method FI FN
+# value: -201275 183  # iter 1478 # used 1.49363 # method FI FN
+# value: -201281 183  # iter 1495 # used 1.52244 # method FI FN
+# value: -201310 183  # iter 1509 # used 1.54366 # method FI FN
+# value: -201284 181  # iter 1510 # used 1.54982 # method FI FN
+# value: -201271 180  # iter 1511 # used 1.55783 # method FI FN
+# value: -201424 180  # iter 1512 # used 1.55793 # method FI FN
+# value: -201424 179  # iter 1513 # used 1.56025 # method FI FN
+# value: -201297 177  # iter 1514 # used 1.56557 # method FI FN
+# value: -201297 176  # iter 1515 # used 1.57377 # method FI FN
+# value: -201297 175  # iter 1516 # used 1.57397 # method FI FN
+# value: -201695 174  # iter 1532 # used 1.59215 # method FI FN
+# value: -201300 173  # iter 1533 # used 1.59713 # method FI FN
+# value: -201273 172  # iter 1534 # used 1.60384 # method FI FN
+# value: -201282 171  # iter 1548 # used 1.62666 # method FI FN
+# value: -201309 170  # iter 1646 # used 1.76686 # method FI FN
+# value: -201275 168  # iter 1647 # used 1.7737 # method FI FN
+# value: -201339 168  # iter 1661 # used 1.79395 # method FI FN
+# value: -201281 166  # iter 1662 # used 1.79967 # method FI FN
+# value: -201285 165  # iter 1684 # used 1.84888 # method FI FN
+# value: -203882 165  # iter 1729 # used 1.90263 # method FI FN
+# value: -203869 164  # iter 1730 # used 1.90397 # method FI FN
+# value: -203869 163  # iter 1731 # used 1.90541 # method FI FN
+# value: -203742 161  # iter 1732 # used 1.90747 # method FI FN
+# value: -201429 160  # iter 1733 # used 1.91045 # method FI FN
+# value: -201429 159  # iter 1734 # used 1.91567 # method FI FN
+# value: -201274 157  # iter 1735 # used 1.92148 # method FI FN
+# value: -201288 156  # iter 1752 # used 1.94488 # method FI FN
+# value: -201419 156  # iter 1768 # used 1.96273 # method FI FN
+# value: -201419 155  # iter 1769 # used 1.96846 # method FI FN
+# value: -201296 153  # iter 1770 # used 1.97454 # method FI FN
+# value: -201472 152  # iter 1834 # used 2.09109 # method FI FN
+# value: -201316 151  # iter 1835 # used 2.09717 # method FI FN
+# value: -201316 150  # iter 1836 # used 2.09918 # method FI FN
+# value: -201316 149  # iter 1837 # used 2.10726 # method FI FN
+# value: -201288 148  # iter 1885 # used 2.18197 # method FI FN
+# value: -201619 147  # iter 1902 # used 2.20121 # method FI FN
+# value: -201300 145  # iter 1903 # used 2.20728 # method FI FN
+# value: -203040 145  # iter 1952 # used 2.26123 # method FI FN
+# value: -201488 144  # iter 1953 # used 2.26474 # method FI FN
+# value: -201320 142  # iter 1954 # used 2.27087 # method FI FN
+# value: -201303 141  # iter 1955 # used 2.27816 # method FI FN
+# value: -201323 141  # iter 1967 # used 2.29325 # method FI FN
+# value: -201334 141  # iter 1983 # used 2.31683 # method FI FN
+# value: -201280 139  # iter 1984 # used 2.32431 # method FI FN
+# value: -201325 138  # iter 2003 # used 2.35122 # method FI FN
+# value: -201402 137  # iter 2018 # used 2.37098 # method FI FN
+# value: -201277 135  # iter 2019 # used 2.37754 # method FI FN
+# value: -201479 135  # iter 2065 # used 2.4524 # method FI FN
+# value: -201297 134  # iter 2066 # used 2.45911 # method FI FN
+# value: -201297 133  # iter 2067 # used 2.46581 # method FI FN
+# value: -201317 133  # iter 2115 # used 2.53408 # method FI FN
+# value: -201280 132  # iter 2116 # used 2.54085 # method FI FN
+# value: -201285 131  # iter 2132 # used 2.56417 # method FI FN
+# value: -201296 131  # iter 2199 # used 2.67508 # method FI FN
+# value: -202234 131  # iter 2318 # used 2.8481 # method FI FN
+# value: -202645 130  # iter 2319 # used 2.85286 # method FI FN
+# value: -201323 128  # iter 2320 # used 2.85721 # method FI FN
+# value: -201309 127  # iter 2321 # used 2.86457 # method FI FN
+# value: -201408 127  # iter 2336 # used 2.88285 # method FI FN
+# value: -201273 125  # iter 2337 # used 2.8901 # method FI FN
+# value: -201593 125  # iter 2352 # used 2.91207 # method FI FN
+# value: -201360 123  # iter 2353 # used 2.91753 # method FI FN
+# value: -201285 122  # iter 2354 # used 2.92489 # method FI FN
+# value: -201354 122  # iter 2397 # used 2.98775 # method FI FN
+# value: -201312 121  # iter 2398 # used 2.99778 # method FI FN
+# value: -202168 121  # iter 2414 # used 3.01253 # method FI FN
+# value: -201418 119  # iter 2415 # used 3.01833 # method FI FN
+# value: -201357 117  # iter 2416 # used 3.02658 # method FI FN
+# value: -201459 117  # iter 2463 # used 3.11135 # method FI FN
+# value: -201422 115  # iter 2464 # used 3.11796 # method FI FN
+# value: -201352 113  # iter 2465 # used 3.12545 # method FI FN
+# value: -201282 112  # iter 2466 # used 3.13341 # method FI FN
+# value: -202230 112  # iter 2482 # used 3.15217 # method FI FN
+# value: -201416 111  # iter 2483 # used 3.15914 # method FI FN
+# value: -201416 110  # iter 2484 # used 3.16455 # method FI FN
+# value: -201403 108  # iter 2485 # used 3.17306 # method FI FN
+# value: -201310 107  # iter 2486 # used 3.18139 # method FI FN
+# value: -203131 107  # iter 2536 # used 3.2763 # method FI FN
+# value: -202335 105  # iter 2537 # used 3.28192 # method FI FN
+# value: -202102 103  # iter 2538 # used 3.28953 # method FI FN
+# value: -201881 101  # iter 2539 # used 3.29749 # method FI FN
+# value: -201628 99  # iter 2540 # used 3.30472 # method FI FN
+# value: -201474 97  # iter 2541 # used 3.31216 # method FI FN
+# value: -201321 96  # iter 2542 # used 3.3196 # method FI FN
+# value: -201445 96  # iter 2573 # used 3.37445 # method FI FN
+# value: -201277 95  # iter 2574 # used 3.3833 # method FI FN
+# value: -201453 94  # iter 2605 # used 3.443 # method FI FN
+# value: -201300 93  # iter 2606 # used 3.45538 # method FI FN
+# value: -201413 93  # iter 2622 # used 3.51132 # method FI FN
+# value: -201722 92  # iter 2638 # used 3.54406 # method FI FN
+# value: -201429 90  # iter 2639 # used 3.55894 # method FI FN
+# value: -201557 90  # iter 2673 # used 3.65958 # method FI FN
+# value: -201324 89  # iter 2674 # used 3.66972 # method FI FN
+# value: -201696 88  # iter 2690 # used 3.69992 # method FI FN
+# value: -201497 86  # iter 2691 # used 3.70865 # method FI FN
+# value: -201728 85  # iter 2692 # used 3.71712 # method FI FN
+# value: -201314 83  # iter 2693 # used 3.72773 # method FI FN
+# value: -201388 82  # iter 2727 # used 3.79167 # method FI FN
+# value: -201468 81  # iter 2761 # used 3.85369 # method FI FN
+# value: -201297 79  # iter 2762 # used 3.86232 # method FI FN
+# value: -201550 78  # iter 2916 # used 4.1657 # method FI FN
+# value: -201319 76  # iter 2917 # used 4.17389 # method FI FN
+# value: -202469 75  # iter 3064 # used 4.51584 # method FI FN
+# value: -201281 74  # iter 3065 # used 4.52836 # method FI FN
+# value: -203680 74  # iter 3113 # used 4.61523 # method FI FN
+# value: -202866 73  # iter 3114 # used 4.62257 # method FI FN
+# value: -202198 71  # iter 3115 # used 4.63044 # method FI FN
+# value: -201904 70  # iter 3116 # used 4.6385 # method FI FN
+# value: -201543 68  # iter 3117 # used 4.6467 # method FI FN
+# value: -201296 66  # iter 3118 # used 4.65503 # method FI FN
+# value: -201544 65  # iter 3187 # used 4.78892 # method FI FN
+# value: -201345 64  # iter 3188 # used 4.79766 # method FI FN
+# value: -201358 64  # iter 3204 # used 4.83421 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar neos-1337307 126 3229 -201358 64 
+## LSTimeUsed 4.86087
+## quality -201358 64 
+## violations 64
+## iterations 3229
+##table1 neos-1337307 2840 5687 NA NA 3229 -201358 64 64 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.020934
+## postingModel 0.010632
+## TotalTime 5.00445
+## GecodeTime 20
+## seed 60
+## peakMemory 13.8008
+## name neos-1337307
+Coin0001I At line 1 NAME           neos-1620770
+Coin0001I At line 2 ROWS
+Coin0001I At line 9300 COLUMNS
+Coin0001I At line 28617 RHS
+Coin0001I At line 37123 BOUNDS
+Coin0001I At line 37916 ENDATA
+Coin0002I Problem neos-1620770 has 9296 rows, 792 columns and 19292 elements
+G: 0   E: 35    L: 9261
+Instance read after 0.017829 seconds
+Peak memory usage for reading instance 3.89844 mb
+## cons 9296
+## vars 792
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 6 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 5
+	propagators: 17788
+	depth: 2
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001653 seconds
+## fail 2
+Posting 4648 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 400 times
+Gecode found solution after 0.001763
+	fail: 0
+	nodes: 400
+	propagators: 4677
+	depth: 399
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.007099
+totally fixed 0
+number of invariants 35 out of 35 (35) 
+number of cycles 0
+##oneway 35
+number of cycles 0
+Total time used so far 0.054006
+Create propagator queues
+Total time used so far 0.065279
+EvalVariables size 22
+Not feasible 
+## initLSModel 0.032533
+This should be initial value 0
+neos-1620770 50 0.034149 
+Peak memory usage for Gecode 14.3047 mb
+##GecodeSol neos-1620770 14.304688 
+LS solver initialized after 0.067075 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 22
+counter 0 variables 792
+Number of variables used in local search 757
+## LSLimitLeft 4.88413
+# test 2
+Number of randomMoves 10
+# value: 1 54  # iter 1 # used 0.000212 # method FI FN
+# value: 2 53  # iter 2 # used 0.000252 # method FI FN
+# value: 2 51  # iter 3 # used 0.000411 # method FI FN
+# value: 2 50  # iter 4 # used 0.000562 # method FI FN
+# value: 2 49  # iter 5 # used 0.00073 # method FI FN
+# value: 3 47  # iter 6 # used 0.000991 # method FI FN
+# value: 3 44  # iter 7 # used 0.001795 # method FI FN
+# value: 4 43  # iter 8 # used 0.002617 # method FI FN
+# value: 5 41  # iter 9 # used 0.003763 # method FI FN
+# value: 5 40  # iter 10 # used 0.004985 # method FI FN
+# value: 5 39  # iter 11 # used 0.006508 # method FI FN
+# value: 6 35  # iter 12 # used 0.008618 # method FI FN
+# value: 7 34  # iter 13 # used 0.01147 # method FI FN
+# value: 7 33  # iter 14 # used 0.0133 # method FI FN
+# value: 7 32  # iter 15 # used 0.017323 # method FI FN
+# value: 8 31  # iter 16 # used 0.020266 # method FI FN
+# value: 9 30  # iter 17 # used 0.024331 # method FI FN
+# value: 10 29  # iter 18 # used 0.027043 # method FI FN
+# value: 10 28  # iter 19 # used 0.027185 # method FI FN
+# value: 10 27  # iter 20 # used 0.030624 # method FI FN
+# value: 10 25  # iter 21 # used 0.035737 # method FI FN
+# value: 10 24  # iter 22 # used 0.036117 # method FI FN
+# value: 10 23  # iter 23 # used 0.040358 # method FI FN
+# value: 10 22  # iter 24 # used 0.041637 # method FI FN
+# value: 11 19  # iter 25 # used 0.045857 # method FI FN
+# value: 12 17  # iter 26 # used 0.052064 # method FI FN
+# value: 13 14  # iter 27 # used 0.057541 # method FI FN
+# value: 13 13  # iter 28 # used 0.061592 # method FI FN
+# value: 13 12  # iter 29 # used 0.068092 # method FI FN
+# value: 13 11  # iter 30 # used 0.07377 # method FI FN
+# value: 14 9  # iter 31 # used 0.080259 # method FI FN
+# value: 14 8  # iter 32 # used 0.08804 # method FI FN
+# value: 14 7  # iter 33 # used 0.092267 # method FI FN
+# value: 15 6  # iter 51 # used 0.11965 # method FI FN
+# value: 17 5  # iter 65 # used 0.142331 # method FI FN
+# value: 18 4  # iter 66 # used 0.148842 # method FI FN
+# value: 20 3  # iter 83 # used 0.170753 # method FI FN
+# value: 19 3  # iter 145 # used 0.237167 # method FI FN
+# value: 22 2  # iter 262 # used 0.375382 # method FI FN
+# value: 22 1  # iter 529 # used 0.648924 # method FI FN
+# value: 22 0  # iter 1029 # used 1.3495 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar neos-1620770 35 4288 22 0 
+## LSTimeUsed 4.88885
+## quality 22 0 
+## violations 0
+## iterations 4288
+##table1 neos-1620770 792 9296 22 4288 22 0 0 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.017829
+## postingModel 0.00948
+## TotalTime 5.00494
+## GecodeTime 20
+## seed 60
+## peakMemory 14.5625
+## name neos-1620770
+Coin0001I At line 1 NAME           neos-777800
+Coin0001I At line 2 ROWS
+Coin0001I At line 483 COLUMNS
+Coin0001I At line 38886 RHS
+Coin0001I At line 39366 BOUNDS
+Coin0001I At line 52167 ENDATA
+Coin0002I Problem neos-777800 has 479 rows, 6400 columns and 32000 elements
+G: 0   E: 1    L: 478
+Instance read after 0.031717 seconds
+Peak memory usage for reading instance 4.01562 mb
+## cons 479
+## vars 6400
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 6323 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 6322
+	propagators: 942
+	depth: 6320
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.045501 seconds
+## fail 2
+Posting 239 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 6321 times
+Gecode found solution after 0.134553
+	fail: 0
+	nodes: 6321
+	propagators: 236
+	depth: 6320
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.182588
+totally fixed 0
+number of invariants 1 out of 1 (1) 
+number of cycles 0
+##oneway 1
+number of cycles 0
+Total time used so far 0.233629
+Create propagator queues
+Total time used so far 0.244299
+EvalVariables size 6399
+Not feasible 
+## initLSModel 0.021901
+This should be initial value -80
+neos-777800 50 0.223524 
+Peak memory usage for Gecode 11.1133 mb
+##GecodeSol neos-777800 11.113281 
+LS solver initialized after 0.245574 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 6399
+counter 0 variables 6400
+Number of variables used in local search 6399
+## LSLimitLeft 4.73766
+# test 2
+Number of randomMoves 10
+# value: -80 139  # iter 1 # used 7.6e-05 # method FI FN
+# value: -80 138  # iter 2 # used 0.000116 # method FI FN
+# value: -80 137  # iter 3 # used 0.000447 # method FI FN
+# value: -80 136  # iter 4 # used 0.000499 # method FI FN
+# value: -80 134  # iter 5 # used 0.000897 # method FI FN
+# value: -80 133  # iter 6 # used 0.000994 # method FI FN
+# value: -80 131  # iter 7 # used 0.001531 # method FI FN
+# value: -80 130  # iter 8 # used 0.001677 # method FI FN
+# value: -80 129  # iter 9 # used 0.002288 # method FI FN
+# value: -80 128  # iter 10 # used 0.002452 # method FI FN
+# value: -80 126  # iter 11 # used 0.003107 # method FI FN
+# value: -80 125  # iter 12 # used 0.003278 # method FI FN
+# value: -80 124  # iter 13 # used 0.004078 # method FI FN
+# value: -80 123  # iter 14 # used 0.004292 # method FI FN
+# value: -80 122  # iter 15 # used 0.005126 # method FI FN
+# value: -80 121  # iter 16 # used 0.005335 # method FI FN
+# value: -80 120  # iter 17 # used 0.006286 # method FI FN
+# value: -80 119  # iter 18 # used 0.006351 # method FI FN
+# value: -80 118  # iter 19 # used 0.007369 # method FI FN
+# value: -80 117  # iter 20 # used 0.007445 # method FI FN
+# value: -80 116  # iter 21 # used 0.008467 # method FI FN
+# value: -80 115  # iter 22 # used 0.008542 # method FI FN
+# value: -80 114  # iter 23 # used 0.009747 # method FI FN
+# value: -80 113  # iter 24 # used 0.009823 # method FI FN
+# value: -80 112  # iter 25 # used 0.011284 # method FI FN
+# value: -80 111  # iter 26 # used 0.01138 # method FI FN
+# value: -80 109  # iter 27 # used 0.012938 # method FI FN
+# value: -80 108  # iter 28 # used 0.01303 # method FI FN
+# value: -80 107  # iter 29 # used 0.014825 # method FI FN
+# value: -80 106  # iter 30 # used 0.014922 # method FI FN
+# value: -80 104  # iter 31 # used 0.016729 # method FI FN
+# value: -80 103  # iter 32 # used 0.016822 # method FI FN
+# value: -80 102  # iter 33 # used 0.018774 # method FI FN
+# value: -80 101  # iter 34 # used 0.018881 # method FI FN
+# value: -80 100  # iter 35 # used 0.020941 # method FI FN
+# value: -80 99  # iter 36 # used 0.021022 # method FI FN
+# value: -80 98  # iter 37 # used 0.0239 # method FI FN
+# value: -80 97  # iter 38 # used 0.024052 # method FI FN
+# value: -80 96  # iter 39 # used 0.025415 # method FI FN
+# value: -80 95  # iter 40 # used 0.025522 # method FI FN
+# value: -80 94  # iter 41 # used 0.028241 # method FI FN
+# value: -80 93  # iter 42 # used 0.028372 # method FI FN
+# value: -80 91  # iter 43 # used 0.031159 # method FI FN
+# value: -80 90  # iter 44 # used 0.031294 # method FI FN
+# value: -80 89  # iter 45 # used 0.034816 # method FI FN
+# value: -80 88  # iter 46 # used 0.035 # method FI FN
+# value: -80 87  # iter 47 # used 0.039508 # method FI FN
+# value: -80 86  # iter 48 # used 0.03962 # method FI FN
+# value: -80 84  # iter 49 # used 0.044707 # method FI FN
+# value: -80 83  # iter 50 # used 0.044876 # method FI FN
+# value: -80 82  # iter 51 # used 0.049005 # method FI FN
+# value: -80 81  # iter 52 # used 0.049207 # method FI FN
+# value: -80 80  # iter 53 # used 0.054591 # method FI FN
+# value: -80 79  # iter 54 # used 0.054769 # method FI FN
+# value: -80 78  # iter 55 # used 0.060832 # method FI FN
+# value: -80 77  # iter 56 # used 0.061051 # method FI FN
+# value: -80 76  # iter 57 # used 0.067524 # method FI FN
+# value: -80 75  # iter 58 # used 0.067725 # method FI FN
+# value: -80 74  # iter 59 # used 0.07551 # method FI FN
+# value: -80 73  # iter 60 # used 0.07575 # method FI FN
+# value: -80 72  # iter 61 # used 0.080209 # method FI FN
+# value: -80 71  # iter 62 # used 0.080284 # method FI FN
+# value: -80 70  # iter 63 # used 0.087996 # method FI FN
+# value: -80 69  # iter 64 # used 0.088101 # method FI FN
+# value: -80 68  # iter 92 # used 0.109474 # method FI FN
+# value: -80 67  # iter 93 # used 0.114094 # method FI FN
+# value: -80 66  # iter 94 # used 0.114333 # method FI FN
+# value: -80 65  # iter 95 # used 0.119244 # method FI FN
+# value: -80 64  # iter 96 # used 0.119537 # method FI FN
+# value: -80 62  # iter 112 # used 0.141468 # method FI FN
+# value: -80 61  # iter 143 # used 0.179425 # method FI FN
+# value: -80 60  # iter 144 # used 0.179758 # method FI FN
+# value: -80 59  # iter 172 # used 0.202916 # method FI FN
+# value: -80 58  # iter 173 # used 0.205513 # method FI FN
+# value: -80 57  # iter 174 # used 0.205633 # method FI FN
+# value: -80 56  # iter 175 # used 0.210498 # method FI FN
+# value: -80 55  # iter 176 # used 0.210716 # method FI FN
+# value: -80 54  # iter 177 # used 0.217127 # method FI FN
+# value: -80 53  # iter 178 # used 0.217467 # method FI FN
+# value: -80 52  # iter 192 # used 0.225987 # method FI FN
+# value: -80 51  # iter 193 # used 0.229465 # method FI FN
+# value: -80 50  # iter 194 # used 0.229832 # method FI FN
+# value: -80 49  # iter 224 # used 0.258433 # method FI FN
+# value: -80 48  # iter 438 # used 0.401899 # method FI FN
+# value: -80 47  # iter 439 # used 0.403721 # method FI FN
+# value: -80 46  # iter 440 # used 0.40382 # method FI FN
+# value: -80 45  # iter 441 # used 0.407962 # method FI FN
+# value: -80 44  # iter 442 # used 0.408116 # method FI FN
+# value: -80 43  # iter 443 # used 0.413511 # method FI FN
+# value: -80 42  # iter 444 # used 0.413695 # method FI FN
+# value: -80 41  # iter 445 # used 0.419766 # method FI FN
+# value: -80 40  # iter 446 # used 0.419961 # method FI FN
+# value: -80 39  # iter 596 # used 0.551361 # method FI FN
+# value: -80 38  # iter 597 # used 0.559509 # method FI FN
+# value: -80 37  # iter 598 # used 0.559833 # method FI FN
+# value: -80 36  # iter 616 # used 0.579164 # method FI FN
+# value: -80 35  # iter 650 # used 0.609661 # method FI FN
+# value: -80 34  # iter 694 # used 0.647835 # method FI FN
+# value: -80 33  # iter 937 # used 0.862914 # method FI FN
+# value: -80 32  # iter 938 # used 0.863976 # method FI FN
+# value: -80 31  # iter 939 # used 0.864115 # method FI FN
+# value: -80 30  # iter 940 # used 0.866521 # method FI FN
+# value: -80 29  # iter 941 # used 0.866861 # method FI FN
+# value: -80 28  # iter 942 # used 0.868764 # method FI FN
+# value: -80 27  # iter 943 # used 0.869677 # method FI FN
+# value: -80 26  # iter 944 # used 0.871833 # method FI FN
+# value: -80 25  # iter 945 # used 0.873252 # method FI FN
+# value: -80 24  # iter 946 # used 0.879845 # method FI FN
+# value: -80 23  # iter 947 # used 0.881675 # method FI FN
+# value: -80 22  # iter 948 # used 0.889549 # method FI FN
+# value: -80 21  # iter 949 # used 0.896371 # method FI FN
+# value: -80 20  # iter 967 # used 0.931152 # method FI FN
+# value: -80 19  # iter 3843 # used 4.1196 # method FI FN
+# value: -80 18  # iter 3844 # used 4.12146 # method FI FN
+# value: -80 17  # iter 3845 # used 4.12843 # method FI FN
+# value: -80 16  # iter 3846 # used 4.13488 # method FI FN
+# value: -80 15  # iter 3847 # used 4.1432 # method FI FN
+# value: -80 14  # iter 3848 # used 4.15021 # method FI FN
+# value: -80 13  # iter 3864 # used 4.18053 # method FI FN
+# value: -80 12  # iter 3878 # used 4.2129 # method FI FN
+# value: -80 11  # iter 3947 # used 4.31118 # method FI FN
+# value: -80 10  # iter 3948 # used 4.31236 # method FI FN
+# value: -80 9  # iter 3963 # used 4.3344 # method FI FN
+# value: -80 8  # iter 3964 # used 4.3457 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar neos-777800 1 4327 -80 8 
+## LSTimeUsed 4.73955
+## quality -80 8 
+## violations 7
+## iterations 4327
+##table1 neos-777800 6400 479 NA NA 4327 -80 8 7 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.031717
+## postingModel 0.00919
+## TotalTime 5.0021
+## GecodeTime 20
+## seed 60
+## peakMemory 11.1133
+## name neos-777800
+Coin0001I At line 1 NAME           neos808444
+Coin0001I At line 2 ROWS
+Coin0001I At line 18333 COLUMNS
+Coin0001I At line 138848 RHS
+Coin0001I At line 142372 BOUNDS
+Coin0001I At line 162219 ENDATA
+Coin0002I Problem neos808444 has 18329 rows, 19846 columns and 120512 elements
+G: 509   E: 942    L: 16878
+Instance read after 0.113252 seconds
+Peak memory usage for reading instance 9.75 mb
+## cons 18329
+## vars 19846
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 2
+Searching for solution....
+Stopped because of Fail limit
+stop called 3283 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 3282
+	propagators: 77122
+	depth: 3280
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.234428 seconds
+## fail 2
+Posting 9164 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 12727 times
+Gecode found solution after 1.12278
+	fail: 0
+	nodes: 12727
+	propagators: 36686
+	depth: 12726
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 1.37915
+totally fixed 2
+number of invariants 148 out of 150 (148) 
+number of cycles 0
+##oneway 148
+number of cycles 0
+Total time used so far 1.6288
+Create propagator queues
+Total time used so far 1.67663
+EvalVariables size 0
+Not feasible 
+## initLSModel 0.149682
+This should be initial value 0
+neos808444 50 1.538397 
+Peak memory usage for Gecode 39.0625 mb
+##GecodeSol neos808444 39.062500 
+LS solver initialized after 1.69036 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 0
+counter 0 variables 19844
+Number of variables used in local search 19696
+## LSLimitLeft 3.24333
+# test 2
+Number of randomMoves 10
+# value: 0 2434  # iter 1 # used 0.000398 # method FI FN
+# value: 0 2406  # iter 2 # used 0.000789 # method FI FN
+# value: 0 2405  # iter 3 # used 0.001139 # method FI FN
+# value: 0 2404  # iter 4 # used 0.001394 # method FI FN
+# value: 0 2403  # iter 5 # used 0.001744 # method FI FN
+# value: 0 2402  # iter 6 # used 0.002122 # method FI FN
+# value: 0 2401  # iter 7 # used 0.002831 # method FI FN
+# value: 0 2400  # iter 8 # used 0.003742 # method FI FN
+# value: 0 2399  # iter 9 # used 0.004496 # method FI FN
+# value: 0 2398  # iter 10 # used 0.005772 # method FI FN
+# value: 0 2361  # iter 11 # used 0.0072 # method FI FN
+# value: 0 2360  # iter 12 # used 0.008673 # method FI FN
+# value: 0 2359  # iter 13 # used 0.009725 # method FI FN
+# value: 0 2358  # iter 14 # used 0.01079 # method FI FN
+# value: 0 2357  # iter 15 # used 0.012006 # method FI FN
+# value: 0 2321  # iter 16 # used 0.013626 # method FI FN
+# value: 0 2285  # iter 17 # used 0.015913 # method FI FN
+# value: 0 2284  # iter 18 # used 0.017568 # method FI FN
+# value: 0 2254  # iter 19 # used 0.018995 # method FI FN
+# value: 0 2221  # iter 20 # used 0.020769 # method FI FN
+# value: 0 2220  # iter 21 # used 0.02345 # method FI FN
+# value: 0 2219  # iter 22 # used 0.025342 # method FI FN
+# value: 0 2218  # iter 23 # used 0.027086 # method FI FN
+# value: 0 2217  # iter 24 # used 0.029503 # method FI FN
+# value: 0 2216  # iter 25 # used 0.031529 # method FI FN
+# value: 0 2198  # iter 26 # used 0.032937 # method FI FN
+# value: 0 2188  # iter 27 # used 0.034425 # method FI FN
+# value: 0 2186  # iter 28 # used 0.03588 # method FI FN
+# value: 0 2185  # iter 29 # used 0.037368 # method FI FN
+# value: 0 2184  # iter 30 # used 0.038932 # method FI FN
+# value: 0 2183  # iter 31 # used 0.040638 # method FI FN
+# value: 0 2163  # iter 32 # used 0.043255 # method FI FN
+# value: 0 2162  # iter 33 # used 0.045595 # method FI FN
+# value: 0 2131  # iter 34 # used 0.04726 # method FI FN
+# value: 0 2130  # iter 35 # used 0.048831 # method FI FN
+# value: 0 2129  # iter 36 # used 0.050567 # method FI FN
+# value: 0 2128  # iter 37 # used 0.052413 # method FI FN
+# value: 0 2127  # iter 38 # used 0.054412 # method FI FN
+# value: 0 2093  # iter 39 # used 0.056484 # method FI FN
+# value: 0 2092  # iter 40 # used 0.059569 # method FI FN
+# value: 0 2091  # iter 41 # used 0.062777 # method FI FN
+# value: 0 2056  # iter 42 # used 0.06484 # method FI FN
+# value: 0 2055  # iter 43 # used 0.066988 # method FI FN
+# value: 0 2054  # iter 44 # used 0.069486 # method FI FN
+# value: 0 2018  # iter 45 # used 0.07345 # method FI FN
+# value: 0 1981  # iter 46 # used 0.077709 # method FI FN
+# value: 0 1980  # iter 47 # used 0.080339 # method FI FN
+# value: 0 1945  # iter 48 # used 0.082709 # method FI FN
+# value: 0 1918  # iter 49 # used 0.085376 # method FI FN
+# value: 0 1917  # iter 50 # used 0.088856 # method FI FN
+# value: 0 1916  # iter 51 # used 0.094135 # method FI FN
+# value: 0 1915  # iter 52 # used 0.098008 # method FI FN
+# value: 0 1914  # iter 53 # used 0.10146 # method FI FN
+# value: 0 1877  # iter 54 # used 0.106075 # method FI FN
+# value: 0 1852  # iter 55 # used 0.111622 # method FI FN
+# value: 0 1850  # iter 56 # used 0.115244 # method FI FN
+# value: 0 1848  # iter 57 # used 0.118503 # method FI FN
+# value: 0 1847  # iter 58 # used 0.123562 # method FI FN
+# value: 0 1846  # iter 59 # used 0.129001 # method FI FN
+# value: 0 1845  # iter 60 # used 0.131778 # method FI FN
+# value: 0 1844  # iter 61 # used 0.135078 # method FI FN
+# value: 0 1843  # iter 62 # used 0.140255 # method FI FN
+# value: 0 1842  # iter 63 # used 0.145158 # method FI FN
+# value: 0 1841  # iter 64 # used 0.148035 # method FI FN
+# value: 0 1840  # iter 65 # used 0.151279 # method FI FN
+# value: 0 1811  # iter 66 # used 0.155898 # method FI FN
+# value: 0 1810  # iter 67 # used 0.161161 # method FI FN
+# value: 0 1809  # iter 68 # used 0.165115 # method FI FN
+# value: 0 1775  # iter 69 # used 0.169283 # method FI FN
+# value: 0 1740  # iter 70 # used 0.174624 # method FI FN
+# value: 0 1739  # iter 71 # used 0.180212 # method FI FN
+# value: 0 1738  # iter 72 # used 0.182246 # method FI FN
+# value: 0 1737  # iter 73 # used 0.185621 # method FI FN
+# value: 0 1736  # iter 74 # used 0.190089 # method FI FN
+# value: 0 1735  # iter 75 # used 0.195202 # method FI FN
+# value: 0 1734  # iter 76 # used 0.198827 # method FI FN
+# value: 0 1733  # iter 77 # used 0.199563 # method FI FN
+# value: 0 1732  # iter 78 # used 0.20485 # method FI FN
+# value: 0 1731  # iter 79 # used 0.208788 # method FI FN
+# value: 0 1730  # iter 80 # used 0.214745 # method FI FN
+# value: 0 1692  # iter 81 # used 0.220124 # method FI FN
+# value: 0 1691  # iter 82 # used 0.224366 # method FI FN
+# value: 0 1667  # iter 83 # used 0.230203 # method FI FN
+# value: 0 1666  # iter 84 # used 0.236021 # method FI FN
+# value: 0 1664  # iter 85 # used 0.241855 # method FI FN
+# value: 0 1654  # iter 86 # used 0.242541 # method FI FN
+# value: 0 1652  # iter 87 # used 0.246305 # method FI FN
+# value: 0 1616  # iter 88 # used 0.25001 # method FI FN
+# value: 0 1615  # iter 89 # used 0.255405 # method FI FN
+# value: 0 1614  # iter 90 # used 0.262688 # method FI FN
+# value: 0 1578  # iter 91 # used 0.267107 # method FI FN
+# value: 0 1577  # iter 92 # used 0.274056 # method FI FN
+# value: 0 1568  # iter 93 # used 0.280707 # method FI FN
+# value: 0 1566  # iter 94 # used 0.28545 # method FI FN
+# value: 0 1565  # iter 95 # used 0.289047 # method FI FN
+# value: 0 1564  # iter 96 # used 0.297248 # method FI FN
+# value: 0 1563  # iter 97 # used 0.302237 # method FI FN
+# value: 0 1534  # iter 98 # used 0.310819 # method FI FN
+# value: 0 1498  # iter 99 # used 0.315231 # method FI FN
+# value: 0 1497  # iter 100 # used 0.320707 # method FI FN
+# value: 0 1473  # iter 101 # used 0.327951 # method FI FN
+# value: 0 1472  # iter 102 # used 0.331964 # method FI FN
+# value: 0 1469  # iter 103 # used 0.337371 # method FI FN
+# value: 0 1431  # iter 104 # used 0.344131 # method FI FN
+# value: 0 1405  # iter 105 # used 0.348347 # method FI FN
+# value: 0 1404  # iter 106 # used 0.353384 # method FI FN
+# value: 0 1403  # iter 107 # used 0.360597 # method FI FN
+# value: 0 1368  # iter 108 # used 0.365044 # method FI FN
+# value: 0 1367  # iter 109 # used 0.371091 # method FI FN
+# value: 0 1366  # iter 110 # used 0.373503 # method FI FN
+# value: 0 1365  # iter 111 # used 0.380037 # method FI FN
+# value: 0 1363  # iter 112 # used 0.384995 # method FI FN
+# value: 0 1362  # iter 113 # used 0.393035 # method FI FN
+# value: 0 1361  # iter 114 # used 0.399043 # method FI FN
+# value: 0 1360  # iter 115 # used 0.405512 # method FI FN
+# value: 0 1324  # iter 116 # used 0.411066 # method FI FN
+# value: 0 1323  # iter 117 # used 0.419281 # method FI FN
+# value: 0 1322  # iter 118 # used 0.4261 # method FI FN
+# value: 0 1321  # iter 119 # used 0.433793 # method FI FN
+# value: 0 1320  # iter 120 # used 0.441183 # method FI FN
+# value: 0 1319  # iter 121 # used 0.44726 # method FI FN
+# value: 0 1279  # iter 122 # used 0.456056 # method FI FN
+# value: 0 1278  # iter 123 # used 0.461796 # method FI FN
+# value: 0 1277  # iter 124 # used 0.471345 # method FI FN
+# value: 0 1276  # iter 125 # used 0.480309 # method FI FN
+# value: 0 1240  # iter 126 # used 0.486287 # method FI FN
+# value: 0 1239  # iter 127 # used 0.492509 # method FI FN
+# value: 0 1202  # iter 128 # used 0.497502 # method FI FN
+# value: 0 1201  # iter 129 # used 0.502624 # method FI FN
+# value: 0 1200  # iter 130 # used 0.508986 # method FI FN
+# value: 0 1166  # iter 131 # used 0.514124 # method FI FN
+# value: 0 1128  # iter 132 # used 0.519435 # method FI FN
+# value: 0 1126  # iter 133 # used 0.525133 # method FI FN
+# value: 0 1125  # iter 134 # used 0.530785 # method FI FN
+# value: 0 1089  # iter 135 # used 0.536555 # method FI FN
+# value: 0 1062  # iter 136 # used 0.542481 # method FI FN
+# value: 0 1061  # iter 137 # used 0.548434 # method FI FN
+# value: 0 1024  # iter 138 # used 0.554402 # method FI FN
+# value: 0 1023  # iter 139 # used 0.560602 # method FI FN
+# value: 0 1022  # iter 140 # used 0.566788 # method FI FN
+# value: 0 1021  # iter 141 # used 0.567188 # method FI FN
+# value: 0 985  # iter 142 # used 0.573142 # method FI FN
+# value: 0 984  # iter 143 # used 0.579417 # method FI FN
+# value: 0 983  # iter 144 # used 0.582967 # method FI FN
+# value: 0 982  # iter 145 # used 0.589252 # method FI FN
+# value: 0 981  # iter 146 # used 0.595655 # method FI FN
+# value: 0 947  # iter 147 # used 0.60223 # method FI FN
+# value: 0 946  # iter 148 # used 0.608831 # method FI FN
+# value: 0 945  # iter 149 # used 0.615546 # method FI FN
+# value: 0 944  # iter 150 # used 0.622193 # method FI FN
+# value: 0 943  # iter 151 # used 0.628873 # method FI FN
+# value: 0 910  # iter 152 # used 0.635672 # method FI FN
+# value: 0 909  # iter 153 # used 0.642874 # method FI FN
+# value: 0 908  # iter 154 # used 0.650234 # method FI FN
+# value: 0 907  # iter 155 # used 0.657327 # method FI FN
+# value: 0 906  # iter 156 # used 0.66509 # method FI FN
+# value: 0 905  # iter 157 # used 0.672373 # method FI FN
+# value: 0 904  # iter 158 # used 0.679578 # method FI FN
+# value: 0 903  # iter 159 # used 0.686792 # method FI FN
+# value: 0 902  # iter 160 # used 0.693248 # method FI FN
+# value: 0 901  # iter 161 # used 0.702298 # method FI FN
+# value: 0 900  # iter 162 # used 0.711781 # method FI FN
+# value: 0 899  # iter 163 # used 0.721092 # method FI FN
+# value: 0 898  # iter 164 # used 0.73117 # method FI FN
+# value: 0 897  # iter 165 # used 0.742751 # method FI FN
+# value: 0 896  # iter 166 # used 0.754984 # method FI FN
+# value: 0 866  # iter 167 # used 0.766127 # method FI FN
+# value: 0 832  # iter 168 # used 0.77926 # method FI FN
+# value: 0 804  # iter 169 # used 0.790605 # method FI FN
+# value: 0 803  # iter 170 # used 0.801394 # method FI FN
+# value: 0 802  # iter 171 # used 0.814786 # method FI FN
+# value: 0 767  # iter 172 # used 0.826245 # method FI FN
+# value: 0 766  # iter 173 # used 0.838286 # method FI FN
+# value: 0 765  # iter 174 # used 0.850621 # method FI FN
+# value: 0 764  # iter 175 # used 0.86457 # method FI FN
+# value: 0 763  # iter 176 # used 0.878555 # method FI FN
+# value: 0 762  # iter 177 # used 0.891281 # method FI FN
+# value: 0 761  # iter 178 # used 0.902963 # method FI FN
+# value: 0 760  # iter 179 # used 0.917133 # method FI FN
+# value: 0 759  # iter 180 # used 0.931061 # method FI FN
+# value: 0 758  # iter 181 # used 0.940215 # method FI FN
+# value: 0 757  # iter 182 # used 0.952696 # method FI FN
+# value: 0 725  # iter 183 # used 0.967876 # method FI FN
+# value: 0 724  # iter 184 # used 0.983163 # method FI FN
+# value: 0 723  # iter 185 # used 0.986438 # method FI FN
+# value: 0 722  # iter 186 # used 0.999672 # method FI FN
+# value: 0 721  # iter 187 # used 1.01512 # method FI FN
+# value: 0 720  # iter 188 # used 1.0311 # method FI FN
+# value: 0 719  # iter 189 # used 1.047 # method FI FN
+# value: 0 718  # iter 190 # used 1.06216 # method FI FN
+# value: 0 717  # iter 191 # used 1.07681 # method FI FN
+# value: 0 716  # iter 192 # used 1.08891 # method FI FN
+# value: 0 715  # iter 193 # used 1.09096 # method FI FN
+# value: 0 711  # iter 194 # used 1.10401 # method FI FN
+# value: 0 689  # iter 195 # used 1.11807 # method FI FN
+# value: 0 688  # iter 196 # used 1.12005 # method FI FN
+# value: 0 687  # iter 197 # used 1.13424 # method FI FN
+# value: 0 649  # iter 198 # used 1.14941 # method FI FN
+# value: 0 648  # iter 199 # used 1.16228 # method FI FN
+# value: 0 647  # iter 200 # used 1.16333 # method FI FN
+# value: 0 646  # iter 201 # used 1.17453 # method FI FN
+# value: 0 610  # iter 202 # used 1.18583 # method FI FN
+# value: 0 574  # iter 203 # used 1.1974 # method FI FN
+# value: 0 573  # iter 204 # used 1.20887 # method FI FN
+# value: 0 572  # iter 205 # used 1.22046 # method FI FN
+# value: 0 534  # iter 206 # used 1.23193 # method FI FN
+# value: 0 533  # iter 207 # used 1.24395 # method FI FN
+# value: 0 532  # iter 208 # used 1.256 # method FI FN
+# value: 0 495  # iter 209 # used 1.2681 # method FI FN
+# value: 0 494  # iter 210 # used 1.27365 # method FI FN
+# value: 0 458  # iter 211 # used 1.28584 # method FI FN
+# value: 0 457  # iter 212 # used 1.29859 # method FI FN
+# value: 0 421  # iter 213 # used 1.31107 # method FI FN
+# value: 0 420  # iter 214 # used 1.32342 # method FI FN
+# value: 0 417  # iter 215 # used 1.33647 # method FI FN
+# value: 0 380  # iter 216 # used 1.3497 # method FI FN
+# value: 0 379  # iter 217 # used 1.36308 # method FI FN
+# value: 0 341  # iter 218 # used 1.37669 # method FI FN
+# value: 0 340  # iter 219 # used 1.39184 # method FI FN
+# value: 0 339  # iter 220 # used 1.40639 # method FI FN
+# value: 0 338  # iter 221 # used 1.42038 # method FI FN
+# value: 0 306  # iter 222 # used 1.43609 # method FI FN
+# value: 0 304  # iter 223 # used 1.44917 # method FI FN
+# value: 0 303  # iter 224 # used 1.46424 # method FI FN
+# value: 0 302  # iter 225 # used 1.4799 # method FI FN
+# value: 0 301  # iter 226 # used 1.49579 # method FI FN
+# value: 0 300  # iter 227 # used 1.51147 # method FI FN
+# value: 0 299  # iter 228 # used 1.52687 # method FI FN
+# value: 0 298  # iter 229 # used 1.54289 # method FI FN
+# value: 0 297  # iter 230 # used 1.55877 # method FI FN
+# value: 0 296  # iter 231 # used 1.57498 # method FI FN
+# value: 0 295  # iter 232 # used 1.59143 # method FI FN
+# value: 0 294  # iter 233 # used 1.60873 # method FI FN
+# value: 0 293  # iter 234 # used 1.62606 # method FI FN
+# value: 0 292  # iter 235 # used 1.64392 # method FI FN
+# value: 0 291  # iter 236 # used 1.66175 # method FI FN
+# value: 0 290  # iter 237 # used 1.67949 # method FI FN
+# value: 0 289  # iter 238 # used 1.69834 # method FI FN
+# value: 0 288  # iter 239 # used 1.71864 # method FI FN
+# value: 0 287  # iter 240 # used 1.73751 # method FI FN
+# value: 0 286  # iter 241 # used 1.7564 # method FI FN
+# value: 0 285  # iter 242 # used 1.77571 # method FI FN
+# value: 0 283  # iter 243 # used 1.78772 # method FI FN
+# value: 0 282  # iter 244 # used 1.80755 # method FI FN
+# value: 0 281  # iter 245 # used 1.82725 # method FI FN
+# value: 0 279  # iter 246 # used 1.84702 # method FI FN
+# value: 0 278  # iter 247 # used 1.86684 # method FI FN
+# value: 0 277  # iter 248 # used 1.88838 # method FI FN
+# value: 0 276  # iter 249 # used 1.91066 # method FI FN
+# value: 0 275  # iter 250 # used 1.93262 # method FI FN
+# value: 0 274  # iter 251 # used 1.95473 # method FI FN
+# value: 0 273  # iter 252 # used 1.97742 # method FI FN
+# value: 0 272  # iter 253 # used 2.00101 # method FI FN
+# value: 0 271  # iter 254 # used 2.02394 # method FI FN
+# value: 0 270  # iter 255 # used 2.0472 # method FI FN
+# value: 0 269  # iter 256 # used 2.07111 # method FI FN
+# value: 0 268  # iter 257 # used 2.09513 # method FI FN
+# value: 0 267  # iter 258 # used 2.12088 # method FI FN
+# value: 0 266  # iter 259 # used 2.14657 # method FI FN
+# value: 0 265  # iter 260 # used 2.17119 # method FI FN
+# value: 0 263  # iter 261 # used 2.19633 # method FI FN
+# value: 0 262  # iter 262 # used 2.19883 # method FI FN
+# value: 0 261  # iter 263 # used 2.20362 # method FI FN
+# value: 0 260  # iter 264 # used 2.22893 # method FI FN
+# value: 0 259  # iter 265 # used 2.25535 # method FI FN
+# value: 0 258  # iter 266 # used 2.28188 # method FI FN
+# value: 0 257  # iter 267 # used 2.30947 # method FI FN
+# value: 0 256  # iter 268 # used 2.33769 # method FI FN
+# value: 0 255  # iter 269 # used 2.3654 # method FI FN
+# value: 0 254  # iter 270 # used 2.3946 # method FI FN
+# value: 0 253  # iter 271 # used 2.42457 # method FI FN
+# value: 0 252  # iter 272 # used 2.45494 # method FI FN
+# value: 0 251  # iter 273 # used 2.48556 # method FI FN
+# value: 0 250  # iter 274 # used 2.51721 # method FI FN
+# value: 0 249  # iter 275 # used 2.54977 # method FI FN
+# value: 0 248  # iter 276 # used 2.58279 # method FI FN
+# value: 0 247  # iter 277 # used 2.61621 # method FI FN
+# value: 0 246  # iter 278 # used 2.64962 # method FI FN
+# value: 0 245  # iter 279 # used 2.68316 # method FI FN
+# value: 0 244  # iter 280 # used 2.7183 # method FI FN
+# value: 0 243  # iter 281 # used 2.75368 # method FI FN
+# value: 0 242  # iter 282 # used 2.78967 # method FI FN
+# value: 0 241  # iter 283 # used 2.80453 # method FI FN
+# value: 0 240  # iter 284 # used 2.80856 # method FI FN
+# value: 0 239  # iter 285 # used 2.84558 # method FI FN
+# value: 0 238  # iter 286 # used 2.88266 # method FI FN
+# value: 0 237  # iter 287 # used 2.92135 # method FI FN
+# value: 0 235  # iter 288 # used 2.964 # method FI FN
+# value: 0 234  # iter 289 # used 3.02049 # method FI FN
+# value: 0 233  # iter 290 # used 3.07182 # method FI FN
+# value: 0 232  # iter 291 # used 3.13184 # method FI FN
+# value: 0 231  # iter 292 # used 3.19995 # method FI FN
+# value: 0 230  # iter 293 # used 3.25987 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar neos808444 148 303 0 230 
+## LSTimeUsed 3.25998
+## quality 0 230 
+## violations 164
+## iterations 303
+##table1 neos808444 19846 18329 NA NA 303 0 230 164 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.113252
+## postingModel 0.048088
+## TotalTime 5.017
+## GecodeTime 20
+## seed 60
+## peakMemory 39.5781
+## name neos808444
+Coin0001I At line 1 NAME           neos-849702
+Coin0001I At line 2 ROWS
+Coin0001I At line 1045 COLUMNS
+Coin0001I At line 20356 RHS
+Coin0001I At line 21311 BOUNDS
+Coin0001I At line 23049 ENDATA
+Coin0002I Problem neos-849702 has 1041 rows, 1737 columns and 19308 elements
+G: 0   E: 357    L: 684
+Instance read after 0.011378 seconds
+Peak memory usage for reading instance 3.21484 mb
+## cons 1041
+## vars 1737
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 1038 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1037
+	propagators: 2254
+	depth: 1035
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.00801 seconds
+## fail 2
+Posting 520 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 841 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 840
+	propagators: 1147
+	depth: 838
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.008119 seconds
+## fail 2
+Number of constriants 260
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1331 times
+Gecode found solution after 0.010756
+	fail: 0
+	nodes: 1331
+	propagators: 1111
+	depth: 1330
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.030316
+totally fixed 0
+number of invariants 260 out of 260 (260) 
+number of cycles 17
+number of cycles 0
+##oneway 243
+number of cycles 0
+Total time used so far 0.058327
+Create propagator queues
+Total time used so far 0.192733
+EvalVariables size 0
+Not feasible 
+## initLSModel 0.146125
+This should be initial value 0
+neos-849702 25 0.047253 
+Peak memory usage for Gecode 13.8125 mb
+##GecodeSol neos-849702 13.812500 
+LS solver initialized after 0.193494 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 0
+counter 0 variables 1737
+Number of variables used in local search 1494
+## LSLimitLeft 3.83185
+# test 2
+Number of randomMoves 10
+# value: 0 326  # iter 1 # used 0.001612 # method FI FN
+# value: 0 318  # iter 2 # used 0.002811 # method FI FN
+# value: 0 314  # iter 3 # used 0.004406 # method FI FN
+# value: 0 309  # iter 4 # used 0.006739 # method FI FN
+# value: 0 308  # iter 5 # used 0.007377 # method FI FN
+# value: 0 300  # iter 6 # used 0.011026 # method FI FN
+# value: 0 285  # iter 7 # used 0.015285 # method FI FN
+# value: 0 280  # iter 8 # used 0.023227 # method FI FN
+# value: 0 278  # iter 9 # used 0.031784 # method FI FN
+# value: 0 277  # iter 10 # used 0.040779 # method FI FN
+# value: 0 275  # iter 11 # used 0.047914 # method FI FN
+# value: 0 272  # iter 12 # used 0.057536 # method FI FN
+# value: 0 270  # iter 13 # used 0.063563 # method FI FN
+# value: 0 264  # iter 14 # used 0.066596 # method FI FN
+# value: 0 259  # iter 15 # used 0.074795 # method FI FN
+# value: 0 257  # iter 16 # used 0.083917 # method FI FN
+# value: 0 252  # iter 17 # used 0.093238 # method FI FN
+# value: 0 247  # iter 18 # used 0.10048 # method FI FN
+# value: 0 241  # iter 19 # used 0.113991 # method FI FN
+# value: 0 239  # iter 20 # used 0.123606 # method FI FN
+# value: 0 229  # iter 21 # used 0.136712 # method FI FN
+# value: 0 224  # iter 22 # used 0.148243 # method FI FN
+# value: 0 222  # iter 172 # used 0.524431 # method FI FN
+# value: 0 219  # iter 191 # used 0.59688 # method FI FN
+# value: 0 217  # iter 422 # used 1.20921 # method FI FN
+# value: 0 210  # iter 454 # used 1.29333 # method FI FN
+# value: 0 209  # iter 547 # used 1.55333 # method FI FN
+# value: 0 207  # iter 548 # used 1.56498 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar neos-849702 243 1440 0 207 
+## LSTimeUsed 3.83412
+## quality 0 207 
+## violations 136
+## iterations 1440
+##table1 neos-849702 1737 1041 NA NA 1440 0 207 136 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.011378
+## postingModel 0.005565
+## TotalTime 5.0024
+## GecodeTime 20
+## seed 60
+## peakMemory 13.8125
+## name neos-849702
+Coin0001I At line 1 NAME           ns1688347
+Coin0001I At line 2 ROWS
+Coin0001I At line 4195 COLUMNS
+Coin0001I At line 71141 RHS
+Coin0001I At line 73939 BOUNDS
+Coin0001I At line 76625 ENDATA
+Coin0002I Problem ns1688347 has 4191 rows, 2685 columns and 66908 elements
+G: 2337   E: 88    L: 1766
+Instance read after 0.038024 seconds
+Peak memory usage for reading instance 5.08203 mb
+## cons 4191
+## vars 2685
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 1357 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1356
+	propagators: 17125
+	depth: 1354
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.017855 seconds
+## fail 2
+Posting 2095 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1811 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1810
+	propagators: 12501
+	depth: 1808
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.018728 seconds
+## fail 2
+Number of constriants 1048
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 2281 times
+Gecode found solution after 0.020957
+	fail: 0
+	nodes: 2281
+	propagators: 4718
+	depth: 2280
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.064053
+totally fixed 0
+number of invariants 87 out of 88 (88) 
+number of cycles 0
+##oneway 87
+number of cycles 0
+Total time used so far 0.139657
+Create propagator queues
+Total time used so far 0.160364
+EvalVariables size 34
+Not feasible 
+## initLSModel 0.043406
+This should be initial value 35
+ns1688347 25 0.118748 
+Peak memory usage for Gecode 16.9922 mb
+##GecodeSol ns1688347 16.992188 
+LS solver initialized after 0.162355 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 34
+counter 0 variables 2685
+Number of variables used in local search 2598
+## LSLimitLeft 4.7309
+# test 2
+Number of randomMoves 10
+# value: 1 118  # iter 1 # used 0.000329 # method FI FN
+# value: 1 117  # iter 2 # used 0.000669 # method FI FN
+# value: 1 116  # iter 3 # used 0.001383 # method FI FN
+# value: 1 115  # iter 4 # used 0.002212 # method FI FN
+# value: 1 114  # iter 5 # used 0.003544 # method FI FN
+# value: 1 113  # iter 6 # used 0.004984 # method FI FN
+# value: 1 112  # iter 7 # used 0.006555 # method FI FN
+# value: 1 111  # iter 8 # used 0.006667 # method FI FN
+# value: 1 110  # iter 9 # used 0.008232 # method FI FN
+# value: 1 109  # iter 10 # used 0.009954 # method FI FN
+# value: 1 108  # iter 11 # used 0.012622 # method FI FN
+# value: 1 107  # iter 12 # used 0.014772 # method FI FN
+# value: 1 106  # iter 13 # used 0.015163 # method FI FN
+# value: 1 105  # iter 14 # used 0.017589 # method FI FN
+# value: 1 104  # iter 15 # used 0.018346 # method FI FN
+# value: 1 102  # iter 16 # used 0.021527 # method FI FN
+# value: 1 101  # iter 17 # used 0.021586 # method FI FN
+# value: 1 99  # iter 18 # used 0.02333 # method FI FN
+# value: 1 98  # iter 19 # used 0.026782 # method FI FN
+# value: 1 97  # iter 20 # used 0.02728 # method FI FN
+# value: 1 96  # iter 21 # used 0.031376 # method FI FN
+# value: 1 95  # iter 22 # used 0.035615 # method FI FN
+# value: 1 91  # iter 23 # used 0.040157 # method FI FN
+# value: 1 87  # iter 24 # used 0.045497 # method FI FN
+# value: 1 86  # iter 25 # used 0.052294 # method FI FN
+# value: 1 84  # iter 26 # used 0.060085 # method FI FN
+# value: 1 82  # iter 27 # used 0.061993 # method FI FN
+# value: 1 80  # iter 28 # used 0.070217 # method FI FN
+# value: 1 77  # iter 29 # used 0.079278 # method FI FN
+# value: 1 75  # iter 30 # used 0.088384 # method FI FN
+# value: 1 74  # iter 31 # used 0.09815 # method FI FN
+# value: 1 73  # iter 32 # used 0.101494 # method FI FN
+# value: 1 69  # iter 33 # used 0.104825 # method FI FN
+# value: 1 67  # iter 48 # used 0.137603 # method FI FN
+# value: 1 66  # iter 62 # used 0.162548 # method FI FN
+# value: 1 65  # iter 63 # used 0.171778 # method FI FN
+# value: 1 64  # iter 64 # used 0.182877 # method FI FN
+# value: 1 62  # iter 94 # used 0.246722 # method FI FN
+# value: 1 61  # iter 216 # used 0.450748 # method FI FN
+# value: 1 60  # iter 217 # used 0.45866 # method FI FN
+# value: 1 59  # iter 248 # used 0.49849 # method FI FN
+# value: 1 58  # iter 262 # used 0.516831 # method FI FN
+# value: 1 56  # iter 520 # used 1.04507 # method FI FN
+# value: 1 55  # iter 537 # used 1.07939 # method FI FN
+# value: 1 53  # iter 570 # used 1.14614 # method FI FN
+# value: 1 51  # iter 692 # used 1.37495 # method FI FN
+# value: 1 49  # iter 693 # used 1.38108 # method FI FN
+# value: 1 47  # iter 694 # used 1.3914 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns1688347 87 2409 1 47 
+## LSTimeUsed 4.7329
+## quality 1 47 
+## violations 40
+## iterations 2409
+##table1 ns1688347 2685 4191 NA NA 2409 1 47 40 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.038024
+## postingModel 0.016737
+## TotalTime 5.00215
+## GecodeTime 20
+## seed 60
+## peakMemory 16.9922
+## name ns1688347
+Coin0001I At line 1 NAME           ns894244
+Coin0001I At line 2 ROWS
+Coin0001I At line 12133 COLUMNS
+Coin0001I At line 103016 RHS
+Coin0001I At line 103155 BOUNDS
+Coin0001I At line 125012 ENDATA
+Coin0002I Problem ns894244 has 12129 rows, 21856 columns and 90864 elements
+G: 4111   E: 4178    L: 3840
+Instance read after 0.085594 seconds
+Peak memory usage for reading instance 8.30859 mb
+## cons 12129
+## vars 21856
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5335
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 4145
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.00659 seconds
+## fail 2
+Posting 6064 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 481 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 480
+	propagators: 12613
+	depth: 478
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.040023 seconds
+## fail 2
+Number of constriants 3032
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8896 times
+Gecode found solution after 0.449156
+	fail: 0
+	nodes: 8896
+	propagators: 6067
+	depth: 8895
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.512552
+totally fixed 804
+number of invariants 2228 out of 3032 (2228) 
+number of cycles 0
+##oneway 2228
+number of cycles 0
+Total time used so far 0.68917
+Create propagator queues
+Total time used so far 0.710121
+EvalVariables size 16
+Not feasible 
+## initLSModel 0.083375
+This should be initial value 0
+ns894244 25 0.633763 
+Peak memory usage for Gecode 28.2617 mb
+##GecodeSol ns894244 28.261719 
+LS solver initialized after 0.717799 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 16
+counter 0 variables 16521
+Number of variables used in local search 14293
+## LSLimitLeft 4.25032
+# test 2
+Number of randomMoves 10
+# value: 0 237  # iter 1 # used 0.001485 # method FI FN
+# value: 0 235  # iter 2 # used 0.003779 # method FI FN
+# value: 0 234  # iter 3 # used 0.009357 # method FI FN
+# value: 0 232  # iter 4 # used 0.015776 # method FI FN
+# value: 0 231  # iter 5 # used 0.023021 # method FI FN
+# value: 0 230  # iter 6 # used 0.02541 # method FI FN
+# value: 0 227  # iter 7 # used 0.034223 # method FI FN
+# value: 0 225  # iter 8 # used 0.045302 # method FI FN
+# value: 1 224  # iter 9 # used 0.056508 # method FI FN
+# value: 1 223  # iter 10 # used 0.06963 # method FI FN
+# value: 1 221  # iter 11 # used 0.084223 # method FI FN
+# value: 1 219  # iter 12 # used 0.100248 # method FI FN
+# value: 1 218  # iter 13 # used 0.116911 # method FI FN
+# value: 1 217  # iter 14 # used 0.135384 # method FI FN
+# value: 1 216  # iter 15 # used 0.153608 # method FI FN
+# value: 2 201  # iter 16 # used 0.173206 # method FI FN
+# value: 2 200  # iter 17 # used 0.192778 # method FI FN
+# value: 2 198  # iter 18 # used 0.212757 # method FI FN
+# value: 2 197  # iter 19 # used 0.226301 # method FI FN
+# value: 2 195  # iter 20 # used 0.237165 # method FI FN
+# value: 2 194  # iter 21 # used 0.25389 # method FI FN
+# value: 2 192  # iter 22 # used 0.275099 # method FI FN
+# value: 2 191  # iter 23 # used 0.296181 # method FI FN
+# value: 2 190  # iter 24 # used 0.311703 # method FI FN
+# value: 2 189  # iter 25 # used 0.333099 # method FI FN
+# value: 2 188  # iter 26 # used 0.359323 # method FI FN
+# value: 2 185  # iter 27 # used 0.384852 # method FI FN
+# value: 3 180  # iter 28 # used 0.410281 # method FI FN
+# value: 3 179  # iter 29 # used 0.412041 # method FI FN
+# value: 3 178  # iter 30 # used 0.413709 # method FI FN
+# value: 3 177  # iter 31 # used 0.416408 # method FI FN
+# value: 3 176  # iter 32 # used 0.421906 # method FI FN
+# value: 3 175  # iter 33 # used 0.42616 # method FI FN
+# value: 3 174  # iter 34 # used 0.436698 # method FI FN
+# value: 3 172  # iter 35 # used 0.454928 # method FI FN
+# value: 3 171  # iter 36 # used 0.484071 # method FI FN
+# value: 3 170  # iter 37 # used 0.485968 # method FI FN
+# value: 3 169  # iter 38 # used 0.513841 # method FI FN
+# value: 3 168  # iter 39 # used 0.51676 # method FI FN
+# value: 3 166  # iter 40 # used 0.554131 # method FI FN
+# value: 3 165  # iter 41 # used 0.559817 # method FI FN
+# value: 3 164  # iter 42 # used 0.585994 # method FI FN
+# value: 3 163  # iter 43 # used 0.587316 # method FI FN
+# value: 3 161  # iter 44 # used 0.615642 # method FI FN
+# value: 3 160  # iter 45 # used 0.627207 # method FI FN
+# value: 3 157  # iter 46 # used 0.658146 # method FI FN
+# value: 4 156  # iter 66 # used 0.855095 # method FI FN
+# value: 4 155  # iter 104 # used 1.05381 # method FI FN
+# value: 4 154  # iter 105 # used 1.05503 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns894244 2228 611 4 154 
+## LSTimeUsed 4.25161
+## quality 4 154 
+## violations 85
+## iterations 611
+##table1 ns894244 21856 12129 NA NA 611 4 154 85 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.085594
+## postingModel 0.036133
+## TotalTime 5.00165
+## GecodeTime 20
+## seed 60
+## peakMemory 28.7773
+## name ns894244
+Coin0001I At line 1 NAME           ns894788
+Coin0001I At line 2 ROWS
+Coin0001I At line 2283 COLUMNS
+Coin0001I At line 16674 RHS
+Coin0001I At line 16739 BOUNDS
+Coin0001I At line 20203 ENDATA
+Coin0002I Problem ns894788 has 2279 rows, 3463 columns and 14381 elements
+G: 790   E: 817    L: 672
+Instance read after 0.014593 seconds
+Peak memory usage for reading instance 3.34766 mb
+## cons 2279
+## vars 3463
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 1127
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 2335
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001035 seconds
+## fail 2
+Posting 1139 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 354 times
+Gecode found solution after 0.003128
+	fail: 0
+	nodes: 354
+	propagators: 1656
+	depth: 353
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.005777
+totally fixed 290
+number of invariants 527 out of 817 (527) 
+number of cycles 0
+##oneway 527
+number of cycles 0
+Total time used so far 0.033365
+Create propagator queues
+Total time used so far 0.036141
+EvalVariables size 7
+Not feasible 
+## initLSModel 0.010748
+This should be initial value 0
+ns894788 50 0.026228 
+Peak memory usage for Gecode 7.21094 mb
+##GecodeSol ns894788 7.210938 
+LS solver initialized after 0.037128 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 7
+counter 0 variables 2336
+Number of variables used in local search 1809
+## LSLimitLeft 4.95823
+# test 2
+Number of randomMoves 10
+# value: 0 136  # iter 1 # used 0.000347 # method FI FN
+# value: 1 125  # iter 2 # used 0.000599 # method FI FN
+# value: 1 124  # iter 3 # used 0.00069 # method FI FN
+# value: 1 123  # iter 4 # used 0.000958 # method FI FN
+# value: 1 122  # iter 5 # used 0.001323 # method FI FN
+# value: 1 121  # iter 6 # used 0.001663 # method FI FN
+# value: 1 120  # iter 7 # used 0.002147 # method FI FN
+# value: 1 118  # iter 8 # used 0.00265 # method FI FN
+# value: 1 117  # iter 9 # used 0.003186 # method FI FN
+# value: 1 115  # iter 10 # used 0.00372 # method FI FN
+# value: 1 114  # iter 11 # used 0.00426 # method FI FN
+# value: 2 113  # iter 12 # used 0.005065 # method FI FN
+# value: 2 111  # iter 13 # used 0.005171 # method FI FN
+# value: 2 109  # iter 14 # used 0.005503 # method FI FN
+# value: 2 107  # iter 15 # used 0.006059 # method FI FN
+# value: 2 106  # iter 16 # used 0.006161 # method FI FN
+# value: 2 105  # iter 17 # used 0.006843 # method FI FN
+# value: 2 104  # iter 18 # used 0.006912 # method FI FN
+# value: 2 101  # iter 19 # used 0.007666 # method FI FN
+# value: 2 100  # iter 20 # used 0.007837 # method FI FN
+# value: 2 99  # iter 21 # used 0.008663 # method FI FN
+# value: 2 98  # iter 22 # used 0.009567 # method FI FN
+# value: 2 97  # iter 23 # used 0.010637 # method FI FN
+# value: 3 88  # iter 24 # used 0.01185 # method FI FN
+# value: 3 87  # iter 25 # used 0.011877 # method FI FN
+# value: 3 86  # iter 26 # used 0.012148 # method FI FN
+# value: 3 85  # iter 27 # used 0.012592 # method FI FN
+# value: 3 84  # iter 28 # used 0.013595 # method FI FN
+# value: 5 83  # iter 50 # used 0.02161 # method FI FN
+# value: 5 80  # iter 51 # used 0.023224 # method FI FN
+# value: 5 79  # iter 162 # used 0.049902 # method FI FN
+# value: 6 78  # iter 177 # used 0.053913 # method FI FN
+# value: 7 77  # iter 178 # used 0.054891 # method FI FN
+# value: 7 76  # iter 179 # used 0.055902 # method FI FN
+# value: 7 74  # iter 180 # used 0.057414 # method FI FN
+# value: 7 73  # iter 193 # used 0.059947 # method FI FN
+# value: 7 72  # iter 194 # used 0.060676 # method FI FN
+# value: 7 71  # iter 195 # used 0.061482 # method FI FN
+# value: 7 70  # iter 196 # used 0.062953 # method FI FN
+# value: 6 70  # iter 227 # used 0.072825 # method FI FN
+# value: 7 69  # iter 228 # used 0.073932 # method FI FN
+# value: 7 68  # iter 229 # used 0.075183 # method FI FN
+# value: 7 67  # iter 230 # used 0.075207 # method FI FN
+# value: 7 66  # iter 231 # used 0.076333 # method FI FN
+# value: 7 65  # iter 276 # used 0.089714 # method FI FN
+# value: 7 64  # iter 277 # used 0.090989 # method FI FN
+# value: 7 63  # iter 278 # used 0.091469 # method FI FN
+# value: 7 62  # iter 279 # used 0.092762 # method FI FN
+# value: 7 61  # iter 343 # used 0.109785 # method FI FN
+# value: 7 60  # iter 437 # used 0.135276 # method FI FN
+# value: 7 59  # iter 502 # used 0.152381 # method FI FN
+# value: 7 57  # iter 503 # used 0.15372 # method FI FN
+# value: 7 56  # iter 1767 # used 0.546269 # method FI FN
+# value: 7 54  # iter 1814 # used 0.565213 # method FI FN
+# value: 7 53  # iter 1850 # used 0.579131 # method FI FN
+# value: 7 52  # iter 1851 # used 0.58128 # method FI FN
+# value: 7 51  # iter 1867 # used 0.583716 # method FI FN
+# value: 7 50  # iter 2361 # used 0.753022 # method FI FN
+# value: 7 48  # iter 2362 # used 0.75604 # method FI FN
+# value: 7 47  # iter 3208 # used 1.00327 # method FI FN
+# value: 7 46  # iter 3209 # used 1.00444 # method FI FN
+# value: 7 45  # iter 4540 # used 1.40039 # method FI FN
+# value: 7 44  # iter 10600 # used 3.26106 # method FI FN
+# value: 7 43  # iter 10613 # used 3.26321 # method FI FN
+# value: 7 42  # iter 11382 # used 3.51729 # method FI FN
+# value: 7 41  # iter 11383 # used 3.51826 # method FI FN
+# value: 7 40  # iter 16245 # used 4.86322 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns894788 527 16624 7 40 
+## LSTimeUsed 4.95864
+## quality 7 40 
+## violations 36
+## iterations 16624
+##table1 ns894788 3463 2279 NA NA 16624 7 40 36 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.014593
+## postingModel 0.005908
+## TotalTime 5.00055
+## GecodeTime 20
+## seed 60
+## peakMemory 7.21094
+## name ns894788
+Coin0001I At line 1 NAME           protfold
+Coin0001I At line 2 ROWS
+Coin0001I At line 2116 COLUMNS
+Coin0001I At line 13981 RHS
+Coin0001I At line 14085 BOUNDS
+Coin0001I At line 15921 ENDATA
+Coin0002I Problem protfold has 2112 rows, 1835 columns and 23491 elements
+G: 1786   E: 37    L: 289
+Instance read after 0.017201 seconds
+Peak memory usage for reading instance 3.49609 mb
+## cons 2112
+## vars 1835
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 730 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 729
+	propagators: 16833
+	depth: 727
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.006709 seconds
+## fail 2
+Posting 1056 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1035 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1034
+	propagators: 8886
+	depth: 1032
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007484 seconds
+## fail 2
+Number of constriants 528
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1613 times
+Gecode found solution after 0.010432
+	fail: 0
+	nodes: 1613
+	propagators: 4080
+	depth: 1612
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.027627
+totally fixed 0
+number of invariants 37 out of 37 (37) 
+number of cycles 2
+number of cycles 0
+##oneway 35
+number of cycles 0
+Total time used so far 0.060043
+Create propagator queues
+Total time used so far 0.069023
+EvalVariables size 120
+Not feasible 
+## initLSModel 0.018493
+This should be initial value 0
+protfold 25 0.051178 
+Peak memory usage for Gecode 8.79297 mb
+##GecodeSol protfold 8.792969 
+LS solver initialized after 0.069784 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 120
+counter 0 variables 1835
+Number of variables used in local search 1800
+## LSLimitLeft 4.89906
+# test 2
+Number of randomMoves 10
+# value: 0 87  # iter 1 # used 8.3e-05 # method FI FN
+# value: -1 87  # iter 2 # used 0.000352 # method FI FN
+# value: -1 82  # iter 3 # used 0.000607 # method FI FN
+# value: -1 80  # iter 4 # used 0.000805 # method FI FN
+# value: -2 79  # iter 5 # used 0.000969 # method FI FN
+# value: -3 78  # iter 6 # used 0.001409 # method FI FN
+# value: -3 77  # iter 7 # used 0.00199 # method FI FN
+# value: -3 76  # iter 8 # used 0.002121 # method FI FN
+# value: -4 76  # iter 9 # used 0.002759 # method FI FN
+# value: -4 71  # iter 10 # used 0.003496 # method FI FN
+# value: -4 68  # iter 11 # used 0.004749 # method FI FN
+# value: -4 67  # iter 12 # used 0.004789 # method FI FN
+# value: -5 66  # iter 13 # used 0.005011 # method FI FN
+# value: -5 65  # iter 14 # used 0.006223 # method FI FN
+# value: -6 65  # iter 15 # used 0.007555 # method FI FN
+# value: -7 65  # iter 16 # used 0.008806 # method FI FN
+# value: -7 61  # iter 17 # used 0.010486 # method FI FN
+# value: -8 60  # iter 18 # used 0.012254 # method FI FN
+# value: -9 60  # iter 19 # used 0.013982 # method FI FN
+# value: -9 59  # iter 20 # used 0.01505 # method FI FN
+# value: -8 58  # iter 21 # used 0.015256 # method FI FN
+# value: -9 58  # iter 22 # used 0.016941 # method FI FN
+# value: -10 58  # iter 23 # used 0.018834 # method FI FN
+# value: -11 58  # iter 24 # used 0.02101 # method FI FN
+# value: -11 57  # iter 25 # used 0.023358 # method FI FN
+# value: -11 56  # iter 26 # used 0.023975 # method FI FN
+# value: -11 52  # iter 27 # used 0.026335 # method FI FN
+# value: -11 51  # iter 28 # used 0.027088 # method FI FN
+# value: -11 47  # iter 29 # used 0.030467 # method FI FN
+# value: -11 46  # iter 30 # used 0.032566 # method FI FN
+# value: -11 45  # iter 31 # used 0.036155 # method FI FN
+# value: -11 44  # iter 32 # used 0.036302 # method FI FN
+# value: -10 43  # iter 33 # used 0.038495 # method FI FN
+# value: -10 42  # iter 34 # used 0.042158 # method FI FN
+# value: -10 41  # iter 35 # used 0.042244 # method FI FN
+# value: -10 40  # iter 36 # used 0.043951 # method FI FN
+# value: -10 39  # iter 37 # used 0.044957 # method FI FN
+# value: -10 38  # iter 38 # used 0.048099 # method FI FN
+# value: -10 37  # iter 39 # used 0.048208 # method FI FN
+# value: -11 36  # iter 40 # used 0.051983 # method FI FN
+# value: -11 33  # iter 41 # used 0.056122 # method FI FN
+# value: -10 32  # iter 42 # used 0.057634 # method FI FN
+# value: -10 31  # iter 43 # used 0.06189 # method FI FN
+# value: -10 30  # iter 44 # used 0.062293 # method FI FN
+# value: -11 29  # iter 45 # used 0.06663 # method FI FN
+# value: -12 29  # iter 337 # used 0.28837 # method FI FN
+# value: -12 28  # iter 338 # used 0.293046 # method FI FN
+# value: -12 27  # iter 339 # used 0.293237 # method FI FN
+# value: -13 26  # iter 361 # used 0.310341 # method FI FN
+# value: -14 26  # iter 378 # used 0.32201 # method FI FN
+# value: -13 24  # iter 379 # used 0.32636 # method FI FN
+# value: -16 24  # iter 1196 # used 1.05077 # method FI FN
+# value: -12 23  # iter 1486 # used 1.30396 # method FI FN
+# value: -12 22  # iter 1738 # used 1.53672 # method FI FN
+# value: -12 21  # iter 1774 # used 1.57754 # method FI FN
+# value: -13 21  # iter 1793 # used 1.59779 # method FI FN
+# value: -12 20  # iter 1794 # used 1.60206 # method FI FN
+# value: -15 20  # iter 5513 # used 4.76943 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar protfold 35 5641 -15 20 
+## LSTimeUsed 4.90236
+## quality -15 20 
+## violations 20
+## iterations 5641
+##table1 protfold 1835 2112 NA NA 5641 -15 20 20 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.017201
+## postingModel 0.006365
+## TotalTime 5.00343
+## GecodeTime 20
+## seed 60
+## peakMemory 8.79297
+## name protfold
+Coin0001I At line 1 NAME           ns1853823
+Coin0001I At line 2 ROWS
+Coin0001I At line 224530 COLUMNS
+Coin0001I At line 1714933 RHS
+Coin0001I At line 1716976 BOUNDS
+Coin0001I At line 1929497 ENDATA
+Coin0002I Problem ns1853823 has 224526 rows, 213440 columns and 1489480 elements
+G: 0   E: 10164    L: 214362
+Instance read after 0.99534 seconds
+Peak memory usage for reading instance 89.5625 mb
+## cons 224526
+## vars 213440
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 264
+Searching for solution....
+stop called 9435 times
+Gecode found solution after 2.83493
+	fail: 0
+	nodes: 9435
+	propagators: 746193
+	depth: 9434
+	restarts: 0
+	nogoods: 0
+## fail 0
+## gecode 2.85209
+## relax 0
+totally fixed 0
+number of invariants 10164 out of 10164 (10164) 
+number of cycles 462
+number of cycles 0
+##oneway 9702
+number of cycles 0
+Total time used so far 5.68739
+Create propagator queues
+Total time used so far 8.20497
+EvalVariables size 656
+## initLSModel 3.88035
+This should be initial value 504000
+ns1853823 100 4.446051 4.446356 
+Peak memory usage for Gecode 568.895 mb
+##GecodeSol ns1853823 568.894531 
+LS solver initialized after 8.32686 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 656
+counter 0 variables 213176
+Number of variables used in local search 203474
+## LSLimitLeft -11.4646
+# test 2
+Number of randomMoves 10
+name, oneway, iteration, eval[0], eval[1]
+##invar ns1853823 9702 0 504000 0 
+## LSTimeUsed 0
+## quality 504000 0 
+## violations 0
+## iterations 0
+##table1 ns1853823 213440 224526 504000 0 504000 0 0 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.99534
+## postingModel 0.598817
+## TotalTime 16.4673
+## GecodeTime 20
+## seed 60
+## peakMemory 569.668
+## name ns1853823
+Coin0001I At line 1 NAME           ns894236
+Coin0001I At line 2 ROWS
+Coin0001I At line 8222 COLUMNS
+Coin0001I At line 49310 RHS
+Coin0001I At line 49391 BOUNDS
+Coin0001I At line 59058 ENDATA
+Coin0002I Problem ns894236 has 8218 rows, 9666 columns and 41067 elements
+G: 2825   E: 2801    L: 2592
+Instance read after 0.063082 seconds
+Peak memory usage for reading instance 5.21484 mb
+## cons 8218
+## vars 9666
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 2250
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 13546
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.00672 seconds
+## fail 2
+Posting 4109 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 715 times
+Gecode found solution after 0.026494
+	fail: 0
+	nodes: 715
+	propagators: 6092
+	depth: 714
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.047393
+totally fixed 821
+number of invariants 1980 out of 2801 (1980) 
+number of cycles 0
+##oneway 1980
+number of cycles 0
+Total time used so far 0.200877
+Create propagator queues
+Total time used so far 0.221657
+EvalVariables size 18
+Not feasible 
+## initLSModel 0.0804
+This should be initial value 0
+ns894236 50 0.147906 
+Peak memory usage for Gecode 16.8828 mb
+##GecodeSol ns894236 16.882812 
+LS solver initialized after 0.229236 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 18
+counter 0 variables 7416
+Number of variables used in local search 5436
+## LSLimitLeft 4.73739
+# test 2
+Number of randomMoves 10
+# value: 0 183  # iter 1 # used 0.000356 # method FI FN
+# value: 0 182  # iter 2 # used 0.00122 # method FI FN
+# value: 0 181  # iter 3 # used 0.003007 # method FI FN
+# value: 0 180  # iter 4 # used 0.00536 # method FI FN
+# value: 0 179  # iter 5 # used 0.007267 # method FI FN
+# value: 1 169  # iter 6 # used 0.00928 # method FI FN
+# value: 1 168  # iter 7 # used 0.012117 # method FI FN
+# value: 1 167  # iter 8 # used 0.016518 # method FI FN
+# value: 1 166  # iter 9 # used 0.021042 # method FI FN
+# value: 1 165  # iter 10 # used 0.025541 # method FI FN
+# value: 1 164  # iter 11 # used 0.03076 # method FI FN
+# value: 2 154  # iter 12 # used 0.038075 # method FI FN
+# value: 2 153  # iter 13 # used 0.042481 # method FI FN
+# value: 3 152  # iter 14 # used 0.048405 # method FI FN
+# value: 3 150  # iter 15 # used 0.050296 # method FI FN
+# value: 3 149  # iter 16 # used 0.052078 # method FI FN
+# value: 3 148  # iter 17 # used 0.058765 # method FI FN
+# value: 3 147  # iter 18 # used 0.070432 # method FI FN
+# value: 3 146  # iter 19 # used 0.080325 # method FI FN
+# value: 3 145  # iter 20 # used 0.091999 # method FI FN
+# value: 3 144  # iter 21 # used 0.103649 # method FI FN
+# value: 4 143  # iter 22 # used 0.116294 # method FI FN
+# value: 4 141  # iter 23 # used 0.119676 # method FI FN
+# value: 4 139  # iter 24 # used 0.121688 # method FI FN
+# value: 4 138  # iter 25 # used 0.125386 # method FI FN
+# value: 4 137  # iter 26 # used 0.131459 # method FI FN
+# value: 4 136  # iter 27 # used 0.139259 # method FI FN
+# value: 4 135  # iter 28 # used 0.142322 # method FI FN
+# value: 4 134  # iter 29 # used 0.150104 # method FI FN
+# value: 4 133  # iter 30 # used 0.158881 # method FI FN
+# value: 4 132  # iter 31 # used 0.17237 # method FI FN
+# value: 4 131  # iter 32 # used 0.187915 # method FI FN
+# value: 4 130  # iter 33 # used 0.201874 # method FI FN
+# value: 4 129  # iter 34 # used 0.220495 # method FI FN
+# value: 4 128  # iter 35 # used 0.238543 # method FI FN
+# value: 4 127  # iter 36 # used 0.257249 # method FI FN
+# value: 4 126  # iter 52 # used 0.337451 # method FI FN
+# value: 4 124  # iter 69 # used 0.393967 # method FI FN
+# value: 5 121  # iter 136 # used 0.612455 # method FI FN
+# value: 5 119  # iter 184 # used 0.79018 # method FI FN
+# value: 5 118  # iter 217 # used 0.88506 # method FI FN
+# value: 5 117  # iter 230 # used 0.901532 # method FI FN
+# value: 5 116  # iter 231 # used 0.908775 # method FI FN
+# value: 5 115  # iter 249 # used 0.991317 # method FI FN
+# value: 5 114  # iter 250 # used 1.00772 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns894236 1980 1737 5 114 
+## LSTimeUsed 4.748
+## quality 5 114 
+## violations 51
+## iterations 1737
+##table1 ns894236 9666 8218 NA NA 1737 5 114 51 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.063082
+## postingModel 0.038063
+## TotalTime 5.01087
+## GecodeTime 20
+## seed 60
+## peakMemory 17.1406
+## name ns894236
+Coin0001I At line 1 NAME           ns894786
+Coin0001I At line 2 ROWS
+Coin0001I At line 16798 COLUMNS
+Coin0001I At line 130390 RHS
+Coin0001I At line 130460 BOUNDS
+Coin0001I At line 157739 ENDATA
+Coin0002I Problem ns894786 has 16794 rows, 27278 columns and 113575 elements
+G: 5613   E: 5805    L: 5376
+Instance read after 0.114137 seconds
+Peak memory usage for reading instance 9.95703 mb
+## cons 16794
+## vars 27278
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5023
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 26404
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.015174 seconds
+## fail 2
+Posting 8397 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1962 times
+Gecode found solution after 0.279931
+	fail: 0
+	nodes: 1962
+	propagators: 15556
+	depth: 1961
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 0.327084
+totally fixed 1084
+number of invariants 4721 out of 5805 (4721) 
+number of cycles 0
+##oneway 4721
+number of cycles 0
+Total time used so far 0.620244
+Create propagator queues
+Total time used so far 0.662894
+EvalVariables size 14
+Not feasible 
+## initLSModel 0.168789
+This should be initial value 0
+ns894786 50 0.502308 
+Peak memory usage for Gecode 37.043 mb
+##GecodeSol ns894786 37.042969 
+LS solver initialized after 0.673329 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 14
+counter 0 variables 22255
+Number of variables used in local search 17534
+## LSLimitLeft 4.27576
+# test 2
+Number of randomMoves 10
+# value: 1 126  # iter 1 # used 0.008374 # method FI FN
+# value: 1 125  # iter 2 # used 0.011667 # method FI FN
+# value: 1 123  # iter 3 # used 0.01567 # method FI FN
+# value: 1 122  # iter 4 # used 0.01989 # method FI FN
+# value: 1 121  # iter 5 # used 0.025723 # method FI FN
+# value: 1 120  # iter 6 # used 0.034856 # method FI FN
+# value: 2 112  # iter 7 # used 0.045178 # method FI FN
+# value: 2 111  # iter 8 # used 0.056692 # method FI FN
+# value: 2 109  # iter 9 # used 0.070367 # method FI FN
+# value: 2 108  # iter 10 # used 0.084148 # method FI FN
+# value: 2 107  # iter 11 # used 0.099179 # method FI FN
+# value: 2 106  # iter 12 # used 0.115057 # method FI FN
+# value: 2 105  # iter 13 # used 0.132015 # method FI FN
+# value: 2 103  # iter 14 # used 0.150261 # method FI FN
+# value: 2 102  # iter 15 # used 0.168877 # method FI FN
+# value: 2 101  # iter 16 # used 0.189141 # method FI FN
+# value: 2 100  # iter 17 # used 0.211813 # method FI FN
+# value: 2 99  # iter 18 # used 0.239525 # method FI FN
+# value: 2 98  # iter 19 # used 0.267971 # method FI FN
+# value: 3 96  # iter 20 # used 0.296111 # method FI FN
+# value: 3 95  # iter 21 # used 0.298082 # method FI FN
+# value: 3 94  # iter 22 # used 0.318604 # method FI FN
+# value: 3 93  # iter 23 # used 0.329781 # method FI FN
+# value: 4 82  # iter 24 # used 0.358776 # method FI FN
+# value: 4 81  # iter 25 # used 0.35905 # method FI FN
+# value: 4 80  # iter 26 # used 0.361205 # method FI FN
+# value: 4 79  # iter 27 # used 0.368389 # method FI FN
+# value: 4 78  # iter 28 # used 0.404245 # method FI FN
+# value: 4 77  # iter 29 # used 0.413059 # method FI FN
+# value: 4 76  # iter 30 # used 0.449758 # method FI FN
+# value: 4 75  # iter 84 # used 0.87085 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns894786 4721 529 4 75 
+## LSTimeUsed 4.30324
+## quality 4 75 
+## violations 52
+## iterations 529
+##table1 ns894786 27278 16794 NA NA 529 4 75 52 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.114137
+## postingModel 0.06311
+## TotalTime 5.02816
+## GecodeTime 20
+## seed 60
+## peakMemory 37.5586
+## name ns894786
+Coin0001I At line 1 NAME           ns903616
+Coin0001I At line 2 ROWS
+Coin0001I At line 18056 COLUMNS
+Coin0001I At line 109722 RHS
+Coin0001I At line 109850 BOUNDS
+Coin0001I At line 131433 ENDATA
+Coin0002I Problem ns903616 has 18052 rows, 21582 columns and 91641 elements
+G: 6093   E: 6151    L: 5808
+Instance read after 0.091536 seconds
+Peak memory usage for reading instance 8.72266 mb
+## cons 18052
+## vars 21582
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5371
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 11041
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007363 seconds
+## fail 2
+Posting 9026 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1054 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1053
+	propagators: 15206
+	depth: 1051
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.066804 seconds
+## fail 2
+Number of constriants 4513
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8469 times
+Gecode found solution after 0.410646
+	fail: 0
+	nodes: 8469
+	propagators: 7024
+	depth: 8468
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 2
+## gecode 0.504995
+totally fixed 1419
+number of invariants 3094 out of 4513 (3094) 
+number of cycles 0
+##oneway 3094
+number of cycles 0
+Total time used so far 0.703743
+Create propagator queues
+Total time used so far 0.725348
+EvalVariables size 22
+Not feasible 
+## initLSModel 0.097238
+This should be initial value 0
+ns903616 25 0.635813 
+Peak memory usage for Gecode 32.9219 mb
+##GecodeSol ns903616 32.921875 
+LS solver initialized after 0.734011 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 22
+counter 0 variables 16211
+Number of variables used in local search 13117
+## LSLimitLeft 4.23188
+# test 2
+Number of randomMoves 10
+# value: 0 180  # iter 1 # used 0.00078 # method FI FN
+# value: 0 178  # iter 2 # used 0.002406 # method FI FN
+# value: 0 176  # iter 3 # used 0.005865 # method FI FN
+# value: 0 175  # iter 4 # used 0.011307 # method FI FN
+# value: 0 174  # iter 5 # used 0.018438 # method FI FN
+# value: 0 172  # iter 6 # used 0.026765 # method FI FN
+# value: 0 171  # iter 7 # used 0.036167 # method FI FN
+# value: 0 169  # iter 8 # used 0.046174 # method FI FN
+# value: 0 168  # iter 9 # used 0.058153 # method FI FN
+# value: 0 167  # iter 10 # used 0.073521 # method FI FN
+# value: 0 166  # iter 11 # used 0.089765 # method FI FN
+# value: 0 165  # iter 12 # used 0.106282 # method FI FN
+# value: 0 164  # iter 13 # used 0.122962 # method FI FN
+# value: 1 163  # iter 14 # used 0.138124 # method FI FN
+# value: 1 161  # iter 15 # used 0.148156 # method FI FN
+# value: 1 160  # iter 16 # used 0.160538 # method FI FN
+# value: 1 159  # iter 17 # used 0.177606 # method FI FN
+# value: 2 149  # iter 18 # used 0.195379 # method FI FN
+# value: 2 148  # iter 19 # used 0.216365 # method FI FN
+# value: 2 147  # iter 20 # used 0.238644 # method FI FN
+# value: 2 146  # iter 21 # used 0.262376 # method FI FN
+# value: 2 144  # iter 22 # used 0.289595 # method FI FN
+# value: 2 142  # iter 23 # used 0.315061 # method FI FN
+# value: 2 141  # iter 24 # used 0.339535 # method FI FN
+# value: 2 140  # iter 25 # used 0.36486 # method FI FN
+# value: 2 139  # iter 26 # used 0.373711 # method FI FN
+# value: 2 138  # iter 27 # used 0.384175 # method FI FN
+# value: 2 136  # iter 28 # used 0.410681 # method FI FN
+# value: 3 128  # iter 29 # used 0.438187 # method FI FN
+# value: 3 127  # iter 30 # used 0.439755 # method FI FN
+# value: 3 126  # iter 31 # used 0.448714 # method FI FN
+# value: 3 125  # iter 32 # used 0.462451 # method FI FN
+# value: 3 122  # iter 33 # used 0.491249 # method FI FN
+# value: 3 121  # iter 109 # used 1.11417 # method FI FN
+# value: 3 120  # iter 110 # used 1.15144 # method FI FN
+# value: 4 118  # iter 133 # used 1.37716 # method FI FN
+name, oneway, iteration, eval[0], eval[1]
+##invar ns903616 3094 523 4 118 
+## LSTimeUsed 4.23977
+## quality 4 118 
+## violations 66
+## iterations 523
+##table1 ns903616 21582 18052 NA NA 523 4 118 66 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.091536
+## postingModel 0.0401
+## TotalTime 5.00825
+## GecodeTime 20
+## seed 60
+## peakMemory 33.4375
+## name ns903616
+Coin0001I At line 1 NAME           pb-simp-nonunif
+Coin0001I At line 2 ROWS
+Coin0001I At line 1451916 COLUMNS
+Coin0001I At line 3647167 RHS
+Coin0001I At line 3647509 BOUNDS
+Coin0001I At line 3671358 ENDATA
+Coin0002I Problem pb-simp-nonunif has 1451912 rows, 23848 columns and 4366648 elements
+G: 1447776   E: 4136    L: 0
+Instance read after 3.75314 seconds
+Peak memory usage for reading instance 266.461 mb
+## cons 1451912
+## vars 23848
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 11594
+Searching for solution....
+stop called 1103 times
+Gecode found solution after 0.087309
+	fail: 0
+	nodes: 1103
+	propagators: 294922
+	depth: 1102
+	restarts: 0
+	nogoods: 0
+## fail 0
+## gecode 0.09437
+## relax 0
+totally fixed 3698
+number of invariants 438 out of 4136 (438) 
+number of cycles 0
+##oneway 438
+number of cycles 0
+Total time used so far 9.08826
+Create propagator queues
+Total time used so far 9.55283
+EvalVariables size 170
+## initLSModel 4.65386
+This should be initial value 97
+pb-simp-nonunif 100 5.431044 5.431170 
+Peak memory usage for Gecode 1591.71 mb
+##GecodeSol pb-simp-nonunif 1591.710938 
+LS solver initialized after 10.0852 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 170
+counter 0 variables 12254
+Number of variables used in local search 11816
+## LSLimitLeft -14.4446
+# test 2
+Number of randomMoves 10
+name, oneway, iteration, eval[0], eval[1]
+##invar pb-simp-nonunif 438 0 97 0 
+## LSTimeUsed 0
+## quality 97 0 
+## violations 0
+## iterations 0
+##table1 pb-simp-nonunif 23848 1451912 97 0 97 0 0 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 3.75314
+## postingModel 1.58356
+## TotalTime 19.4449
+## GecodeTime 20
+## seed 60
+## peakMemory 1591.71
+## name pb-simp-nonunif
+Coin0001I At line 1 NAME           t1722
+Coin0001I At line 2 ROWS
+Coin0001I At line 342 COLUMNS
+Coin0001I At line 170071 RHS
+Coin0001I At line 170410 BOUNDS
+Coin0001I At line 207041 ENDATA
+Coin0002I Problem t1722 has 338 rows, 36630 columns and 133096 elements
+G: 0   E: 338    L: 0
+Instance read after 0.16885 seconds
+Peak memory usage for reading instance 10.3828 mb
+## cons 338
+## vars 36630
+Initialize solution
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 15830 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 15829
+	propagators: 51
+	depth: 15827
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 2.35273 seconds
+## fail 2
+Posting 169 constriants 
+Gecode time 20
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 36046 times
+Gecode found solution after 4.28685
+	fail: 0
+	nodes: 36046
+	propagators: 169
+	depth: 36045
+	restarts: 0
+	nogoods: 0
+## fail 0
+## relax 1
+## gecode 6.65378
+totally fixed 0
+number of invariants 169 out of 169 (169) 
+number of cycles 0
+##oneway 169
+number of cycles 0
+Total time used so far 6.97633
+Create propagator queues
+Total time used so far 7.32009
+EvalVariables size 36461
+Not feasible 
+## initLSModel 0.42256
+This should be initial value 380179
+t1722 50 6.905241 
+Peak memory usage for Gecode 56.7656 mb
+##GecodeSol t1722 56.765625 
+LS solver initialized after 7.32841 seconds
+
+ ######################################################################################################### 
+BEGINING LOCALSEARCH 
+ ######################################################################################################### 
+
+Number of evaluation variables 36461
+counter 0 variables 36630
+Number of variables used in local search 36461
+## LSLimitLeft -3.18707
+# test 2
+Number of randomMoves 10
+name, oneway, iteration, eval[0], eval[1]
+##invar t1722 169 0 380179 240 
+## LSTimeUsed 0
+## quality 380179 240 
+## violations 125
+## iterations 0
+##table1 t1722 36630 338 NA NA 0 380179 240 125 
+instance name, variables, constraints, gecode percentage of constraints, time to initial solution, time to feasible solution, value of first feasible, #iterations, final solution val, number of violations
+## CoinRead 0.16885
+## postingModel 0.082543
+## TotalTime 8.18749
+## GecodeTime 20
+## seed 60
+## peakMemory 56.7656
+## name t1722

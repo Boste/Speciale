@@ -4,7 +4,6 @@
 
 Model::Model() {
 
-
 }
 
 Model::~Model() {
@@ -12,7 +11,6 @@ Model::~Model() {
     //    for (IntegerVariable* iv : *IntVarVector) {
     //        delete iv;
     //    }
-
     for (Variable* iv : original) {
         delete iv;
     }
@@ -351,7 +349,7 @@ void Model::initialize() {
 
 
     if (getIntegerVariables().size() == 0) {
-        std::cout << "Do stuff for binary swapping" << std::endl;
+//        std::cout << "Do stuff for binary swapping" << std::endl;
     } else {
         containsIntegerVariables = true;
         auto start = std::clock();

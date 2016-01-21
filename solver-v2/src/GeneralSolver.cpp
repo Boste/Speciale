@@ -212,17 +212,7 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         // Obj value after gecode
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-        int initialValue = 0;
-        constraint obj = model->getConstraintsWithPriority(0)->at(0);
-        std::unordered_map<int, coefType>& coef = obj->getCoefficients();
-        for (Variable* iv : obj->getVariables()) {
-            double coeff = coef.at(iv->getID());
-            if (coeff != 0) {
-                //                std::cout << "id " << iv->getID() << " value " << iv->getCurrentValue() << " coeff " << coeff << std::endl;
-                initialValue += coeff * iv->getCurrentValue();
-            }
-        }
-        std::cout << "This should be initial value " << initialValue << std::endl;
+
         double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
@@ -235,14 +225,14 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //        exit(1);
         std::cout << "## relax 0" << std::endl;
         tid = std::clock();
-//        LS->createDDG(true);
-//        LS->initializeLS(true);
+        LS->createDDG(true);
+        LS->initializeLS(true);
         auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
 
     } else {
-        std::cout << "not relaxing" << std::endl;
-//        relax(TimeForGecode);
+        //        std::cout << "not relaxing" << std::endl;   
+        relax(TimeForGecode);
         double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## gecode " << gecode << std::endl;
 
@@ -254,13 +244,43 @@ void GeneralSolver::initialSolution(int TimeForGecode) {
         //        exit(1);
         tid = std::clock();
 
-//        LS->createDDG(false);
-//        LS->initializeLS(false);
+        LS->createDDG(false);
+        LS->initializeLS(false);
         double inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
         std::cout << "## initLSModel " << inils << std::endl;
 
     }
 
+    int initialValue = 0;
+    constraint obj = model->getConstraintsWithPriority(0)->at(0);
+    std::unordered_map<int, coefType>& coef = obj->getCoefficients();
+    for (Variable* iv : obj->getVariables()) {
+        double coeff = coef.at(iv->getID());
+        if (coeff != 0) {
+            //                std::cout << "id " << iv->getID() << " value " << iv->getCurrentValue() << " coeff " << coeff << std::endl;
+            initialValue += coeff * iv->getCurrentValue();
+        }
+    }
+    std::cout << "This should be initial value " << initialValue << std::endl;
+
+    unsigned relax = model->out->relax;
+    if (relax == 0) {
+        model->out->addToTable1(std::to_string(100));
+        model->out->feasibleVal = model->getEvaluationInvariantNr(0)->getCurrentValue();
+    } else if (relax == 1) {
+        model->out->addToTable1(std::to_string(50));
+    } else if (relax == 2) {
+        model->out->addToTable1(std::to_string(25));
+    } else if (relax == 3) {
+        model->out->addToTable1(std::to_string(0));
+    } else {
+
+    }
+    model->out->addToTable1(std::to_string(model->out->solTime));
+    if (model->out->feasible) {
+        model->out->addToTable1(std::to_string(model->out->feasibleTime));
+    }
+    std::cout << model->out->getToTable1() << std::endl;
 
     //        st = std::make_shared<State>(model);
 
@@ -355,9 +375,9 @@ bool GeneralSolver::relax(int TimeForGecode) {
             std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
         }
     }
-    model->out.relax = 1;
+    model->out->relax = 1;
 
-    model->out.addToGecodePrint("1");
+    model->out->addToGecodePrint("1");
     bool solution = GS->findSolution(TimeForGecode, false);
     //    std::vector<constraint> ;
     unsigned numberOfTimesRelaxed = 1;
@@ -384,9 +404,9 @@ bool GeneralSolver::relax(int TimeForGecode) {
         //        }
         std::cout << "Number of constriants " << keepOrder.size() << std::endl;
         furtherRelax(keepOrder);
-        model->out.relax = 2;
+        model->out->relax = 2;
 
-        model->out.addToGecodePrint("2");
+        model->out->addToGecodePrint("2");
 
         solution = GS->findSolution(TimeForGecode, false);
         //        keepOrder = newKeep;
@@ -399,13 +419,13 @@ bool GeneralSolver::relax(int TimeForGecode) {
     for (constraint con : keepOrder) {
         if (con->isFunctional()) {
             feasibleFunc.push_back(con);
-        }   
+        }
     }
     if (solution) {
         model->setFeasibleFunctionalConstraints(feasibleFunc);
     } else {
-        model->out.relax = 3;
-        model->out.addToGecodePrint("3");
+        model->out->relax = 3;
+        model->out->addToGecodePrint("3");
 
         GS->randomInitialize();
 
@@ -585,6 +605,6 @@ void GeneralSolver::printVariableValues() {
     //        std::cout << std::endl;
 }
 
-Output& GeneralSolver::getOutput() {
-    return model->out;
+void GeneralSolver::setOutput(Output* out) {
+    model->out = out;
 }

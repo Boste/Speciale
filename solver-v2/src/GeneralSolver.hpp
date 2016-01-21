@@ -88,7 +88,7 @@ public:
 
     void printVariableValues();
     //    unsigned getNumberOfDigits(double number);
-    Output& getOutput();
+    void setOutput(Output* out);
 private:
 
     void print_stats(Gecode::Search::Statistics & stat) {

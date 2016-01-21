@@ -1,6 +1,7 @@
 #ifndef STATE_HPP
 #define	STATE_HPP
 #include "Model.hpp"
+#include "Clock.hpp"
 
 class State {
 private:

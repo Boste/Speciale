@@ -1,0 +1,126 @@
+When a model better suited for local search has been made the remaining time before the time limit is used to do local 
+search. The check is done after a step of a search procedure has been made to insure the time limit is not exceeded. 
+The best solution found while searching is save in a \class{State} such that the search can continue but always report 
+the best solution when the time limit is reached. \\ 
+Three algorithms has been made from combining \class{Neighborhood} classes and search procedures that will be used to 
+test efficiency of the framework. The first algorithm uses two \class{TabuSearch} with different 
+\class{Neighborhood} classes. When the solution is infeasible \class{TabuSearch} is combined with \class{ConflictOnlyNE} 
+to only look at variables that can reduce the number of violations. When the current solution is feasible 
+\class{TabuSearch} with a \class{RestrictedFlipNE} class is used. If the number of independent variables are less than 
+or equal to 5000 it uses a \class{FlipNeighborhood} class instead. The reason for choosing a subset of the neighborhood 
+to examine is to increase the number of steps made in case the neighborhood is large. \\
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+  \algdata
+%\Input{\int iteration, int[] best, int[] current, int[] tabulist }
+%\Output{\bool improvement}
+%\BlankLine
+ConflictOnlyNE neigborhood \;
+RestrictedFlipNE neigborhood2 \;
+TabuSearch TSCON(neighborhood) \;
+TabuSearch TSRFN(neighborhood2) \;
+\int iteration = 0 \;
+\int[] best = getSolution() \;
+\int[] current = getSolution() \;
+\int[] tabulist(neighborhood.getSize(), -neighborhood.getSize()) \;
+\While{\upshape within time limit}{
+  \eIf{\upshape Current solution is feasible}{
+    TSCON.start(iteration ,current, best, tabulist) \;
+    iterations++ \;     
+    \If{\upshape getSolution() is better than bestSolution} {
+      bestSolution = getSolution() \;
+    }
+  }{
+    TSRFN.start(iteration, current, best, tabulist) \;
+    iterations++ \;     
+    \If{\upshape getSolution() is better than bestSolution} {
+      bestSolution = getSolution() \;
+    }
+  }
+}
+\caption{Local Search - Test Algorithm 1} \label{algo_LS1} 
+ %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
+The second algorithm for testing is iterative improvement using first improvement and random walk with a single flip 
+neighborhood. They idea is to find a local optima fast, and use randomness to escape the optima.  \\ 
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+  \algdata
+%\Input{\int iteration, int[] best, int[] current, int[] tabulist }
+%\Output{\bool improvement}
+%\BlankLine
+
+FlipNeighborhood FN \;
+\int randomMoves = min(FN.getSize() / 50, 10) \;
+FirstImprovement FI(FN) \;
+RandomWalk RW(FN, randomMoves) \;
+\bool improvement = true  \;
+\While{\upshape within time limit}{
+  \eIf{improvement \&\& \upshape within time limit}{
+    improvement = FI.start() \;
+    iterations++ \;     
+    \If{\upshape getSolution() is better than bestSolution} {
+      bestSolution = getSolution() \;
+    }
+  }
+    RW.start() \;
+    iterations += randomMoves \;     
+    \If{\upshape getSolution() is better than bestSolution} {
+      bestSolution = getSolution() \;
+    }
+  
+}
+\caption{Local Search - Test Algorithm 2} \label{algo_LS2} 
+ %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
+The last algorithm that will be tested uses a minimum conflict heuristic with a single flip neighborhood when the 
+current solutions is infeasible. When the current solution is feasible a tabu search with a restricted single flip 
+neighborhood is used. \\ 
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+
+%\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
+  \algdata
+%\Input{\int iteration, int[] best, int[] current, int[] tabulist }
+%\Output{\bool improvement}
+%\BlankLine
+RandomConflictConNE neigborhood \;
+RestrictedFlipNE neigborhood2 \;
+BestImprovement BIRCC(neighborhood) \;
+TabuSearch TSRFN(neighborhood2) \;
+\int iteration = 0 \;
+\int[] best = getSolution() \;
+\int[] current = getSolution() \;
+\int[] tabulist(neighborhood.getSize(), -neighborhood.getSize()) \;
+\While{\upshape within time limit}{
+  \eIf{\upshape Current solution is feasible}{
+    BIRCC.start() \;
+    iterations++ \;     
+    \If{\upshape getSolution() is better than bestSolution} {
+      bestSolution = getSolution() \;
+    }
+  }{
+    TSRFN.start(iteration, current, best, tabulist) \;
+    iterations++ \;     
+    \If{\upshape getSolution() is better than bestSolution} {	
+      bestSolution = getSolution() \;
+    }
+  }
+}
+\caption{Local Search - Test Algorithm 3} \label{algo_LS3} 
+ %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
+\end{algorithm} \noindent
+\DecMargin{1em} \\
+Several other algorithms can be made from the \class{Neighborhood} and search procedure classes. Though they can be 
+combined in many ways they are not as easily combined as wanted. The \class{Neighborhood} classes can be a mix of 
+heuristics and a neighborhood which is not ideal. The next subsection will discuss this in more detail. 
+
+
+

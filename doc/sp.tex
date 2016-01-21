@@ -10,10 +10,6 @@ best \class{Move}. The best \class{Move} is determined from their delta vector a
 of the \class{Neighborhood} is called on each \class{Move}. It returns a boolean that tells if the current solution was 
 improved. A boolean can be given to \class{BestImprovement} that indicate if it should commit a non improving 
 \class{Move}. How each iteration is done is describe by algorithm \ref{algo_BI} \\ 
-\boste{Skriv best improvement alg, min conflict, muligvis tabu 
- Søndag} \\
-\boste{Linear, sum, LEQ og EQ start søndag. Færdig mandag + ret}
-
 \IncMargin{1em}
 \begin{algorithm}[H]
 
@@ -78,7 +74,7 @@ algorithm \ref{algo_TS}. \\
 
 %\SetKwFunction{relation}{relation}\SetKwFunction{coeff}{coefficient}
   \algdata
-\Input{\int iteration, int[] best, int[] current, vector<int> tabulist }
+\Input{\int iteration, int[] best, int[] current, int[] tabulist }
 %\Output{\bool improvement}
 \BlankLine
 \int tabuTenure = Random(0,10)+ min(NE.getSize()*2, tabulist.size() /200) \;
@@ -110,7 +106,7 @@ algorithm \ref{algo_TS}. \\
 NE.commitMove(bestMove) \;
 %\Return improvement \;
 
-\caption{TabuSearch Start} \label{algo_TS} 
+\caption{TabuSearch Start(iteration, best,current,tabulist)} \label{algo_TS} 
  %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
 \end{algorithm} \noindent
 \DecMargin{1em} \\

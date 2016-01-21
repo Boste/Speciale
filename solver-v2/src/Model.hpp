@@ -46,7 +46,7 @@ private:
     std::vector<constraint> feasibleFunctionalConstriants;
     
 public:
-    Output out;
+    Output* out;
     /// Should be moved to state
     std::vector<int> initialEvaluation;
     bool containsIntegerVariables = false;

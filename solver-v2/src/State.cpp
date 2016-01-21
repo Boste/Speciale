@@ -59,7 +59,15 @@ State::~State() {
 /// Saves current value of all non-fixed binary variable and set solutionValue to the sum of obj functions. 
 
 void State::setViolation() {
+    
     violation = model->getViolatedConstraints().size();
+    if(!model->out->feasible){
+        if(violation == 0){
+            model->out->feasibleTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+            model->out->feasibleVal = model->getEvaluationInvariantNr(0)->getCurrentValue();
+            model->out->feasible = true;
+        }
+    }
 }
 
 unsigned State::getViolations() {

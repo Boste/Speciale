@@ -17,13 +17,16 @@ The \class{Neighborhood} classes that are implemented are shown in table \ref{ta
 \hline
 class                          & Heuristic                                          \\ \hline
 \class{FlipNeighborhood}     & All variables                                      \\ \hline
-\class{RestrictedFlipNE}     & A Random subset of the variables	               \\ \hline
-\class{ConflictOnlyNE}       & Variables in unsatisfied constraints           \\ \hline
+\class{RestrictedFlipNE}     & A expected 5000 variables chosen at random              \\ \hline
+\class{ConflictOnlyNE}       & All variables in unsatisfied constraints           \\ \hline
 \class{RandomConflictFlipNE} & Variables from a random unsatisfied constraint \\ \hline
 \end{tabular}
 \caption{Table of \class{Neighborhood} classes}
 \label{tab_neighb}
 \end{table}
+The \class{RestrictedFlipNE} class chooses a variable for the next move with probability $p = \frac{5000}{n}$, where 
+$n$ is the number of independent variables. This gives expected 5000 variable before it return a \textbf{NULL} pointer. 
+\\
 The method \method{next()} creates new \class{Move} object and returns a pointer to it. If all the 
 different neighborhood operation has been returned the method returns a pointer to \textbf{NULL} instead. To know when 
 a neighborhood has been fully explored, counters and iterators are used depending on the neighborhood. These are 

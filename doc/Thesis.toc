@@ -37,10 +37,10 @@
 \contentsline {section}{\numberline {8}Local Search and Metaheuristics}{28}
 \contentsline {subsection}{\numberline {8.1}Neighborhoods}{29}
 \contentsline {subsection}{\numberline {8.2}Search Procedures}{32}
-\contentsline {subsection}{\numberline {8.3}Local Search Algorithms}{36}
-\contentsline {subsection}{\numberline {8.4}Change in Design}{36}
-\contentsline {section}{\numberline {9}Tests}{36}
-\contentsline {subsection}{\numberline {9.1}Gecode Search Engine}{36}
-\contentsline {section}{\numberline {10}Results}{36}
-\contentsline {section}{\numberline {11}Future Work}{36}
-\contentsline {section}{\numberline {12}Conclusion}{36}
+\contentsline {subsection}{\numberline {8.3}Local Search Algorithms}{34}
+\contentsline {subsection}{\numberline {8.4}Change in Local Search Design}{37}
+\contentsline {section}{\numberline {9}Tests}{37}
+\contentsline {subsection}{\numberline {9.1}Gecode Search Engine}{37}
+\contentsline {section}{\numberline {10}Results}{37}
+\contentsline {section}{\numberline {11}Future Work}{37}
+\contentsline {section}{\numberline {12}Conclusion}{38}

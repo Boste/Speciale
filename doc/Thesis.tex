@@ -113,10 +113,12 @@
 \section{Architectural Overview}  
   \input{architec}
   \subsection{Variables}
+    \subsection{Invariants}
+  \input{archInv}\label{sub_inv}
+
   \subsection{Constraints}
   \input{archCons} \label{sub_cons}
-  \subsection{Invariants}
-  \input{archInv}\label{sub_inv}
+
   \subsection{General Solver}
   \input{generalsolver}\label{sub_gen}
   
@@ -152,9 +154,10 @@
   \subsection{Local Search Algorithms}
   \input{algimp}
   \subsection{Change in Local Search Design}
+  \input{lschange}
 \section{Tests}
 \subsection{Gecode Search Engine}
-\input{gecodetest}
+%\input{gecodetest}
 \section{Results}
 \section{Future Work}
   \input{future}

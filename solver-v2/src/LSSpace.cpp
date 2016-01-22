@@ -158,7 +158,7 @@ void LSSpace::createDDG(bool all) {
     DDG->cleanUpGraph(model->getNonFixedVariables());
 
     DDG->checkForCycles(model->getInvariants());
-    
+
     //    exit(1);
     //    std::cout << "BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
     //    std::cout << "BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
@@ -242,7 +242,7 @@ void LSSpace::initializeLS(bool feasible) {
 
     //    if (feasible) {
     model->cleanUp();
-    std::cout <<"##oneway " << model->getInvariants().size() << std::endl;
+    std::cout << "##oneway " << model->getInvariants().size() << std::endl;
     model->out->oneway = model->getInvariants().size();
 
 
@@ -535,70 +535,70 @@ void LSSpace::optimizeSolution(int time, int test) {
     //#####################################################################################
     //    should test all invariants
     //#####################################################################################
-    for (invariant inv : model->getInvariants()) {
-        if (!inv->test()) {
-            std::cout << "Wrong before optimization " << std::endl;
-
-            exit(1);
-        }
-
-    }
-
-
-
-    for (Variable* iv : model->getNonFixedVariables()) {
-        if (iv->isDef()) {
-            assert(iv->getOneway()->getCurrentValue() == iv->getCurrentValue());
-        } else {
-            //            unsigned prev = 0;
-            //            for (invariant invar : model->getPropagationQueue(iv)) {
-            //                if (invar->getTimestamp() > prev) {
-            //                    std::cout << "pointing to higher timestamp" << std::endl;
-            //                    
-            //                } else {
-            //                    prev = invar->getTimestamp();
-            //                }
-            //            }
-            for (unsigned i = 0; i < model->getUpdate(iv).size(); i++) {
-                bool found = false;
-                for (auto inva : model->getPropagationQueue(iv)) {
-                    if (model->getUpdate(iv).at(i) == inva) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    std::cout << "one from update is not in propagation queue" << std::endl;
-
-                }
-            }
-            for (auto inva : model->getPropagationQueue(iv)) {
-                unsigned times = inva->getTimestamp();
-                bool found = false;
-                for (auto invas : model->getUpdate(inva)) {
-                    if (invas->getTimestamp() > times) {
-                        std::cout << "wrong order of timestamp " << std::endl;
-
-                    }
-                    for (auto inva2 : model->getPropagationQueue(iv)) {
-
-                        if (invas == inva2) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        std::cout << "one from update is not in propagation queue" << std::endl;
-
-                    }
-
-                }
-
-
-
-            }
-        }
-    }
+    //    for (invariant inv : model->getInvariants()) {
+    //        if (!inv->test()) {
+    //            std::cout << "Wrong before optimization " << std::endl;
+    //
+    //            exit(1);
+    //        }
+    //
+    //    }
+    //
+    //
+    //
+    //    for (Variable* iv : model->getNonFixedVariables()) {
+    //        if (iv->isDef()) {
+    //            assert(iv->getOneway()->getCurrentValue() == iv->getCurrentValue());
+    //        } else {
+    //            //            unsigned prev = 0;
+    //            //            for (invariant invar : model->getPropagationQueue(iv)) {
+    //            //                if (invar->getTimestamp() > prev) {
+    //            //                    std::cout << "pointing to higher timestamp" << std::endl;
+    //            //                    
+    //            //                } else {
+    //            //                    prev = invar->getTimestamp();
+    //            //                }
+    //            //            }
+    //            for (unsigned i = 0; i < model->getUpdate(iv).size(); i++) {
+    //                bool found = false;
+    //                for (auto inva : model->getPropagationQueue(iv)) {
+    //                    if (model->getUpdate(iv).at(i) == inva) {
+    //                        found = true;
+    //                        break;
+    //                    }
+    //                }
+    //                if (!found) {
+    //                    std::cout << "one from update is not in propagation queue" << std::endl;
+    //
+    //                }
+    //            }
+    //            for (auto inva : model->getPropagationQueue(iv)) {
+    //                unsigned times = inva->getTimestamp();
+    //                bool found = false;
+    //                for (auto invas : model->getUpdate(inva)) {
+    //                    if (invas->getTimestamp() > times) {
+    //                        std::cout << "wrong order of timestamp " << std::endl;
+    //
+    //                    }
+    //                    for (auto inva2 : model->getPropagationQueue(iv)) {
+    //
+    //                        if (invas == inva2) {
+    //                            found = true;
+    //                            break;
+    //                        }
+    //                    }
+    //                    if (!found) {
+    //                        std::cout << "one from update is not in propagation queue" << std::endl;
+    //
+    //                    }
+    //
+    //                }
+    //
+    //
+    //
+    //            }
+    //        }
+    //    }
 
 
     //    std::cout << DDG->getVariableUpdate(1).size() << std::endl;
@@ -632,89 +632,89 @@ void LSSpace::optimizeSolution(int time, int test) {
     //        //        exit(1);
     //    }
 
-    for (Variable* var : model->getNonFixedVariables()) {
-        if (var->isDef()) {
-            Constraint * con = var->getDefinedByCon();
-            invariant inv = var->getOneway();
-            assert(con->getVariables().size() - 1 == inv->getVariablePointers().size() + inv->getInvariantPointers().size() + inv->getFixedVariables().size());
-            for (Variable* var : inv->getVariablePointers()) {
-                if (var->isDef()) {
-                    std::cout << "Defined but in variable pointers" << std::endl;
-                    debug;
-                }
-                if (var->isFixed()) {
-                    std::cout << "Fixed but in variable pointers" << std::endl;
-                    debug;
-                }
-
-                bool found = false;
-                for (invariant invar : DDG->getVariableUpdate(var->getID())) {
-                    if (invar == inv) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    debug;
-                    exit(1);
-                }
-                //
-            }
-            for (invariant invar : inv->getInvariantPointers()) {
-                bool found = false;
-                for (invariant inva : DDG->getInvariantUpdate(invar->getID())) {
-                    if (inva == inv) {
-                        found = true;
-                        break;
-                    }
-                }
-
-
-                if (!found) {
-                    debug;
-                    exit(1);
-                }
-            }
-        }
-    }
-
-    int counter = 0;
-
-    for (Variable* var : model->getNonFixedVariables()) {
-        //        std::cout << "Var id " << var->getID() << std::endl;
-        if (var->isDef()) {
-
-            //            debug;
-            if (var->isInObjective()) {
-                if (var->numberOfConstraints() != DDG->getInvariantUpdate(var->getOneway()->getID()).size()) {
-                    std::cout << var->numberOfConstraints() + 1 << " " << DDG->getInvariantUpdate(var->getOneway()->getID()).size() << std::endl;
-
-                } else if (var->numberOfConstraints() != DDG->getInvariantUpdate(var->getOneway()->getID()).size()) {
-                    std::cout << var->numberOfConstraints() << " " << DDG->getInvariantUpdate(var->getOneway()->getID()).size() << std::endl;
-                    counter++;
-                }
-            }
-        } else {
-            if (var->isInObjective()) {
-                if (var->numberOfConstraints() + 1 != DDG->getVariableUpdate(var->getID()).size()) {
-                    std::cout << var->numberOfConstraints() + 1 << " " << DDG->getVariableUpdate(var->getID()).size() << std::endl;
-                }
-            } else {
-
-                if (var->numberOfConstraints() != DDG->getVariableUpdate(var->getID()).size()) {
-                    std::cout << var->numberOfConstraints() << " " << DDG->getVariableUpdate(var->getID()).size() << std::endl;
-                    counter++;
-                }
-            }
-        }
-        //        assert(var->numberOfConstraints() == DDG->getVariableUpdate(var->getID()).size());
-    }
+    //    for (Variable* var : model->getNonFixedVariables()) {
+    //        if (var->isDef()) {
+    //            Constraint * con = var->getDefinedByCon();
+    //            invariant inv = var->getOneway();
+    //            assert(con->getVariables().size() - 1 == inv->getVariablePointers().size() + inv->getInvariantPointers().size() + inv->getFixedVariables().size());
+    //            for (Variable* var : inv->getVariablePointers()) {
+    //                if (var->isDef()) {
+    //                    std::cout << "Defined but in variable pointers" << std::endl;
+    //                    debug;
+    //                }
+    //                if (var->isFixed()) {
+    //                    std::cout << "Fixed but in variable pointers" << std::endl;
+    //                    debug;
+    //                }
+    //
+    //                bool found = false;
+    //                for (invariant invar : DDG->getVariableUpdate(var->getID())) {
+    //                    if (invar == inv) {
+    //                        found = true;
+    //                        break;
+    //                    }
+    //                }
+    //                if (!found) {
+    //                    debug;
+    //                    exit(1);
+    //                }
+    //                //
+    //            }
+    //            for (invariant invar : inv->getInvariantPointers()) {
+    //                bool found = false;
+    //                for (invariant inva : DDG->getInvariantUpdate(invar->getID())) {
+    //                    if (inva == inv) {
+    //                        found = true;
+    //                        break;
+    //                    }
+    //                }
+    //
+    //
+    //                if (!found) {
+    //                    debug;
+    //                    exit(1);
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //    int counter = 0;
+    //
+    //    for (Variable* var : model->getNonFixedVariables()) {
+    //        //        std::cout << "Var id " << var->getID() << std::endl;
+    //        if (var->isDef()) {
+    //
+    //            //            debug;
+    //            if (var->isInObjective()) {
+    //                if (var->numberOfConstraints() != DDG->getInvariantUpdate(var->getOneway()->getID()).size()) {
+    //                    std::cout << var->numberOfConstraints() + 1 << " " << DDG->getInvariantUpdate(var->getOneway()->getID()).size() << std::endl;
+    //
+    //                } else if (var->numberOfConstraints() != DDG->getInvariantUpdate(var->getOneway()->getID()).size()) {
+    //                    std::cout << var->numberOfConstraints() << " " << DDG->getInvariantUpdate(var->getOneway()->getID()).size() << std::endl;
+    //                    counter++;
+    //                }
+    //            }
+    //        } else {
+    //            if (var->isInObjective()) {
+    //                if (var->numberOfConstraints() + 1 != DDG->getVariableUpdate(var->getID()).size()) {
+    //                    std::cout << var->numberOfConstraints() + 1 << " " << DDG->getVariableUpdate(var->getID()).size() << std::endl;
+    //                }
+    //            } else {
+    //
+    //                if (var->numberOfConstraints() != DDG->getVariableUpdate(var->getID()).size()) {
+    //                    std::cout << var->numberOfConstraints() << " " << DDG->getVariableUpdate(var->getID()).size() << std::endl;
+    //                    counter++;
+    //                }
+    //            }
+    //        }
+    //        //        assert(var->numberOfConstraints() == DDG->getVariableUpdate(var->getID()).size());
+    //    }
 
     //    
 
 
     std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
-    std::cout << "counter " << counter << " variables " << model->getNonFixedVariables().size() << std::endl;
+    //    std::cout << "counter " << counter << " variables " << model->getNonFixedVariables().size() << std::endl;
     //    debug;
     //    debug;
     //    debug;
@@ -963,13 +963,14 @@ void LSSpace::optimizeSolution(int time, int test) {
         RandomWalk RW(FN, randomMoves);
         FirstImprovement FIFN(FN);
         bool imp = true;
-        //        unsigned loopCounter =0;
+        //                unsigned loopCounter =0;
         while (usedTime < timelimit) {
             imp = true;
-            //            loopCounter++;
+            //                        loopCounter++;
             while (imp && usedTime < timelimit) {
                 imp = FIFN.Start();
                 iterations++;
+
                 if (currentState->compare(bestState)) {
                     currentState->setViolation();
                     bestState->copy(currentState);
@@ -1018,6 +1019,7 @@ void LSSpace::optimizeSolution(int time, int test) {
             //                std::random_shuffle(model->getMask().begin(),model->getMask().end());
             //                loopCounter = 0;
             //            }
+            //            std::cout << loopCounter << std::endl;
         }
         delete FN;
 
@@ -1097,18 +1099,18 @@ void LSSpace::optimizeSolution(int time, int test) {
         model->out->addToTable1("NA");
         model->out->addToTable1(std::to_string(iterations));
     }
-    
+
 
     std::cout << "name, oneway, iteration, eval[0], eval[1]" << std::endl;
-    std::cout << "##invar " << model->out->name<< model->out->oneway << " ";
-    std::cout << iterations <<" ";
+    std::cout << "##invar " << model->out->name << model->out->oneway << " ";
+    std::cout << iterations << " ";
     for (int eval : bestState->getEvaluation()) {
 
         std::cout << eval << " ";
-//        model->out->addToTable1(std::to_string(eval));
+        //        model->out->addToTable1(std::to_string(eval));
     }
     std::cout << std::endl;
-    
+
     //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;
     //    std::cout << "number of loops " << loopCounter << std::endl;
     std::cout << "## LSTimeUsed " << usedTime << std::endl;

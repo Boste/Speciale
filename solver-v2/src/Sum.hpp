@@ -36,34 +36,12 @@ public:
     
     Sum();
     Sum(const Sum &a);
-
-    bool calculateValue();
-
     ~Sum();
 
-//    Sum& operator=(const Sum &a);
-
-//    void rollback() {
-//        // Skal den overhovedet bruges?
-//    }
-//
-//    void initialize() {
-//        // er det hurtigere at løbe igennem invarianter end at løbe gennem updates?
-//    }
-
     bool calculateDeltaValue();
-//    void initialize();
-    
-//    void usedByConstraint(int constraint, int priority);
-//    void usedByObjective(int constraint, int priority);
 
     void proposeChange(int variableNumber, int changeInValue);
     void updateValue();
-
-
-//    void addChange(std::vector<int> variableNumbers, std::vector<int> changes);
-
-//    void addChangeSwap(int variableNumber1, int variableNumber2);
 
 
     bool test();

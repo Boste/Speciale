@@ -18,10 +18,6 @@ bool EQviolation::calculateDeltaValue() {
 
         return true;
     }
-    //    if(VariableChange.size() > 1){
-    //        debug;
-    //    } 
-
     if (LHS->getCurrentValue() + VariableChange.back() == RHS) {
 
         DeltaValue = -CurrentValue;

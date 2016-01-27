@@ -10,8 +10,8 @@
 #ifndef MODEL_HPP
 #define	MODEL_HPP
 
-class Model {
-        friend class GeneralSolver;
+class Storage {
+        friend class GPSolver;
         
 private:
     /// All variables given by user
@@ -58,9 +58,9 @@ public:
     //    unsigned numberOfLayers = 0;
     //    int numberOfViolations;
 
-    Model();
-    Model(const Model& orig);
-    ~Model();
+    Storage();
+    Storage(const Storage& orig);
+    ~Storage();
 //    std::vector<constraint>& getFunctionalConstraints();
     std::vector<std::vector<Variable*>>& getPriorityVectors();
     std::vector<Variable*>& getPriorityVectorNr(unsigned i);

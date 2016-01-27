@@ -8,14 +8,16 @@ found so far and uses two local search algorithms, random walk and iterative imp
 to find a local optima and compare it to the best solution so far. Then uses random walk for some iterations to escape 
 the local optima. These two algorithms are repeated until the termination criteria is reached. \\ 
 Another metaheuristics is \emph{tabu search} that implements an iterative improvement with a modified best improvement 
-pivoting rule. It chooses the solution leading to the best solution but not necessarily an improving move. In addition 
-to the modification of the pivot rule it implements a tabu list $T$ that remembers the last $m$ solution. The solution 
-in the tabu list are not consider when looking for the next solution. It might be very memory expensive to keep track 
-of the last $m$ solutions. An alternative way of implementing the tabu list is to remember the last $m$ moves and 
-forbid the reverse move. This is more restrictive since the reverse moves might not lead to a solution visited within 
-the last $m$ iterations. To compensate for this a \emph{aspiration criteria} can be implemented. Aspiration criteria is 
-a set of rules that can overrule the tabu list \cite[p.139-140]{lsbog}. \\
+pivoting rule. It chooses the neighborhood operation that will leads to the best solution in the neighborhood but not 
+necessarily an improving solution. In addition to the modification of the pivot rule it implements a tabu list $T$ that 
+keeps track of the last $t$ solution. The solution in the tabu list are not consider when looking for the next 
+solution. It might be very memory expensive to keep track of the last $t$ solutions. An alternative way of implementing 
+the tabu list is to keep track of the last $t$ neighborhood operations and forbid the reverse neighborhood operation. 
+This is more restrictive since the reverse neighborhood operations might not lead to a solution visited within 
+the last $t$ iterations. To compensate for this a \emph{aspiration criteria} can be implemented. Aspiration criteria is 
+a set of rules that can overrule the tabu list \cite[p.139-140]{lsbog}. A common aspiration criteria is to ignore the 
+tabulist if the neighborhood operation leads to the best solution found so far. \\
 Several other metaheuristics exist such as variable neighborhood search and very large scale neighborhood search. 
-Variable neighborhood search uses different step function, hence different neighborhoods. Very large scale neighborhood 
-search changes many variable in each move which give a very large neighborhood but might need fewer iteration to find a 
-good quality solution.  
+Variable neighborhood search uses different neighborhood functions, hence different neighborhoods. Very large scale 
+neighborhood search changes many variable in each neighborhood operation which give a very large neighborhood but might 
+need fewer iteration to find a good quality solution. 

@@ -2,7 +2,7 @@
 #include "ConflictOnlyNE.hpp"
 //#include "State.hpp"
 
-ConflictOnlyNE::ConflictOnlyNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+ConflictOnlyNE::ConflictOnlyNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
     calculated.resize(model->getAllVariables().size(), 0);
@@ -169,7 +169,7 @@ Move* ConflictOnlyNE::nextRandom() {
 bool ConflictOnlyNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
 
     Variable* variable = mv->var;
@@ -183,7 +183,7 @@ bool ConflictOnlyNE::calculateDelta(Move* mv) {
     bool legal = true;
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         if (!legal) {
             break;
         }
@@ -195,7 +195,7 @@ bool ConflictOnlyNE::calculateDelta(Move* mv) {
     }
     if (!legal) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < change.size(); i++) {

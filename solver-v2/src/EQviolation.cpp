@@ -12,7 +12,7 @@ EQviolation::EQviolation(invariant invar, int RHS) {
 EQviolation::~EQviolation() {
 }
 
-bool EQviolation::calculateDeltaValue() {
+bool EQviolation::calculateDelta() {
     if (VariableChange.size() == 0) {
         DeltaValue = 0;
 

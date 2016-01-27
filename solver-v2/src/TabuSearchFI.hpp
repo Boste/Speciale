@@ -1,14 +1,14 @@
 #include "SearchEngine.hpp"
 #include "Move.hpp"
 #include "Neighborhood.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 
 #ifndef TABUSEARCHFI_HPP
 #define	TABUSEARCHFI_HPP
 
 class TabuSearchFI : SearchEngine {
 public:
-    TabuSearchFI(std::shared_ptr<Model> model, Neighborhood* neighborhood);
+    TabuSearchFI(std::shared_ptr<Storage> model, Neighborhood* neighborhood);
 //    TabuSearchFI(const TabuSearchFI& orig);
     virtual ~TabuSearchFI();
 
@@ -17,7 +17,7 @@ public:
 
 
 private:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     unsigned sidewalks = 0;
     bool betterThanBest(std::vector<int> current, std::vector<int> delta, std::vector<int> best);
 };

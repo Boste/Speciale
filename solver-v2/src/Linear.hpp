@@ -60,62 +60,62 @@ public:
     }
 
     InvariantContainer& createInvariants() {
-        int value = 0;
-        //        InvariantContainer invars;
-        std::unordered_map<int, coefType>& coef = this->getCoefficients();
-        //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
-        //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
-        Sum* sumInvariant = new Sum(coef);
-        //                    sumInvariant->invariantID = model->getInvariants().size();
-        variableContainer variables;
-        InvariantContainer invariants;
-        for (Variable* iv : this->getVariables()) {
-            unsigned id = iv->getID();
-            if (!iv->isDef()) {
+            int value = 0;
+            //        InvariantContainer invars;
+            std::unordered_map<int, coefType>& coef = this->getCoefficients();
+            //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(coef, model->getDDG());
+            //                std::shared_ptr<Sum> sumInvariant = std::make_shared<Sum>(cons->getVariables(), coef);
+            Sum* sumInvariant = new Sum(coef);
+            //                    sumInvariant->invariantID = model->getInvariants().size();
+            variableContainer variables;
+            InvariantContainer invariants;
+            for (Variable* iv : this->getVariables()) {
+                unsigned id = iv->getID();
+                if (!iv->isDef()) {
 
-                value += coef.at(id) * iv->getCurrentValue();
-                variables.push_back(iv);
-            } else {
-                value += coef.at(id) * iv->getOneway()->getCurrentValue();
-                invariants.push_back(iv->getOneway());
+                    value += coef.at(id) * iv->getCurrentValue();
+                    variables.push_back(iv);
+                } else {
+                    value += coef.at(id) * iv->getOneway()->getCurrentValue();
+                    invariants.push_back(iv->getOneway());
+                }
+
+            }
+            sumInvariant->setVariablePointers(variables);
+            sumInvariant->setInvariantPointers(invariants);
+            assert(variables.size() + invariants.size() == coef.size());
+
+            sumInvariant->setValue(value);
+            invars.push_back(sumInvariant);
+            if (this->getPriority() != OBJ) {
+
+                if (relation == LQ) {
+                    LEQviolation* leq = new LEQviolation(sumInvariant, rhs);
+                    if (value <= rhs) {
+                        leq->setValue(0);
+                    } else {
+    //                    leq->setValue(1);
+                        leq->setValue(value -rhs);
+                    }
+                    invars.push_back(leq);
+                } else if (relation == EQ) {
+                    EQviolation* eq = new EQviolation(sumInvariant, rhs);
+                    if (value == rhs) {
+                        eq->setValue(0);
+                    } else {
+                        eq->setValue(std::abs(value - rhs));
+                        //                    eq->setValue(1);
+                    }
+                    invars.push_back(eq);
+                } else {
+                    std::cout << "Only LEQ and EQ linear constraint are implemented" << std::endl;
+                }
+
             }
 
+            assert(invars.size()>0);
+            return invars;
         }
-        sumInvariant->setVariablePointers(variables);
-        sumInvariant->setInvariantPointers(invariants);
-        assert(variables.size() + invariants.size() == coef.size());
-
-        sumInvariant->setValue(value);
-        invars.push_back(sumInvariant);
-        if (this->getPriority() != OBJ) {
-
-            if (relation == LQ) {
-                LEQviolation* leq = new LEQviolation(sumInvariant, rhs);
-                if (value <= rhs) {
-                    leq->setValue(0);
-                } else {
-//                    leq->setValue(1);
-                    leq->setValue(value -rhs);
-                }
-                invars.push_back(leq);
-            } else if (relation == EQ) {
-                EQviolation* eq = new EQviolation(sumInvariant, rhs);
-                if (value == rhs) {
-                    eq->setValue(0);
-                } else {
-                    eq->setValue(std::abs(value - rhs));
-                    //                    eq->setValue(1);
-                }
-                invars.push_back(eq);
-            } else {
-                std::cout << "Only LEQ and EQ linear constraint are implemented" << std::endl;
-            }
-
-        }
-
-        assert(invars.size()>0);
-        return invars;
-    }
 
     bool canBeMadeOneway() {
         if(!functional){
@@ -138,7 +138,6 @@ public:
                 //                return false; 
                 //                return false; 
             } else {
-                debug;
                 return false;
             }
         }
@@ -146,7 +145,7 @@ public:
         bool canBeMadeOneway = false;
         Variable* bestVar;
         unsigned prevEqual = 0;
-        unsigned prio = 0;
+//        unsigned prio = 0;
         unsigned equalCounter = 0;
         unsigned defined = std::numeric_limits<unsigned int>::max();
         unsigned constraintsApplyingToiv = std::numeric_limits<unsigned>::max();
@@ -158,7 +157,6 @@ public:
             if (iv->isDef()) {
                 continue;
             }
-
             // Will not make cycles 
             //                                if(iv->getDefining()>0){
             //                                    continue;
@@ -166,8 +164,8 @@ public:
             if (defined > iv->getDefining()) {
                 bestVar = iv;
                 canBeMadeOneway = true;
-                constraintsApplyingToiv = iv->usedIn;
-                prio = iv->getSerachPriority();
+                constraintsApplyingToiv = iv->getDegree();
+//                prio = iv->getSerachPriority();
                 prevEqual = 1;
                 //            defined = defining.at(iv->getID());
                 defined = iv->getDefining();
@@ -193,17 +191,17 @@ public:
                 //                        prevEqual = 1;
                 //                        defined = iv->getDefining();
                 //                    } else 
-                if (iv->getSerachPriority() == prio) {
+//                if (iv->getSerachPriority() == prio) {
 
 
-                    if (iv->usedIn < constraintsApplyingToiv) {
+                    if (iv->getDegree() < constraintsApplyingToiv) {
                         bestVar = iv;
                         canBeMadeOneway = true;
-                        constraintsApplyingToiv = iv->usedIn;
-                        prio = iv->getSerachPriority();
+                        constraintsApplyingToiv = iv->getDegree();
+//                        prio = iv->getSerachPriority();
                         prevEqual = 1;
                         defined = iv->getDefining();
-                    } else if (iv->usedIn == constraintsApplyingToiv) {
+                    } else if (iv->getDegree() == constraintsApplyingToiv) {
                         int choose = Random::Integer(prevEqual);
                         prevEqual++;
                         //            ties++
@@ -211,12 +209,12 @@ public:
                         if (choose == 0) {
                             bestVar = iv;
                             canBeMadeOneway = true;
-                            constraintsApplyingToiv = iv->usedIn;
-                            prio = iv->getSerachPriority();
+                            constraintsApplyingToiv = iv->getDegree();
+//                            prio = iv->getSerachPriority();
                             defined = iv->getDefining();
                         }
                     }
-                }
+//                }
                 //        if (defining.at(iv->getID()) > 0) {
                 //            return false;
                 //        }

@@ -2,7 +2,7 @@
 #define	FLIP2NEIGHBORHOOD_HPP
 
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -16,9 +16,9 @@
 
 class Flip2Neighborhood : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    Flip2Neighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    Flip2Neighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
     Flip2Neighborhood(const Flip2Neighborhood& orig);
     ~Flip2Neighborhood();
     Move* nextRandom();

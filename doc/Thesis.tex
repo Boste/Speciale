@@ -11,6 +11,7 @@
  \usepackage{booktabs}
  \usepackage{tabularx}
  \usepackage{mathtools}
+ \usepackage{url}
 % \usepackage{glossaries}
 
 
@@ -34,15 +35,18 @@
 
 %\end{abstract}
 %\newpage
+\thispagestyle{empty}
 \tableofcontents
+\thispagestyle{empty}
 %\listoffigures
 %\listoftables
 %\printglossary
 %\makeglossary
 \newpage
+\setcounter{page}{1}
 \section{Introduction}
  \input{intro}
- 
+ \newpage
  
 \section{Discrete Optimization}
 
@@ -63,12 +67,14 @@
   
   \subsection{Constraint Programming}
   \input{CP}
-    \subsubsection{Implicit Constraints}
-    \input{implicitCons}
     \subsubsection{Gecode}
     \input{gecode}
   \subsection{Heuristics and Local Search}
   \input{heurLS}
+        \subsubsection{Implicit Constraints}
+    \input{implicitCons}
+        \subsubsection{Soft Constraints}
+    \input{softCons}
      \subsubsection{Basic Aspects of Local Search}
     \input{lsneig}
     \subsubsection{Local Search Algorithms}
@@ -83,43 +89,26 @@
   \input{CBLS}
     \subsubsection{Invariants and Oneway Constraints}
     \input{invariant}
-    \subsubsection{Soft Constraints}
-    \input{softCons}
     \subsubsection{Evaluating Solutions}
     \input{cblssol}
   %\subsection{Evaluation Function}
   %\input{objFunc}
     \subsubsection{Comet}
-    %\input{comet}
+    \input{comet}
     \subsubsection{OscaR}
     
-  
-%\section{Modeling Constraint Based Local Search}
-  %\boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
-  %\subsection{Types of Modeling \boste{not sure this should be here}}
-  %\input{modeling}
-
-    
  
-%\section{Local Search}
-%  \input{local}
-%\section{Previous Work}
- % \subsection{Comet}
-  %\input{comet}
-  %\subsection{Gecode}
-  %\subsection{LocalSolver}
-%\subsection{Structure of this CBLS \boste{Differences from oscar and comet.}}
 \newpage
 \section{Architectural Overview}  
   \input{architec}
   \subsection{Variables}
+  \input{variables}
+  \subsection{Constraints}
+  \input{archCons} \label{sub_cons}
     \subsection{Invariants}
   \input{archInv}\label{sub_inv}
 
-  \subsection{Constraints}
-  \input{archCons} \label{sub_cons}
-
-  \subsection{General Solver}
+  \subsection{General Purpose Solver - GPSolver}
   \input{generalsolver}\label{sub_gen}
   
 \newpage
@@ -155,7 +144,9 @@
   \input{algimp}
   \subsection{Change in Local Search Design}
   \input{lschange}
+  
 \section{Tests}
+\input{test}
 \subsection{Gecode Search Engine}
 %\input{gecodetest}
 \section{Results}

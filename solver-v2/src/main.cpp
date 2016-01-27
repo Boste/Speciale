@@ -11,7 +11,7 @@
 #include "BPSolver.hpp"
 #include "Clock.hpp"
 #include "getRSS.hpp"
-#include "GeneralSolver.hpp"
+#include "GPSolver.hpp"
 
 #include "Output.hpp"
 #include <iostream>

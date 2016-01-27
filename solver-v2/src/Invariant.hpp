@@ -8,43 +8,9 @@
 #include <cassert>
 //class Constraint;
 
-//class Invariant;
-//struct compare_invariant : public std::binary_function<Invariant*, Invariant*, bool> {
-////
-////   
-////
-//    bool operator<(const Invariant& invar) const {
-//        std::cout << "used to sort1 <" << std::endl;
-////        debug;
-//        return (this->operator <(invar));
-//    }
-////
-//    bool operator>(const Invariant& invar) const {
-//        std::cout << "used to sort2 >" << std::endl;
-////        debug;
-//        return (this->operator >(invar));
-//    }
-////    bool operator<(const invariant invar) const {
-////        std::cout << "used to sort1 <" << std::endl;
-//////        debug;
-////        return (this->operator <(invar));
-////    }
-//////
-////    bool operator>(const invariant invar) const {
-////        std::cout << "used to sort2 >" << std::endl;
-//////        debug;
-////        return (this->operator >(invar));
-////    }
-//     bool operator()(const Invariant* invar1, const Invariant* invar2) const {
-////        std::cout << "compare " << (*invar1 < *invar2) << std::endl;
-//        
-//        return (invar1 < invar2);
-//    }
-//};
-
 class Invariant {
     //    friend class GeneralSolver;
-    friend class Model;
+    friend class Storage;
 
 public:
     //    bool changeAdd = false;
@@ -57,12 +23,6 @@ public:
         std::cout << &a << std::endl;
 
     }
-    //    virtual void commit() = 0;
-    //    {
-    //        std::cout << "commit in invariant" << std::endl;
-    //    }
-
-
     // should be pointers instead of integers
     /// Tells this Invariant that deltavalue of invariant or variable with ID is changed by change
 
@@ -70,22 +30,15 @@ public:
 
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
 
-    virtual bool calculateDeltaValue() =0;
-    /// used for initialize value after DDG is made, hence only oneway constraints need it.
-//    virtual bool calculateValue() {
-//        std::cout << "Forgot to implement this method for an invariant used as oneway constraint" << std::endl;
-//        debug;
-//        exit(1);
-//    }
+    virtual bool calculateDelta() =0;
+
     virtual void updateValue() =0;
 
-//    virtual void initialize() =0;
     /// Return the posible change of value. Never resets but gets recomputed by CalculateDeltaValue() based on new changes and current value.
 
     int getDeltaValue() {
         return DeltaValue;
     }
-    /// Not working
 
     virtual bool test() {
         std::cout << "test in invariant" << std::endl;
@@ -93,12 +46,6 @@ public:
     }
 
     virtual ~Invariant() {
-        //        std::cout << "destruct invariant" << std::endl;
-
-        //        for(IntegerVariable* IV : *VariablePointers){
-        //            delete IV;
-        //        }
-        //        delete VariablePointers;
     }
     /// Return currnet value of this Invariant
 
@@ -106,12 +53,6 @@ public:
 
         return CurrentValue;
     }
-    /// Set Current value = Current Value + Delta value (should only be called after recomputing the delta value)
-
-
-    // should be pointer instead of integers
-
-    //    void setUsedByConstraint(int cons, int priority) {
 
     void setObjective() {
         constraintPriority = 0;
@@ -119,20 +60,6 @@ public:
 
 
     }
-    /// Set which constraints this Invariant is used by. Currently only possible to be used by one constraint
-    /// Delete this
-//    void setUsedByConstraint(constraint cons, int priority) {
-//        //        std::cout << "ehhh?" << std::endl;
-//        usedInConstraint = cons;
-//        //        std::cout << "constraint" << std::endl;
-//        constraintPriority = priority;
-//        usedByConstraint = true;
-//    }
-    /// Return wether this invariant is used by a constraint
-    /// Delete this
-//    bool isUsedByConstraint() {
-//        return usedByConstraint;
-//    }
 
     bool inViolatedConstraints(){
         return inViolated;
@@ -143,26 +70,9 @@ public:
     bool representConstraint(){
         return representCons;
     }
-    
-    /// Return the constraint this invariant is used by
-/// Delete this
-//    Constraint* getConstraint() {
-//        return usedInConstraint;
-//    }
-
-    // should be pointer instead of integers
-
-    //    int getUsedInObjective() {
-    //        return usedInObjectiveNr;
-    //    }
     /// The priority of the constraint this invariant is used by (if any otherwise fails assert) Not used
 
     unsigned getPriority() {
-//        if (!usedByConstraint) {
-//            std::cout << invariantID << " " << constraintPriority << std::endl;
-//            debug;
-//        }
-//        assert(usedByConstraint || constraintPriority == 0);
         return constraintPriority;
     }
 
@@ -213,10 +123,6 @@ public:
 
     void setStartValue(double value) {
         startValue = value;
-        //        this->value = value;
-        //        if (value < lowerbound) {
-        //            CurrentValue = lowerbound;
-        //        } else {
         CurrentValue = value;
         //        }
 
@@ -281,15 +187,9 @@ protected:
     std::vector<Variable*> fixedVariablePointers;
     std::vector<Variable*> VariablePointers;
     std::vector<invariant> InvariantPointers;
-    //    int value = 0;
     unsigned invariantID;
     coefType DeltaValue = 0;
     unsigned constraintPriority = 0;
-    //    int usedInConstraintNr;
-    //    int usedInObjectiveNr;
-    //    int usedInConstraint;
-//    Constraint* usedInConstraint;
-//    bool usedByConstraint = false;
     std::unordered_map<int, coefType> coefficients;
     int type;
     /// Should be defined when creating oneway constraints that define (integer)variables 

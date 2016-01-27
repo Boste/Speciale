@@ -38,7 +38,7 @@ public:
     Sum(const Sum &a);
     ~Sum();
 
-    bool calculateDeltaValue();
+    bool calculateDelta();
 
     void proposeChange(int variableNumber, int changeInValue);
     void updateValue();

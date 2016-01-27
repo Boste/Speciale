@@ -2,13 +2,13 @@
 #define	GENERALSOLVER_HPP
 #include <cmath>
 #include <algorithm>
-#include "LSSpace.hpp"
+#include "LocalSearchEngine.hpp"
 #include <assert.h>
-#include "Model.hpp"
+#include "Storage.hpp"
 #include <gecode/driver.hh>
 #include <gecode/int.hh>
 #include "Constants.hpp"
-#include "GecodeSolver.hpp"
+#include "GecodeEngine.hpp"
 //#include <gecode/minimodel.hh>
 #include "Linear.hpp"
 #include <limits>
@@ -32,20 +32,29 @@
 
 //class GeneralSolver : public Gecode::Space, private LSSpace {
 
-class GeneralSolver {
+class GPSolver {
     //    friend class Test;
 private:
     //    std::vector<int> maxCoef;
-    const std::shared_ptr<Model> model = std::make_shared<Model> ();
-    const std::unique_ptr<LSSpace> LS = std::unique_ptr<LSSpace> (new LSSpace(model));
-    std::unique_ptr<GecodeSolver> GS = std::unique_ptr<GecodeSolver> (new GecodeSolver(model));
+    const std::shared_ptr<Storage> storage = std::make_shared<Storage> ();
+    const std::unique_ptr<LocalSearchEngine> LS = std::unique_ptr<LocalSearchEngine> (new LocalSearchEngine(storage));
+    std::unique_ptr<GecodeEngine> GS = std::unique_ptr<GecodeEngine> (new GecodeEngine(storage));
+
+    
+     bool relax(int TimeForGecode);
+
+    void simpleRelax(int timesRelaxed);
+
+    bool relaxAllNonFunctionel(int TimeForGecode);
+//    std::vector<constraint> furtherRelax(std::vector<constraint> cons);
+    void furtherRelax(std::vector<constraint> cons);
 
 public:
 
-    GeneralSolver();
+    GPSolver();
 
-    ~GeneralSolver();
-    GeneralSolver& operator=(const GeneralSolver &a);
+    ~GPSolver();
+    GPSolver& operator=(const GPSolver &a);
 
     // Skal Gecode::IntConLevel icl være et argument?
     // ingen shared i det her kald
@@ -74,14 +83,7 @@ public:
     /// Different relaxation can be chosen (not atm) needs to create a new GecodeSolver (Space) and recreate some 
     /// of the calls the user made (those that should not be relaxed).
 
-    bool relax(int TimeForGecode);
-
-    void simpleRelax(int timesRelaxed);
-
-    bool relaxAllNonFunctionel(int TimeForGecode);
-//    std::vector<constraint> furtherRelax(std::vector<constraint> cons);
-    void furtherRelax(std::vector<constraint> cons);
-
+   
     std::vector<int>& getInitialValue();
 
     void optimizeSolution(int time, int test);

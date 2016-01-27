@@ -1,6 +1,6 @@
 #include "SwapNeighborhood.hpp"
 
-SwapNeighborhood::SwapNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+SwapNeighborhood::SwapNeighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
     std::cout << "Still uses constraints, not invariants" << std::endl;
@@ -118,7 +118,7 @@ bool SwapNeighborhood::calculateDelta(Move * mv) {
     //        change[i] = 0;
     //    }
     for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     std::vector<Variable*>& variables = mv->getVars();
     propagation_queue& queue1 = model->getPropagationQueue(variables.at(0));
@@ -228,7 +228,7 @@ bool SwapNeighborhood::calculateDelta(Move * mv) {
 
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         if (!legal) {
             // Should make a reset in invariant to remove all changes added to the rest of the invariants, instead of calculating delta and not using it.
             break;
@@ -256,7 +256,7 @@ bool SwapNeighborhood::calculateDelta(Move * mv) {
     //    change = model->get
     if (!legal) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < model->getEvaluationInvariants().size(); i++) {

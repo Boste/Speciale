@@ -1,5 +1,5 @@
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -14,9 +14,9 @@
 
 class RandomConflictConNE : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    RandomConflictConNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    RandomConflictConNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
 //    RandomConflictConNE(const RandomConflictConNE& orig);
     ~RandomConflictConNE();
 

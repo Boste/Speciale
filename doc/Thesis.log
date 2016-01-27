@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  21 JAN 2016 17:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  27 JAN 2016 19:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -740,6 +740,10 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \TX@cols=\count148
 \TX@ftn=\toks35
 )
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \c@ALC@unique=\count149
@@ -805,23 +809,23 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 
 (./style.tex) (./Thesis.aux
 
-LaTeX Warning: Label `fig_smallG' multiply defined.
+LaTeX Warning: Label `fig_smallG2' multiply defined.
 
 )
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 \c@lstlisting=\count157
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -839,12 +843,12 @@ LaTeX Font Info:    ... okay on input line 29.
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 31.
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -861,7 +865,15 @@ LaTeX Warning: No \author given.
 \openout4 = `Thesis.toc'.
 
  [2]
-(./intro.tex) (./vars.tex) (./cons.tex) (./discOpt.tex
+(./intro.tex) [1] (./vars.tex)
+Overfull \hbox (3.8797pt too wide) in paragraph at lines 1--55
+\OT1/cmr/m/n/10.95 Discrete op-ti-miza-tion mod-els con-tain a set of $\OML/cmm
+/m/it/10.95 n$ \OT1/cmr/m/n/10.95 vari-ables $\OML/cmm/m/it/10.95 X \OT1/cmr/m/
+n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 x[]; x[]; [] ; x[]\OMS/cmsy/
+m/n/10.95 g$
+ []
+
+(./cons.tex) (./discOpt.tex
 Overfull \hbox (1.62082pt too wide) in paragraph at lines 1--10
 \OT1/cmr/m/n/10.95 A \OT1/cmr/m/it/10.95 Con-straint Sat-is-fac-tion Prob-lem \
 OT1/cmr/m/n/10.95 (CSP) is de-fined as a triple $\U/msb/m/n/10.95 P \OT1/cmr/m/
@@ -874,103 +886,119 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--10
 
  []
 
-) [3] (./solutions.tex
-Underfull \hbox (badness 10000) in paragraph at lines 1--8
+) (./solutions.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--61
 
  []
 
-) [4] (./bpip.tex) (./CP.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--66
+[2] [3] (./bpip.tex) (./CP.tex) [4] (./gecode.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--72
 
  []
 
-[5] (./implicitCons.tex) (./gecode.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--70
-
- []
-
-[6] (./heurLS.tex)
-Overfull \hbox (1.41125pt too wide) in paragraph at lines 1--72
+[5] (./heurLS.tex)
+Overfull \hbox (1.41125pt too wide) in paragraph at lines 1--74
 \OT1/cmr/m/n/10.95 In con-trast to in-te-ger pro-gram-ming and con-straint pro-
 gram-ming, lo-cal search
  []
 
-(./lsneig.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--74
-
- []
-
-[7] (./lsalg.tex) [8] (./construcHeur.tex) [9] (./metaheur.tex) (./lsmodel.tex)
-[10] (./CBLS.tex) (./invariant.tex) (./softCons.tex
+(./implicitCons.tex) (./softCons.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--7
 
  []
 
-[11]) (./cblssol.tex) [12] (./architec.tex
-<architectureTest.pdf, id=58, 844.82875pt x 462.05702pt>
+[6]) (./lsneig.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--80
+
+ []
+
+[7] (./lsalg.tex) (./construcHeur.tex) [8] (./metaheur.tex) [9] (./lsmodel.tex)
+(./CBLS.tex) (./invariant.tex [10]) (./cblssol.tex) (./comet.tex [11]) [12]
+(./architec.tex <architectureTest.pdf, id=64, 844.82875pt x 462.05702pt>
 File: architectureTest.pdf Graphic file (type pdf)
 
 <use architectureTest.pdf>
-Package pdftex.def Info: architectureTest.pdf used on input line 4.
+Package pdftex.def Info: architectureTest.pdf used on input line 5.
 (pdftex.def)             Requested size: 360.0pt x 196.88983pt.
-) [13 <./architectureTest.pdf>] (./archCons.tex
-<constraint.pdf, id=111, 579.8664pt x 852.88638pt>
+) [13 <./architectureTest.pdf>] (./variables.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--106
+
+ []
+
+(./archCons.tex <constraint.pdf, id=116, 579.8664pt x 852.88638pt>
 File: constraint.pdf Graphic file (type pdf)
- <use constraint.pdf>
+
+<use constraint.pdf>
 Package pdftex.def Info: constraint.pdf used on input line 3.
 (pdftex.def)             Requested size: 180.0pt x 264.74342pt.
-)
-[14 <./constraint.pdf>] (./archInv.tex
-<invariant.pdf, id=130, 584.17154pt x 642.40337pt>
+ [14 <./constraint.pdf>] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
+
+ []
+
+) (./archInv.tex <invariant.pdf, id=138, 584.17154pt x 642.40337pt>
 File: invariant.pdf Graphic file (type pdf)
- <use invariant.pdf>
+
+<use invariant.pdf>
 Package pdftex.def Info: invariant.pdf used on input line 5.
 (pdftex.def)             Requested size: 180.0pt x 197.9471pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1--27
+Underfull \hbox (badness 10000) in paragraph at lines 1--29
 
  []
 
-[15 <./invariant.pdf>]) (./generalsolver.tex
-<general2.pdf, id=142, 809.77531pt x 662.60046pt>
+[16] [17 <./invariant.pdf>] [18]
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+
+ []
+
+) (./generalsolver.tex <general2.pdf, id=158, 809.77531pt x 662.60046pt>
 File: general2.pdf Graphic file (type pdf)
- <use general2.pdf>
+
+<use general2.pdf>
 Package pdftex.def Info: general2.pdf used on input line 5.
 (pdftex.def)             Requested size: 288.0011pt x 235.6545pt.
 )
-Overfull \hbox (6.2678pt too wide) in paragraph at lines 1--122
-[][][][][]\OT1/cmr/m/n/10.95 . The solver must be able to re-pro-duce the call 
-to [][][][][]
+Overfull \hbox (6.32379pt too wide) in paragraph at lines 1--113
+\OT1/cmr/bx/n/10.95 straint \OT1/cmr/m/n/10.95 class and two meth-ods, one in \
+OT1/cmr/bx/n/10.95 GP-Solver \OT1/cmr/m/n/10.95 and one in \OT1/cmr/bx/n/10.95 
+GecodeEngine\OT1/cmr/m/n/10.95 ,
  []
 
 
-Overfull \hbox (2.77959pt too wide) in paragraph at lines 1--122
+Overfull \hbox (2.77959pt too wide) in paragraph at lines 1--113
 \OT1/cmr/m/n/10.95 To find a bet-ter so-lu-tion than the ini-tial so-lu-tion th
 e method [][][]
  []
 
-[16] [17 <./general2.pdf>] (./prepros.tex) (./dom.tex) (./inisol.tex [18])
-[19] (./strucLS.tex
-Underfull \hbox (badness 10000) in paragraph at lines 1--18
+[19] [20 <./general2.pdf>] [21] (./prepros.tex) (./dom.tex) (./inisol.tex)
+[22] [23] (./strucLS.tex) (./simplification.tex [24] [25]
+Underfull \hbox (badness 10000) in paragraph at lines 146--182
 
  []
 
-) (./simplification.tex
-Underfull \hbox (badness 10000) in paragraph at lines 1--4
+) (./ddg.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--24
 
  []
 
-[20] [21]
-Underfull \hbox (badness 10000) in paragraph at lines 144--152
+[26]
+Overfull \hbox (3.22758pt too wide) in paragraph at lines 30--117
+\OT1/cmr/m/n/10.95 con-nected com-po-nents is used. []\OT1/cmr/bx/n/10.95 (cite
+ SIAM J. Com-put., 1(2), 146{160.)[]\OT1/cmr/m/n/10.95 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--117
 
  []
 
-) (./ddg.tex [22]
-Underfull \hbox (badness 10000) in paragraph at lines 27--114
+[27] [28]
+Underfull \hbox (badness 10000) in paragraph at lines 118--129
 
  []
 
-[23] [24]) (./propaqueue.tex) [25] [26] (./modelsol.tex) [27] (./lse.tex
+) (./propaqueue.tex) [29] [30] (./modelsol.tex) [31] (./lse.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
@@ -980,7 +1008,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--34
 
  []
 
-[28] <LSE.pdf, id=195, 827.80214pt x 353.24716pt>
+[32] <LSE.pdf, id=213, 827.80214pt x 353.24716pt>
 File: LSE.pdf Graphic file (type pdf)
  <use LSE.pdf>
 Package pdftex.def Info: LSE.pdf used on input line 52.
@@ -988,21 +1016,32 @@ Package pdftex.def Info: LSE.pdf used on input line 52.
 )
 (./neighborhoods.tex
 
-LaTeX Warning: Reference `fig_neighborhood' on page 29 undefined on input line 
+LaTeX Warning: Reference `fig_neighborhood' on page 33 undefined on input line 
 2.
 
-<neighborhood.pdf, id=196, 741.2192pt x 662.60046pt>
+<neighborhood.pdf, id=214, 741.2192pt x 662.60046pt>
 File: neighborhood.pdf Graphic file (type pdf)
  <use neighborhood.pdf>
 Package pdftex.def Info: neighborhood.pdf used on input line 5.
 (pdftex.def)             Requested size: 323.9978pt x 289.63422pt.
+
+Overfull \hbox (19.8045pt too wide) in paragraph at lines 16--24
+ [][] 
+ []
+
+
+Overfull \hbox (26.66081pt too wide) in paragraph at lines 1--40
+\OT1/cmr/m/n/10.95 hood. These are re-seted when re-turn-ing \OT1/cmr/bx/n/10.9
+5 NULL \OT1/cmr/m/n/10.95 or the method [][][][][][]
+ []
+
 
 Overfull \hbox (6.53658pt too wide) in paragraph at lines 1--40
 \OT1/cmr/m/n/10.95 Method [][][][] gives a ran-dom neigh-bor-hood op-er-a-tion 
 with-out chang-
  []
 
-[29] [30 <./LSE.pdf> <./neighborhood.pdf
+[33] [34 <./LSE.pdf> <./neighborhood.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ./neighborhood.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
@@ -1011,33 +1050,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--64
 
  []
 
-[31]) (./sp.tex
-Overfull \hbox (0.85367pt too wide) in paragraph at lines 1--54
-\OT1/cmr/m/n/10.95 hood and de-fine this strat-egy. The classes im-ple-mented a
-re [][][],
+[35]) (./sp.tex
+Overfull \hbox (25.26344pt too wide) in paragraph at lines 1--54
+\OT1/cmr/bx/n/10.95 prove-ment\OT1/cmr/m/n/10.95 , \OT1/cmr/bx/n/10.95 Bes-tIm-
+prove-ment\OT1/cmr/m/n/10.95 , \OT1/cmr/bx/n/10.95 TabuSe-arch\OT1/cmr/m/n/10.9
+5 , and \OT1/cmr/bx/n/10.95 Ran-domWalk\OT1/cmr/m/n/10.95 . \OT1/cmr/bx/n/10.95
+ FirstIm-
  []
 
-[32]
-Overfull \hbox (28.49745pt too wide) in paragraph at lines 54--111
-\OT1/cmr/m/n/10.95 If [][][] is com-bined with the neigh-bor-hood class [][][]
+
+Overfull \hbox (0.17957pt too wide) in paragraph at lines 1--54
+\OT1/cmr/bx/n/10.95 BestImprovement\OT1/cmr/m/n/10.95 , and \OT1/cmr/bx/n/10.95
+ Ran-domWalk \OT1/cmr/m/n/10.95 are im-ple-men-ta-tion of lo-cal search
  []
 
-[33]) (./algimp.tex [34] [35]
+[36] [37]) (./algimp.tex [38] [39]
 Underfull \hbox (badness 10000) in paragraph at lines 80--85
 
  []
 
-[36]
-Underfull \hbox (badness 10000) in paragraph at lines 119--121
+[40]) (./lschange.tex) (./test.tex) (./future.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--155
 
  []
 
-) (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--161
-
- []
-
-[37] (./Thesis.bbl) [38] (./Thesis.aux)
+[41] (./Thesis.bbl) [42] (./Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1046,35 +1083,35 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16548 strings out of 495032
- 283169 string characters out of 6181718
- 368223 words of memory out of 5000000
- 19346 multiletter control sequences out of 15000+600000
- 13086 words of font info for 49 fonts, out of 8000000 for 9000
+ 16637 strings out of 495032
+ 284242 string characters out of 6181718
+ 368333 words of memory out of 5000000
+ 19419 multiletter control sequences out of 15000+600000
+ 13445 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,24n,92p,418b,1356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,18n,92p,418b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (38 pages, 1267329 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (44 pages, 1285694 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
+ 364 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

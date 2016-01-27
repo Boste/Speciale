@@ -20,7 +20,7 @@ public:
 
     virtual ~Max();
     void proposeChange(int id, int change);
-    bool calculateDeltaValue();
+    bool calculateDelta();
     bool test();
     void updateValue();
 

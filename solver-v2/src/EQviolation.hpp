@@ -51,7 +51,7 @@ public:
 //        // er det hurtigere at løbe igennem invarianter end at løbe gennem updates?
 //    }
 
-    bool calculateDeltaValue();
+    bool calculateDelta();
 //    void initialize();
     
 //    void usedByConstraint(int constraint, int priority);

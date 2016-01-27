@@ -1,6 +1,6 @@
 #include "Flip2Neighborhood.hpp"
 
-Flip2Neighborhood::Flip2Neighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+Flip2Neighborhood::Flip2Neighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
     std::cout << "Still uses constraints, not invariants" << std::endl;
@@ -91,7 +91,7 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
         for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     //    for (unsigned i = 0; i < change.size(); i++) {
     //        change[i] = 0;
@@ -200,7 +200,7 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
 
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         if (!legal) {
             // Should make a reset in invariant to remove all changes added to the rest of the invariants, instead of calculating delta and not using it.
             break;
@@ -226,7 +226,7 @@ bool Flip2Neighborhood::calculateDelta(Move* mv) {
     }
     if (!legal) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     }
     return legal;

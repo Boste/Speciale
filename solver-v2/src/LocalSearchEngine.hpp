@@ -12,7 +12,7 @@
 //#include "Linear.hpp"
 //#include "Constraint.hpp"
 //#include "Variable.hpp"   
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "DependencyDigraph.hpp"
 #include "Neighborhood.hpp"
 #include "FlipNeighborhood.hpp"
@@ -38,21 +38,21 @@
 #define	LSSPACE_HPP
 //#include 
 
-class LSSpace {
+class LocalSearchEngine {
     friend class Test;
 
 
     //    void addInvariantToIntVariable(int variableNumber, int invariantNumber);
 
 public:
-    LSSpace(std::shared_ptr<Model> model);
+    LocalSearchEngine(std::shared_ptr<Storage> model);
     void printCurrent();
     //    unsigned  ties = 0;
 
-    ~LSSpace() {
+    ~LocalSearchEngine() {
 
     }
-    void initializeLS(bool feasible);
+    void initializeLS();
     void createDDG(bool all);
     //        bool canBeMadeOneway(IntegerVariable* iv, constraint cons);
 //    bool canBeMadeOneway(constraint cons);
@@ -69,7 +69,7 @@ private:
     int Violations = 0;
     //    int ObjectiveValue = 0;
     int iterations = 0;
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> currentState;
     std::shared_ptr<State> bestState;
     std::shared_ptr<DependencyDigraph> DDG;

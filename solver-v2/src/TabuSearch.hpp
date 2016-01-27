@@ -1,7 +1,7 @@
 #include "SearchEngine.hpp"
 #include "Move.hpp"
 #include "Neighborhood.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 
 #ifndef TABUSEARCH_HPP
 #define	TABUSEARCH_HPP

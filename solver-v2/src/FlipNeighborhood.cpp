@@ -2,7 +2,7 @@
 #include "FlipNeighborhood.hpp"
 //#include "State.hpp"
 
-FlipNeighborhood::FlipNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+FlipNeighborhood::FlipNeighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
@@ -18,6 +18,7 @@ Move* FlipNeighborhood::next() {
     if (moveCounter < model->getMask().size()) {
         Variable* iv = model->getMaskAt(moveCounter);
         moveCounter++;
+        assert(!iv->isFixed());
         //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
         Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
         //    mv->deltaVector.resize(state->getEvaluation().size());
@@ -68,7 +69,7 @@ Move* FlipNeighborhood::nextRandom() {
 
 bool FlipNeighborhood::calculateDelta(Move* mv) {
     for (unsigned i = 0; i < mv->getDeltaVector().size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     std::vector<int>& change = mv->getDeltaVector();
 
@@ -81,7 +82,7 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
     }
     bool legal = true;
     for (updateType invar : queue) {
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         //        std::cout << "calcul " << invar->getDeltaValue() << " ";
 
         if (!legal) {
@@ -96,7 +97,7 @@ bool FlipNeighborhood::calculateDelta(Move* mv) {
     if (!legal) {
         //        debug;
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < change.size(); i++) {

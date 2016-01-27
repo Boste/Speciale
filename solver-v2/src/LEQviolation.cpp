@@ -14,7 +14,7 @@ LEQviolation::LEQviolation(invariant invar, coefType RHS) {
 LEQviolation::~LEQviolation() {
 }
 
-bool LEQviolation::calculateDeltaValue() {
+bool LEQviolation::calculateDelta() {
     if (VariableChange.size() == 0) {
         DeltaValue = 0;
 
@@ -23,11 +23,11 @@ bool LEQviolation::calculateDeltaValue() {
     if (LHS->getCurrentValue() + VariableChange.back() <= RHS) {
         DeltaValue = -CurrentValue;
     } else {
-        int old = std::max(LHS->getCurrentValue() - RHS,(coefType) 0);
+        int old = std::max(LHS->getCurrentValue() - RHS, (coefType) 0);
         int ne = std::max(LHS->getCurrentValue() + VariableChange.back() - RHS, (coefType) 0);
-        DeltaValue =    ne -old;                                           
+        DeltaValue = ne - old;
 
-//        DeltaValue = 1 - CurrentValue;
+        //        DeltaValue = 1 - CurrentValue;
     }
     VariableChange.pop_back();
 
@@ -40,8 +40,8 @@ void LEQviolation::proposeChange(int variableNumber, int changeInValue) {
 
 void LEQviolation::updateValue() {
     CurrentValue += DeltaValue;
-//    DeltaValue = 0;
-    assert(CurrentValue >=0);
+    //    DeltaValue = 0;
+    assert(CurrentValue >= 0);
 }
 
 bool LEQviolation::test() {
@@ -50,10 +50,10 @@ bool LEQviolation::test() {
         value += inv->getCurrentValue();
     }
     assert(value == LHS->getCurrentValue());
-//    if (value <= RHS) {
-//        assert(CurrentValue == 0);
-//    } else {
-//        assert(CurrentValue == 1);
-//    }
+    //    if (value <= RHS) {
+    //        assert(CurrentValue == 0);
+    //    } else {
+    //        assert(CurrentValue == 1);
+    //    }
     return true;
 }

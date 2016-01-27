@@ -15,7 +15,8 @@ $x_i$ in the dependency directed graph. \\
 %time when making changes to on or more variables to increase performance. For each variable used in 
 %the local search a \emph{propagation queue} $q$ is made. A propagation queue is the order of which invariant to update 
 %when the associated variable changes value. \boste{Not quite happy about the description here} \medskip \\
-
 The model is simplified by defining some of the variables by transforming the functional constraints into oneway 
-constraints using two algorithms described in subsection \ref{sec_ddg}. When a variable is defined by a oneway 
-constraint it is transformed into an invariant since its value is dependent on other variables and invariants. 
+constraints using the algorithms implemented in the respective constraints. When a variable is defined by a oneway 
+constraint it is transformed into an invariant since its value is dependent on other variables and invariants. \\ 
+The only constraint implemented, \class{Linear}, is used as an example for creating oneway constraints. 
+ 

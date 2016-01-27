@@ -2,7 +2,7 @@
 #define	INTSWAPNEIGHBORHOOD_HPP
 
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -17,9 +17,9 @@
 class IntSwapNeighborhood : public Neighborhood {
 public:
     unsigned testCounter = 0;
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    IntSwapNeighborhood(std::shared_ptr<Model>& model, std::shared_ptr<State>& st, std::vector<Variable*>& binarySwapVars);
+    IntSwapNeighborhood(std::shared_ptr<Storage>& model, std::shared_ptr<State>& st, std::vector<Variable*>& binarySwapVars);
     IntSwapNeighborhood(const IntSwapNeighborhood& orig);
     ~IntSwapNeighborhood();
 

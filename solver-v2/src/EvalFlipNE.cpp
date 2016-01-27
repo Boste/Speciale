@@ -2,7 +2,7 @@
 #include "EvalFlipNE.hpp"
 //#include "State.hpp"
 
-EvalFlipNE::EvalFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+EvalFlipNE::EvalFlipNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
@@ -79,7 +79,7 @@ Move* EvalFlipNE::nextRandom() {
 bool EvalFlipNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
@@ -90,7 +90,7 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
     bool allowed = true;
     for (updateType invar : queue) {
 
-        allowed = invar->calculateDeltaValue();
+        allowed = invar->calculateDelta();
         if (!allowed) {
             break;
         }
@@ -102,7 +102,7 @@ bool EvalFlipNE::calculateDelta(Move* mv) {
     } 
     if (!allowed) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < change.size(); i++) {

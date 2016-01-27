@@ -639,7 +639,8 @@ void DependencyDigraph::undefineVariable(std::shared_ptr<invariantNode> invar) {
 //    return brokenInvariants;
 //}
 
-void DependencyDigraph::createPropagationQueue(variableContainer & vars, InvariantContainer & invars) {
+void DependencyDigraph::createPropagationQueue(variableContainer & vars) {
+//void DependencyDigraph::createPropagationQueue(variableContainer & vars, InvariantContainer & invars) {
     //    std::cout << "not made yet" << std::endl;
     madePropagationQueues = true;
 

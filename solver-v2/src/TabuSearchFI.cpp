@@ -1,6 +1,6 @@
 #include "TabuSearchFI.hpp"
 
-TabuSearchFI::TabuSearchFI(std::shared_ptr<Model> model, Neighborhood* neighborhood) {
+TabuSearchFI::TabuSearchFI(std::shared_ptr<Storage> model, Neighborhood* neighborhood) {
     this->model = model;
     NE = neighborhood;
 }

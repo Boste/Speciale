@@ -1,6 +1,6 @@
 #ifndef STATE_HPP
 #define	STATE_HPP
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Clock.hpp"
 
 class State {
@@ -9,7 +9,7 @@ private:
 
 //    int solutionValue;
     //    std::vector<int>* mask;
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::vector<int> solution;
 //    unsigned numberOfViolations = 0;
     std::vector<int> evaluation;
@@ -21,7 +21,7 @@ private:
 
 public:
 
-    State(std::shared_ptr<Model> model);
+    State(std::shared_ptr<Storage> model);
     State(const State& orig);
     bool compare(std::shared_ptr<State>& st);
     virtual ~State();

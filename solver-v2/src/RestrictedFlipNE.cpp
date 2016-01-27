@@ -2,7 +2,7 @@
 #include "RestrictedFlipNE.hpp"
 //#include "State.hpp"
 
-RestrictedFlipNE::RestrictedFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+RestrictedFlipNE::RestrictedFlipNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
     small = model->getMask().size() < 10000;
@@ -92,7 +92,7 @@ bool RestrictedFlipNE::calculateDelta(Move * mv) {
 
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
@@ -104,7 +104,7 @@ bool RestrictedFlipNE::calculateDelta(Move * mv) {
     bool legal = true;
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         if (!legal) {
             break;
         }
@@ -116,7 +116,7 @@ bool RestrictedFlipNE::calculateDelta(Move * mv) {
     }
     if (!legal) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < change.size(); i++) {
@@ -136,7 +136,7 @@ bool RestrictedFlipNE::commitMove(Move * mv) {
 
 
     for (unsigned i = 0; i < mv->getDeltaVector().size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     //    std::vector<int>& change = mv->getDeltaVector();
 
@@ -149,7 +149,7 @@ bool RestrictedFlipNE::commitMove(Move * mv) {
     }
     //    bool legal = true;
     for (updateType invar : queue) {
-        invar->calculateDeltaValue();
+        invar->calculateDelta();
         for (updateType inv : model->getUpdate(invar)) {
             inv->proposeChange(invar->getVariableID(), invar->getDeltaValue());
         }

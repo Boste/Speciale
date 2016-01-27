@@ -1,5 +1,5 @@
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -14,9 +14,9 @@
 
 class RestrictedFlipNE : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    RestrictedFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    RestrictedFlipNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
 //    RestrictedFlipNE(const RestrictedFlipNE& orig);
     ~RestrictedFlipNE();
 

@@ -43,7 +43,8 @@ public:
     propagation_queue& getPropagationQueue(Variable* iv);
     bool propagationQueueHasBeenMade();
     /// Create propagation queue for each variable used in local search
-    void createPropagationQueue(variableContainer& vars, InvariantContainer& invars);
+    void createPropagationQueue(variableContainer& vars);
+//    void createPropagationQueue(variableContainer& vars, InvariantContainer& invars);
     /// Merges variable nodes with the oneway constraints defining them
     void cleanUpGraph(std::vector<Variable*>& vars);
     /// merges variable node and invariant node into the invariant node. 

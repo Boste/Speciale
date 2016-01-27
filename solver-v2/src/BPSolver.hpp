@@ -6,13 +6,13 @@
 
 #include <iostream>
 #include "BP_Data.hpp"
-#include "GeneralSolver.hpp"
+#include "GPSolver.hpp"
 #include "Variable.hpp"
 //#include "boost/make_shared.hpp"
 //#include "boost/shared_ptr.hpp"
 //using namespace Gecode;
 
-class BPSolver : public GeneralSolver {
+class BPSolver : public GPSolver {
 protected:
     //    BP_Input *p_in;
     //    int model;
@@ -82,10 +82,10 @@ public:
             if (x.size() != 0) {
                 if (b.type == 5) {
                     //                GeneralSolver::linear(*this, c, x, EQ, upperbound, Gecode::ICL_DOM, HARD);
-                    GeneralSolver::linear(c, x, EQ, upperbound, HARD);
+                    GPSolver::linear(c, x, EQ, upperbound, HARD);
                 } else {
                     //                GeneralSolver::linear(*this, c, x, LQ, upperbound, Gecode::ICL_DOM, HARD);
-                    GeneralSolver::linear(c, x, LQ, upperbound, HARD);
+                    GPSolver::linear(c, x, LQ, upperbound, HARD);
                 }
             } else {
 //                std::cout <<  "Posting constraint with no variables?" << std::endl;
@@ -129,7 +129,7 @@ public:
         //        c.shrink_to_fit();
         //        x.shrink_to_fit();
 
-        GeneralSolver::linear(c, x, LQ, 0, OBJ);
+        GPSolver::linear(c, x, LQ, 0, OBJ);
         //        delete x;
 
         //        Search(getAllVariables());
@@ -183,7 +183,7 @@ public:
     //    }
 
     void printCurrent() {
-        GeneralSolver::printVariableValues();
+        GPSolver::printVariableValues();
     }
 
     //void print_stats(Search::Statistics &stat) {

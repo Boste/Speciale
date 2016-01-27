@@ -1,5 +1,5 @@
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -13,9 +13,9 @@
 
 class EvalFlipNE : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    EvalFlipNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    EvalFlipNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
     EvalFlipNE(const EvalFlipNE& orig);
     ~EvalFlipNE();
 

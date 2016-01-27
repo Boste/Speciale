@@ -2,7 +2,7 @@
 #define	SWAPNEIGHBORHOOD_HPP
 
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -17,9 +17,9 @@
 class SwapNeighborhood : public Neighborhood {
 public:
     unsigned testCounter = 0;
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    SwapNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    SwapNeighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
     SwapNeighborhood(const SwapNeighborhood& orig);
     ~SwapNeighborhood();
 

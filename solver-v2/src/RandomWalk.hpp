@@ -3,7 +3,7 @@
 #include "SearchEngine.hpp"
 #include "Move.hpp"
 #include "Neighborhood.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 
 
 class RandomWalk : public SearchEngine {

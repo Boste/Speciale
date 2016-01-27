@@ -26,7 +26,7 @@ Sum::~Sum() {
   
 }
 
-bool Sum::calculateDeltaValue() {
+bool Sum::calculateDelta() {
     DeltaValue = 0;
     while (!VariableChange.empty()) {
         DeltaValue += VariableChange.back();

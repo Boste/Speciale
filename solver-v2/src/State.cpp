@@ -3,7 +3,7 @@
 
 /// Model should be initialized before making a State (since State is only used in LS hence model should be made LS friendly)
 
-State::State(std::shared_ptr<Model> model) {
+State::State(std::shared_ptr<Storage> model) {
     //    std::cout << "create state" << std::endl;
     this->model = model;
 

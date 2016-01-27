@@ -61,7 +61,7 @@ FirstImprovement FI(FN) \;
 RandomWalk RW(FN, randomMoves) \;
 \bool improvement = true  \;
 \While{\upshape within time limit}{
-  \eIf{improvement \&\& \upshape within time limit}{
+  \While{improvement \textbf{AND} \upshape within time limit}{
     improvement = FI.start() \;
     iterations++ \;     
     \If{\upshape getSolution() is better than bestSolution} {

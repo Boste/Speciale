@@ -56,7 +56,7 @@ void Max::proposeChange(int id, int change) {
 
 }
 
-bool Max::calculateDeltaValue() {
+bool Max::calculateDelta() {
     firstChange = 0;
     DeltaValue = 0;
     //    std::cout << "lowerbound " << lowerbound << std::endl;

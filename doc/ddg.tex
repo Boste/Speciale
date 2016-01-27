@@ -1,47 +1,48 @@
-The dependency directed graph (\emph{DDG}) $G=(V,A)$ is made of a set of vertices $V$ representing the non-fixed 
-variables, invariants and the non transformed constraints. The vertex $v \in V$ has an outgoing arc to vertex $u \in V$ 
-if and only if the value of the variable corresponding to $u$ is directly dependent on the value of variable 
-corresponding to $v$. The variable vertices only have outgoing arcs and the constraints can only have ingoing arcs. 
-\boste{Skal det stå her efter omstrukturering} The initial model will be modified by introducing invariants defined by 
-oneway constraints and vertices representing invariants will be added to the graph $G$. \\
+For each constraint not transformed to a oneway constraint auxiliary variables are introduced as invariants and an 
+invariant for violation is created. The are created by calling the method \method{createInvariants} of each constraint. 
+The algorithm for \class{Linear} was shown in subsection \ref{sub_cons}. These invariants are used to speed up local 
+search, that is described in section \ref{sec_local}. \boste{Are they?} \\
+The dependency directed graph (\emph{DDG}) $G=(V,A)$ is made of a set of vertices $V$ representing all independent 
+variables and all invariants. To ease the notation we say the value of vertex $v \in V$ is the value of the variable or 
+invariant it represents. \\
+The vertex $v \in V$ has an outgoing arc to vertex $u \in V$ if and only if the value of $u$ is directly dependent on 
+the value of $v$. The vertices representing independent variables never have an ingoing arc. \\ 
 The graph can be illustrated with all the variable vertices to the left with outgoing arcs going right to vertices 
-representing invariants and constraints.  \\  
-The invariants are variables that are defined by oneway constraints or they can be auxiliary variables used in the local 
-search. If a variable is defined by a oneway constraint the variable vertex is removed from $G$ since the value of that 
+representing invariants. \\  
+If a variable is defined by a oneway constraint the variable vertex is removed from $G$ since the value of that 
 variable is given by the invariant representing it. \\  
 %From now on when talking about vertices in $G$ it refers to the variable, invariant or constraint it represents unless 
 %other stated. \\
 %The variables are non-fixed and non-defined and only have outgoing arcs. 
 %Variables and invariants has an outgoing arc to the invariants that 
 %depends on their value. \\ 
-The DDG is used to update values of variables and invariants during local search. The graph $G$ is used to build the 
-propagation queues described in subsection \ref{sec_propaqueue}. \\
-The example is a model with three variables and a two constraint and will illustrate how a possible dependency directed 
-graph $G$ is made. 
+The DDG is used to update values of variables and invariants during local search. The graph $G$ is also used to build 
+the propagation queues described in subsection \ref{sec_propaqueue}. The idea of a graph representing the relationship 
+between invariants comes from Comet \cite[p. 97]{comet} and OscaR\cite[p. 7-9]{oscar}. \\
+To illustrate how the DDG is made an example of a model with three variables and a two constraint will 
+illustrate it. \\ 
 \begin{center}
 \begin{tabular}{rlr}
-$ c_1: $&$2x_1 + x_2 - x_3 $&$= 2$ \\
-$ c_2: $&$x_2 + x_3 $&$\leq 1$ \\
+$ c_1: $&$x_1 + x_2 - x_3 $&$= 1$ \\
+$ c_2: $&$2x_2 + x_3 $&$\leq 2$ \\
 \end{tabular} 
 \end{center}
-$G$ consist of the three variables $x_1$, $x_2$, and $x_3$ and the constraints $c_1$ and $c_2$. The 
-variable $x_3$ can be defined as an invariant $inv_1$ by transforming $c_1$ to a oneway constraint. Once 
-variable $x_3$ is defined by a oneway constraint $c_1$ and $x_3$ are removed from the graph and replaced by invariant 
-$inv_1$. The variables $x_1$ and $x_2$ defines $inv_1$ hence they have outgoing arcs to $inv_1$. Invariant $inv_1$ has 
-an outgoing arc to $c_2$ since Variable $x_3$ participates in $c_2$. \\
+The variable $x_3$ can be defined as an invariant $y_1$ by transforming $c_1$ to a oneway constraint $c_1': x_3 = 
+x_1+x_2-1$. Once variable $x_3$ is defined by a oneway constraint $x_3$ are removed from the graph and replaced by 
+invariant $y_1$. The variables $x_1$ and $x_2$ defines $y_1$ hence they have outgoing arcs to $y_1$. 
 \begin{figure}[b]
 \begin{center}
     \begin{tikzpicture}[scale=1]
         \vertex[label=$x_1$](x1) at (0,2) {};
         \vertex[label=$x_2$](x2) at (0,0) {};
-        \vertex[label=$inv_1$](i1) at (2,1) {};
-        \vertex[label=$c_2$](c2) at (4,0) {};
+        \vertex[label=$y_1$](i1) at (2,1) {};
+%         \vertex[label=$c_2$](c2) at (4,0) {};
 
     \tikzset{EdgeStyle/.style={->}}
         \Edge(x1)(i1)
         \Edge(x2)(i1)
-        \Edge(x2)(c2)
-        \Edge(i1)(c2)
+%         \Edge(x2)(c2)
+%         \Edge(i1)(c2)
         %\Edge(y1)(c3)
         %\Edge(y2)(c3)
     \end{tikzpicture}
@@ -51,46 +52,45 @@ an outgoing arc to $c_2$ since Variable $x_3$ participates in $c_2$. \\
 \end{figure} \noindent
 Auxiliary variable can be useful to update constraint violations and in this example we could create an auxiliary 
 variable where value is the sum of the left hand side of $c_2$. The auxiliary variable will be represented 
-by an invariant $inv_2$ which will be added to $G$. The invariant $inv_1$, representing $x_3$, and variable $x_2$ have 
-an outgoing arc to $inv_2$ that has an outgoing arc to $c_2$.
+by a \class{Sum} invariant $y_2$ which will be added to $G$. The invariant $y_1$, representing $x_3$, and variable 
+$x_2$ have an outgoing arc to $y_2$ that has an outgoing arc to $c_2$. A \class{LEQViolation} invariant $y_3$ 
+representing the violation of constraint $c_2$ is added as well.
 \begin{figure}[b]
 \begin{center}
     \begin{tikzpicture}[scale=1]
         \vertex[label=$x_1$](x1) at (0,2) {};
         \vertex[label=$x_2$](x2) at (0,0) {};
-        \vertex[label=$inv_1$](i1) at (2,1) {};
-        \vertex[label=$inv_2$](i2) at (4,0) {};
-        \vertex[label=$c_2$](c2) at (6,0) {};
+        \vertex[label=$y_1$](i1) at (2,1) {};
+        \vertex[label=$y_2$](i2) at (4,0) {};
+        \vertex[label=$y_3$](i3) at (6,0) {};
 
     \tikzset{EdgeStyle/.style={->}}
         \Edge(x1)(i1)
         \Edge(x2)(i1)
         \Edge(x2)(i2)
         \Edge(i1)(i2)
-        \Edge(i2)(c2)
+        \Edge(i2)(i3)
     \end{tikzpicture} 
     \captionof{figure}{Small example of DDG continued}
     \label{fig_smallG2}
 \end{center}
-\end{figure}   \label{fig_smallG} 
+\end{figure}   \label{fig_smallG2}
+Invariant $y_1$ has an outgoing arc to $y_2$ since Variable $x_3$ participates in $c_2$. \\
 When changing the value of $x_2$ both invariants need to be updated since they are dependent on the value of $x_2$. 
-Invariant $inv_2$ is dependent on the value of $inv_1$ therefore to avoid updating $inv_2$ twice, it is beneficial to 
-update 
-$inv_1$ before updating $inv_2$. This is the ordering given the propagation queue that is discussed in the next 
+Invariant $y_2$ is dependent on the value of $y_1$ therefore to avoid updating $y_2$ twice, it is beneficial to 
+update $y_1$ before updating $y_2$. This is the ordering given the propagation queue that is discussed in the next 
 subsection. \medskip \\
 %\end{minipage}
 %\boste{start on algorithms}
 %The DDG $G$ is initially a bipartite graph where all the decision variables $X$ are vertices in one set and all the 
 %constraints $C$ are vertices in the other set. If constraint $c$ applies to a variable $x$ then there is an arc from 
 %the vertex representing $x$ to the vertex representing $c$. \\   
-In order to avoid circular definitions of invariants dependency directed graph $G$ should be acyclic. A circular 
-definition could be if $x_i$ is used to define $x_j$ and vise versa. Then a change in value 
-of $x_i$ would lead to a change in value of $x_j$ that again changes the value of $x_i$ and so on. \\ 
-Once all invariants are introduced, all strongly connected components of size two or more in $G$ is found. A 
+In order to avoid circular definitions of invariants dependency directed graph $G$ is made acyclic. A circular 
+definition could be if $x_i$ is used to define $x_j$ and vise versa. Then a change in value of $x_i$ would lead to a 
+change in value of $x_j$ that again changes the value of $x_i$ and so on.  \\ 
+In order to remove circular definitions, all strongly connected components of size two or more in $G$ is found. A 
 \emph{strongly connected component} (SCC) is a maximal set of vertices $V^{SCC}$ such that for each pair of vertices 
 $(u,v) \in V^{SCC}$ there exist both a path from $u$ to $v$ and a path from $v$ to $u$ \cite[p. 1170]{cormen}. 
-To find all SCC of size two or more Tarjan's algorithm \boste{cite SIAM J. Comput., 1(2), 146–160.} that finds strongly 
-connected components (\emph{SCC}) is used. \boste{Description of Tarjan and timestamps} \\ 
 Each of these strongly connected components must be broken in order to keep $G$ acyclic, since a SCC consist of at 
 least one cycle. A SCC can be broken by removing arcs and/or removing vertices. The arcs $A$ represent relations 
 between variables, invariants and constraints and should not be changed. The vertices $V^{SCC}$ can only be vertices 
@@ -99,18 +99,34 @@ those invariants corresponds to removing one of the vertices, hence breaking the
 reintroducing the variable it represents and removing the invariant from the model. The oneway constraint used to 
 define the invariant is transformed back into a functional constraint again and is reintroduced in the model. \\
 For each SCC one of the vertices is chosen and the invariant it represents is undefined. The invariant is chosen in the 
-order of lowest domain then highest arity of oneway constraint defining it \boste{Search priority?}. If there is ties 
-they are broken at random.  \\  
+order of lowest domain then highest arity of oneway constraint defining it. If there is ties they are broken at random.
+\\  
+To find all SCC of size two or more Tarjan's algorithm for finding strongly connected components is used. \boste{cite 
+SIAM J. Comput., 1(2), 146–160.}. Tarjan's algorithm has a depth first search behavior when exploring vertices and uses 
+a stack when exploring. The stack consist of vertices that has been visited before but not part of a strongly 
+connected component yet. The use two counters, first one index is unique in the order they are visited the other is 
+lowlink initially the same as index. If we go from vertex $v$ to vertex $u$ and $u$, $v.lowlink = 
+min(v.index,u.lowlink$. When a vertex does not point to any more vertices if its index is equal to it lowlink it pops 
+the stack until it reaches it self. All the vertices popped from the stack is in a strongly connected component. \\
+The algorithm has been modified to give each variable a time stamp when they are popped from the stack aswell. That 
+time stamp gives an ordering of the invariants used to create the propagation queues described in the next subsection. 
+The time stamp is updated each time the algorithm is repeated, when cycles are found. \\
+Removing the fewest possible invariants such that there are no cycles in $G$ corresponds to solving the minimum 
+feedback arc set problem and is known to be NP-hard \cite[p.9]{oscar}. In order to reduce the construction time a 
+greedy approach is chosen. \\ 
+
 Once these strongly connected components are broken there is still no guarantee that $G$ is a directed acyclic graph 
 (DAG). A strongly connected component can be made of several cycles and it might not be sufficient just to break all 
 SCC found by Tarjans algorithm initially. The process of finding SCC with Tarjans algorithm and then 
 breaking these strongly connected components is repeated until no strongly connected components (of size two or more) 
 is found by Tarjans algorithm. \medskip \\  
+The only vertices that can make strongly connected components are the vertices representing invariants, more 
+specifically only the invariants that define a variable. Therefore the check for strongly connected components are done 
+before other invariants are added. \\ 
 The first tiebreaker in algorithm \ref{algo_makeoneway} is used as a heuristic to reduce the number of cycles 
 generated. If invariants are not used to define other invariants no cycles can occur, since cycles can only be made of 
 invariant vertices. \\
-Tarjans algorithm also gives each vertex representing invariants a time stamp that is used to create the propagation 
-queues described in the next subsection.  \boste{This should be described earlier} \\
+
 
 
 

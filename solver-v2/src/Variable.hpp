@@ -14,7 +14,7 @@
 class Invariant;
 
 class Variable {
-    friend class GeneralSolver;
+    friend class GPSolver;
 protected:
     //    Gecode::IntVar* VariablePointer;
     //    Gecode::IntVarArray* ArrayPointer;
@@ -24,69 +24,55 @@ protected:
     int vectorID;
     unsigned defining = 0;
     int CurrentValue = 0;
-    bool isInteger = false;
+//    bool isInteger = false;
     bool isDefined = false;
     bool isFix = false;
-    VariableInConstraints constraints;
+//    VariableInConstraints constraints;
     invariant oneway;
-//    constraint definedByCons;
+    //    constraint definedByCons;
     Constraint* definedByCons;
     unsigned searchPrio = 0;
     bool inObjective = false;
-    
-    //    propagation_queue propagationQueue;
-    //    invariant definedByInvar; 
-
-    /// Current Value of variable
 
     operator int () {
         return CurrentValue;
     }
 
-
-
-    //    bool operator <(int asd){
-    //        return CurrentValue < asd;
-    //    }
-    //    updateVector update;
-    //    Gecode::IntVarArray* ArrayPointer;
     Gecode::BoolVar* VariablePointer;
-//    Gecode::IntVar* VariablePointer;
-
-    //    void clearUpdateVector() {
-    ////        for(InvariantContainer invars : update){
-    ////            invars.clear();
-    ////            invars.resize(0);
-    ////        }
-    //        
-    //        update.clear();
-    //        update.resize(0);
-    //    }
+    unsigned usedIn = 0;
 
 
 public:
     /// Only used for testing instances
-    unsigned usedIn = 0;
-    unsigned getDefining(){
+
+    unsigned getDefining() {
         return defining;
     }
-    void increaseDefining(){
+
+    void increaseDefining() {
         defining++;
     }
-    void decreaseDefining(){
+
+    void decreaseDefining() {
         defining--;
     }
-    VariableInConstraints& usedInConstraints() {
-        usedIn++;
-        return constraints;
-    }
-    unsigned getSerachPriority(){
+
+//    VariableInConstraints& usedInConstraints() {
+//        usedIn++;
+//        return constraints;
+//    }
+
+    unsigned getSerachPriority() {
         return searchPrio;
     }
-    
+
     /// Just used for testing but the counter for constraints is used.
-    void addToUsedInConstraints(std::shared_ptr<Constraint> constraint) {
-        constraints.push_back(constraint);
+
+//    void addToUsedInConstraints(std::shared_ptr<Constraint> constraint) {
+//        constraints.push_back(constraint);
+//    }
+    void addToUsedInConstraints() {
+        usedIn++;
     }
 
     invariant getOneway() {
@@ -98,9 +84,10 @@ public:
         oneway = invar;
         isDefined = true;
     }
-    
+
     /// Only for testing
-    Constraint* getDefinedByCon(){
+
+    Constraint* getDefinedByCon() {
         return definedByCons;
     }
 
@@ -124,9 +111,9 @@ public:
         //        ArrayPointer = ap;
         lowerBound = lowerbound;
         upperBound = upperbound;
-        if (upperbound > 1 || lowerbound < 0) {
-            isInteger = true;
-        }
+//        if (upperbound > 1 || lowerbound < 0) {
+//            isInteger = true;
+//        }
         vectorID = id;
     }
 
@@ -135,45 +122,29 @@ public:
 
     }
 
-//    bool isIntegerVariable() {
-//        return isInteger;
-//    }
-
     int getCurrentValue() {
         return CurrentValue;
     }
 
-    //    void addToUpdate(updateType invariant) {
-    ////        update.push(invariant);//push(invariant);
-    //        update.insert(update.end(),invariant);
-    //    }
-    //    
-    //    updateVector& getUpdateVector() {
-    //        return update;
-    //    }
-
     unsigned getID() {
         return vectorID;
     }
-    void undefine(){
+
+    void undefine() {
 
         isDefined = false;
         definedByCons->isOneway(false);
     }
 
     Gecode::BoolVar* getVariablePointer() {
-//    Gecode::IntVar* getVariablePointer() {
+        //    Gecode::IntVar* getVariablePointer() {
         return VariablePointer;
     }
 
     void setVariablePointer(Gecode::BoolVar& gecodeVar) {
-//    void setVariablePointer(Gecode::IntVar& gecodeVar) {
+        //    void setVariablePointer(Gecode::IntVar& gecodeVar) {
         VariablePointer = &gecodeVar;
     }
-
-    //    Gecode::IntVarArray* getArrayPointer() {
-    //        return ArrayPointer;
-    //    }
 
     int getLowerBound() {
         return lowerBound;
@@ -182,59 +153,55 @@ public:
     int getUpperBound() {
         return upperBound;
     }
-    //    propagation_queue& getPropagationQueue(){
-    //        return propagationQueue;
-    //    }
-    //    void addToPropagationQueue(invariant& invar){
-    ////        propagationQueue.push(invar);
-    //        propagationQueue.insert(invar);
-    //       
-    //    }
 
     ~Variable() {
         //        delete VariablePointer;
 
     }
-    bool isInObjective(){
+
+    bool isInObjective() {
         return inObjective;
     }
 
-    
-    /// Sort in order of decreasing domain
-    struct SortGreater {
 
-        bool operator()(const Variable* var1, const Variable* var2) const {
-                //            std::cout << "sorter" << std::endl;
-            int ds1 = var1->upperBound-var1->lowerBound;
-            int ds2 = var2->upperBound-var2->lowerBound;
-            if(ds1==ds2){
-                return (var1->constraints.size() > var2->constraints.size());
-            }
-            return (var1->upperBound-var1->lowerBound  > var2->upperBound-var2->lowerBound);
-        }
-    };
+    /// Sort in order of decreasing domain
+    //    struct SortGreater {
+    //
+    //        bool operator()(const Variable* var1, const Variable* var2) const {
+    //                //            std::cout << "sorter" << std::endl;
+    //            int ds1 = var1->upperBound-var1->lowerBound;
+    //            int ds2 = var2->upperBound-var2->lowerBound;
+    //            if(ds1==ds2){
+    //                return (var1->constraints.size() > var2->constraints.size());
+    //            }
+    //            return (var1->upperBound-var1->lowerBound  > var2->upperBound-var2->lowerBound);
+    //        }
+    //    };
+
     struct compare_variable : public std::binary_function<Variable*, Variable*, bool> {
 
-//    bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
-//        //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
-//        //                sleep(1);
-//        return (var1->getID() > var2->getID());
-//    }
+//        bool operator()(const IntegerVariable* var1, const IntegerVariable* var2) const {
+//            //                std::cout << "is used"  << invar1 << " " << invar2 << " id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+//            //                sleep(1);
+//            return (var1->getID() > var2->getID());
+//        }
 
-    bool operator()(Variable* var1,Variable* var2) {
+        bool operator()(Variable* var1, Variable* var2) {
 
-        //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
-        //                sleep(1);
-//        unsigned t1 = invariant_nodes.at(invar1->getID())->timestamp; 
-        return (var1->getID() >  var2->getID());
-    }
-   
-};
-    
-    
+            //                std::cout << "is used123 " <<" id1 "<< invar1->getID() <<" id2 "<< invar2->getID() << " compare " << (invar1 < invar2) << std::endl;
+            //                sleep(1);
+            //        unsigned t1 = invariant_nodes.at(invar1->getID())->timestamp; 
+            return (var1->getID() > var2->getID());
+        }
+
+    };
+
+
     /// Just for testing
-    unsigned numberOfConstraints(){
-        return constraints.size();
+
+    unsigned getDegree() {
+        return usedIn;      
+//        return constraints.size();
     }
 
     //    IntegerVariable(const IntegerVariable& orig);

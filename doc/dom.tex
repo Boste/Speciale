@@ -1,4 +1,5 @@
-When an initial solution to the model is requested, Gecode {\sffamily{Branch}} method is called that specifies which 
+When an initial solution to the model is requested, Gecode \method{Branch()} method is called that specifies which 
 variables to branch on and what values should be examined in the branches. Gecode uses preprocessing before searching 
 for a solution and that might reduce the domain of some of the variables. If the domain of a variable is reduced to a 
-single value, the variable is said to be fixed and is assigned that value.   
+single value, the variable is said to be fixed and is assigned that value. The variable will never change value hence 
+it is no longer considered an independent variable.   

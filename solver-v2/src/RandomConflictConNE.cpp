@@ -2,7 +2,7 @@
 #include "RandomConflictConNE.hpp"
 //#include "State.hpp"
 
-RandomConflictConNE::RandomConflictConNE(std::shared_ptr<Model> model, std::shared_ptr<State> st) {
+RandomConflictConNE::RandomConflictConNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st) {
     this->model = model;
     this->state = st;
 }
@@ -180,7 +180,7 @@ Move* RandomConflictConNE::nextRandom() {
 bool RandomConflictConNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
     for (unsigned i = 0; i < change.size(); i++) {
-        model->getEvaluationInvariantNr(i)->calculateDeltaValue();
+        model->getEvaluationInvariantNr(i)->calculateDelta();
     }
     Variable* variable = mv->var;
     propagation_queue& queue = model->getPropagationQueue(variable);
@@ -192,7 +192,7 @@ bool RandomConflictConNE::calculateDelta(Move* mv) {
     bool legal = true;
     for (updateType invar : queue) {
 
-        legal = invar->calculateDeltaValue();
+        legal = invar->calculateDelta();
         if (!legal) {
             break;
         }
@@ -204,7 +204,7 @@ bool RandomConflictConNE::calculateDelta(Move* mv) {
     }
     if (!legal) {
         for (updateType invar : queue) {
-            invar->calculateDeltaValue();
+            invar->calculateDelta();
         }
     } else {
         for (unsigned i = 0; i < change.size(); i++) {

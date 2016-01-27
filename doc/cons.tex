@@ -1,6 +1,7 @@
 % \in C$ is a pair $\langle R_{X(c_j)}, X(c_j) \rangle $ where $ R_{X(c_j)}$  also 
 %called the relation on $c_j$. \\ 
-The values of variables will be restricted by a set of $m$ constraints $C= \{ c_1,c_2, \dots , c_m \} $ and let $J = 
+The values of variables will be restricted by a set of $m$ constraints $C= \{ c_1,c_2, \dots, c_j, \dots , c_m \} $ and 
+let $J = 
 \{1,2,\dots,j,\dots , m\}$. The set of 
 variables to which the constraint $c_j$ applies is called its \emph{scope} and is denoted 
 %$X(c_j) = \{x_{j,{i_1}}, x_{j,i_2} , \dots , x_{j,\alpha_j}\}$. 
@@ -9,7 +10,7 @@ and corresponds to a variable $x_k\in X$.
 The size of a scope $|X(c_j)|$ is called the \emph{arity} $\alpha_j$. If all variables of a constraint $c_j$ has a 
 finite domain then the constraint can be written in extensional form. \emph{Extensional form} is a 
 subset of the Cartesian product of the domains of the variables in its scope $X(c_j)$, i.e, $c_j \subseteq 
-D(x_{i_1,j}) \times D(x_{i_2,j}) \times \dots \times D(x_{i_{\alpha_j},j}), \; x_{ij} \in X(c_j)$, that is the set 
+D(x_{1,j}) \times D(x_{2,j}) \times \dots \times D(x_{{\alpha_j},j}), \; x_{ij} \in X(c_j)$, that is the set 
 of tuples that satisfy the constraint $c_j$. \\
 We call a constraint $c_j$ a \emph{functional constraint} if given an assignment of values to all variables except 
 $x_i$ in $c_j$, then at most one value of $x_i$ satisfy $c_j$ for all $x_i \in X(c_j)$. In other words the value of a 

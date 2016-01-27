@@ -1,6 +1,7 @@
 \newcommand{\method}[1]{\lstinline[basicstyle=\sffamily]{#1}}
 \newcommand{\interface}[1]{\lstinline[basicstyle=\sffamily]{#1}}
-\newcommand{\class}[1]{\lstinline[basicstyle=\sffamily]{#1}}
+% \newcommand{\class}[1]{\lstinline[basicstyle=\sffamily]{#1}}
+\newcommand{\class}[1]{\textbf{#1}}
 \newcommand{\boste}[1]{{\textbf{\color{blue}(#1)}}}
 \newcommand{\marco}[1]{{\color{red}#1}}
 \newcommand{\Int}[0]{\textbf{int} }
@@ -16,9 +17,9 @@
 \newcommand{\true}{\textbf{true }}
 \newcommand{\false}{\textbf{false }}
 \newcommand{\Tau}{\mathcal{T}}
-\newcommand{\gensol}{General Solver }
-\newcommand{\gecodesol}{Gecode Engine }
-\newcommand{\lssol}{Local Search Engine }
+\newcommand{\gensol}{\class{GPSolver} }
+\newcommand{\gecodesol}{\class{GecodeEngine} }
+\newcommand{\lssol}{\class{LocalSearchEngine} }
 \newcommand{\algdata}{\SetKwData{Var}{Variable}\SetKwData{Con}{Constraint}\SetKwData{funccon}{Functional constraint}
 \SetKwInOut{Input}{
 input}\SetKwInOut{Output}{ output}\SetKwData{int}{int}\DontPrintSemicolon\SetKwData{Bool}{bool}\SetKwFunction{Sum}{Sum}

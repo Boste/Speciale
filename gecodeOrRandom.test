@@ -1,0 +1,2867 @@
+Coin0001I At line 1 NAME           acc-tight4
+Coin0001I At line 2 ROWS
+Coin0001I At line 3289 COLUMNS
+Coin0001I At line 20366 RHS
+Coin0001I At line 23652 BOUNDS
+Coin0001I At line 25273 ENDATA
+Coin0002I Problem acc-tight4 has 3285 rows, 1620 columns and 17073 elements
+G: 2043   E: 297    L: 945
+Instance read after 0.012122 seconds
+Peak memory usage for reading instance 3.28125 mb
+## cons 3285
+## vars 1620
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 18 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 17
+	propagators: 2009
+	depth: 15
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001206 seconds
+## fail 2
+Posting 1642 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 164 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 163
+	propagators: 3366
+	depth: 161
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.002016 seconds
+## fail 2
+Number of constriants 821
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 278 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 277
+	propagators: 1651
+	depth: 275
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.002542 seconds
+## fail 2
+##Random random acc-tight4 
+Coin0001I At line 1 NAME           acc-tight5
+Coin0001I At line 2 ROWS
+Coin0001I At line 3056 COLUMNS
+Coin0001I At line 19194 RHS
+Coin0001I At line 22247 BOUNDS
+Coin0001I At line 23587 ENDATA
+Coin0002I Problem acc-tight5 has 3052 rows, 1339 columns and 16134 elements
+G: 1669   E: 277    L: 1106
+Instance read after 0.015341 seconds
+Peak memory usage for reading instance 3.31641 mb
+## cons 3052
+## vars 1339
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 4
+Searching for solution....
+Stopped because of Fail limit
+stop called 17 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 16
+	propagators: 1015
+	depth: 14
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001307 seconds
+## fail 2
+Posting 1526 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 35 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 34
+	propagators: 1457
+	depth: 32
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000807 seconds
+## fail 2
+Number of constriants 763
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 200 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 199
+	propagators: 943
+	depth: 197
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001715 seconds
+## fail 2
+##Random random acc-tight5 
+Coin0001I At line 1 NAME           acc-tight6
+Coin0001I At line 2 ROWS
+Coin0001I At line 3051 COLUMNS
+Coin0001I At line 19163 RHS
+Coin0001I At line 22211 BOUNDS
+Coin0001I At line 23547 ENDATA
+Coin0002I Problem acc-tight6 has 3047 rows, 1335 columns and 16108 elements
+G: 1670   E: 277    L: 1100
+Instance read after 0.019651 seconds
+Peak memory usage for reading instance 3.31641 mb
+## cons 3047
+## vars 1335
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 8 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 7
+	propagators: 333
+	depth: 5
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000959 seconds
+## fail 2
+Posting 1523 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 44 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 43
+	propagators: 1202
+	depth: 41
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000843 seconds
+## fail 2
+Number of constriants 762
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 220 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 219
+	propagators: 1373
+	depth: 217
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001971 seconds
+## fail 2
+##Random random acc-tight6 
+Coin0001I At line 1 NAME           air04
+Coin0001I At line 2 ROWS
+Coin0001I At line 827 COLUMNS
+Coin0001I At line 44724 RHS
+Coin0001I At line 45137 BOUNDS
+Coin0001I At line 54042 ENDATA
+Coin0002I Problem air04 has 823 rows, 8904 columns and 72965 elements
+G: 0   E: 823    L: 0
+Instance read after 0.05333 seconds
+Peak memory usage for reading instance 5.91016 mb
+## cons 823
+## vars 8904
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 5206 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 5205
+	propagators: 199
+	depth: 5203
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.171028 seconds
+## fail 2
+Posting 411 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 6181 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 6180
+	propagators: 111
+	depth: 6178
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.205585 seconds
+## fail 2
+Number of constriants 206
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8555 times
+Gecode found solution after 0.271365
+	fail: 0
+	nodes: 8555
+	propagators: 206
+	depth: 8554
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal air04 
+Coin0001I At line 1 NAME           circ10-3
+Coin0001I At line 2 ROWS
+Coin0001I At line 42624 COLUMNS
+Coin0001I At line 196927 RHS
+Coin0001I At line 217338 BOUNDS
+Coin0001I At line 220039 ENDATA
+Coin0002I Problem circ10-3 has 42620 rows, 2700 columns and 307320 elements
+G: 42170   E: 450    L: 0
+Instance read after 0.229476 seconds
+Peak memory usage for reading instance 16.4453 mb
+## cons 42620
+## vars 2700
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 320 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 319
+	propagators: 84459
+	depth: 317
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.034137 seconds
+## fail 2
+Posting 21310 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1198 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1197
+	propagators: 123733
+	depth: 1195
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.031012 seconds
+## fail 2
+Number of constriants 10655
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1227 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1226
+	propagators: 59662
+	depth: 1224
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.017859 seconds
+## fail 2
+##Random random circ10-3 
+Coin0001I At line 1 NAME           cov1075
+Coin0001I At line 2 ROWS
+Coin0001I At line 641 COLUMNS
+Coin0001I At line 15044 RHS
+Coin0001I At line 15682 BOUNDS
+Coin0001I At line 15803 ENDATA
+Coin0002I Problem cov1075 has 637 rows, 120 columns and 14280 elements
+G: 637   E: 0    L: 0
+Instance read after 0.020123 seconds
+Peak memory usage for reading instance 2.97656 mb
+## cons 637
+## vars 120
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 70 times
+Gecode found solution after 0.000675
+	fail: 0
+	nodes: 70
+	propagators: 1051
+	depth: 69
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal cov1075 
+Coin0001I At line 1 NAME           datt256
+Coin0001I At line 2 ROWS
+Coin0001I At line 11081 COLUMNS
+Coin0001I At line 1776960 RHS
+Coin0001I At line 1777474 BOUNDS
+Coin0001I At line 2039619 ENDATA
+Coin0002I Problem datt256 has 11077 rows, 262144 columns and 1503732 elements
+G: 0   E: 11077    L: 0
+Instance read after 1.41671 seconds
+Peak memory usage for reading instance 80.3828 mb
+## cons 11077
+## vars 262144
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 65997
+Searching for solution....
+Stopped because of Fail limit
+stop called 2231 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 2230
+	propagators: 17165
+	depth: 2228
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 3.93227 seconds
+## fail 2
+Posting 5538 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 5532 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 5531
+	propagators: 19765
+	depth: 5531
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.004 seconds
+## fail 0
+Number of constriants 2769
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 6540 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 6539
+	propagators: 17065
+	depth: 6539
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0054 seconds
+## fail 0
+##Random random datt256 
+Coin0001I At line 1 NAME           ex1010-pi
+Coin0001I At line 2 ROWS
+Coin0001I At line 1472 COLUMNS
+Coin0001I At line 71247 RHS
+Coin0001I At line 71982 BOUNDS
+Coin0001I At line 97183 ENDATA
+Coin0002I Problem ex1010-pi has 1468 rows, 25200 columns and 102114 elements
+G: 1468   E: 0    L: 0
+Instance read after 0.102459 seconds
+Peak memory usage for reading instance 8.44531 mb
+## cons 1468
+## vars 25200
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 24470 times
+Gecode found solution after 1.44166
+	fail: 0
+	nodes: 24470
+	propagators: 41171
+	depth: 24469
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ex1010-pi 
+Coin0001I At line 1 NAME           ex10
+Coin0001I At line 2 ROWS
+Coin0001I At line 69613 COLUMNS
+Coin0001I At line 1266976 RHS
+Coin0001I At line 1336586 BOUNDS
+Coin0001I At line 1371947 ENDATA
+Coin0002I Problem ex10 has 69608 rows, 17680 columns and 1162000 elements
+G: 0   E: 200    L: 69408
+Instance read after 0.737594 seconds
+Peak memory usage for reading instance 49.25 mb
+## cons 69608
+## vars 17680
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 1744
+Searching for solution....
+Stopped because of Fail limit
+stop called 9967 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 9966
+	propagators: 875321
+	depth: 9964
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.772424 seconds
+## fail 2
+Posting 34804 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 10118 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 10117
+	propagators: 424536
+	depth: 10115
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.820843 seconds
+## fail 2
+Number of constriants 17402
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 12458 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 12457
+	propagators: 248123
+	depth: 12455
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.950711 seconds
+## fail 2
+##Random random ex10 
+Coin0001I At line 1 NAME           ex9
+Coin0001I At line 2 ROWS
+Coin0001I At line 40966 COLUMNS
+Coin0001I At line 568485 RHS
+Coin0001I At line 609448 BOUNDS
+Coin0001I At line 630257 ENDATA
+Coin0002I Problem ex9 has 40962 rows, 10404 columns and 517112 elements
+G: 0   E: 162    L: 40800
+Instance read after 0.331496 seconds
+Peak memory usage for reading instance 24.207 mb
+## cons 40962
+## vars 10404
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 1844
+Searching for solution....
+Stopped because of Fail limit
+stop called 4884 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4883
+	propagators: 340709
+	depth: 4881
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.251596 seconds
+## fail 2
+Posting 20481 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 4453 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4452
+	propagators: 155707
+	depth: 4450
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.231103 seconds
+## fail 2
+Number of constriants 10241
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 6159 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 6158
+	propagators: 96411
+	depth: 6156
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.28689 seconds
+## fail 2
+##Random random ex9 
+Coin0001I At line 1 NAME           f2000
+Coin0001I At line 2 ROWS
+Coin0001I At line 10504 COLUMNS
+Coin0001I At line 28266 RHS
+Coin0001I At line 33517 BOUNDS
+Coin0001I At line 37518 ENDATA
+Coin0002I Problem f2000 has 10500 rows, 4000 columns and 29500 elements
+G: 10500   E: 0    L: 0
+Instance read after 0.03894 seconds
+Peak memory usage for reading instance 4.62891 mb
+## cons 10500
+## vars 4000
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 97 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 96
+	propagators: 8276
+	depth: 94
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.002771 seconds
+## fail 2
+Posting 5250 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1711 times
+Gecode found solution after 0.020173
+	fail: 0
+	nodes: 1711
+	propagators: 7511
+	depth: 1710
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal f2000 
+Coin0001I At line 1 NAME           go19
+Coin0001I At line 2 ROWS
+Coin0001I At line 445 COLUMNS
+Coin0001I At line 2694 RHS
+Coin0001I At line 3056 BOUNDS
+Coin0001I At line 3498 ENDATA
+Coin0002I Problem go19 has 441 rows, 441 columns and 1885 elements
+G: 361   E: 80    L: 0
+Instance read after 0.009543 seconds
+Peak memory usage for reading instance 2.35938 mb
+## cons 441
+## vars 441
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 80
+Searching for solution....
+stop called 207 times
+Gecode found solution after 0.000487
+	fail: 0
+	nodes: 207
+	propagators: 874
+	depth: 206
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal go19 
+Coin0001I At line 1 NAME           hanoi5
+Coin0001I At line 2 ROWS
+Coin0001I At line 16403 COLUMNS
+Coin0001I At line 39309 RHS
+Coin0001I At line 47510 BOUNDS
+Coin0001I At line 51373 ENDATA
+Coin0002I Problem hanoi5 has 16399 rows, 3862 columns and 39718 elements
+G: 16399   E: 0    L: 0
+Instance read after 0.051694 seconds
+Peak memory usage for reading instance 5.29297 mb
+## cons 16399
+## vars 3862
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 862
+Searching for solution....
+Stopped because of Fail limit
+stop called 33 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 32
+	propagators: 19988
+	depth: 30
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.003164 seconds
+## fail 2
+Posting 8199 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1042 times
+Gecode found solution after 0.01073
+	fail: 0
+	nodes: 1042
+	propagators: 7707
+	depth: 1041
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal hanoi5 
+Coin0001I At line 1 NAME           iis-100-0-cov
+Coin0001I At line 2 ROWS
+Coin0001I At line 3835 COLUMNS
+Coin0001I At line 26924 RHS
+Coin0001I At line 30756 BOUNDS
+Coin0001I At line 30857 ENDATA
+Coin0002I Problem iis-100-0-cov has 3831 rows, 100 columns and 22986 elements
+G: 3831   E: 0    L: 0
+Instance read after 0.029545 seconds
+Peak memory usage for reading instance 3.44141 mb
+## cons 3831
+## vars 100
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 42 times
+Gecode found solution after 0.001077
+	fail: 0
+	nodes: 42
+	propagators: 8412
+	depth: 41
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal iis-100-0-cov 
+Coin0001I At line 1 NAME           iis-bupa-cov
+Coin0001I At line 2 ROWS
+Coin0001I At line 4807 COLUMNS
+Coin0001I At line 43547 RHS
+Coin0001I At line 48351 BOUNDS
+Coin0001I At line 48697 ENDATA
+Coin0002I Problem iis-bupa-cov has 4803 rows, 345 columns and 38392 elements
+G: 4803   E: 0    L: 0
+Instance read after 0.033925 seconds
+Peak memory usage for reading instance 4.03906 mb
+## cons 4803
+## vars 345
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 214 times
+Gecode found solution after 0.001857
+	fail: 0
+	nodes: 214
+	propagators: 13402
+	depth: 213
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal iis-bupa-cov 
+Coin0001I At line 1 NAME           iis-pima-cov
+Coin0001I At line 2 ROWS
+Coin0001I At line 7205 COLUMNS
+Coin0001I At line 79917 RHS
+Coin0001I At line 87119 BOUNDS
+Coin0001I At line 87888 ENDATA
+Coin0002I Problem iis-pima-cov has 7201 rows, 768 columns and 71941 elements
+G: 7201   E: 0    L: 0
+Instance read after 0.055739 seconds
+Peak memory usage for reading instance 5.43359 mb
+## cons 7201
+## vars 768
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 633 times
+Gecode found solution after 0.004132
+	fail: 0
+	nodes: 633
+	propagators: 16247
+	depth: 632
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal iis-pima-cov 
+Coin0001I At line 1 NAME           m100n500k4r1
+Coin0001I At line 2 ROWS
+Coin0001I At line 104 COLUMNS
+Coin0001I At line 2607 RHS
+Coin0001I At line 2708 BOUNDS
+Coin0001I At line 3209 ENDATA
+Coin0002I Problem m100n500k4r1 has 100 rows, 500 columns and 2000 elements
+G: 0   E: 0    L: 100
+Instance read after 0.009071 seconds
+Peak memory usage for reading instance 2.36328 mb
+## cons 100
+## vars 500
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 501 times
+Gecode found solution after 0.001741
+	fail: 0
+	nodes: 501
+	propagators: 100
+	depth: 500
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal m100n500k4r1 
+Coin0001I At line 1 NAME           methanosarcina
+Coin0001I At line 2 ROWS
+Coin0001I At line 14608 COLUMNS
+Coin0001I At line 65725 RHS
+Coin0001I At line 75818 BOUNDS
+Coin0001I At line 83749 ENDATA
+Coin0002I Problem methanosarcina has 14604 rows, 7930 columns and 43812 elements
+G: 9558   E: 0    L: 5046
+Instance read after 0.058751 seconds
+Peak memory usage for reading instance 5.89844 mb
+## cons 14604
+## vars 7930
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 2861 times
+Gecode found solution after 0.059704
+	fail: 0
+	nodes: 2861
+	propagators: 33719
+	depth: 2860
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal methanosarcina 
+Coin0001I At line 1 NAME           macrophage
+Coin0001I At line 2 ROWS
+Coin0001I At line 3168 COLUMNS
+Coin0001I At line 14245 RHS
+Coin0001I At line 15464 BOUNDS
+Coin0001I At line 17725 ENDATA
+Coin0002I Problem macrophage has 3164 rows, 2260 columns and 9492 elements
+G: 2555   E: 0    L: 609
+Instance read after 0.021242 seconds
+Peak memory usage for reading instance 3.19922 mb
+## cons 3164
+## vars 2260
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 1627 times
+Gecode found solution after 0.01306
+	fail: 0
+	nodes: 1627
+	propagators: 8667
+	depth: 1626
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal macrophage 
+Coin0001I At line 1 NAME           mspp16
+Coin0001I At line 2 ROWS
+Coin0001I At line 561661 COLUMNS
+Coin0001I At line 28244464 RHS
+Coin0001I At line 28770497 BOUNDS
+Coin0001I At line 28799778 ENDATA
+Coin0002I Problem mspp16 has 561657 rows, 29280 columns and 27678735 elements
+G: 256   E: 35176    L: 526225
+Instance read after 28.2187 seconds
+Peak memory usage for reading instance 1000.52 mb
+## cons 561657
+## vars 29280
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 25215
+Searching for solution....
+Stopped because of Fail limit
+stop called 3361 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 3360
+	propagators: 1073088
+	depth: 3358
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 8.99602 seconds
+## fail 2
+Posting 280828 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 3861 times
+Gecode found solution after 2.34203
+	fail: 0
+	nodes: 3861
+	propagators: 256533
+	depth: 3860
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal mspp16 
+Coin0001I At line 1 NAME           n3div36
+Coin0001I At line 2 ROWS
+Coin0001I At line 4488 COLUMNS
+Coin0001I At line 367351 RHS
+Coin0001I At line 371836 BOUNDS
+Coin0001I At line 393957 ENDATA
+Coin0002I Problem n3div36 has 4484 rows, 22120 columns and 340740 elements
+G: 60   E: 0    L: 4424
+Instance read after 0.425069 seconds
+Peak memory usage for reading instance 16.9688 mb
+## cons 4484
+## vars 22120
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 22094 times
+Gecode found solution after 3.40671
+	fail: 0
+	nodes: 22094
+	propagators: 317331
+	depth: 22093
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal n3div36 
+Coin0001I At line 1 NAME           n3seq24
+Coin0001I At line 2 ROWS
+Coin0001I At line 6048 COLUMNS
+Coin0001I At line 3344567 RHS
+Coin0001I At line 3349172 BOUNDS
+Coin0001I At line 3469029 ENDATA
+Coin0002I Problem n3seq24 has 6044 rows, 119856 columns and 3232340 elements
+G: 1560   E: 0    L: 4484
+Instance read after 3.75603 seconds
+Peak memory usage for reading instance 126.535 mb
+## cons 6044
+## vars 119856
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of time limit
+stop called 17031 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 17030
+	propagators: 364301
+	depth: 17030
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0017 seconds
+## fail 0
+Posting 3022 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 18021 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 18020
+	propagators: 217787
+	depth: 18020
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0046 seconds
+## fail 0
+Number of constriants 1511
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 20098 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 20097
+	propagators: 137219
+	depth: 20097
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0058 seconds
+## fail 0
+##Random random n3seq24 
+Coin0001I At line 1 NAME           neos-1109824
+Coin0001I At line 2 ROWS
+Coin0001I At line 28983 COLUMNS
+Coin0001I At line 120026 RHS
+Coin0001I At line 148930 BOUNDS
+Coin0001I At line 150451 ENDATA
+Coin0002I Problem neos-1109824 has 28979 rows, 1520 columns and 89528 elements
+G: 0   E: 99    L: 28880
+Instance read after 0.067817 seconds
+Peak memory usage for reading instance 7.79688 mb
+## cons 28979
+## vars 1520
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 746 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 745
+	propagators: 59230
+	depth: 743
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.011066 seconds
+## fail 2
+Posting 14489 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 744 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 743
+	propagators: 30309
+	depth: 741
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007338 seconds
+## fail 2
+Number of constriants 7245
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 933 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 932
+	propagators: 16660
+	depth: 930
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007027 seconds
+## fail 2
+##Random random neos-1109824 
+Coin0001I At line 1 NAME           neos-1337307
+Coin0001I At line 2 ROWS
+Coin0001I At line 5691 COLUMNS
+Coin0001I At line 22931 RHS
+Coin0001I At line 23923 BOUNDS
+Coin0001I At line 26764 ENDATA
+Coin0002I Problem neos-1337307 has 5687 rows, 2840 columns and 30799 elements
+G: 3664   E: 126    L: 1897
+Instance read after 0.023738 seconds
+Peak memory usage for reading instance 4.01172 mb
+## cons 5687
+## vars 2840
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 584 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 583
+	propagators: 24237
+	depth: 581
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.012193 seconds
+## fail 2
+Posting 2843 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1313 times
+Gecode found solution after 0.014719
+	fail: 0
+	nodes: 1313
+	propagators: 11991
+	depth: 1312
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos-1337307 
+Coin0001I At line 1 NAME           neos-1440225
+Coin0001I At line 2 ROWS
+Coin0001I At line 334 COLUMNS
+Coin0001I At line 15790 RHS
+Coin0001I At line 16121 BOUNDS
+Coin0001I At line 17407 ENDATA
+Coin0002I Problem neos-1440225 has 330 rows, 1285 columns and 14168 elements
+G: 0   E: 330    L: 0
+Instance read after 0.010215 seconds
+Peak memory usage for reading instance 3.02734 mb
+## cons 330
+## vars 1285
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 96 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 95
+	propagators: 144
+	depth: 93
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000961 seconds
+## fail 2
+Posting 165 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 557 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 556
+	propagators: 18
+	depth: 554
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.003367 seconds
+## fail 2
+Number of constriants 83
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 284 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 283
+	propagators: 12
+	depth: 281
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001261 seconds
+## fail 2
+##Random random neos-1440225 
+Coin0001I At line 1 NAME           neos-1616732
+Coin0001I At line 2 ROWS
+Coin0001I At line 2003 COLUMNS
+Coin0001I At line 6204 RHS
+Coin0001I At line 8204 BOUNDS
+Coin0001I At line 8405 ENDATA
+Coin0002I Problem neos-1616732 has 1999 rows, 200 columns and 3998 elements
+G: 1999   E: 0    L: 0
+Instance read after 0.009408 seconds
+Peak memory usage for reading instance 2.61719 mb
+## cons 1999
+## vars 200
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 25 times
+Gecode found solution after 0.000295
+	fail: 0
+	nodes: 25
+	propagators: 1999
+	depth: 24
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos-1616732 
+Coin0001I At line 1 NAME           neos-1620770
+Coin0001I At line 2 ROWS
+Coin0001I At line 9300 COLUMNS
+Coin0001I At line 28617 RHS
+Coin0001I At line 37123 BOUNDS
+Coin0001I At line 37916 ENDATA
+Coin0002I Problem neos-1620770 has 9296 rows, 792 columns and 19292 elements
+G: 0   E: 35    L: 9261
+Instance read after 0.022155 seconds
+Peak memory usage for reading instance 3.89844 mb
+## cons 9296
+## vars 792
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 6 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 5
+	propagators: 17788
+	depth: 2
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001626 seconds
+## fail 2
+Posting 4648 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 400 times
+Gecode found solution after 0.00169
+	fail: 0
+	nodes: 400
+	propagators: 4677
+	depth: 399
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos-1620770 
+Coin0001I At line 1 NAME           neos18
+Coin0001I At line 2 ROWS
+Coin0001I At line 11406 COLUMNS
+Coin0001I At line 36103 RHS
+Coin0001I At line 43629 BOUNDS
+Coin0001I At line 50254 ENDATA
+Coin0002I Problem neos18 has 11402 rows, 3312 columns and 24614 elements
+G: 2888   E: 2394    L: 6120
+Instance read after 0.031113 seconds
+Peak memory usage for reading instance 4.41797 mb
+## cons 11402
+## vars 3312
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 2349
+Searching for solution....
+stop called 425 times
+Gecode found solution after 0.003159
+	fail: 0
+	nodes: 425
+	propagators: 9542
+	depth: 424
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos18 
+Coin0001I At line 1 NAME           neos-631710
+Coin0001I At line 2 ROWS
+Coin0001I At line 169580 COLUMNS
+Coin0001I At line 1004305 RHS
+Coin0001I At line 1006271 BOUNDS
+Coin0001I At line 1173328 ENDATA
+Coin0002I Problem neos-631710 has 169576 rows, 167056 columns and 834166 elements
+G: 166500   E: 300    L: 2776
+Instance read after 0.581929 seconds
+Peak memory usage for reading instance 58.8711 mb
+## cons 169576
+## vars 167056
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 336829
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.138549 seconds
+## fail 2
+Posting 84788 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 6285 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 6284
+	propagators: 84138
+	depth: 6284
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.004 seconds
+## fail 0
+Number of constriants 42394
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 6228 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 6227
+	propagators: 41834
+	depth: 6227
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0035 seconds
+## fail 0
+##Random random neos-631710 
+Coin0001I At line 1 NAME           neos-777800
+Coin0001I At line 2 ROWS
+Coin0001I At line 483 COLUMNS
+Coin0001I At line 38886 RHS
+Coin0001I At line 39366 BOUNDS
+Coin0001I At line 52167 ENDATA
+Coin0002I Problem neos-777800 has 479 rows, 6400 columns and 32000 elements
+G: 0   E: 1    L: 478
+Instance read after 0.037984 seconds
+Peak memory usage for reading instance 4.27344 mb
+## cons 479
+## vars 6400
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 6323 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 6322
+	propagators: 942
+	depth: 6320
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.045584 seconds
+## fail 2
+Posting 239 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 6321 times
+Gecode found solution after 0.128991
+	fail: 0
+	nodes: 6321
+	propagators: 236
+	depth: 6320
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos-777800 
+Coin0001I At line 1 NAME           neos808444
+Coin0001I At line 2 ROWS
+Coin0001I At line 18333 COLUMNS
+Coin0001I At line 138848 RHS
+Coin0001I At line 142372 BOUNDS
+Coin0001I At line 162219 ENDATA
+Coin0002I Problem neos808444 has 18329 rows, 19846 columns and 120512 elements
+G: 509   E: 942    L: 16878
+Instance read after 0.103169 seconds
+Peak memory usage for reading instance 9.75 mb
+## cons 18329
+## vars 19846
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 2
+Searching for solution....
+Stopped because of Fail limit
+stop called 3283 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 3282
+	propagators: 77122
+	depth: 3280
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.237402 seconds
+## fail 2
+Posting 9164 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 12727 times
+Gecode found solution after 0.862345
+	fail: 0
+	nodes: 12727
+	propagators: 36686
+	depth: 12726
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos808444 
+Coin0001I At line 1 NAME           neos-849702
+Coin0001I At line 2 ROWS
+Coin0001I At line 1045 COLUMNS
+Coin0001I At line 20356 RHS
+Coin0001I At line 21311 BOUNDS
+Coin0001I At line 23049 ENDATA
+Coin0002I Problem neos-849702 has 1041 rows, 1737 columns and 19308 elements
+G: 0   E: 357    L: 684
+Instance read after 0.010469 seconds
+Peak memory usage for reading instance 3.22266 mb
+## cons 1041
+## vars 1737
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 1035 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1034
+	propagators: 2248
+	depth: 1032
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007457 seconds
+## fail 2
+Posting 520 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 846 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 845
+	propagators: 1166
+	depth: 843
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007751 seconds
+## fail 2
+Number of constriants 260
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1331 times
+Gecode found solution after 0.009798
+	fail: 0
+	nodes: 1331
+	propagators: 1111
+	depth: 1330
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal neos-849702 
+Coin0001I At line 1 NAME           neos-941313
+Coin0001I At line 2 ROWS
+Coin0001I At line 13193 COLUMNS
+Coin0001I At line 646076 RHS
+Coin0001I At line 646936 BOUNDS
+Coin0001I At line 814847 ENDATA
+Coin0002I Problem neos-941313 has 13189 rows, 167910 columns and 484080 elements
+G: 12330   E: 49    L: 810
+Instance read after 0.392916 seconds
+Peak memory usage for reading instance 36.3047 mb
+## cons 13189
+## vars 167910
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of time limit
+stop called 13331 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 13330
+	propagators: 110759
+	depth: 13330
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0017 seconds
+## fail 0
+Posting 6594 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 9608 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 9607
+	propagators: 34278
+	depth: 9607
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.001 seconds
+## fail 0
+Number of constriants 3297
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 11324 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 11323
+	propagators: 18989
+	depth: 11323
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0048 seconds
+## fail 0
+##Random random neos-941313 
+Coin0001I At line 1 NAME           netdiversion
+Coin0001I At line 2 ROWS
+Coin0001I At line 119593 COLUMNS
+Coin0001I At line 774676 RHS
+Coin0001I At line 824583 RANGES
+Coin0001I At line 824584 BOUNDS
+Coin0001I At line 953765 ENDATA
+Coin0002I Problem netdiversion has 119589 rows, 129180 columns and 615282 elements
+G: 39792   E: 20000    L: 59797
+Instance read after 0.637533 seconds
+Peak memory usage for reading instance 44.4531 mb
+## cons 119589
+## vars 129180
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 9700 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 9699
+	propagators: 204592
+	depth: 9697
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 6.6186 seconds
+## fail 2
+Posting 59794 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 8512 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 8511
+	propagators: 46742
+	depth: 8511
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0037 seconds
+## fail 0
+Number of constriants 29897
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 11074 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 11073
+	propagators: 27712
+	depth: 11073
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.004 seconds
+## fail 0
+##Random random netdiversion 
+Coin0001I At line 1 NAME           ns1663818
+Coin0001I At line 2 ROWS
+Coin0001I At line 172021 COLUMNS
+Coin0001I At line 20605973 RHS
+Coin0001I At line 20719179 BOUNDS
+Coin0001I At line 20843806 ENDATA
+Coin0002I Problem ns1663818 has 172017 rows, 124626 columns and 20433649 elements
+G: 109104   E: 631    L: 62282
+Instance read after 8.91212 seconds
+Peak memory usage for reading instance 728.137 mb
+## cons 172017
+## vars 124626
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 3102
+Searching for solution....
+Stopped because of time limit
+stop called 16141 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 16140
+	propagators: 143722
+	depth: 16140
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 9.96205 seconds
+## fail 0
+Posting 86008 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 14416 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 14415
+	propagators: 68644
+	depth: 14415
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0003 seconds
+## fail 0
+Number of constriants 43004
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 14499 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 14498
+	propagators: 33549
+	depth: 14498
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0031 seconds
+## fail 0
+##Random random ns1663818 
+Coin0001I At line 1 NAME           ns1688347
+Coin0001I At line 2 ROWS
+Coin0001I At line 4195 COLUMNS
+Coin0001I At line 71141 RHS
+Coin0001I At line 73939 BOUNDS
+Coin0001I At line 76625 ENDATA
+Coin0002I Problem ns1688347 has 4191 rows, 2685 columns and 66908 elements
+G: 2337   E: 88    L: 1766
+Instance read after 0.034539 seconds
+Peak memory usage for reading instance 5.08203 mb
+## cons 4191
+## vars 2685
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 1357 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1356
+	propagators: 17125
+	depth: 1354
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.016963 seconds
+## fail 2
+Posting 2095 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1811 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1810
+	propagators: 12501
+	depth: 1808
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.019078 seconds
+## fail 2
+Number of constriants 1048
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 2281 times
+Gecode found solution after 0.020974
+	fail: 0
+	nodes: 2281
+	propagators: 4718
+	depth: 2280
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns1688347 
+Coin0001I At line 1 NAME           ns1696083
+Coin0001I At line 2 ROWS
+Coin0001I At line 11067 COLUMNS
+Coin0001I At line 395254 RHS
+Coin0001I At line 403884 BOUNDS
+Coin0001I At line 411867 ENDATA
+Coin0002I Problem ns1696083 has 11063 rows, 7982 columns and 384129 elements
+G: 7271   E: 153    L: 3639
+Instance read after 0.18547 seconds
+Peak memory usage for reading instance 17.1484 mb
+## cons 11063
+## vars 7982
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 507
+Searching for solution....
+Stopped because of Fail limit
+stop called 2305 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 2304
+	propagators: 35869
+	depth: 2302
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.06905 seconds
+## fail 2
+Posting 5531 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 2921 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 2920
+	propagators: 25312
+	depth: 2918
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.067353 seconds
+## fail 2
+Number of constriants 2766
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 3418 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 3417
+	propagators: 13160
+	depth: 3415
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.072107 seconds
+## fail 2
+##Random random ns1696083 
+Coin0001I At line 1 NAME           ns1853823
+Coin0001I At line 2 ROWS
+Coin0001I At line 224530 COLUMNS
+Coin0001I At line 1714933 RHS
+Coin0001I At line 1716976 BOUNDS
+Coin0001I At line 1929497 ENDATA
+Coin0002I Problem ns1853823 has 224526 rows, 213440 columns and 1489480 elements
+G: 0   E: 10164    L: 214362
+Instance read after 0.972102 seconds
+Peak memory usage for reading instance 89.375 mb
+## cons 224526
+## vars 213440
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 264
+Searching for solution....
+stop called 9435 times
+Gecode found solution after 2.69633
+	fail: 0
+	nodes: 9435
+	propagators: 746193
+	depth: 9434
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns1853823 
+Coin0001I At line 1 NAME           ns894236
+Coin0001I At line 2 ROWS
+Coin0001I At line 8222 COLUMNS
+Coin0001I At line 49310 RHS
+Coin0001I At line 49391 BOUNDS
+Coin0001I At line 59058 ENDATA
+Coin0002I Problem ns894236 has 8218 rows, 9666 columns and 41067 elements
+G: 2825   E: 2801    L: 2592
+Instance read after 0.046154 seconds
+Peak memory usage for reading instance 5.21094 mb
+## cons 8218
+## vars 9666
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 2250
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 13626
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.003335 seconds
+## fail 2
+Posting 4109 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 715 times
+Gecode found solution after 0.0178
+	fail: 0
+	nodes: 715
+	propagators: 6092
+	depth: 714
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns894236 
+Coin0001I At line 1 NAME           ns894244
+Coin0001I At line 2 ROWS
+Coin0001I At line 12133 COLUMNS
+Coin0001I At line 103016 RHS
+Coin0001I At line 103155 BOUNDS
+Coin0001I At line 125012 ENDATA
+Coin0002I Problem ns894244 has 12129 rows, 21856 columns and 90864 elements
+G: 4111   E: 4178    L: 3840
+Instance read after 0.083106 seconds
+Peak memory usage for reading instance 8.30859 mb
+## cons 12129
+## vars 21856
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5335
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 4145
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.006798 seconds
+## fail 2
+Posting 6064 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 481 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 480
+	propagators: 12615
+	depth: 478
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.040727 seconds
+## fail 2
+Number of constriants 3032
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8896 times
+Gecode found solution after 0.448732
+	fail: 0
+	nodes: 8896
+	propagators: 6067
+	depth: 8895
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns894244 
+Coin0001I At line 1 NAME           ns894786
+Coin0001I At line 2 ROWS
+Coin0001I At line 16798 COLUMNS
+Coin0001I At line 130390 RHS
+Coin0001I At line 130460 BOUNDS
+Coin0001I At line 157739 ENDATA
+Coin0002I Problem ns894786 has 16794 rows, 27278 columns and 113575 elements
+G: 5613   E: 5805    L: 5376
+Instance read after 0.106512 seconds
+Peak memory usage for reading instance 9.95312 mb
+## cons 16794
+## vars 27278
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5023
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 26347
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.011274 seconds
+## fail 2
+Posting 8397 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1962 times
+Gecode found solution after 0.138129
+	fail: 0
+	nodes: 1962
+	propagators: 15556
+	depth: 1961
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns894786 
+Coin0001I At line 1 NAME           ns894788
+Coin0001I At line 2 ROWS
+Coin0001I At line 2283 COLUMNS
+Coin0001I At line 16674 RHS
+Coin0001I At line 16739 BOUNDS
+Coin0001I At line 20203 ENDATA
+Coin0002I Problem ns894788 has 2279 rows, 3463 columns and 14381 elements
+G: 790   E: 817    L: 672
+Instance read after 0.014824 seconds
+Peak memory usage for reading instance 3.44531 mb
+## cons 2279
+## vars 3463
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 1127
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 2355
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001014 seconds
+## fail 2
+Posting 1139 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 354 times
+Gecode found solution after 0.003069
+	fail: 0
+	nodes: 354
+	propagators: 1656
+	depth: 353
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns894788 
+Coin0001I At line 1 NAME           ns903616
+Coin0001I At line 2 ROWS
+Coin0001I At line 18056 COLUMNS
+Coin0001I At line 109722 RHS
+Coin0001I At line 109850 BOUNDS
+Coin0001I At line 131433 ENDATA
+Coin0002I Problem ns903616 has 18052 rows, 21582 columns and 91641 elements
+G: 6093   E: 6151    L: 5808
+Instance read after 0.090022 seconds
+Peak memory usage for reading instance 8.72266 mb
+## cons 18052
+## vars 21582
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 5371
+Searching for solution....
+Stopped because of Fail limit
+stop called 5 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 4
+	propagators: 11039
+	depth: 1
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007378 seconds
+## fail 2
+Posting 9026 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1054 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1053
+	propagators: 15206
+	depth: 1051
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.065995 seconds
+## fail 2
+Number of constriants 4513
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 8469 times
+Gecode found solution after 0.413669
+	fail: 0
+	nodes: 8469
+	propagators: 7024
+	depth: 8468
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ns903616 
+Coin0001I At line 1 NAME           opm2-z10-s2
+Coin0001I At line 2 ROWS
+Coin0001I At line 160637 COLUMNS
+Coin0001I At line 538085 RHS
+Coin0001I At line 538094 BOUNDS
+Coin0001I At line 544345 ENDATA
+Coin0002I Problem opm2-z10-s2 has 160633 rows, 6250 columns and 371243 elements
+G: 0   E: 0    L: 160633
+Instance read after 0.358782 seconds
+Peak memory usage for reading instance 28.5742 mb
+## cons 160633
+## vars 6250
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 4363 times
+Gecode found solution after 0.196223
+	fail: 0
+	nodes: 4363
+	propagators: 354199
+	depth: 4362
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal opm2-z10-s2 
+Coin0001I At line 1 NAME           opm2-z11-s8
+Coin0001I At line 2 ROWS
+Coin0001I At line 223086 COLUMNS
+Coin0001I At line 741331 RHS
+Coin0001I At line 741340 BOUNDS
+Coin0001I At line 749360 ENDATA
+Coin0002I Problem opm2-z11-s8 has 223082 rows, 8019 columns and 510283 elements
+G: 0   E: 0    L: 223082
+Instance read after 0.493473 seconds
+Peak memory usage for reading instance 38.5 mb
+## cons 223082
+## vars 8019
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 3637 times
+Gecode found solution after 0.174647
+	fail: 0
+	nodes: 3637
+	propagators: 470234
+	depth: 3636
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal opm2-z11-s8 
+Coin0001I At line 1 NAME           opm2-z12-s14
+Coin0001I At line 2 ROWS
+Coin0001I At line 319512 COLUMNS
+Coin0001I At line 1055624 RHS
+Coin0001I At line 1055633 BOUNDS
+Coin0001I At line 1066434 ENDATA
+Coin0002I Problem opm2-z12-s14 has 319508 rows, 10800 columns and 725376 elements
+G: 0   E: 0    L: 319508
+Instance read after 0.716317 seconds
+Peak memory usage for reading instance 54.082 mb
+## cons 319508
+## vars 10800
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 6286 times
+Gecode found solution after 0.375205
+	fail: 0
+	nodes: 6286
+	propagators: 684117
+	depth: 6285
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal opm2-z12-s14 
+Coin0001I At line 1 NAME           opm2-z12-s7
+Coin0001I At line 2 ROWS
+Coin0001I At line 319512 COLUMNS
+Coin0001I At line 1055642 RHS
+Coin0001I At line 1055651 BOUNDS
+Coin0001I At line 1066452 ENDATA
+Coin0002I Problem opm2-z12-s7 has 319508 rows, 10800 columns and 725385 elements
+G: 0   E: 0    L: 319508
+Instance read after 0.713897 seconds
+Peak memory usage for reading instance 54.0742 mb
+## cons 319508
+## vars 10800
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 6291 times
+Gecode found solution after 0.373606
+	fail: 0
+	nodes: 6291
+	propagators: 684154
+	depth: 6290
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal opm2-z12-s7 
+Coin0001I At line 1 NAME           opm2-z7-s2
+Coin0001I At line 2 ROWS
+Coin0001I At line 31802 COLUMNS
+Coin0001I At line 113564 RHS
+Coin0001I At line 113573 BOUNDS
+Coin0001I At line 115597 ENDATA
+Coin0002I Problem opm2-z7-s2 has 31798 rows, 2023 columns and 79762 elements
+G: 0   E: 0    L: 31798
+Instance read after 0.071878 seconds
+Peak memory usage for reading instance 7.92969 mb
+## cons 31798
+## vars 2023
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 578 times
+Gecode found solution after 0.018417
+	fail: 0
+	nodes: 578
+	propagators: 66280
+	depth: 577
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal opm2-z7-s2 
+Coin0001I At line 1 NAME           pb-simp-nonunif
+Coin0001I At line 2 ROWS
+Coin0001I At line 1451916 COLUMNS
+Coin0001I At line 3647167 RHS
+Coin0001I At line 3647509 BOUNDS
+Coin0001I At line 3671358 ENDATA
+Coin0002I Problem pb-simp-nonunif has 1451912 rows, 23848 columns and 4366648 elements
+G: 1447776   E: 4136    L: 0
+Instance read after 3.77427 seconds
+Peak memory usage for reading instance 266.461 mb
+## cons 1451912
+## vars 23848
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 11594
+Searching for solution....
+stop called 1103 times
+Gecode found solution after 0.08769
+	fail: 0
+	nodes: 1103
+	propagators: 294922
+	depth: 1102
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal pb-simp-nonunif 
+Coin0001I At line 1 NAME           protfold
+Coin0001I At line 2 ROWS
+Coin0001I At line 2116 COLUMNS
+Coin0001I At line 13981 RHS
+Coin0001I At line 14085 BOUNDS
+Coin0001I At line 15921 ENDATA
+Coin0002I Problem protfold has 2112 rows, 1835 columns and 23491 elements
+G: 1786   E: 37    L: 289
+Instance read after 0.016841 seconds
+Peak memory usage for reading instance 3.49609 mb
+## cons 2112
+## vars 1835
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 730 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 729
+	propagators: 16833
+	depth: 727
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.006615 seconds
+## fail 2
+Posting 1056 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1034 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1033
+	propagators: 8883
+	depth: 1031
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.007217 seconds
+## fail 2
+Number of constriants 528
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 1614 times
+Gecode found solution after 0.01046
+	fail: 0
+	nodes: 1614
+	propagators: 4081
+	depth: 1613
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal protfold 
+Coin0001I At line 1 NAME           p6b
+Coin0001I At line 2 ROWS
+Coin0001I At line 5856 COLUMNS
+Coin0001I At line 12052 RHS
+Coin0001I At line 14979 BOUNDS
+Coin0001I At line 15442 ENDATA
+Coin0002I Problem p6b has 5852 rows, 462 columns and 11704 elements
+G: 0   E: 0    L: 5852
+Instance read after 0.012644 seconds
+Peak memory usage for reading instance 3.26562 mb
+## cons 5852
+## vars 462
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 463 times
+Gecode found solution after 0.001557
+	fail: 0
+	nodes: 463
+	propagators: 5852
+	depth: 462
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal p6b 
+Coin0001I At line 1 NAME           queens-30
+Coin0001I At line 2 ROWS
+Coin0001I At line 964 COLUMNS
+Coin0001I At line 95307 RHS
+Coin0001I At line 96268 BOUNDS
+Coin0001I At line 97169 ENDATA
+Coin0002I Problem queens-30 has 960 rows, 900 columns and 93440 elements
+G: 0   E: 0    L: 960
+Instance read after 0.062665 seconds
+Peak memory usage for reading instance 5.74219 mb
+## cons 960
+## vars 900
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 901 times
+Gecode found solution after 0.014477
+	fail: 0
+	nodes: 901
+	propagators: 93440
+	depth: 900
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal queens-30 
+Coin0001I At line 1 NAME           ramos3
+Coin0001I At line 2 ROWS
+Coin0001I At line 2191 COLUMNS
+Coin0001I At line 37186 RHS
+Coin0001I At line 39374 BOUNDS
+Coin0001I At line 41562 ENDATA
+Coin0002I Problem ramos3 has 2187 rows, 2187 columns and 32805 elements
+G: 0   E: 0    L: 2187
+Instance read after 0.020701 seconds
+Peak memory usage for reading instance 3.875 mb
+## cons 2187
+## vars 2187
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 1661 times
+Gecode found solution after 0.014466
+	fail: 0
+	nodes: 1661
+	propagators: 11443
+	depth: 1660
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal ramos3 
+Coin0001I At line 1 NAME           seymour
+Coin0001I At line 2 ROWS
+Coin0001I At line 4948 COLUMNS
+Coin0001I At line 22724 RHS
+Coin0001I At line 25197 BOUNDS
+Coin0001I At line 26570 ENDATA
+Coin0002I Problem seymour has 4944 rows, 1372 columns and 33549 elements
+G: 4944   E: 0    L: 0
+Instance read after 0.02267 seconds
+Peak memory usage for reading instance 4.05859 mb
+## cons 4944
+## vars 1372
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 117
+Searching for solution....
+stop called 814 times
+Gecode found solution after 0.005438
+	fail: 0
+	nodes: 814
+	propagators: 11185
+	depth: 813
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal seymour 
+Coin0001I At line 1 NAME           sts405
+Coin0001I At line 2 ROWS
+Coin0001I At line 27274 COLUMNS
+Coin0001I At line 109492 RHS
+Coin0001I At line 136763 BOUNDS
+Coin0001I At line 137169 ENDATA
+Coin0002I Problem sts405 has 27270 rows, 405 columns and 81810 elements
+G: 27270   E: 0    L: 0
+Instance read after 0.085131 seconds
+Peak memory usage for reading instance 7.15625 mb
+## cons 27270
+## vars 405
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 48 times
+Gecode found solution after 0.004597
+	fail: 0
+	nodes: 48
+	propagators: 31917
+	depth: 47
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal sts405 
+Coin0001I At line 1 NAME           sts729
+Coin0001I At line 2 ROWS
+Coin0001I At line 88456 COLUMNS
+Coin0001I At line 354544 RHS
+Coin0001I At line 442997 BOUNDS
+Coin0001I At line 443727 ENDATA
+Coin0002I Problem sts729 has 88452 rows, 729 columns and 265356 elements
+G: 88452   E: 0    L: 0
+Instance read after 0.277688 seconds
+Peak memory usage for reading instance 18.3359 mb
+## cons 88452
+## vars 729
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 67 times
+Gecode found solution after 0.017362
+	fail: 0
+	nodes: 67
+	propagators: 99742
+	depth: 66
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal sts729 
+Coin0001I At line 1 NAME           tanglegram1
+Coin0001I At line 2 ROWS
+Coin0001I At line 68346 COLUMNS
+Coin0001I At line 307546 RHS
+Coin0001I At line 323233 BOUNDS
+Coin0001I At line 357993 ENDATA
+Coin0002I Problem tanglegram1 has 68342 rows, 34759 columns and 205026 elements
+G: 60499   E: 0    L: 7843
+Instance read after 0.245997 seconds
+Peak memory usage for reading instance 17.8438 mb
+## cons 68342
+## vars 34759
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 26821 times
+Gecode found solution after 3.56665
+	fail: 0
+	nodes: 26821
+	propagators: 192325
+	depth: 26820
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal tanglegram1 
+Coin0001I At line 1 NAME           tanglegram2
+Coin0001I At line 2 ROWS
+Coin0001I At line 8984 COLUMNS
+Coin0001I At line 40417 RHS
+Coin0001I At line 44738 BOUNDS
+Coin0001I At line 49453 ENDATA
+Coin0002I Problem tanglegram2 has 8980 rows, 4714 columns and 26940 elements
+G: 6820   E: 0    L: 2160
+Instance read after 0.031177 seconds
+Peak memory usage for reading instance 4.26953 mb
+## cons 8980
+## vars 4714
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 2519 times
+Gecode found solution after 0.02551
+	fail: 0
+	nodes: 2519
+	propagators: 24220
+	depth: 2518
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal tanglegram2 
+Coin0001I At line 1 NAME           toll-like
+Coin0001I At line 2 ROWS
+Coin0001I At line 4412 COLUMNS
+Coin0001I At line 19843 RHS
+Coin0001I At line 22154 BOUNDS
+Coin0001I At line 25038 ENDATA
+Coin0002I Problem toll-like has 4408 rows, 2883 columns and 13224 elements
+G: 3253   E: 0    L: 1155
+Instance read after 0.019221 seconds
+Peak memory usage for reading instance 3.41797 mb
+## cons 4408
+## vars 2883
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+stop called 1677 times
+Gecode found solution after 0.016728
+	fail: 0
+	nodes: 1677
+	propagators: 11644
+	depth: 1676
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal toll-like 
+Coin0001I At line 1 NAME           t1717
+Coin0001I At line 2 ROWS
+Coin0001I At line 555 COLUMNS
+Coin0001I At line 217755 RHS
+Coin0001I At line 218032 BOUNDS
+Coin0001I At line 291918 ENDATA
+Coin0002I Problem t1717 has 551 rows, 73885 columns and 325689 elements
+G: 0   E: 551    L: 0
+Instance read after 0.251064 seconds
+Peak memory usage for reading instance 20.7305 mb
+## cons 551
+## vars 73885
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of time limit
+stop called 38162 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 38161
+	propagators: 17
+	depth: 38161
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0071 seconds
+## fail 0
+Posting 275 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 36801 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 36800
+	propagators: 0
+	depth: 36800
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0086 seconds
+## fail 0
+Number of constriants 138
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of time limit
+stop called 39077 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of time limit
+	fail: 0
+	nodes: 39076
+	propagators: 0
+	depth: 39076
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 10.0091 seconds
+## fail 0
+##Random random t1717 
+Coin0001I At line 1 NAME           t1722
+Coin0001I At line 2 ROWS
+Coin0001I At line 342 COLUMNS
+Coin0001I At line 170071 RHS
+Coin0001I At line 170410 BOUNDS
+Coin0001I At line 207041 ENDATA
+Coin0002I Problem t1722 has 338 rows, 36630 columns and 133096 elements
+G: 0   E: 338    L: 0
+Instance read after 0.140011 seconds
+Peak memory usage for reading instance 10.3867 mb
+## cons 338
+## vars 36630
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 15830 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 15829
+	propagators: 51
+	depth: 15827
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 1.85225 seconds
+## fail 2
+Posting 169 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 36046 times
+Gecode found solution after 4.13621
+	fail: 0
+	nodes: 36046
+	propagators: 169
+	depth: 36045
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal t1722 
+Coin0001I At line 1 NAME           vpphard2
+Coin0001I At line 2 ROWS
+Coin0001I At line 198454 COLUMNS
+Coin0001I At line 1043397 RHS
+Coin0001I At line 1240627 BOUNDS
+Coin0001I At line 1440627 ENDATA
+Coin0002I Problem vpphard2 has 198450 rows, 199999 columns and 648340 elements
+G: 0   E: 1850    L: 196600
+Instance read after 1.14091 seconds
+Peak memory usage for reading instance 59.9102 mb
+## cons 198450
+## vars 199999
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 304 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 303
+	propagators: 108889
+	depth: 301
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.480669 seconds
+## fail 2
+Posting 98762 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 356 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 355
+	propagators: 58109
+	depth: 353
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.627702 seconds
+## fail 2
+Number of constriants 49381
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1217 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1216
+	propagators: 83440
+	depth: 1214
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 1.77345 seconds
+## fail 2
+##Random random vpphard2 
+Coin0001I At line 1 NAME           vpphard
+Coin0001I At line 2 ROWS
+Coin0001I At line 47284 COLUMNS
+Coin0001I At line 466027 RHS
+Coin0001I At line 512815 BOUNDS
+Coin0001I At line 564287 ENDATA
+Coin0002I Problem vpphard has 47280 rows, 51471 columns and 372305 elements
+G: 0   E: 845    L: 46435
+Instance read after 0.458884 seconds
+Peak memory usage for reading instance 23.8438 mb
+## cons 47280
+## vars 51471
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 361
+Searching for solution....
+Stopped because of Fail limit
+stop called 1433 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1432
+	propagators: 163295
+	depth: 1430
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.860603 seconds
+## fail 2
+Posting 23540 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 1698 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 1697
+	propagators: 106693
+	depth: 1695
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.59203 seconds
+## fail 2
+Number of constriants 11770
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 2453 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 2452
+	propagators: 68914
+	depth: 2450
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.477582 seconds
+## fail 2
+##Random random vpphard 
+Coin0001I At line 1 NAME           wnq-n100-mw99-14
+Coin0001I At line 2 ROWS
+Coin0001I At line 656904 COLUMNS
+Coin0001I At line 1328607 RHS
+Coin0001I At line 1657058 BOUNDS
+Coin0001I At line 1667059 ENDATA
+Coin0002I Problem wnq-n100-mw99-14 has 656900 rows, 10000 columns and 1333400 elements
+G: 656900   E: 0    L: 0
+Instance read after 2.09796 seconds
+Peak memory usage for reading instance 102.172 mb
+## cons 656900
+## vars 10000
+Initialize solution
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 8248 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 8247
+	propagators: 1301488
+	depth: 8245
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.697329 seconds
+## fail 2
+Posting 328450 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+stop called 9910 times
+Gecode found solution after 0.507444
+	fail: 0
+	nodes: 9910
+	propagators: 329610
+	depth: 9909
+	restarts: 0
+	nogoods: 0
+## fail 0
+##Random setVal wnq-n100-mw99-14 

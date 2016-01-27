@@ -1,20 +1,20 @@
 //#include <c++/4.8/bits/stl_vector.h>
 
-#include "LSSpace.hpp"
+#include "LocalSearchEngine.hpp"
 
 //#include "RowEcholonTransformer.hpp"
 
 
 //using namespace Gecode;
 
-LSSpace::LSSpace(std::shared_ptr<Model> model) {
+LocalSearchEngine::LocalSearchEngine(std::shared_ptr<Storage> model) {
     this->model = model;
     this->DDG = model->getDDG();
     //        std::cout << "constructed" << std::endl;
 
 }
 
-void LSSpace::createDDG(bool all) {
+void LocalSearchEngine::createDDG(bool all) {
     /// Sort constraints a variable is part of in decreasing order according to domain
 
     /// Sort integer variables decreasing order according to number of constraints they are involved
@@ -120,38 +120,38 @@ void LSSpace::createDDG(bool all) {
     for (constraint con : func) {
         //        if (canBeMadeOneway(con)) {
 
-//        if (con->canBeMadeOneway()) {
-//            invariant invar = con->makeOneway();
-//            model->addInvariant(invar);
-//            //            std::cout << "Add to DDG aswell " << std::endl;
-//            DDG->addInvariant(invar);
-//
-//            numberOfOneway++;
-//            //            std::cout << numberOfOneway << " ";
-//            //            DDG->checkForCycles(model->getInvariants());
-//
-//        }
+        if (con->canBeMadeOneway()) {
+            invariant invar = con->makeOneway();
+            model->addInvariant(invar);
+            //            std::cout << "Add to DDG aswell " << std::endl;
+            DDG->addInvariant(invar);
+
+            numberOfOneway++;
+            //            std::cout << numberOfOneway << " ";
+            //            DDG->checkForCycles(model->getInvariants());
+
+        }
 
         //        }
 
-        if (!con->isOneway()) {
-            bool gotNonfixed = false;
-            for (Variable* iv : con->getVariables()) {
-                if (!iv->isFixed()) {
-                    gotNonfixed = true;
-                }
-
-            }
-
-            if (gotNonfixed) {
-
-            } else {
-                totallyfixed++;
-            }
-            //            std::cout << std::endl;
-        }
+        //        if (!con->isOneway()) {
+        //            bool gotNonfixed = false;
+        //            for (Variable* iv : con->getVariables()) {
+        //                if (!iv->isFixed()) {
+        //                    gotNonfixed = true;
+        //                }
+        //
+        //            }
+        //
+        //            if (gotNonfixed) {
+        //
+        //            } else {
+        //                totallyfixed++;
+        //            }
+        //            //            std::cout << std::endl;
+        //        }
     }
-    std::cout << "totally fixed " << totallyfixed << std::endl;
+    //    std::cout << "totally fixed " << totallyfixed << std::endl;
 
     std::cout << "number of invariants " << numberOfOneway << " out of " << func.size()
             << " (" << func.size() - totallyfixed << ") " << std::endl;
@@ -236,7 +236,7 @@ void LSSpace::createDDG(bool all) {
 
 }
 
-void LSSpace::initializeLS(bool feasible) {
+void LocalSearchEngine::initializeLS() {
 
 
 
@@ -475,7 +475,8 @@ void LSSpace::initializeLS(bool feasible) {
 
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     std::cout << "Create propagator queues" << std::endl;
-    DDG->createPropagationQueue(model->getAllVariables(), model->getInvariants());
+//    DDG->createPropagationQueue(model->getAllVariables(), model->getInvariants());
+    DDG->createPropagationQueue(model->getAllVariables());
     //    model->getDDG()->printSizes();
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     model->initialize();
@@ -525,7 +526,7 @@ void LSSpace::initializeLS(bool feasible) {
     //    }
 }
 
-void LSSpace::optimizeSolution(int time, int test) {
+void LocalSearchEngine::optimizeSolution(int time, int test) {
 
 
 
@@ -890,10 +891,17 @@ void LSSpace::optimizeSolution(int time, int test) {
         } else {
             NE = new FlipNeighborhood(model, currentState);
         }
+        //        std::cout << "\t evaluation \t violation 1 \t iterations \t time \t method \n";
+
+
+
+
         //        RestrictedFlipNE* RFN = new RestrictedFlipNE(model, currentState);
         TabuSearch TSRFN(NE);
         while (usedTime < timelimit) {
-            //            while (!currentState->isFeasible() && usedTime < timelimit) {
+
+
+            //            while (!currentState->isFeasible() && us  edTime < timelimit) {
             if (!currentState->isFeasible()) {
                 TSCON.Start(iterations, bestState, currentState, tabulist);
                 iterations++;
@@ -901,6 +909,13 @@ void LSSpace::optimizeSolution(int time, int test) {
                     currentState->setViolation();
                     bestState->copy(currentState);
                     usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                    //                        std::cout << "\t";
+                    //                    for (int eval : bestState->getEvaluation()) {
+                    //                        std::cout << eval << " ";
+                    //                    }
+                    //                    std::cout << "\t" << model->getViolatedConstraints().size();
+                    //                    std::cout << "\t" << iterations << "\t" << usedTime << "\t" << "TS-CON" << std::endl;
+
                     std::cout << "# value: ";
                     for (int eval : bestState->getEvaluation()) {
                         std::cout << eval << " ";
@@ -928,6 +943,15 @@ void LSSpace::optimizeSolution(int time, int test) {
                     //                    assert(model->getViolatedConstraints().size() == 0);
                     bestState->copy(currentState);
                     usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
+                    //                    for (int eval : bestState->getEvaluation()) {
+                    //                        std::cout << "\t" << eval;
+                    //                    }
+                    //                    std::cout << "\t" << iterations << "\t" << usedTime << "\t" << "TS-RFN" << std::endl;
+
+
+
+                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
                     std::cout << "# value: ";
                     for (int eval : bestState->getEvaluation()) {
                         std::cout << eval << " ";
@@ -953,12 +977,14 @@ void LSSpace::optimizeSolution(int time, int test) {
 
     if (test == 2) {
         std::cout << "# test 2" << std::endl;
-        unsigned twoPercent = model->getMask().size() / 50;
+//        unsigned twoPercent = model->getMask().size() / 50;
         unsigned onePercent = model->getMask().size() / 100;
-        //        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
-        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
+        unsigned randomMoves = std::min(onePercent, (unsigned) 10);
+//        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
         //        unsigned randomMoves = twoPercent;
         std::cout << "Number of randomMoves " << randomMoves << std::endl;
+        //        std::cout << "\t value \t evaluation \t priority 1 \t iterations \t time \t method \n";
+
         FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
         RandomWalk RW(FN, randomMoves);
         FirstImprovement FIFN(FN);
@@ -1032,6 +1058,8 @@ void LSSpace::optimizeSolution(int time, int test) {
         //        FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
 
         std::cout << "# test 3" << std::endl;
+        //        std::cout << "\t value \t evaluation \t priority 1 \t iterations \t time \t method \n";
+
         RandomConflictConNE* RCC = new RandomConflictConNE(model, currentState);
         BestImprovement BIRCC(RCC);
         bool alwaysCommit = true;
@@ -1133,7 +1161,7 @@ void LSSpace::optimizeSolution(int time, int test) {
 
 }
 
-bool LSSpace::testInvariant() {
+bool LocalSearchEngine::testInvariant() {
     bool failed = false;
     for (invariant invar : model->getInvariants()) {
         //        if (invar->isUsedByConstraint()) {
@@ -1147,7 +1175,7 @@ bool LSSpace::testInvariant() {
     return failed;
 }
 
-void LSSpace::setSolution(std::shared_ptr<State> st) {
+void LocalSearchEngine::setSolution(std::shared_ptr<State> st) {
     std::vector<int>& solution = st->getSolution();
     for (unsigned i = 0; i < model->getAllVariables().size(); i++) {
         model->getVariable(i)->setCurrentValue(solution.at(i));

@@ -2,9 +2,9 @@
 
 #include <gecode/int.hh>
 
-#include "GecodeSolver.hpp"
+#include "GecodeEngine.hpp"
 
-GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
+GecodeEngine::GecodeEngine(std::shared_ptr<Storage> model) {
     this->model = model;
     tmpVars = Gecode::BoolVarArgs();
     //    tmpVars = Gecode::IntVarArgs();
@@ -12,11 +12,11 @@ GecodeSolver::GecodeSolver(std::shared_ptr<Model> model) {
 
 }
 
-GecodeSolver::~GecodeSolver() {
+GecodeEngine::~GecodeEngine() {
 
 }
 
-void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound) {
+void GecodeEngine::linear(std::vector<int>& coefficients, const std::vector<Variable*>& variables, int relation, int upperbound) {
     //    IntVars = IntVarArray(*this, tmpVars);
 
     //    if (variables.size() == 1 && coefficients[0] == 1) {
@@ -109,7 +109,7 @@ void GecodeSolver::linear(std::vector<int>& coefficients, const std::vector<Vari
 //
 //}
 
-void GecodeSolver::createGecodeVariable(int lb, int ub) {
+void GecodeEngine::createGecodeVariable(int lb, int ub) {
     //    std::cout << "lb " << lb << " ub " << ub << std::endl;
     //    if (ub > 2) {
     //        std::cout << ub << std::endl;
@@ -132,7 +132,7 @@ void GecodeSolver::createGecodeVariable(int lb, int ub) {
 
 }
 
-GecodeSolver::GecodeSolver(bool share, GecodeSolver & s) :
+GecodeEngine::GecodeEngine(bool share, GecodeEngine & s) :
 Gecode::Space(share, s) {
     //        std::cout << "this is not a line " << IntVars->size() << std::endl;
     //    for (IntVar iv : IntVars) {
@@ -145,7 +145,7 @@ Gecode::Space(share, s) {
 
 }
 
-void GecodeSolver::print(std::ostream & os) const {
+void GecodeEngine::print(std::ostream & os) const {
     for (BoolVar iv : AllVars) {
         //    for (IntVar iv : AllVars) {
         os << iv << ", ";
@@ -153,7 +153,7 @@ void GecodeSolver::print(std::ostream & os) const {
     os << std::endl;
 }
 
-void GecodeSolver::createArray() {
+void GecodeEngine::createArray() {
     //    std::cout << "CreateArray" << std::endl;
     AllVars = BoolVarArray(*this, tmpVars);
 
@@ -204,7 +204,7 @@ void GecodeSolver::createArray() {
 //
 //}
 
-void GecodeSolver::fixVariables() {
+void GecodeEngine::fixVariables() {
     //    std::cout << "In fix" << std::endl;
     std::vector<Variable*> preprocessed; // = new std::vector<IntegerVariable*>();
 
@@ -246,7 +246,7 @@ void GecodeSolver::fixVariables() {
 //
 //}
 
-bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
+bool GecodeEngine::findSolution(int TimeForGecode, bool fix) {
     //    postCovSol();
     //    this->print(std::cout);
     //    std::cout << "No branch posted " << std::endl;
@@ -304,11 +304,11 @@ bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
         //        model->out->addToGecodePrint("0");
     }
     bool solutionFound = false;
-    GecodeSolver* s;
+    GecodeEngine* s;
     try {
         std::clock_t GecodeClock = std::clock();
         //        std::cout << "Before search engine" << std::endl;
-        Gecode::DFS<GecodeSolver> e(this, *so);
+        Gecode::DFS<GecodeEngine> e(this, *so);
         //        Gecode::BAB<GecodeSolver> e(this, *so);
         std::cout << "Searching for solution...." << std::endl;
         s = e.next();
@@ -402,7 +402,7 @@ bool GecodeSolver::findSolution(int TimeForGecode, bool fix) {
     return solutionFound;
 }
 
-void GecodeSolver::SetValues(Gecode::BoolVarArray vars) {
+void GecodeEngine::SetValues(Gecode::BoolVarArray vars) {
     //void GecodeSolver::SetValues(Gecode::IntVarArray vars) {
     //    for (int i = 0; i < model->getAllIntegerVariables()->size(); i++) {
     //    Gecode::BoolVarArray vars = AllVars;
@@ -421,11 +421,12 @@ void GecodeSolver::SetValues(Gecode::BoolVarArray vars) {
 
         }
     }
+    std::cout <<  "##Random setVal " << model->out->name << std::endl;
 
-
+    exit(1);
 }
 
-void GecodeSolver::randomInitialize() {
+void GecodeEngine::randomInitialize() {
     for (Variable* var : model->getAllVariables()) {
         if (AllVars[var->getID()].assigned()) {
             var->setCurrentValue(AllVars[var->getID() ].val());
@@ -434,12 +435,13 @@ void GecodeSolver::randomInitialize() {
 
         }
     }
+    std::cout << "##Random random " << model->out->name << std::endl; 
     model->out->solTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-
+    exit(1);
 
 }
 
-void GecodeSolver::printSpaceStatus() {
+void GecodeEngine::printSpaceStatus() {
     //    std::cout << "in status" << std::endl;
     Gecode::SpaceStatus status = this->status();
     if (status == Gecode::SS_FAILED) {
@@ -459,7 +461,7 @@ void GecodeSolver::printSpaceStatus() {
 
 }
 
-void GecodeSolver::print_stats(Gecode::Search::Statistics & stat) {
+void GecodeEngine::print_stats(Gecode::Search::Statistics & stat) {
     std::cout << "\tfail: " << stat.fail << std::endl;
     std::cout << "\tnodes: " << stat.node << std::endl;
     std::cout << "\tpropagators: " << stat.propagate << std::endl; // see page 145 MPG
@@ -469,9 +471,9 @@ void GecodeSolver::print_stats(Gecode::Search::Statistics & stat) {
 }
 // Copy during cloning
 
-Gecode::Space * GecodeSolver::copy(bool share) {
+Gecode::Space * GecodeEngine::copy(bool share) {
     //        std::cout << "copy" << std::endl;
-    return new GecodeSolver(share, *this);
+    return new GecodeEngine(share, *this);
 }
 
 //void GecodeSolver::postCovSol() {

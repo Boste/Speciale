@@ -4,7 +4,7 @@
 #include "Variable.hpp"
 #include "Clock.hpp"
 #include "Constants.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Multistop.hpp"
 #include <stdlib.h>
 
@@ -15,9 +15,9 @@
 
 using namespace Gecode;
 
-class GecodeSolver : public Space {
+class GecodeEngine : public Space {
 protected:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
 //    IntVarArray IntVars;
     Gecode::BoolVarArray AllVars;
 //    Gecode::IntVarArray AllVars;
@@ -29,9 +29,9 @@ protected:
 //    Gecode::IntVarArgs binVars;
 public:
 
-    GecodeSolver(std::shared_ptr<Model> model);
+    GecodeEngine(std::shared_ptr<Storage> model);
 
-    virtual ~GecodeSolver();
+    virtual ~GecodeEngine();
     
     /// Always branches the same way. 
 //    void branch();
@@ -48,7 +48,7 @@ public:
     void createArray();
     void print_stats(Gecode::Search::Statistics & stat);
     void print(std::ostream& os) const;
-    GecodeSolver(bool share, GecodeSolver& s); // : Space(share, s);
+    GecodeEngine(bool share, GecodeEngine& s); // : Space(share, s);
     void postCovSol();
     //        IntVars.update(*this, share, s.IntVars);
     // remember to update your main variables!

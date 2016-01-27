@@ -65,7 +65,7 @@ Test::~Test() {
 
 void Test::testConstraints() {
     startTest(string(__FUNCTION__));
-    GS = new GeneralSolver();
+    GS = new GPSolver();
     varInt = GS->createVariables(10, 0, 1);
 
 
@@ -81,7 +81,7 @@ void Test::testInvariants() {
 
 void Test::testBig(int vars, int cons) {
     startTest(string(__FUNCTION__));
-    GS = new GeneralSolver();
+    GS = new GPSolver();
     varInt = GS->createVariables(vars, 0, 1);
     for (int i = 0; i < cons; i++) {
         vector<int>* c = new vector<int>(vars);
@@ -111,7 +111,7 @@ void Test::testBig(int vars, int cons) {
     Gecode::Support::Timer t;
     t.start();
 
-    GeneralSolver* General = GS->initialSolution(so);
+    GPSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     GS->optimizeSolution(10);
     testDone(string(__FUNCTION__));
@@ -121,7 +121,7 @@ void Test::testBig(int vars, int cons) {
 
 void Test::testObjectiveFunction() {
     startTest(string(__FUNCTION__));
-    GS = new GeneralSolver();
+    GS = new GPSolver();
     varInt = GS->createVariables(100, 0, 1);
     //    createLinearEQConst();
     createLinearLQConst();
@@ -134,7 +134,7 @@ void Test::testObjectiveFunction() {
         coef->push_back(c);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, LQ, 0, 1);
+    GS->GPSolver::linear(*GS, coef, x, LQ, 0, 1);
     string error = "objective not added to LSS";
     if (GS->st->getObjectives()->size() != 1) {
         testFailed(__FUNCTION__, error);
@@ -145,7 +145,7 @@ void Test::testObjectiveFunction() {
     so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
-    GeneralSolver* General = GS->initialSolution(so);
+    GPSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     int objfnc = 0;
     for (unsigned i = 0; i < varInt->size(); i++) {
@@ -164,7 +164,7 @@ void Test::testObjectiveFunction() {
 
 void Test::testLinear() {
     startTest(string(__FUNCTION__));
-    GS = new GeneralSolver();
+    GS = new GPSolver();
     varInt = GS->createVariables(100, 0, 1);
     createLinearEQConst();
     createLinearLQConst();
@@ -174,7 +174,7 @@ void Test::testLinear() {
     so->stop = ts;
     Gecode::Support::Timer t;
     t.start();
-    GeneralSolver* General = GS->initialSolution(so);
+    GPSolver* General = GS->initialSolution(so);
     GS->initializeLS(General);
     string error = "Constraints not satisfied";
     for (unsigned i = 0; i < GS->st->getHardConstraints()->size(); i++) {
@@ -207,7 +207,7 @@ void Test::testLinear() {
 
 void Test::testSum() {
     startTest(string(__FUNCTION__));
-    GS = new GeneralSolver();
+    GS = new GPSolver();
     varInt = GS->createVariables(100, 0, 1);
     createLinearEQConst();
 
@@ -225,7 +225,7 @@ void Test::createLinearEQConst() {
         coef->push_back(i + 1);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, EQ, 50, 2);
+    GS->GPSolver::linear(*GS, coef, x, EQ, 50, 2);
     if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
         string error = "";
         testFailed(string(__FUNCTION__), error);
@@ -249,7 +249,7 @@ void Test::createLinearLQConst() {
         coef->push_back(2);
         x->push_back(varInt->at(i));
     }
-    GS->GeneralSolver::linear(*GS, coef, x, LQ, 60, 2);
+    GS->GPSolver::linear(*GS, coef, x, LQ, 60, 2);
     if (invarSize + 1 != GS->st->getInvariants()->size() || constSize + 1 != GS->st->getHardConstraints()->size()) {
         string error = "number of invariants and constraints " + std::to_string(invarSize) + " " + std::to_string(constSize) + ". After linear " + std::to_string(GS->st->getInvariants()->size()) + " " + std::to_string(GS->st->getHardConstraints()->size());
         testFailed(string(__FUNCTION__), error);

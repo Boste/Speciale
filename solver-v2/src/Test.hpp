@@ -1,4 +1,4 @@
-#include "GeneralSolver.hpp"
+#include "GPSolver.hpp"
 #include "Variable.hpp"
 #include "Invariant.hpp"
 #include "Sum.hpp"
@@ -18,7 +18,7 @@ public:
     Test(const Test& orig);
     virtual ~Test();
 protected:
-    GeneralSolver* GS;
+    GPSolver* GS;
     vector<Variable*>* varInt;
     std::clock_t start;
     std::clock_t testStart;

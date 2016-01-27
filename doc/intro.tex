@@ -1,0 +1,36 @@
+The field of optimization can be split into several subfields depending on the nature of the decision variables 
+(continuous, discrete) and the structure of the problem (linear, non linear, combinatorial, convex, non 
+convex). The main focus of this thesis is discrete optimization both linear and non linear. 
+Several solvers are available for discrete optimization. The mixed integer linear programming (MILP) approach has 
+solvers such as \emph{GLPK}, \emph{Gurobi} and \emph{CPLEX}. There are also constraint programming (CP) solvers, such 
+as \emph{Gecode}. All these solvers solve the problem exactly, but for some problems thit is not always possible due to 
+the computational cost. Another approach is to use local search and find a good solution fast by making a trade off 
+between speed and solution quality. \medskip \\ 
+There exists a vast literature about how to make good local search solvers for specific problems.
+However, only a few attempts have been made to use local search for general purpose solvers like 
+mathematical programming and constraint programming. \emph{Comet} was a successful CP based solver and that allowed to 
+use local search to find a good solution fast but the project is now abandoned.  \\ 
+\emph{OscaR} is another CP based solver that uses local search to find a good solution. 
+\boste{OscaR}
+% Currently LocalSolver is a commercial 
+% product that combines a local search solver with a problem modeling language. It can be used to solve mathematical, 
+% constraint, continuous, and non linear programming. \medskip \\
+\boste{Overall made}
+In this project, a general heuristic solver based on local search has been developed. It uses Gecode to find 
+an initial solution and uses local search trying to improve the solution. It can solve problems formulated as binary 
+programming problems but can be extended to solve a wider range of problems. Ideas for structuring the framework are 
+drawn from Comet, OscaR, and Gecode. \medskip \\
+\boste{More specific}
+Beside the basic components of local search several elements have been studied to see their effect on the solution.
+ One of these elements is preprocessing, with the help from Gecode, that can reduce the size of the search space before 
+the local search is started. Other elements that have be studied are invariants and a directed acyclic graphs to 
+represent efficiently the dependencies between the variables and invariants. The choice of neighborhoods and how to 
+efficiently explore these neighborhoods have been considered. The quality of a solution is evaluated by a vector in 
+lexicographic order instead of a single value. The lexicographic order is from a priority given to the constraints that 
+will affect the local search. Finally, on top of the local search different combinations of neighborhoods, procedures, 
+and metaheuristics has been tested. \medskip \\   
+The framework has a solid base from which it can be extended to solve a wide range of problems by implementing 
+different constraints and new neighborhoods. \medskip \\
+The performance of the solver has been tested with the instances from the MIPLIB 2010 and compared to Gurobi.  
+
+

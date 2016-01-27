@@ -1,5 +1,5 @@
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -14,9 +14,9 @@
 
 class ConflictOnlyNE : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    ConflictOnlyNE(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    ConflictOnlyNE(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
 //    ConflictOnlyNE(const ConflictOnlyNE& orig);
     ~ConflictOnlyNE();
 
@@ -25,7 +25,7 @@ public:
     //    template<typename returnType>
     //    bool bestImprovement(std::shared_ptr<State> st);
     //    template<typename returnType>
-    //    bool firstImprovement(Move* mv, Model* st);
+    //    bool firstImprovement(Move* mv, Model* st);   
 
     //    void makeMove(Move* mv, std::shared_ptr<State> st);
 //    bool hasNext();

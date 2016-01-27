@@ -1,18 +1,20 @@
-When a local search algorithms makes a move from a current solution to new solution we say it commits to the new 
-solution. One of the basic local search algorithms is the \emph{iterative improvement} with different pivot rules. 
-iterative improvement explores the neighborhood of the current solution or a subset of the neighborhood and uses the 
-delta evaluation function to determine which move to make. \\ 
-Two basic pivoting rules for iterative improvement are \emph{Best improvement} and \emph{first 
-improvement}. Best improvement examine the neighborhood of the current solution with delta evaluation function and 
-chooses the solution that gives the best improvement, if any. First improvement examine the neighborhood and commits to 
-the first solution that gives an improvement. iterative improvement is repeated until no improving solution exists. \\ 
+When a local search algorithm makes a neighborhood operation from a current solution to a new solution we say it 
+commit the neighborhood operation. One of the basic local search algorithms is the \emph{iterative 
+improvement} with different pivot rules. Iterative improvement explores the neighborhood of the current solution or a 
+subset of the neighborhood and uses the delta evaluation function to determine which of the neighborhood operations to 
+commit. \\ 
+Two basic pivoting rules for iterative improvement are \emph{Best improvement} and \emph{first improvement}. Best 
+improvement examine all solutions in the neighborhood of the current solution with delta evaluation function and 
+chooses the solution that gives the best improvement, if any. First improvement examine the solutions in the 
+neighborhood and commits the first neighborhood operation that gives an improvement, if any. iterative 
+improvement is repeated until no improving solution exists. \\ 
 Several heuristics can be applied to the algorithms for instance by choosing a subset of the neighborhood to examine at 
 random when using best improvement or allowing a number of consecutive sidewalks. A sidewalk is going from a solution 
 $\tau$ to a neighbor solution $\tau'$ where $\delta(\tau') = 0$. First improvement can be modified to \emph{random 
 improvement} that chooses an improving solution with a probability $p$ or looks for the next improving solution with 
-probability $1-p$. \\
-Another basic local search algorithm is the \emph{random walk}. Random walk commits to one of the neighbor 
-solution chosen uniformly random. This might lead to worsening solution and/or infeasible solution and is usually 
-combined with other heuristics or local search algorithms. \\
+probability $1-p$. \\ 
+Another basic local search algorithm is the \emph{random walk}. Random walk commits a neighborhood operation chosen 
+uniformly random and repeats that for number of iterations. This might lead to worsening solution and/or infeasible 
+solution and is usually combined with other heuristics or local search algorithms. \\
 Before local search can be done an initial assignment to the variables is needed and an initialization function is 
 used for this also called a construction heuristic. 

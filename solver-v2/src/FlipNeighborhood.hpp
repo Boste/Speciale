@@ -1,5 +1,5 @@
 #include "Move.hpp"
-#include "Model.hpp"
+#include "Storage.hpp"
 #include "Constants.hpp"
 #include <memory>
 #include "Neighborhood.hpp"
@@ -13,9 +13,9 @@
 
 class FlipNeighborhood : public Neighborhood {
 public:
-    std::shared_ptr<Model> model;
+    std::shared_ptr<Storage> model;
     std::shared_ptr<State> state;
-    FlipNeighborhood(std::shared_ptr<Model> model, std::shared_ptr<State> st);
+    FlipNeighborhood(std::shared_ptr<Storage> model, std::shared_ptr<State> st);
     FlipNeighborhood(const FlipNeighborhood& orig);
     ~FlipNeighborhood();
 

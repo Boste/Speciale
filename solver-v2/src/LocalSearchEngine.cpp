@@ -120,17 +120,17 @@ void LocalSearchEngine::createDDG(bool all) {
     for (constraint con : func) {
         //        if (canBeMadeOneway(con)) {
 
-                if (con->canBeMadeOneway()) {
-                    invariant invar = con->makeOneway();
-                    model->addInvariant(invar);
-                    //            std::cout << "Add to DDG aswell " << std::endl;
-                    DDG->addInvariant(invar);
-        
-                    numberOfOneway++;
-                    //            std::cout << numberOfOneway << " ";
-                    //            DDG->checkForCycles(model->getInvariants());
-        
-                }
+//                if (con->canBeMadeOneway()) {
+//                    invariant invar = con->makeOneway();
+//                    model->addInvariant(invar);
+//                    //            std::cout << "Add to DDG aswell " << std::endl;
+//                    DDG->addInvariant(invar);
+//        
+//                    numberOfOneway++;
+//                    //            std::cout << numberOfOneway << " ";
+//                    //            DDG->checkForCycles(model->getInvariants());
+//        
+//                }
 
         //        }
 

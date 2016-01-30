@@ -1177,13 +1177,15 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     std::cout << "name, oneway, eval[0], eval[1]" << std::endl;
     std::cout << "##invar " << model->out->name << model->out->oneway << " ";
 //    std::cout << iterations << " ";
-    for (int eval : bestState->getEvaluation()) {
-
-        std::cout << eval << " ";
-        //        model->out->addToTable1(std::to_string(eval));
-    }
-    std::cout << std::endl;
-
+    
+    std::cout << bestState->getEvaluation().at(0) << " " << bestState->getViolations() << std::endl;
+//    for (int eval : bestState->getEvaluation()) {
+//
+//        std::cout << eval << " ";
+//        //        model->out->addToTable1(std::to_string(eval));
+//    }
+//    std::cout << std::endl;
+//    
     //    std::cout << "Number of Moves delta calculated " << NE->testCounter << std::endl;
     //    std::cout << "number of loops " << loopCounter << std::endl;
     std::cout << "## LSTimeUsed " << usedTime << std::endl;

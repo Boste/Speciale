@@ -164,52 +164,56 @@ void GPSolver::Search(std::vector<Variable*> variables) {
 void GPSolver::initialSolution(int TimeForGecode) {
     auto tid = std::clock();
     GS->createArray();
+    storage->setNonFixedVariables(storage->getAllVariables());
     //        GS->branch(true);
-    if (GS->findSolution(TimeForGecode, true)) {
-        //    if (false) {
+    //    if (GS->findSolution(TimeForGecode, true)) {
+    //        //    if (false) {
+    //
+    //
+    //        //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+    //        // Obj value after gecode
+    //        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+    //
+    //        double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+    //        std::cout << "## gecode " << gecode << std::endl;
+    //
+    //
+    //        //        std::ofstream myfile;
+    //        //        myfile.open("func2.txt", std::ios::app);
+    //        //        myfile << " 0 " << gecode << "\n";
+    //        //        myfile.close();
+    //        //        std::cout << "#relax 0" << std::endl;
+    //        //        exit(1);
+    //        std::cout << "## relax 0" << std::endl;
+    //        tid = std::clock();
+    //        LS->createDDG(true);
+    //        LS->initializeLS();
+    //        auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+    //        std::cout << "## initLSModel " << inils << std::endl;
+    //
+    //    } else {
+    std::cout << "not relaxing" << std::endl;
+    GS->randomInitialize();
 
 
-        //¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-        // Obj value after gecode
-        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-
-        double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## gecode " << gecode << std::endl;
+    //        relax(TimeForGecode);
+    double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+    std::cout << "## gecode " << gecode << std::endl;
 
 
-        //        std::ofstream myfile;
-        //        myfile.open("func2.txt", std::ios::app);
-        //        myfile << " 0 " << gecode << "\n";
-        //        myfile.close();
-        //        std::cout << "#relax 0" << std::endl;
-        //        exit(1);
-        std::cout << "## relax 0" << std::endl;
-        tid = std::clock();
-        LS->createDDG(true);
-        LS->initializeLS();
-        auto inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## initLSModel " << inils << std::endl;
+    //        std::ofstream myfile;
+    //        myfile.open("func2.txt", std::ios::app);
+    //        myfile << " " << gecode << "\n";
+    //        myfile.close();
+    //        exit(1);
+    tid = std::clock();
 
-    } else {
-        //        std::cout << "not relaxing" << std::endl;   
-        relax(TimeForGecode);
-        double gecode = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## gecode " << gecode << std::endl;
+    LS->createDDG(false);
+    LS->initializeLS();
+    double inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
+    std::cout << "## initLSModel " << inils << std::endl;
 
-
-        //        std::ofstream myfile;
-        //        myfile.open("func2.txt", std::ios::app);
-        //        myfile << " " << gecode << "\n";
-        //        myfile.close();
-        //        exit(1);
-        tid = std::clock();
-
-        LS->createDDG(false);
-        LS->initializeLS();
-        double inils = (std::clock() - tid) / (double) CLOCKS_PER_SEC;
-        std::cout << "## initLSModel " << inils << std::endl;
-
-    }
+    //    }
 
     int initialValue = 0;
     constraint obj = storage->getConstraintsWithPriority(0)->at(0);
@@ -223,24 +227,24 @@ void GPSolver::initialSolution(int TimeForGecode) {
     }
     std::cout << "This should be initial value " << initialValue << std::endl;
 
-    unsigned relax = storage->out->relax;
-    if (relax == 0) {
-        storage->out->addToTable1(std::to_string(100));
-        storage->out->feasibleVal = storage->getEvaluationInvariantNr(0)->getCurrentValue();
-    } else if (relax == 1) {
-        storage->out->addToTable1(std::to_string(50));
-    } else if (relax == 2) {
-        storage->out->addToTable1(std::to_string(25));
-    } else if (relax == 3) {
-        storage->out->addToTable1(std::to_string(0));
-    } else {
-
-    }
-    storage->out->addToTable1(std::to_string(storage->out->solTime));
-    if (storage->out->feasible) {
-        storage->out->addToTable1(std::to_string(storage->out->feasibleTime));
-    }
-    std::cout << storage->out->getToTable1() << std::endl;
+    //    unsigned relax = storage->out->relax;
+    //    if (relax == 0) {
+    //        storage->out->addToTable1(std::to_string(100));
+    //        storage->out->feasibleVal = storage->getEvaluationInvariantNr(0)->getCurrentValue();
+    //    } else if (relax == 1) {
+    //        storage->out->addToTable1(std::to_string(50));
+    //    } else if (relax == 2) {
+    //        storage->out->addToTable1(std::to_string(25));
+    //    } else if (relax == 3) {
+    //        storage->out->addToTable1(std::to_string(0));
+    //    } else {
+    //
+    //    }
+    //    storage->out->addToTable1(std::to_string(storage->out->solTime));
+    //    if (storage->out->feasible) {
+    //        storage->out->addToTable1(std::to_string(storage->out->feasibleTime));
+    //    }
+    //    std::cout << storage->out->getToTable1() << std::endl;
 
     //        st = std::make_shared<State>(model);
 

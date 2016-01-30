@@ -920,7 +920,7 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
 
     //    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
     //    debug;
-    std::cout << "##beforels " << model->out->name << " " << currentState->getEvaluation().at(0) << " " << model->getViolatedConstraints().size() << " " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
+    std::cout << "##beforels " << model->out->name << " " << currentState->getEvaluation().at(0) << " " << model->getViolatedConstraints().size() << " " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " " << model->out->relaxp << std::endl;
     //######################################################
     // Test 1 TS conflict only + TS Restricted neighborhood
     //######################################################

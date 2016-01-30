@@ -227,12 +227,16 @@ void GPSolver::initialSolution(int TimeForGecode) {
     if (relax == 0) {
         storage->out->addToTable1(std::to_string(100));
         storage->out->feasibleVal = storage->getEvaluationInvariantNr(0)->getCurrentValue();
+        storage->out->relaxp = 100;
     } else if (relax == 1) {
         storage->out->addToTable1(std::to_string(50));
+        storage->out->relaxp = 50;
     } else if (relax == 2) {
         storage->out->addToTable1(std::to_string(25));
+        storage->out->relaxp = 25;
     } else if (relax == 3) {
         storage->out->addToTable1(std::to_string(0));
+        storage->out->relaxp = 0;
     } else {
 
     }

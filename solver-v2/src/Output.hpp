@@ -75,6 +75,7 @@ public:
     vector<double> time;
     vector<unsigned> iteration;
     unsigned relax;
+    unsigned relaxp;
     double feasibleTime;
     coefType feasibleVal;
     double solTime;

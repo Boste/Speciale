@@ -1174,9 +1174,9 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     }
 
 
-    std::cout << "name, oneway, iteration, eval[0], eval[1]" << std::endl;
+    std::cout << "name, oneway, eval[0], eval[1]" << std::endl;
     std::cout << "##invar " << model->out->name << model->out->oneway << " ";
-    std::cout << iterations << " ";
+//    std::cout << iterations << " ";
     for (int eval : bestState->getEvaluation()) {
 
         std::cout << eval << " ";

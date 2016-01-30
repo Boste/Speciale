@@ -123,7 +123,7 @@ void LocalSearchEngine::createDDG(bool all) {
 //                if (con->canBeMadeOneway()) {
 //                    invariant invar = con->makeOneway();
 //                    model->addInvariant(invar);
-//                    //            std::cout << "Add to DDG aswell " << std::endl;
+//                    //            std::cout << "Add to DDG aswell " << std::endl; 
 //                    DDG->addInvariant(invar);
 //        
 //                    numberOfOneway++;

@@ -120,17 +120,17 @@ void LocalSearchEngine::createDDG(bool all) {
     for (constraint con : func) {
         //        if (canBeMadeOneway(con)) {
 
-//                if (con->canBeMadeOneway()) {
-//                    invariant invar = con->makeOneway();
-//                    model->addInvariant(invar);
-//                    //            std::cout << "Add to DDG aswell " << std::endl;
-//                    DDG->addInvariant(invar);
-//        
-//                    numberOfOneway++;
-//                    //            std::cout << numberOfOneway << " ";
-//                    //            DDG->checkForCycles(model->getInvariants());
-//        
-//                }
+                if (con->canBeMadeOneway()) {
+                    invariant invar = con->makeOneway();
+                    model->addInvariant(invar);
+                    //            std::cout << "Add to DDG aswell " << std::endl;
+                    DDG->addInvariant(invar);
+        
+                    numberOfOneway++;
+                    //            std::cout << numberOfOneway << " ";
+                    //            DDG->checkForCycles(model->getInvariants());
+        
+                }
 
         //        }
 
@@ -920,7 +920,7 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
 
     //    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
     //    debug;
-
+    std::cout << "##beforels " << model->out->name << " " currentState->getEvaluation().at(0) << " " model->getViolatedConstraints().size() << " " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     //######################################################
     // Test 1 TS conflict only + TS Restricted neighborhood
     //######################################################

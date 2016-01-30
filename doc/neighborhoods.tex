@@ -1,17 +1,17 @@
 The neighborhood classes are all subclasses of the super class \class{Neighborhood} such that they can easily be 
 combined with the search procedures. The methods of neighborhoods are illustrated in figure \ref{fig_neighborhood}. \\
-\begin{figure}[!b]
-\begin{center}
-\includegraphics[width=0.9\linewidth]{neighborhood}\caption{The methods all Neighborhood classes needs to implement.} 
-\label{fig_neighbborhood}
-\end{center}
-\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{neighborhood}
+\caption{The methods all Neighborhood classes needs to implement.} 
+\label{fig_neighborhood}
+\end{figure} \noindent
 All \class{Neighborhoods} implemented uses a step functions that changes value of a single independent variable, from 
 0 to 1 or vise versa since all variables are binary. A neighborhood operation is stored in an a \class{Move} that 
 contains a pointer to the variable used, the variables change in value, and the change to the quality vector $Q$, 
 once computed. The change in the quality vector is referred to at the \emph{delta vector}. \\ 
 The \class{Neighborhood} classes that are implemented are shown in table \ref{tab_neighb}. \\  
-\begin{table}[!t]
+\begin{table}[b]
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -23,44 +23,53 @@ class                          & Heuristic                                      
 \end{tabular}
 \caption{Table of \class{Neighborhood} classes}
 \label{tab_neighb}
-\end{table}
-The \class{RestrictedFlipNE} class chooses a variable for the next move with probability $p = \frac{5000}{n}$, where 
-$n$ is the number of independent variables. This gives expected 5000 variable before it return a \textbf{NULL} pointer. 
-\\
-The method \method{next()} creates new \class{Move} object and returns a pointer to it. If all the 
-different neighborhood operation has been returned the method returns a pointer to \textbf{NULL} instead. To know when 
-a neighborhood has been fully explored, counters and iterators are used depending on the neighborhood. These are 
+\end{table} \noindent
+The method \method{next()} creates new \class{Move} object and returns a pointer to it. If all possible neighborhood 
+operation of the neighborhood function have been returned the method returns a pointer to \textbf{NULL} instead. To know 
+when  a neighborhood has been fully explored, counters and iterators are used depending on the neighborhood. These are 
 reseted when returning \textbf{NULL} or the method \method{commitMove(move)} is called. The \class{Move} created only 
 contain the variable and its suggested change in value, the delta vector is not computed yet. \\ 
-Method \method{nextRandom()} gives a random neighborhood operation without changing the.  \\ 
+For \class{FlipNeighborhood} when \method{next()} returns a \class{Move} and the variable chosen is given by a random 
+sequence, a mask.  When \method{next()} is called in the \class{RestrictedFlipNE} class it returns the next variable 
+probability $p = \frac{5000}{n}$, where $n$ is the number of independent variables. This gives expected 5000 variable 
+before it return a \textbf{NULL} pointer. \\
+For \class{ConflictOnlyNE} the neighborhood operations consist of a variable that participate in a constraint that is 
+unsatisfied. The neighborhood consist of all solutions that only has a change in a single of those variables. \\ 
+The class \class{RandomConflictFlipNE} choose an unsatisfied constraint at random and returns only a \class{Move} with 
+a variable participating in that constraint until each different \class{Move} has been returned. \\
+Method \method{nextRandom()} returns a \class{Move} with a random variable from the neighborhood.  \\ 
 Method \method{calculateDelta(move)} takes a \class{Move} pointer as argument and propagate the change through the 
-dependency digraph using the propagation queue of the variable. The method identical for all the \class{Neighborhood} 
-classes implemented. A neighborhood operation that calculate the delta change if variable $x_i$ would change value is 
-describe with the following step:
+dependency digraph using the propagation queue of the variable. The method is identical for all the 
+\class{Neighborhood} classes implemented. The method returns a boolean that indicates if the suggested 
+neighborhood operation is not allowed by one of the oneway constraints. \\ 
+Calculating the delta change if variable $x_i$ would change value is describe with the following step:
 \begin{enumerate} 
  \item Reset delta value of invariants in quality vector $Q$
- \item Send delta value of $x_i$ to neighbor invariant in DDG.
- \item For each invariant $inv$ in propagation queue of $x_i$, calculate $inv$s delta value, if it is not zero, send 
-it to neighbor invariants in DDG. 
+ \item Send delta value of $x_i$ to neighbor invariants in DDG.
+ \item For each invariant $y_j$ in propagation queue of $x_i$, calculate delta value $y_j$, if it is not zero, send 
+the change to neighbors in DDG. 
  \item If a variables delta value is not allowed, by a oneway constraint, reset all delta values of invariant in 
-the propagation queue.
- \item Otherwise set $move$s delta quality vector. 
-\item return if the $move$ is an allowed neighborhood operation. 
-\end{enumerate}
+the propagation queue. Then return false. 
+ \item Otherwise update delta quality vector of move. 
+\item return true if the $move$ is an allowed neighborhood operation. 
+\end{enumerate} \noindent
 The delta values of the invariants can be reset by calculating delta value, when no change is send. The reason for 
-resetting them is only to make sure their queue of changes is empty before the next neighborhood operation. \\ 
-To perform a step the method \method{commitMove(move)} is called with a pointer to the \class{Move} that used be used.  
-\method{commitMove(move)} use the delta value calculated by \method{calculateDelta(move)} to update the value of 
-invariants. The delta value needs to be recomputed since other neighborhood operation might have been suggested. Once 
-the delta values of invariants have been computed they can be added to their current value. Invariants that represent 
-violation of a single constraint are kept in a hash map of they are non zero. If they change value from non zero to zero 
-or vise versa, that hash map needs to be updated. The hash map is used by the two neighborhoods \class{ConflictOnlyNE} 
-and \class{RandomConflictFlipNE} that only can be used when the current solution is infeasible. \\
+resetting them is only to make sure their stack of changes is empty before the next neighborhood operation is 
+calculated. \\ 
+To commit a neighborhood operation the method \method{commitMove(move)} is called with a pointer to the 
+\class{Move} $move$ that is wanted. \method{commitMove(move)} recalculate the delta value 
+by \method{calculateDelta(move)} since other neighborhood operation might have been explored since mv was 
+explored. Once the delta values of invariants have been computed, the invariant can be updated by calling their 
+\method{updateValue()}. Invariants that represent violation of a single constraint are kept in a hash map of they are 
+non zero. If they change value from non zero to zero or vise versa, that hash map needs to be updated. The hash map is 
+used by the two neighborhoods \class{ConflictOnlyNE} and \class{RandomConflictFlipNE} that only can be used when the 
+current solution is infeasible. If the current solution is feasible their neighborhood size is zero. \\
 A default method \method{compareMoves(move1,move2)} compares the delta vector of two \class{Move} pointers and returns 
-0 if they are the same, 1 if if move1 is best and 2 otherwise. \\ 
-The size of the neighborhood and the restriction applied to it, if any, can be requested from the 
-method \method{getSize()}. It returns the size of the current neighborhood, for \class{ConflictOnlyNE} and 
-\class{RandomConflictFlipNE} the neighborhood size can change after each step, for the others it is a constant size. \\ 
+0 if they are the same, 1 if move1 is best and 2 otherwise. \\ 
+The size of the neighborhood with the restriction applied to it, if any, can be requested from the 
+method \method{getSize()}. It returns the size of the current neighborhood. For \class{ConflictOnlyNE} and 
+\class{RandomConflictFlipNE} the neighborhood size can change after each iteration, for the others it is a constant 
+size. \\ 
 
 
 

@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="722.14282"
-   height="1062.1052"
+   width="781.71875"
+   height="1062.125"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.88543689"
-     inkscape:cx="-96.986804"
-     inkscape:cy="454.01547"
+     inkscape:zoom="0.8558474"
+     inkscape:cx="361.05801"
+     inkscape:cy="531.05843"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-page="false"
      inkscape:window-width="1855"
@@ -56,22 +56,21 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-14.642849,-5.5764563)"
-     sodipodi:insensitive="true">
+     transform="translate(-14.65625,-5.5625)">
     <rect
-       style="fill:#0064ff;fill-opacity:1;stroke:#0000ff;stroke-width:5.41923857;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:#a4f5af;fill-opacity:1;stroke:#259c34;stroke-width:5.63864279;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2985"
-       width="716.72357"
-       height="1056.686"
-       x="17.352468"
-       y="8.2860756"
-       ry="95.819885" />
+       width="776.09424"
+       height="1056.4666"
+       x="17.462172"
+       y="8.3957777"
+       ry="95.799995" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="tekst"
-     transform="translate(-14.642849,-5.5764563)">
+     transform="translate(-14.65625,-5.5625)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot3760"
@@ -104,7 +103,7 @@
            height="58.107773"
            x="151.42857"
            y="208.07646" /></flowRegion><flowPara
-         id="flowPara3784">canBeMadeOneway</flowPara></flowRoot>    <path
+         id="flowPara3784">canBeMadeOneway()</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:3.22239518;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
        d="m 86.578164,188.65562 0,768.02443"
        id="path3807"
@@ -121,18 +120,18 @@
            height="59.857456"
            x="158.11403"
            y="295.67358" /></flowRegion><flowPara
-         id="flowPara3833">getVariables</flowPara></flowRoot>    <flowRoot
+         id="flowPara3833">getVariables()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot3835"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        transform="translate(-22.476971,281.76769)"><flowRegion
          id="flowRegion3837"><rect
            id="rect3839"
-           width="318.48682"
+           width="347.69763"
            height="57.598686"
            x="163.76097"
            y="402.96524" /></flowRegion><flowPara
-         id="flowPara3841">getCoefficients</flowPara></flowRoot>    <flowRoot
+         id="flowPara3841">getCoefficients()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5356"
        style="font-size:23px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -153,7 +152,7 @@
            height="59.857456"
            width="390.76755"
            id="rect5368" /></flowRegion><flowPara
-         id="flowPara5370">getPriority</flowPara></flowRoot>    <flowRoot
+         id="flowPara5370">getPriority()</flowPara></flowRoot>    <flowRoot
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        id="flowRoot5372"
        xml:space="preserve"
@@ -164,7 +163,7 @@
            height="67.14286"
            width="320"
            id="rect5376" /></flowRegion><flowPara
-         id="flowPara5378">getType</flowPara></flowRoot>    <flowRoot
+         id="flowPara5378">getType()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5380"
        style="font-size:23px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -185,7 +184,7 @@
            height="54.719616"
            x="151.42857"
            y="208.07646" /></flowRegion><flowPara
-         id="flowPara5394">createInvariants</flowPara></flowRoot>    <flowRoot
+         id="flowPara5394">createInvariants()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5396"
        style="font-size:23px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -203,15 +202,15 @@
          id="flowRegion3048"><rect
            y="208.07646"
            x="151.42857"
-           height="58.107773"
-           width="449.87939"
+           height="69.792099"
+           width="698.75555"
            id="rect3050" /></flowRegion><flowPara
-         id="flowPara3052">MakeOneway</flowPara></flowRoot>  </g>
+         id="flowPara3052">MakeOneway(bestVariable)</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Lines"
-     transform="translate(-14.642849,-5.5764563)">
+     transform="translate(-14.65625,-5.5625)">
     <path
        style="fill:none;stroke:#000000;stroke-width:3.96819043;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="M 135.37634,234.24195 86.222546,235.2839"

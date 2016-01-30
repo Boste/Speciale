@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="721.125"
-   height="825.15625"
+   width="933.4375"
+   height="824"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -26,9 +26,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.8666218"
      inkscape:cx="649.66638"
-     inkscape:cy="335.05168"
+     inkscape:cy="333.89543"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:snap-page="false"
      inkscape:window-width="1855"
@@ -58,13 +58,13 @@
      id="layer1"
      transform="translate(-15.15625,-6.0625)">
     <rect
-       style="fill:#a4f5af;fill-opacity:1;stroke:#269c34;stroke-width:4.47850657;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#a4f5af;fill-opacity:1;stroke:#269c34;stroke-width:4.06225681;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2985"
-       width="1128.6082"
-       height="820.664"
-       x="17.382345"
-       y="8.3159552"
-       ry="74.417496" />
+       width="929.39868"
+       height="819.92633"
+       x="17.174221"
+       y="8.10783"
+       ry="74.350609" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -92,7 +92,7 @@
            x="67.14286"
            y="58.076469" /></flowRegion><flowPara
          id="flowPara3774"
-         style="font-size:72px">General Solver</flowPara></flowRoot>    <path
+         style="font-size:72px">GPSolver</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:3.28037596;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
        d="m 87.142857,171.5563 0,549.57271"
        id="path3807"
@@ -152,7 +152,7 @@
            height="64.546646"
            x="158.11403"
            y="295.67358" /></flowRegion><flowPara
-         id="flowPara3833">createVariables(int number, int lb, int ub)</flowPara></flowRoot>    <path
+         id="flowPara3833">createVariables(numberOfVars, lb, ub)</flowPara></flowRoot>    <path
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path4782"
@@ -186,7 +186,7 @@
            height="59.931019"
            width="525.79462"
            id="rect4770" /></flowRegion><flowPara
-         id="flowPara4772">relax(int timesRelaxed)</flowPara></flowRoot>    <path
+         id="flowPara4772">relax()</flowPara></flowRoot>    <path
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path4786"
@@ -203,7 +203,7 @@
            height="59.931019"
            width="525.79462"
            id="rect4778" /></flowRegion><flowPara
-         id="flowPara4780">optimizeSolution(int time)</flowPara></flowRoot>    <path
+         id="flowPara4780">optimizeSolution(time)</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:3.96819043;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="M 135.37635,620.89385 86.222546,621.9358"
        id="path4788"
@@ -220,7 +220,7 @@
            height="59.931019"
            x="158.11403"
            y="295.67358" /></flowRegion><flowPara
-         id="flowPara3257">initialSolution(int time)</flowPara></flowRoot>    <path
+         id="flowPara3257">initialSolution(time)</flowPara></flowRoot>    <path
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path3259"

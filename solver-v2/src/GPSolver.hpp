@@ -76,7 +76,7 @@ public:
     /// returns a new GeneralSolver with the initial solution the old (the one this method is called from) is not updated with new solution. 
 
     void initialSolution(int TimeForGecode);
-
+    void addObjective(std::vector<int>& coefficients, std::vector<Variable*>& variables);
     /// relaxes the space (reduce the number of constraints). Used when Gecode cant find a solution in time.
     /// Only works for binary
 

@@ -120,17 +120,17 @@ void LocalSearchEngine::createDDG(bool all) {
     for (constraint con : func) {
         //        if (canBeMadeOneway(con)) {
 
-        if (con->canBeMadeOneway()) {
-            invariant invar = con->makeOneway();
-            model->addInvariant(invar);
-            //            std::cout << "Add to DDG aswell " << std::endl;
-            DDG->addInvariant(invar);
-
-            numberOfOneway++;
-            //            std::cout << numberOfOneway << " ";
-            //            DDG->checkForCycles(model->getInvariants());
-
-        }
+        //        if (con->canBeMadeOneway()) {
+        //            invariant invar = con->makeOneway();
+        //            model->addInvariant(invar);
+        //            //            std::cout << "Add to DDG aswell " << std::endl;
+        //            DDG->addInvariant(invar);
+        //
+        //            numberOfOneway++;
+        //            //            std::cout << numberOfOneway << " ";
+        //            //            DDG->checkForCycles(model->getInvariants());
+        //
+        //        }
 
         //        }
 
@@ -475,7 +475,7 @@ void LocalSearchEngine::initializeLS() {
 
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
     std::cout << "Create propagator queues" << std::endl;
-//    DDG->createPropagationQueue(model->getAllVariables(), model->getInvariants());
+    //    DDG->createPropagationQueue(model->getAllVariables(), model->getInvariants());
     DDG->createPropagationQueue(model->getAllVariables());
     //    model->getDDG()->printSizes();
     std::cout << "Total time used so far " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << std::endl;
@@ -861,12 +861,57 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     //    RandomWalk RW(model, FN, randomMoves);
     //    BestImprovement BI(model, FN);
     //    BestImprovement BIFN(model, FN);
-    //    FirstImprovement FI(model, FN);
     //    FirstImprovement FIMCN(model, MCN);
     //    FirstImprovement FIFON(model, FON);
     //    unsigned loopCounter = 0;
     //    unsigned impCounter = 0;
     //    std::cout << model->getMask().size() << std::endl;
+
+
+
+
+//    if (!currentState->isFeasible()) {
+        FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
+        FirstImprovement FI(FN);
+        while(FI.Start()){
+            
+        }
+//        Move* mv = new Move(model->getMaskAt(0), 1);
+//        std::vector<int> delta(model->getConstraints().size());
+//        mv->setDeltaVector(delta);
+//        for (int i = 1; i < 4; i++) {
+//            unsigned commits = 0;
+//            for (Variable* var : model->getMask()) {
+//                mv->var = var;
+//                mv->setID(0);
+//                mv->variableChange = (1 - var->getCurrentValue()) - var->getCurrentValue();
+//                //            mv->id = var->getID();
+//                if (FN->calculateDelta(mv)) {
+//
+//                    for (int j = mv->deltaVector.size() - 1; j >= 0; j--) { // No ties in favor of newest move
+//                        //                    std::cout <<  mv->deltaVector[j] << std::endl;
+//                        if (mv->deltaVector[j] < 0) {
+//                            FN->commitMove(mv);
+//                            commits++;
+//                            break;
+//                        } else if (mv->deltaVector[j] > 0) {
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//            }
+//            std::cout << "Number of commits in round " << i << " " << commits << std::endl;
+//            if(commits == 0){
+//                break;
+//            }
+//        }
+//        delete mv;
+        delete FN;
+
+        std::cout << "Suggestion of all variable flips has been made " << std::endl;
+
+//    }
     double timelimit = (double) time - (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     //    std::cout << "time left for local search " << timelimit << std::endl;
     std::cout << "## LSLimitLeft " << timelimit << std::endl;
@@ -977,10 +1022,10 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
 
     if (test == 2) {
         std::cout << "# test 2" << std::endl;
-//        unsigned twoPercent = model->getMask().size() / 50;
+        //        unsigned twoPercent = model->getMask().size() / 50;
         unsigned onePercent = model->getMask().size() / 100;
         unsigned randomMoves = std::min(onePercent, (unsigned) 10);
-//        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
+        //        unsigned randomMoves = std::min(twoPercent, (unsigned) 10);
         //        unsigned randomMoves = twoPercent;
         std::cout << "Number of randomMoves " << randomMoves << std::endl;
         //        std::cout << "\t value \t evaluation \t priority 1 \t iterations \t time \t method \n";

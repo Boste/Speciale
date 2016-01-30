@@ -24,18 +24,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2150198"
-     inkscape:cx="363.7457"
-     inkscape:cy="294.23694"
+     inkscape:zoom="0.63499671"
+     inkscape:cx="363.74316"
+     inkscape:cy="400.00208"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:snap-page="false"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1"
+     inkscape:window-width="796"
+     inkscape:window-height="655"
+     inkscape:window-x="388"
+     inkscape:window-y="131"
+     inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,7 +58,7 @@
      id="layer1"
      transform="translate(-11.968563,-5.5623118)">
     <rect
-       style="fill:#0064ff;fill-opacity:1;stroke:#0000ff;stroke-width:4.7038188;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:#a4f5af;fill-opacity:1;stroke:#259c34;stroke-width:4.70381879999999963;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2985"
        width="717.44025"
        height="795.31018"
@@ -104,7 +104,7 @@
            height="58.107773"
            x="151.42857"
            y="208.07646" /></flowRegion><flowPara
-         id="flowPara3784">calculateDeltaValue</flowPara></flowRoot>    <path
+         id="flowPara3784">calculateDeltaValue()</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:2.67358518;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
        d="m 86.578164,188.13141 0,528.69531"
        id="path3807"
@@ -121,7 +121,7 @@
            height="59.857456"
            x="158.11403"
            y="295.67358" /></flowRegion><flowPara
-         id="flowPara3833">updateValue</flowPara></flowRoot>    <flowRoot
+         id="flowPara3833">updateValue()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot3835"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -132,7 +132,7 @@
            height="61.713844"
            x="163.76097"
            y="402.96524" /></flowRegion><flowPara
-         id="flowPara3841">getCurrentValue</flowPara></flowRoot>    <flowRoot
+         id="flowPara3841">getCurrentValue()</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5356"
        style="font-size:23px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -159,11 +159,11 @@
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
          id="flowRegion5390"><rect
            id="rect5392"
-           width="437.45615"
-           height="54.719616"
+           width="588.63806"
+           height="57.86924"
            x="151.42857"
            y="208.07646" /></flowRegion><flowPara
-         id="flowPara5394">addChange</flowPara></flowRoot>    <flowRoot
+         id="flowPara5394">proposeChange(ID,change)</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5396"
        style="font-size:23px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -184,7 +184,7 @@
            height="58.107773"
            width="449.87939"
            id="rect3050" /></flowRegion><flowPara
-         id="flowPara3052">getDeltaValue</flowPara></flowRoot>  </g>
+         id="flowPara3052">getDeltaValue()</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"

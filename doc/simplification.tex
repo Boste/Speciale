@@ -1,14 +1,13 @@
-Each functional constraint can be used to define a variable making it dependent on other variables or invariants. The 
-idea is to reduce the number of independent variables reducing the search space and likely the neighborhoods in local 
-search. This does come with a downside that calculation of a variable changing value might take more time. \\ 
+The idea is to reduce the number of independent variables reducing the search space and likely the neighborhoods in 
+local search. This does come with a downside that calculation of a variable changing value might take more time. \\ 
 The functional constraint used to create a oneway constraint must be satisfied by the initial solution in order to 
 create a oneway constraint. Once a oneway constraint is made it defines a variable that is represented by an invariant. 
 The invariants value is always within the domain of the variable which corresponds to the functional constraint always 
 being satisfied. \\
 Even though all \class{Linear} constraints with an equality relation are functional only those with unit 
-coefficients only are chosen to be functional for simplicity. I.e. on the form $c: \sum\limits_{i=1}^{\alpha(c)} a_i 
+coefficients are chosen to be functional for simplicity. I.e. on the form $c: \sum\limits_{i=1}^{\alpha(c)} a_i 
 x_i = b(c), \; |a_i|= 1 \; \; \forall i $. If other coefficients where allowed it could create non integer coefficients 
-when defining a variable, and does not work with the rest of the framework currently. \\ 
+that does not work with the rest of the framework currently. \boste{Sikkert et spørgsmål til forsvar} \\ 
 For each functional \class{Linear} constraint $c_j$ with unit coefficient two algorithm steps are used to create 
 invariants. The first checks if the constraint $c_j$ can be transformed into a oneway constraint and the other 
 transforms $c_j$ into a one-way constraint defining $x_i$. \\ 
@@ -19,7 +18,7 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 \SetKwFunction{makeOneway}{makeOneway}
 \SetKwFunction{defi}{defines}
 \algdata
-% \Input{}
+ \Input{\cons $c_j$}
 %\Output{Boolean}
 \BlankLine
 %\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
@@ -35,7 +34,7 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 %\tcp{Find the best variable to define}
 \var $bestVariable$ = NULL\;
 \int numberOfTies = 0 \;
-% \ForEach{$x_i$ \upshape in $X(c_j)$ }{
+ \ForEach{$x_i$ \upshape in $X(c_j)$ }{
 %   \If{$x_i$ \upshape is fixed or defined}{
 %     \continue
 %   }
@@ -56,7 +55,7 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 %     } 
 %     \ElseIf{$|D(x_i)|$ $==$ $|D(bestVariable)|$}{  
       \If{$|deg(x_i)|$ $<$ $|deg(bestVariable)|$}{
-	\tcp{Choose the variable with lowest degree} \boste{remember to define degree}
+	\tcp{Choose the variable with lowest degree} \;
 	$bestVariable$ = $x_i$ \;
 	numberOfTies = 0 \;
 %	\continue
@@ -69,7 +68,7 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 	}
       }
 %     }
-%   }
+   }
 }
 
 \If{ bestVariable $\neq $ \upshape NULL}{
@@ -87,9 +86,9 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 For each unit \class{Linear} constraint an independent variable is found if possible. If there is more 
 than one eligible variable the best variable among those is found. The first tiebreaker is the number of oneway 
 constraints the variable participate in (helps define other variables). The next tiebreaker is the number of constraints 
-the variables participate in. If none of the tiebreakers can be used a fair random 
-is used such that the probability is equal for all variables whose ties could not be broken. \\ 
-Once a the best variable is found, if any, the algorithm \ref{algo_makeoneway} \makeOneway is called. \\
+the variables participate in. If none of the tiebreakers can be used a fair random is used such that the probability is 
+equal for all variables whose ties could not be broken. \\ 
+Once a the best variable is found, if any, algorithm \ref{algo_makeoneway} \makeOneway is called. \\
 %\begin{itemize}
 % \item Highest search priority or highest domain size
 % \item Lowest size of $C(x_i)$
@@ -100,18 +99,18 @@ Once a the best variable is found, if any, the algorithm \ref{algo_makeoneway} \
 \IncMargin{1em}
 \begin{algorithm}[H]
 \algdata
-\Input{\Var $x_i$}
+\Input{\Var $x_i$, \cons $c_j$}
 \Output{A new invariant $y$ defined by a oneway constraint}
 \BlankLine
 set $Q = \emptyset$ \tcp*[r]{new coefficient set}
 set $U = \emptyset$ \tcp*[r]{new variable set}
-\tcp{Move $x_i$ to right hand side and set coefficient to 1}
+\tcp{Move other variables to right hand side and update their cofficient}
 \ForEach{$x_k$ \upshape in $X(c_j)\setminus {x_i}$}{
   $c'_{kj} = -\frac{c_{kj}}{c_{ij}}$ \;   
   $Q = Q\cup c'_{kj}$ \;
   $U = Q\cup x_k$ \;
 }
-\tcp{Move right hand side to left hand side}
+\tcp{Isolate $x_i$ }
 \int $b' = \frac{b(c_j)}{c_{ij}}$ \; 
 \textbf{invariant} $y = $ \Sum($U$,$Q$,$b'$)\; \tcp{Invariant whose value is defined by the other variables and a 
 constant}
@@ -145,8 +144,10 @@ constant}
  \caption{Linear - makeOneway(\textsf{Variable} $x_i$)} \label{algo_makeoneway}
 \end{algorithm}\DecMargin{1em} \noindent
 The algorithm transforms the constraint $c_j$ into a oneway constraint defining an invariant. The dependency directed 
-graph $G$ is updated by adding the new invariant $inv$ and removing the constraint $c_j$ and variable $x_i$. \medskip 
+graph $G$ is updated by adding the new invariant $y$ and removing the constraint $c_j$ and variable $x_i$. \medskip 
 \\
+The value of the invariant must always be within its domain, corresponding to domain of the variable. It is not allowed 
+to change value of one of the variable such that the invariants value is not within its domain.
 %\IncMargin{1em}
 %\begin{algorithm}[H]
 %\SetKwData{Oneway}{oneway}

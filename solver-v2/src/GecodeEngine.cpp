@@ -423,7 +423,7 @@ void GecodeEngine::SetValues(Gecode::BoolVarArray vars) {
     }
     std::cout <<  "##Random setVal " << model->out->name << std::endl;
 
-    exit(1);
+//    exit(1);
 }
 
 void GecodeEngine::randomInitialize() {
@@ -437,7 +437,7 @@ void GecodeEngine::randomInitialize() {
     }
     std::cout << "##Random random " << model->out->name << std::endl; 
     model->out->solTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-    exit(1);
+//    exit(1);
 
 }
 

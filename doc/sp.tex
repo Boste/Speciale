@@ -1,13 +1,14 @@
-\class{Neighborhood} classes do not implement any strategy of which neighborhood operation that should be chosen. 
+\class{Neighborhood} classes do not implement any strategy of which neighborhood operation to choose. 
 Search procedures are using a neighborhood and define this strategy. The classes implemented 
-are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch}, and \class{RandomWalk}. 
-\class{FirstImprovement}, \\ \class{BestImprovement}, and \class{RandomWalk} are implementation of local search 
+are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch}, and \class{RandomWalk}. \\
+\class{FirstImprovement}, \class{BestImprovement}, and \class{RandomWalk} are implementation of local search 
 algorithms of almost same name and can be used together with any of the \class{Neighborhood} classes. 
-\class{TabuSearch} is an implementation of the metaheuristic tabu search using best improvement, a tabu tenure, and 
+\class{TabuSearch} is an implementation of the metaheuristic tabu search using a tabu tenure, and 
 an aspiration criteria. \medskip \\
 The class \class{BestImprovement} looks at each \class{Move} a \class{Neighborhood} class $NE$ gives and finds the 
-best \class{Move}. The best \class{Move} is determined from their delta vector after the method \method{claculatDelta} 
-of the \class{Neighborhood} is called on each \class{Move}. It returns a boolean that tells if the current solution was 
+best \class{Move}. The best \class{Move} is determined from their delta vector after the method 
+\method{calculateDelta()} of the \class{Neighborhood} is called on each \class{Move} returned by the neighborhood 
+until \textbf{NULL} is returned. \class{BestImprovement} returns a boolean that tells if the current solution was 
 improved. A boolean can be given to \class{BestImprovement} that indicate if it should commit a non improving 
 \class{Move}. How each iteration is done is describe by algorithm \ref{algo_BI} \\ 
 \IncMargin{1em}
@@ -17,7 +18,7 @@ improved. A boolean can be given to \class{BestImprovement} that indicate if it 
 \SetKwFunction{makeOneway}{makeOneway}
 \SetKwFunction{defi}{defines}
 \algdata
-\Input{\bool alwaysCommit}
+\Input{\bool alwaysCommit, \class{Neighborhood} NE}
 \Output{\bool improvement}
 \BlankLine
 %\If{c \upshape already defines a oneway constraint}{\Return{} \false\; \boste{This constraint could be removed in 
@@ -44,7 +45,7 @@ improved. A boolean can be given to \class{BestImprovement} that indicate if it 
 }
 \bool improvement = Check if bestMove gives improvement \;
 \tcp{by looking at delta vector} \;
-\If{improvement or alwaysCommit}{
+\If{improvement \textbf{OR} alwaysCommit}{
   NE.commitMove(bestMove)
  }
 \Return improvement \;
@@ -62,13 +63,15 @@ improving \class{Move} is found the current solution is in a local optima with t
 \class{Neighborhood}. \\ 
 The class \class{RandomWalk} uses the method \method{nextRandom()} from its \class{Neighborhood} $NE$ and if that 
 \class{Move} is allowed it is committed. It takes an integer as argument that indicate the number of times it is 
-repeated. The benefits is create new solution very fast but they are not likely to have a good quality.  
+repeated. The benefit is many iteration can be done but they are not as likely to have a good quality.  
 Though tabu search is a metaheuristic it is implemented the same way as the other search procedures but with some 
-additions. It takes four arguments; the number of steps made(iterations), the best solution found, the current 
+additions. It takes four arguments; the number of iterations made so far, the best solution found, the current 
 solution, and a tabu list. The implementation is similar to \class{BestImprovement} with additional checks with regard 
-to the tabu list and aspiration criteria. If a neighborhood operation is tabu but leads to a solution better than one 
-found so far, the tabu list is ignored. The algorithm for tabu search for a single flip neighborhood sketched by 
-algorithm \ref{algo_TS}. \\ 
+to the tabu list and aspiration criteria. The aspiration criteria is if a neighborhood operation is tabu but leads to a 
+solution better than one found so far, the tabu list is ignored and that neighborhood operation is done. The 
+tabu list has size $n$ and each variable has a integer corresponding to the last iteration that variable was 
+changed. \\ 
+The algorithm for tabu search for a single flip neighborhood sketched by algorithm \ref{algo_TS}. \\ 
 \IncMargin{1em}
 \begin{algorithm}[H]
 

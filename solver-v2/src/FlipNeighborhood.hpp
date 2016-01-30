@@ -38,9 +38,13 @@ public:
 
 
 private:
+    unsigned testCounter =0;
     unsigned moveCounter = 0;
     unsigned randomCounter = 0;
     unsigned randomMovesWanted = 0;
+    unsigned moveCounterStart = 0;
+    bool flag = false;
+    unsigned  size;
     //    template<typename returnType>
     //    std::pair<int, int> calculateDeltaChange(Move* mv, std::shared_ptr<State> st);
 

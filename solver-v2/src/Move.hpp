@@ -37,13 +37,14 @@ public:
     //        }
     //    }
 
-    /// Set size of delta vector;
     void setID(unsigned id){
         this->id = id;
     }
     unsigned getID(){
         return id;
     }
+        /// Set size of delta vector;
+
     void setDeltaVector(std::vector<int>& evaluationChanges) {
         //        for (unsigned i = deltaVector.size(); i < size; i++) {
         deltaVector = evaluationChanges;

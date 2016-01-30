@@ -16,6 +16,25 @@ GPSolver::~GPSolver() {
     //        delete st;
 }
 
+void GPSolver::addObjective(std::vector<int>& coefficients, std::vector<Variable*>& variables) {
+    std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, 0, EQ, 0);
+    for (Variable* iv : variables) {
+        iv->inObjective = true;
+
+    }
+    if (storage->getConstraints().size() <= 0) {
+        std::shared_ptr<std::vector<std::shared_ptr < Constraint>>>prioVector = std::make_shared<std::vector<std::shared_ptr < Constraint >>> ();
+        storage->getConstraints().push_back(prioVector);
+
+    }
+
+    constraintContainer prio = storage->getConstraintsWithPriority(0);
+    //        if (relation == EQ) {
+    //            model->functionalConstraints.push_back(LinearConstraint);
+    //        }
+    prio->push_back(LinearConstraint);
+}
+
 void GPSolver::linear(std::vector<int>& coefficients, std::vector<Variable*>& variables, int relation, int ub, unsigned priority) {
 
 
@@ -52,7 +71,7 @@ void GPSolver::linear(std::vector<int>& coefficients, std::vector<Variable*>& va
     std::shared_ptr<Linear> LinearConstraint = std::make_shared<Linear>(coefficients, variables, ub, relation, priority);
     for (Variable* iv : variables) {
         if (priority != 0) {
-//            iv->addToUsedInConstraints(LinearConstraint);
+            //            iv->addToUsedInConstraints(LinearConstraint);
             iv->addToUsedInConstraints();
         } else {
             iv->inObjective = true;
@@ -352,8 +371,6 @@ bool GPSolver::relax(int TimeForGecode) {
         solution = GS->findSolution(TimeForGecode, false);
         //        keepOrder = newKeep;
         numberOfTimesRelaxed++;
-
-    } else {
 
     }
     std::vector<constraint> feasibleFunc;

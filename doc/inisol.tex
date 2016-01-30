@@ -1,30 +1,31 @@
-Once domain reduction preprocessing has been done a Gecode DFS search engine is started. The stop criteria for Gecodes 
-search can be specified by an option class. A Gecode search engine takes a space and search option 
-as arguments and the search option contains a stop object. The stop object can either be timestop, nodestop or 
+Once domain reduction preprocessing has been done a Gecode DFS search engine (Depth First Search) is started. The stop 
+criteria for Gecodes search can be specified by an option class. A Gecode search engine takes a space and search 
+option as arguments and the search option contains a stop object. The stop object can either be timestop, nodestop or 
 failstop. Each time Gecode branches on a variable two new nodes are created and nodestop set a upper bound on the 
 number of nodes to explorer. If Gecode reaches a node that has no feasible assignment of one or more variables then 
 that space is failed and failstop sets an upper bound on the number of failed spaces that can occur before stopping. 
 Timestop stops the search if the time limit is reach. \\ 
-Instead of using only one of these stop object a \class{Multistop} object is created that combines all three 
-stop objects such that it can have multiple stopping criteria. \\ 
+Instead of using only one of these stop objects, a \class{Multistop} object has been implemented that combines all 
+three stop objects such that it can have multiple stopping criterion. \\ 
 Combinatorial problems can be formulated with Gecode and these problems can be very difficult to solve. In these cases 
 Gecode keeps searching for a solution until it finds one (or runs out of available memory). Instead, the search can be 
 stopped using stop object and the constraints can be relaxed such that Gecode can find a initial solution to the 
 instance. If one of the stop criteria is reached the \method{relax} is called and some of the constraint are relaxed. To 
-relax some constraints a new Gecode Engine is created and all variables and constraints, except those relaxed, 
+relax some constraints a new \class{GecodeEngine} is created and all variables and constraints, except those relaxed, 
 are created and added to the new space. In order to choose which constraint that should be removed the priority of the 
 constraints, given by the user, is used. The constraint is only relaxed if all non functional constraints with lower 
-priority has been relaxed. The functional constraints are the last to be relaxed no matter what their priority is. The 
+priority has been relaxed. The functional constraints are the last to be relaxed no matter what their priority are. The 
 reason for this choice is these constraints are used to create oneway constraints and are only created if the 
-functional constraints is feasible. This will be discussed further in the next section.  \\ 
+functional constraints are feasible. \\
+The constraints are chosen by their priority and ties are broken at random. I.e. a model with 100 
+non-functional constraints of 
+priority 3, 40 of priority 2, and 15 of priority 1 and there are 20 constraints that should be relaxed. The 15 
+constraints with priority 1 and 5 of the 40 constraints with priority 2, chosen at random, would not be posted. The 
+constraints that are not posted in the Gecode space are still applied when doing local search, hence the initial 
+solution might start with some violations.  \\
 A greedy approach is chosen in order to keep the time usage low. Each time Gecode fails in finding a solution the number 
 of constraints added next time is halved. This is repeated at most 2 times, down to posting 25 \% of the constraints. If 
 no solution can be found within the search 
-limits, the search is stopped and finding an initial solution to the instance has failed.  \\ 
-The constraints are chosen by their priority and ties are broken at random. I.e. a model with 100 constraint of 
-priority 1, 40 of priority 2, and 15 of priority 3 and there are 20 constraints that should be relaxed. The 15 
-constraints with priority 3 and 5 of the 40 constraints with priority 2 are chosen at random would not be posted. The 
-constraints that are not posted in the Gecode space are still applied when doing local search, hence the initial 
-solution might start with some violations.  \\
+limits, the search is stopped and finding an initial solution to the instance with Gecode has failed.  \\
 If Gecode fails to find an initial solution, the independent variables are assigned value within their domain chosen 
 uniformly at random. 

@@ -13,6 +13,14 @@
  \usepackage{mathtools}
  \usepackage{url}
 % \usepackage{glossaries}
+\usepackage{graphicx}
+% \usepackage{epstopdf}
+\newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+% \usepackage{marvosym}
+% \usepackage[
+% bottom = 3cm,
+% top = 3.5cm
+%  ]{geometry}
 
 
 
@@ -24,17 +32,18 @@
 %opening
 
 \include{style}
-\title{A General Purpose Local Search Solver}
+%\title{A General Purpose Local Search Solver}
 
 
 \begin{document}
 
-\maketitle
+% \maketitle
 %\newpage
 %\begin{abstract}
 
 %\end{abstract}
 %\newpage
+\input{forside}
 \thispagestyle{empty}
 \tableofcontents
 \thispagestyle{empty}
@@ -42,6 +51,7 @@
 %\listoftables
 %\printglossary
 %\makeglossary
+
 \newpage
 \setcounter{page}{1}
 \section{Introduction}
@@ -96,7 +106,7 @@
     \subsubsection{Comet}
     \input{comet}
     \subsubsection{OscaR}
-    
+    \input{oscar}
  
 \newpage
 \section{Architectural Overview}  
@@ -144,16 +154,17 @@
   \input{algimp}
   \subsection{Change in Local Search Design}
   \input{lschange}
-  
+  \newpage
 \section{Tests}
 \input{test}
-\subsection{Gecode Search Engine}
 %\input{gecodetest}
+\newpage
 \section{Results}
 \section{Future Work}
   \input{future}
 \section{Conclusion}
-
+\section{Appendix}
+\input{appendix}
 \bibliographystyle{plain}
 \bibliography{main}
 %\newpage

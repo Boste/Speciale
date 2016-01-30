@@ -126,7 +126,7 @@
      inkscape:cx="512.29895"
      inkscape:cy="149.4167"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g4213"
      showgrid="false"
      inkscape:window-width="1855"
      inkscape:window-height="1056"
@@ -302,15 +302,15 @@
       <text
          sodipodi:linespacing="125%"
          id="text4136"
-         y="684.16254"
-         x="489.1301"
+         y="683.34393"
+         x="479.30707"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
            style="font-size:23px"
-           y="684.16254"
-           x="489.1301"
+           y="683.34393"
+           x="479.30707"
            id="tspan4138"
-           sodipodi:role="line">Model</tspan></text>
+           sodipodi:role="line">Storage</tspan></text>
     </g>
     <g
        id="g3913"
@@ -462,76 +462,68 @@
            id="tspan3955"
            style="font-size:23px">Search Engines*</tspan></text>
     </g>
-    <g
-       transform="translate(12.729361,-139.38777)"
-       id="g4083">
-      <rect
-         style="fill:#000000;filter:url(#filter3767)"
-         id="rect4085"
-         width="204.78915"
-         height="93.01181"
-         x="398.97171"
-         y="74.246269"
-         rx="25"
-         ry="20"
-         transform="matrix(0.94911804,0,0,0.87325729,-361.37818,575.0288)" />
-      <rect
-         ry="18.03665"
-         rx="24.137337"
-         y="634.48914"
-         x="12.859236"
-         height="83.881073"
-         width="197.72258"
-         id="rect4087"
-         style="fill:#ff9955;stroke:#d45500;stroke-width:1.86624038;stroke-miterlimit:4;stroke-dasharray:none" />
-      <text
-         xml:space="preserve"
-         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-         x="75.062164"
-         y="682.76263"
-         id="text4089"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4091"
-           x="75.062164"
-           y="682.76263"
-           style="font-size:23px">State</tspan></text>
-    </g>
-    <g
-       id="g4093"
-       transform="translate(12.729362,-27.241517)">
-      <rect
-         transform="matrix(0.94911804,0,0,0.87325729,-361.37818,575.0288)"
-         ry="20"
-         rx="25"
-         y="74.246269"
-         x="398.97171"
-         height="93.01181"
-         width="204.78915"
-         id="rect4095"
-         style="fill:#000000;filter:url(#filter3767)" />
-      <rect
-         style="fill:#ff9955;stroke:#d45500;stroke-width:1.86624038;stroke-miterlimit:4;stroke-dasharray:none"
-         id="rect4097"
-         width="197.72258"
-         height="83.881073"
-         x="12.859236"
-         y="634.48914"
-         rx="24.137337"
-         ry="18.03665" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text4099"
-         y="682.76263"
-         x="75.062164"
-         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-         xml:space="preserve"><tspan
-           style="font-size:23px"
-           y="682.76263"
-           x="75.062164"
-           id="tspan4101"
-           sodipodi:role="line">State</tspan></text>
-    </g>
+    <rect
+       transform="matrix(0.94911804,0,0,0.87325729,-348.64882,435.64103)"
+       ry="20"
+       rx="25"
+       y="74.246269"
+       x="398.97171"
+       height="93.01181"
+       width="204.78915"
+       id="rect4085"
+       style="fill:#000000;filter:url(#filter3767)" />
+    <rect
+       style="fill:#ff9955;stroke:#d45500;stroke-width:1.86624038;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4087"
+       width="197.72258"
+       height="83.881073"
+       x="25.588596"
+       y="495.10138"
+       rx="24.137337"
+       ry="18.03665" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4089"
+       y="543.37488"
+       x="77.14991"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="font-size:23px"
+         y="543.37488"
+         x="77.14991"
+         id="tspan4091"
+         sodipodi:role="line">Variable</tspan></text>
+    <rect
+       style="fill:#000000;filter:url(#filter3767)"
+       id="rect4095"
+       width="204.78915"
+       height="93.01181"
+       x="398.97171"
+       y="74.246269"
+       rx="25"
+       ry="20"
+       transform="matrix(0.94911804,0,0,0.87325729,-348.64882,547.78728)" />
+    <rect
+       ry="18.03665"
+       rx="24.137337"
+       y="607.24762"
+       x="25.588598"
+       height="83.881073"
+       width="197.72258"
+       id="rect4097"
+       style="fill:#ff9955;stroke:#d45500;stroke-width:1.86624038;stroke-miterlimit:4;stroke-dasharray:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="60.778198"
+       y="654.70251"
+       id="text4099"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4101"
+         x="60.778198"
+         y="654.70251"
+         style="font-size:23px">Constraints*</tspan></text>
     <path
        inkscape:connector-curvature="3"
        inkscape:connector-type="polyline"

@@ -1,14 +1,14 @@
-When a model better suited for local search has been made the remaining time before the time limit is used to do local 
-search. The check is done after a step of a search procedure has been made to insure the time limit is not exceeded. 
-The best solution found while searching is save in a \class{State} such that the search can continue but always report 
-the best solution when the time limit is reached. \\ 
+When a model better suited for local search has been made, the remaining time is used to do local search. The 
+algorithms check if the timelimit is reach before each iteration of a search procedure. The best solution found while 
+searching is saved in a \class{State} class such that the search can continue but always report the best solution when 
+the time limit is reached. \\ 
 Three algorithms has been made from combining \class{Neighborhood} classes and search procedures that will be used to 
 test efficiency of the framework. The first algorithm uses two \class{TabuSearch} with different 
 \class{Neighborhood} classes. When the solution is infeasible \class{TabuSearch} is combined with \class{ConflictOnlyNE} 
 to only look at variables that can reduce the number of violations. When the current solution is feasible 
 \class{TabuSearch} with a \class{RestrictedFlipNE} class is used. If the number of independent variables are less than 
 or equal to 5000 it uses a \class{FlipNeighborhood} class instead. The reason for choosing a subset of the neighborhood 
-to examine is to increase the number of steps made in case the neighborhood is large. \\
+to examine is to increase the number of iterations made in case the neighborhood is large. \\
 \IncMargin{1em}
 \begin{algorithm}[H]
 
@@ -17,10 +17,10 @@ to examine is to increase the number of steps made in case the neighborhood is l
 %\Input{\int iteration, int[] best, int[] current, int[] tabulist }
 %\Output{\bool improvement}
 %\BlankLine
-ConflictOnlyNE neigborhood \;
-RestrictedFlipNE neigborhood2 \;
-TabuSearch TSCON(neighborhood) \;
-TabuSearch TSRFN(neighborhood2) \;
+\class{ConflictOnlyNE} CON \;
+\class{RestrictedFlipNE} RFN \;
+\class{TabuSearch} TSCON(NE) \;
+\class{TabuSearch} TSRFN(NE2) \;
 \int iteration = 0 \;
 \int[] best = getSolution() \;
 \int[] current = getSolution() \;
@@ -44,8 +44,11 @@ TabuSearch TSRFN(neighborhood2) \;
  %\caption{Test if a constraint $c$ can define a variable $x$ } \label{algo_checkoneway}
 \end{algorithm} \noindent
 \DecMargin{1em} \\
-The second algorithm for testing is iterative improvement using first improvement and random walk with a single flip 
-neighborhood. They idea is to find a local optima fast, and use randomness to escape the optima.  \\ 
+The second algorithm for testing is iterated local search using first improvement and random walk \cite[p. 
+141-142]{lsbog} with a single flip neighborhood. They idea is to find a local optima fast, and use randomness to escape 
+the optima. The random walk chooses a random neighborhood operation and commits that if it is legal. This is repeated 
+a number of time depending on the size of the neighborhood. This is done to try to explore many different subspaces 
+of the search space $S$. \\ 
 \IncMargin{1em}
 \begin{algorithm}[H]
 
@@ -55,21 +58,19 @@ neighborhood. They idea is to find a local optima fast, and use randomness to es
 %\Output{\bool improvement}
 %\BlankLine
 
-FlipNeighborhood FN \;
+\class{FlipNeighborhood} FN \;
 \int randomMoves = min(FN.getSize() / 50, 10) \;
-FirstImprovement FI(FN) \;
-RandomWalk RW(FN, randomMoves) \;
-\bool improvement = true  \;
+\class{FirstImprovement} FI(FN) \;
+\class{RandomWalk} RW(FN, randomMoves) \;
 \While{\upshape within time limit}{
+\bool improvement = true  \;
   \While{improvement \textbf{AND} \upshape within time limit}{
     improvement = FI.start() \;
-    iterations++ \;     
     \If{\upshape getSolution() is better than bestSolution} {
       bestSolution = getSolution() \;
     }
   }
     RW.start() \;
-    iterations += randomMoves \;     
     \If{\upshape getSolution() is better than bestSolution} {
       bestSolution = getSolution() \;
     }
@@ -91,10 +92,10 @@ neighborhood is used. \\
 %\Input{\int iteration, int[] best, int[] current, int[] tabulist }
 %\Output{\bool improvement}
 %\BlankLine
-RandomConflictConNE neigborhood \;
-RestrictedFlipNE neigborhood2 \;
-BestImprovement BIRCC(neighborhood) \;
-TabuSearch TSRFN(neighborhood2) \;
+\class{RandomConflictConNE} RCC \;
+\class{RestrictedFlipNE} RFN \;
+\class{BestImprovement} BIRCC(RCC) \;
+\class{TabuSearch} TSRFN(RFN) \;
 \int iteration = 0 \;
 \int[] best = getSolution() \;
 \int[] current = getSolution() \;
@@ -120,7 +121,7 @@ TabuSearch TSRFN(neighborhood2) \;
 \DecMargin{1em} \\
 Several other algorithms can be made from the \class{Neighborhood} and search procedure classes. Though they can be 
 combined in many ways they are not as easily combined as wanted. The \class{Neighborhood} classes can be a mix of 
-heuristics and a neighborhood which is not ideal. The next subsection will discuss this in more detail. 
+heuristics and a neighborhood which is not ideal. %The next subsection will discuss this in more detail. 
 
 
 

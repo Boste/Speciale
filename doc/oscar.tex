@@ -1,0 +1,12 @@
+Oscar is a another CBLS framework implemented in Scala and has drawn inspiration from Comet. It is implemented as a 
+backend solver for MiniZinc, MiniZinc is a modeling language to combinatorial problems.  \\ 
+OscarR uses invariants and oneway constraints like Comet and uses propagation graphs. OscaR allow the user to define 
+variables through oneway constraints and creates more oneway constraints defining variables if possible. The 
+propagation graphs are split in a dynamic and static graph. The graphs have the same set of vertices but the 
+dynamic has a subset of the edges of the static. In the dynamic graph cycles are not allowedbut they are in 
+the static. If a cycles would be formed in the dynamic it is broken. In order to only update each invariant 
+once the cycles in the static graph is consider a single vertex of a strongly connected component. \\ 
+Their search procedure uses different neighborhoods for independent varibles and implicit constraints. Each variable in 
+a model can only be involved in one neighborhood. Some of the neighborhoods are constraints specific meaning they 
+are only uses if a specific constraint is used when modeling. \\ 
+More information about OscaR can eb found here \cite{oscar} \cite{oscar2}. 

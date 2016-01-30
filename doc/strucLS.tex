@@ -1,10 +1,11 @@
-Once an initial solution to the constraint satisfaction problem (CSP) has been found by Gecode the model is transformed 
-to create a model suited for local search, a CBLS model. Two new datastructures structures are introduced in this 
-section, dependency directed graph in subsection \ref{sec_ddg} and propagation queue in subsection \ref{sec_propaqueue}. 
+Once an initial solution to the constraint satisfaction optimization problem (COP) has been found the model 
+is transformed to create a model suited for local search. Two new datastructures structures are introduced 
+in this section, dependency directed graph in subsection \ref{sec_ddg} and propagation queue in subsection 
+\ref{sec_propaqueue}. 
 \\
-The dependency directed graph is used to update invariants when a variable changes value. A 
-propagation queue $q_i$ is created for each variable $x_i$ that gives an ordering of the invariants reachable from 
-$x_i$ in the dependency directed graph. \\
+The dependency directed graph is used to handle dependencies of invariants when a 
+variable changes value. A propagation queue $q_i$ is created for each variable $x_i$ that gives an ordering of the 
+invariants reachable from  $x_i$ in the dependency directed graph. \\
 %When a variable $x$ changes value other variables dependent on the value of $x$ will need to be updated. To 
 %update those variables and invariants a directed graph $G=(V,A)$ is made, called dependency directed graph, 
 %\emph{DDG}. 
@@ -17,6 +18,6 @@ $x_i$ in the dependency directed graph. \\
 %when the associated variable changes value. \boste{Not quite happy about the description here} \medskip \\
 The model is simplified by defining some of the variables by transforming the functional constraints into oneway 
 constraints using the algorithms implemented in the respective constraints. When a variable is defined by a oneway 
-constraint it is transformed into an invariant since its value is dependent on other variables and invariants. \\ 
+constraint it is transformed into an invariant since its value is dependent on other variables and/or invariants. \\ 
 The only constraint implemented, \class{Linear}, is used as an example for creating oneway constraints. 
  

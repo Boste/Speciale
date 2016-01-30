@@ -42,8 +42,9 @@
 \contentsline {subsection}{\numberline {8.2}Search Procedures}{36}
 \contentsline {subsection}{\numberline {8.3}Local Search Algorithms}{38}
 \contentsline {subsection}{\numberline {8.4}Change in Local Search Design}{41}
-\contentsline {section}{\numberline {9}Tests}{41}
-\contentsline {subsection}{\numberline {9.1}Gecode Search Engine}{41}
-\contentsline {section}{\numberline {10}Results}{41}
-\contentsline {section}{\numberline {11}Future Work}{41}
-\contentsline {section}{\numberline {12}Conclusion}{42}
+\contentsline {section}{\numberline {9}Tests}{42}
+\contentsline {subsection}{\numberline {9.1}Parameters of Gecodes DFS Search Engine}{42}
+\contentsline {section}{\numberline {10}Results}{43}
+\contentsline {section}{\numberline {11}Future Work}{43}
+\contentsline {section}{\numberline {12}Conclusion}{45}
+\contentsline {section}{\numberline {13}Appendix}{45}

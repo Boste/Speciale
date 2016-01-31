@@ -27,5 +27,85 @@ In almost all of the instances where a solution was found, zero spaces where fai
 ``neos-1440225'' that reported 19118 spaces to be failed. One of the instances where solution was not found reports 
 that zero spaces were failed but otherwise they all report some failed spaces. Based on this test the number of failed 
 spaces tolerated is set to 1. This will exclude one initial solution but save time on a lot of the others. \\ 
+There are other parameters for Gecode that could have been tested is the different ways for Gecode to branch. \\ 
+\phantom{p. 1}
+\clearpage
+%\thispagestyle{empty}
+%%\phantom{p. 2}
+%\clearpage
+\subsection{Defining variables by Oneway Constraints}
+If the mdeol contains functional constraints we try to define one variable for each functional constraint to reduce the 
+search space. The effect has been test on the instances where functional constraints are present. They have been tested 
+by algorithm 1, Tabu search with \class{ConflictOnlyNE} and tabu search with \class{FlipNeigborhood}, with a 
+total run time of 120 seconds. The seed that was used during the test was $42$. \\ 
+The resulting number of violations are shown in figure \ref{fig_oneway}. To see if defining variable 
+by oneway has an impact on the result it has been analysed with Wilcoxon signed-rank test. The p-value of the test is 
+0.8888 hence it is not statistical significant that one result was better than the other. \\ 
+The two cases where the number of violations are zero for both, the objective function is zero as well. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/oneway} \caption{Sorted by number of defined variables in 
+increasing order.}\label{fig_oneway}
+% \end{center} 
+\end{figure}\noindent
+\
+\subsection{Using Gecode as Construction Heuristic}
+Gecode set limits on the design but it might provide a useful preprocessing and initial solution as well. We test 
+the effect of using Gecode to find and initial solution versus a random assignment to the variables. In both cases a 
+first improvement is used until local optima just like describe in section \ref{sec_local}. Two test on 46 instances 
+has been made to test the effect of Gecode. \\ 
+The first test algorithm 2, Iterated local search, is used until a total time limit of 30 seconds, with a random seed 
+$42$. The limit is chosen to make sure local search has started but not been running for very long. The violation of 
+the result is shown in figure \ref{fig_gecodels}. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/gecodels} \caption{Violation after 30 seconds with 
+algorithm 1, with and without Gecode}\label{fig_gecodels}
+% \end{center} 
+\end{figure}\noindent
+There is barely a difference between the two results and a Wilcoxon signed-rank test gives a p-value of 1, hence they 
+are not significantly different. In order to look closer at the difference we look at the objective to see if there is 
+a difference there. In order to visualize the data a ratio is created for each result, since the objective value span
+from -206179 to 3810000 in different instances. 
+\begin{equation}
+ ratio = \frac{obj.val1}{obj.val1+obj.val2}
+\end{equation}
+$obj.val1$ is the objective value of the result without Gecode and $obj.val2$ is the result with gecode. This can only 
+be done if the denominator is not zero and the values do not have opposite signs. In only two instances this was the 
+case and they have been left out in the visualization. The two instances are ``neos808444'' and ``neos-849702'' and 
+both have objective value zero. If the resulting ratio is 0.5 then the objective value is the same in the test. The 
+result is shown in figure \ref{fig_gecodelsobj} and a Wilcoxon test gives a p-value of 0.8379. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/gecodelsobj} \caption{Violation after 30 seconds with 
+algorithm 1, with and without Gecode}\label{fig_gecodelsobj}
+% \end{center} 
+\end{figure}\noindent
+The figure show they give an equal objective value most of the time. This could be because the local search 
+evened out the difference, hence the next text we leave out the local search. \medskip \\
+The test will be Gecode and first improvement versus random assignment and first improvement, in both cases until a 
+local optima has been found. In this case the run with Gecode proves to be significant better than without Gecode. 
+Wilcoxon test gives a p-value of 0.01894. The result of the test is shown in figure \ref{fig_gecodenols}. \\ 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/gecodenols} \caption{Violation after 30 seconds with 
+algorithm 1, with and without Gecode}\label{fig_gecodenols}
+% \end{center} 
+\end{figure}\noindent
+Based on the last test we keep using Gecode for further test, though the time usage is of interest as well. The time 
+use is plotted in figure \ref{fig_gecodetime} and it shows Gecode uses more time which is also confirmed by a Wilcoxon 
+test with a p-value of 0.005979. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/gecodetime} \caption{Violation after 30 seconds with 
+algorithm 1, with and without Gecode}\label{fig_gecodetime}
+% \end{center} 
+\end{figure}\noindent
+\newpage
+\subsection{Testing the Algorithms}
+
+
+
+
 
 

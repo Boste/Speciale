@@ -74,6 +74,7 @@ private:
     std::shared_ptr<State> bestState;
     std::shared_ptr<DependencyDigraph> DDG;
     std::vector<unsigned> defining;
+    unsigned oneway = 0;
 
     // Assumes initial value is 0, hence can only be used to initialize once. 
     //    void initializeInvariants(std::shared_ptr<State> st);

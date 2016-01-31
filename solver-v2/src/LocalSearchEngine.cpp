@@ -243,8 +243,9 @@ void LocalSearchEngine::initializeLS() {
     //    if (feasible) {
     model->cleanUp();
     std::cout << "##oneway " << model->getInvariants().size() << std::endl;
-    model->out->oneway = model->getInvariants().size();
-
+//    model->out->oneway = model->getInvariants().size();
+    oneway = model->getInvariants().size();
+    
 
     //    for (invariant inv : model->getInvariants()) {
     //        inv->calculateValue();
@@ -910,13 +911,24 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
         delete FN;
 
         std::cout << "Suggestion of all variable flips has been made " << std::endl;
-
+         if (currentState->compare(bestState)) {
+                    currentState->setViolation();
+                    bestState->copy(currentState);
+                    std::cout << "# value: ";
+                    for (int eval : bestState->getEvaluation()) {
+                        std::cout << eval << " ";
+                    }
+                    std::cout << " # iter " << 0 << " # used " << (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC << " # method TS FI" << std::endl;
+         }
+        
 //    }
-    double timelimit = (double) time - (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+//    double timelimit = (double) time - (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+    double timelimit = (double) time;
     //    std::cout << "time left for local search " << timelimit << std::endl;
     std::cout << "## LSLimitLeft " << timelimit << std::endl;
-    double usedTime = 0;
-    std::clock_t start = std::clock();
+    double usedTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+    auto start = Clock::globalClock;
+//    std::clock_t start = std::clock();
 
     //    std::cout << "Number of evaluation variables " << model->getEvaluationVariables().size() << std::endl;
     //    debug;
@@ -1175,10 +1187,9 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     }
 
 
-    std::cout << "name, oneway, eval[0], eval[1]" << std::endl;
-    std::cout << "##invar " << model->out->name << model->out->oneway << " ";
-//    std::cout << iterations << " ";
-    
+    std::cout << "name, oneway, iterations, eval[0], eval[1]" << std::endl;
+    std::cout << "##invar " << model->out->name << " "<< oneway << " ";
+    std::cout << iterations << " ";
     std::cout << bestState->getEvaluation().at(0) << " " << bestState->getViolations() << std::endl;
 //    for (int eval : bestState->getEvaluation()) {
 //

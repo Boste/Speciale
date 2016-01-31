@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  30 JAN 2016 12:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  31 JAN 2016 19:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -807,7 +807,11 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \@input{style.aux}
 \openout2 = `style.aux'.
 
-(./style.tex) (./Thesis.aux)
+(./style.tex) (./Thesis.aux
+
+LaTeX Warning: Label `fig_gecodetime' multiply defined.
+
+)
 \openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
@@ -823,8 +827,7 @@ LaTeX Font Info:    ... okay on input line 38.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
 LaTeX Font Info:    ... okay on input line 38.
 \c@lstlisting=\count157
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count158
 \scratchdimen=\dimen204
@@ -915,11 +918,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--90
 
 [7] (./lsalg.tex) (./construcHeur.tex) [8] (./metaheur.tex) [9] (./lsmodel.tex)
 (./CBLS.tex) (./invariant.tex [10]) (./cblssol.tex) (./comet.tex [11])
-(./oscar.tex
-
-LaTeX Warning: Citation `oscar2' on page 12 undefined on input line 12.
-
-) [12] (./architec.tex
+(./oscar.tex) [12] (./architec.tex
 <architectureTest.pdf, id=70, 844.82875pt x 462.05702pt>
 File: architectureTest.pdf Graphic file (type pdf)
 
@@ -965,9 +964,9 @@ File: general.pdf Graphic file (type pdf)
 Package pdftex.def Info: general.pdf used on input line 5.
 (pdftex.def)             Requested size: 288.0011pt x 254.23465pt.
 )
-Overfull \hbox (6.32379pt too wide) in paragraph at lines 1--123
-\OT1/cmr/bx/n/10.95 straint \OT1/cmr/m/n/10.95 class and two meth-ods, one in \
-OT1/cmr/bx/n/10.95 GP-Solver \OT1/cmr/m/n/10.95 and one in \OT1/cmr/bx/n/10.95 
+Overfull \hbox (15.29817pt too wide) in paragraph at lines 1--123
+\OT1/cmr/m/sc/10.95 straint \OT1/cmr/m/n/10.95 class and two meth-ods, one in \
+OT1/cmr/m/sc/10.95 GP-Solver \OT1/cmr/m/n/10.95 and one in \OT1/cmr/m/sc/10.95 
 GecodeEngine\OT1/cmr/m/n/10.95 ,
  []
 
@@ -994,79 +993,123 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--130
 
  []
 
-[27] [28]) (./propaqueue.tex) [29] [30] (./modelsol.tex) [31] (./lse.tex
-<LSE.pdf, id=216, 827.80214pt x 353.24716pt>
+[27] [28]) (./propaqueue.tex) [29] [30] (./lse.tex
+<LSE.pdf, id=213, 827.80214pt x 353.24716pt>
 File: LSE.pdf Graphic file (type pdf)
  <use LSE.pdf>
-Package pdftex.def Info: LSE.pdf used on input line 37.
+Package pdftex.def Info: LSE.pdf used on input line 42.
 (pdftex.def)             Requested size: 323.9978pt x 138.26172pt.
- [32])
-(./neighborhoods.tex <neighborhood.pdf, id=221, 741.2192pt x 662.60046pt>
+ [31])
+(./neighborhoods.tex <neighborhood.pdf, id=218, 741.2192pt x 662.60046pt>
 File: neighborhood.pdf Graphic file (type pdf)
 
 <use neighborhood.pdf>
 Package pdftex.def Info: neighborhood.pdf used on input line 5.
 (pdftex.def)             Requested size: 323.9978pt x 289.63422pt.
 
-Overfull \hbox (19.8045pt too wide) in paragraph at lines 16--24
+Overfull \hbox (24.10083pt too wide) in paragraph at lines 16--24
  [][] 
  []
 
-[33 <./LSE.pdf>] [34 <./neighborhood.pdf>]
+[32 <./LSE.pdf>] [33 <./neighborhood.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 55--73
 
  []
 
-[35]) (./sp.tex [36] [37]) (./algimp.tex [38] [39]
+[34]) (./sp.tex [35] [36]) (./algimp.tex [37] [38]
 Underfull \hbox (badness 10000) in paragraph at lines 81--86
 
  []
 
-[40]) (./lschange.tex) [41] (./test.tex
-<../R/GecodeTime.pdf, id=304, 597.23125pt x 844.15375pt>
+[39]) [40] (./test.tex
+<../R/GecodeTime.pdf, id=301, 597.23125pt x 844.15375pt>
 File: ../R/GecodeTime.pdf Graphic file (type pdf)
 
 <use ../R/GecodeTime.pdf>
 Package pdftex.def Info: ../R/GecodeTime.pdf used on input line 12.
 (pdftex.def)             Requested size: 360.0pt x 508.84045pt.
 
-<../R/GecodeFail.pdf, id=305, 597.23125pt x 844.15375pt>
+<../R/GecodeFail.pdf, id=302, 597.23125pt x 844.15375pt>
 File: ../R/GecodeFail.pdf Graphic file (type pdf)
 
 <use ../R/GecodeFail.pdf>
 Package pdftex.def Info: ../R/GecodeFail.pdf used on input line 21.
 (pdftex.def)             Requested size: 360.0pt x 508.84045pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--30
-
- []
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [42] (./future.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--165
+[41] [42 <../R/GecodeTime.pdf>] [43 <../R/GecodeFail.pdf>]
+<../R/oneway.pdf, id=324, 844.15375pt x 597.23125pt>
+File: ../R/oneway.pdf Graphic file (type pdf)
+ <use ../R/oneway.pdf>
+Package pdftex.def Info: ../R/oneway.pdf used on input line 47.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+<../R/gecodels.pdf, id=325, 844.15375pt x 597.23125pt>
+File: ../R/gecodels.pdf Graphic file (type pdf)
+ <use ../R/gecodels.pdf>
+Package pdftex.def Info: ../R/gecodels.pdf used on input line 62.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+[44
+
+ <../R/oneway.pdf>]
+<../R/gecodelsobj.pdf, id=335, 844.15375pt x 597.23125pt>
+File: ../R/gecodelsobj.pdf Graphic file (type pdf)
+
+<use ../R/gecodelsobj.pdf>
+Package pdftex.def Info: ../R/gecodelsobj.pdf used on input line 80.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+<../R/gecodenols.pdf, id=336, 844.15375pt x 597.23125pt>
+File: ../R/gecodenols.pdf Graphic file (type pdf)
+
+<use ../R/gecodenols.pdf>
+Package pdftex.def Info: ../R/gecodenols.pdf used on input line 91.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+<../R/gecodetime.pdf, id=337, 844.15375pt x 597.23125pt>
+File: ../R/gecodetime.pdf Graphic file (type pdf)
+
+<use ../R/gecodetime.pdf>
+Package pdftex.def Info: ../R/gecodetime.pdf used on input line 100.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[45 <../R/gecodels.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[46 <../R/gecodelsobj.pdf>]) [47 <../R/gecodenols.pdf>] (./future.tex)
+(./Thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 1--1
 
  []
 
+[48 <../R/gecodetime.pdf>]
+Underfull \hbox (badness 3449) in paragraph at lines 34--37
+[]\OT1/cmr/m/n/10.95 OscaR Team.  Os-caR: Scala in OR, 2012.  Avail-able from
+ []
 
-Overfull \vbox (30.52724pt too high) has occurred while \output is active []
+) [49] (./Thesis.aux)
 
-
-[43 <../R/GecodeTime.pdf>] [44 <../R/GecodeFail.pdf>] (./appendix.tex [45]
-[46] [47] [48] [49]) (./Thesis.bbl [50]) [51] (./Thesis.aux)
-
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16668 strings out of 495032
- 284673 string characters out of 6181718
- 370298 words of memory out of 5000000
- 19436 multiletter control sequences out of 15000+600000
+ 16687 strings out of 495032
+ 285138 string characters out of 6181718
+ 370371 words of memory out of 5000000
+ 19459 multiletter control sequences out of 15000+600000
  13755 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  56i,21n,92p,418b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1091,9 +1134,9 @@ onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (54 pages, 2145949 bytes).
+Output written on Thesis.pdf (52 pages, 2235479 bytes).
 PDF statistics:
- 419 PDF objects out of 1000 (max. 8388607)
+ 448 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 58 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 83 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,12 +1,12 @@
 The \class{LocalSearchEngine} class uses the model created for local search described in section \ref{sec_ls} and 
 uses local search to improve the initial solution. Pointers to the independent variables are to given a random 
-ordering, called a mask, that is used in local search.   \\ 
+ordering, called a mask, that is used in local search. \\
 Local search explores how changing value of few variables will affect the solution quality, hence exploring a neighbor 
 solution. The key for being efficient is to compute this change fast and the dependency digraph and the propagation 
 queues are used for this. Before committing a neighborhood operation several neighborhood operations might be explored 
 before choosing which one to commit. To evaluate a neighborhood operation a delta value for each invariant is used. The 
 delta value is the value an invariant would change if the neighborhood operation is committed. By this we can evaluate 
-the neighbor solution without committing a neighborhood operation. \\ 
+the neighbor solution without committing a neighborhood operation. \\
 Each constraint $c \in C$ created in the model was given a priority $p$ and these priorities are used during local 
 search and let $k$ denote the highest priority given. An invariant is created for each priority $p$ and one for the 
 objective function before the local search begin at the same time invariants are created by each constraint class. \\
@@ -31,7 +31,12 @@ sequence in which the neighbor solutions in the neighborhood graph are explored.
 \class{Neighborhood} class to evaluate a neighborhood operations, a \class{Move}, effect on the evaluation function. It 
 is the search procedures that determine which neighborhood operation to cmmmit, if any. Neighborhoods and search 
 procedures are combined to create different local search algorithms and \class{LocalSearchEngine} uses them within the 
-time limit to search for a better solution. \\ 
+time limit to search for a better solution. \\
+The first algorithms that is used is a first improvement until a local optmia is found. Gecode is not used to optmize 
+hence it might be posible to improve the initial solution very easily. If Gecode does not find an initial solution it 
+is very likely that the construction heuristic, random assignment, does not give a feasible solution and is far from a 
+local optima. It is prefered to start in local optima or at least close to one and first improvement is very efficient 
+at finding a local optima. \\
 \begin{figure}[!t]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{LSE}\caption{Overview of the class pointers of \class{LocalSearchEngine}. The 

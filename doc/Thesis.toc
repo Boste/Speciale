@@ -36,15 +36,14 @@
 \contentsline {subsection}{\numberline {6.1}Simplification}{24}
 \contentsline {subsection}{\numberline {6.2}Dependency Digraph}{26}
 \contentsline {subsection}{\numberline {6.3}Propagation Queue}{29}
-\contentsline {section}{\numberline {7}From Modeling to Local Search}{31}
-\contentsline {section}{\numberline {8}Local Search and Metaheuristics}{32}
-\contentsline {subsection}{\numberline {8.1}Neighborhoods}{33}
-\contentsline {subsection}{\numberline {8.2}Search Procedures}{36}
-\contentsline {subsection}{\numberline {8.3}Local Search Algorithms}{38}
-\contentsline {subsection}{\numberline {8.4}Change in Local Search Design}{41}
-\contentsline {section}{\numberline {9}Tests}{42}
-\contentsline {subsection}{\numberline {9.1}Parameters of Gecodes DFS Search Engine}{42}
-\contentsline {section}{\numberline {10}Results}{43}
-\contentsline {section}{\numberline {11}Future Work}{43}
-\contentsline {section}{\numberline {12}Conclusion}{45}
-\contentsline {section}{\numberline {13}Appendix}{45}
+\contentsline {section}{\numberline {7}Local Search and Metaheuristics}{31}
+\contentsline {subsection}{\numberline {7.1}Neighborhoods}{32}
+\contentsline {subsection}{\numberline {7.2}Search Procedures}{35}
+\contentsline {subsection}{\numberline {7.3}Local Search Algorithms}{37}
+\contentsline {section}{\numberline {8}Tests}{41}
+\contentsline {subsection}{\numberline {8.1}Parameters of Gecodes DFS Search Engine}{41}
+\contentsline {subsection}{\numberline {8.2}Defining variables by Oneway Constraints}{44}
+\contentsline {subsection}{\numberline {8.3}Using Gecode as Construction Heuristic}{44}
+\contentsline {subsection}{\numberline {8.4}Testing the Algorithms}{47}
+\contentsline {section}{\numberline {9}Results}{48}
+\contentsline {section}{\numberline {10}Future Work}{48}

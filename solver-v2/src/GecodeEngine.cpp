@@ -390,6 +390,8 @@ bool GecodeEngine::findSolution(int TimeForGecode, bool fix) {
         if (fix) {
             model->out->feasible = true;
             model->out->feasibleTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+//            std::cout << model->out->feasibleTime << std::endl;
+//            debug;
 //            model->out->feasibleVal = std::to_string(model->getEvaluationInvariantNr(0));
 
         }

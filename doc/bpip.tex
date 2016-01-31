@@ -1,20 +1,20 @@
 Binary- and integer linear programming can be used to model a wide range of problems by posting linear constraints and 
-using and a linear objective function. A integer linear program (ILP) can be writing on the form: 
+using and a linear objective function. An integer linear program (ILP) can be written on the form: 
 \begin{align}
  \text{Minimize }\; &z =  \mathbf{c}^T\mathbf{x} \\ 
  \text{subject to } \; & A\mathbf{x} \leq \mathbf{b} \\ 
  & \mathbf{x} \in \mathbb{Z}^n
 \end{align} \noindent
 Here $A$ is a $n \times m$ matrix of coefficients, $\mathbf{b} \in \mathbb{R}^m$, $z$ is the value of the objective 
-function and $\mathbf{c} \in \mathbb{R}^n$. The first line is the objective function and can easily be transformed to a 
-maximization problem by multiplying by $-1$. The relation in line 2 can be a mix of $\{\leq,=,\geq\}$ but greater 
-than or equal can be transformed to less than or equal by multiplying both side of the constraint by $-1$.  \\ 
+function and $\mathbf{c} \in \mathbb{R}^n$. $(1)$ is the objective function and can easily be transformed to a 
+maximization problem by multiplying by $-1$. The relation in $(2)$ can be a mix of $\{\leq,=,\geq\}$, but greater 
+than or equal can be transformed to less than or equal by multiplying both sides of the constraint by $-1$.  \\ 
 A candidate solution is an assignment of values to all variables $\mathbf{x}$ and a solution is said to be feasible if 
-all constraints are satisfied. The set of feasible solutions consist of integer point in a $n$ dimensional space and 
+all constraints are satisfied. The set of feasible solutions consist of integer points in a $n$ dimensional space and 
 the point that minimize the objective function is said to be the optimal solution. There can be multiple optimal 
 solutions for a given model. \\
-Solving a general integer program or binary program is a NP-hard problem \cite[p.30]{ilpbog} and several techniques are 
-developed for solving them. The techniques can be i.e. branch and bound, cutting plane and branch and cut 
+Solving a general integer program or binary program formualtions are NP-hard \cite[p.30]{ilpbog} and several techniques 
+have been developed for solving them. The techniques can be i.e. branch and bound, cutting plane and branch and cut 
 \cite[p.31]{ilpbog}. An integer linear program can be relaxed by relaxing the integer constraint, line 3 changed to 
 $\mathbf{x} \in \mathbb{R}^n$, on the variables creating a linear programming problem \cite[p. 30]{ilpbog}. The linear 
 programming problem is easier to solver than the integer programming problem and can be used to find bounds on the 

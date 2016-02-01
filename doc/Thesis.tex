@@ -17,11 +17,9 @@
 % \usepackage{epstopdf}
 \newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
 % \usepackage{marvosym}
-% \usepackage[
-% bottom = 3cm,
-% top = 3.5cm
-%  ]{geometry}
-
+ %\usepackage[ left=3.5cm, right = 3.5cm, bottom = 4cm, top = 4cm]{geometry}
+ %\usepackage[a4paper]{geometry}
+\usepackage{rotating}
 
 
 \usepackage{algorithmic}
@@ -45,6 +43,8 @@
 %\newpage
 \input{forside}
 \thispagestyle{empty}
+\section{Acknowledgements}
+\input{acknow}
 \tableofcontents
 \thispagestyle{empty}
 %\listoffigures
@@ -58,7 +58,7 @@
  \input{intro}
  \newpage
  
-\section{Discrete Optimization}
+\section{Introduction to Discrete Optimization}
 
   \subsection{Variables} 
   \input{vars} % Written
@@ -158,11 +158,12 @@
 \section{Tests}
 \input{test}
 %\input{gecodetest}
-\newpage
-\section{Results}
+
+
+%\section{Results}
 \section{Future Work}
   \input{future}
-%\section{Conclusion}
+%	\section{Conclusion}
 %\section{Appendix}
 %\input{appendix}
 \bibliographystyle{plain}

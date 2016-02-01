@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  31 JAN 2016 19:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.29)  1 FEB 2016 05:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -744,18 +744,26 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count149
+\rotFPtop=\skip52
+\rotFPbot=\skip53
+\rot@float@box=\box39
+\rot@mess@toks=\toks36
+)
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count149
-\c@ALC@line=\count150
-\c@ALC@rem=\count151
-\c@ALC@depth=\count152
-\ALC@tlm=\skip52
-\algorithmicindent=\skip53
+\c@ALC@unique=\count150
+\c@ALC@line=\count151
+\c@ALC@rem=\count152
+\c@ALC@depth=\count153
+\ALC@tlm=\skip54
+\algorithmicindent=\skip55
 )
 (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count153
+\c@AlgoLine=\count154
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -770,39 +778,39 @@ Package `algorithm2e' Release 5.0 -- january 06 2013 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (cfiorio@um2.fr)
 ********************************************************
-\skiptotal=\skip54
-\skiplinenumber=\skip55
-\skiprule=\skip56
-\skiphlne=\skip57
-\skiptext=\skip58
-\skiplength=\skip59
-\algomargin=\skip60
-\skipalgocfslide=\skip61
+\skiptotal=\skip56
+\skiplinenumber=\skip57
+\skiprule=\skip58
+\skiphlne=\skip59
+\skiptext=\skip60
+\skiplength=\skip61
+\algomargin=\skip62
+\skipalgocfslide=\skip63
 \algowidth=\dimen198
 \inoutsize=\dimen199
 \inoutindent=\dimen200
 \interspacetitleruled=\dimen201
 \interspacealgoruled=\dimen202
 \interspacetitleboxruled=\dimen203
-\algocf@inoutbox=\box39
-\algocf@inputbox=\box40
-\AlCapSkip=\skip62
-\AlCapHSkip=\skip63
-\algoskipindent=\skip64
-\algocf@nlbox=\box41
-\algocf@hangingbox=\box42
-\algocf@untilbox=\box43
-\algocf@skipuntil=\skip65
-\algocf@capbox=\box44
-\algoheightruledefault=\skip66
-\algoheightrule=\skip67
-\algotitleheightruledefault=\skip68
-\algotitleheightrule=\skip69
-\c@algocfline=\count154
-\c@algocfproc=\count155
-\c@algocf=\count156
-\algocf@algoframe=\box45
-\algocf@algobox=\box46
+\algocf@inoutbox=\box40
+\algocf@inputbox=\box41
+\AlCapSkip=\skip64
+\AlCapHSkip=\skip65
+\algoskipindent=\skip66
+\algocf@nlbox=\box42
+\algocf@hangingbox=\box43
+\algocf@untilbox=\box44
+\algocf@skipuntil=\skip67
+\algocf@capbox=\box45
+\algoheightruledefault=\skip68
+\algoheightrule=\skip69
+\algotitleheightruledefault=\skip70
+\algotitleheightrule=\skip71
+\c@algocfline=\count155
+\c@algocfproc=\count156
+\c@algocf=\count157
+\algocf@algoframe=\box46
+\algocf@algobox=\box47
 )
 \@input{style.aux}
 \openout2 = `style.aux'.
@@ -811,37 +819,41 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 
 LaTeX Warning: Label `fig_gecodetime' multiply defined.
 
+
+LaTeX Warning: Label `tab3' multiply defined.
+
 )
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-\c@lstlisting=\count157
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+\c@lstlisting=\count158
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count158
+\scratchcounter=\count159
 \scratchdimen=\dimen204
-\scratchbox=\box47
-\nofMPsegments=\count159
-\nofMParguments=\count160
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count161
+\scratchbox=\box48
+\nofMPsegments=\count160
+\nofMParguments=\count161
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count162
 \MPscratchDim=\dimen205
-\MPnumerator=\count162
-\makeMPintoPDFobject=\count163
-\everyMPtoPDFconversion=\toks37
+\MPnumerator=\count163
+\makeMPintoPDFobject=\count164
+\everyMPtoPDFconversion=\toks38
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (./forside.tex
 LaTeX Font Info:    Try loading font information for U+msa on input line 77.
@@ -863,13 +875,13 @@ Package pdftex.def Info: logo.jpg used on input line 97.
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo.jpg>]) (./Thesis.to
-c [2])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo.jpg>]) (./acknow.te
+x) (./Thesis.toc
+[2])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [3]
-(./intro.tex) [1] (./vars.tex)
+ [3] (./intro.tex) [1] (./vars.tex)
 Overfull \hbox (3.8797pt too wide) in paragraph at lines 1--65
 \OT1/cmr/m/n/10.95 Discrete op-ti-miza-tion mod-els con-tain a set of $\OML/cmm
 /m/it/10.95 n$ \OT1/cmr/m/n/10.95 vari-ables $\OML/cmm/m/it/10.95 X \OT1/cmr/m/
@@ -993,17 +1005,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--130
 
  []
 
-[27] [28]) (./propaqueue.tex) [29] [30] (./lse.tex
-<LSE.pdf, id=213, 827.80214pt x 353.24716pt>
+[27] [28]) (./propaqueue.tex
+
+pdfTeX warning: /usr/bin/pdflatex (file ./1.pdf): PDF inclusion: found PDF vers
+ion <1.5>, but at most version <1.4> allowed
+<1.pdf, id=207, 263.64899pt x 104.2846pt>
+File: 1.pdf Graphic file (type pdf)
+ <use 1.pdf>
+Package pdftex.def Info: 1.pdf used on input line 44.
+(pdftex.def)             Requested size: 360.0pt x 142.40758pt.
+
+
+pdfTeX warning: /usr/bin/pdflatex (file ./2.pdf): PDF inclusion: found PDF vers
+ion <1.5>, but at most version <1.4> allowed
+<2.pdf, id=208, 314.04828pt x 66.67209pt>
+File: 2.pdf Graphic file (type pdf)
+ <use 2.pdf>
+Package pdftex.def Info: 2.pdf used on input line 49.
+(pdftex.def)             Requested size: 360.0pt x 76.43118pt.
+) [29] [30 <./1.pdf> <./2.pdf>] (./lse.tex <LSE.pdf, id=233, 827.80214pt x 353.
+24716pt>
 File: LSE.pdf Graphic file (type pdf)
  <use LSE.pdf>
 Package pdftex.def Info: LSE.pdf used on input line 42.
 (pdftex.def)             Requested size: 323.9978pt x 138.26172pt.
- [31])
-(./neighborhoods.tex <neighborhood.pdf, id=218, 741.2192pt x 662.60046pt>
-File: neighborhood.pdf Graphic file (type pdf)
 
-<use neighborhood.pdf>
+[31]) (./neighborhoods.tex
+<neighborhood.pdf, id=238, 741.2192pt x 662.60046pt>
+File: neighborhood.pdf Graphic file (type pdf)
+ <use neighborhood.pdf>
 Package pdftex.def Info: neighborhood.pdf used on input line 5.
 (pdftex.def)             Requested size: 323.9978pt x 289.63422pt.
 
@@ -1022,14 +1052,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 81--86
  []
 
 [39]) [40] (./test.tex
-<../R/GecodeTime.pdf, id=301, 597.23125pt x 844.15375pt>
+<../R/GecodeTime.pdf, id=321, 597.23125pt x 844.15375pt>
 File: ../R/GecodeTime.pdf Graphic file (type pdf)
 
 <use ../R/GecodeTime.pdf>
 Package pdftex.def Info: ../R/GecodeTime.pdf used on input line 12.
 (pdftex.def)             Requested size: 360.0pt x 508.84045pt.
 
-<../R/GecodeFail.pdf, id=302, 597.23125pt x 844.15375pt>
+<../R/GecodeFail.pdf, id=322, 597.23125pt x 844.15375pt>
 File: ../R/GecodeFail.pdf Graphic file (type pdf)
 
 <use ../R/GecodeFail.pdf>
@@ -1043,13 +1073,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [41] [42 <../R/GecodeTime.pdf>] [43 <../R/GecodeFail.pdf>]
-<../R/oneway.pdf, id=324, 844.15375pt x 597.23125pt>
+<../R/oneway.pdf, id=344, 844.15375pt x 597.23125pt>
 File: ../R/oneway.pdf Graphic file (type pdf)
  <use ../R/oneway.pdf>
 Package pdftex.def Info: ../R/oneway.pdf used on input line 47.
 (pdftex.def)             Requested size: 360.0pt x 254.69933pt.
 
-<../R/gecodels.pdf, id=325, 844.15375pt x 597.23125pt>
+<../R/gecodels.pdf, id=345, 844.15375pt x 597.23125pt>
 File: ../R/gecodels.pdf Graphic file (type pdf)
  <use ../R/gecodels.pdf>
 Package pdftex.def Info: ../R/gecodels.pdf used on input line 62.
@@ -1058,26 +1088,26 @@ Package pdftex.def Info: ../R/gecodels.pdf used on input line 62.
 [44
 
  <../R/oneway.pdf>]
-<../R/gecodelsobj.pdf, id=335, 844.15375pt x 597.23125pt>
+<../R/gecodelsobj.pdf, id=355, 844.15375pt x 597.23125pt>
 File: ../R/gecodelsobj.pdf Graphic file (type pdf)
 
 <use ../R/gecodelsobj.pdf>
 Package pdftex.def Info: ../R/gecodelsobj.pdf used on input line 80.
 (pdftex.def)             Requested size: 360.0pt x 254.69933pt.
 
-<../R/gecodenols.pdf, id=336, 844.15375pt x 597.23125pt>
+<../R/gecodenols.pdf, id=356, 844.15375pt x 597.23125pt>
 File: ../R/gecodenols.pdf Graphic file (type pdf)
 
 <use ../R/gecodenols.pdf>
 Package pdftex.def Info: ../R/gecodenols.pdf used on input line 91.
-(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+(pdftex.def)             Requested size: 323.9978pt x 229.22847pt.
 
-<../R/gecodetime.pdf, id=337, 844.15375pt x 597.23125pt>
+<../R/gecodetime.pdf, id=357, 844.15375pt x 597.23125pt>
 File: ../R/gecodetime.pdf Graphic file (type pdf)
 
 <use ../R/gecodetime.pdf>
-Package pdftex.def Info: ../R/gecodetime.pdf used on input line 100.
-(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+Package pdftex.def Info: ../R/gecodetime.pdf used on input line 101.
+(pdftex.def)             Requested size: 323.9978pt x 229.22847pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1089,27 +1119,66 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[46 <../R/gecodelsobj.pdf>]) [47 <../R/gecodenols.pdf>] (./future.tex)
-(./Thesis.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 1--1
+[46 <../R/gecodelsobj.pdf>] [47 <../R/gecodenols.pdf> <../R/gecodetime.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 109--125
 
  []
 
-[48 <../R/gecodetime.pdf>]
+<../R/algs.pdf, id=392, 844.15375pt x 597.23125pt>
+File: ../R/algs.pdf Graphic file (type pdf)
+ <use ../R/algs.pdf>
+Package pdftex.def Info: ../R/algs.pdf used on input line 142.
+(pdftex.def)             Requested size: 540.0pt x 382.05354pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[48
+
+] <../R/algbox.pdf, id=396, 844.15375pt x 597.23125pt>
+File: ../R/algbox.pdf Graphic file (type pdf)
+
+<use ../R/algbox.pdf>
+Package pdftex.def Info: ../R/algbox.pdf used on input line 153.
+(pdftex.def)             Requested size: 360.0pt x 254.69933pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--159
+
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[49 <../R/algs.pdf>]
+Overfull \hbox (117.17339pt too wide) in paragraph at lines 177--206
+ [][] 
+ []
+
+
+Overfull \hbox (108.62625pt too wide) in paragraph at lines 211--237
+ [][] 
+ []
+
+
+Overfull \hbox (101.20454pt too wide) in paragraph at lines 243--269
+ [][] 
+ []
+
+[50 <../R/algbox.pdf>] [51] [52] [53]) (./future.tex) (./Thesis.bbl
 Underfull \hbox (badness 3449) in paragraph at lines 34--37
 []\OT1/cmr/m/n/10.95 OscaR Team.  Os-caR: Scala in OR, 2012.  Avail-able from
  []
 
-) [49] (./Thesis.aux)
+[54]) [55] (./Thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16687 strings out of 495032
- 285138 string characters out of 6181718
- 370371 words of memory out of 5000000
- 19459 multiletter control sequences out of 15000+600000
+ 16783 strings out of 495032
+ 286418 string characters out of 6181718
+ 399588 words of memory out of 5000000
+ 19544 multiletter control sequences out of 15000+600000
  13755 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  56i,21n,92p,418b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1124,19 +1193,20 @@ ype1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msbm10.pfb>
-Output written on Thesis.pdf (52 pages, 2235479 bytes).
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/symbols/msbm10.pfb>
+Output written on Thesis.pdf (58 pages, 2286571 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
+ 501 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

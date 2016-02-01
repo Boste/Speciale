@@ -1,49 +1,50 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Discrete Optimization}{2}
-\contentsline {subsection}{\numberline {2.1}Variables}{2}
-\contentsline {subsection}{\numberline {2.2}Constraints}{2}
-\contentsline {subsection}{\numberline {2.3}Problem Formulation}{2}
-\contentsline {subsection}{\numberline {2.4}Solutions}{3}
-\contentsline {section}{\numberline {3}General Purpose Solution Methods}{4}
-\contentsline {subsection}{\numberline {3.1}Binary- and Integer Linear Programming}{4}
-\contentsline {subsection}{\numberline {3.2}Constraint Programming}{4}
-\contentsline {subsubsection}{\numberline {3.2.1}Gecode}{5}
-\contentsline {subsection}{\numberline {3.3}Heuristics and Local Search}{6}
-\contentsline {subsubsection}{\numberline {3.3.1}Implicit Constraints}{6}
-\contentsline {subsubsection}{\numberline {3.3.2}Soft Constraints}{6}
-\contentsline {subsubsection}{\numberline {3.3.3}Basic Aspects of Local Search}{7}
-\contentsline {subsubsection}{\numberline {3.3.4}Local Search Algorithms}{8}
-\contentsline {subsubsection}{\numberline {3.3.5}Construction Heuristics}{8}
-\contentsline {subsubsection}{\numberline {3.3.6}Metaheuristics}{9}
-\contentsline {subsubsection}{\numberline {3.3.7}Creating a Model for Local Search}{10}
-\contentsline {subsection}{\numberline {3.4}Constraint Based Local Search}{10}
-\contentsline {subsubsection}{\numberline {3.4.1}Invariants and Oneway Constraints}{10}
-\contentsline {subsubsection}{\numberline {3.4.2}Evaluating Solutions}{11}
-\contentsline {subsubsection}{\numberline {3.4.3}Comet}{11}
-\contentsline {subsubsection}{\numberline {3.4.4}OscaR}{12}
-\contentsline {section}{\numberline {4}Architectural Overview}{13}
-\contentsline {subsection}{\numberline {4.1}Variables}{14}
-\contentsline {subsection}{\numberline {4.2}Constraints}{14}
-\contentsline {subsubsection}{\numberline {4.2.1}Implementation of Linear}{15}
-\contentsline {subsection}{\numberline {4.3}Invariants}{16}
-\contentsline {subsubsection}{\numberline {4.3.1}Implementation of Sum}{18}
-\contentsline {subsubsection}{\numberline {4.3.2}Implementation of LEQViolation and EQViolation}{18}
-\contentsline {subsection}{\numberline {4.4}General Purpose Solver - GPSolver}{20}
-\contentsline {section}{\numberline {5}Preprocessing and Initial Solution}{22}
-\contentsline {subsection}{\numberline {5.1}Domain Reduction}{22}
-\contentsline {subsection}{\numberline {5.2}Finding an Initial Solution}{22}
-\contentsline {section}{\numberline {6}Structuring Local Search Model}{24}
-\contentsline {subsection}{\numberline {6.1}Simplification}{24}
-\contentsline {subsection}{\numberline {6.2}Dependency Digraph}{26}
-\contentsline {subsection}{\numberline {6.3}Propagation Queue}{29}
-\contentsline {section}{\numberline {7}Local Search and Metaheuristics}{31}
-\contentsline {subsection}{\numberline {7.1}Neighborhoods}{32}
-\contentsline {subsection}{\numberline {7.2}Search Procedures}{35}
-\contentsline {subsection}{\numberline {7.3}Local Search Algorithms}{37}
-\contentsline {section}{\numberline {8}Tests}{41}
-\contentsline {subsection}{\numberline {8.1}Parameters of Gecodes DFS Search Engine}{41}
-\contentsline {subsection}{\numberline {8.2}Defining variables by Oneway Constraints}{44}
-\contentsline {subsection}{\numberline {8.3}Using Gecode as Construction Heuristic}{44}
-\contentsline {subsection}{\numberline {8.4}Testing the Algorithms}{47}
-\contentsline {section}{\numberline {9}Results}{48}
-\contentsline {section}{\numberline {10}Future Work}{48}
+\contentsline {section}{\numberline {1}Acknowledgements}{2}
+\contentsline {section}{\numberline {2}Introduction}{1}
+\contentsline {section}{\numberline {3}Introduction to Discrete Optimization}{2}
+\contentsline {subsection}{\numberline {3.1}Variables}{2}
+\contentsline {subsection}{\numberline {3.2}Constraints}{2}
+\contentsline {subsection}{\numberline {3.3}Problem Formulation}{2}
+\contentsline {subsection}{\numberline {3.4}Solutions}{3}
+\contentsline {section}{\numberline {4}General Purpose Solution Methods}{4}
+\contentsline {subsection}{\numberline {4.1}Binary- and Integer Linear Programming}{4}
+\contentsline {subsection}{\numberline {4.2}Constraint Programming}{4}
+\contentsline {subsubsection}{\numberline {4.2.1}Gecode}{5}
+\contentsline {subsection}{\numberline {4.3}Heuristics and Local Search}{6}
+\contentsline {subsubsection}{\numberline {4.3.1}Implicit Constraints}{6}
+\contentsline {subsubsection}{\numberline {4.3.2}Soft Constraints}{6}
+\contentsline {subsubsection}{\numberline {4.3.3}Basic Aspects of Local Search}{7}
+\contentsline {subsubsection}{\numberline {4.3.4}Local Search Algorithms}{8}
+\contentsline {subsubsection}{\numberline {4.3.5}Construction Heuristics}{8}
+\contentsline {subsubsection}{\numberline {4.3.6}Metaheuristics}{9}
+\contentsline {subsubsection}{\numberline {4.3.7}Creating a Model for Local Search}{10}
+\contentsline {subsection}{\numberline {4.4}Constraint Based Local Search}{10}
+\contentsline {subsubsection}{\numberline {4.4.1}Invariants and Oneway Constraints}{10}
+\contentsline {subsubsection}{\numberline {4.4.2}Evaluating Solutions}{11}
+\contentsline {subsubsection}{\numberline {4.4.3}Comet}{11}
+\contentsline {subsubsection}{\numberline {4.4.4}OscaR}{12}
+\contentsline {section}{\numberline {5}Architectural Overview}{13}
+\contentsline {subsection}{\numberline {5.1}Variables}{14}
+\contentsline {subsection}{\numberline {5.2}Constraints}{14}
+\contentsline {subsubsection}{\numberline {5.2.1}Implementation of Linear}{15}
+\contentsline {subsection}{\numberline {5.3}Invariants}{16}
+\contentsline {subsubsection}{\numberline {5.3.1}Implementation of Sum}{18}
+\contentsline {subsubsection}{\numberline {5.3.2}Implementation of LEQViolation and EQViolation}{18}
+\contentsline {subsection}{\numberline {5.4}General Purpose Solver - GPSolver}{20}
+\contentsline {section}{\numberline {6}Preprocessing and Initial Solution}{22}
+\contentsline {subsection}{\numberline {6.1}Domain Reduction}{22}
+\contentsline {subsection}{\numberline {6.2}Finding an Initial Solution}{22}
+\contentsline {section}{\numberline {7}Structuring Local Search Model}{24}
+\contentsline {subsection}{\numberline {7.1}Simplification}{24}
+\contentsline {subsection}{\numberline {7.2}Dependency Digraph}{26}
+\contentsline {subsection}{\numberline {7.3}Propagation Queue}{29}
+\contentsline {section}{\numberline {8}Local Search and Metaheuristics}{31}
+\contentsline {subsection}{\numberline {8.1}Neighborhoods}{32}
+\contentsline {subsection}{\numberline {8.2}Search Procedures}{35}
+\contentsline {subsection}{\numberline {8.3}Local Search Algorithms}{38}
+\contentsline {section}{\numberline {9}Tests}{41}
+\contentsline {subsection}{\numberline {9.1}Parameters of Gecodes DFS Search Engine}{41}
+\contentsline {subsection}{\numberline {9.2}Defining variables by Oneway Constraints}{44}
+\contentsline {subsection}{\numberline {9.3}Using Gecode as Construction Heuristic}{44}
+\contentsline {subsection}{\numberline {9.4}Testing the Algorithms}{48}
+\contentsline {subsection}{\numberline {9.5}Versus Gurobi}{50}
+\contentsline {section}{\numberline {10}Future Work}{54}

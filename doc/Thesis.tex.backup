@@ -11,7 +11,16 @@
  \usepackage{booktabs}
  \usepackage{tabularx}
  \usepackage{mathtools}
+ \usepackage{url}
 % \usepackage{glossaries}
+\usepackage{graphicx}
+% \usepackage{epstopdf}
+\newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+% \usepackage{marvosym}
+% \usepackage[
+% bottom = 3cm,
+% top = 3.5cm
+%  ]{geometry}
 
 
 
@@ -23,55 +32,63 @@
 %opening
 
 \include{style}
-\title{A General Purpose Local Search Solver}
+%\title{A General Purpose Local Search Solver}
 
 
 \begin{document}
 
-\maketitle
+% \maketitle
 %\newpage
 %\begin{abstract}
 
 %\end{abstract}
 %\newpage
+\input{forside}
+\thispagestyle{empty}
 \tableofcontents
+\thispagestyle{empty}
 %\listoffigures
 %\listoftables
 %\printglossary
 %\makeglossary
+
 \newpage
+\setcounter{page}{1}
 \section{Introduction}
  \input{intro}
+ \newpage
  
- 
-\section{Definitions} 
+\section{Introduction to Discrete Optimization}
+
   \subsection{Variables} 
   \input{vars} % Written
   \subsection{Constraints}
   \input{cons} % split it into constriants and CSP
-  \subsection{Problem formulation} % CSP-> CSOP
+  \subsection{Problem Formulation} % CSP-> CSOP
   \input{discOpt}
   \subsection{Solutions}
   \input{solutions}
   
 \newpage  
-\section{Discrete Optimization}  
+\section{General Purpose Solution Methods}  
   
   \subsection{Binary- and Integer Linear Programming} % In general, talk about Gurobi, Scip, Cplex after
   \input{bpip}
   
   \subsection{Constraint Programming}
   \input{CP}
-    \subsubsection{Implicit Constraints}
-    \input{implicitCons}
     \subsubsection{Gecode}
     \input{gecode}
   \subsection{Heuristics and Local Search}
   \input{heurLS}
+        \subsubsection{Implicit Constraints}
+    \input{implicitCons}
+        \subsubsection{Soft Constraints}
+    \input{softCons}
      \subsubsection{Basic Aspects of Local Search}
     \input{lsneig}
     \subsubsection{Local Search Algorithms}
-    \input{lsalg}
+    \input{lsalg} \label{sub_lsalg}
     \subsubsection{Construction Heuristics}
     \input{construcHeur}
     \subsubsection{Metaheuristics}
@@ -82,48 +99,35 @@
   \input{CBLS}
     \subsubsection{Invariants and Oneway Constraints}
     \input{invariant}
-    \subsubsection{Soft Constraints}
-    \input{softCons}
-    \subsubsection{Evaluating solutions}
+    \subsubsection{Evaluating Solutions}
     \input{cblssol}
   %\subsection{Evaluation Function}
   %\input{objFunc}
     \subsubsection{Comet}
-    %\input{comet}
+    \input{comet}
     \subsubsection{OscaR}
-  
-%\section{Modeling Constraint Based Local Search}
-  %\boste{Tror ikke det er så sammenhængende, mangler en mere blød overgang.}
-  %\subsection{Types of Modeling \boste{not sure this should be here}}
-  %\input{modeling}
-
-    
+    \input{oscar}
  
-%\section{Local Search}
-%  \input{local}
-%\section{Previous Work}
- % \subsection{Comet}
-  %\input{comet}
-  %\subsection{Gecode}
-  %\subsection{LocalSolver}
-%\subsection{Structure of this CBLS \boste{Differences from oscar and comet.}}
 \newpage
 \section{Architectural Overview}  
   \input{architec}
-  \newpage
+  \subsection{Variables}
+  \input{variables}
   \subsection{Constraints}
   \input{archCons} \label{sub_cons}
-  \subsection{Invariants}
+    \subsection{Invariants}
   \input{archInv}\label{sub_inv}
 
+  \subsection{General Purpose Solver - GPSolver}
+  \input{generalsolver}\label{sub_gen}
+  
 \newpage
-\section{From Modeling to Solution}
 \section{Preprocessing and Initial Solution} \label{sec_gecode}
   \input{prepros}
   \subsection{Domain Reduction}
   \input{dom}
   \subsection{Finding an Initial Solution}
-  \input{inisol}
+  \input{inisol} \label{sub_inisol}
 
 \newpage
 \section{Structuring Local Search Model} \label{sec_ls}
@@ -137,16 +141,30 @@
     
   
 \newpage  
-\section{Local Search Engine} \label{sec_local}
+%\section{From Modeling to Local Search}
+%\input{modelsol}
+%\newpage
+\section{Local Search and Metaheuristics} \label{sec_local}
+  \input{lse}
   \subsection{Neighborhoods}
-    \subsubsection{Neighborhood Operations}
-\section{Metaheuristics}
+  \input{neighborhoods}
+  \subsection{Search Procedures}
+  \input{sp}
+  \subsection{Local Search Algorithms}
+  \input{algimp}
+  %\subsection{Change in Local Search Design}
+  %\input{lschange}
+  \newpage
 \section{Tests}
+\input{test}
+%\input{gecodetest}
+\newpage
 \section{Results}
 \section{Future Work}
   \input{future}
-\section{Conclusion}
-
+%	\section{Conclusion}
+%\section{Appendix}
+%\input{appendix}
 \bibliographystyle{plain}
 \bibliography{main}
 %\newpage

@@ -33,4 +33,20 @@ visited is added to the propagation queue of $v_i$. This gives a time complexity
 number of reachable vertices from $v_i$.  \medskip \\ 
 During local search when a single variable $x_i$ changes value the change propagate through the DDG using 
 the ordering from the propagation queue $q_i$. When two or more variable change value the propagation queues can be 
-merged into a single queue removing duplicates.  
+merged into a single queue removing duplicates.  \\ 
+Figure \ref{fig_ddgs} and \ref{fig_props} gives an example of creating a propagation queue for a variable based on the 
+dependency graph. It is possible to create different propagation queues from the example but we do not differentiate 
+between them as long as there is no backward going arc. In this case we have single variable $x_1$ that creates the 
+propagation queue $q_1 = [y_2,y_1,y_4,y_3,y_5]$. The idea is to send the changes from $x_1 $ to $y_2$,$y_1$, and $y_4$ 
+then go to $y_2$ update its value and send the change to $y_5$. Go to $y_1$, update and send change, go to $y_4$ etc.  
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{1.pdf} \caption{Example of subgraph in the DDG.}\label{fig_ddgs}
+% \end{center} 
+\end{figure}
+\begin{figure}[!b]
+\centering
+\includegraphics[width=\linewidth]{2.pdf} \caption{Example of a propagation queue created from figure
+\ref{fig_ddgs}.} \label{fig_props}
+% \end{center} 
+\end{figure}

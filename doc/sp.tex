@@ -70,7 +70,9 @@ solution, and a tabu list. The implementation is similar to \class{BestImproveme
 to the tabu list and aspiration criteria. The aspiration criteria is if a neighborhood operation is tabu but leads to a 
 solution better than one found so far, the tabu list is ignored and that neighborhood operation is done. The 
 tabu list has size $n$ and each variable has a integer corresponding to the last iteration that variable was 
-changed. \\ 
+changed. The tabu tenure is chosen to be based on the neighborhood size with a small degree of random. $tt = 
+random(0,10) + min(2\cdot neigborhood size, n/200)$. The neighborhood size might be very small when only considering 
+variables that are in a conflicting constraint, hence the multiplier. \\ 
 The algorithm for tabu search for a single flip neighborhood sketched by algorithm \ref{algo_TS}. \\ 
 \IncMargin{1em}
 \begin{algorithm}[H]

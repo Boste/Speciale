@@ -1,4 +1,4 @@
-\subsection{Parameters of Gecodes DFS Search Engine}
+\subsection{Parameters of Gecodes DFS Search Engine} \label{sub_gectest}
 The search engine was briefly described in section \ref{sec_gecode} and the \class{Multistop} object can be used to 
 stop the search for a solution. The search can be stopped based on three parameters, time, number of fails, and number 
 of nodes explored. The number of nodes explored is highly correlated to the instance size and will not be tested. All 
@@ -38,14 +38,14 @@ If the mdeol contains functional constraints we try to define one variable for e
 search space. The effect has been test on the instances where functional constraints are present. They have been tested 
 by algorithm 1, Tabu search with \class{ConflictOnlyNE} and tabu search with \class{FlipNeigborhood}, with a 
 total run time of 120 seconds. The seed that was used during the test was $42$. \\ 
-The resulting number of violations are shown in figure \ref{fig_oneway}. To see if defining variable 
+The resulting number of violations are shown in figure \ref{fig_onewaytest}. To see if defining variable 
 by oneway has an impact on the result it has been analysed with Wilcoxon signed-rank test. The p-value of the test is 
 0.8888 hence it is not statistical significant that one result was better than the other. \\ 
 The two cases where the number of violations are zero for both, the objective function is zero as well. 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\linewidth]{../R/oneway} \caption{Sorted by number of defined variables in 
-increasing order.}\label{fig_oneway}
+increasing order.}\label{fig_onewaytest}
 % \end{center} 
 \end{figure}\noindent
 \
@@ -70,7 +70,7 @@ from -206179 to 3810000 in different instances.
 \begin{equation}
  ratio = \frac{obj.val1}{obj.val1+obj.val2}
 \end{equation}
-$obj.val1$ is the objective value of the result without Gecode and $obj.val2$ is the result with gecode. This can only 
+The objective value $obj.val1$ is the result without Gecode and $obj.val2$ is the result with gecode. This can only 
 be done if the denominator is not zero and the values do not have opposite signs. In only two instances this was the 
 case and they have been left out in the visualization. The two instances are ``neos808444'' and ``neos-849702'' and 
 both have objective value zero. If the resulting ratio is 0.5 then the objective value is the same in the test. The 
@@ -82,30 +82,194 @@ algorithm 1, with and without Gecode}\label{fig_gecodelsobj}
 % \end{center} 
 \end{figure}\noindent
 The figure show they give an equal objective value most of the time. This could be because the local search 
-evened out the difference, hence the next text we leave out the local search. \medskip \\
+evened out the difference, hence the next test we leave out the local search. \medskip \\
 The test will be Gecode and first improvement versus random assignment and first improvement, in both cases until a 
 local optima has been found. In this case the run with Gecode proves to be significant better than without Gecode. 
 Wilcoxon test gives a p-value of 0.01894. The result of the test is shown in figure \ref{fig_gecodenols}. \\ 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\linewidth]{../R/gecodenols} \caption{Violation after 30 seconds with 
+\includegraphics[width=0.9\linewidth]{../R/gecodenols} \caption{Violation after 30 seconds with 
 algorithm 1, with and without Gecode}\label{fig_gecodenols}
 % \end{center} 
 \end{figure}\noindent
 Based on the last test we keep using Gecode for further test, though the time usage is of interest as well. The time 
-use is plotted in figure \ref{fig_gecodetime} and it shows Gecode uses more time which is also confirmed by a Wilcoxon 
-test with a p-value of 0.005979. 
+use is plotted in figure \ref{fig_gecodetime} and it shows Gecode sometimes uses more time. The Wilcoxon test gives a 
+p-value of 0.005979 so we can conclude the time use is significantly different. The red line indicate which of the runs 
+that uses the most time. 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\linewidth]{../R/gecodetime} \caption{Violation after 30 seconds with 
+\includegraphics[width=0.9\linewidth]{../R/gecodetime} \caption{Violation after 30 seconds with 
 algorithm 1, with and without Gecode}\label{fig_gecodetime}
 % \end{center} 
 \end{figure}\noindent
 \newpage
+\phantom{p. 2}
+\clearpage
 \subsection{Testing the Algorithms}
+Algorithm one is using tabu search only considering independent variables that are in a conflicting constraint as long 
+the the current solution is infeasible. When the solution is feasible it considers all independent variables if there 
+is less than 5000 otherwise it selects expected 5000 at random before choosing the best. \\ 
+Algorithm two is an iterated local search, first improvement and random walk. The third algorithm uses a minimum 
+conflict heuristic as long as the current solution is infeasible. When feasible it uses the same as algorithm one. \\ 
+They have been tested on all 64 instances and will primarily be compared based on the number of violations. The test 
+time used is 120 seconds and the random seed is 42. Based on the previous test Gecode is used with the parameters found 
+in subsection \ref{sub_gectest}. We try to define as many variables as possible as oneway constraints. \\ 
+To illustrate the data one instance has been left out to make the other data more visible. Instead the data for that 
+instance, ``netdiversion'', is shown in table \ref{tab_netd}. The data show that algorithm three is by far the best 
+one. The minimum conflict heuristic is very effective but after 77 seconds it does not improve the solution anymore. \\ 
+The result for the other instances is illustrated in figure \ref{fig_algs} with a logarithmic scale on the number of 
+violations. Even though algorithm three performed much better than the other on ``netdiversion'' it does perform much 
+worse than the others on ``neos-1337307''. From the graph it looks like algorithm two performs a bit worse than the 
+others. The algorithms has not been fine tuned but the parameters are based on a few initial test and what is found in 
+other literature. The parameters have significant impact on the performance of an algorithm. \\ 
+
+\begin{table}[b]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+            & objective    & violation & iterations \\ \hline
+Algorithm 1 & 5713042 & 3112      & 685        \\ \hline
+Algorithm 2 & 5712891 & 3470      & 1014       \\ \hline
+Algorithm 3 & 5714768 & 20        & 9773710    \\ \hline
+\end{tabular}
+\caption{Result on instance ``netdiversion''.}
+\label{tab_netd}
+\end{table}
 
 
+\begin{figure}[!h]
+\centerline{
+\includegraphics[width=1.5\linewidth]{../R/algs}} \caption{Violation after 30 seconds with 
+algorithm 1, with and without Gecode}\label{fig_algs}
+\end{figure}\noindent
+\newpage\noindent
+The algorithms have been ranked on each of the 64 instances in order to find the best algorithm overall. The result is 
+shown in figure \ref{fig_boxplot} and the ranks are shown in box plots. The value they have been ranked by is 
+$1.000.000\cdot violations + objective$ $value$ in order to make violation more important than the objective value. The 
+algorithms have been given the rank 1,2, or 3 for each instance. In case of a tie they are given the average, i.e. they 
+two are tied for second place they are given 2.5 each. \\
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{../R/algbox} \caption{Boxplots over the ranking of the 
+algorithms.}\label{fig_boxplot}
+% \end{center} 
+\end{figure}\noindent
+From the plot it looks like algorithm three is the best performing wining in at least 25 \% of the instances. Algorithm 
+two did perform worst in at least 50 \% of the instances. \\ 
+\subsection{Versus Gurobi}
+The time limit of the tests are 120 seconds with random seed 42 and algorithm three. Gurobi has the same time limit and 
+uses only one thread as this framework. \\ 
+The tables on the next three pages show the final result when comparing to Gurobi. In the columns are instance name, 
+number of variables, number of constraints, how many percentage Gecode solved for initial solution, and the time for 
+finding initial solution. The next columns are the time used for finding a feasible solution, the value of the feasible 
+solution, number of iterations with local search. The last four columns are final objective value, final number of 
+violation, Gurobis solution value and the optimal value. If a feasible solution is not found the cells are given NA. 
+If a optimal solution is not know, then the cell will contain NA. \\ 
+Gurobi found a feasible solution in 52 instances, algorithm three found a feasible solution in 33 instances. In three 
+instances algorithm three found a solution equal to Gurobi and in three instances it found a solution better than 
+Gurobi. \\
+Gurobi do better preprocessing than Gecode but Gurobi has been optimized towards MIPLIB instances. Based on the result 
+the framework can match Gurobi on a few instances though Gurobi is far superior. 
 
 
+\begin{sidewaystable}
+\centering
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|}
+\hline
+Instance    & \#Vars & \#Cons & Gecode Sol. & Init. Sol. Time & Feas.Time & Feas.Val & 
+\#Iter & Final Obj & Final Viol & Gurobi & Opt \\ \hline
+acc-tight4 & 1620 & 3285 & 0 & 0.010000 & NA & NA & 7883990 & 0 & 3 & 0 & 0\\ \hline 
+acc-tight5 & 1339 & 3052 & 0 & 0.010000 & NA & NA & 7986211 & 0 & 10 & 0 & 0\\ \hline 
+acc-tight6 & 1335 & 3047 & 0 & 0.010000 & NA & NA & 8008028 & 0 & 7 & 0 & 0\\ \hline 
+air04 & 8904 & 823 & 25 & 0.800000 & NA & NA & 207078 & 76428 & 120  & 56137 & 56137 \\ \hline 
+circ10-3 & 2700 & 42620 & 0 & 0.410000 & NA & NA & 243144 & 470 & 8 & NA & NA\\ \hline 
+cov1075 & 120 & 637 & 100 & 0.010000 & 0.010000 & 42 & 99555 & 21 & 0 & 20 & 20\\ \hline 
+datt256 & 262144 & 11077 & 0 & 24.550000 & NA & NA & 153905 & 258 & 101 & NA & NA\\ \hline 
+ex1010-pi & 25200 & 1468 & 100 & 1.720000 & 1.720000 & 742 & 8189 & 449 & 0 & 244 & NA\\ \hline 
+ex10 & 17680 & 69608 & 0 & 5.440000 & NA & NA & 39155 & 99 & 63 & 100 & 100\\ \hline 
+ex9 & 10404 & 40962 & 0 & 1.870000 & NA & NA & 75425 & 81 & 42 & 81 & 81\\ \hline 
+f2000 & 4000 & 10500 & 50 & 0.110000 & NA & NA & 10475255 & 1971 & 50 & NA & NA\\ \hline 
+go19 & 441 & 441 & 100 & 0.000000 & 0.000000 & 147 & 527525 & 86 & 0 & 84 & 84\\ \hline 
+hanoi5 & 3862 & 16399 & 50 & 0.120000 & NA & NA & 11871831 & 1934 & 20 & NA & 1931\\ \hline 
+iis-100-0-cov & 100 & 3831 & 100 & 0.020000 & 0.020000 & 59 & 33278 & 29 & 0 & 29 & 29\\ \hline 
+iis-bupa-cov & 345 & 4803 & 100 & 0.030000 & 0.030000 & 129 & 16437 & 38 & 0 & 36 & 36\\ \hline 
+iis-pima-cov & 768 & 7201 & 100 & 0.070000 & 0.070000 & 214 & 6806 & 35 & 0 & 33 & 33\\ \hline 
+m100n500k4r1 & 500 & 100 & 100 & 0.000000 & 0.000000 & 0 & 449501 & -23 & 0 & -24 & -25\\ \hline 
+methanosarcina & 7930 & 14604 & 100 & 0.150000 & 0.150000 & 5046 & 9835 & 5046 & 0 & 2916 & NA\\ \hline 
+macrophage & 2260 & 3164 & 100 & 0.030000 & 0.030000 & 609 & 35803 & 508 & 0 & 374 & 374\\ \hline 
+mspp16 & 29280 & 561657 & 50 & 51.390000 & 145.52 & 451 & 0 & 451 & 0 & 418 & 363\\ \hline 
+n3div36 & 22120 & 4484 & 100 & 4.540000 & 4.540000 & 480400 & 6160 & 480400 & 0 & 132800 & 130800\\ \hline 
+n3seq24 & 119856 & 6044 & 0 & 34.360000 & 41.04 & 841200 & 1465 & 841200 & 0 & 52200 & 52200\\ \hline 
 
+
+\end{tabular}
+\caption{Table of first 22 instances.}
+\label{tab1}
+\end{sidewaystable}
+\begin{sidewaystable}
+\centering
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|}
+\hline
+Instance    & \#Vars & \#Cons & Gecode Sol. & Init. Sol. Time & Feas.Time & Feas.Val & 
+\#Iter & Final Obj & Final Viol & Gurobi & Opt \\ \hline
+neos-1109824 & 1520 & 28979 & 0 & 0.180000 & NA & NA & 70641 & 808 & 6 & 378 & 378\\ \hline 
+neos-1337307 & 2840 & 5687 & 50 & 0.070000 & NA & NA & 694423 & -201273 & 427 & 18 & -202319\\ \hline 
+neos-1440225 & 1285 & 330 & 0 & 0.020000 & NA & NA & 3484127 & 36 & 6 & 36 & 36\\ \hline 
+neos-1616732 & 200 & 1999 & 100 & 0.000000 & 0.000000 & 176 & 277059 & 159 & 0 & 161 & 159 \\ \hline 
+neos-1620770 & 792 & 9296 & 50 & 0.030000 & NA & NA & 11363096 & 18 & 1 & 9 & 9\\ \hline 
+neos18 & 3312 & 11402 & 100 & 0.040000 & 0.040000 & 22 & 10196 & 22 & 0 & 16 & 16\\ \hline 
+neos-631710 & 167056 & 169576 & 0 & 21.280000 & 24.03 & 555 & 9978 & 555  & 0 & 203 & 203  \\ \hline 
+neos-777800 & 6400 & 479 & 50 & 0.230000 & 4.05 & -80 & 14719 & -80 & 0  & -80 & -80\\ \hline 
+neos808444 & 19846 & 18329 & 50 & 1.490000 & NA & NA & 3933914 & 0 & 43 & 0 & 0\\ \hline 
+neos-849702 & 1737 & 1041 & 25 & 0.030000 & NA & NA & 987431 & 0 & 17 & NA & 0\\ \hline 
+neos-941313 & 167910 & 13189 & 0 & 29.270000 & NA & NA & 5668704 & 19010 & 10 & 9361 & 9361\\ \hline 
+netdiversion & 129180 & 119589 & 0 & 23.980000 & NA & NA & 9773710 & 5714768 & 20 & 400 & 242\\ \hline 
+ns1663818 & 124626 & 172017 & 0 & 44.190000 & NA & NA & 0 & 0 & 165 & NA & 86\\ \hline 
+ns1688347 & 2685 & 4191 & 25 & 0.100000 & NA & NA & 111441 & 35 & 6 & 270 & 27\\ \hline 
+ns1696083 & 7982 & 11063 & 0 & 0.610000 & NA & NA & 61680 & 53 & 4 & NA & 45\\ \hline 
+ns1853823 & 213440 & 224526 & 100 & 3.270000 & 3.270000 & 504000 & 4041 & 504000 & 0 & 467000 & NA\\ \hline 
+ns894236 & 9666 & 8218 & 50 & 0.090000 & NA & NA & 1415963 & 18 & 35 & NA & NA\\ \hline 
+ns894244 & 21856 & 12129 & 25 & 0.860000 & NA & NA & 983731 & 16 & 50 & NA & 15  \\ \hline 
+ns894786 & 27278 & 16794 & 50 & 0.380000 & NA & NA & 1390731 & 14 & 29 & NA & NA\\ \hline 
+ns894788 & 3463 & 2279 & 50 & 0.030000 & NA & NA & 1556360 & 7 & 16 & NA & 7\\ \hline 
+ns903616 & 21582 & 18052 & 25 & 0.900000 & NA & NA & 783520 & 22 & 41 & NA & NA\\ \hline 
+\end{tabular}
+\caption{Table of next 21 instances.}
+\label{tab3}
+\end{sidewaystable}
+\begin{sidewaystable}
+\centering
+
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|}
+\hline
+Instance    & \#Vars & \#Cons & Gecode Sol. & Init. Sol. Time & Feas.Time & Feas.Val & 
+\#Iter & Final Obj & Final Viol & Gurobi & Opt \\ \hline
+opm2-z10-s2 & 6250 & 160633 & 100 & 0.750000 & 0.750000 & 0 & 1040 & -9297 & 0 & -24373 & -33826\\ \hline 
+opm2-z11-s8 & 8019 & 223082 & 100 & 0.900000 & 0.900000 & 0 & 1097 & -10921 & 0 & -31311 & -43485\\ \hline 
+opm2-z12-s14 & 10800 & 319508 & 100 & 1.520000 & 1.520000 & 0 & 1088 & -14557 & 0 & -43598 & -64291\\ \hline 
+opm2-z12-s7 & 10800 & 319508 & 100 & 1.500000 & 1.500000 & 0 & 1408 & -15398 & 0 & -43139 & -65514\\ \hline 
+opm2-z7-s2 & 2023 & 31798 & 100 & 0.110000 & 0.110000 & 0 & 4144 & -3695 & 0 & -10280 & -10280\\ \hline 
+pb-simp-no & 23848 & 1451912 & 100 & 5.300000 & 5.300000 & 97 & 523 & 97 & 0 & 140 & NA\\ \hline 
+protfold & 1835 & 2112 & 25 & 0.040000 & NA & NA & 880685 & -14 & 3 & -19 & -31\\ \hline 
+p6b & 462 & 5852 & 100 & 0.010000 & 0.010000 & 0 & 79578 & -59 & 0 & -63 & -63\\ \hline 
+queens-30 & 900 & 960 & 100 & 0.090000 & 0.090000 & 0 & 3124 & -38 & 0 & -37 & -40\\ \hline 
+ramos3 & 2187 & 2187 & 100 & 0.030000 & 0.030000 & 471 & 22563 & 258 & 0 & 255 & NA\\ \hline 
+seymour & 1372 & 4944 & 100 & 0.030000 & 0.030000 & 547 & 7780 & 446 & 0 & 424 & 423\\ \hline 
+sts405 & 405 & 27270 & 100 & 0.160000 & 0.160000 & 355 & 1786 & 347 & 0 & 347 & NA\\ \hline 
+sts729 & 729 & 88452 & 100 & 0.490000 & 0.490000 & 661 & 253 & 652 & 0 & 651 & NA\\ \hline 
+tanglegram1 & 34759 & 68342 & 100 & 2.320000 & 2.320000 & 7813 & 4899 & 7516 & 0 & 5182 & 5182\\ \hline 
+tanglegram2 & 4714 & 8980 & 100 & 0.080000 & 0.080000 & 2140 & 7175 & 2009 & 0 & 443 & 443\\ \hline 
+toll-like & 2883 & 4408 & 100 & 0.030000 & 0.030000 & 1155 & 57839 & 931 & 0 & 627 & 610  \\ \hline 
+t1717 & 73885 & 551 & 0 & 30.290000 & NA & NA & 96904 & 416368 & 25 & 238901 & NA \\ \hline 
+t1722 & 36630 & 338 & 50 & 7.540000 & NA & NA & 81574 & 315879 & 33 & 136540 & NA\\ \hline 
+vpphard2 & 199999 & 198450 & 0 & 2.990000 & NA & NA & 189071 & 752 & 28 & 81 & 81\\ \hline 
+vpphard & 51471 & 47280 & 0 & 1.380000 & NA & NA & 294746 & 328 & 5 & 9 & 5\\ \hline 
+wnq-n100-mw & 10000 & 656900 & 50 & 4.370000 & 10.18 & 5987 & 781 & 2411 & 0 & 284 & 259 \\ \hline
+\end{tabular}
+\caption{Table of last 21 instances.}
+\label{tab3}
+\end{sidewaystable}
+
+
+\newpage
 

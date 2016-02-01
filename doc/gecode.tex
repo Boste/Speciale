@@ -1,23 +1,21 @@
 Gecode (GEneric COnstraint Development Environment) is a constraint programming solver implemented in C++ and 
-offer a wide range of modeling features. Gecode offers more than 70 constraints from the ``Global Constraint Catalog'' 
-\cite{url_globalCons} that can be applied to boolean, integer, set and float variables. \boste{Muligvis Gecode 
-architecture billede} \\ 
+offers a wide range of modeling features. Gecode offers more than 70 constraints from the ``Global Constraint Catalog'' 
+\cite{url_globalCons} that can be applied to boolean, integer, set and float variables. \\ 
 A model created for Gecode is created by inheriting the \class{Space} class. \class{Space} is a class in Gecode that 
 a user can create the model in. To create variables or post constraints the user need to specify the \class{Space} they 
 should be created in. When variables are created in a \class{Space}, views are created and associated with the 
-variables. Views are not used in modeling but are used to know when propagation should be made on a constraint. \\ 
+variables. Views are not used in modeling, but are used to know when propagation should be made on a constraint. \\ 
 When posting constraints in a \class{Space}, Gecode creates propagators and these propagators can subscribe to the views 
-of the variables in the constraint. When variables changes domain the corresponding view tell its subscribes that the 
+of the variables in the constraint. When variables change domain the corresponding view tells its subscriber that the 
 variables domain has changed. For some constraint the user has the option to choose the propagator based on a 
 consistency level. The cost of different consistency level varies from linear $O(n)$ in the number of variables $n$ to 
-exponential $O(D(x)^n$. \cite[p.57]{MPG:M}. \\
-To solve a problem Gecode needs guidance when searching and that is done by a \method{branch} method. Once a problem 
+exponential $O(D(x)^n)$. \cite[p.57]{MPG:M}. \\
+To solve a problem Gecode needs guidance when searching and that is done by a branching method. Once a problem 
 has been formulated, the user must define on which variables and how branching is done. Just like variables and 
-constraints are 
-posted in a \class{Space} the branch order is also posted on the \class{Space}. The choices in branching for a set of 
-variables are 
-which of those variables to branch on first and what values to branch on. One can post several branch methods and they 
-are treated in the order they are posted. Once all variables have been branched in one \method{branch} method it 
+constraints are posted in a \class{Space} the branch order is also posted on the \class{Space}. The choices in branching 
+for a set of variables are which variables to branch on first and which values to branch on. One can post several branch 
+methods and they 
+are treated in the order they are posted. Once all variables have been branched in one \method{branch} method, it 
 continues with the next \method{branch} or restarts.  If no branch strategy is chosen for a variable then branching is 
 not done on that variable. \\ 
 To start the search a Gecode search engine must be chosen and Gecode offers two, a depth first search engine and a 
@@ -25,9 +23,7 @@ branch and bound engine. Search engines have an option class in which several op
 \\ 
 When searching for a solution in a \class{Space}, the search can be illustrated as a binary tree where the edges are 
 branch choices for a variable and the vertices are the \class{Space} created because of those choices. If it reaches a 
-point 
-where no feasible solution is possible it stops branching from that vertex and the \class{Space} is said to be failed. 
-Gecode creates clones of \class{Space}s while searching for a solution that are used for backtracking. When Gecode 
-reaches a failed \class{Space}, instead of starting from scratch and recompute all way to down to the previous vertex, 
-it 
-uses the closest clone to backtrack to that \class{Space}. \\
+point where no feasible solution is possible it stops branching from that vertex and the \class{Space} is said to be 
+failed. Gecode creates clones of \class{Space}s while searching for a solution that are used for backtracking. When 
+Gecode reaches a failed \class{Space}, instead of starting from scratch and recompute all the way to down to the 
+previous vertex, it uses the closest clone to backtrack to that \class{Space}. \\

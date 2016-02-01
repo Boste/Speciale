@@ -1,11 +1,15 @@
-\boste{Short description of problems that should be investigated more} \\
-\boste{preprocessing :} preprocessing of Cplex and gurobi with Gecode \\ 
-\boste{Cycles :} Finding all (elementary) cycles in the dependency digraph and/or finding the smallest set of vertices 
-to remove such that the graph is DAG. \\ 
-\boste{Integer variables :} How to treat integer variables when they cannot be defined by oneway constraints. \\ 
-\boste{Propagation queue :} Finding a datastructure better suited for propagation queues than red-black trees (C++ 
-set). \\ 
-\boste{Mixed neighborhood :} Find a way to treat both integer and binary variables in local search. \\
-\boste{Make ``true'' DFS when creating propagation queues, no revisit of vertices} \\
-\boste{Change Constraints to invariants during local search to measure the violation} \\
-\boste{option class for user to specify stop limits, branch other things} \\  
+There is many things that can be developed to this framework. Find a way to incorporate Gecode such that is is 
+easier to create new constraint. Currently it can only solve instances with integer coefficients because Gecode either 
+takes all arguments as integer (and integer variables) or all arguments as float (and float variables). It has not been 
+possible to scale the coefficient to integer since it quickly leads to integer overflow. \\ 
+It can be extended to handle integer variables as well as binary. This could lead to a wide range of constraints to 
+implement and increase the usability of Gecode. To handle integer variable new neighborhoods must be implemented and 
+one should think about how to handle models with both binary and integer variables. \\
+The \class{Neigborhood} classes is mixed with heuristics and it would be good to separate those, both conceptually and 
+for effectiveness in practice. \\
+There is currently not much a user can do to influence how the problem should be solved other than a priority for the 
+constraints. It could be extended with a priority for the variables as well such that variables depend on other got a 
+lower priority. In addition an option class could be implemented giving the user access to change some of the 
+parameters in the framework. \\ 
+Last but not least the parameters of the local search should be test more throughly which is expected to increase the 
+performance of this solver.  

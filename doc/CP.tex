@@ -1,9 +1,8 @@
-Constraint programming involves defining variables and constraints like ILP but often a wide range of constraints can 
-be used. Constraint programming is declarative programming that is the program describe the desired result 
-and not the commands or steps to reach it, just like ILP. Constraint programming uses some interface either a 
-programming language or a framework that have procedures implement to solve the problem according to the constraints 
-posted. The language or framework may provides global constraint that can be used to formulate the problem. An example 
-of a global constraint is the {\sffamily{alldifferent(\textbf{x})}} constraint that specify the variables \textbf{x} 
+Constraint programming involves defining variables and constraints like ILP, but often a wide range of constraints can 
+be used. Constraint programming uses either a programming language or a framework that have procedures implemented to 
+solve the problem according to the constraints posted. The language or framework may provide global constraints that 
+can be used to formulate the problem. An example of a global constraint is the {\sffamily{alldifferent(\textbf{x})}} 
+constraint that specifies the variables \textbf{x} 
 must have pairwise distinct values.  \\ 
 Two important aspects of solving a CSP are inference and search. \emph{Inference} is adding constraints to the CSP that 
 does not eliminate any feasible solution but might make it easier to solve the CSP \cite[p.301]{CPbog}. 
@@ -17,4 +16,3 @@ variables to $\{0,1,2\}$. If we set $x_1 =1$ we can again do propagation and red
 Search strategies explores possible assignments of variables and an exhaustive search would be a combination of all 
 possible assignments of values to the variables. When combining propagation and search strategies the search space can 
 be examined exhaustively and large subspaces can be pruned by propagation. \\ 
-COP

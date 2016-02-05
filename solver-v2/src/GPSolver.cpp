@@ -223,28 +223,28 @@ void GPSolver::initialSolution(int TimeForGecode) {
     }
     std::cout << "This should be initial value " << initialValue << std::endl;
 
-    unsigned relax = storage->out->relax;
-    if (relax == 0) {
-        storage->out->addToTable1(std::to_string(100));
-        storage->out->feasibleVal = storage->getEvaluationInvariantNr(0)->getCurrentValue();
-        storage->out->relaxp = 100;
-    } else if (relax == 1) {
-        storage->out->addToTable1(std::to_string(50));
-        storage->out->relaxp = 50;
-    } else if (relax == 2) {
-        storage->out->addToTable1(std::to_string(25));
-        storage->out->relaxp = 25;
-    } else if (relax == 3) {
-        storage->out->addToTable1(std::to_string(0));
-        storage->out->relaxp = 0;
-    } else {
-
-    }
-    storage->out->addToTable1(std::to_string(storage->out->solTime));
-    if (storage->out->feasible) {
-        storage->out->addToTable1(std::to_string(storage->out->feasibleTime));
-    }
-    std::cout << storage->out->getToTable1() << std::endl;
+//    unsigned relax = storage->out->relax;
+//    if (relax == 0) {
+//        storage->out->addToTable1(std::to_string(100));
+//        storage->out->feasibleVal = storage->getEvaluationInvariantNr(0)->getCurrentValue();
+//        storage->out->relaxp = 100;
+//    } else if (relax == 1) {
+//        storage->out->addToTable1(std::to_string(50));
+//        storage->out->relaxp = 50;
+//    } else if (relax == 2) {
+//        storage->out->addToTable1(std::to_string(25));
+//        storage->out->relaxp = 25;
+//    } else if (relax == 3) {
+//        storage->out->addToTable1(std::to_string(0));
+//        storage->out->relaxp = 0;
+//    } else {
+//
+//    }
+//    storage->out->addToTable1(std::to_string(storage->out->solTime));
+//    if (storage->out->feasible) {
+//        storage->out->addToTable1(std::to_string(storage->out->feasibleTime));
+//    }
+//    std::cout << storage->out->getToTable1() << std::endl;
 
     //        st = std::make_shared<State>(model);
 
@@ -339,9 +339,9 @@ bool GPSolver::relax(int TimeForGecode) {
             std::cout << "type should be LINEAR and assert should prevent this. Then type is set to " << cons->getType() << std::endl;
         }
     }
-    storage->out->relax = 1;
-
-    storage->out->addToGecodePrint("1");
+//    storage->out->relax = 1;
+//
+//    storage->out->addToGecodePrint("1");
     bool solution = GS->findSolution(TimeForGecode, false);
     //    std::vector<constraint> ;
     unsigned numberOfTimesRelaxed = 1;
@@ -368,9 +368,9 @@ bool GPSolver::relax(int TimeForGecode) {
         //        }
         std::cout << "Number of constriants " << keepOrder.size() << std::endl;
         furtherRelax(keepOrder);
-        storage->out->relax = 2;
+//        storage->out->relax = 2;
 
-        storage->out->addToGecodePrint("2");
+//        storage->out->addToGecodePrint("2");
 
         solution = GS->findSolution(TimeForGecode, false);
         //        keepOrder = newKeep;
@@ -384,10 +384,10 @@ bool GPSolver::relax(int TimeForGecode) {
         }
     }
     if (solution) {
-        storage->setFeasibleFunctionalConstraints(feasibleFunc);
+//        storage->setFeasibleFunctionalConstraints(feasibleFunc);
     } else {
-        storage->out->relax = 3;
-        storage->out->addToGecodePrint("3");
+//        storage->out->relax = 3;
+//        storage->out->addToGecodePrint("3");
 
         GS->randomInitialize();
 
@@ -567,6 +567,6 @@ void GPSolver::printVariableValues() {
     //        std::cout << std::endl;
 }
 
-void GPSolver::setOutput(Output* out) {
-    storage->out = out;
-}
+//void GPSolver::setOutput(Output* out) {
+//    storage->out = out;
+//}

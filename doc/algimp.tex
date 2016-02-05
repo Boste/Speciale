@@ -2,7 +2,7 @@ When a model better suited for local search has been made, the remaining time is
 algorithms check if the timelimit is reach before each iteration of a search procedure. The best solution found while 
 searching is saved in a \class{State} class such that the search can continue but always report the best solution when 
 the time limit is reached. \\ 
-Three algorithms has been made from combining \class{Neighborhood} classes and search procedures that will be used to 
+Three algorithms have been made from combining \class{Neighborhood} classes and search procedures that will be used to 
 test efficiency of the framework. The first algorithm uses two \class{TabuSearch} with different 
 \class{Neighborhood} classes. When the solution is infeasible \class{TabuSearch} is combined with \class{ConflictOnlyNE} 
 to only look at variables that can reduce the number of violations. When the current solution is feasible 

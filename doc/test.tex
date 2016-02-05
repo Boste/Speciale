@@ -1,11 +1,16 @@
+There are many parameters that can be tested in this framework and only some of them has been selected. The test are 
+shown in chronological order, meaning the results of one test is when creating the next test. To test the difference 
+between results a Wilcoxon signed-rank test is used, which available in R. The test have been done on a subset of the 
+instances from MIPLIB2010. The test is done on Horseshoe9 and the hardware specification can been seen here 
+\cite{horse}.
 \subsection{Parameters of Gecodes DFS Search Engine} \label{sub_gectest}
-The search engine was briefly described in section \ref{sec_gecode} and the \class{Multistop} object can be used to 
+The search engine was described in section \ref{sec_gecode} and the \class{Multistop} object can be used to 
 stop the search for a solution. The search can be stopped based on three parameters, time, number of fails, and number 
 of nodes explored. The number of nodes explored is highly correlated to the instance size and will not be tested. All 
-the instances has been tested with a time limit of 100 seconds and random seed 60. This is done to get an indication 
-of the time Gecode use and the number of failed spaces before Gecode finds a solution, if any. \\ 
-The goal of the test is to find a parameter for time and number of fails such that the search can be stopped early if 
-it is likely it will not find a solution. The worst case is Gecode never finds a solution hence the time used for 
+the instances have been tested with a time limit of 100 seconds and random seed 60. This is done to get an indication 
+of the time Gecode uses and the number of failed spaces before Gecode finds a solution, if any. \\ 
+The goals of the test are to find a parameter for time and number of fails, such that the search can be stopped early 
+if it is likely it will not find a solution. The worst case is Gecode never finds a solution hence the time used for 
 searching has not be useful. \\
 \begin{figure}[!h]
 \centering
@@ -23,10 +28,11 @@ scale.}\label{fig_gecodefail}
 % \end{center} 
 \end{figure}\noindent
 The number of failed spaces can be seen in figure \ref{fig_gecodefail} on the page after the time test. \\ 
-In almost all of the instances where a solution was found, zero spaces where failed. The only exception is 
-``neos-1440225'' that reported 19118 spaces to be failed. One of the instances where solution was not found reports 
-that zero spaces were failed but otherwise they all report some failed spaces. Based on this test the number of failed 
-spaces tolerated is set to 1. This will exclude one initial solution but save time on a lot of the others. \\ 
+In almost all of the instances in which a solution was found, there were zero spaces where failed. The only exception 
+is ``neos-1440225'' that reported 19118 spaces to be failed. One of the instances where solution was not found reports 
+that zero spaces were failed but otherwise they all report a high amount of failed spaces. Based on this test the 
+number of failed spaces tolerated is set to 1. This will exclude one initial solution but save time on a lot of the 
+others. \\ 
 There are other parameters for Gecode that could have been tested is the different ways for Gecode to branch. \\ 
 \phantom{p. 1}
 \clearpage
@@ -34,13 +40,13 @@ There are other parameters for Gecode that could have been tested is the differe
 %%\phantom{p. 2}
 %\clearpage
 \subsection{Defining variables by Oneway Constraints}
-If the mdeol contains functional constraints we try to define one variable for each functional constraint to reduce the 
-search space. The effect has been test on the instances where functional constraints are present. They have been tested 
-by algorithm 1, Tabu search with \class{ConflictOnlyNE} and tabu search with \class{FlipNeigborhood}, with a 
+If the model contains functional constraints we try to define one variable for each functional constraint to reduce 
+the search space. The effect has been test on the instances where functional constraints are present. They have been 
+tested by algorithm 1, Tabu search with \class{ConflictOnlyNE} and tabu search with \class{FlipNeigborhood}, with a 
 total run time of 120 seconds. The seed that was used during the test was $42$. \\ 
-The resulting number of violations are shown in figure \ref{fig_onewaytest}. To see if defining variable 
-by oneway has an impact on the result it has been analysed with Wilcoxon signed-rank test. The p-value of the test is 
-0.8888 hence it is not statistical significant that one result was better than the other. \\ 
+The resulting number of violations are shown in figure \ref{fig_onewaytest}. To see if defining variables 
+by oneway constraints have an impact on the result it has been analyzed with Wilcoxon signed-rank test. The p-value of 
+the test is 0.8888 hence it is not statistical significant that one result was better than the other. \\ 
 The two cases where the number of violations are zero for both, the objective function is zero as well. 
 \begin{figure}[!h]
 \centering
@@ -77,8 +83,8 @@ both have objective value zero. If the resulting ratio is 0.5 then the objective
 result is shown in figure \ref{fig_gecodelsobj} and a Wilcoxon test gives a p-value of 0.8379. 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\linewidth]{../R/gecodelsobj} \caption{Violation after 30 seconds with 
-algorithm 1, with and without Gecode}\label{fig_gecodelsobj}
+\includegraphics[width=\linewidth]{../R/gecodelsobj} \caption{Ratio of objective value after 30 seconds with 
+algorithm 1.}\label{fig_gecodelsobj}
 % \end{center} 
 \end{figure}\noindent
 The figure show they give an equal objective value most of the time. This could be because the local search 
@@ -88,18 +94,18 @@ local optima has been found. In this case the run with Gecode proves to be signi
 Wilcoxon test gives a p-value of 0.01894. The result of the test is shown in figure \ref{fig_gecodenols}. \\ 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.9\linewidth]{../R/gecodenols} \caption{Violation after 30 seconds with 
-algorithm 1, with and without Gecode}\label{fig_gecodenols}
+\includegraphics[width=0.9\linewidth]{../R/gecodenols} \caption{Violation after initial solution and first improvement, 
+with and without Gecode.}\label{fig_gecodenols}
 % \end{center} 
 \end{figure}\noindent
 Based on the last test we keep using Gecode for further test, though the time usage is of interest as well. The time 
-use is plotted in figure \ref{fig_gecodetime} and it shows Gecode sometimes uses more time. The Wilcoxon test gives a 
+use is plotted in figure \ref{fig_gecodetime2} and it shows Gecode sometimes uses more time. The Wilcoxon test gives a 
 p-value of 0.005979 so we can conclude the time use is significantly different. The red line indicate which of the runs 
 that uses the most time. 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.9\linewidth]{../R/gecodetime} \caption{Violation after 30 seconds with 
-algorithm 1, with and without Gecode}\label{fig_gecodetime}
+\includegraphics[width=0.9\linewidth]{../R/gecodetime} \caption{Time used before starting local 
+search algorithms.}\label{fig_gecodetime2}
 % \end{center} 
 \end{figure}\noindent
 \newpage
@@ -107,10 +113,12 @@ algorithm 1, with and without Gecode}\label{fig_gecodetime}
 \clearpage
 \subsection{Testing the Algorithms}
 Algorithm one is using tabu search only considering independent variables that are in a conflicting constraint as long 
-the the current solution is infeasible. When the solution is feasible it considers all independent variables if there 
-is less than 5000 otherwise it selects expected 5000 at random before choosing the best. \\ 
+the the current solution is infeasible. When the solution is feasible if there 
+is less than 5000 it considers all independent variables, otherwise it selects expected 5000 at random before choosing 
+the best. \\ 
 Algorithm two is an iterated local search, first improvement and random walk. The third algorithm uses a minimum 
-conflict heuristic as long as the current solution is infeasible. When feasible it uses the same as algorithm one. \\ 
+conflict heuristic as long as the current solution is infeasible. When feasible it uses the same tabu search as 
+algorithm one. \\ 
 They have been tested on all 64 instances and will primarily be compared based on the number of violations. The test 
 time used is 120 seconds and the random seed is 42. Based on the previous test Gecode is used with the parameters found 
 in subsection \ref{sub_gectest}. We try to define as many variables as possible as oneway constraints. \\ 
@@ -139,15 +147,15 @@ Algorithm 3 & 5714768 & 20        & 9773710    \\ \hline
 
 \begin{figure}[!h]
 \centerline{
-\includegraphics[width=1.5\linewidth]{../R/algs}} \caption{Violation after 30 seconds with 
-algorithm 1, with and without Gecode}\label{fig_algs}
+\includegraphics[width=1.5\linewidth]{../R/algs}} \caption{Violation after 120 seconds with the different 
+algorithms.}\label{fig_algs}
 \end{figure}\noindent
 \newpage\noindent
 The algorithms have been ranked on each of the 64 instances in order to find the best algorithm overall. The result is 
 shown in figure \ref{fig_boxplot} and the ranks are shown in box plots. The value they have been ranked by is 
-$1.000.000\cdot violations + objective$ $value$ in order to make violation more important than the objective value. The 
-algorithms have been given the rank 1,2, or 3 for each instance. In case of a tie they are given the average, i.e. they 
-two are tied for second place they are given 2.5 each. \\
+$1.000.000\cdot violations + objective$ $value$ to make violation more important than the objective value. The 
+algorithms have been given the rank 1,2, or 3 for each instance. In case of a tie they are given the average. i.e. If 
+two algorithms are tied for second place they are given rank 2.5 each. \\
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\linewidth]{../R/algbox} \caption{Boxplots over the ranking of the 
@@ -157,8 +165,8 @@ algorithms.}\label{fig_boxplot}
 From the plot it looks like algorithm three is the best performing wining in at least 25 \% of the instances. Algorithm 
 two did perform worst in at least 50 \% of the instances. \\ 
 \subsection{Versus Gurobi}
-The time limit of the tests are 120 seconds with random seed 42 and algorithm three. Gurobi has the same time limit and 
-uses only one thread as this framework. \\ 
+The time limit of the tests are set to 120 seconds with random seed 42 and algorithm three is used. Gurobi has the same 
+time limit and uses only one thread, as this framework do. \\ 
 The tables on the next three pages show the final result when comparing to Gurobi. In the columns are instance name, 
 number of variables, number of constraints, how many percentage Gecode solved for initial solution, and the time for 
 finding initial solution. The next columns are the time used for finding a feasible solution, the value of the feasible 
@@ -169,7 +177,8 @@ Gurobi found a feasible solution in 52 instances, algorithm three found a feasib
 instances algorithm three found a solution equal to Gurobi and in three instances it found a solution better than 
 Gurobi. \\
 Gurobi do better preprocessing than Gecode but Gurobi has been optimized towards MIPLIB instances. Based on the result 
-the framework can match Gurobi on a few instances though Gurobi is far superior. 
+the framework can match Gurobi on a few instances though Gurobi is far superior. \\ 
+The source code is available at \url{https://github.com/Boste/Speciale.git}
 
 
 \begin{sidewaystable}

@@ -2,21 +2,20 @@
 
 % Figur om opbygning af comet som i bogen
 Comet is an object oriented programming language that uses the modeling language of constraint programming and uses a 
-general purpose local search solver. Comet is now an abandoned project but the architecture used is still of interest. 
-The core of framework are the variables and invariants.
+general purpose local search solver. Comet is now an abandoned project, but the architecture used is still of interest. 
+The core of the framework are the variables and invariants.
 \medskip \\
 One layer above the invariants are the differentiable objects that can use the invariants and variables. 
-Both constraints and objective are implemented as differentiable objects. They are called differentiable 
+Both constraints and objectives are implemented as differentiable objects. They are called differentiable 
 because it is possible to compute how the change of a variable value will affect the differentiable object's values. 
-All constraints are implemented using the same interface, that means that all constraint have some methods in common. 
-This is especially useful when combining multiple constraints in a constraint system, that also implements the 
-constraint interface. The constraints can be combined in a constraint system that then uses the method from the 
-individual constraints to calculated its own methods. Just like the \interface{constraint} interface there exist a 
-\interface{objective} interface. \medskip \\ 
-The next layer is where the user models their problem and use the objects mentioned above. Several search method are 
-implemented that can be used. The benefit of this architecture is the user can focus on modeling the problem 
+All constraints are implemented using the same interface, which means that all constraint have some methods in common. 
+This is especially useful when combining multiple constraints in a constraint system. The constraints can be combined in 
+a constraint system that then uses the method from the individual constraints to calculated its own methods. Just like 
+the \interface{constraint} interface there exists an \interface{objective} interface. \medskip \\ 
+The next layer is where the user models their problem and use the objects mentioned above. Several search procedures 
+are implemented. The benefit of this architecture is that the user can focus on modeling the problem 
 efficiently on a high level and thereby avoid small implementation mistakes. Using constraint programming inspired 
-structure gives the benefit of brief but very descriptive code. \\ 
+structure gives the benefit of brief, but very descriptive code. \\ 
 The idea of structuring the constraint and invariant as interface is also used in this framework. 
 
 

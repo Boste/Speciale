@@ -1,16 +1,16 @@
 \class{Neighborhood} classes do not implement any strategy of which neighborhood operation to choose. 
-Search procedures are using a neighborhood and define this strategy. The classes implemented 
+Search procedures are using a \class{Neighborhood} and define this strategy. The classes implemented 
 are \class{FirstImprovement}, \class{BestImprovement}, \class{TabuSearch}, and \class{RandomWalk}. \\
 \class{FirstImprovement}, \class{BestImprovement}, and \class{RandomWalk} are implementation of local search 
 algorithms of almost same name and can be used together with any of the \class{Neighborhood} classes. 
 \class{TabuSearch} is an implementation of the metaheuristic tabu search using a tabu tenure, and 
 an aspiration criteria. \medskip \\
-The class \class{BestImprovement} looks at each \class{Move} a \class{Neighborhood} class $NE$ gives and finds the 
-best \class{Move}. The best \class{Move} is determined from their delta vector after the method 
-\method{calculateDelta()} of the \class{Neighborhood} is called on each \class{Move} returned by the neighborhood 
-until \textbf{NULL} is returned. \class{BestImprovement} returns a boolean that tells if the current solution was 
-improved. A boolean can be given to \class{BestImprovement} that indicate if it should commit a non improving 
-\class{Move}. How each iteration is done is describe by algorithm \ref{algo_BI} \\ 
+The class \class{BestImprovement} looks at each \class{Move} a \class{Neighborhood} class $NE$ gives and finds uses the 
+\class{Move} that leads to the best solution. The best \class{Move} is determined from their delta vector after the 
+method \method{calculateDelta()} of the \class{Neighborhood} is called on each \class{Move} returned by the 
+neighborhood until \textbf{NULL} is returned. \class{BestImprovement} returns a flag that tells if the current 
+solution was improved. A flag can be given to \class{BestImprovement} that indicate if it should commit a non 
+improving \class{Move}. How each iteration is done is describe by algorithm \ref{algo_BI} \\ 
 \IncMargin{1em}
 \begin{algorithm}[H]
 
@@ -34,7 +34,7 @@ improved. A boolean can be given to \class{BestImprovement} that indicate if it 
 %\tcp{Find the best variable to define}
 \class{Move} bestMove = NE.next() \;
 \class{Move} move = NE.next() \;
-\While{move != NULL}{
+\While{move $\neq$ NULL}{
   \bool allowed = NE.calculateDelta(move) \;
   \If{!allowed}{
     move = NE.next() \;
@@ -56,11 +56,11 @@ improved. A boolean can be given to \class{BestImprovement} that indicate if it 
 \DecMargin{1em} \\
 If \class{BestImprovement} is combined with the neighborhood class \class{RandomConflictConNE} it gives a minimim 
 conflict heuristic that can be useful to reach a feasible solution. \\ 
-\class{FirstImprovement} has a very similar implementation. Instead of calculating each \class{Move} of a 
-\class{Neighborhood} class $NE$ it stops requesting a \class{Move} once an improving \class{Move} is found. If no 
-improving \class{Move} is found when $NE$ returns a \textbf{NULL} pointer it does not commit a \class{Move}. If no 
-improving \class{Move} is found the current solution is in a local optima with the regard to the chosen 
-\class{Neighborhood}. \\ 
+\class{FirstImprovement} has an implementation very similar to \class{BestImprovement}. Instead of calculating each 
+\class{Move} of a \class{Neighborhood} class $NE$ it stops requesting a \class{Move} once an improving \class{Move} is 
+found. If no improving \class{Move} is found, when $NE$ returns a \textbf{NULL} pointer it does not commit a 
+\class{Move}. If no improving \class{Move} is found the current solution is in a local optima with the regard to the 
+chosen \class{Neighborhood} class. \\ 
 The class \class{RandomWalk} uses the method \method{nextRandom()} from its \class{Neighborhood} $NE$ and if that 
 \class{Move} is allowed it is committed. It takes an integer as argument that indicate the number of times it is 
 repeated. The benefit is many iteration can be done but they are not as likely to have a good quality.  

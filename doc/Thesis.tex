@@ -43,8 +43,12 @@
 %\newpage
 \input{forside}
 \thispagestyle{empty}
-\section{Acknowledgements}
+\section*{Acknowledgements}
 \input{acknow}
+\thispagestyle{empty}
+
+\newpage
+\thispagestyle{empty}
 \tableofcontents
 \thispagestyle{empty}
 %\listoffigures
@@ -59,7 +63,7 @@
  \newpage
  
 \section{Introduction to Discrete Optimization}
-
+  \input{disintro}
   \subsection{Variables} 
   \input{vars} % Written
   \subsection{Constraints}
@@ -155,7 +159,7 @@
   %\subsection{Change in Local Search Design}
   %\input{lschange}
   \newpage
-\section{Tests}
+\section{Testing the Framework}
 \input{test}
 %\input{gecodetest}
 
@@ -166,6 +170,9 @@
 %	\section{Conclusion}
 %\section{Appendix}
 %\input{appendix}
+\newpage
+\thispagestyle{empty}
+
 \bibliographystyle{plain}
 \bibliography{main}
 %\newpage

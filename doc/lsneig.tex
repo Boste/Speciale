@@ -1,14 +1,13 @@
 There are several important aspects of local search and the most basic will be covered here. \\The \emph{evaluation 
-function}
-$f(\tau)$ evaluate the quality of the candidate solution. 
-The \emph{neighborhood function} $N(\tau)$ that defines the candidate solutions $s \in S$ close to a given candidate 
-solution $\tau$. The set of candidate solutions $s$ is said to be the neighborhood of $\tau$ and can be reach by using 
-the neighborhood function once, called a \emph{neighborhood operation}. We call it an iteration each time we move from 
-one solution to another and Several solution might be explored before making a neighborhood operation. The cardinality 
-of $N(\tau)$ is called the neighborhood size of $\tau$. The neighborhood function is symmetric if, $\tau' \subseteq 
-N(\tau)$ if and only if $\tau \subseteq N(\tau')$ for all pairs of $\tau$ and $\tau'$. 
+function} $f(\tau)$ evaluates the quality of the candidate solution. 
+The \emph{neighborhood function} $N(\tau)$ that defines the candidate solutions $s$ in the search space $S$ close to a 
+given candidate solution $\tau$. The set of candidate solutions $s$ is said to be the neighborhood of $\tau$ and can be 
+reached by using the neighborhood function once, called a \emph{neighborhood operation}. We call it an iteration each 
+time we move from 
+one solution to another and several solution might be explored before making a neighborhood operation. The cardinality 
+of $N(\tau)$ is called the neighborhood size of $\tau$. \\ 
 In a problem with $n$ binary variables the neighborhood function could be to change the value of a single variable, 
-called a flip. This can be done on all variable hence the neighborhood size of a candidate solution would be $n$. \\ 
+called a flip. This can be done on all variables hence the neighborhood size of a candidate solution would be $n$. \\ 
 It might be expensive to use the evaluation function to evaluate each solutions, instead a \emph{delta evaluation 
 function} $\delta(\tau)$ can be used. The evaluation function recomputes the quality of a solution even if only a few 
 variables changes value. The delta evaluation function only computes how much the value of the evaluation function will 
@@ -18,9 +17,10 @@ set $V$ is a set of vertices each representing a candidate solutions of the sear
 edges connecting a vertex v, representing the solution $\tau$, with the vertices representing the solutions 
 in $N(\tau)$. The graph $G$ is called the \emph{neighborhood graph} and local search does a walk through the 
 neighborhood graph when searching for a solution. \cite[p. 3-5]{lsbog} \\ 
-Local search needs a \emph{termination criteria} that determines when the search is stopped. Sometimes we know what 
-the optimal solution is, i.e. the SAT problem, once we find a feasible solution we can stop. In other cases an optimal 
-solution may not be know, several combinatorial problems are not solved to optimality. The termination function can i.e. 
+Local search needs a \emph{termination criteria} that determines when the search should stop. Sometimes we know what 
+the optimal solution is, i.e. the SAT problem, if we find a feasible solution we can stop. In other cases an optimal 
+solution may not be known, several combinatorial problems are not solved to optimality. The termination function can 
+i.e. 
 be based on a time limit, number of steps made, or when a locally optimal solution is found. A locally optimal solution 
 for a minimization problem is a solution $\hat{\tau}$, such that for each feasible solution $\tau \in N(\hat{\tau})$ 
 $f(\hat{\tau}) \leq f(\tau)$. \\

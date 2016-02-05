@@ -1,23 +1,24 @@
-Metaheuristics defines how the search space should be explored in where as local search algorithms that focus more on 
-the neighborhood of the solution. Iterative improvement is often fast to find a local optimum depending on the size of 
+Metaheuristics defines how the search space should be explored, whereas local search algorithms focus more on 
+the neighborhood of the solution. Iterative improvement often find a local optimum quickly, depending on the size of 
 the neighborhood. Usually only a small fraction of local optima are close to optimality and they can be a poor quality 
 solution \cite[p.135]{lsbog}. Metaheuristics are used to get out of local optima to search different parts of the 
 search space. \\
-One of the simple Metaheuristics is \emph{iterative local search} that remembers the best solution 
-found so far and uses two local search algorithms, random walk and iterative improvement. It uses iterative improvement 
+A simple metaheuristic is \emph{iterative local search} that remembers the best solution found so far and uses two 
+local search algorithms, random walk and iterative improvement. It uses iterative improvement 
 to find a local optima and compare it to the best solution so far. Then uses random walk for some iterations to escape 
 the local optima. These two algorithms are repeated until the termination criteria is reached. \\ 
-Another metaheuristics is \emph{tabu search} that implements an iterative improvement with a modified best improvement 
-pivoting rule. It chooses the neighborhood operation that will leads to the best solution in the neighborhood but not 
-necessarily an improving solution. In addition to the modification of the pivot rule it implements a tabu list $T$ that 
-keeps track of the last $t$ solution. The solution in the tabu list are not consider when looking for the next 
+Another metaheuristic is \emph{tabu search} that implements an iterative improvement with a modified best improvement 
+pivoting rule. It chooses the neighborhood operation that will leads to the best solution in the neighborhood, but not 
+necessarily a better solution. In addition to the modification of the pivot rule it implements a tabu list $T$ that 
+keeps track of the last $t$ solution. The solutions in the tabu list are not considered when looking for the next 
 solution. It might be very memory expensive to keep track of the last $t$ solutions. An alternative way of implementing 
-the tabu list is to keep track of the last $t$ neighborhood operations and forbid the reverse neighborhood operation. 
+the tabu list is to keep track of the last $t$ neighborhood operations and forbid the reverse neighborhood operations. 
 This is more restrictive since the reverse neighborhood operations might not lead to a solution visited within 
-the last $t$ iterations. To compensate for this a \emph{aspiration criteria} can be implemented. Aspiration criteria is 
+the last $t$ iterations. To compensate for this an \emph{aspiration criteria} can be implemented. Aspiration criteria 
+is 
 a set of rules that can overrule the tabu list \cite[p.139-140]{lsbog}. A common aspiration criteria is to ignore the 
-tabulist if the neighborhood operation leads to the best solution found so far. \\
-Several other metaheuristics exist such as variable neighborhood search and very large scale neighborhood search. 
-Variable neighborhood search uses different neighborhood functions, hence different neighborhoods. Very large scale 
-neighborhood search changes many variable in each neighborhood operation which give a very large neighborhood but might 
-need fewer iteration to find a good quality solution. 
+tabu list if the neighborhood operation leads to the best solution found so far. \\
+Several other metaheuristics exist such as variable neighborhood search and very large scale neighborhood 
+search. Variable neighborhood search uses different neighborhood functions, hence different neighborhoods. Very large 
+scale neighborhood search changes many variables in each neighborhood operation, which gives a very large neighborhood, 
+but might need fewer iterations to find a good quality solution. 

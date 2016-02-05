@@ -1,23 +1,23 @@
-There are different ways of measuring the quality of an solution. For a CSP a feasible solution needs to be found but 
+There are different ways of measuring the quality of an solution. For a CSP a feasible solution needs to be found, but 
 different feasible solutions are equally good.  \\
 In a COP the feasible solutions are compared by an objective function that gives the feasible solution a measurement 
 of quality. \\ 
-There are different ways of differentiating infeasible solution from other solutions, feasible or infeasible. The 
+There are different ways of differentiating infeasible solutions from other solutions, feasible or infeasible. The 
 evaluation function is a combination of the objective function and the violated constraints. \\ 
-Each constraint can be given a weight and together with the violation degree it contribute to the evaluation function. 
-I.e. a constraint has weight ten and a violation degree of three it then contribute $3\cdot 10 = 30$ to the evaluation 
-function. In this way the search priorities to satisfy certain constraints more than other. This method can have the 
-negative effect that it might priorities to have all constraint with violation degree close to zero instead of 
-one constraint with very high violation degree. If many constraint are violated it might take more iterations to get to 
-feasible solution than if only a single constraint is infeasible. \\ 
-Another way it to use a priority for each constraint as a lexicographic ordering, and try to satisfy constraints in 
+Each constraint can be given a weight and together with the violation degree it contributes to the evaluation function. 
+I.e. If a constraint has weight ten and a violation degree of three, it contributes $30$ to the evaluation function. In 
+this way the search prioritizes to satisfy certain constraints more than others. This method can have the 
+negative effect that it might prioritize to have all constraint with violation degree close to zero instead of 
+one constraint with a very high violation degree. If many constraints are violated it might take more iterations to get 
+to a feasible solution than if only a single constraint is infeasible. \\ 
+Another way is to use a priority for each constraint as a lexicographic ordering, and try to satisfy constraints in 
 that order. Once a group of constraints with priority $p$ is feasible they are always kept feasible and it tries to 
 satisfy constraint of priority $p-1$. This will reduce the search space each time a group of constraints is satisfied 
 and might lead to a scenario where the optimal solution cannot be reached. \\ 
-This framework introduce a third way that uses priorities of constraints for a lexicographic ordering. Instead of 
-evaluation a single value a vector of values from each solution can be compared in lexicographic order. The values 
+This framework introduces a third way that uses priorities of constraints for a lexicographic ordering. Instead of 
+evaluation a single value, a vector of values from each solution can be compared in lexicographic order. The values 
 representing violations of constraints of priority $p$ is first compared if equal it moves to $p-1$ and so on. The 
-first vector to have a smaller value is considered the best. This prevent getting trapped in a subset of the search 
+first vector to have a smaller value is considered the best. This prevent being stuck in a subset of the search 
 space S. \\ 
-The vectors are never compared implementation wise but the delta evaluation function returns a delta vector 
+The vectors are never compared implementation wise, but the delta evaluation function returns a delta vector 
 that is used for evaluation instead of a delta value. This will be discussed further in section \ref{sec_local}.

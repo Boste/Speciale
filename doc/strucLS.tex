@@ -1,10 +1,11 @@
-Once an initial solution to the constraint satisfaction optimization problem (COP) has been found the model 
-is transformed to create a model suited for local search. Two new datastructures structures are introduced 
+Once an initial solution to the constraint satisfaction optimization problem (COP) has been found, the model 
+is transformed to create a model suited for local search. Two new datastructures are introduced 
 in this section, dependency directed graph in subsection \ref{sec_ddg} and propagation queue in subsection 
 \ref{sec_propaqueue}. 
 \\
 The dependency directed graph is used to handle dependencies of invariants when a 
-variable changes value. A propagation queue $q_i$ is created for each variable $x_i$ that gives an ordering of the 
+variables value is changed. A propagation queue $q_i$ is created for each variable $x_i$ that gives an ordering 
+of the 
 invariants reachable from  $x_i$ in the dependency directed graph. \\
 %When a variable $x$ changes value other variables dependent on the value of $x$ will need to be updated. To 
 %update those variables and invariants a directed graph $G=(V,A)$ is made, called dependency directed graph, 
@@ -16,8 +17,9 @@ invariants reachable from  $x_i$ in the dependency directed graph. \\
 %time when making changes to on or more variables to increase performance. For each variable used in 
 %the local search a \emph{propagation queue} $q$ is made. A propagation queue is the order of which invariant to update 
 %when the associated variable changes value. \boste{Not quite happy about the description here} \medskip \\
-The model is simplified by defining some of the variables by transforming the functional constraints into oneway 
-constraints using the algorithms implemented in the respective constraints. When a variable is defined by a oneway 
-constraint it is transformed into an invariant since its value is dependent on other variables and/or invariants. \\ 
+The model is simplified by defining some of the variables. This is done by transforming the functional constraints into 
+oneway constraints, using the algorithms implemented in the respective constraints. When a variable is defined by a 
+oneway constraint it is transformed into an invariant since its value is dependent on other variables and/or invariants. 
+\\ 
 The only constraint implemented, \class{Linear}, is used as an example for creating oneway constraints. 
  

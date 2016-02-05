@@ -132,11 +132,11 @@ int main(int argc, char* argv[]) {
     //    BPSolver* userModel = new BPSolver(input);
     BPSolver userModel(input);
     //    std::cout << "Create output here " << std::endl;1
-    Output* out = new Output();
-    userModel.setOutput(out);
-    out->setName(name2);
-    out->addToTable1(std::to_string(input->getNvars()));
-    out->addToTable1(std::to_string(input->getNcons()));
+//    Output* out = new Output();
+//    userModel.setOutput(out);
+//    out->setName(name2);
+//    out->addToTable1(std::to_string(input->getNvars()));
+//    out->addToTable1(std::to_string(input->getNcons()));
     std::cout << "Initialize solution" << std::endl;
     //Need my own option class
 
@@ -155,9 +155,9 @@ int main(int argc, char* argv[]) {
     std::cout << "Peak memory usage for Gecode " << (double) peakSize2 / 1024 / 1024 << " mb" << std::endl;
     //    std::cout << "Initializing LSS" << std::endl;
     //    m->initializeLS(GS);
-    out->addToGecodePrint(std::to_string((double) peakSize2 / 1024 / 1024));
+//    out->addToGecodePrint(std::to_string((double) peakSize2 / 1024 / 1024));
 
-    std::cout << "##GecodeSol " << out->getToGecodePrint() << std::endl;
+//    std::cout << "##GecodeSol " << out->getToGecodePrint() << std::endl;
     //    exit(1);
     //    
     //    std::cout << "Remember to in comment createDDG and ini LS in general solver both fail and not fail" << std::endl;
@@ -212,7 +212,7 @@ int main(int argc, char* argv[]) {
     std::cout << "## name " << name << std::endl; // Instance name
     // Output: improved sol; initial sol; time gecode used to find sol; peak memory use in mb; instance name
     //    std::cout << "solution, time Gecode used, total time, peak memory in mb, " << std::endl;
-    delete out;
+//    delete out;
 
     //    size_t peakSize = getPeakRSS();
     //    std::cout << "Peak memory usage " << (double) peakSize / 1024 / 1024 << " mb" << std::endl;

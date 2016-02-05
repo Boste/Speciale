@@ -1,14 +1,14 @@
-The idea is to reduce the number of independent variables reducing the search space and likely the neighborhoods in 
-local search. This does come with a downside that calculation of a variable changing value might take more time. \\ 
+The idea is to reduce the number of independent variables hence reducing the size of search space and the neighborhoods 
+in local search. This does come with a downside that calculation of a variable changing value might take more time. \\ 
 The functional constraint used to create a oneway constraint must be satisfied by the initial solution in order to 
 create a oneway constraint. Once a oneway constraint is made it defines a variable that is represented by an invariant. 
 The invariants value is always within the domain of the variable which corresponds to the functional constraint always 
 being satisfied. \\
-Even though all \class{Linear} constraints with an equality relation are functional only those with unit 
+Even though all \class{Linear} constraints with an equality relation are functional, only those with unit 
 coefficients are chosen to be functional for simplicity. I.e. on the form $c: \sum\limits_{i=1}^{\alpha(c)} a_i 
-x_i = b(c), \; |a_i|= 1 \; \; \forall i $. If other coefficients where allowed it could create non integer coefficients 
-that does not work with the rest of the framework currently. \boste{Sikkert et spørgsmål til forsvar} \\ 
-For each functional \class{Linear} constraint $c_j$ with unit coefficient two algorithm steps are used to create 
+x_i = b(c), \; |a_i|= 1 \; \; \forall i $. If other coefficients were allowed it could create non integer coefficients 
+that does not work with the rest of the framework currently. \\ %\boste{Sikkert et spørgsmål til forsvar} \\ 
+For each functional \class{Linear} constraint $c_j$ with unit coefficient, two algorithm steps are used to create 
 invariants. The first checks if the constraint $c_j$ can be transformed into a oneway constraint and the other 
 transforms $c_j$ into a one-way constraint defining $x_i$. \\ 
 \IncMargin{1em}
@@ -85,10 +85,10 @@ transforms $c_j$ into a one-way constraint defining $x_i$. \\
 \DecMargin{1em} \\
 For each unit \class{Linear} constraint an independent variable is found if possible. If there is more 
 than one eligible variable the best variable among those is found. The first tiebreaker is the number of oneway 
-constraints the variable participate in (helps define other variables). The next tiebreaker is the number of constraints 
-the variables participate in. If none of the tiebreakers can be used a fair random is used such that the probability is 
-equal for all variables whose ties could not be broken. \\ 
-Once a the best variable is found, if any, algorithm \ref{algo_makeoneway} \makeOneway is called. \\
+constraints the variable participates in (helps define other variables). The next tiebreaker is the number of 
+constraints the variables participate in. If none of the tiebreakers can be used, a fair random is used, such that the 
+probability is equal for all variables whose ties could not be broken. \\ 
+Once the best variable is found, if any, algorithm \ref{algo_makeoneway} \makeOneway is called. \\
 %\begin{itemize}
 % \item Highest search priority or highest domain size
 % \item Lowest size of $C(x_i)$
@@ -144,8 +144,7 @@ constant}
  \caption{Linear - makeOneway(\textsf{Variable} $x_i$)} \label{algo_makeoneway}
 \end{algorithm}\DecMargin{1em} \noindent
 The algorithm transforms the constraint $c_j$ into a oneway constraint defining an invariant. The dependency directed 
-graph $G$ is updated by adding the new invariant $y$ and removing the constraint $c_j$ and variable $x_i$. \medskip 
-\\
+graph $G$ is updated by adding the new invariant $y$ and removing the constraint $c_j$ and variable $x_i$. \\
 The value of the invariant must always be within its domain, corresponding to domain of the variable. It is not allowed 
 to change value of one of the variable such that the invariants value is not within its domain.
 %\IncMargin{1em}

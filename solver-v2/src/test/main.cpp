@@ -117,10 +117,10 @@ int main(int argc, char** argv) {
     //    GS.printVariableValues();
     double timeUsed = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
     
-    std::ofstream myfile;
-    myfile.open("output.txt", std::ios::app);
-    myfile << name2 << " " << sol.first << " " << sol.second << " " << timeUsed << std::endl;
-    myfile.close();
+//    std::ofstream myfile;
+//    myfile.open("output.txt", std::ios::app);
+    std::cout  << "#output " << name2 << " " << sol.first << " " << sol.second << " " << timeUsed << std::endl;
+//    myfile.close();
     
     delete in;
 }

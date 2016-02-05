@@ -86,7 +86,7 @@ public:
    
     std::vector<int>& getInitialValue();
 
-    void optimizeSolution(int time, int test);
+    std::pair<int,int> optimizeSolution(int time, int test);
 
     void printVariableValues();
     //    unsigned getNumberOfDigits(double number);

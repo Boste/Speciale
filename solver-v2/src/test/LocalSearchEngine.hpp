@@ -59,7 +59,7 @@ public:
 //    void makeOneway(Variable* iv, constraint cons);
 //    bool intVarCanBeMadeOneway(constraint cons);
 //    void makeIntVarOneway(IntegerVariable* iv, constraint cons);
-    void optimizeSolution(int time, int test);
+    std::pair<int,int> optimizeSolution(int time, int test);
     //    void simpleMove(int variabelNr);
     //    bool bestImprovement();
     void setSolution(std::shared_ptr<State> st);

@@ -18,61 +18,7 @@ LocalSearchEngine::LocalSearchEngine(std::shared_ptr<Storage> model) {
 void LocalSearchEngine::createDDG(bool all) {
 
     DDG->addVariables(model->getAllVariables());
-    //    model->getDDG()->printSizes();
-    //    defining = std::vector<unsigned>(model->getAllVariables().size());
-
-
-    //    std::vector<constraint> func2;
-    //    for (unsigned i = 1; i < model->getConstraints().size(); i++) {
-    //        for (constraint cons : *model->getConstraintsWithPriority(i)) {
-    //            if (cons->isFunctional()) {
-    //                func2.push_back(cons);
-    //            }
-    //        }
-    //
-    //    }
-    ////    if (func2.size() > 0) {
-    //        std::ofstream myfile;
-    //        myfile.open("func.txt", std::ios::app);
-    //        myfile << " " << func2.size() << "\n";
-    //        myfile.close();
-    ////    }
-    //    std::cout << func2.size() << std::endl;
-    //    exit(1);
-    //    std::cout << "DELETE ABOVE" << std::endl;
-
-    //#####################################################################################################################################
-    // Making oneway looking at each integer variable. Harder to delete the constraints that have been made one-way
-    //#####################################################################################################################################        
-    //    std::list<IntegerVariable*> queue = model->getIntegerVariables();
-
-    //    std::vector<IntegerVariable*>& queue = model->getPriorityVectorNr(0);
-    //    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
-    //    for (IntegerVariable* iv : queue) {
-    //        std::cout << iv->numberOfConstraints() << " ";
-    //    } 
-    //    std::cout << std::endl;
-
-    //    for (IntegerVariable* iv : queue) {
-    //        std::cout << iv->numberOfConstraints() << " ";
-    //    }
-    //    std::cout << std::endl;
-    //        for (int i =queue.size()-1; i >= 0; i--){ 
-    // Try to make Integer variables oneway
-    //        unsigned numberOfIntegerVariables = queue.size();
-    //        std::cout << numberOfIntegerVariables << std::endl;
-    //        std::cout << "#####################################################################################################" << std::endl;
-    //        std::cout << queue.size() << std::endl;
-    //        unsigned layer = 1;
-    //        int iter = 0;
-
-
-
-
-    //    std::vector<IntegerVariable*>& queue = model->getPriorityVectorNr(0);
-    //    std::sort(queue.begin(), queue.end(), IntegerVariable::SortGreater());
-    /// Try to see if it is to expensive to prevent cycles. 
-
+    
     std::vector<constraint> func;
     if (all) {
 
@@ -224,7 +170,7 @@ void LocalSearchEngine::initializeLS() {
 
 }
 
-void LocalSearchEngine::optimizeSolution(int time, int test) {
+std::pair<int,int> LocalSearchEngine::optimizeSolution(int time, int test) {
 
 
 
@@ -680,6 +626,8 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     //    std::cout << "## violations " << bestState->getViolations() << std::endl;
     //    std::cout << "## iterations " << iterations << std::endl;
     setSolution(bestState);
+    std::pair<int,int> sol(bestState->getEvaluation().at(0), bestState->getViolations());
+    return sol;
 //    for (Variable* var : model->getAllVariables()) {
 //        if (var->isDef()) {
 //            invariant inv = var->getOneway();

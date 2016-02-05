@@ -428,9 +428,9 @@ std::vector<int>& GPSolver::getInitialValue() {
     return storage->getInitialEvaluation();
 }
 
-void GPSolver::optimizeSolution(int time, int test) {
+std::pair<int,int> GPSolver::optimizeSolution(int time, int test) {
 
-    LS->optimizeSolution(time, test);
+   return LS->optimizeSolution(time, test);
 }
 // Only for testing
 

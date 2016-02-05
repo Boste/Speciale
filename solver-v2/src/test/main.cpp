@@ -17,8 +17,26 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    Clock::globalClock = std::clock();
 
-
+        string str2 = argv[1];
+    for (unsigned i = 0; i < str2.length(); i++) {
+        if (str2[i] == '/') {
+            str2[i] = ' ';
+        } else if (str2[i] == '.') {
+            str2[i] = ' ';
+        }
+    }
+    //    std::cout << argv[1] << std::endl;
+    string temp2;
+    std::vector<string> array2;
+    stringstream ss2(str2);
+    while (ss2 >> temp2)
+        array2.push_back(temp2);
+    string name2 = array2[1];
+    seed = Random::Seed(60);
+    
+    
     GPSolver GS;
     if (argc < 2) {
         std::cout << "No instances given" << std::endl;
@@ -81,7 +99,7 @@ int main(int argc, char** argv) {
     if (argc >= 3) {
         time = std::stoi(argv[2]);
     } else {
-        time = 120;
+        time = 119;
     }
     int test;
     if (argc >= 4) {
@@ -93,16 +111,17 @@ int main(int argc, char** argv) {
     } else {
         test = 3;
     }
-    std::cout << "opt" << std::endl;
-    GS.optimizeSolution(time, test);
-    GS.printVariableValues();
+    std::pair<int,int> sol = GS.optimizeSolution(time, test);
+ 
 
-
-
-
-
-
-
+    //    GS.printVariableValues();
+    double timeUsed = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
+    
+    std::ofstream myfile;
+    myfile.open("output.txt", std::ios::app);
+    myfile << name2 << " " << sol.first << " " << sol.second << " " << timeUsed << std::endl;
+    myfile.close();
+    
     delete in;
 }
 

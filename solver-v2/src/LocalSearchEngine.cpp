@@ -680,6 +680,8 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     //    std::cout << "## violations " << bestState->getViolations() << std::endl;
     //    std::cout << "## iterations " << iterations << std::endl;
     setSolution(bestState);
+//    std::pair<int,int> sol(bestState->getEvaluation().at(0),bestState->getViolations());
+//    return sol;
 //    for (Variable* var : model->getAllVariables()) {
 //        if (var->isDef()) {
 //            invariant inv = var->getOneway();

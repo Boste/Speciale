@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     while (ss2 >> temp2)
         array2.push_back(temp2);
     string name2 = array2[1];
-    int seed = Random::Seed(60);
+    Random::Seed(60);
     
     
     GPSolver GS;

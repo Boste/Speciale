@@ -101,6 +101,7 @@ int main(int argc, char* argv[]) {
         //        std::cout << "Random Seed not set, setting to 1337" << std::endl;
         seed = Random::Seed(RANDOMSEED);
     }
+    
     //    std::cout << "Random seed " << Random::seed << std::endl;
     //    gecode(argc, argv);
     Clock::globalClock = std::clock();

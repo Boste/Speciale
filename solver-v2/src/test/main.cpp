@@ -34,8 +34,13 @@ int main(int argc, char** argv) {
     while (ss2 >> temp2)
         array2.push_back(temp2);
     string name2 = array2[array2.size() - 3];
-    Random::Seed(60);
-    std::cout << "Seed " << Random::seed << std::endl;
+    int seed;
+    if (argc >= 6) {
+        seed = Random::Seed(std::atoi(argv[5]));
+    } else {
+        //        std::cout << "Random Seed not set, setting to 1337" << std::endl;
+        seed = Random::Seed(60);
+    }
 
     GPSolver GS;
     if (argc < 2) {
@@ -100,12 +105,15 @@ int main(int argc, char** argv) {
         time = std::stoi(argv[2]);
     } else {
         time = 119;
+        std::cout << "time set to 119" << std::endl;
     }
     int gecode;
     if (argc >= 3) {
         gecode = std::stoi(argv[3]);
     } else {
         gecode = 10;
+        std::cout << "gecode set to 10" << std::endl;
+
     }
     GS.initialSolution(gecode);
 
@@ -113,12 +121,17 @@ int main(int argc, char** argv) {
     if (argc >= 4) {
         test = std::stoi(argv[4]);
         if (test < 1 || test > 3) {
-            std::cout << "Algorithm not implemented for that number (Third argument). " << argv[3] << std::endl;
+            std::cout << "Algorithm not implemented for that number (Third argument). " << argv[4] << std::endl;
             exit(1);
         }
     } else {
         test = 3;
     }
+//        Random::Seed(60);
+    std::cout << seed << std::endl;
+    std::cout << "Seed " << Random::seed << std::endl;
+    
+    
     std::pair<int, int> sol = GS.optimizeSolution(time, test);
 
 

@@ -153,6 +153,7 @@ bool TabuSearch::Start(unsigned iteration, std::shared_ptr<State>& bestState, st
                 //                    debug;
                 //                }
                 int choose = Random::Integer(NE->numberOfEqualMoves);
+                
                 if (choose == 0) {
                     bestMove->copy(mv);
                     break;

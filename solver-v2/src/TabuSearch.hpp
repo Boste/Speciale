@@ -2,6 +2,7 @@
 #include "Move.hpp"
 #include "Neighborhood.hpp"
 #include "Storage.hpp"
+#include "Random.hpp"
 
 #ifndef TABUSEARCH_HPP
 #define	TABUSEARCH_HPP

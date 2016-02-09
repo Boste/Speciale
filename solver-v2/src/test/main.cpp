@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 
     Clock::globalClock = std::clock();
 
-        string str2 = argv[1];
+    string str2 = argv[1];
     for (unsigned i = 0; i < str2.length(); i++) {
         if (str2[i] == '/') {
             str2[i] = ' ';
@@ -33,10 +33,10 @@ int main(int argc, char** argv) {
     stringstream ss2(str2);
     while (ss2 >> temp2)
         array2.push_back(temp2);
-    string name2 = array2[1];
+    string name2 = array2[array2.size() - 3];
     Random::Seed(60);
-    
-    
+    std::cout << "Seed " << Random::seed << std::endl;
+
     GPSolver GS;
     if (argc < 2) {
         std::cout << "No instances given" << std::endl;
@@ -94,16 +94,24 @@ int main(int argc, char** argv) {
         x.push_back(varInt.at(i));
     }
     GS.addObjective(c, x);
-    GS.initialSolution(10);
+
     int time;
     if (argc >= 3) {
         time = std::stoi(argv[2]);
     } else {
         time = 119;
     }
+    int gecode;
+    if (argc >= 3) {
+        gecode = std::stoi(argv[3]);
+    } else {
+        gecode = 10;
+    }
+    GS.initialSolution(gecode);
+
     int test;
     if (argc >= 4) {
-        test = std::stoi(argv[3]);
+        test = std::stoi(argv[4]);
         if (test < 1 || test > 3) {
             std::cout << "Algorithm not implemented for that number (Third argument). " << argv[3] << std::endl;
             exit(1);
@@ -111,17 +119,17 @@ int main(int argc, char** argv) {
     } else {
         test = 3;
     }
-    std::pair<int,int> sol = GS.optimizeSolution(time, test);
- 
+    std::pair<int, int> sol = GS.optimizeSolution(time, test);
+
 
     //    GS.printVariableValues();
     double timeUsed = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-    
-//    std::ofstream myfile;
-//    myfile.open("output.txt", std::ios::app);
-    std::cout  << "#output " << name2 << " " << sol.first << " " << sol.second << " " << timeUsed << std::endl;
-//    myfile.close();
-    
+
+    //    std::ofstream myfile;
+    //    myfile.open("output.txt", std::ios::app);
+    std::cout << "#output " << name2 << " " << sol.first << " " << sol.second << " " << timeUsed << std::endl;
+    //    myfile.close();
+
     delete in;
 }
 

@@ -1,0 +1,313 @@
+Coin0001I At line 1 NAME           acc-tight4
+Coin0001I At line 2 ROWS
+Coin0001I At line 3289 COLUMNS
+Coin0001I At line 20366 RHS
+Coin0001I At line 23652 BOUNDS
+Coin0001I At line 25273 ENDATA
+Coin0002I Problem acc-tight4 has 3285 rows, 1620 columns and 17073 elements
+G: 2043   E: 297    L: 945
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 0
+Searching for solution....
+Stopped because of Fail limit
+stop called 32 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 31
+	propagators: 3814
+	depth: 29
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001595 seconds
+## fail 2
+Posting 1642 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 43 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 42
+	propagators: 1569
+	depth: 40
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000963 seconds
+## fail 2
+Number of constriants 821
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 321 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 320
+	propagators: 1531
+	depth: 318
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.002845 seconds
+## fail 2
+## relax 2
+## gecode 0.007969
+number of invariants 0 out of 0 (0) 
+number of cycles 0
+##oneway 0
+number of cycles 0
+Total time used so far 0.041872
+Create propagator queues
+Total time used so far 0.045462
+EvalVariables size 1
+Not feasible 
+## initLSModel 0.012963
+This should be initial value 1
+Number of evaluation variables 1
+Number of variables used in local search 1620
+Suggestion of all variable flips has been made 
+# value: 0 102  # iter 0 # used 0.05935 # method TS FI
+## LSLimitLeft 119
+# test 3
+# value: 0 101  # iter 15 # used 0.059638 # method BI RCC
+# value: 0 99  # iter 61 # used 0.060376 # method BI RCC
+# value: 0 97  # iter 72 # used 0.060635 # method BI RCC
+# value: 0 95  # iter 75 # used 0.060694 # method BI RCC
+# value: 0 94  # iter 77 # used 0.060768 # method BI RCC
+# value: 0 92  # iter 80 # used 0.060813 # method BI RCC
+# value: 0 91  # iter 81 # used 0.060843 # method BI RCC
+# value: 0 90  # iter 97 # used 0.061065 # method BI RCC
+# value: 0 88  # iter 134 # used 0.061676 # method BI RCC
+# value: 0 87  # iter 141 # used 0.061816 # method BI RCC
+# value: 0 85  # iter 152 # used 0.061987 # method BI RCC
+# value: 0 84  # iter 153 # used 0.062025 # method BI RCC
+# value: 0 83  # iter 157 # used 0.06211 # method BI RCC
+# value: 0 82  # iter 162 # used 0.062222 # method BI RCC
+# value: 0 81  # iter 163 # used 0.06227 # method BI RCC
+# value: 0 78  # iter 207 # used 0.063055 # method BI RCC
+# value: 0 75  # iter 209 # used 0.063115 # method BI RCC
+# value: 0 74  # iter 211 # used 0.063167 # method BI RCC
+# value: 0 72  # iter 212 # used 0.063195 # method BI RCC
+# value: 0 71  # iter 219 # used 0.063351 # method BI RCC
+# value: 0 70  # iter 220 # used 0.063391 # method BI RCC
+# value: 0 69  # iter 244 # used 0.063707 # method BI RCC
+# value: 0 68  # iter 370 # used 0.065691 # method BI RCC
+# value: 0 67  # iter 433 # used 0.066665 # method BI RCC
+# value: 0 66  # iter 434 # used 0.066705 # method BI RCC
+# value: 0 65  # iter 435 # used 0.066734 # method BI RCC
+# value: 0 64  # iter 437 # used 0.066801 # method BI RCC
+# value: 0 63  # iter 487 # used 0.067678 # method BI RCC
+# value: 0 62  # iter 488 # used 0.067723 # method BI RCC
+# value: 0 61  # iter 489 # used 0.067754 # method BI RCC
+# value: 0 60  # iter 566 # used 0.06887 # method BI RCC
+# value: 0 59  # iter 567 # used 0.068903 # method BI RCC
+# value: 0 58  # iter 578 # used 0.069075 # method BI RCC
+# value: 0 57  # iter 585 # used 0.06922 # method BI RCC
+# value: 0 56  # iter 615 # used 0.069741 # method BI RCC
+# value: 0 55  # iter 625 # used 0.069931 # method BI RCC
+# value: 0 54  # iter 700 # used 0.071006 # method BI RCC
+# value: 0 52  # iter 701 # used 0.071048 # method BI RCC
+# value: 0 51  # iter 744 # used 0.071803 # method BI RCC
+# value: 0 50  # iter 745 # used 0.071832 # method BI RCC
+# value: 0 49  # iter 746 # used 0.071861 # method BI RCC
+# value: 0 48  # iter 962 # used 0.074905 # method BI RCC
+# value: 0 47  # iter 964 # used 0.074964 # method BI RCC
+# value: 0 46  # iter 1008 # used 0.075656 # method BI RCC
+# value: 0 45  # iter 1082 # used 0.076799 # method BI RCC
+# value: 0 44  # iter 1116 # used 0.077353 # method BI RCC
+# value: 0 43  # iter 1117 # used 0.077388 # method BI RCC
+# value: 0 42  # iter 1287 # used 0.079992 # method BI RCC
+# value: 0 40  # iter 1309 # used 0.080307 # method BI RCC
+# value: 0 39  # iter 1322 # used 0.080561 # method BI RCC
+# value: 0 38  # iter 1355 # used 0.081115 # method BI RCC
+# value: 0 37  # iter 1470 # used 0.082815 # method BI RCC
+# value: 0 36  # iter 1499 # used 0.083322 # method BI RCC
+# value: 0 35  # iter 1516 # used 0.083577 # method BI RCC
+# value: 0 34  # iter 1545 # used 0.084039 # method BI RCC
+# value: 0 33  # iter 1555 # used 0.084247 # method BI RCC
+# value: 0 32  # iter 1556 # used 0.08428 # method BI RCC
+# value: 0 31  # iter 1559 # used 0.084333 # method BI RCC
+# value: 0 30  # iter 1560 # used 0.084356 # method BI RCC
+# value: 0 29  # iter 2048 # used 0.09224 # method BI RCC
+# value: 0 28  # iter 2050 # used 0.0923 # method BI RCC
+# value: 0 27  # iter 2071 # used 0.092605 # method BI RCC
+# value: 0 26  # iter 2085 # used 0.092849 # method BI RCC
+# value: 0 25  # iter 2216 # used 0.094819 # method BI RCC
+# value: 0 24  # iter 2217 # used 0.094865 # method BI RCC
+# value: 0 23  # iter 2295 # used 0.095989 # method BI RCC
+# value: 0 22  # iter 2498 # used 0.098925 # method BI RCC
+# value: 0 21  # iter 3260 # used 0.109291 # method BI RCC
+# value: 0 20  # iter 3285 # used 0.109691 # method BI RCC
+# value: 0 19  # iter 3366 # used 0.110765 # method BI RCC
+# value: 0 18  # iter 5090 # used 0.133873 # method BI RCC
+# value: 0 17  # iter 20211 # used 0.337879 # method BI RCC
+# value: 0 16  # iter 22239 # used 0.369337 # method BI RCC
+# value: 0 15  # iter 22275 # used 0.37003 # method BI RCC
+# value: 0 14  # iter 22299 # used 0.37039 # method BI RCC
+# value: 0 13  # iter 86160 # used 1.25988 # method BI RCC
+# value: 0 12  # iter 86165 # used 1.25999 # method BI RCC
+# value: 0 11  # iter 158565 # used 2.30068 # method BI RCC
+# value: 0 10  # iter 158677 # used 2.30219 # method BI RCC
+# value: 0 9  # iter 180522 # used 2.60806 # method BI RCC
+# value: 0 8  # iter 180548 # used 2.60847 # method BI RCC
+# value: 0 7  # iter 1561538 # used 23.4649 # method BI RCC
+# value: 0 5  # iter 1561539 # used 23.465 # method BI RCC
+6600222 0 5
+
+Coin0001I At line 1 NAME           acc-tight5
+Coin0001I At line 2 ROWS
+Coin0001I At line 3056 COLUMNS
+Coin0001I At line 19194 RHS
+Coin0001I At line 22247 BOUNDS
+Coin0001I At line 23587 ENDATA
+Coin0002I Problem acc-tight5 has 3052 rows, 1339 columns and 16134 elements
+G: 1669   E: 277    L: 1106
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Number of variables fixed in preprocessing 4
+Searching for solution....
+Stopped because of Fail limit
+stop called 18 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 17
+	propagators: 1156
+	depth: 15
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.001062 seconds
+## fail 2
+Posting 1526 constriants 
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 33 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 32
+	propagators: 1376
+	depth: 30
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.000783 seconds
+## fail 2
+Number of constriants 763
+Gecode time 10
+Stuck in Status? 
+Status: 2 the space is not failed and we need to start branching.
+Searching for solution....
+Stopped because of Fail limit
+stop called 276 times
+WARNING: solver stopped, solution is not optimal!
+Stopped because of Fail limit
+	fail: 2
+	nodes: 275
+	propagators: 1371
+	depth: 273
+	restarts: 0
+	nogoods: 0
+	Time spend searching for solution: 0.002211 seconds
+## fail 2
+## relax 2
+## gecode 0.006428
+number of invariants 0 out of 0 (0) 
+number of cycles 0
+##oneway 0
+number of cycles 0
+Total time used so far 0.032724
+Create propagator queues
+Total time used so far 0.03612
+EvalVariables size 1
+Not feasible 
+## initLSModel 0.012004
+This should be initial value 1
+Number of evaluation variables 1
+Number of variables used in local search 1335
+Suggestion of all variable flips has been made 
+# value: 1 92  # iter 0 # used 0.051589 # method TS FI
+## LSLimitLeft 119
+# test 3
+# value: 1 91  # iter 41 # used 0.052301 # method BI RCC
+# value: 1 89  # iter 43 # used 0.052361 # method BI RCC
+# value: 1 88  # iter 53 # used 0.052541 # method BI RCC
+# value: 1 87  # iter 54 # used 0.052607 # method BI RCC
+# value: 1 86  # iter 82 # used 0.053108 # method BI RCC
+# value: 1 85  # iter 85 # used 0.053193 # method BI RCC
+# value: 1 84  # iter 90 # used 0.053266 # method BI RCC
+# value: 1 83  # iter 91 # used 0.053305 # method BI RCC
+# value: 1 82  # iter 116 # used 0.053751 # method BI RCC
+# value: 1 81  # iter 117 # used 0.053785 # method BI RCC
+# value: 1 80  # iter 118 # used 0.053824 # method BI RCC
+# value: 1 79  # iter 120 # used 0.053891 # method BI RCC
+# value: 0 79  # iter 153 # used 0.054414 # method BI RCC
+# value: 0 78  # iter 155 # used 0.054478 # method BI RCC
+# value: 0 77  # iter 156 # used 0.05451 # method BI RCC
+# value: 0 76  # iter 158 # used 0.054571 # method BI RCC
+# value: 0 74  # iter 159 # used 0.054612 # method BI RCC
+# value: 0 73  # iter 216 # used 0.05549 # method BI RCC
+# value: 0 72  # iter 264 # used 0.056262 # method BI RCC
+# value: 0 71  # iter 265 # used 0.05629 # method BI RCC
+# value: 0 70  # iter 267 # used 0.056341 # method BI RCC
+# value: 0 69  # iter 268 # used 0.056377 # method BI RCC
+# value: 0 68  # iter 273 # used 0.056469 # method BI RCC
+# value: 0 67  # iter 293 # used 0.056776 # method BI RCC
+# value: 0 66  # iter 296 # used 0.056851 # method BI RCC
+# value: 0 65  # iter 340 # used 0.057541 # method BI RCC
+# value: 0 63  # iter 359 # used 0.057865 # method BI RCC
+# value: 0 62  # iter 360 # used 0.057912 # method BI RCC
+# value: 0 60  # iter 476 # used 0.059716 # method BI RCC
+# value: 0 59  # iter 479 # used 0.059785 # method BI RCC
+# value: 0 58  # iter 481 # used 0.059838 # method BI RCC
+# value: 0 57  # iter 482 # used 0.059865 # method BI RCC
+# value: 0 56  # iter 503 # used 0.06026 # method BI RCC
+# value: 0 55  # iter 507 # used 0.060338 # method BI RCC
+# value: 0 54  # iter 508 # used 0.060376 # method BI RCC
+# value: 0 52  # iter 522 # used 0.060576 # method BI RCC
+# value: 0 51  # iter 525 # used 0.060659 # method BI RCC
+# value: 0 49  # iter 528 # used 0.060711 # method BI RCC
+# value: 0 48  # iter 564 # used 0.061236 # method BI RCC
+# value: 0 46  # iter 565 # used 0.06127 # method BI RCC
+# value: 0 45  # iter 567 # used 0.061307 # method BI RCC
+# value: 0 44  # iter 604 # used 0.061922 # method BI RCC
+# value: 0 42  # iter 607 # used 0.061995 # method BI RCC
+# value: 0 41  # iter 610 # used 0.062059 # method BI RCC
+# value: 0 38  # iter 1073 # used 0.068762 # method BI RCC
+# value: 0 37  # iter 1092 # used 0.069082 # method BI RCC
+# value: 0 35  # iter 1093 # used 0.069122 # method BI RCC
+# value: 0 33  # iter 1137 # used 0.069821 # method BI RCC
+# value: 0 32  # iter 1145 # used 0.069962 # method BI RCC
+# value: 0 31  # iter 1166 # used 0.070255 # method BI RCC
+# value: 0 30  # iter 1188 # used 0.070612 # method BI RCC
+# value: 0 29  # iter 1572 # used 0.076339 # method BI RCC
+# value: 0 28  # iter 1573 # used 0.076423 # method BI RCC
+# value: 0 27  # iter 1983 # used 0.08295 # method BI RCC
+# value: 0 26  # iter 2128 # used 0.085565 # method BI RCC
+# value: 0 25  # iter 2719 # used 0.094755 # method BI RCC
+# value: 0 24  # iter 3819 # used 0.1133 # method BI RCC
+# value: 0 23  # iter 3821 # used 0.113406 # method BI RCC
+# value: 0 22  # iter 3855 # used 0.113933 # method BI RCC
+# value: 0 21  # iter 6477 # used 0.153841 # method BI RCC
+# value: 0 20  # iter 11284 # used 0.231004 # method BI RCC
+# value: 0 19  # iter 14503 # used 0.276533 # method BI RCC
+# value: 0 18  # iter 14504 # used 0.276607 # method BI RCC
+# value: 0 17  # iter 14737 # used 0.280089 # method BI RCC
+# value: 0 16  # iter 43345 # used 0.682426 # method BI RCC
+# value: 0 15  # iter 43346 # used 0.682503 # method BI RCC
+# value: 0 14  # iter 74499 # used 1.19216 # method BI RCC
+# value: 0 13  # iter 75408 # used 1.20604 # method BI RCC
+# value: 1 12  # iter 78467 # used 1.26164 # method BI RCC
+# value: 1 11  # iter 95603 # used 1.53378 # method BI RCC
+# value: 0 11  # iter 1284044 # used 20.6671 # method BI RCC
+# value: 0 10  # iter 1463204 # used 23.2351 # method BI RCC

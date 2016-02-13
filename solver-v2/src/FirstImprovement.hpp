@@ -9,10 +9,8 @@ class FirstImprovement {
 public:
     FirstImprovement( Neighborhood* NE) ;
     bool Start();
-//    BestImprovement(const BestImprovement& orig);
     ~FirstImprovement();
 private:
-//    std::shared_ptr<Model> model;
         Neighborhood* NE;
 
 };

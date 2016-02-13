@@ -55,7 +55,6 @@ bool EQviolation::test() {
     if (value == RHS) {
         assert(CurrentValue == 0);
     } else {
-        //        assert(CurrentValue == 1);
         assert(CurrentValue != 0);
     }
     return true;

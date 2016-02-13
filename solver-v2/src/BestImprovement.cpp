@@ -1,29 +1,21 @@
     #include "BestImprovement.hpp"
 
 BestImprovement::BestImprovement(Neighborhood* neighborhood) {
-//    this->model = model;
     NE = neighborhood;
 
 }
-
-//BestImprovement::BestImprovement(const BestImprovement& orig) {
-//}
 
 BestImprovement::~BestImprovement() {
 }
 
 bool BestImprovement::Start(bool alwaysCommit) {
-    //    debug;
     bool allowed = false;
     Move* bestMove;
     Move* mv; // = new Move();
 
     while (!allowed) {
-        //        debug;
         bestMove = NE->next();
         if (bestMove != NULL) {
-            //            debug;
-            //            bestMove = NE->next();
             allowed = NE->calculateDelta(bestMove);
             if (!allowed) {
                 delete bestMove;
@@ -37,17 +29,13 @@ bool BestImprovement::Start(bool alwaysCommit) {
    
     mv = NE->next();
     while (mv != NULL) {
-        //        mv = NE->next();
         allowed = NE->calculateDelta(mv);
         if (!allowed) {
             delete mv;
-            //                        illegal++;
             mv = NE->next();
             continue;
         }
-        //                legalmoves++;
         int compare = NE->compareMoves(mv, bestMove);
-        //        std::cout << "compare chose " << compare << std::endl;
         switch (compare) {
             case 1:
                 bestMove->copy(mv);
@@ -59,7 +47,6 @@ bool BestImprovement::Start(bool alwaysCommit) {
                 int choose = Random::Integer(NE->numberOfEqualMoves);
                 if (choose == 0) {
                     bestMove->copy(mv);
-                    //                    bestMove->copy(mv);
                 }
 
         }

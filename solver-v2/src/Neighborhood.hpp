@@ -6,9 +6,7 @@
 class Neighborhood {
 public:
     Neighborhood();
-    //    Neighborhood(const Neighborhood& orig) = 0;
     virtual ~Neighborhood() = 0;
-//    virtual bool hasNext() = 0;
     virtual Move* next() = 0;
     virtual bool calculateDelta(Move* mv) = 0;
     virtual bool commitMove(Move* mv) = 0;
@@ -16,8 +14,6 @@ public:
     virtual unsigned getSize() = 0;
     int numberOfEqualMoves = 0;
 
-//    virtual void setRandomCounter(unsigned numberOfRandomMoves) = 0;
-//    virtual bool hasNextRandom() = 0;
     virtual Move* nextRandom() = 0;
 
 

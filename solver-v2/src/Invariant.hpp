@@ -9,23 +9,16 @@
 //class Constraint;
 
 class Invariant {
-    //    friend class GeneralSolver;
     friend class Storage;
 
 public:
-    //    bool changeAdd = false;
-
     Invariant() {
-        //                std::cout << "invariant" << std::endl;
     }
 
     Invariant(const Invariant &a) {
         std::cout << &a << std::endl;
 
     }
-    // should be pointers instead of integers
-    /// Tells this Invariant that deltavalue of invariant or variable with ID is changed by change
-
     virtual void proposeChange(int ID, int change) = 0;
 
     /// Computes the deltavalue of this Invariant based on the vector of changes (Maybe that vector should be moved here)
@@ -56,7 +49,6 @@ public:
 
     void setObjective() {
         constraintPriority = 0;
-//        usedByConstraint = true;
 
 
     }
@@ -80,8 +72,6 @@ public:
         return type;
     }
 
-    /// not passing by value
-    /// Should only be used for testing i think
 
     std::unordered_map<int, coefType>& getCoefficients() {
         return coefficients;
@@ -105,10 +95,6 @@ public:
     }
     
 
-    /// Correspond to the priority the invariant should be updated. 
-    //    unsigned getLayer() {
-    //        return layer;
-    //    }
     /// Not sure this is relevant after Max invariant is introduced.
 
     int getStartValue() {
@@ -144,7 +130,6 @@ public:
         return bounds;
     }
 
-    /// Only used for testing
 
     void setVariablePointers(std::vector<Variable*>& vars) {
         VariablePointers = vars;
@@ -203,10 +188,6 @@ protected:
     int variableID = -1;
     Variable* variable;
     bool broken = false;
-    //    InvariantContainer invariants;
-    //    updateVector update;
-    //    std::set<Invariant*, compare_invariant> update;
-    //    bool changeAdd = false;
 
 private:
 

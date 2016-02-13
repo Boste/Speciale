@@ -5,9 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
-//#include <glpk.h>
 #include "coin/CoinMpsIO.hpp"
-//#include "../include/Constraints.hpp"<>
 #include <fstream>
 #include <algorithm>
 
@@ -60,11 +58,6 @@ public:
         return matcoeff[i];
     }
 
-//    const vector<elem> & getMatcoeff2(const int j) const {
-//        assert(j >= 0 && j < nvars);
-//        return matcoeff2[j];
-//    }
-
     unsigned getNcons() const {
         return ncons;
     }
@@ -74,9 +67,6 @@ public:
     }
 
     var getVar(const int j) const {
-//        if(j < 0 || j >= nvars){
-//            std::cout << "j " << j << " nvars " << nvars;
-//        }
         assert(j >= 0 && j < nvars);
         return vars[j];
     }
@@ -91,42 +81,18 @@ public:
         return direction;
     }
 
-//    unsigned getScale() const {
-//        return scale;
-//    }
-//    void setDigits(double number);
-    
     ~BP_Input(){
-//        for( vector<elem> vec : matcoeff){
-//            for(elem e : vec){
-//                delete e;
-//            }
-//        }
     }
-    //        Constraint getConstraint(const int i){
-    //            return cons[i];
-    //        } 
-
-
-    // Insert your getters
 
 protected:
-    // Insert your data members
     int nvars;
     int ncons;
     int nbinvars;
     int nintvars;
     int direction;
     unsigned scale;
-    //  std::vector<std::vector<unsigned int>> neighbor;    
-
-
-    //vector<double> objcoeff;
 
     vector<vector<elem> > matcoeff;
-//    vector<vector<elem> > matcoeff2;
-    //  vector<Constraint*> cons;
-
     vector<bounds> bterms;
     vector<var> vars;
     vector<unsigned> objVars;
@@ -136,19 +102,10 @@ class BP_Output {
     friend ostream& operator<<(ostream& os, const BP_Output& out);
     friend istream& operator>>(istream& is, BP_Output& out);
 public:
-    BP_Output(const BP_Input& i);
-    BP_Output& operator=(const BP_Output& out);
-    // Insert your getters
 
-    int assignment(int var) const {
-        return varAssignment[var];
-    }
-
-    void assign(int var, bool b);
 protected:
     const BP_Input& in;
     vector<bool> varAssignment;
-    // Insert your data members
 };
 
 

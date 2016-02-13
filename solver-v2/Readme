@@ -1,0 +1,12 @@
+The framework uses Gecode andthe path to needs to be set in Makefile. 
+Three classes are used for reading and solving binary programming instances, BP_Data, BPSolver and the main class, but can be ommited. 
+BP_Data is used to read input files in mps format and uses the Coin framework. If it is used the path to Coin/coin-CoinUtils must be set in the Makefile.
+BPSolver uses BP_Data to create a model for a binary programming instance.
+main.cpp is set up to run the framework to solve binary programming instances taking the following arguments: 
+-i [path to instance] 												Must be specified.
+-a [The algorithm number used to solve it] 		The third algorithm is used if not specified.
+-s [Random seed]															If not set, the one given in 'Constants.hpp' is used.
+-t [Total time] 															Total time limit to find solution. 120 seconds is used if not specified.
+-g [Time for Gecode]													Time limit for each time Gecode search for an initial solution. Set to 10 seconds if not specified.
+
+BPSolver inheirts from GPSolver but it is possible to create a GPSolver object and call its methods from it, creating variables, constraints and solving.

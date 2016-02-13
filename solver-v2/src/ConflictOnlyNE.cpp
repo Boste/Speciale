@@ -9,11 +9,7 @@ ConflictOnlyNE::ConflictOnlyNE(std::shared_ptr<Storage> model, std::shared_ptr<S
     lastSuggested = model->getViolatedConstraints().size()*2;
 }
 
-//MinConflictFlipNE::MinConflictFlipNE(const MinConflictFlipNE& orig) {
-//}
-
 ConflictOnlyNE::~ConflictOnlyNE() {
-    //    std::cout << "Destructing MinConflictFlipNE" << std::endl;
 }
 
 Move* ConflictOnlyNE::next() {
@@ -34,10 +30,7 @@ Move* ConflictOnlyNE::next() {
     while (moveIterator != model->getViolatedConstraints().end()) {
         while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
             int id = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
-            //            if(model->getVariable(id)->isFixed())
-
             if (calculated.at(id) != iter) {
-                //                int id = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
                 calculated.at(id) = iter;
                 Variable* var = model->getVariable(id);
                 if (var->isFixed()) {
@@ -47,9 +40,7 @@ Move* ConflictOnlyNE::next() {
 
                 moveCounter++;
                 Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-                //                std::cout << mv << std::endl;
                 mv->deltaVector.resize(state->getEvaluation().size(), 0);
-                //                mv->setID(mv->var->getID());
                 return mv;
 
 
@@ -63,71 +54,7 @@ Move* ConflictOnlyNE::next() {
     firstMove = true;
     return NULL;
 
-
-
-    //    Variable* var = model->getVariable(this->var);
-    //
-    //    moveCounter++;
-    //    Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-    //    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-    //    return mv;
 }
-//Move* ConflictOnlyNE::next() {
-//    
-//    Variable* var = model->getVariable(this->var);
-//
-//    moveCounter++;
-//    Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-//    mv->deltaVector.resize(state->getEvaluation().size(), 0);
-//    return mv;
-//}
-
-//bool ConflictOnlyNE::hasNext() {
-//    if (firstMove) {
-//        iter++;
-//        firstMove = false;
-//        lastSuggested = suggested;
-//        moveCounter = 0;
-//        suggested = 0;
-//        moveIterator = model->getViolatedConstraints().begin();
-//
-//
-//    }
-//
-//    if (model->getViolatedConstraints().empty()) {
-//        return false;
-//    }
-//    while (moveIterator != model->getViolatedConstraints().end()) {
-//        while (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
-//            if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
-//                suggested++;
-//                var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
-//                calculated.at(var) = iter;
-//                return true;
-//            } else {
-//                moveCounter++;
-//            }
-//        }
-//        moveIterator++;
-//        moveCounter = 0;
-//    }
-//    firstMove = true;
-//    return false;
-//    //    if (moveCounter < (*moveIterator).second->getVariablePointers().size()) {
-//    //
-//    //        if (calculated.at((*moveIterator).second->getVariablePointers().at(moveCounter)->getID()) != iter) {
-//    //            var = (*moveIterator).second->getVariablePointers().at(moveCounter)->getID();
-//    //
-//    //            return true;
-//    //        } else {
-//    //            
-//    //        }
-//    //    } else {
-//    //        moveIterator++;
-//    //    }
-//    //    int rand = Random::Integer(model->getViolatedConstraints().size() - 1);
-//
-//}
 
 unsigned ConflictOnlyNE::getSize() {
     return lastSuggested;
@@ -141,30 +68,10 @@ Move* ConflictOnlyNE::nextRandom() {
     }
     int rand2 = Random::Integer(0, (*moveIterator).second->getVariablePointers().size() - 1);
     Variable* var = (*moveIterator).second->getVariablePointers().at(rand2);
-
-
-    //        Variable* iv = model->getMaskAt(Random::Integer(0, (int) model->getMask().size() - 1));
-    //    randomCounter++;
-    //    //    Move* mv = new Move(iv, (1 - iv->getCurrentValue()) - iv->getCurrentValue());
     Move* mv = new Move(var, (1 - var->getCurrentValue()) - var->getCurrentValue());
-    //    //    mv->deltaVector.resize(state->getEvaluation().size());
     mv->deltaVector.resize(state->getEvaluation().size(), 0);
     return mv;
 }
-
-//bool ConflictOnlyNE::hasNextRandom() {
-//    return false;
-//    if (randomCounter < randomMovesWanted) {
-//        return true;
-//    } else {
-//        randomCounter = 0;
-//        return false;
-//    }
-//}
-
-//void ConflictOnlyNE::setRandomCounter(unsigned numberOfRandomMoves) {
-//    randomMovesWanted = numberOfRandomMoves;
-//}
 
 bool ConflictOnlyNE::calculateDelta(Move* mv) {
     std::vector<int>& change = mv->getDeltaVector();
@@ -227,15 +134,11 @@ bool ConflictOnlyNE::commitMove(Move* mv) {
         if (invar->representConstraint()) {
             if (invar->getCurrentValue() == 0) {
                 if (invar->getInvariantPointers().back()->inViolatedConstraints()) {
-                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->removeViolatedConstraint(invar->getInvariantPointers().back());
                 }
             } else {
                 if (!invar->getInvariantPointers().back()->inViolatedConstraints()) {
-                    //                    std::unordered_map<unsigned, invariant>& vioCons = model->getViolatedConstraints();
                     model->addViolatedConstraint(invar->getInvariantPointers().back());
-                    //                    vioCons[invar->getInvariantPointers().back()->getID()] = invar->getInvariantPointers().back();
-                    //                    invar->getInvariantPointers().back()->setInViolatedConstraints(true);
 
                 }
             }
@@ -246,7 +149,3 @@ bool ConflictOnlyNE::commitMove(Move* mv) {
     }
     return true;
 }
-
-//void MinConflictFlipNE::makeMove(Move* mv, std::shared_ptr<State> st) {
-//    commitMove(mv, st);
-//}

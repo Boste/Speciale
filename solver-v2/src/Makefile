@@ -1,5 +1,9 @@
-include ../../../make/make.local
-## You may need to edit this path to gecode
+#include ../../../make/make.local
+
+
+
+
+## set path to gecode
 #UNAME_S := $(shell uname -s)
 #ifeq ($(UNAME_S),Linux)
 #	GECODE_HOME=${HOME}/gecode/release-4.3.3
@@ -8,53 +12,29 @@ include ../../../make/make.local
 #		GECODE_HOME=/opt/gecode/release
 #  	endif
 #endif
+
+
+# Set path to Coin
 #COIN = ${HOME}/Coin/coin-CoinUtils
+
+
 PROG=xyz
 MAKE=make
 LIBDIR=../lib
-#GECODE_LINKS=-lgecodegist -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport -lgecodedriver -lgecodeminimodel -lgecodeset -lgecodefloat     Try without gist
-GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport #-lgecodedriver  -lgecodeminimodel -lgecodeset -lgecodefloat
+GECODE_LINKS= -lgecodeint -lgecodesearch -lgecodekernel -lgecodesupport 
 
-#COIN = ${HOME}/Coin/coin-CoinUtils
-#BOOST = ${HOME}/boost/boost_1_57_0
-#BOOST_LIB = ${HOME}/boost/boost_1_57_0/stage/lib
-#CXXFLAGS = -std=c++11 -Wall #-O3 # -g
-#EASYLOCALLIB = -lEasyLocal -lboost_program_options
-
-#LDFLAGS = -L$(EASYLOCAL)/lib -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
-#LDFLAGS = -L$(BOOST_LIB) -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
 LDFLAGS = -L../lib -L/usr/lib -L/usr/lib/i386-linux-gnu/ 
-#LIBS = $(EASYLOCALLIB) 
-
-
 
 
 LD=g++
-#CXX=g++
-#CXX=clang
-
-#CXXFLAGS = -std=c++11 -g -Wextra -Wall  -Wfatal-errors # -DNDEBUG
-#CXXFLAGS = -std=c++14 -g -Wextra -Wall  -Wfatal-errors #-fopenmp  # -DNDEBUG
 CXXFLAGS = -std=c++14 -O3 -Wextra -Wall  -Wfatal-errors # -DNDEBUG
-#CPPFLAGS = -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 CPPFLAGS = -I../include -I$(COIN)/include -I${GECODE_HOME} 
-#CPPFLAGS = -I$(EASYLOCAL)/include -I$(BOOST) -I../include -I$(COIN)/include -I${GECODE_HOME} 
 LDFLAGS +=   -pthread -Wl,--rpath,$(GECODE_HOME) -Wl,--rpath,$(COIN)/lib -L${GECODE_HOME} -L$(COIN)/lib  #-L/usr/lib/gcc/i686-linux-gnu/4.9#-Wl, --rpath,$(LIBDIR)
 LIBS += ${GECODE_LINKS} -lCoinUtils -lz -llapack -lblas -lm -lbz2  #-lgomp
 
-#SOURCE_FILES = main.cpp BP_Data.cpp LSSpace.cpp GeneralSolver.cpp ../include/constraints/linear.cpp Sum.cpp #../include/constraints/invariant.cpp #IntegerVariable.cpp
-# BP_Basics.cpp BP_Helpers.cpp 
-# ../include/constraints/Equal.cpp ../include/constraints/LinearComb.cpp ../include/constraints/Constraint.cpp ../include/constraints/ConstraintSystem.cpp
 OBJECT_FILES = main.o BP_Data.o LocalSearchEngine.o GPSolver.o  Sum.o Storage.o State.o Neighborhood.o FlipNeighborhood.o \
-Random.o Clock.o Multistop.o GecodeEngine.o Max.o DependencyDigraph.o BestImprovement.o FirstImprovement.o RandomWalk.o  SwapNeighborhood.o \
-LEQviolation.o EQviolation.o TabuSearch.o TabuSearchFI.o RandomConflictConNE.o EvalFlipNE.o RestrictedFlipNE.o ConflictOnlyNE.o  # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o Flip2Neighborhood.o
-# BP_Basics.o BP_Helpers.o 
-#../include/constraints/Equal.o ../include/constraints/LinearComb.o ../include/constraints/Constraint.o ../include/constraints/ConstraintSystem.o
-#HEADER_FILES = BP_Data.hpp Constants.hpp LSSpace.hpp GeneralSolver.hpp ../include/constraints/Sum.hpp ../include/constraints/linear.hpp IntegerVariable.hpp invariant.hpp
-#BP_Basics.hpp BP_Helpers.hpp 
-#../include/constraints/Equal.hpp ../include/constraints/LinearComb.hpp ../include/constraints/Constraint.hpp ../include/constraints/ConstraintSystem.hpp
-
-
+Random.o Clock.o Multistop.o GecodeEngine.o Max.o DependencyDigraph.o BestImprovement.o FirstImprovement.o RandomWalk.o  \
+LEQviolation.o EQviolation.o TabuSearch.o RandomConflictConNE.o EvalFlipNE.o RestrictedFlipNE.o ConflictOnlyNE.o  # Test.o Move.o #FlipMove.o ValueChangeMove.o #linear.o #Invariant.o Flip2Neighborhood.o
 
 xyz: $(OBJECT_FILES)
 	$(LD) $(LDFLAGS) $(OBJECT_FILES) $(LIBS) -o ${PROG}

@@ -15,8 +15,7 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
-\documentclass{beamer}
-
+\documentclass[12pt]{beamer}
 \mode<presentation> {
 
 % The Beamer class comes with a number of default slide themes
@@ -85,21 +84,32 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{tikz}
+\usepackage{color}
+\usepackage{tkz-graph}
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,matrix} 
-\tikzstyle{vertex}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
-\tikzstyle{selectedvertex} = [vertex, fill=red!24] 
-\tikzstyle{edge} = [draw,thick,-] 
+\usepackage{mathtools}% Loads amsmath
+\usepackage{amsmath}
+\usetikzlibrary{decorations.pathreplacing}	
+
+% \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,matrix} 
+% \tikzstyle{vertex}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
+% \tikzstyle{selectedvertex} = [vertex, fill=red!24] 
+% \tikzstyle{edge} = [draw,thick,-] 
+% \tikzstyle{arc}= [draw,thick,->,shorten >=1pt,>=stealth'] 
+% \tikzstyle{arcl} = [draw,thick,->,shorten>=1pt,>=stealth',bend left=25] 
+% \tikzstyle{arcr} = [draw,thick,->,shorten >=1pt,>=stealth']
+% \tikzstyle{rpath}=[draw, thick,->,shorten >=1pt,>=stealth',red, opacity=0.4]
+% \tikzstyle{weight} = [font=\small] 
+% \tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+% \tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20] 
+% \newcommand*{\vpointer}{\vcenter{\hbox{\scalebox{2}{\Huge\pointer}}}}	
+% \def\Arrow{\raisebox{3\height}{\scalebox{3}{$\Rightarrow$}}}
 \tikzstyle{arc}= [draw,thick,->,shorten >=1pt,>=stealth'] 
-\tikzstyle{arcl} = [draw,thick,->,shorten>=1pt,>=stealth',bend left=25] 
-\tikzstyle{arcr} = [draw,thick,->,shorten >=1pt,>=stealth']
-\tikzstyle{rpath}=[draw, thick,->,shorten >=1pt,>=stealth',red, opacity=0.4]
-\tikzstyle{weight} = [font=\small] 
-\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
-\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20] 
-\newcommand*{\vpointer}{\vcenter{\hbox{\scalebox{2}{\Huge\pointer}}}}	
-\def\Arrow{\raisebox{3\height}{\scalebox{3}{$\Rightarrow$}}}
+%\tikzstyle{vertex}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=10pt]
+\newcommand{\vertex}{\node[vertex]}
+\def\Arrow{{\scalebox{2}{$\Rightarrow$}}}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -127,7 +137,7 @@ Institut for Matematik og Datalogi
 \end{frame}
 
 \begin{frame}
-\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\frametitle{Overblik} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{}
 %commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
@@ -149,7 +159,6 @@ Institut for Matematik og Datalogi
 \begin{itemize}[<+->]
 \item 
 \item 
-$O(log^* n + \Delta)$ rounds, $\Delta$ is the highest vertex degree 
 \end{itemize}
 
 
@@ -203,7 +212,6 @@ En mulig løsning: \\
 
  $z = 2\cdot 1 + 1\cdot 0 + 1\cdot 1  =3$ \\
 \end{minipage}
-
 \end{frame}
 
 %------------------------------------------------
@@ -214,6 +222,7 @@ En mulig løsning: \\
 \begin{itemize}[<+->]  
 \item Simplex metode.
 \item Ligningsbaseret model.
+\item Kan ikke altid finde en (optimal) løsning inden for rimelig tid.
 \item Gurobi, GLPK, SCIP.
 \end{itemize}
 \begin{center}
@@ -235,19 +244,20 @@ En mulig løsning: \\
 \begin{frame}
 \frametitle{Lokal søgning}
 \begin{itemize}[<+->]
-\item Undersøger mange små ændringer.
-\item Kan ikke garentere optimalitet.
-\item Ofte skrevet til et specifikt problem.
+\item Ændre få variable ad gangen og ser beregner effekten.
+\item Kan undersøge mange mulige løsninger.
+\item Kan ikke garantere optimalitet.
+\item Ofte implementeret til specifikke problemer.
 \end{itemize}
 % \begin{center}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Constraint programming med lokal søgning}
+\frametitle{Constraint programming med lokalsøgning}
 \begin{itemize}[<+->]
 \item Formulering af problem som i Constraint programming. 
-\item Genanvendelse af algorithmer.
+\item Genanvendelse af algoritmer.
 \item Giver mulighed for at fokusere på modellering.
 \item Solver fx Comet og OscaR.
 \end{itemize}
@@ -256,12 +266,12 @@ En mulig løsning: \\
 
 
 \begin{frame}
-\frametitle{Det er projekt}
+\frametitle{Hvad er gjort i det her projekt}
 \begin{itemize}[<+->] 
 \item Kombinere Gecode og lokal søgning.
 \item Undersøger effekten af Gecode. 
 \item Tester brugen af invarianter. 
-\item Introducere en ny evaluerings metode.
+\item Introducerer en ny evalueringsmetode.
 \end{itemize}
 \end{frame}
 
@@ -272,7 +282,7 @@ En mulig løsning: \\
 
 
 %------------------------------------------------
-\section{Opbygning af Systemet}
+\section{Opbygning af systemet}
 
 \begin{frame}
 \frametitle{Overblik}
@@ -286,7 +296,7 @@ Her er et flot billed af formulering -> GPSolver -> GecodeEngine -> LocalSearcEn
 
 
 \begin{frame}
-\frametitle{Brugen af Gecode}
+\frametitle{Start løsning - GecodeEngine}
 \begin{itemize}[<+->]
 \pause 
 \item Opret variable og begrænsninger.
@@ -298,23 +308,27 @@ Her er et flot billed af formulering -> GPSolver -> GecodeEngine -> LocalSearcEn
 
 %------------------------------------------------
 \begin{frame}
-\frametitle{Transformation af Modellen}
+\frametitle{Forberedelse til lokalsøgning}
 \begin{itemize}[<+->]
-\item 
-\item 
-\item 
-\item 
+\item Definer variable ud fra betingelser hvis muligt.
+\item Graf over afhængighed.
+\item Betingelser lavet som invarianter.
+\item Ordning af invarianter.
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Maximal matching for $G$}
-The maximal matching of $\mathcal{M} = M_1,\dots, M_\Delta$ can be computed. The
-maximal matching $M_1$ of forest $F_1$ is computed and the vertices removed from $V$. Then the
-maximal matching $M_2$ is computed and vertices removed and so on for all forests $F_3',\dots ,
-F_\Delta'$. This gives a total of 3$\Delta$ rounds
+\frametitle{Uafhængige variable gjort afhængige}
+\begin{itemize}[<+->]
+\item Færre mulige løsninger der skal undersøges.
+\item Bruger lidt mere tid på at evaluere en løsning.
+\item $x_1 +x_2 -x_3 = 1$.
+\item $x_3 = x_1 +x_2 -1$.
+\item $x_3$ er gjort afhængig af $x_1$ og $x_2$. 
+\item Fjerner betingelsen da den altid vil være overholdt.
+\end{itemize}
 
 \end{frame}
 
@@ -322,68 +336,373 @@ F_\Delta'$. This gives a total of 3$\Delta$ rounds
 
 
 \begin{frame}
-\frametitle{Algorithm}
-
-\begin{algorithm}[H]
-\begin{algorithmic}[1]
- {\footnotesize \STATE Compute forest decomposition $F_1 \dots F_\Delta$ 
- \STATE Make all edges directed from lowest ID to higher ID 
- \STATE Compute 3-coloring of each forest $F_i$ in parallel
- \STATE $\mathcal{M}\leftarrow \emptyset$
- \STATE $V' \leftarrow V$ 
-\FOR{$i\leftarrow1$ to $\Delta$}
-\FOR{$j\leftarrow1$ to $3$}
- \STATE let $c_j$ be the set of vertices colored $j$ in $F_i$
- \STATE Every $u \in c_j \cap V'$ selects one outgoing edge in $(V',E_i)$
- \STATE Let $M_j$ be the set of edges selected
- \STATE $\mathcal{M} \leftarrow \mathcal{M} \cup M_j$
- \STATE $V' \leftarrow V'\setminus \{u \mid u$ is matched in $M_j\}$ 
-\ENDFOR
-\ENDFOR }
-\end{algorithmic}
-\caption{pseudocode for maximal matching}
-\end{algorithm}
+\frametitle{Graf over afhængigheder}
+\begin{itemize}[<+->]
+ \item $x_3 = x_1 +x_2 -1$.
+ \item $x_4 = x_3 + x_5 - 1$.
+\end{itemize}
+\onslide<3-6>
+ \begin{minipage}{0.3\linewidth}
+% \begin{figure}
+     \centering
+     \begin{tikzpicture}[scale=0.9]
+        \vertex[label=$x_1$](x1) at (0,4) {};
+        \vertex[label=$x_2$](x2) at (0,3) {};
+        \vertex[label=$x_3$](x3) at (0,2) {};
+        \vertex[label=$x_4$](x4) at (0,1) {};
+        \vertex[label=$x_5$](x5) at (0,0) {};
+            \end{tikzpicture}
+ \end{minipage}
+ \onslide<4-6>
+\Arrow
+%   \onslide<4-5>
+% \visible<4-5>
+    \begin{minipage}{0.5\linewidth}
+    \centering
+  \begin{tikzpicture}[scale=0.7]
+          \onslide<4-6>{\vertex[label=$x_1$](x1) at (0,4) {};}
+           \onslide<4-6>{\vertex[label=$x_2$](x2) at (0,2) {};}
+           \onslide<5-6>{\vertex[label=$x_5$](x5) at (0,0) {};}
+           \onslide<4-5>{\vertex[label=$x_3$](i1) at (2,3) {};}
+           \onslide<5>{\vertex[label=$x_4$](i2) at (4,1) {};}
+      \tikzset{EdgeStyle/.style={->}}
+           \onslide<4-6>{\Edge(x1)(i1)}
+           \onslide<4-6>{\Edge(x2)(i1)}
+           \onslide<5-6>{\Edge(i1)(i2)}
+           \onslide<5-6>{\Edge(x5)(i2)}
+          %        \begin{tikzpicture}[scale=0.7]
+%             \onslide<5>{\vertex[label=$x_1$](x1) at (0,4) {};}
+%              \onslide<5>{\vertex[label=$x_2$](x2) at (0,2) {};}
+             \onslide<5-6>{\vertex[label=$x_5$](x5) at (0,0) {};}
+             \onslide<6>{\vertex[label= \color{blue}$y_1$](i1) at (2,3) {};}
+             \onslide<6>{\vertex[label= \color{blue}$y_2$](i2) at (4,1) {};}
+        \tikzset{EdgeStyle/.style={->}}
+%              \onslide<5-6>{\Edge(x1)(i1)}
+%              \onslide<5-6>{\Edge(x2)(i1)}
+%              \onslide<6>{\Edge(i1)(i2)}
+%              \onslide<6>{\Edge(x5)(i2)}
+      \end{tikzpicture}
+   \end{minipage}
 \end{frame}
 
 %------------------------------------------------
-\section{Analysis}
 \begin{frame}
-\frametitle{Analysis}
+\frametitle{Problemer med kredse}
+\pause
+ \begin{minipage}{0.47\linewidth}
+  $y_1 = x_1 - y_3$ \\
+  $y_2 = y_1 $ \\
+  $y_3 = x_3 +y_2-1$  \\
+  $x_1,x_2,y_1,y_2,y_3 \in \{0,1\}$
+ \end{minipage}
+ \begingroup
+    \fontsize{9pt}{12pt}\selectfont
+ \begin{minipage}{0.47\linewidth}
+\begin{tikzpicture}[scale=1.9]
+        \onslide<3>{\vertex[label=$x_1$](x1) at (0,1) {0};}
+        \onslide<5-8>{\vertex[label=$x_1$](x1) at (0,1) {1};}
+        \onslide<3-8>{\vertex[label=$x_2$](x2) at (0,0) {1};}
+        \onslide<3-4>{\vertex[label=$y_1$](y1) at (1.5,1) {0};}
+        \onslide<6-7>{\vertex[label=$y_1$](y1) at (1.5,1) {1};}
+        \onslide<3-5>{\vertex[label=$y_2$](y2) at (2,0) {0};}
+        \onslide<7-8>{\vertex[label=$y_2$](y2) at (2,0) {1};}
+        \onslide<3-6>{\vertex[label=$y_3$](y3) at (1,0) {0};}
+        \onslide<8>{\vertex[label=$y_3$](y3) at (1,0) {1};}
+        \onslide<4>{\vertex[label=$x_1$](x1) at (0,1) {\color{red}1};}
+        \onslide<5>{\vertex[label=$y_1$](y1) at (1.5,1) {\color{red}1};}
+        \onslide<8>{\vertex[label=$y_1$](y1) at (1.5,1) {\color{red}0};}
+        \onslide<6>{\vertex[label=$y_2$](y2) at (2,0) {\color{red}1};}
+        \onslide<7>{\vertex[label=$y_3$](y3) at (1,0) {\color{red}1};}
+        \tikzset{EdgeStyle/.style={->}}
+             \onslide<3,5-8>{\Edge(x1)(y1)}
+             \onslide<3-4,6-8>{\Edge(y1)(y2)}
+             \onslide<3-5,7-8>{\Edge(y2)(y3)}
+             \onslide<3-6,8>{\Edge(y3)(y1)}
+             \onslide<3-8>{\Edge(x2)(y3)}
+             %
+             \onslide<4>{\Edge[style={color=red}](x1)(y1)}
+             \onslide<5,8>{\Edge[style={color=red}](y1)(y2)}
+             \onslide<6>{\Edge[style={color=red}](y2)(y3)}
+             \onslide<7>{\Edge[style={color=red}](y3)(y1)}
+             %\onslide<3-7>{\Edge[style={color=red}](x2)(y3)}
+      \end{tikzpicture}
+   \end{minipage}
+\endgroup
+\end{frame}
+%-------------------------------------------------------
+ \begin{frame}
+ \frametitle{Identificering af kredse}
+ \begin{itemize}[<+->]
+  \item Dybde først lignende algoritme, af Tarjan. 
+  \item Finder stærke sammenhængskomponenter (SCC). 
+  \item Genopretter en betingelse og variable fra hver SCC.
+  \item Gentager indtil ingen stærke sammenhængskomponenter er fundet. 
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------
+ \begin{frame}
+ \frametitle{Identificering af kredse}
+ \begin{minipage}{0.4\linewidth}
+  \begin{tikzpicture}[scale=1.7]
+%  \onslide<3>{\vertex[label=$x_1$](x1) at (0,1) {0};}
+        \onslide<1-3>{\vertex[label=$x_1$](x1) at (0,1) {};}
+         \onslide<1-3>{\vertex[label=$x_2$](x2) at (0,0) {};}
+        \onslide<1-3>{\vertex[label=$y_1$](y1) at (1.5,1) {};}
+%         \onslide<>{\vertex[label=$y_1$](y1) at (1,1) {1};}
+        \onslide<1-3>{\vertex[label=$y_2$](y2) at (2,0) {};}
+%         \onslide<7-8>{\vertex[label=$y_2$](y2) at (2,1) {1};}
+        \onslide<1-3>{\vertex[label=$y_3$](y3) at (1,0) {};}
+        \tikzset{EdgeStyle/.style={->}}
+             \onslide<1-3>{\Edge(x1)(y1)}
+             \onslide<1-3>{\Edge(y1)(y2)}
+             \onslide<1-3>{\Edge(y2)(y3)}
+             \onslide<1-3>{\Edge(y3)(y1)}
+             \onslide<1-3>{\Edge(x2)(y3)}
+  \end{tikzpicture}
+  \end{minipage}
+  \onslide<2-3>
+  \Arrow \hfill
+     \begin{minipage}{0.45\linewidth}
+    \begin{tikzpicture}[scale=1.7]
+ \onslide<2-3>{\vertex[label=$x_1$](x1) at (0,1) {};}
+         \onslide<2-3>{\vertex[label=$x_2$](x2) at (0,0) {};}
+         \onslide<2-3>{\vertex[label=$x_3$](x3) at (0,-1) {};}
+         \onslide<2-3>{\vertex[label=$y_1$](y1) at (1.5,1) {};}
+%         \onslide<>{\vertex[label=$y_1$](y1) at (1,1) {1};}
+%         \onslide<2-3>{\vertex[label=$y_2$](y2) at (2,1) {};}
+%         \onslide<7-8>{\vertex[label=$y_2$](y2) at (2,1) {1};}
+        \onslide<2-3>{\vertex[label=$y_3$](y3) at (1,0) {};}
+        \tikzset{EdgeStyle/.style={->}}
+              \onslide<2-3>{\Edge(x1)(y1)}
+              \onslide<2-3>{\Edge(x3)(y3)}
+%              \onslide<2-3>{\Edge(y2)(y3)}
+              \onslide<2-3>{\Edge(y3)(y1)}
+             \onslide<2-3>{\Edge(x2)(y3)}
+  \end{tikzpicture}  
+  \end{minipage}
+  
+  \onslide<3>
+  \begin{itemize}[<+->]
+   \item Genindfører variablen $x_3$ og betingelsen.
+   \item $ y_2 = y_1 \Leftrightarrow y_1 -x_3  =0$.
+  \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Forberedelse til lokalsøgning}
 \begin{itemize}
- \item First the graph $G$ is decomposed into at most $\Delta$ forests in constant time
-\item In each forest the trees can be 3-colored in $O(log^* n)$ rounds in parallel
-\item Computing the maximal matching in a tree takes three rounds
-\item There are $\Delta$ forest hence the number of rounds for the matching is $O(\Delta)$
-\item The total number of rounds need is $O(log^* n + \Delta)$
+\item Definer variable ud fra betingelser hvis muligt.
+\item Graf over afhængighed.
+\item \textbf{Betingelser lavet som invarianter.}
+\item Ordning af invarianter.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+ \begin{frame}
+ \frametitle{Betingelser erstattet af invarianter}
+ \begin{itemize}[<+->]
+  \item Betingelser som ikke er brugt til at definere variable. 
+  \item Betingelses specifik oprettelse af invarianter.
+  \item Tilføj invarianter til grafen. 
+  \item Linear betingelsen opretter to invarianter.
+  \item Invarianter til summering af overtrædelse betingelser.
+\end{itemize}
+ 
+ \end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}
+ \frametitle{Invarianter for linear}
+ \begin{itemize}[<+->]
+  \item Summering af venstresiden: $\;\underbrace{x_1 + 2x_2 -x_3}_{y_1} \leq 2$
+  \item Overtrædelse af betingelsen: $\; \underbrace{y_1 \leq 2}_{y_2} \;, $
+\end{itemize}
+     $\qquad \qquad y_2 = \begin{cases}
+        y_1-2, & \text{if $y_1> 2$}.\\
+        0, & \text{otherwise}.
+       \end{cases}$
+\end{frame}
+%-----------------------------------------------------
+\begin{frame}
+ \frametitle{Endelige graf}
+   \begin{tikzpicture}[scale=1.7]
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (0.8,0.3) -- (0.8,-0.3) node [black,midway,yshift=-0.4cm] 
+{\footnotesize $Variable$};
+\onslide<2-5>{
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (0.8,1.8) -- (0.8,0.8) node [black,midway,yshift=-0.4cm] 
+{\footnotesize $Afhængige$};
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (1,1.3) -- (1,1.3) node [black,midway,yshift=-0.4cm] 
+{\footnotesize $variable$};
+}
+\onslide<3-5>{
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (0.8,2.7) -- (0.8,2.3) node [black,midway,yshift=-0.4cm] 
+{\footnotesize $Venstre\; side$};
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (1,2.5) -- (1,2.5) node [black,midway,yshift=-0.4cm] 
+   {\footnotesize $af\; betingelser$};
+   }
+   \onslide<4-5>{
+    
+   
+\draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (0.8,4.2) -- (0.8,3.7) node [black,midway,yshift=-0.4cm] 
+   {\footnotesize $Overtrædelse$};
+      \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (1,3.95) -- (1,3.95) node [black,midway,yshift=-0.4cm] 
+   {\footnotesize $af\; betingelser$};
+   }
+   \onslide<5>{
+   \draw [decorate,decoration={brace,amplitude=5pt},xshift=-0pt,yshift=-0pt,rotate=270]
+   (0.8,5.5) -- (0.8,5) node [black,midway,yshift=-0.4cm] 
+   {\footnotesize $Opsumm	ering$};
+   }
+         \onslide<1-5>{\vertex[label=$x_1$](x1) at (0,1.5) {};}
+          \onslide<1-5>{\vertex[label=$x_2$](x2) at (0,-.5) {};}
+         \onslide<2-5>{\vertex[label=$y_1$](y1) at (1.5,1) {};}
+         \onslide<3-5>{\vertex[label=$y_3$](y2) at (2.5,0) {};}
+         \onslide<2-5>{\vertex[label=$y_2$](y3) at (1,0) {};}
+         \onslide<3-5>{\vertex[label=$y_4$](y4) at (2.5,1.5) {};}
+         \onslide<4-5>{\vertex[label=$y_5$](y5) at (4,0) {};}
+         \onslide<4-5>{\vertex[label=$y_6$](y6) at (4,1.5) {};}
+         \onslide<5>{\vertex[label=$y_7$](y7) at (5.3,0.75) {};}
+         \tikzset{EdgeStyle/.style={->}}
+              \onslide<2-5>{\Edge(x1)(y1)}
+              \onslide<3-5>{\Edge(y1)(y2)}
+              \onslide<3-5>{\Edge(x1)(y4)}
+              \onslide<3-5>{\Edge(y1)(y4)}
+              \onslide<3-5>{\Edge(y3)(y2)}
+              \onslide<2-5>{\Edge(y3)(y1)}
+              \onslide<2-5>{\Edge(x2)(y3)}
+              \onslide<3-5>{\Edge(x2)(y2)}
+	      \onslide<4-5>{\Edge(y4)(y6)}
+              \onslide<4-5>{\Edge(y2)(y5)}
+              \onslide<5>{\Edge(y5)(y7)}
+              \onslide<5>{\Edge(y6)(y7)}
+   \end{tikzpicture}
+ \end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Forberedelse til lokalsøgning}
+\begin{itemize}
+\item Definer variable ud fra betingelser hvis muligt.
+\item Graf over afhængighed.
+\item Betingelser omdannet til invarianter.
+\item \textbf{Ordning af invarianter.}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Ordning af invarianter}
+\begin{itemize}
+\item Lav ordning af invarianter til når de skal opdateres. 
+\item Forhindre flere opdateringer af samme invariant.
+\item Ordningen kan laves med dybde først søgning i grafen.
+\item Opret en liste for hver uafhængig variable. 
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Eksempel for en variable}
+\centering
+% \begin{figure}[!t]
+% \centering
+% \includegraphics[width=0.6\linewidth]{1.pdf} 
+% % \end{center} 
+% \end{figure}%
+\begingroup
+\begin{center}
+    \fontsize{9pt}{12pt}\selectfont
+  \begin{tikzpicture}[scale=1]
+        \onslide<1-16>{\vertex[label=$x_1$](x1) at (0,1) { };}
+         \onslide<1-9>{\vertex[label=$y_1$](y1) at (2,0) { };}
+        \onslide<1-13>{\vertex[label=$y_2$](y2) at (2,2) { };}
+        \onslide<1-5>{\vertex[label=$y_3$](y3) at (3,1) { };}
+        \onslide<1-8>{\vertex[label=$y_4$](y4) at (4,0) {};}
+        \onslide<1-4>{\vertex[label=$y_5$](y5) at (6,1) {};}
+        \tikzset{EdgeStyle/.style={->}}
+             \onslide<1,3-16>{\Edge(x1)(y1)}
+             \onslide<1-11,13,15,16>{\Edge(x1)(y2)}
+             \onslide<1-10,12-16>{\Edge(x1)(y3)}
+             \onslide<1-6,8,10-16>{\Edge(y1)(y4)}
+             \onslide<1-2,4,5,7-16>{\Edge(y1)(y3)}
+             \onslide<1-12,14-16>{\Edge(y2)(y5)}
+             \onslide<1-3,6-16>{\Edge(y3)(y5)}
+             \onslide<1-7,9-16>{\Edge(y4)(y5)}
+%         \onslide<13>{\vertex[label=$x_1$](x1') at (0,1) {};}
+
+        \onslide<10-16>{\vertex[label=$y_1$](y1') at (2,0) {4};}
+        \onslide<14-16>{\vertex[label=$y_2$](y2') at (2,2) {5};}
+        \onslide<6-16>{\vertex[label=$y_3$](y3') at (3,1) {2};}
+        \onslide<9-16>{\vertex[label=$y_4$](y4') at (4,0) {3};}
+        \onslide<5-16>{\vertex[label=$y_5$](y5') at (6,1) {1};}
+        \tikzset{EdgeStyle/.style={->}}
+             \onslide<2,10>{\Edge[style={color=red}](x1)(y1)}
+             \onslide<12,14>{\Edge[style={color=red}](x1)(y2)}
+             \onslide<11>{\Edge[style={color=red}](x1)(y3)}
+             \onslide<7,9>{\Edge[style={color=red}](y1)(y4)}
+             \onslide<3,6>{\Edge[style={color=red}](y1)(y3)}
+             \onslide<13>{\Edge[style={color=red}](y2)(y5)}
+             \onslide<4,5>{\Edge[style={color=red}](y3)(y5)}
+             \onslide<8>{\Edge[style={color=red}](y4)(y5)}
+  \end{tikzpicture}
+  \onslide<16>
+    \begin{tikzpicture}[scale=1.2]
+        \vertex[label=$x_1$](x1) at (0,0) {};
+        \vertex[label=$y_1$](y1) at (2,0) {4};
+        \vertex[label=$y_2$](y2) at (1,0) {5};
+        \vertex[label=$y_3$](y3) at (4,0) {2};
+        \vertex[label=$y_4$](y4) at (3,0) {3};
+        \vertex[label=$y_5$](y5) at (5,0) {1};
+        \tikzset{EdgeStyle/.style={->}}
+           \Edge[style={bend right = 45}](x1)(y1)
+           \Edge[style={bend right = 0}](x1)(y2)
+           \Edge[style={bend left = 45}](x1)(y3)
+           \Edge[style={bend right = 0}](y1)(y4)
+           \Edge[style={bend right = 45}](y1)(y3)
+           \Edge[style={bend right = 45}](y2)(y5)
+           \Edge[style={bend right = 0}](y3)(y5)
+           \Edge[style={bend right = 45}](y4)(y5)
+  \end{tikzpicture}
+  \end{center}
+
+\endgroup
+\end{frame}
+
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Lokalsøgning}
+\begin{frame}
+\frametitle{}
+\begin{itemize}
+\item
 \end{itemize}
 \end{frame}
 
 
 
-%------------------------------------------------
-\begin{frame}
- \frametitle{Questions?}
-\begin{center}
-
-{\Huge Questions?}
-\end{center}
-\end{frame}
-
-\begin{frame}
- \frametitle{The End}
-\begin{center}
-
-{\Huge Thanks for your attention}
-\end{center}
-\end{frame}
 
 
-%------------------------------------------------
 
-% \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-% \frametitle{Verbatim}
-% 
-% \end{frame}
-%----------------------------------------------------------------------------------------
+
+
 
 \end{document}

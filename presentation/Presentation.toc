@@ -2,5 +2,5 @@
 \select@language {danish}
 \beamer@sectionintoc {1}{Introduktion}{3}{0}{1}
 \beamer@sectionintoc {2}{L\IeC {\o }sningsmetoder}{7}{0}{2}
-\beamer@sectionintoc {3}{Opbygning af Systemet}{24}{0}{3}
-\beamer@sectionintoc {4}{Analysis}{37}{0}{4}
+\beamer@sectionintoc {3}{Opbygning af systemet}{26}{0}{3}
+\beamer@sectionintoc {4}{Lokals\IeC {\o }gning}{95}{0}{4}

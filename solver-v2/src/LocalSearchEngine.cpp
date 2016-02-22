@@ -147,7 +147,10 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
             break;
         }
     }
-
+    std::vector<double> atTime;
+    std::vector<int> obj;
+    std::vector<int> viol;
+    std::vector<int> violDeg;
     delete FN;
     std::cout << "Suggestion of all variable flips has been made " << std::endl;
     if (currentState->compare(bestState)) {
@@ -299,10 +302,14 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
                 if (!currentState->isFeasible()) {
                     BIRCC.Start(alwaysCommit);
                     iterations++;
+                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
                     if (currentState->compare(bestState)) {
                         currentState->setViolation();
                         bestState->copy(currentState);
-                        usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                        atTime.push_back(usedTime);
+                        obj.push_back(bestState->getEvaluation().at(0));
+                        violDeg.push_back(bestState->getEvaluation().at(1));
+                        viol.push_back(bestState->getViolations());
                         std::cout << "# value: ";
                         for (int eval : bestState->getEvaluation()) {
                             std::cout << eval << " ";
@@ -311,23 +318,26 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
                         std::cout << " # iter " << iterations << " # used " << usedTime << " # method BI RCC" << std::endl;
 
                     }
-                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
 
                 } else {
                     TSRFN.Start(iterations, bestState, currentState, tabulist);
                     iterations++;
                     //                debug;
+                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
                     if (currentState->compare(bestState)) {
                         currentState->setViolation();
                         bestState->copy(currentState);
-                        usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                        atTime.push_back(usedTime);
+                        obj.push_back(bestState->getEvaluation().at(0));
+                        violDeg.push_back(bestState->getEvaluation().at(1));
+                        viol.push_back(bestState->getViolations());
                         std::cout << "# value: ";
                         for (int eval : bestState->getEvaluation()) {
                             std::cout << eval << " ";
                         }
                         std::cout << " # iter " << iterations << " # used " << usedTime << " # method TS RFN" << std::endl;
                     }
-                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
 
 
                 }
@@ -339,6 +349,11 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     std::cout << iterations << " ";
     std::cout << bestState->getEvaluation().at(0) << " " << bestState->getViolations() << std::endl;
     setSolution(bestState);
+    for(unsigned i = 0; i < atTime.size(); i++){
+        std::cout << "#conv ";
+        std::cout << atTime.at(i) << " " << obj.at(i) << " " << viol.at(i) << " " << violDeg.at(i) << std::endl;
+    }
+
 
 }
 

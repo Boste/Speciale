@@ -297,59 +297,60 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
             NE = new RestrictedFlipNE(model, currentState);
         } else {
             NE = new FlipNeighborhood(model, currentState);
-            TabuSearch TSRFN(NE);
-            while (usedTime < timelimit) {
-                if (!currentState->isFeasible()) {
-                    BIRCC.Start(alwaysCommit);
-                    iterations++;
-                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-                    if (currentState->compare(bestState)) {
-                        currentState->setViolation();
-                        bestState->copy(currentState);
-                        atTime.push_back(usedTime);
-                        obj.push_back(bestState->getEvaluation().at(0));
-                        violDeg.push_back(bestState->getEvaluation().at(1));
-                        viol.push_back(bestState->getViolations());
-                        std::cout << "# value: ";
-                        for (int eval : bestState->getEvaluation()) {
-                            std::cout << eval << " ";
-                        }
-
-                        std::cout << " # iter " << iterations << " # used " << usedTime << " # method BI RCC" << std::endl;
-
+        }
+        TabuSearch TSRFN(NE);
+        while (usedTime < timelimit) {
+            if (!currentState->isFeasible()) {
+                BIRCC.Start(alwaysCommit);
+                iterations++;
+                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+                if (currentState->compare(bestState)) {
+                    currentState->setViolation();
+                    bestState->copy(currentState);
+                    atTime.push_back(usedTime);
+                    obj.push_back(bestState->getEvaluation().at(0));
+                    violDeg.push_back(bestState->getEvaluation().at(1));
+                    viol.push_back(bestState->getViolations());
+                    std::cout << "# value: ";
+                    for (int eval : bestState->getEvaluation()) {
+                        std::cout << eval << " ";
                     }
 
-                } else {
-                    TSRFN.Start(iterations, bestState, currentState, tabulist);
-                    iterations++;
-                    //                debug;
-                    usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-
-                    if (currentState->compare(bestState)) {
-                        currentState->setViolation();
-                        bestState->copy(currentState);
-                        atTime.push_back(usedTime);
-                        obj.push_back(bestState->getEvaluation().at(0));
-                        violDeg.push_back(bestState->getEvaluation().at(1));
-                        viol.push_back(bestState->getViolations());
-                        std::cout << "# value: ";
-                        for (int eval : bestState->getEvaluation()) {
-                            std::cout << eval << " ";
-                        }
-                        std::cout << " # iter " << iterations << " # used " << usedTime << " # method TS RFN" << std::endl;
-                    }
-
+                    std::cout << " # iter " << iterations << " # used " << usedTime << " # method BI RCC" << std::endl;
 
                 }
+
+            } else {
+                TSRFN.Start(iterations, bestState, currentState, tabulist);
+                iterations++;
+                //                debug;
+                usedTime = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
+                if (currentState->compare(bestState)) {
+                    currentState->setViolation();
+                    bestState->copy(currentState);
+                    atTime.push_back(usedTime);
+                    obj.push_back(bestState->getEvaluation().at(0));
+                    violDeg.push_back(bestState->getEvaluation().at(1));
+                    viol.push_back(bestState->getViolations());
+                    std::cout << "# value: ";
+                    for (int eval : bestState->getEvaluation()) {
+                        std::cout << eval << " ";
+                    }
+                    std::cout << " # iter " << iterations << " # used " << usedTime << " # method TS RFN" << std::endl;
+                }
+
+
             }
-            delete NE;
-            delete RCC;
         }
+        delete NE;
+        delete RCC;
     }
+
     std::cout << iterations << " ";
     std::cout << bestState->getEvaluation().at(0) << " " << bestState->getViolations() << std::endl;
     setSolution(bestState);
-    for(unsigned i = 0; i < atTime.size(); i++){
+    for (unsigned i = 0; i < atTime.size(); i++) {
         std::cout << "#conv ";
         std::cout << atTime.at(i) << " " << obj.at(i) << " " << viol.at(i) << " " << violDeg.at(i) << std::endl;
     }

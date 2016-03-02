@@ -138,7 +138,14 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
     std::vector<int> tabulist(tabulistsize, -tabulistsize);
     std::cout << "Number of variables used in local search " << model->getMask().size() << std::endl;
     double usedTime = (std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC;
-
+    std::vector<double> atTime;
+    std::vector<int> obj;
+    std::vector<int> viol;
+    std::vector<int> violDeg;
+    atTime.push_back((std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC);
+    obj.push_back(bestState->getEvaluation().at(0));
+    violDeg.push_back(bestState->getEvaluation().at(1));
+    viol.push_back(bestState->getViolations());
     FlipNeighborhood* FN = new FlipNeighborhood(model, currentState);
     FirstImprovement FI(FN);
     while (FI.Start()) {
@@ -147,15 +154,16 @@ void LocalSearchEngine::optimizeSolution(int time, int test) {
             break;
         }
     }
-    std::vector<double> atTime;
-    std::vector<int> obj;
-    std::vector<int> viol;
-    std::vector<int> violDeg;
+
     delete FN;
     std::cout << "Suggestion of all variable flips has been made " << std::endl;
     if (currentState->compare(bestState)) {
         currentState->setViolation();
         bestState->copy(currentState);
+        atTime.push_back((std::clock() - Clock::globalClock) / (double) CLOCKS_PER_SEC);
+        obj.push_back(bestState->getEvaluation().at(0));
+        violDeg.push_back(bestState->getEvaluation().at(1));
+        viol.push_back(bestState->getViolations());
         std::cout << "# value: ";
         for (int eval : bestState->getEvaluation()) {
             std::cout << eval << " ";

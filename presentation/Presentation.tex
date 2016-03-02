@@ -10,12 +10,68 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[smaller,handouts]{beamer}
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
+\mode<handout>{
+  \usepackage{pgf}
+  \usepackage{pgfpages}
 
-\documentclass[smaller]{beamer}
+\pgfpagesdeclarelayout{4 on 1 boxed}
+{
+  \edef\pgfpageoptionheight{\the\paperheight} 
+  \edef\pgfpageoptionwidth{\the\paperwidth}
+  \edef\pgfpageoptionborder{0pt}
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=4,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth%
+  }
+  \pgfpageslogicalpageoptions{1}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.25\pgfphysicalwidth}{.75\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{2}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.75\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{3}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.25\pgfphysicalwidth}{.25\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{4}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.25\pgfphysicalheight}%
+  }%
+}
+
+
+  \pgfpagesuselayout{4 on 1 boxed}[a4paper, border shrink=5mm, landscape]
+  \nofiles
+}
+
+
 \usepackage{algorithm,algorithmic}
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
@@ -35,7 +91,8 @@
 
 %\definecolor{kugreen}{RGB}{50,93,61}
 %\setbeamercovered{transparent=20}
-  
+
+
 \mode<presentation> {
 % \useoutertheme{sidebar}
 % infolines
@@ -240,14 +297,14 @@ Institut for Matematik og Datalogi
 \begin{columns}[T]
     \begin{column}[T]{.5\textwidth}
         \vspace{0pt}
-\onslide<1->   En diskret optimeringsinstans $I$: 
+\onslide<1->   En diskret optimeringsproblem $p$ består af: 
 \pause
     \begin{itemize}[<+->]
 \item $n$ variable \textbf{x}, $\mathbf{x} \in \mathbb{Z}^n$
 \item $m$ betingelser \textbf{C}
-\item Evaluerings funktion $f(x)$
+\item Evaluerings funktion $f(x)$ \medskip \\
 \end{itemize}
- \onslide<5-> \alert{$min \{\; f(x) \;| \; x  \in feas(I)\}$ \medskip \\}
+ \onslide<5-> \alert{\[min \{\; f(x) \;| \; x  \in feas(p)\}\]} \\
  \onslide<6-> Kan være NP-hårde problemer
  \end{column}
     \hfill
@@ -266,23 +323,24 @@ Institut for Matematik og Datalogi
 
 \begin{frame}
  \frametitle{Løsningsmetoder}
- \begin{columns}[T]
- \begin{column}[T]{.5\textwidth} \vfill
+%  \begin{columns}[T]
+%  \begin{column}[T]{.5\textwidth} \vfill
   - Algoritmer til specifikke problemer  \\ \hspace{1cm}\pause
-      - Approximations algorithmer \\  \hspace{1cm}\pause 
+      - Approximations algoritmer \\  \hspace{1cm}\pause 
       - Dynamisk programmering \\ \pause
- - Satisfiability solver \\ \pause 
+ - \dots \\ 
+ - Satisfiability encoding \\ \pause 
  - Lineær heltalsprogramming \\ \pause 
- - \alert{Constraint Programming} \\ \pause
- - \alert{Lokalsøgning} \\ \pause
- - Flere andre
- \end{column} 
- \onslide<1->
-\begin{column}[T]{.5\textwidth} \vfill
+ - Constraint Programming \\ \pause
+ - Lokalsøgning \\ 
+ - \dots
+%  \end{column} 
+%  \onslide<1->
+% \begin{column}[T]{.5\textwidth} \vfill
 %\includegraphics[scale=0.45]{lokals3.jpg}
-\includegraphics[scale=0.2]{lokals6.png}
-\end{column}
-\end{columns}
+% \includegraphics[scale=0.2]{lokals6.png}
+% \end{column}
+% \end{columns}
  
 \end{frame}
 
@@ -309,7 +367,8 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
 
 \begin{itemize}[<+->]
 \item Gurobi, CPLEX, SCIP, GLPK
-\item Kan ikke altid finde en (optimal) løsning inden for rimelig tid
+\item \alert{Kan ikke altid finde en (optimal) løsning inden for rimelig tid}
+\item Kan garantere at en løsning er optimal 
 \end{itemize}
 
     
@@ -321,13 +380,14 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
 \begin{frame}
 \frametitle{Constraint Programming (CP)}
 \begin{columns}[T]
-    \begin{column}[T]{.5\textwidth}
+    \begin{column}[T]{.52\textwidth}
+    \vspace{0.1cm}
     \begin{itemize}[<+->]
 \item Bruger søgetræer + propagation til at finde en løsning
 \item Mere naturlig formulering af problemer
 \item Flere muligheder for at modeller et problem
-\item Men mindre egnet til optimeringsproblemer
-\item Fx Gecode, CHIP, Prolog
+\item \alert{Men mindre egnet til optimeringsproblemer}
+\item Fx Gecode, CHIP, Prolog, \dots
 \end{itemize}
 \end{column} 
 \begin{column}[T]{.5\textwidth} \vfill
@@ -347,9 +407,10 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
 \item ``Trial and error'' teknik
 \item Alle variable skal have en værdi først
 \item Delt op implicitte og bløde betingelser
-\item Ændre få variable ad gangen og beregner effekten.
-\item Kan ikke garantere optimalitet
-\item Ofte implementeret for fra til specifikke problemer.
+\item Ændre få variable ad gangen og beregner effekten
+\item \alert{Kan ikke garantere optimalitet}
+\item Ofte implementeret forfra til specifikke problemer
+\item Genenral Purpose lokalsøgningssystemer
 \end{itemize}
 \end{column} 
 \begin{column}[T]{.5\textwidth} \vfill
@@ -360,51 +421,45 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
 \end{frame}
 
 \begin{frame}
- \frametitle{Sammensætning af løsningsmetoder}
+ \frametitle{General purpose lokalsøgningssystemer}
  \begin{columns}[T]
     \begin{column}[T]{.5\textwidth}
      \begin{enumerate}[<+->]
-  \item LocalSolver \footnotemark
-  \begin{itemize}[<+->]
-   \item Matematisk modellering
-   \item Lineær- og heltalsprogrammering
-   \item Kommerciel Solver
-  \end{itemize}
-  \item EasyLocal++ \footnotemark
+  \item EasyLocal++ {\scriptsize [L. Gaspero \& A. Schaerf]}
   \begin{itemize}[<+->]
    \item Lokalsøgningsalgoritmer implementeret
    \item Bruger definere hvilke der skal bruges 
+   \item Hotspots skal implementeres af bruger
   \end{itemize}
-\end{enumerate}
-
-\end{column} 
-\begin{column}[T]{.5\textwidth}
-     \begin{enumerate}[<+->]
-     \setcounter{enumi}{2}
-  \item Comet \footnotemark
+     \item Comet {\scriptsize [Van Hentenryck \& Michel]}
   \begin{itemize}[<+->]
    \item Først betingelsesbaseret lokalsøgningssystem
    \item Mulighed for udvidelse
    \item Ikke længere vedligeholdt
   \end{itemize}
-\item OscaR \footnotemark
+\end{enumerate}
+\end{column} 
+\begin{column}[T]{.5\textwidth}
+     \begin{enumerate}[<+->]
+     \setcounter{enumi}{2}
+       \item LocalSolver {\scriptsize [Innovation 24]}
+  \begin{itemize}[<+->]
+   \item Matematisk modellering
+   \item Lineær- og heltalsprogrammering
+   \item Kommerciel Solver	
+  \end{itemize}
+\item OscaR  {\scriptsize [R. Landtsheer]}
   \begin{itemize}[<+->]
    \item Inspireret af Comet
    \item Forholdsvis nyt
   \end{itemize}
-   \end{enumerate}
-
-  
+   \end{enumerate}  
 \end{column}
 \end{columns}
-\footnotetext[1]{http://www.localsolver.com/}
-\footnotetext[2]<5->{https://bitbucket.org/satt/easylocal-3}
-\footnotetext[3]<8->{Constrainted-Based Local Search, P. Hentenryck \& L. Michel}
-\footnotetext[4]<12->{http://oscarlib.bitbucket.org/cbls.html}
-
-
-  
-
+% \footnotetext[1]{http://www.localsolver.com/}
+% \footnotetext[2]<5->{https://bitbucket.org/satt/easylocal-3}
+% \footnotetext[3]<8->{Constrainted-Based Local Search, P. Hentenryck \& L. Michel}
+% \footnotetext[4]<12->{http://oscarlib.bitbucket.org/cbls.html}
 \end{frame}
 
 % \begin{frame}
@@ -452,21 +507,24 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
  \begin{itemize}[<+->]
  \item Kombinerer CP og lokalsøgning på en ny måde: 
  \begin{itemize}[<+->]
-  \item[--] Ikke kun modelleringsmæssigt
-  \item[--] Ikke som ``large scale neighborhood search''
+%   \item[--] Ikke kun modelleringsmæssigt
+  \item[--] Ikke som ``large scale neighborhood search'' {\scriptsize [P. Shaw] \footnotemark }
  \end{itemize}
- \item Undersøger effekten af (offline) CP domæne reducering
+ \item Undersøger effekten af (offline) CP domæne reducering og variable fiksering
  \item Bruger CP som konstruktions heuristik
  \item Tester effekten af envejsbetingelser
- \item Introducerer en ny evalueringsmetode
+ \item \alert{Undersøger en ny evalueringsmetode i lokalsøgning}
   \begin{itemize}[<+->]
   \item[--] Leksikografisk vægtning
  \end{itemize}
  \end{itemize}
+ \footnotetext[1]{\scriptsize Using constraint programming and 
+local search methods to solve vehicle
+routing problems}
 \end{frame}
 
 
-\section{Elementer i lokalsøgning}
+\section{Lokalsøgnings elementer}
 % 
 % \begin{frame}
 %  \frametitle{Invarianter, envejsbetingelser og bløde betingelser}
@@ -485,12 +543,13 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
    Modellering: 
    \pause
  \begin{itemize}[<+->]
- \item Variable: løsningsrepræsentation, search space $S(I)$
+ \item Variable:  search space $S(p)$, løsningsrepræsentation
  \item Betingelser: 
  \begin{itemize}[<+->]
-  \item[--] Bløde betingelser
-  \item[--] Envejsbetingelser
   \item[--] Implicitte betingelser
+  \item[--] Envejsbetingelser
+  \item[--] Bløde betingelser
+  
  \end{itemize}
 \item Evaluerings funktion: kvaliteten af en løsning
 %   \item Search space $S(I)$: alle løsninger
@@ -502,21 +561,24 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
  \end{itemize}
   \end{column}
    \begin{column}[T]{.5\textwidth}
+   \onslide<8->
    Søgning:
-   \pause
+   \onslide<9->
     \begin{itemize}[<+->]
-     \item Neighborhood
-      \item Konstruktions heuristik
+     \item (Konstruktions heuristik)
+     \item Neighborhood \pause
      \item Lokalsøgning
      \item Metaheuristikker
       \begin{itemize}[<+->]
   \item[--] Tabu søgning
   \item[--] Iterativ lokalsøgning
+  \item[--] ...
  \end{itemize}
     \end{itemize}
    \end{column}
   \end{columns}
   \begin{center}
+  \onslide<2->
   \includegraphics[scale=0.2]{landscape1.jpg}
   \end{center} 
 \end{frame}
@@ -548,9 +610,11 @@ $\qquad \qquad $ $x_1,x_2,x_3 $  $\in$ $\mathbb{Z}^+$
 \begin{frame}
 \frametitle{Binære optimeringsproblemer}
 \begin{center}
-        $min \left\{\sum\limits_{j=1}^n c_jx_j \; | \; \sum\limits_{j=1}^n a_{ij}x_j \leq b_j \; , \; \; \forall i \in 
+        $min \left\{\sum\limits_{j=1}^n c_jx_j \; \Big| \; \sum\limits_{j=1}^n a_{ij}x_j \leq b_j \; , \; \; 
+\forall i \in 
 \{1..m\}\right\}$
 \pause
+\medskip \\
 % \end{center}
 % \begin{table}[]
 % \begin{center}
@@ -581,9 +645,9 @@ subject to &     &$-x_1$        & + & $2x_2$      &   &       & $\leq 1$  \\
        
 \end{columns} 
 \onslide<5->{
-	  Bliver oprettet i systemet med $linear$: \\ 
-	  $linear($int$[]\; coefficients,\; $Variable$[]\; variables,\; $int$\; relation,\; $int$\; ub, \;$int$\; 
-priority)$}
+	  Bliver oprettet i dette system med \textbf{linear}: \medskip \\
+	  \footnotesize{\textbf{linear}($int$[]\; coefficients,\; $Variable$[]\; variables,\; $int$\; relation,\; 
+ $int$\; bound, \;$int$\; priority)}}
 
 % \begin{align}
 %  \text{Minimize }\; &z =  \mathbf{c}^T\mathbf{x} \\ 
@@ -708,35 +772,37 @@ priority)$}
 % \end{frame}
 \begin{frame}
  \frametitle{Før lokalsøgning kan startes}
- \begin{columns}[T]
-    \begin{column}[T]{.5\textwidth}
+%  \begin{columns}[T]
+%     \begin{column}[T]{.5\textwidth}
 Find en startløsning:
-\begin{itemize}[<+->]
-\pause 
-\item Opret variable og begrænsninger
-\item Domæne reducering lavet af Gecode
-\item Oprettelse af søgningsstrategi
-\item Find en gyldig løsning
 \begin{itemize}
+\item Opret variable og begrænsninger \pause 
+\item Domæne reducering lavet af Gecode \pause 
+\item Oprettelse af søgningsstrategi til Gecode \pause 
+\item Find en gyldig løsning \pause 
+\begin{itemize}
+ \item[--] til 100 \% af betingelserne
  \item[--] til 50 \% af betingelserne
  \item[--] til 25 \% af betingelserne
- \item[--] til 12,5 \% af betingelserne
- \item[--] Tilfældig tildeling af værdi inden for domæne
+ \item[--] Tilfældig tildeling af værdi til variable inden for deres domæne
 \end{itemize}
 \end{itemize}
-\end{column}
-\begin{column}[T]{.5\textwidth}
-Behandling af betingelser: 
+% \end{column}
+% \begin{column}[T]{.5\textwidth}
+% \onslide<10->
+\end{frame}
+\begin{frame}
+Behandling af betingelser: \pause
  \begin{enumerate}[<+->]
 \item Invarianter: Variable defineret af betingelser
-\item Graf over afhængighed
+\item Graf over afhængighed mellem variable og invarianter
 \item Auxiliary invarianter: Betingelser behandlet som invarianter
 \item Topologisk sortering af invarianter.
 \end{enumerate}
 
-\end{column}
+% \end{column}
 
-\end{columns}
+% \end{columns}
 \end{frame}
 
 % 
@@ -775,21 +841,23 @@ Behandling af betingelser:
 
 
 \begin{frame}
-\frametitle{Invarianter og afhængighedsgraf}
+\frametitle{(1) Invarianter og afhængighedsgraf}
 \begin{itemize}[<+->]
  \item Betingelses bestemt om envejsbetingelse kan laves
- \item $x_1 + x_2 -x_3 = 1 \Leftrightarrow x_3 = x_1 +x_2 -1$
- \item $x_3-x_4+x_5  =1 \Leftrightarrow x_4 = x_3 + x_5 - 1$
-\end{itemize}
+ \end{itemize}
+\[  x_1 + x_2 -x_3 = 1 \; \Leftrightarrow \; x_3 = x_1 +x_2 -1\]
+  \[x_3-x_4+x_5  =1 \; \Leftrightarrow \; x_4 = x_3 + x_5 - 1\]
 \onslide<3->
 \begin{columns}[T]
  \begin{column}[T]{.1\linewidth}
-       \begin{tikzpicture}[scale=0.9]
-        \vertex[label=$x_1$](x1) at (0,4) {};
-        \vertex[label=$x_2$](x2) at (0,3) {};
-        \vertex[label=$x_3$](x3) at (0,2) {};
-        \vertex[label=$x_4$](x4) at (0,1) {};
-        \vertex[label=$x_5$](x5) at (0,0) {};
+  \end{column}
+ \begin{column}[T]{.1\linewidth}
+ \begin{tikzpicture}[scale=0.9]
+        \vertex[label=$x_1$](x1) at (1,4) {};
+        \vertex[label=$x_2$](x2) at (1,3) {};
+        \vertex[label=$x_3$](x3) at (1,2) {};
+        \vertex[label=$x_4$](x4) at (1,1) {};
+        \vertex[label=$x_5$](x5) at (1,0) {};
             \end{tikzpicture}
  \end{column}
  \begin{column}[T]{.1\textwidth}
@@ -828,11 +896,11 @@ Behandling af betingelser:
 \pause
 
 \begin{itemize}[<+->]
-\item Færre mulige løsninger der skal undersøges
-\item Bruger lidt mere tid på at evaluere en løsning
 \item $x_3$ er gjort afhængig af $x_1$ og $x_2$
 \item $x_4$ indirekte afhængig af $x_1$ og $x_2$
-\item Variable valgt efter udgående kanter og antallet af betingelser den optræder i
+\item Variable valgt efter antal udgående kanter og antallet af betingelser den optræder i
+\item \alert{Færre mulige løsninger der skal undersøges}
+\item Bruger lidt mere tid på at evaluere en løsning
 \end{itemize}
 \end{column}
 
@@ -885,7 +953,7 @@ Behandling af betingelser:
 
 %------------------------------------------------
 \begin{frame}
-\frametitle{Kredse i grafen}
+\frametitle{(2) Kredse i grafen}
 \pause
 \begin{columns}[T]
 \begin{column}[T]{.1\linewidth}
@@ -893,19 +961,19 @@ Behandling af betingelser:
 \end{column}
   
 \begin{column}[T]{.4\linewidth}  
- \only<1-12>{
+ \only<1-14>{
  $y_1 = x_1 - y_3$ \\
    $y_2 = y_1 $ \\
  $y_3 = x_2 +y_2-1$ \\
   $x_1,x_2 \in \{0,1\}$ \\ 
   $y_1,y_2,y_3 \in \{0,1\}$  \newline }
-  \only<13>{
+  \only<15>{
   $y_1 = x_1 - y_3$ \\
  {\color{red} $y_2 = y_1 $} \\
   $y_3 = x_2 + {\color{red}y_2} - 1$  \\
   $x_1,x_2 \in \{0,1\}$ \\ 
   $y_1, {\color{red}y_2},y_3 \in \{0,1\}$  \newline }
-  \only<14->{
+  \only<16->{
    $y_1 = x_1 - y_3$ \\
   $x_3-y_1 = 0$ \\
   $y_3 = x_2 +x_3-1$  \\
@@ -926,7 +994,7 @@ Behandling af betingelser:
         \onslide<4>{\vertex[label=$x_1$](x1) at (0,0.5) {\color{red}1};}
         \onslide<5>{\vertex[label=$y_1$](y1) at (0.75,0.5) {\color{red}1};}
         \onslide<8>{\vertex[label=$y_1$](y1) at (0.75,0.5) {\color{red}0};}
-        \onslide<6,13>{\vertex[label=$y_2$](y2) at (1,0) {\color{red}1};}
+        \onslide<6>{\vertex[label=$y_2$](y2) at (1,0) {\color{red}1};}
         \onslide<7>{\vertex[label=$y_3$](y3) at (0.5,0) {\color{red}1};}
         \tikzset{EdgeStyle/.style={->}}
              \onslide<3,5->{\Edge(x1)(y1)}
@@ -943,7 +1011,7 @@ Behandling af betingelser:
       \end{tikzpicture}
       \endgroup
       \\
-  \onslide<14->    
+  \onslide<16->    
     \begin{tikzpicture}[scale=0.8]
  \onslide<2->{\vertex[label=$x_1$](x1) at (0,1) {};}
          \onslide<2->{\vertex[label=$x_2$](x2) at (0,0) {};}
@@ -972,8 +1040,8 @@ Behandling af betingelser:
   \item [--] Fjerne en invariant $\rightarrow$ genskaber en variable fra hver SCC
   \item [--] Vælger invariant efter antal indgående kanter
     \end{itemize}
-  \item Gentager indtil ingen stærke sammenhængskomponenter er fundet
-  \item Ikke minimalt antal invarianter der fjernes 
+  \item Gentages indtil ingen stærke sammenhængskomponenter er fundet
+  \item Balance mellem tid og effekt
 %    \item Genindfører variablen $x_3$ og betingelsen.
 %    \item $ y_2 = y_1 \Leftrightarrow y_1 -x_3  =0$.
   \end{itemize}
@@ -1080,18 +1148,8 @@ Behandling af betingelser:
 
 %------------------------------------------------
  \begin{frame}
- \frametitle{Yderligere invarianter}
+ \frametitle{(3) Yderligere invarianter}
  \begin{columns}[T]
-\begin{column}[T]{0.5\linewidth} 
- \begin{itemize}[<+->]
-  \item Betingelser som ikke er brugt til at definere variable. 
-  \item Betingelses specifik oprettelse af invarianter.
-  \item Tilføj invarianter til grafen. 
-  \item Invarianter til summering af overtrædelse betingelser.
-\end{itemize}
-
-\end{column}
-\pause
 \begin{column}[T]{0.55\linewidth} 
  For en \textbf{linear} betingelsen: 
   \begin{itemize}[<+->]
@@ -1102,9 +1160,18 @@ Behandling af betingelser:
         0, & \text{otherwise}.
        \end{cases}$
  \end{itemize}
+\end{column}
+\pause
+\begin{column}[T]{0.5\linewidth} 
+ \begin{itemize}[<+->]
+  \item \alert{Betingelser som ikke er brugt til at definere variable }
+  \item Betingelses specifik oprettelse af invarianter
+  \item Tilføj invarianter til grafen
+  \item Invarianter til summering af overtrædelse betingelser
+\end{itemize}
 
 \end{column}
-  \end{columns}
+\end{columns}
  \end{frame}
 
 
@@ -1232,10 +1299,10 @@ Behandling af betingelser:
  \begin{columns}[T]
 \begin{column}[T]{0.5\linewidth} 
 \begin{itemize}[<+->]
-\item Lav ordning af invarianter til når de skal opdateres. 
-\item Forhindre flere opdateringer af samme invariant.
-\item Ordningen kan laves med dybde først søgning i grafen.
-\item Opret en liste for hver uafhængig variable. 
+\item Lav ordning af invarianter til når de skal opdateres
+\item \alert{Forhindre flere opdateringer af samme invariant}
+\item Ordningen kan laves med dybde først søgning i grafen
+\item \alert{Opret en liste for hver uafhængig variable}
 \end{itemize}
 \end{column}
 \onslide<5->
@@ -1368,12 +1435,304 @@ Behandling af betingelser:
 % \end{frame}
 % 
 % 
+\section{Lokalsøgningsalgoritmer}
+\begin{frame}
+ \frametitle{Basis for algoritmerne}
+ \begin{columns}[T]
+  \begin{column}[T]{0.5\linewidth}
+  \centering
+  Fra universitet til stadion \medskip \\
+  \includegraphics[scale=0.06]{fynbus.JPG}
+  \end{column}
+\begin{column}[T]{0.5\linewidth}
+\begin{itemize}[<+->]
+ \item Find den optimale løsning:  \\
+ Kan være alt fra trivielt til meget svært 
+ \item First improvement: \\ 
+ Første der forbedre nuværende situation
+ \item Best improvement: \\ 
+ Bedste forbedring af nuværende situation
+ \item Random walk: \\
+ En række tilfældige valg
+\end{itemize}
+  \end{column}
+ \end{columns}
+
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+ \frametitle{Lokalsøgningsalgoritmer}
+\begin{columns}[T]
+\begin{column}[T]{0.4\linewidth}
+  Bruger kun 1-flip lokalsøgning \pause \medskip \\ 
+  Forkortelser: 
+ \begin{itemize}
+  \item FI: First improvement
+  \item TS: Tabu search
+  \item CN: Conflict only neighborhood
+  \item TL: Time limit
+  \item RW: Random walk
+  \item MC: Minimum conflict heuristic
+ \end{itemize}
+\end{column}
+\pause
+\begin{column}[T]{0.5\linewidth}
+\only<1-4>{
+\resizebox{6cm}{3cm}{
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (8.9,-32.6) circle (3);
+\draw (8.9,-32.6) node {$Start$};
+\draw [black] (20.4,-32.6) circle (3);
+\draw (20.4,-32.6) node {$FI$};
+\draw [black] (42.5,-24.2) circle (3);
+\draw (42.5,-24.2) node {$TS$};
+\draw [black] (29.6,-32.3) circle (3);
+\draw [black] (56.1,-32.3) circle (3);
+\draw [black] (42.5,-41.4) circle (3);
+\draw (42.5,-41.4) node {$TS$ $CN$};
+\draw [black] (29.6,-44.4) circle (3);
+\draw (29.6,-44.4) node {$Slut$};
+\draw [black] (29.6,-44.4) circle (2.4);
+\draw [black] (11.9,-32.6) -- (17.4,-32.6);
+\fill [black] (17.4,-32.6) -- (16.6,-32.1) -- (16.6,-33.1);
+\draw [black] (19.077,-29.92) arc (234:-54:2.25);
+\draw (20.4,-25.35) node [above] {$Forbedring$};
+\fill [black] (21.72,-29.92) -- (22.6,-29.57) -- (21.79,-28.98);
+\draw [black] (23.4,-32.5) -- (26.6,-32.4);
+\fill [black] (26.6,-32.4) -- (25.79,-31.92) -- (25.82,-32.92);
+\draw [black] (32.6,-32.3) -- (53.1,-32.3);
+\fill [black] (53.1,-32.3) -- (52.3,-31.8) -- (52.3,-32.8);
+\draw (42.85,-31.8) node [above] {$Time\mbox{ }<\mbox{ }TL$};
+\draw [black] (53.52,-30.76) -- (45.08,-25.74);
+\fill [black] (45.08,-25.74) -- (45.51,-26.57) -- (46.02,-25.71);
+\draw (51.41,-27.75) node [above] {$feas$};
+\draw [black] (39.96,-25.8) -- (32.14,-30.7);
+\fill [black] (32.14,-30.7) -- (33.08,-30.7) -- (32.55,-29.86);
+\draw [black] (53.61,-33.97) -- (44.99,-39.73);
+\fill [black] (44.99,-39.73) -- (45.94,-39.7) -- (45.38,-38.87);
+\draw (50.86,-39.35) node [above] {$!feas$};
+\draw [black] (40.05,-39.67) -- (32.05,-34.03);
+\fill [black] (32.05,-34.03) -- (32.42,-34.9) -- (32.99,-34.08);
+\draw [black] (29.6,-35.3) -- (29.6,-41.4);
+\fill [black] (29.6,-41.4) -- (30.1,-40.6) -- (29.1,-40.6);
+\draw (29.1,-38.35) node [left] {$Time\geq TL$};
+\end{tikzpicture}
+}}
+\only<5>{
+\resizebox{6cm}{3cm}{
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (8.9,-32.6) circle (3);
+\draw (8.9,-32.6) node {$Start$};
+\draw [black] (20.4,-32.6) circle (3);
+\draw (20.4,-32.6) node {$FI$};
+\draw [black] (42.5,-24.2) circle (3);
+\draw (42.5,-24.2) node {$TS$};
+\draw [black] (29.6,-32.3) circle (3);
+\draw [black] (56.1,-32.3) circle (3);
+\draw [black] (42.5,-41.4) circle (3);
+\draw (42.5,-41.4) node {$TS$ $MC$};
+\draw [black] (29.6,-44.4) circle (3);
+\draw (29.6,-44.4) node {$Slut$};
+\draw [black] (29.6,-44.4) circle (2.4);
+\draw [black] (11.9,-32.6) -- (17.4,-32.6);
+\fill [black] (17.4,-32.6) -- (16.6,-32.1) -- (16.6,-33.1);
+\draw [black] (19.077,-29.92) arc (234:-54:2.25);
+\draw (20.4,-25.35) node [above] {$Forbedring$};
+\fill [black] (21.72,-29.92) -- (22.6,-29.57) -- (21.79,-28.98);
+\draw [black] (23.4,-32.5) -- (26.6,-32.4);
+\fill [black] (26.6,-32.4) -- (25.79,-31.92) -- (25.82,-32.92);
+\draw [black] (32.6,-32.3) -- (53.1,-32.3);
+\fill [black] (53.1,-32.3) -- (52.3,-31.8) -- (52.3,-32.8);
+\draw (42.85,-31.8) node [above] {$Time\mbox{ }<\mbox{ }TL$};
+\draw [black] (53.52,-30.76) -- (45.08,-25.74);
+\fill [black] (45.08,-25.74) -- (45.51,-26.57) -- (46.02,-25.71);
+\draw (51.41,-27.75) node [above] {$feas$};
+\draw [black] (39.96,-25.8) -- (32.14,-30.7);
+\fill [black] (32.14,-30.7) -- (33.08,-30.7) -- (32.55,-29.86);
+\draw [black] (53.61,-33.97) -- (44.99,-39.73);
+\fill [black] (44.99,-39.73) -- (45.94,-39.7) -- (45.38,-38.87);
+\draw (50.86,-39.35) node [above] {$!feas$};
+\draw [black] (40.05,-39.67) -- (32.05,-34.03);
+\fill [black] (32.05,-34.03) -- (32.42,-34.9) -- (32.99,-34.08);
+\draw [black] (29.6,-35.3) -- (29.6,-41.4);
+\fill [black] (29.6,-41.4) -- (30.1,-40.6) -- (29.1,-40.6);
+\draw (29.1,-38.35) node [left] {$Time\geq TL$};
+\end{tikzpicture}
+}
+}
+\pause
+\resizebox{6cm}{2.8cm}{
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (8.9,-32.6) circle (3);
+\draw (8.9,-32.6) node {$Start$};
+\draw [black] (20.4,-32.6) circle (3);
+\draw (20.4,-32.6) node {$FI$};
+\draw [black] (29.6,-32.3) circle (3);
+\draw [black] (56.1,-32.3) circle (3);
+\draw (56.1,-32.3) node {$FI$};
+\draw [black] (42.7,-37.8) circle (3);
+\draw (42.7,-37.8) node {$RW$};
+\draw [black] (29.6,-44.4) circle (3);
+\draw (29.6,-44.4) node {$Slut$};
+\draw [black] (29.6,-44.4) circle (2.4);
+\draw [black] (11.9,-32.6) -- (17.4,-32.6);
+\fill [black] (17.4,-32.6) -- (16.6,-32.1) -- (16.6,-33.1);
+\draw [black] (19.077,-29.92) arc (234:-54:2.25);
+\draw (20.4,-25.35) node [above] {$Forbedring$};
+\fill [black] (21.72,-29.92) -- (22.6,-29.57) -- (21.79,-28.98);
+\draw [black] (23.4,-32.5) -- (26.6,-32.4);
+\fill [black] (26.6,-32.4) -- (25.79,-31.92) -- (25.82,-32.92);
+\draw [black] (32.6,-32.3) -- (53.1,-32.3);
+\fill [black] (53.1,-32.3) -- (52.3,-31.8) -- (52.3,-32.8);
+\draw (42.85,-31.8) node [above] {$Time\mbox{ }<\mbox{ }TL$};
+\draw [black] (53.32,-33.44) -- (45.48,-36.66);
+\fill [black] (45.48,-36.66) -- (46.41,-36.82) -- (46.03,-35.89);
+\draw [black] (39.93,-36.64) -- (32.37,-33.46);
+\fill [black] (32.37,-33.46) -- (32.91,-34.23) -- (33.3,-33.31);
+\draw [black] (29.6,-35.3) -- (29.6,-41.4);
+\fill [black] (29.6,-41.4) -- (30.1,-40.6) -- (29.1,-40.6);
+\draw (29.1,-38.35) node [left] {$Time>=TL$};
+\draw [black] (44.023,-40.48) arc (54:-234:2.25);
+\draw (42.7,-45.05) node [below] {$Min(2\%,10)$};
+\fill [black] (41.38,-40.48) -- (40.5,-40.83) -- (41.31,-41.42);
+\end{tikzpicture}
+}
+\end{column}
+\end{columns}
+\end{frame}
+
+
 
 
 %----------------------------------------------------------------------------------------
-\section{Experimentel evaluering}
+\section{Eksperimentel evaluering}
 \begin{frame}
- Test og resultater
+\frametitle{Effekten af envejsbetingelser (oneway constraints)}
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.3]{../R/oneway}
+% \end{center} 
+\end{figure}\noindent
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Gecode som konstruktions heuristik}
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.3]{../R/gecodenols} 
+% \end{center} 
+\end{figure}\noindent
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Gecode som konstruktions heuristik}
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.3]{../R/gecodetime}
+% \end{center} 
+\end{figure}\noindent
+\end{frame}
+
+\begin{frame}
+\frametitle{Gecode som konstruktions heuristik}
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.3]{../R/gecodels}
+% \end{center} 
+\end{figure}\noindent
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Algoritmerne mod hinanden}
+\begin{figure}[!h]
+\centerline{
+\includegraphics[scale=0.3]{../R/algs}}
+\end{figure}\noindent
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Algoritmerne mod hinanden}
+\begin{figure}[!h]
+\centerline{
+\includegraphics[scale=0.3]{../R/algbox}}
+\end{figure}\noindent
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel}
+\begin{figure}[!h]
+\centerline{
+\includegraphics[scale=0.3]{../R/conv1}}
+\end{figure}\noindent
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel}
+\begin{figure}[!h]
+\centerline{
+\includegraphics[scale=0.3]{../R/conv2}}
+\end{figure}\noindent
+\end{frame}
+\begin{frame}
+
+
+\frametitle{Eksempel - alle gyldige}
+\begin{figure}[!h]
+\centerline{
+\includegraphics[scale=0.3]{../R/conv3}}
+\end{figure}\noindent
+\end{frame}
+
+
+
+\section{Sidste kommentarer}
+\begin{frame}
+ \frametitle{Forbedringer og udvidelser}
+ \begin{columns}[T]
+  \begin{column}[T]{0.5\linewidth}
+    Forbedringer:  \pause
+    \begin{itemize}[<+->]
+    \item En bedre konstruktionsheuristik hvis Gecode ikke kan bruges
+     \item Implementering swap som neighborhood operation
+     \item Implementering af simuleret udglødning
+     \item Test af flere parametre bl.a. for tabu søgning
+     \item Undersøg effekt af opdeling af variable, envejsbetingelser
+    \end{itemize}
+  \end{column}
+%       \pause
+      \onslide<7->
+\begin{column}[T]{0.5\linewidth}
+  Udvidelser: \pause
+   \begin{itemize}[<+->]
+     \item Tillad ikke heltalskoefficienter 
+     \item Behandling af heltalsvariable
+     \item Flere typer af betingelser
+     \item Flere skift mellem CP og LS
+    \end{itemize}
+  \end{column}
+
+ \end{columns}
+
+\end{frame}
+
+\begin{frame}
+ \frametitle{Konklusion}
+    \begin{itemize}[<+->]
+     \item Et CBLS system der danner grundlag for udvidelser
+     \item Gecode begrænset effekt på Binær programmering
+     \item Alle variable behandlet med samme neighborhood operation, giver ingen effekt af envejsbetingelser
+     \item 
+     \item 
+    \end{itemize}
 \end{frame}
 
 

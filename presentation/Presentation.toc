@@ -1,6 +1,8 @@
 \beamer@endinputifotherversion {3.24pt}
 \select@language {danish}
 \beamer@sectionintoc {1}{Introduktion}{3}{0}{1}
-\beamer@sectionintoc {2}{Elementer i lokals\IeC {\o }gning}{57}{0}{2}
-\beamer@sectionintoc {3}{Opbygning af systemet}{71}{0}{3}
-\beamer@sectionintoc {4}{Experimentel evaluering}{147}{0}{4}
+\beamer@sectionintoc {2}{Lokals\IeC {\o }gnings elementer}{58}{0}{2}
+\beamer@sectionintoc {3}{Opbygning af systemet}{73}{0}{3}
+\beamer@sectionintoc {4}{Lokals\IeC {\o }gningsalgoritmer}{146}{0}{4}
+\beamer@sectionintoc {5}{Eksperimentel evaluering}{155}{0}{5}
+\beamer@sectionintoc {6}{Sidste kommentarer}{164}{0}{6}
